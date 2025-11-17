@@ -19381,6 +19381,11 @@ paths:
         name: poe_disabled
         schema:
           type: boolean
+      - description: PoE priority.
+        in: query
+        name: poe_priority
+        schema:
+          $ref: '#/components/schemas/poe_priority'
       - description: POE mode depending on class E.g. "802.3at"
         in: query
         name: poe_mode
@@ -24681,6 +24686,18 @@ paths:
       description: Clear device pending fw version (Available on Junos OS EX2300-,
         EX3400-, EX4000-, EX4100-, EX4400- devices)
       operationId: clearSiteMultipleDevicePendingVersion
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  device_ids:
+                  - 00000000-0000-0000-1000-5c5b35584a6f
+                  - 00000000-0000-0000-1000-5c5b350ea3b3
+            schema:
+              $ref: '#/components/schemas/devices_ids'
+        description: Request Body
       responses:
         '200':
           $ref: '#/components/responses/OK'
@@ -24982,6 +24999,34 @@ paths:
       - Sites Devices
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/devices/gbp_tag:
+    post:
+      description: Set GBP Tag for multiple devices
+      operationId: setSiteDevicesGbpTag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/devices_gbp_tag'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: setSiteDevicesGbpTag
+      tags:
+      - Sites Devices
+    parameters:
+    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/devices/import:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -25061,6 +25106,12 @@ paths:
       description: Search Device Last Configs
       operationId: searchSiteDeviceLastConfigs
       parameters:
+      - description: Duration in format 2d, 3h, or seconds like 172800 for querying certs that expire within the duration
+        in: query
+        name: cert_expiry_duration
+        schema:
+          example: 2d
+          type: string
       - in: query
         name: device_type
         schema:
@@ -25202,9 +25253,21 @@ paths:
     parameters:
     - $ref: '#/components/parameters/site_id'
     post:
-      description: Restore device backup fw version (Available on Junos OS EX2300-,
-        EX3400-, EX4000-, EX4100-, EX4400- devices)
+      description: Restore device backup fw version (Available on Junos OS EX4000-,
+        EX4100-, EX4400- devices)
       operationId: restoreSiteMultipleDeviceBackupVersion
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  device_ids:
+                  - 00000000-0000-0000-1000-5c5b35584a6f
+                  - 00000000-0000-0000-1000-5c5b350ea3b3
+            schema:
+              $ref: '#/components/schemas/devices_ids'
+        description: Request Body
       responses:
         '200':
           $ref: '#/components/responses/OK'
@@ -26930,8 +26993,8 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: Restore device backup fw version (Available on Junos OS EX2300-,
-        EX3400-, EX4000-, EX4100-, EX4400- devices)
+      description: Restore device backup fw version (Available on Junos OS EX4000-,
+        EX4100-, EX4400- devices)
       operationId: restoreSiteDeviceBackupVersion
       responses:
         '200':
@@ -29387,6 +29450,8 @@ paths:
             examples:
               Example:
                 value:
+                  group_name: string
+                  group_idx: 0
                   height: 0
                   height_m: 0
                   latlng_br:
@@ -35206,6 +35271,89 @@ paths:
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/mxedge_id'
+
+
+  /api/v1/sites/{site_id}/stats/ospf_peers/count:
+    get:
+      description: Count by Distinct Attributes of Ospf peers stats
+      operationId: countSiteOspfStats
+      parameters:
+      - in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/ospf_peer_stats_count_distinct'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/search_after'
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgOspfStats
+      tags:
+      - Sites Stats - Ospf
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+
+
+  /api/v1/sites/{site_id}/stats/ospf_peers/search:
+    get:
+      description: Search OSPF Neighbor Stats
+      operationId: searchSiteOspfStats
+      parameters:
+      - in: query
+        name: site_id
+        schema:
+          type: string
+      - in: query
+        name: mac
+        schema:
+          type: string
+      - in: query
+        name: vrf_name
+        schema:
+          type: string
+      - in: query
+        name: peer_ip
+        schema:
+          type: string
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/search_after'
+      responses:
+        '200':
+          $ref: '#/components/responses/OspfPeersStatsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteOspfStats
+      tags:
+      - Sites Stats - Ospf
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+
+
+
   /api/v1/sites/{site_id}/stats/ports/count:
     get:
       description: Count by Distinct Attributes of Switch/Gateway Ports
@@ -37934,6 +38082,7 @@ paths:
                   sponsorStatusDenied: string
                   sponsorStatusPending: string
                   sponsorSubmit: string
+                  sponsorsFieldLabel: string
                   tos: true
                   tosAcceptLabel: string
                   tosError: string
@@ -46510,6 +46659,8 @@ components:
       value:
       - created_time: 0
         flags: {}
+        group_name: "East Wing"
+        group_idx: 1
         height: 0
         height_m: 0
         id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
@@ -60519,7 +60670,7 @@ components:
     acl_tag_ether_types:
       default:
       - any
-      description: Can only be used under dst tags.
+      description: arp / ipv6. Default is any
       items:
         type: string
       type: array
@@ -61237,7 +61388,7 @@ components:
         type: string
       readOnly: true
       type: array
-    ant_mode:
+    antenna_select:
       description: 'Antenna Mode for AP which supports selectable antennas. enum:
         `external`, `internal`'
       enum:
@@ -62142,8 +62293,8 @@ components:
           example: 5
           minimum: 0
           type: integer
-        ant_mode:
-          $ref: '#/components/schemas/ant_mode'
+        antenna_select:
+          $ref: '#/components/schemas/antenna_select'
         antenna_mode:
           $ref: '#/components/schemas/ap_radio_antenna_mode'
         band_24:
@@ -62167,6 +62318,9 @@ components:
           description: To make an outdoor operate indoor. For an outdoor-ap, some
             channels are disallowed by default, this allows the user to use it as
             an indoor-ap
+          type: boolean
+        rrm_managed:
+          description: Whether to let RRM manage all radios settings - all "band_xxx" configs will be ignored
           type: boolean
         scanning_enabled:
           description: Whether scanning radio is enabled
@@ -62254,6 +62408,8 @@ components:
           minimum: 0
           nullable: true
           type: integer
+        antenna_beam_pattern:
+          $ref: '#/components/schemas/radio_band_antenna_beam_pattern'
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
@@ -62311,6 +62467,8 @@ components:
           minimum: 0
           nullable: true
           type: integer
+        antenna_beam_pattern:
+          $ref: '#/components/schemas/radio_band_antenna_beam_pattern'
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
@@ -67395,6 +67553,26 @@ components:
       items:
         $ref: '#/components/schemas/deviceprofile'
       type: array
+    devices_gbp_tag:
+      properties:
+        macs:
+          $ref: '#/components/schemas/mac_addresses_macs'
+        gbp_tag:
+          type: integer
+      required:
+      - macs
+      - gbp_tag
+      type: object
+    devices_ids:
+      properties:
+        device_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - device_ids
+      type: object
     dhcp_client_option:
       properties:
         code:
@@ -71734,6 +71912,14 @@ components:
             storeTime: 10
           readOnly: true
           type: object
+        group_name:
+          description: The group name of the map
+          example: East Wing
+          type: string
+        group_idx:
+          description: The group index of the map, typically used for floor
+          example: 1
+          type: integer
         for_site:
           readOnly: true
           type: boolean
@@ -76535,7 +76721,6 @@ components:
           example: 232
           type: integer
         next:
-          example: /api/v1/orgs/76bd3d9a-48b8-468f-83c1-6fb2544f7815/stats/ospf_peers/search?end=1711035686&limit=10&search_after=%5B1711031354000%2C+%2256bfa7af-b2db-43ee-a4c8-9b820bbba0e1%22%5D&start=1710949286
           type: string
       type: object
     ospf_peer_stats_search_results:
@@ -76568,11 +76753,11 @@ components:
         up:
           description: True if state is full
           type: boolean
-        port_id:
-          description: Interface name
-          type: string
         peer_ip:
           description: Neighbor address (IP)
+          type: string
+        port_id:
+          description: Interface name
           type: string
         priority:
           description: Neighbor priority, 0-255
@@ -76665,6 +76850,12 @@ components:
           example: https://api.mist.com/api/v1/forward/looker?jwt=...
           type: string
       type: object
+    poe_priority:
+      description: 'PoE priority. enum: `low`, `high`'
+      enum:
+      - low
+      - high
+      type: string
     portal_template_alignment:
       default: center
       description: 'defines alignment on portal. enum: `center`, `left`, `right`'
@@ -77213,6 +77404,13 @@ components:
       - '5'
       - '6'
       - auto
+      type: string
+    radio_band_antenna_beam_pattern:
+      description: 'enum: `narrow`, `medium`, `wide`'
+      enum:
+      - narrow
+      - medium
+      - wide
       type: string
     radio_band_antenna_mode:
       default: default
@@ -86688,8 +86886,8 @@ components:
     stats_ap:
       description: AP statistics
       properties:
-        ant_mode:
-          $ref: '#/components/schemas/ant_mode'
+        antenna_select:
+          $ref: '#/components/schemas/antenna_select'
         auto_placement:
           $ref: '#/components/schemas/stats_ap_auto_placement'
         auto_upgrade_stat:
@@ -89876,6 +90074,8 @@ components:
           description: Is the device attached to POE
           readOnly: true
           type: boolean
+        poe_priority:
+          $ref: '#/components/schemas/poe_priority'
         port_id:
           example: ge-0/0/0
           readOnly: true
@@ -90873,6 +91073,7 @@ components:
       example:
       - 8.8.8.8
       - 4.4.4.4
+      - 2001:4860:4860::8888
       items:
         type: string
       type: array
@@ -91488,6 +91689,11 @@ components:
             for all (including unknown clients) if set to true when RADIUS server
             is down
           type: boolean
+        bypass_auth_when_server_down_for_voip:
+          default: false
+          description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. Bypass
+            auth for voip if set to true when RADIUS server is down
+          type: boolean
         community_vlan_id:
           description: Only if `mode`!=`dynamic`. To be used together with `isolation`
             under networks. Signaling that this port connects to the networks isolated
@@ -91565,6 +91771,8 @@ components:
           description: Only if `mode`!=`dynamic`. Whether PoE capabilities are disabled
             for a port
           type: boolean
+        poe_priority:
+          $ref: '#/components/schemas/poe_priority'
         port_auth:
           $ref: '#/components/schemas/switch_port_usage_dot1x'
         port_network:
@@ -94532,6 +94740,9 @@ components:
           maximum: 65535
           minimum: 56
           type: integer
+        vrf:
+          description: VRF/Routing instance through which the packet needs to be sent
+          type: string
       required:
       - host
       type: object
