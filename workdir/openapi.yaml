@@ -47115,7 +47115,7 @@ components:
         created_time: 1632684398
         for_site: false
         id: 00000000-0000-0000-1000-020000a80cb4
-        inactive_vlan_strs":
+        inactive_vlan_strs:
           l2tp: []
           wired:
           - 100
