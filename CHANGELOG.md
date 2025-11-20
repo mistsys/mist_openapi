@@ -1,0 +1,171 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [2511.1.0] - 2025-11-17
+Mist API version: `hotfix-v1.19.289-v1.19.319`
+Changes:
+
+- Marked `/api/v1/orgs/{org_id}/128routers/register_cmd` as deprecated, replaced by `/api/v1/orgs/{org_id}/ssr/register_cmd`
+- Updated `/api/v1/orgs/{org_id}/devices/last_config/search`
+  - added `cert_expiry_duration` query parameter
+- Updated `/api/v1/orgs/{org_id}/jsi/inventory/search`
+  - added `claimed` query parameter
+  - added `has_support` query parameter
+- Updated `/api/v1/orgs/{org_id}/sites`
+  - removed `apporttemplate_id` from response
+- Updated `/api/v1/sites/{site_id}`
+  - removed `apporttemplate_id` from response
+- Added `/api/v1/orgs/{org_id}/ssr/export_idtokens`
+- Added `/api/v1/orgs/{org_id}/stats/ospf_peers/count`
+- Added `/api/v1/orgs/{org_id}/stats/ospf_peers/search`
+- Update `/api/v1/orgs/{org_id}/stats/ports/search`
+  - added  `poe_priority` query parameter
+- Updated `/api/v1/sites/{site_id}/devices/clear_pending_version`
+  - added request body schema and example
+- Added `/api/v1/sites/{site_id}/devices/gbp_tag`
+- Updated `/api/v1/sites/{site_id}/devices/last_config/search`
+  - added `cert_expiry_duration` query parameter
+- Updated `/api/v1/sites/{site_id}/devices/restore_backup_version`
+  - added request body schema and example
+  - updated supported devices listed in description
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}/restore_backup_version`
+  - updated supported devices listed in description
+- Updated `/api/v1/installer/orgs/{org_id}/sites/{site_name}/maps/{map_id}`
+  - added `group_idx` and `group_name` to request and response
+- Updated `/api/v1/sites/{site_id}/maps`
+  - added `group_idx` and `group_name` to request and response
+- Updated `/api/v1/sites/{site_id}/maps/{map_id}`
+  - added `group_idx` and `group_name` to request and response
+- Updated `/api/v1/installer/orgs/{org_id}/sites/{site_name}/maps`
+  - added `group_idx` and `group_name` to response
+- Updated `/api/v1/sites/{site_id}/maps`
+  - added `group_idx` and `group_name` to response
+- Added `/api/v1/sites/{site_id}/stats/ospf_peers/count`
+- Added `/api/v1/sites/{site_id}/stats/ospf_peers/search`
+- Updated `/api/v1/sites/{site_id}/stats/devices`
+  - renamed `ant_mode` to `antenna_select`
+- Updated `/api/v1/sites/{site_id}/stats/devices/{device_id}`
+  - renamed `ant_mode` to `antenna_select`
+- Update `/api/v1/sites/{site_id}/devices/import`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/sites/{site_id}/devices`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Update `/api/v1/sites/{site_id}/devices/{device_id}`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/sites/{site_id}/setting/derived`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/sites/{site_id}/setting`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/orgs/{org_id}/deviceprofiles`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/orgs/{org_id}/deviceprofiles/{deviceprofile_id}`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/sites/{site_id}/deviceprofiles/derived`
+  - renamed `ant_mode` to `antenna_select`, added `rrm_managed`, `antenna_beam_pattern`
+- Updated `/api/v1/installer/orgs/{org_id}/sites/{site_name}/maps`
+  - added `group_idx` and `group_name`
+- Updated `/api/v1/installer/orgs/{org_id}/sites/{site_name}/maps/{map_id}`
+  - added `group_idx` and `group_name`
+- Updated `/api/v1/sites/{site_id}/maps`
+  - added `group_idx` and `group_name`
+- Updated `/api/v1/sites/{site_id}/maps/{map_id}`
+  - added `group_idx` and `group_name`
+- Updated `/api/v1/orgs/{org_id}/nacportals`
+  - added `additional_cacerts`
+- Updated `/api/v1/orgs/{org_id}/nacportals/{nacportal_id}`
+  - added `additional_cacerts`
+- Updated `/api/v1/orgs/{org_id}/mxclusters`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/orgs/{org_id}/mxclusters/{mxcluster_id}`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/orgs/{org_id}/mxedges`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/orgs/{org_id}/mxedges/{mxedge_id}`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/sites/{site_id}/mxedges`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/sites/{site_id}/mxedges/{mxedge_id}`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/sites/{site_id}/setting`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/sites/{site_id}/setting/derived`
+  - added `disabled` to `proxy`
+- Updated `/api/v1/sites/{site_id}/devices/import`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/sites/{site_id}/devices`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/orgs/{org_id}/deviceprofiles`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/orgs/{org_id}/deviceprofiles/{deviceprofile_id}`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/sites/{site_id}/deviceprofiles/derived`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/orgs/{org_id}/gatewaytemplates`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/sites/{site_id}/setting`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/sites/{site_id}/setting/derived`
+  - added `skyatp` and `syslog` to gateway `service_policies`
+- Updated `/api/v1/sites/{site_id}/setting`
+  - added `disabled` to ssr `proxy`
+- Updated `/api/v1/sites/{site_id}/setting/derived`
+  - added `disabled` to ssr `proxy`
+- Updated `/api/v1/orgs/{org_id}/setting`
+  - added `disabled` to ssr `proxy`
+- Updated `/api/v1/orgs/{org_id}/stats/mxedges/{mxedge_id}`
+  - added `inactive_vlan_strs`
+- Updated `/api/v1/sites/{site_id}/stats/mxedges/{mxedge_id}`
+  - added `inactive_vlan_strs`
+- Updated `/api/v1/orgs/{org_id}/mxedges/search`
+  - added `inactive_vlan_strs`
+- Updated `/api/v1/sites/{site_id}/stats/mxedges`
+  - added `inactive_vlan_strs`
+- Updated `/api/v1/orgs/{org_id}/stats/mxedges`
+  - added `inactive_vlan_strs`
+- Updated `/api/v1/sites/{site_id}/stats/ports/search`
+  - added `poe_priority`
+- Updated `/api/v1/sites/{site_id}/stats/devices/{device_id}`
+  - added `poe_priority` for switch stats
+- Updated `api/v1/sites/{site_id}/stats/devices`
+  - added `poe_priority` for switch stats
+- Updated ` /api/v1/orgs/{org_id}/stats/devices`
+  - added `poe_priority` for switch stats
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/sites/{site_id}/devices/import`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/sites/{site_id}/devices`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Update `/api/v1/orgs/{org_id}/deviceprofiles`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Update `/api/v1/orgs/{org_id}/deviceprofiles/{deviceprofile_id}`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/sites/{site_id}/deviceprofiles/derived`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/orgs/{org_id}/evpn_topologies`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/orgs/{org_id}/evpn_topologies/{evpn_topology_id}`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/sites/{site_id}/evpn_topologies`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Update `/api/v1/sites/{site_id}/evpn_topologies/{evpn_topology_id}`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switch ports
+- Updated `/api/v1/orgs/{org_id}/networktemplates`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for ports
+- Updated `/api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for ports
+- Updated `/api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for ports
+- Updated `/api/v1/sites/{site_id}/networktemplates/derived`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for ports
+- Updated `/api/v1/sites/{site_id}/setting`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switches and ports
+- Updated `/api/v1/sites/{site_id}/setting/derived`
+  - added `bypass_auth_when_server_down_for_voip` and `poe_priority` for switches and ports
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}/ping`
+  - added `vrf`
