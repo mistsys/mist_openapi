@@ -73934,6 +73934,11 @@ components:
       example: juniper-mist
       readOnly: true
       type: string
+    nac_event_port_id:
+      description: Port ID where the NAC client event occurred
+      example: ge-0/0/17.0
+      readOnly: true
+      type: string
     nac_event_ssid:
       description: SSIDs the client was connecting to
       example: MyCorp-NAC
@@ -73987,11 +73992,6 @@ components:
         type: string
       readOnly: true
       type: array
-    nac_event_port_id:
-      description: Port ID where the NAC client event occurred
-      example: ge-0/0/17.0
-      readOnly: true
-      type: string
     nac_portal:
       properties:
         access_type:
@@ -77654,10 +77654,10 @@ components:
       uniqueItems: true
     random_mac:
       description: Whether the client is using randomized MAC Address or not
-      type: string
       enum:
       - 'true'
       - 'false'
+      type: string
     recaptcha:
       properties:
         flavor:
