@@ -746,7 +746,7 @@ tags:
   name: Orgs Stats - Devices
 - description: API Calls to retrieve statistics about the Mist Edges at the Org level
   name: Orgs Stats - MxEdges
-- description: API Calls to retrieve statistics about Ospf peers at the Org level
+- description: API Calls to retrieve statistics about OSPF peers at the Org level
   name: Orgs Stats - Ospf
 - description: API Calls to retrieve statistics about the Other/3rd party devices
     at the Org level
@@ -1500,7 +1500,7 @@ tags:
   name: Sites Stats - Devices
 - description: API Calls to retrieve statistics about the Mist Edges at the Site level
   name: Sites Stats - MxEdges
-- description: API Calls to retrieve statistics about Ospf peers at the Site level
+- description: API Calls to retrieve statistics about OSPF peers at the Site level
   name: Sites Stats - Ospf
 - description: API Calls to retrieve statistics about the Wired Ports at the Site
     level
@@ -4748,16 +4748,16 @@ paths:
       description: 128T devices can be managed/adopted by Mist.
       operationId: getOrg128TRegistrationCommands
       parameters:
-      - description: duration for the token to stay valid,in seconds. Defaults to
-          1 year (31536000 seconds) if not specified.
+      - description: Token validity duration in seconds. Defaults to 1 year (31536000
+          seconds)
         in: query
         name: ttl
         schema:
           example: 31536000
           type: integer
-      - description: When specified, only specified assets are allowed for registration.
-          This parameter can and is preferred to be set in HTTP body, especially when
-          the list is long, so that HTTP header size will never exceed limit.
+      - description: When specified restricts registration to listed assets only.
+          Prefer HTTP body over headers for this parameter, especially with long lists
+          to avoid header size limits.
         in: query
         name: asset_ids
         schema:
@@ -8304,8 +8304,7 @@ paths:
         schema:
           example: 10.0.0
           type: string
-      - description: Duration in format 2d, 3h, or seconds like 172800 for querying
-          certs that expire within the duration
+      - description: 'Duration for expiring cert queries (format: 2d/3h/172800 seconds)'
         in: query
         name: cert_expiry_duration
         schema:
@@ -10498,8 +10497,8 @@ paths:
         \ specific information will be returned."
       operationId: searchOrgJsiAssetsAndContracts
       parameters:
-      - description: Device claim status, pass `true` to filter claimed only devices,
-          `false` for all devices
+      - description: Device claim status, `true` for claimed devices, `false` for
+          all devices
         in: query
         name: claimed
         schema:
@@ -10546,7 +10545,6 @@ paths:
           example: 30d
           type: string
       - description: Indicates if the device is covered under active support contract
-          or not
         in: query
         name: has_support
         schema:
@@ -18482,9 +18480,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: While using Mist to onboard 128T devices, you can export the IDTokens
-        and import it into Conductor so it will only allow those devices to get securely
-        onboarded.
+      description: Export IDTokens from Mist to import into Conductor to securely
+        allow SSR devices during onboarding
       operationId: exportOrgSsrIdTokens
       requestBody:
         content:
@@ -18513,16 +18510,16 @@ paths:
       description: SSR devices can be managed/adopted by Mist.
       operationId: getOrgSsrRegistrationCommands
       parameters:
-      - description: duration for the token to stay valid,in seconds. Defaults to
-          1 year (31536000 seconds) if not specified.
+      - description: Token validity duration in seconds. Defaults to 1 year (31536000
+          seconds)
         in: query
         name: ttl
         schema:
           example: 31536000
           type: integer
-      - description: When specified, only specified assets are allowed for registration.
-          This parameter can and is preferred to be set in HTTP body, especially when
-          the list is long, so that HTTP header size will never exceed limit.
+      - description: When specified restricts registration to listed assets only.
+          Prefer HTTP body over headers for this parameter, especially with long lists
+          to avoid header size limits.
         in: query
         name: asset_ids
         schema:
@@ -19065,7 +19062,7 @@ paths:
     - $ref: '#/components/parameters/mxedge_id'
   /api/v1/orgs/{org_id}/stats/ospf_peers/count:
     get:
-      description: Count by Distinct Attributes of Ospf peers stats
+      description: Count OSPF peer stats by distinct attribute name
       operationId: countOrgOspfStats
       parameters:
       - in: query
@@ -25111,8 +25108,7 @@ paths:
       description: Search Device Last Configs
       operationId: searchSiteDeviceLastConfigs
       parameters:
-      - description: Duration in format 2d, 3h, or seconds like 172800 for querying
-          certs that expire within the duration
+      - description: 'Duration for expiring cert queries (format: 2d/3h/172800 seconds)'
         in: query
         name: cert_expiry_duration
         schema:
@@ -35279,7 +35275,7 @@ paths:
     - $ref: '#/components/parameters/mxedge_id'
   /api/v1/sites/{site_id}/stats/ospf_peers/count:
     get:
-      description: Count by Distinct Attributes of Ospf peers stats
+      description: Count by Distinct Attributes of OSPF peers stats
       operationId: countSiteOspfStats
       parameters:
       - in: query
@@ -60668,7 +60664,7 @@ components:
     acl_tag_ether_types:
       default:
       - any
-      description: arp / ipv6. Default is any
+      description: ARP / IPv6. Default is `any`
       items:
         type: string
       type: array
@@ -62318,8 +62314,8 @@ components:
             an indoor-ap
           type: boolean
         rrm_managed:
-          description: Whether to let RRM manage all radios settings - all "band_xxx"
-            configs will be ignored
+          description: Enable RRM to manage all radio settings (ignores all band_xxx
+            configs)
           type: boolean
         scanning_enabled:
           description: Whether scanning radio is enabled
@@ -69384,7 +69380,7 @@ components:
           type: string
         ae_lacp_force_up:
           default: false
-          description: 'For SRX Only, if `aggregated`==`true`.Sets the state of the
+          description: 'For SRX only, if `aggregated`==`true`.Sets the state of the
             interface as UP when the peer has limited LACP capability. Use case: When
             a device connected to this AE port is ZTPing for the first time, it will
             not have LACP configured on the other end. **Note:** Turning this on will
@@ -71026,7 +71022,7 @@ components:
     js_inventory_item:
       properties:
         claimed:
-          description: indicates if the device is claimed by any org
+          description: Indicates if the device is claimed by any org
           type: boolean
         device_name:
           description: Name of the device
@@ -74106,8 +74102,7 @@ components:
           example: https://yourorg.com/external-guest-portal
           type: string
         force_reconnect:
-          description: disconnect the client (to workaround client-side issues with
-            reauth)
+          description: Disconnect client (workaround for reauth issues)
           type: boolean
         forward:
           description: If `auth`==`none` or `auth`==`multi`, whether to forward the
@@ -76757,7 +76752,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Sampling time (in epoch)
+          description: Sampling time (in epoch seconds)
         up:
           description: True if state is full
           type: boolean
@@ -82903,7 +82898,7 @@ components:
           $ref: '#/components/schemas/strings'
       type: object
     service_policy_aamw:
-      description: For SRX Only
+      description: SRX only
       properties:
         aamwprofile_id:
           description: org-level Advanced Advance Anti Malware Profile (SkyAtp) Profile
@@ -82940,7 +82935,7 @@ components:
           type: string
       type: object
     service_policy_appqoe:
-      description: For SRX Only
+      description: SRX only
       properties:
         enabled:
           default: false
@@ -82972,7 +82967,7 @@ components:
       - strict
       type: string
     service_policy_secintel:
-      description: For SRX Only
+      description: SRX only
       properties:
         enabled:
           default: false
@@ -82993,7 +82988,7 @@ components:
       - strict
       type: string
     service_policy_skyatp:
-      description: For SRX Only
+      description: SRX only
       properties:
         dns_dga_detection:
           default: disabled
@@ -83039,7 +83034,7 @@ components:
           type: boolean
       type: object
     service_policy_syslog:
-      description: Required if logging via syslog is needed
+      description: Required for syslog logging
       properties:
         enabled:
           default: false
@@ -84374,7 +84369,7 @@ components:
         protect_re:
           $ref: '#/components/schemas/protect_re'
         root_password:
-          description: For SRX only
+          description: SRX only
           type: string
         security_log_source_address:
           example: 192.168.1.1
@@ -89003,18 +88998,15 @@ components:
           user: 46
       type: object
     stats_mxedge_inactive_vlan_strs:
-      description: wired/l2tp inactive vlans. Each entry can be an individual vlan
-        or a range of vlans
+      description: Inactive wired/L2TP VLANs. Entries can be individual VLANs or ranges.
       properties:
         l2tp:
-          description: L2TP inactive vlans. Each entry can be an individual vlan or
-            a range of vlans.
+          description: Inactive L2TP VLANs. Entries can be individual VLANs or ranges.
           items:
             type: string
           type: array
         wired:
-          description: Wired inactive vlans. Each entry can be an individual vlan
-            or a range of vlans.
+          description: Inactive wired VLANs. Entries can be individual VLANs or ranges.
           example:
           - '100'
           - 102-106
@@ -91703,7 +91695,7 @@ components:
         bypass_auth_when_server_down_for_voip:
           default: false
           description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. Bypass
-            auth for voip if set to true when RADIUS server is down
+            auth for VOIP if set to true when RADIUS server is down
           type: boolean
         community_vlan_id:
           description: Only if `mode`!=`dynamic`. To be used together with `isolation`
@@ -93955,12 +93947,12 @@ components:
         \ Device name must match the first 3 letters of the property value\n  * `match_name[2:6]`:\
         \ Device name must match the property value from the 2nd to the 6th letter\n\
         \  * `match_model`: Device model must match the property value\n  * `match_model[1:3]`:\
-        \ Device model must match the property value from the 1nd to the 3rd letter\n\
+        \ Device model must match the property value from the 1st to the 3rd letter\n\
         \ * `match_role`: Device role must match the property value\n  * `match_role[0:3]`:\
-        \ Device role must match the property value from the 1nd to the 3rd letter\n\
-        \ * `match_evpn_role`: Device evpn topology role must match the property value\n\
-        \  * `match_evpn_role[0:3]`: Device evpn topology role must match the property\
-        \ value from the 1nd to the 3rd letter"
+        \ Device role must match the property value from the 1st to the 3rd letter\n\
+        \ * `match_evpn_role`: Device EVPN topology role must match the property value\n\
+        \  * `match_evpn_role[0:3]`: Device EVPN topology role must match the property\
+        \ value from the 1st to the 3rd letter"
       example:
       - match_model: AP43
         match_name[2:8]: access
