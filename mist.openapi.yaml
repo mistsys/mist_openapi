@@ -86333,11 +86333,11 @@ components:
       type: string
     sponsor_link_validity_duration:
       anyOf:
-      - maximum: 60
+      - default: 60
+        maximum: 60
         minimum: 5
         type: integer
       - type: string
-      default: 60
       description: Optional if `sponsor_enabled`==`true`. How long to remain valid
         sponsored guest request approve/deny link received in email, in minutes. Value
         is between 5 and 60.
