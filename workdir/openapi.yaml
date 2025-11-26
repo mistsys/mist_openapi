@@ -55967,13 +55967,13 @@ components:
       content:
         application/json:
           schema:
-            description: File
             contentMediaType: application/octet-stream
+            description: File
             type: string
         application/vnd.api+json:
           schema:
-            description: File
             contentMediaType: application/octet-stream
+            description: File
             type: string
       description: OK
     FingerprintSearch:
@@ -62515,8 +62515,8 @@ components:
             - string
             - 'null'
           examples:
-            - 1-10: null
-              user: null
+          - 1-10: null
+            user: null
           type: object
       type: object
     ap_port_config_forwarding:
@@ -63742,8 +63742,8 @@ components:
       additionalProperties: false
       properties:
         file:
-          description: CSV file
           contentMediaType: application/octet-stream
+          description: CSV file
           type: string
       type: object
     assets_import_json:
@@ -64323,8 +64323,8 @@ components:
       additionalProperties: false
       properties:
         file:
-          description: File to upload
           contentMediaType: application/octet-stream
+          description: File to upload
           type: string
       required:
       - file
@@ -68854,9 +68854,9 @@ components:
           $ref: '#/components/schemas/site_id'
         system_desc:
           examples:
-          - 'Juniper Networks, Inc. ex4100-f-12p Ethernet Switch, kernel JUNOS
-            22.4R3.25, Build date: 2024-02-10 00:49:09 UTC Copyright (c) 1996-2024
-            Juniper Networks, Inc.'
+          - 'Juniper Networks, Inc. ex4100-f-12p Ethernet Switch, kernel JUNOS 22.4R3.25,
+            Build date: 2024-02-10 00:49:09 UTC Copyright (c) 1996-2024 Juniper Networks,
+            Inc.'
           type: string
         system_name:
           examples:
@@ -69286,8 +69286,7 @@ components:
           $ref: '#/components/schemas/site_id'
         text:
           examples:
-          - 'Plugged: The Internal 5GB (SIM1) has been inserted into Internal
-            1.'
+          - 'Plugged: The Internal 5GB (SIM1) has been inserted into Internal 1.'
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
@@ -71603,8 +71602,8 @@ components:
     image_import:
       properties:
         file:
-          description: Binary file
           contentMediaType: application/octet-stream
+          description: Binary file
           type: string
         json:
           type: string
@@ -73491,12 +73490,12 @@ components:
           - true
           type: boolean
         csv:
-          description: CSV file for ap name mapping, optional
           contentMediaType: application/octet-stream
+          description: CSV file for ap name mapping, optional
           type: string
         file:
-          description: Ekahau or ibwave file
           contentMediaType: application/octet-stream
+          description: Ekahau or ibwave file
           type: string
         json:
           $ref: '#/components/schemas/map_org_import_file_json'
@@ -73537,12 +73536,12 @@ components:
           - true
           type: boolean
         csv:
-          description: CSV file for ap name mapping, optional
           contentMediaType: application/octet-stream
+          description: CSV file for ap name mapping, optional
           type: string
         file:
-          description: Ekahau or ibwave file
           contentMediaType: application/octet-stream
+          description: Ekahau or ibwave file
           type: string
         json:
           $ref: '#/components/schemas/map_import_json'
@@ -75581,7 +75580,7 @@ components:
       description: Optional list of additional CA certificates to be used
       examples:
       - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-        CERTIFICATE-----'
+          CERTIFICATE-----'
       items:
         type: string
       type: array
@@ -76713,8 +76712,8 @@ components:
       additionalProperties: false
       properties:
         file:
-          description: a PEM or DER formatted CRL file
           contentMediaType: application/octet-stream
+          description: a PEM or DER formatted CRL file
           type: string
         json:
           description: a JSON string with "name" field for CRL file issuer (optional)
@@ -78032,8 +78031,7 @@ components:
       properties:
         cert:
           examples:
-          - '-----BEGIN CERTIFICATE-----\nMIIowDQYJKoZIhvcNAQELBQE\n-----END
-            CERTIFICATE-----'
+          - '-----BEGIN CERTIFICATE-----\nMIIowDQYJKoZIhvcNAQELBQE\n-----END CERTIFICATE-----'
           type: string
       type: object
     org_system_event:
@@ -78959,8 +78957,8 @@ components:
       additionalProperties: false
       properties:
         file:
-          description: Binary file
           contentMediaType: application/octet-stream
+          description: Binary file
           type: string
         json:
           description: JSON string describing the upload
@@ -79508,9 +79506,9 @@ components:
     remote_syslog_cacerts:
       examples:
       - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-        CERTIFICATE-----'
+          CERTIFICATE-----'
         - '-----BEGIN CERTIFICATE-----\nBhMCRVMxFDASBgNVBAoMC1N0YXJ0Q29tIENBMSwwKgYDVn-----END
-        CERTIFICATE-----'
+          CERTIFICATE-----'
       items:
         type: string
       type: array
@@ -81063,8 +81061,8 @@ components:
       properties:
         detail:
           examples:
-          - Too Many Request. The API Token used for the request reached the
-            5000 API Calls per hour threshold
+          - Too Many Request. The API Token used for the request reached the 5000
+            API Calls per hour threshold
           type: string
       type: object
     response_insight_rogue:
@@ -83179,8 +83177,8 @@ components:
           type: string
         text:
           examples:
-          - Clients of the AP had slow association 8% of the time on Bhavabhi
-            and 5 GHz. ...
+          - Clients of the AP had slow association 8% of the time on Bhavabhi and
+            5 GHz. ...
           type: string
       type: object
     response_troubleshoot_results:
@@ -89090,9 +89088,9 @@ components:
         the LDAP certificate
       examples:
       - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-        CERTIFICATE-----'
+          CERTIFICATE-----'
         - '-----BEGIN CERTIFICATE-----\nBhMCRVMxFDASBgNVBAoMC1N0YXJ0Q29tIENBMSwwKgYDVn-----END
-        CERTIFICATE-----'
+          CERTIFICATE-----'
       items:
         type: string
       type: array
@@ -90342,9 +90340,9 @@ components:
         system_desc:
           description: Description provided by switch
           examples:
-          - 'uniper Networks, Inc. ex4300-48t internet router, kernel JUNOS
-            20.4R3-S7.2, Build date: 2023-04-21 19:47:18 UTC Copyright (c) 1996-2023
-            Juniper Networks, Inc.'
+          - 'uniper Networks, Inc. ex4300-48t internet router, kernel JUNOS 20.4R3-S7.2,
+            Build date: 2023-04-21 19:47:18 UTC Copyright (c) 1996-2023 Juniper Networks,
+            Inc.'
           readOnly: true
           type:
           - string
@@ -96171,8 +96169,8 @@ components:
           description: if status is `inactive` this field returns the reason for it
             being inactive.
           examples:
-          - Cradlepoint API keys are no longer valid, please verify and update
-            the keys under organization settings.
+          - Cradlepoint API keys are no longer valid, please verify and update the
+            keys under organization settings.
           readOnly: true
           type: string
         last_status:
@@ -96398,8 +96396,8 @@ components:
       additionalProperties: false
       properties:
         file:
-          description: Ekahau or ibwave file
           contentMediaType: application/octet-stream
+          description: Ekahau or ibwave file
           type: string
       type: object
     tickets:
