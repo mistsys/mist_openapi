@@ -63816,7 +63816,7 @@ components:
           description: Major number for iBeacon
           example: 13
           maximum: 65535
-          minimum: 1
+          minimum: 0
           type: integer
         ibeacon_minor:
           default: 0
@@ -63837,8 +63837,8 @@ components:
           description: Required if `power_mode`==`custom`; else use `power_mode` as
             default
           example: 6
-          maximum: 7
-          minimum: 2
+          maximum: 10
+          minimum: 1
           type: integer
         power_mode:
           $ref: '#/components/schemas/ble_config_power_mode'
@@ -65908,9 +65908,9 @@ components:
     const_device_model:
       discriminator:
         mapping:
-          ap: '#/components/schemas/const_device_type_ap'
-          gateway: '#/components/schemas/const_device_type_gateway'
-          switch: '#/components/schemas/const_device_type_switch'
+          ap: '#/components/schemas/const_device_ap'
+          gateway: '#/components/schemas/const_device_switch'
+          switch: '#/components/schemas/const_device_gateway'
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/const_device_ap'
@@ -77926,9 +77926,9 @@ components:
       type: array
     radsec_idle_timeout:
       anyOf:
-      - type: integer
+      - default: 60
+        type: integer
       - type: string
-      default: 60
       description: Radsec Idle Timeout in seconds. Default is 60
     radsec_mxcluster_ids:
       description: To use Org mxedges when this WLAN does not use mxtunnel, specify
@@ -78166,11 +78166,11 @@ components:
       type: object
     remote_syslog_server_port:
       anyOf:
-      - maximum: 65545
+      - default: 514
+        maximum: 65545
         minimum: 1
         type: integer
       - type: string
-      default: 514
       description: Syslog Service Port, value from 1 to 65535
     remote_syslog_server_protocol:
       default: udp
@@ -92694,11 +92694,11 @@ components:
       type: object
     switch_mgmt_mxedge_proxy_port:
       anyOf:
-      - maximum: 65535
+      - default: 2222
+        maximum: 65535
         minimum: 1
         type: integer
       - type: string
-      default: 2222
       description: Mist Edge port used to proxy the switch management traffic to the
         Mist Cloud. Value in range 1-65535
     switch_mist_nac:
@@ -93273,11 +93273,11 @@ components:
         by platform)
     switch_port_usage_mac_limit_overwrite:
       anyOf:
-      - maximum: 16383
+      - default: 0
+        maximum: 16383
         minimum: 0
         type: integer
       - type: string
-      default: 0
       description: Max number of mac addresses, default is 0 for unlimited, otherwise
         range is 1 to 16383 (upper bound constrained by platform)
     switch_port_usage_mode:
@@ -99728,7 +99728,7 @@ components:
       type: object
     wlan_app_qos:
       additionalProperties: false
-      description: APp qos wlan settings
+      description: APP qos wlan settings
       properties:
         apps:
           additionalProperties:
@@ -100210,12 +100210,12 @@ components:
         minimum: 1
         type: integer
     wlan_dynamic_vlan_default_vlan_id_deprecated:
-      default: 999
       deprecated: true
       description: "vlan_id to use when there\u2019s no match from RADIUS"
       oneOf:
       - type: string
-      - maximum: 4094
+      - default: 999
+        maximum: 4094
         minimum: 1
         type: integer
     wlan_dynamic_vlan_default_vlan_ids:
