@@ -65904,9 +65904,9 @@ components:
     const_device_model:
       discriminator:
         mapping:
-          ap: '#/components/schemas/const_device_type_ap'
-          gateway: '#/components/schemas/const_device_type_gateway'
-          switch: '#/components/schemas/const_device_type_switch'
+          ap: '#/components/schemas/const_device_ap'
+          gateway: '#/components/schemas/const_device_switch'
+          switch: '#/components/schemas/const_device_gateway'
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/const_device_ap'
