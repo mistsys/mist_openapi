@@ -39338,6 +39338,15 @@ paths:
 webhooks:
   alarms:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39390,6 +39399,15 @@ webhooks:
             successfully
   audits:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39415,6 +39433,15 @@ webhooks:
             successfully
   client_info:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39438,6 +39465,15 @@ webhooks:
             successfully
   client_join:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39470,6 +39506,15 @@ webhooks:
             successfully
   client_latency:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39499,6 +39544,15 @@ webhooks:
             successfully
   client_sessions:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39540,6 +39594,15 @@ webhooks:
             successfully
   device_events:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39571,6 +39634,15 @@ webhooks:
             successfully
   device_updowns:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39596,6 +39668,15 @@ webhooks:
             successfully
   discovered_raw_rssi:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39632,6 +39713,15 @@ webhooks:
             successfully
   guest_authorizations:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39669,6 +39759,15 @@ webhooks:
             successfully
   location:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39704,6 +39803,15 @@ webhooks:
             successfully
   location_asset:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39737,6 +39845,15 @@ webhooks:
             successfully
   location_centrak:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39763,6 +39880,15 @@ webhooks:
             successfully
   location_client:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39791,6 +39917,15 @@ webhooks:
             successfully
   location_sdk:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39816,6 +39951,15 @@ webhooks:
             successfully
   location_unclient:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39844,6 +39988,15 @@ webhooks:
             successfully
   nac_accounting:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39876,6 +40029,15 @@ webhooks:
             successfully
   nac_events:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39919,6 +40081,15 @@ webhooks:
             successfully
   occupancy_alerts:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39948,6 +40119,15 @@ webhooks:
             successfully
   ping:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -39969,6 +40149,15 @@ webhooks:
             successfully
   sdkclient_scan_data:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -40009,6 +40198,15 @@ webhooks:
             successfully
   site_sle:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -40016,17 +40214,16 @@ webhooks:
               Example:
                 value:
                   events:
-                  - asset_id: b4695157-0d1d-4da0-8f9e-5c53149389e4
-                    map_id: 09d2b626-2e4e-45ef-a3c4-e6aeb6c83db1
-                    name: asset_name
-                    site_id: 72771e6a-6f5e-4de4-a5b9-1266c4197811
-                    timestamp: 0
-                    trigger: enter
-                    type: asset
-                    zone_id: 4495020a-236f-46e0-9453-e3f9cc6476f4
-                  topic: zone
+                  - org_id: 2818e386-8dec-2562-9ede-5b8a0fbbdc71
+                    site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+                    sle:
+                      ap-availability: 0.6
+                      successful-connect: 0.7
+                      time-to-connect: 0.9
+                    timestamp: 1694620800
+                  topic: site_sle
             schema:
-              $ref: '#/components/schemas/webhook_zone'
+              $ref: '#/components/schemas/webhook_site_sle'
         description: Webhook sample for `site-sle` topic
       responses:
         '200':
@@ -40034,6 +40231,15 @@ webhooks:
             successfully
   zone:
     post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -99602,9 +99808,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_alarms_events'
         topic:
-          default: alarms
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_alarms_topic'
       required:
       - events
       - topic
@@ -99616,6 +99820,11 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_alarms_topic:
+      description: 'enum: `alarms`'
+      enum:
+      - alarms
+      type: string
     webhook_assetfilter_ids:
       description: Only if `type`==`asset-raw-rssi`. List of ids to associated asset
         filters. These filters will be applied to messages routed to a filtered-asset-rssi
@@ -99659,8 +99868,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_audits_events'
         topic:
-          default: audits
-          type: string
+          $ref: '#/components/schemas/webhook_audits_topic'
       required:
       - events
       - topic
@@ -99671,6 +99879,11 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_audits_topic:
+      description: 'enum: `audits`'
+      enum:
+      - audits
+      type: string
     webhook_client_info:
       properties:
         events:
@@ -99714,8 +99927,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_client_join_events'
         topic:
-          default: client-join
-          type: string
+          $ref: '#/components/schemas/webhook_client_join_topic'
       required:
       - events
       - topic
@@ -99786,14 +99998,17 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_client_join_topic:
+      description: 'enum: `client-join`'
+      enum:
+      - client-join
+      type: string
     webhook_client_latency:
       properties:
         events:
           $ref: '#/components/schemas/webhook_client_latency_events'
         topic:
-          examples:
-          - client-latency
-          type: string
+          $ref: '#/components/schemas/webhook_client_latency_topic'
       type: object
     webhook_client_latency_event:
       additionalProperties: false
@@ -99845,14 +100060,18 @@ components:
       items:
         $ref: '#/components/schemas/webhook_client_latency_event'
       type: array
+    webhook_client_latency_topic:
+      description: 'enum: `client-latency`'
+      enum:
+      - client-latency
+      type: string
     webhook_client_sessions:
       description: Client session webhook sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_client_sessions_events'
         topic:
-          default: client-sessions
-          type: string
+          $ref: '#/components/schemas/webhook_client_sessions_topic'
       required:
       - events
       - topic
@@ -99962,6 +100181,11 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_client_sessions_topic:
+      description: 'enum: `client-sessions`'
+      enum:
+      - client-sessions
+      type: string
     webhook_delivery:
       additionalProperties: false
       properties:
@@ -100059,9 +100283,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_device_events_events'
         topic:
-          default: device_events
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_device_events_topic'
       required:
       - events
       - topic
@@ -100130,14 +100352,17 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_device_events_topic:
+      enum:
+      - device_events
+      type: string
     webhook_device_updowns:
       description: Device up/down webhook sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_device_updowns_events'
         topic:
-          default: device-updowns
-          type: string
+          $ref: '#/components/schemas/webhook_device_updowns_topic'
       required:
       - events
       - topic
@@ -100181,12 +100406,16 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_device_updowns_topic:
+      enum:
+      - device-updowns
+      type: string
     webhook_discovered_raw_rssi:
       properties:
         events:
           $ref: '#/components/schemas/webhook_discovered_raw_rssi_events'
         topic:
-          type: string
+          $ref: '#/components/schemas/webhook_discovered_raw_rssi_topic'
       required:
       - topic
       type: object
@@ -100252,14 +100481,17 @@ components:
       items:
         $ref: '#/components/schemas/webhook_discovered_raw_rssi_event'
       type: array
+    webhook_discovered_raw_rssi_topic:
+      enum:
+      - asset-raw-rssi
+      type: string
     webhook_guest_authorizations:
       description: guest-authorizations webhook sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_guest_authorizations_events'
         topic:
-          default: guest-authorizations
-          type: string
+          $ref: '#/components/schemas/webhook_guest_authorizations_topic'
       type: object
     webhook_guest_authorizations_event:
       additionalProperties: false
@@ -100364,15 +100596,17 @@ components:
       items:
         $ref: '#/components/schemas/webhook_guest_authorizations_event'
       type: array
+    webhook_guest_authorizations_topic:
+      enum:
+      - guest-authorizations
+      type: string
     webhook_location:
       description: location webhook sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_events'
         topic:
-          default: location
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_location_topic'
       required:
       - events
       - topic
@@ -100383,9 +100617,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_location_asset_events'
         topic:
-          default: location_asset
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_location_asset_topic'
       required:
       - events
       - topic
@@ -100467,15 +100699,17 @@ components:
       items:
         $ref: '#/components/schemas/webhook_location_asset_event'
       type: array
+    webhook_location_asset_topic:
+      enum:
+      - location_asset
+      type: string
     webhook_location_centrak:
       description: location webhook sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_centrak_events'
         topic:
-          default: location
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_location_centrak_topic'
       required:
       - events
       - topic
@@ -100525,15 +100759,17 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_location_centrak_topic:
+      enum:
+      - location_centrak
+      type: string
     webhook_location_client:
       description: Location Client sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_client_events'
         topic:
-          default: location_client
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_location_client_topic'
       required:
       - events
       - topic
@@ -100577,6 +100813,10 @@ components:
       items:
         $ref: '#/components/schemas/webhook_location_client_event'
       type: array
+    webhook_location_client_topic:
+      enum:
+      - location_client
+      type: string
     webhook_location_event:
       additionalProperties: false
       properties:
@@ -100651,9 +100891,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_location_sdk_events'
         topic:
-          default: location_sdk
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_location_sdk_topic'
       required:
       - events
       - topic
@@ -100697,15 +100935,21 @@ components:
       items:
         $ref: '#/components/schemas/webhook_location_sdk_event'
       type: array
+    webhook_location_sdk_topic:
+      enum:
+      - location_sdk
+      type: string
+    webhook_location_topic:
+      enum:
+      - location
+      type: string
     webhook_location_unclient:
       description: Location Unconnected Client sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_unclient_events'
         topic:
-          default: location_unclient
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_location_unclient_topic'
       required:
       - events
       - topic
@@ -100749,14 +100993,17 @@ components:
       items:
         $ref: '#/components/schemas/webhook_location_unclient_event'
       type: array
+    webhook_location_unclient_topic:
+      enum:
+      - location_unclient
+      type: string
     webhook_nac_accounting:
       description: nac-accounting webhook sample
       properties:
         events:
           $ref: '#/components/schemas/webhook_nac_accounting_events'
         topic:
-          default: nac-accounting
-          type: string
+          $ref: '#/components/schemas/webhook_nac_accounting_topic'
       type: object
     webhook_nac_accounting_event:
       additionalProperties: false
@@ -100824,13 +101071,16 @@ components:
       items:
         $ref: '#/components/schemas/webhook_nac_accounting_event'
       type: array
+    webhook_nac_accounting_topic:
+      enum:
+      - nac-accounting
+      type: string
     webhook_nac_events:
       properties:
         events:
           $ref: '#/components/schemas/webhook_nac_events_events'
         topic:
-          default: nac_events
-          type: string
+          $ref: '#/components/schemas/webhook_nac_events_topic'
       type: object
     webhook_nac_events_event:
       additionalProperties: false
@@ -100908,6 +101158,10 @@ components:
       items:
         $ref: '#/components/schemas/webhook_nac_events_event'
       type: array
+    webhook_nac_events_topic:
+      enum:
+      - nac_events
+      type: string
     webhook_oauth2_grant_type:
       description: 'required when `type`==`oauth2`. enum: `client_credentials`, `password`'
       enum:
@@ -100932,8 +101186,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_occupancy_alerts_events'
         topic:
-          default: occupancy-alerts
-          type: string
+          $ref: '#/components/schemas/webhook_occupancy_alerts_topic'
       required:
       - events
       - topic
@@ -101001,14 +101254,17 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_occupancy_alerts_topic:
+      enum:
+      - occupancy-alerts
+      type: string
     webhook_ping:
       description: Ping webhook
       properties:
         events:
           $ref: '#/components/schemas/webhook_ping_events'
         topic:
-          default: ping
-          type: string
+          $ref: '#/components/schemas/webhook_ping_topic'
       required:
       - events
       - topic
@@ -101036,6 +101292,10 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_ping_topic:
+      enum:
+      - ping
+      type: string
     webhook_sdkclient_scan_data:
       properties:
         events:
@@ -101136,9 +101396,10 @@ components:
         events:
           $ref: '#/components/schemas/webhook_site_sle_events'
         topic:
-          examples:
-          - site_sle
-          type: string
+          $ref: '#/components/schemas/webhook_site_sle_topic'
+      required:
+      - events
+      - topic
       type: object
     webhook_site_sle_event:
       additionalProperties: false
@@ -101172,6 +101433,10 @@ components:
       items:
         $ref: '#/components/schemas/webhook_site_sle_event'
       type: array
+    webhook_site_sle_topic:
+      enum:
+      - site_sle
+      type: string
     webhook_topics:
       description: List of supported webhook topics available with the API Call [List
         Webhook Topics](/#operations/listWebhookTopics)
@@ -101194,9 +101459,7 @@ components:
         events:
           $ref: '#/components/schemas/webhook_zone_events'
         topic:
-          default: zone
-          description: Topic subscribed to
-          type: string
+          $ref: '#/components/schemas/webhook_zone_topic'
       required:
       - events
       - topic
@@ -101262,6 +101525,10 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    webhook_zone_topic:
+      enum:
+      - zone
+      type: string
     webhooks:
       items:
         $ref: '#/components/schemas/webhook'
