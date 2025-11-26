@@ -4,7 +4,7 @@ SPEC_FILE = "./openapi.yaml"
 EXCEPTIONS = []
 
 with open(SPEC_FILE, "r") as f_in:
-    data = yaml.load(f_in, Loader=yaml.loader.SafeLoader)
+    data = yaml.safe_load(f_in)
 
 path = data.get("paths", {})
 for p, v in path.items():
