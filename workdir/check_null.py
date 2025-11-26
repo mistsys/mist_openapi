@@ -3,7 +3,7 @@ import yaml
 SPEC_FILE = "./openapi.yaml"
 
 with open(SPEC_FILE, "r", encoding="utf-8") as f_in:
-    data = yaml.load(f_in, Loader=yaml.loader.SafeLoader)
+    data = yaml.safe_load(f_in)
 
 
 schemas = data.get("components", {}).get("schemas")
