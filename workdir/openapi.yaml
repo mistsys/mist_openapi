@@ -5963,10 +5963,6 @@ paths:
                       name: string
                       port_config:
                         property1:
-                          additional_vlan_ids:
-                          - 55
-                          - 66
-                          authentication_protocol: pap
                           disabled: true
                           dynamic_vlan:
                             default_vlan_id: 999
@@ -6026,10 +6022,6 @@ paths:
                           wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
                           wxtunnel_remote_id: wifiguest
                         property2:
-                          additional_vlan_ids:
-                          - 55
-                          - 66
-                          authentication_protocol: pap
                           disabled: true
                           dynamic_vlan:
                             default_vlan_id: 999
@@ -6176,132 +6168,17 @@ paths:
                     - match_model: string
                       name: string
                       port_config:
-                        property1:
-                          additional_vlan_ids:
-                          - 55
-                          - 66
-                          authentication_protocol: pap
+                        eth1,eth2:
                           disabled: true
                           dynamic_vlan:
                             default_vlan_id: 999
                             enabled: true
-                            type: string
-                            vlans:
-                              1-10: null
-                              user: null
-                          enable_mac_auth: false
-                          forwarding: all
-                          mx_tunnel_id: 08cd7499-5841-51c8-e663-fb16b6f3b45e
-                          mxtunnel_name: string
-                          port_auth: none
                           port_vlan_id: 1
-                          radius_config:
-                            acct_interim_interval: 0
-                            acct_servers:
-                            - host: 1.2.3.4
-                              keywrap_enabled: true
-                              keywrap_format: hex
-                              keywrap_kek: '1122334455'
-                              keywrap_mack: '1122334455'
-                              port: 1813
-                              secret: testing123
-                            auth_servers:
-                            - host: 1.2.3.4
-                              keywrap_enabled: true
-                              keywrap_format: hex
-                              keywrap_kek: '1122334455'
-                              keywrap_mack: '1122334455'
-                              port: 1812
-                              secret: testing123
-                            auth_servers_retries: 3
-                            auth_servers_timeout: 5
-                            coa_enabled: false
-                            coa_port: 3799
-                            network: string
-                            source_ip: string
-                          radsec:
-                            enabled: true
-                            idle_timeout: 60
-                            mxcluster_ids:
-                            - 572586b7-f97b-a22b-526c-8b97a3f609c4
-                            proxy_hosts:
-                            - mxedge1.local
-                            server_name: radsec.abc.com
-                            servers:
-                            - host: 1.1.1.1
-                              port: 1812
-                            use_mxedge: true
-                            use_site_mxedge: false
                           vlan_id: 9
                           vlan_ids:
                           - 1
                           - 10
                           - 50
-                          wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
-                          wxtunnel_remote_id: wifiguest
-                        property2:
-                          additional_vlan_ids:
-                          - 55
-                          - 66
-                          authentication_protocol: pap
-                          disabled: true
-                          dynamic_vlan:
-                            default_vlan_id: 999
-                            enabled: true
-                            type: string
-                            vlans:
-                              1-10: null
-                              user: null
-                          enable_mac_auth: false
-                          forwarding: all
-                          mx_tunnel_id: 08cd7499-5841-51c8-e663-fb16b6f3b45e
-                          mxtunnel_name: string
-                          port_auth: none
-                          port_vlan_id: 1
-                          radius_config:
-                            acct_interim_interval: 0
-                            acct_servers:
-                            - host: 1.2.3.4
-                              keywrap_enabled: true
-                              keywrap_format: hex
-                              keywrap_kek: '1122334455'
-                              keywrap_mack: '1122334455'
-                              port: 1813
-                              secret: testing123
-                            auth_servers:
-                            - host: 1.2.3.4
-                              keywrap_enabled: true
-                              keywrap_format: hex
-                              keywrap_kek: '1122334455'
-                              keywrap_mack: '1122334455'
-                              port: 1812
-                              secret: testing123
-                            auth_servers_retries: 3
-                            auth_servers_timeout: 5
-                            coa_enabled: false
-                            coa_port: 3799
-                            network: string
-                            source_ip: string
-                          radsec:
-                            enabled: true
-                            idle_timeout: 60
-                            mxcluster_ids:
-                            - 572586b7-f97b-a22b-526c-8b97a3f609c4
-                            proxy_hosts:
-                            - mxedge1.local
-                            server_name: radsec.abc.com
-                            servers:
-                            - host: 1.1.1.1
-                              port: 1812
-                            use_mxedge: true
-                            use_site_mxedge: false
-                          vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
-                          wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
-                          wxtunnel_remote_id: wifiguest
                   wifi:
                     cisco_enabled: true
                     disable_11k: false
@@ -7729,7 +7606,7 @@ paths:
                 value:
                   aeroscout:
                     enabled: true
-                    host: string
+                    host: aero.pvt.net
                   disable_eth1: true
                   disable_module: true
                   mesh:
@@ -7749,7 +7626,6 @@ paths:
                       disabled: true
                       power: 8
                       preamble: auto
-                      usage: '24'
                     band_24_usage: '24'
                     band_5:
                       allow_rrm_disable: true
@@ -7760,7 +7636,6 @@ paths:
                       power_max: 8
                       power_min: 15
                       preamble: auto
-                      usage: '24'
                     scanning_enabled: true
                   type: ap
               deviceprofile_hub:
@@ -11024,8 +10899,7 @@ paths:
                   name: string
                   radsec:
                     enabled: true
-                    server_name: string
-                    servers:
+                    auth_servers:
                     - host: string
                       port: 0
                   tunterm_ap_subnets:
@@ -11105,8 +10979,7 @@ paths:
                   name: string
                   radsec:
                     enabled: true
-                    server_name: string
-                    servers:
+                    auth_servers:
                     - host: string
                       port: 0
                   tunterm_ap_subnets:
@@ -11753,27 +11626,29 @@ paths:
             examples:
               Example:
                 value:
+                  name: me-gc1-01
                   model: ME-X1
-                  name: string
-                  ntp_servers:
-                  - string
+                  tunterm_ip_config:
+                    ip: 10.10.172.201
+                    netmask: "/24"
+                    gateway: 10.10.172.2
+                  tunterm_port_config:
+                    separate_upstream_downstream: true
+                    upstream_ports:
+                    - '1'
+                    downstream_ports:
+                    - '0'
+                    upstream_port_vlan_id: '1010'
                   services:
                   - tunterm
-                  tunterm_ip_config:
+                  oob_ip_config:
+                    type: static
+                    ip: 10.3.172.201
+                    netmask: "/24"
+                    gateway: 10.3.172.9
                     dns:
-                    - string
-                    dns_suffix:
-                    - string
-                    gateway: string
-                    ip: string
-                    netmask: string
-                  tunterm_port_config:
-                    downstream_ports:
-                    - string
-                    separate_upstream_downstream: true
-                    upstream_port_vlan_id: 1
-                    upstream_ports:
-                    - string
+                    - 8.8.8.8
+                    - 1.1.1.1
             schema:
               $ref: '#/components/schemas/mxedge'
         description: Request Body
@@ -13287,11 +13162,11 @@ paths:
                         property1:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                         property2:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13310,11 +13185,11 @@ paths:
                         property1:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                         property2:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13445,11 +13320,11 @@ paths:
                         property1:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                         property2:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13468,11 +13343,11 @@ paths:
                         property1:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                         property2:
                           name: web server
                           port: '443'
-                          to: 192.168.70.5/30
+                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13579,7 +13454,7 @@ paths:
                     property1:
                       all_networks: false
                       allow_dhcpd: true
-                      authentication_protocol: pap
+                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13597,7 +13472,7 @@ paths:
                       poe_disabled: false
                       port_auth: dot1x
                       port_network: string
-                      rejected_network: null
+                      server_reject_network: null
                       speed: auto
                       storm_control:
                         no_broadcast: false
@@ -13610,7 +13485,7 @@ paths:
                     property2:
                       all_networks: false
                       allow_dhcpd: true
-                      authentication_protocol: pap
+                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13627,7 +13502,7 @@ paths:
                       persist_mac: false
                       poe_disabled: false
                       port_network: string
-                      rejected_network: null
+                      server_reject_network: null
                       speed: auto
                       storm_control:
                         no_broadcast: false
@@ -13638,7 +13513,7 @@ paths:
                       stp_edge: true
                       voip_network: string
                   switch_mgmt:
-                    config_revert: 10
+                    config_revert_timer: 10
                     protect_re:
                       enabled: false
                     root_password: string
@@ -13797,7 +13672,7 @@ paths:
                     property1:
                       all_networks: false
                       allow_dhcpd: true
-                      authentication_protocol: pap
+                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13815,7 +13690,7 @@ paths:
                       poe_disabled: false
                       port_auth: dot1x
                       port_network: string
-                      rejected_network: null
+                      server_reject_network: null
                       speed: auto
                       storm_control:
                         no_broadcast: false
@@ -13828,7 +13703,7 @@ paths:
                     property2:
                       all_networks: false
                       allow_dhcpd: true
-                      authentication_protocol: pap
+                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13845,7 +13720,7 @@ paths:
                       persist_mac: false
                       poe_disabled: false
                       port_network: string
-                      rejected_network: null
+                      server_reject_network: null
                       speed: auto
                       storm_control:
                         no_broadcast: false
@@ -13856,7 +13731,7 @@ paths:
                       stp_edge: true
                       voip_network: string
                   switch_mgmt:
-                    config_revert: 10
+                    config_revert_timer: 10
                     protect_re:
                       enabled: false
                     root_password: string
@@ -13949,7 +13824,7 @@ paths:
                       property1:
                         all_networks: false
                         allow_dhcpd: true
-                        authentication_protocol: pap
+                        mac_auth_protocol: pap
                         bypass_auth_when_server_down: true
                         description: string
                         disable_autoneg: false
@@ -13967,7 +13842,7 @@ paths:
                         poe_disabled: false
                         port_auth: dot1x
                         port_network: string
-                        rejected_network: null
+                        server_reject_network: null
                         speed: auto
                         storm_control:
                           no_broadcast: false
@@ -13980,7 +13855,7 @@ paths:
                       property2:
                         all_networks: false
                         allow_dhcpd: true
-                        authentication_protocol: pap
+                        mac_auth_protocol: pap
                         bypass_auth_when_server_down: true
                         description: string
                         disable_autoneg: false
@@ -13997,7 +13872,7 @@ paths:
                         persist_mac: false
                         poe_disabled: false
                         port_network: string
-                        rejected_network: null
+                        server_reject_network: null
                         speed: auto
                         storm_control:
                           no_broadcast: false
@@ -14008,7 +13883,7 @@ paths:
                         stp_edge: true
                         voip_network: string
                     switch_mgmt:
-                      config_revert: 10
+                      config_revert_timer: 10
                       protect_re:
                         enabled: false
                       root_password: string
@@ -14465,7 +14340,6 @@ paths:
                         port1:
                           tcpdump_expression: udp port 67 or udp port 68
                   num_packets: 100
-                  tcpdump_expression: vlan 999
                   type: mxedge
             schema:
               $ref: '#/components/schemas/capture_org'
@@ -14560,8 +14434,6 @@ paths:
                     symbols_enabled: true
                   ssid: USR-test
                   sso:
-                    default_role: guest
-                    forced_role: desired
                     idp_cert: '-----BEGIN CERTIFICATE-----
 
                       MIIDqDCCApCgA...-----END CERTIFICATE-----'
@@ -14570,7 +14442,7 @@ paths:
                     issuer: http://www.okta.com/a6b88bec5ab7
                     nameid_format: email
                   type: byod
-                  vlan_id: null
+                  vlan_id: 42
             schema:
               $ref: '#/components/schemas/psk_portal'
       responses:
@@ -14774,9 +14646,7 @@ paths:
                     symbols: ()[]{}_%@#&$
                     symbols_enabled: true
                   ssid: USR-test
-                  sso:
-                    default_role: guest
-                    forced_role: desired
+                  sponsors:
                     idp_cert: '-----BEGIN CERTIFICATE-----
 
                       MIIDqDCCApCgA...-----END CERTIFICATE-----'
@@ -14785,7 +14655,7 @@ paths:
                     issuer: http://www.okta.com/a6b88bec5ab7
                     nameid_format: email
                   type: byod
-                  vlan_id: null
+                  vlan_id: nu42ll
             schema:
               $ref: '#/components/schemas/psk_portal'
       responses:
@@ -15980,8 +15850,6 @@ paths:
                       microsoft_enabled: false
                       passphrase_enabled: false
                       password: let me in
-                      portal_api_secret: string
-                      portal_image: https://url/to/image.png
                       predefined_sponsors_enabled: true
                       privacy: true
                       puzzel_password: string
@@ -16010,7 +15878,6 @@ paths:
                       sso_nameid_format: email
                       telstra_client_id: string
                       telstra_client_secret: string
-                      thumbnail: string
                       twilio_auth_token: af9dac44c344a875ab5d31cb7abcdefg
                       twilio_phone_number: '+18548888888'
                       twilio_sid: AC72ec6ba0ec5af30e6731c5e47abcdefgh
@@ -16019,11 +15886,8 @@ paths:
                     - ibm.com
                     portal_allowed_subnets:
                     - 63.5.3.0/24
-                    portal_api_secret: EIfPMOykI3lMlDdNPub2WcbqT6dNOtWwmYHAd6bY
                     portal_denied_hostnames:
                     - msg.snapchat.com
-                    portal_image: https://example.com
-                    portal_template_url: string
                     qos:
                       class: best_effort
                       overwrite: false
@@ -16077,8 +15941,6 @@ paths:
                         mon: 09:00-17:00
                     sle_excluded: false
                     ssid: corporate
-                    template_id: c6d67e98-83ea-49f0-8812-e4abae2b68bc
-                    thumbnail: https://example.com
                     use_eapol_v1: false
                     vlan_enabled: false
                     vlan_ids:
@@ -16345,9 +16207,10 @@ paths:
                   app_key: string
                   name: string
                   network_id: d6797cf4-42b9-4cad-8591-9dd91c3f0fc3
+                  addresses:
+                  - 0.0.0.0/0
                   specs:
-                  - address: string
-                    port: 0
+                  - port_range: 8080,8443
                     protocol: any
                   subnet: string
                   type: custom
@@ -16501,7 +16364,7 @@ paths:
                     auto_device_naming:
                       enable: true
                       rules:
-                      - match_device_type: ap
+                      - match_device: ap
                         prefix: MIST-
                         src: lldp_port_desc
                     auto_deviceprofile_assignment:
@@ -16548,7 +16411,7 @@ paths:
                     name: string
                     password_policy:
                       enabled: true
-                      freshness: 0
+                      expiry_in_days: 365
                       min_length: 8
                       requires_special_char: true
                       requires_two_factor_auth: true
@@ -18139,18 +18002,16 @@ paths:
                 value:
                   name: string
                   privileges:
-                  - msp_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-                    msp_name: string
-                    name: string
-                    org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-                    org_name: string
-                    orggroup_ids:
-                    - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                  - org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     role: admin
                     scope: org
+                  - role: read
                     site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-                    sitegroup_ids:
-                    - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                    scope: site
+                  - org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                    role: read
+                    sitegroup_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                    scope: sitegroup
             schema:
               $ref: '#/components/schemas/sso_role_org'
         description: Request Body
@@ -18223,18 +18084,16 @@ paths:
                 value:
                   name: string
                   privileges:
-                  - msp_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-                    msp_name: string
-                    name: string
-                    org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-                    org_name: string
-                    orggroup_ids:
-                    - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                  - org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     role: admin
                     scope: org
+                  - role: read
                     site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-                    sitegroup_ids:
-                    - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                    scope: site
+                  - org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                    role: read
+                    sitegroup_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+                    scope: sitegroup
             schema:
               $ref: '#/components/schemas/sso_role_org'
         description: Request Body
@@ -26606,17 +26465,8 @@ paths:
               Example:
                 value:
                   ge-0/0/0-1:
-                    ae_disable_lacp: true
-                    ae_idx: 0
-                    aggregated: false
-                    description: string
-                    disable_autoneg: true
-                    duplex: auto
-                    dynamic_usage: string
-                    esilag: true
                     poe_disabled: true
-                    speed: auto
-                    usage: string
+                    usage: iot
             schema:
               $ref: '#/components/schemas/local_port_config'
       responses:
@@ -31234,7 +31084,6 @@ paths:
                   ap_mac: string
                   client_mac: 38f9d3972ff1
                   duration: 600
-                  includes_mcast: true
                   max_pkt_len: 128
                   num_packets: 1024
                   ssid: string
@@ -32536,12 +32385,20 @@ paths:
                   ap_matching:
                     enabled: true
                     rules:
-                    - eth1,eth2:
-                        port_vlan_id: 1
-                        vlan_ids:
-                        - 1
-                        - 10
-                        - 50
+                    - match_model: string
+                      name: string
+                      port_config:
+                        eth1,eth2:
+                          disabled: true
+                          dynamic_vlan:
+                            default_vlan_id: 999
+                            enabled: true
+                          port_vlan_id: 1
+                          vlan_id: 9
+                          vlan_ids:
+                          - 1
+                          - 10
+                          - 50
                   ap_port_config:
                     model_specific:
                       AP32:
@@ -32609,7 +32466,7 @@ paths:
                       - string
                       custom_apps:
                       - app_type: string
-                        hostname:
+                        hostnames:
                         - string
                         name: string
                         protocol: http
@@ -32633,25 +32490,13 @@ paths:
                     root_password: ROOT_PASSWORD
                   networks:
                     property1:
-                      dns:
-                      - string
-                      dns_suffix:
-                      - string
                       gateway: string
-                      ospf_interface_type: string
                       subnet: string
                       vlan_id: 10
-                      zone: string
                     property2:
-                      dns:
-                      - string
-                      dns_suffix:
-                      - string
                       gateway: string
-                      ospf_interface_type: string
                       subnet: string
                       vlan_id: 10
-                      zone: string
                   ntp_servers:
                   - string
                   occupancy:
@@ -32725,7 +32570,7 @@ paths:
                     property1:
                       all_networks: false
                       allow_dhcpd: true
-                      authentication_protocol: pap
+                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -32743,7 +32588,7 @@ paths:
                       poe_disabled: false
                       port_auth: dot1x
                       port_network: string
-                      rejected_network: null
+                      server_reject_network: null
                       speed: auto
                       storm_control:
                         no_broadcast: false
@@ -32756,7 +32601,7 @@ paths:
                     property2:
                       all_networks: false
                       allow_dhcpd: true
-                      authentication_protocol: pap
+                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -32773,7 +32618,7 @@ paths:
                       persist_mac: false
                       poe_disabled: false
                       port_network: string
-                      rejected_network: null
+                      server_reject_network: null
                       speed: auto
                       storm_control:
                         no_broadcast: false
@@ -36230,7 +36075,6 @@ paths:
                     rowspan: 2
                     scopeId: e0c767834b4c
                     scopeType: client
-                    sortedColumns: null
                     timeRange:
                       end: 1508823743
                       endDate: 10/23/2017
@@ -39822,7 +39666,7 @@ paths:
                     nacrule_matched: true
                     nas_vendor: juniper-mist
                     org_id: 27547ac2-d114-4e04-beb1-f3f1e6e81ec6
-                    random_mac: true
+                    random_mac: 'true'
                     resp_attrs:
                     - Tunnel-Type=VLAN
                     - Tunnel-Medium-Type=IEEE-802
@@ -40154,132 +39998,17 @@ components:
           - match_model: string
             name: string
             port_config:
-              property1:
-                additional_vlan_ids:
-                - 55
-                - 66
-                authentication_protocol: pap
+              eth1,eth2:
                 disabled: true
                 dynamic_vlan:
                   default_vlan_id: 999
                   enabled: true
-                  type: string
-                  vlans:
-                    1-10: null
-                    user: null
-                enable_mac_auth: false
-                forwarding: all
-                mx_tunnel_id: 08cd7499-5841-51c8-e663-fb16b6f3b45e
-                mxtunnel_name: string
-                port_auth: none
                 port_vlan_id: 1
-                radius_config:
-                  acct_interim_interval: 0
-                  acct_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1813
-                    secret: testing123
-                  auth_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1812
-                    secret: testing123
-                  auth_servers_retries: 3
-                  auth_servers_timeout: 5
-                  coa_enabled: false
-                  coa_port: 3799
-                  network: string
-                  source_ip: string
-                radsec:
-                  enabled: true
-                  idle_timeout: 60
-                  mxcluster_ids:
-                  - 572586b7-f97b-a22b-526c-8b97a3f609c4
-                  proxy_hosts:
-                  - mxedge1.local
-                  server_name: radsec.abc.com
-                  servers:
-                  - host: 1.1.1.1
-                    port: 1812
-                  use_mxedge: true
-                  use_site_mxedge: false
                 vlan_id: 9
                 vlan_ids:
                 - 1
                 - 10
                 - 50
-                wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
-                wxtunnel_remote_id: wifiguest
-              property2:
-                additional_vlan_ids:
-                - 55
-                - 66
-                authentication_protocol: pap
-                disabled: true
-                dynamic_vlan:
-                  default_vlan_id: 999
-                  enabled: true
-                  type: string
-                  vlans:
-                    1-10: null
-                    user: null
-                enable_mac_auth: false
-                forwarding: all
-                mx_tunnel_id: 08cd7499-5841-51c8-e663-fb16b6f3b45e
-                mxtunnel_name: string
-                port_auth: none
-                port_vlan_id: 1
-                radius_config:
-                  acct_interim_interval: 0
-                  acct_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1813
-                    secret: testing123
-                  auth_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1812
-                    secret: testing123
-                  auth_servers_retries: 3
-                  auth_servers_timeout: 5
-                  coa_enabled: false
-                  coa_port: 3799
-                  network: string
-                  source_ip: string
-                radsec:
-                  enabled: true
-                  idle_timeout: 60
-                  mxcluster_ids:
-                  - 572586b7-f97b-a22b-526c-8b97a3f609c4
-                  proxy_hosts:
-                  - mxedge1.local
-                  server_name: radsec.abc.com
-                  servers:
-                  - host: 1.1.1.1
-                    port: 1812
-                  use_mxedge: true
-                  use_site_mxedge: false
-                vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
-                wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
-                wxtunnel_remote_id: wifiguest
         created_time: 0
         for_site: true
         id: 497f6eca-6276-4993-bfeb-53cbbbba8f08
@@ -40307,132 +40036,17 @@ components:
           - match_model: string
             name: string
             port_config:
-              property1:
-                additional_vlan_ids:
-                - 55
-                - 66
-                authentication_protocol: pap
+              eth1,eth2:
                 disabled: true
                 dynamic_vlan:
                   default_vlan_id: 999
                   enabled: true
-                  type: string
-                  vlans:
-                    1-10: null
-                    user: null
-                enable_mac_auth: false
-                forwarding: all
-                mx_tunnel_id: 08cd7499-5841-51c8-e663-fb16b6f3b45e
-                mxtunnel_name: string
-                port_auth: none
                 port_vlan_id: 1
-                radius_config:
-                  acct_interim_interval: 0
-                  acct_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1813
-                    secret: testing123
-                  auth_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1812
-                    secret: testing123
-                  auth_servers_retries: 3
-                  auth_servers_timeout: 5
-                  coa_enabled: false
-                  coa_port: 3799
-                  network: string
-                  source_ip: string
-                radsec:
-                  enabled: true
-                  idle_timeout: 60
-                  mxcluster_ids:
-                  - 572586b7-f97b-a22b-526c-8b97a3f609c4
-                  proxy_hosts:
-                  - mxedge1.local
-                  server_name: radsec.abc.com
-                  servers:
-                  - host: 1.1.1.1
-                    port: 1812
-                  use_mxedge: true
-                  use_site_mxedge: false
                 vlan_id: 9
                 vlan_ids:
                 - 1
                 - 10
                 - 50
-                wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
-                wxtunnel_remote_id: wifiguest
-              property2:
-                additional_vlan_ids:
-                - 55
-                - 66
-                authentication_protocol: pap
-                disabled: true
-                dynamic_vlan:
-                  default_vlan_id: 999
-                  enabled: true
-                  type: string
-                  vlans:
-                    1-10: null
-                    user: null
-                enable_mac_auth: false
-                forwarding: all
-                mx_tunnel_id: 08cd7499-5841-51c8-e663-fb16b6f3b45e
-                mxtunnel_name: string
-                port_auth: none
-                port_vlan_id: 1
-                radius_config:
-                  acct_interim_interval: 0
-                  acct_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1813
-                    secret: testing123
-                  auth_servers:
-                  - host: 1.2.3.4
-                    keywrap_enabled: true
-                    keywrap_format: hex
-                    keywrap_kek: '1122334455'
-                    keywrap_mack: '1122334455'
-                    port: 1812
-                    secret: testing123
-                  auth_servers_retries: 3
-                  auth_servers_timeout: 5
-                  coa_enabled: false
-                  coa_port: 3799
-                  network: string
-                  source_ip: string
-                radsec:
-                  enabled: true
-                  idle_timeout: 60
-                  mxcluster_ids:
-                  - 572586b7-f97b-a22b-526c-8b97a3f609c4
-                  proxy_hosts:
-                  - mxedge1.local
-                  server_name: radsec.abc.com
-                  servers:
-                  - host: 1.1.1.1
-                    port: 1812
-                  use_mxedge: true
-                  use_site_mxedge: false
-                vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
-                wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
-                wxtunnel_remote_id: wifiguest
         created_time: 0
         for_site: true
         id: 497f6eca-6276-4993-bfeb-53cbbbba9f08
@@ -40825,10 +40439,10 @@ components:
         total: 0
     CallStatsSummaryExample:
       value:
-        bad_minutes: 5566
-        bad_minutes_client: 526
-        bad_minutes_site_wan: 3612
-        bad_minutes_wireless: 1428
+        bad_minutes: 5566.0
+        bad_minutes_client: 526.0
+        bad_minutes_site_wan: 3612.0
+        bad_minutes_wireless: 1428.0
         num_aps: 1
         num_users: 3
         total_minutes: 575217
@@ -40990,7 +40604,7 @@ components:
             ap_num_clients: 45.48306793636746
             ap_rtt: 6.352042701509264
             client_cpu: 9.323452578650581
-            client_radio_band: 1.5325644097982958e-06
+            client_radio_band: 0.5841414928436279
             client_rssi: 17.251008563571506
             client_tx_bytes: 1.8379177401463191
             client_tx_rates: 10.668423069847954
@@ -41002,15 +40616,15 @@ components:
             radio_util: 27.891777674357098
             radio_util_interference: 4.38913492154744
             site_num_clients: -0.2855822932389047
-            site_wan_avg_upload_mpbs: -0.988989942603641
+            site_wan_avg_upload_mbps: -0.988989942603641
             site_wan_jitter: 0.7875519659784105
             site_wan_rtt: 15.094849904378256
-            site_wan_upload_mpbs: -0.8131117953194512
+            site_wan_upload_mbps: -0.8131117953194512
           audio_out:
             ap_num_clients: 45.48306793636746
             ap_rtt: 6.352042701509264
             client_cpu: 9.323452578650581
-            client_radio_band: 1.5325644097982958e-06
+            client_radio_band: 0.5841414928436279
             client_rssi: 17.251008563571506
             client_tx_bytes: 1.8379177401463191
             client_tx_rates: 10.668423069847954
@@ -41022,22 +40636,22 @@ components:
             radio_util: 27.891777674357098
             radio_util_interference: 4.38913492154744
             site_num_clients: -0.2855822932389047
-            site_wan_avg_upload_mpbs: -0.988989942603641
+            site_wan_avg_upload_mbps: -0.988989942603641
             site_wan_jitter: 0.7875519659784105
             site_wan_rtt: 15.094849904378256
-            site_wan_upload_mpbs: -0.8131117953194512
+            site_wan_upload_mbps: -0.8131117953194512
           client_cpu: 0.00834270566701889
           client_n_streams: 0.00734270566701889
           client_radio_band: 0.5841414928436279
           client_rssi: 0.7594696879386902
-          client_rx_bytes: 2.365511655807e-05
+          client_rx_bytes: 0.00002365511655807
           client_rx_rates: 0.02441493794322014
           client_rx_retries: -0.14325742423534393
           client_tx_bytes: 0.00102365511655807
           client_tx_rates: 0.22236637771129608
           client_tx_retries: 0.3308201730251312
           client_vpn_distance: -0.0001660545531194657
-          client_wifi_version: 7.0566701889e-07
+          client_wifi_version: 0.00000070566701889
           expected: -2.8630001056670187
           radio_ap_change: 0.01850946433842182
           radio_bandwidth: -0.021175479516386986
@@ -41047,18 +40661,18 @@ components:
           radio_util: 0.2452986091375351
           radio_util_interference: 3.4367904663085938
           site_num_clients: 0.055026158690452576
-          site_wan_avg_download_mbps: 3.0566701889e-07
-          site_wan_avg_upload_mbps: 5.566701889e-08
-          site_wan_download_mbps: 8.0566701889e-07
-          site_wan_jitter: 1.00566701889e-06
-          site_wan_rtt: 4.0566701889e-07
-          site_wan_upload_mbps: 2.0566701889e-07
+          site_wan_avg_download_mbps: 0.00000030566701889
+          site_wan_avg_upload_mbps: 0.00000005566701889
+          site_wan_download_mbps: 0.00000080566701889
+          site_wan_jitter: 0.7875519659784105
+          site_wan_rtt: 15.094849904378256
+          site_wan_upload_mbps: 0.00000020566701889
           timestamp: 1695425115
           video_in:
             ap_num_clients: 45.48306793636746
             ap_rtt: 6.352042701509264
             client_cpu: 9.323452578650581
-            client_radio_band: 1.5325644097982958e-06
+            client_radio_band: 0.5841414928436279
             client_rssi: 17.251008563571506
             client_tx_bytes: 1.8379177401463191
             client_tx_rates: 10.668423069847954
@@ -41070,15 +40684,15 @@ components:
             radio_util: 27.891777674357098
             radio_util_interference: 4.38913492154744
             site_num_clients: -0.2855822932389047
-            site_wan_avg_upload_mpbs: -0.988989942603641
+            site_wan_avg_upload_mbps: -0.988989942603641
             site_wan_jitter: 0.7875519659784105
             site_wan_rtt: 15.094849904378256
-            site_wan_upload_mpbs: -0.8131117953194512
+            site_wan_upload_mbps: -0.8131117953194512
           video_out:
             ap_num_clients: 45.48306793636746
             ap_rtt: 6.352042701509264
             client_cpu: 9.323452578650581
-            client_radio_band: 1.5325644097982958e-06
+            client_radio_band: 0.5841414928436279
             client_rssi: 17.251008563571506
             client_tx_bytes: 1.8379177401463191
             client_tx_rates: 10.668423069847954
@@ -41090,10 +40704,10 @@ components:
             radio_util: 27.891777674357098
             radio_util_interference: 4.38913492154744
             site_num_clients: -0.2855822932389047
-            site_wan_avg_upload_mpbs: -0.988989942603641
+            site_wan_avg_upload_mbps: -0.988989942603641
             site_wan_jitter: 0.7875519659784105
             site_wan_rtt: 15.094849904378256
-            site_wan_upload_mpbs: -0.8131117953194512
+            site_wan_upload_mbps: -0.8131117953194512
     CertificateExample:
       value:
         cert: '-----BEGIN CERTIFICATE-----
@@ -41198,7 +40812,7 @@ components:
           nas_vendor:
           - juniper-mist
           org_id: 31f27122-68a9-47a4-b526-8fb8a62a8acb
-          random_mac: true
+          random_mac: 'true'
           site_id: 832b1d74-9531-409b-ae37-4d7f3edbde92
           ssid:
           - string
@@ -42319,7 +41933,7 @@ components:
         eap_type: EAP-TLS
         nas_vendor: Mist
         org_id: 94de66e8-556a-4d56-8780-a114620a5c42
-        random_mac: true
+        random_mac: 'true'
         site_id: b5a005ab-47d4-41f7-97bf-733f9cc252dd
         ssid: Test_Suriya-SSID
         timestamp: 1685658478.438995
@@ -45522,8 +45136,7 @@ components:
         limit: 1
         next: /api/v1/sites/f5fcbee5-fbca-45b3-8bf1-1619ede87879/stats/discovered_switch_metrics/search?end=1675193686.0191767&limit=1&search_after=%5B1675193400000%5D&start=1675107286.0191767
         results:
-        - details: {}
-          org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
+        - org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
           scope: site
           score: 100
           site_id: f5fcbee5-fbca-45b3-8bf1-1619ede87879
@@ -45633,7 +45246,7 @@ components:
           nacrule_matched: true
           nas_vendor: juniper-mist
           org_id: 27547ac2-d114-4e04-beb1-f3f1e6e81ec6
-          random_mac: false
+          random_mac: 'false'
           resp_attrs:
           - Tunnel-Type=VLAN
           - Tunnel-Medium-Type=IEEE-802
@@ -45705,7 +45318,6 @@ components:
         pod_names:
           '1': Pod 1
         site_id: 00000000-0000-0000-0000-000000000000
-        version: 6
     EvpnTopologyExample:
       value:
         id: 9197ec96-4c8d-529f-c595-035895e688b2
@@ -46929,10 +46541,6 @@ components:
           11.0.0.0/8:
             via: 10.3.3.1
         tunterm_ip_config:
-          dns:
-          - 8.8.8.8
-          dns_suffix:
-          - .mist.local
           gateway: 10.2.1.254
           ip: 10.2.1.1
           netmask: 255.255.255.0
@@ -47037,7 +46645,6 @@ components:
             tx_errors: 0
             tx_pkts: 8784452092
             up: true
-        sensor_stat: {}
         serial: string
         service_stat:
           mxagent:
@@ -47916,7 +47523,7 @@ components:
           property1:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -47933,7 +47540,7 @@ components:
             poe_disabled: false
             port_auth: dot1x
             port_network: string
-            rejected_network: null
+            server_reject_network: null
             speed: auto
             storm_control:
               no_broadcast: false
@@ -47946,7 +47553,7 @@ components:
           property2:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -47963,7 +47570,7 @@ components:
             persist_mac: false
             poe_disabled: false
             port_network: string
-            rejected_network: null
+            server_reject_network: null
             speed: auto
             storm_control:
               no_broadcast: false
@@ -48057,7 +47664,7 @@ components:
           ap:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: WAP
             disable_autoneg: false
@@ -48074,7 +47681,7 @@ components:
             persist_mac: false
             poe_disabled: false
             port_network: default
-            rejected_network: null
+            server_reject_network: null
             storm_control:
               no_broadcast: false
               no_multicast: false
@@ -49517,7 +49124,6 @@ components:
           max: 0
           min: 0
           p95: 0
-        display_is_group: false
         id: 17ef7169-e000-4dcd-abc7-f721f0a8ffda
         modified_time: 1733864928
         name: proximity openspace
@@ -49873,12 +49479,20 @@ components:
         ap_matching:
           enabled: true
           rules:
-          - eth1,eth2:
-              port_vlan_id: 1
-              vlan_ids:
-              - 1
-              - 10
-              - 50
+          - match_model: string
+            name: string
+            port_config:
+              eth1,eth2:
+                disabled: true
+                dynamic_vlan:
+                  default_vlan_id: 999
+                  enabled: true
+                port_vlan_id: 1
+                vlan_id: 9
+                vlan_ids:
+                - 1
+                - 10
+                - 50
         ap_port_config:
           model_specific:
             AP32:
@@ -49987,7 +49601,7 @@ components:
             - string
             custom_apps:
             - app_type: string
-              hostname:
+              hostnames:
               - string
               name: string
               protocol: http
@@ -50039,7 +49653,6 @@ components:
             proxy_hosts:
             - string
             server_selection: ordered
-            source: any
         mxedge_mgmt:
           mist_password: MIST_PASSWORD
           root_password: ROOT_PASSWORD
@@ -50115,7 +49728,7 @@ components:
           property1:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -50133,7 +49746,7 @@ components:
             poe_disabled: false
             port_auth: dot1x
             port_network: string
-            rejected_network: null
+            server_reject_network: null
             speed: auto
             storm_control:
               no_broadcast: false
@@ -50146,7 +49759,7 @@ components:
           property2:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -50163,7 +49776,7 @@ components:
             persist_mac: false
             poe_disabled: false
             port_network: string
-            rejected_network: null
+            server_reject_network: null
             speed: auto
             storm_control:
               no_broadcast: false
@@ -50393,12 +50006,20 @@ components:
         ap_matching:
           enabled: true
           rules:
-          - eth1,eth2:
-              port_vlan_id: 1
-              vlan_ids:
-              - 1
-              - 10
-              - 50
+          - match_model: string
+            name: string
+            port_config:
+              eth1,eth2:
+                disabled: true
+                dynamic_vlan:
+                  default_vlan_id: 999
+                  enabled: true
+                port_vlan_id: 1
+                vlan_id: 9
+                vlan_ids:
+                - 1
+                - 10
+                - 50
         ap_port_config:
           model_specific:
             AP32:
@@ -50507,7 +50128,7 @@ components:
             - string
             custom_apps:
             - app_type: string
-              hostname:
+              hostnames:
               - string
               name: string
               protocol: http
@@ -50559,7 +50180,6 @@ components:
             proxy_hosts:
             - string
             server_selection: ordered
-            source: any
         mxedge_mgmt:
           mist_password: MIST_PASSWORD
           root_password: ROOT_PASSWORD
@@ -50637,7 +50257,7 @@ components:
           property1:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -50655,7 +50275,7 @@ components:
             poe_disabled: false
             port_auth: dot1x
             port_network: string
-            rejected_network: null
+            server_reject_network: null
             speed: auto
             storm_control:
               no_broadcast: false
@@ -50668,7 +50288,7 @@ components:
           property2:
             all_networks: false
             allow_dhcpd: true
-            authentication_protocol: pap
+            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -50685,7 +50305,7 @@ components:
             persist_mac: false
             poe_disabled: false
             port_network: string
-            rejected_network: null
+            server_reject_network: null
             speed: auto
             storm_control:
               no_broadcast: false
@@ -52115,7 +51735,6 @@ components:
             active_port_count: 1
             total_port_count: 2
           score: 50
-          switch_id: 67970e46-4e12-11e6-9188-0242ac110007_fc334262ef00
           total_switch_count: 1
     SwitchPortsSearchExample:
       value:
@@ -52267,7 +51886,6 @@ components:
         - attachments:
           - content_type: string
             content_url: string
-            size: 0
           author: string
           comment: string
           created_at: 0
@@ -52284,7 +51902,6 @@ components:
         - attachments:
           - content_type: string
             content_url: string
-            size: 0
           author: string
           comment: string
           created_at: 0
@@ -52402,7 +52019,6 @@ components:
           rowspan: 2
           scopeId: e0c767834b4c
           scopeType: client
-          sortedColumns: null
           timeRange:
             end: 1508823743
             endDate: 10/23/2017
@@ -52454,7 +52070,6 @@ components:
           rowspan: 2
           scopeId: e0c767834b4c
           scopeType: client
-          sortedColumns: null
           timeRange:
             end: 1508823743
             endDate: 10/23/2017
@@ -52590,8 +52205,7 @@ components:
         id: 00000000-0000-0000-1000-52d9107af289
         mac: 52d9107af289
         members:
-        - _idx: 0
-          boot_partition: junos
+        - boot_partition: junos
           cpld_version: '6'
           cpu_stat:
             idle: 69
@@ -52655,8 +52269,7 @@ components:
           vc_role: master
           vc_state: present
           version: 21.4R3-S4.18
-        - _idx: 1
-          boot_partition: junos
+        - boot_partition: junos
           cpld_version: '6'
           cpu_stat:
             idle: 76
@@ -52747,10 +52360,7 @@ components:
         end: 1619518989.4989712
         limit: 10
         results:
-        - auth_algo: hmac-sha1-96
-          enc_algo: aes-cbc-128
-          ike_version: '1'
-          is_active: true
+        - is_active: true
           last_seen: 1619518709.222
           mac: 020001c04668
           org_id: 0c160b7f-1027-4cd1-923b-744534c4b070
@@ -52811,8 +52421,7 @@ components:
         end: 0
         limit: 0
         results:
-        - When: 2022-12-31T23:59:43.497+0000
-          hostname:
+        - hostname:
           - sonoszp
           ip:
           - 192.168.1.139
@@ -53098,7 +52707,7 @@ components:
         specs:
         - port_range: string
           protocol: tcp
-          subnet:
+          subnets:
           - string
         subnet: string
         type: match
@@ -53123,7 +52732,7 @@ components:
         specs:
         - port_range: string
           protocol: tcp
-          subnet:
+          subnets:
           - string
         subnet: string
         type: match
@@ -53231,12 +52840,12 @@ components:
         total: 5892
     ZoneStatsArrayExample1:
       value:
-      - assets_waits:
+      - assets_wait:
           avg: 0
           max: 0
           min: 0
           p95: 0
-        clients_waits:
+        clients_wait:
           avg: 1200
           max: 3610
           min: 600
@@ -53251,7 +52860,7 @@ components:
         num_sdkclients: 10
         occupancy_limit: 4
         org_id: 1234c1a0-6ef6-11e6-8bbf-02e208b21234
-        sdkclients_waits:
+        sdkclients_wait:
           avg: 1200
           max: 3610
           min: 600
@@ -64267,7 +63876,7 @@ components:
           example: 0.7594696879386902
           type: number
         client_rx_bytes:
-          example: 2.365511655807e-05
+          example: 0.00002365511655807
           type: number
         client_rx_rates:
           example: 0.02441493794322014
@@ -64288,7 +63897,7 @@ components:
           example: -0.0001660545531194657
           type: number
         client_wifi_version:
-          example: 7.0566701889e-07
+          example: 0.00000070566701889
           type: number
         expected:
           example: -2.8630001056670187
@@ -64318,22 +63927,22 @@ components:
           example: 0.055026158690452576
           type: number
         site_wan_avg_download_mbps:
-          example: 3.0566701889e-07
+          example: 0.00000030566701889
           type: number
         site_wan_avg_upload_mbps:
-          example: 5.566701889e-08
+          example: 0.00000005566701889
           type: number
         site_wan_download_mbps:
-          example: 8.0566701889e-07
+          example: 0.00000080566701889
           type: number
         site_wan_jitter:
-          example: 1.00566701889e-06
+          example: 0.7875519659784105
           type: number
         site_wan_rtt:
-          example: 4.0566701889e-07
+          example: 15.094849904378256
           type: number
         site_wan_upload_mbps:
-          example: 2.0566701889e-07
+          example: 0.00000020566701889
           type: number
         timestamp:
           $ref: '#/components/schemas/timestamp'
@@ -64422,6 +64031,24 @@ components:
           type: number
         wan_rtt:
           example: 46.77899
+          type: number
+        site_wan_avg_download_mbps:
+          example: 0.00000030566701889
+          type: number
+        site_wan_avg_upload_mbps:
+          example: 0.00000005566701889
+          type: number
+        site_wan_download_mbps:
+          example: 0.00000080566701889
+          type: number
+        site_wan_jitter:
+          example: 0.7875519659784105
+          type: number
+        site_wan_rtt:
+          example: 15.094849904378256
+          type: number
+        site_wan_upload_mbps:
+          example: 0.00000020566701889
           type: number
       type: object
     call_troubleshoots:
@@ -65245,6 +64872,8 @@ components:
     client_wireless:
       additionalProperties: false
       properties:
+        last_username:
+          type: string
         ap:
           $ref: '#/components/schemas/client_wireless_ap'
         app_version:
@@ -66246,6 +65875,8 @@ components:
           type: object
         key:
           type: string
+        group:
+          type: string
       required:
       - key
       - display
@@ -66308,7 +65939,7 @@ components:
           $ref: '#/components/schemas/const_insight_metrics_property_keys'
         params:
           $ref: '#/components/schemas/const_insight_metrics_property_params'
-        report_duration:
+        report_durations:
           $ref: '#/components/schemas/const_insight_metrics_property_report_durations'
         report_scopes:
           $ref: '#/components/schemas/strings'
@@ -66744,6 +66375,11 @@ components:
           type: number
         user:
           description: Percentage of CPU time being used by user processes
+          nullable: true
+          readOnly: true
+          type: number
+        usage:
+          description: CPU usage
           nullable: true
           readOnly: true
           type: number
@@ -68558,6 +68194,12 @@ components:
       additionalProperties: false
       description: AP events
       properties:
+        last_reboot_time:
+          type: integer
+        type_code:
+          type: integer
+        model:
+          type: string
         ap:
           type: string
         apfw:
@@ -68830,6 +68472,8 @@ components:
     evpn_topology_response:
       additionalProperties: false
       properties:
+        for_site:
+          type: boolean
         created_time:
           $ref: '#/components/schemas/created_time'
         evpn_options:
@@ -72129,7 +71773,7 @@ components:
           description: Number of failed login attempts
           example: 1
           type: integer
-        scr_ips:
+        src_ips:
           $ref: '#/components/schemas/login_failures_src_ips'
         user_agents:
           $ref: '#/components/schemas/login_failures_user_agents'
@@ -72802,6 +72446,8 @@ components:
         status:
           example: ok
           type: string
+        rpm:
+          type: integer
       type: object
     module_stat_item_network_resource:
       additionalProperties: false
@@ -72860,6 +72506,8 @@ components:
         power_draw:
           example: 120.3
           type: number
+        status:
+          type: string
       type: object
     module_stat_item_psus:
       items:
@@ -76411,6 +76059,7 @@ components:
         expiry_in_days:
           description: password expiry in days
           example: 60
+          maximum: 365
           type: integer
         min_length:
           default: 8
@@ -77655,7 +77304,7 @@ components:
     psk_portal_passphrase_rules:
       additionalProperties: false
       properties:
-        alphaberts_enabled:
+        alphabets_enabled:
           default: true
           type: boolean
         length:
@@ -78426,8 +78075,8 @@ components:
       properties:
         completed:
           $ref: '#/components/schemas/response_async_license_completed'
-        detail:
-          $ref: '#/components/schemas/response_async_license_detail'
+        details:
+          $ref: '#/components/schemas/response_async_license_details'
         failed:
           description: Current failed number of device
           type: integer
@@ -78454,7 +78103,7 @@ components:
       items:
         type: string
       type: array
-    response_async_license_detail:
+    response_async_license_details:
       additionalProperties: false
       description: detail claim status per device
       properties:
@@ -80176,7 +79825,7 @@ components:
       type: object
     response_mxedge_search_results:
       items:
-        $ref: '#/components/schemas/stats_mxedge'
+        $ref: '#/components/schemas/search_mxedge'
       type: array
     response_mxedge_upgrade:
       additionalProperties: false
@@ -81170,9 +80819,25 @@ components:
         example: 5c5b35000001
         type: string
       type: array
+    response_site_device_upgrade_canary_phases:
+      type: array
+      items:
+        type: integer
+      description: phases for canary deployment. Each phase represents percentage of devices that need to be upgraded in that phase.
+      default: [1, 10, 50, 100]
     response_site_device_upgrade:
       additionalProperties: false
       properties:
+        p2p_cluster_size:
+          type: integer
+          description: size to split the devices for p2p
+          default: 10
+        p2p_parallelism:
+          type: integer
+          description: number of parallel p2p download batches to create
+          default: 1
+        canary_phases:
+          $ref: '#/components/schemas/response_site_device_upgrade_canary_phases'
         current_phase:
           description: Current canary or rrm phase in progress
           type: integer
@@ -81371,7 +81036,7 @@ components:
     response_ssr_export_id_tokens_results_item:
       additionalProperties: false
       properties:
-        idtoken:
+        token:
           type: string
         mac:
           type: string
@@ -81519,6 +81184,9 @@ components:
           type: number
         bad_minutes_wireless:
           example: 1428.0
+          type: number
+        bad_minutes:
+          example: 5566.0
           type: number
         num_aps:
           example: 1
@@ -81795,6 +81463,10 @@ components:
           $ref: '#/components/schemas/site_id'
         status:
           readOnly: true
+          type: string
+        mac:
+          type: string
+        type:
           type: string
         vc_mac:
           readOnly: true
@@ -83620,11 +83292,7 @@ components:
       - standard
       - strict
       type: string
-    service_policy_skyatp:
-      additionalProperties: false
-      description: SRX only
-      properties:
-        dns_dga_detection:
+    service_policy_skyatp_dns_dga_detection:
           default: disabled
           description: 'enum: `disabled`, `default`, `standard`, `strict`'
           enum:
@@ -83633,7 +83301,7 @@ components:
           - standard
           - strict
           type: string
-        dns_tunnel_detection:
+    service_policy_skyatp_dns_tunnel_detection:
           default: disabled
           description: 'enum: `disabled`, `default`, `standard`, `strict`'
           enum:
@@ -83642,7 +83310,7 @@ components:
           - standard
           - strict
           type: string
-        http_inspection:
+    service_policy_skyatp_http_inspection:
           default: disabled
           description: 'enum: `disabled`, `standard`'
           enum:
@@ -83650,13 +83318,25 @@ components:
           - standard
           - strict
           type: string
-        iot_device_policy:
+    service_policy_skyatp_iot_device_policy:
           default: disabled
           description: 'enum: `disabled`, `enabled`'
           enum:
           - disabled
           - enabled
           type: string
+    service_policy_skyatp:
+      additionalProperties: false
+      description: SRX only
+      properties:
+        dns_dga_detection:
+          $ref: '#/components/schemas/service_policy_skyatp_dns_dga_detection'
+        dns_tunnel_detection:
+          $ref: '#/components/schemas/service_policy_skyatp_dns_tunnel_detection'
+        http_inspection:
+          $ref: '#/components/schemas/service_policy_skyatp_http_inspection'
+        iot_device_policy:
+          $ref: '#/components/schemas/service_policy_skyatp_iot_device_policy'
       type: object
     service_policy_ssl_proxy:
       additionalProperties: false
@@ -84830,12 +84510,20 @@ components:
       type: object
     site_setting_ap_matching_rules:
       example:
-      - eth1,eth2:
-          port_vlan_id: 1
-          vlan_ids:
-          - 1
-          - 10
-          - 50
+      - match_model: string
+        name: string
+        port_config:
+          eth1,eth2:
+            disabled: true
+            dynamic_vlan:
+              default_vlan_id: 999
+              enabled: true
+            port_vlan_id: 1
+            vlan_id: 9
+            vlan_ids:
+            - 1
+            - 10
+            - 50
       items:
         $ref: '#/components/schemas/site_setting_ap_matching_rule'
       type: array
@@ -87491,11 +87179,19 @@ components:
         name:
           type: string
         org_id:
-          $ref: '#/components/schemas/org_id'
+          type: string
+          format: uuid
+          example: 60f6bfdb-2f45-4022-8e2a-e00d977953fe
         privileges:
           $ref: '#/components/schemas/sso_role_org_privileges'
         site_id:
-          $ref: '#/components/schemas/site_id'
+          type: string
+          format: uuid
+          example: 580eb9a7-e6cb-4d05-aa20-4c60808fb011
+        sitegroup_id:
+          type: string
+          format: uuid
+          example: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
       required:
       - name
       - privileges
@@ -89186,10 +88882,14 @@ components:
           nullable: true
           readOnly: true
           type: string
+        boot_partition:
+          type: string
         cpld_version:
           nullable: true
           readOnly: true
           type: string
+        memory_stat:
+          $ref: '#/components/schemas/memory_stat'
         fans:
           $ref: '#/components/schemas/module_stat_item_fans'
         fpga_version:
@@ -89637,6 +89337,33 @@ components:
       items:
         $ref: '#/components/schemas/stats_gateway_wan_tunnel'
       type: array
+    search_mxedge:
+      additionalProperties: false
+      properties:
+        distro:
+          type: string
+        tunterm_version:
+          type: string
+        mxedge_id:
+          $ref: '#/components/schemas/id'
+        mxcluster_id:
+          $ref: '#/components/schemas/id'        
+        model:
+          example: ME-VM
+          type: string
+        name:
+          description: The name of the tunnel
+          example: me-vm-1
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        last_seen:
+          type: number
+        uptime:
+          type: integer
+      type: object
     stats_mxedge:
       additionalProperties: false
       properties:
@@ -90281,10 +90008,16 @@ components:
       additionalProperties: false
       description: Zone statistics
       properties:
-        assets_waits:
+        assets_wait:
           $ref: '#/components/schemas/stats_zone_assets_waits'
-        clients_waits:
+        clients_wait:
           $ref: '#/components/schemas/stats_zone_clients_waits'
+        discovered_assets_wait:
+          $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
+        sdkclients_wait:
+          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
+        unconnected_clients_wait:
+          $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
         created_time:
           $ref: '#/components/schemas/created_time'
         devices:
@@ -90297,6 +90030,14 @@ components:
           description: Name of the zone
           example: Zone A
           type: string
+        num_discovered_assets:
+          description: Number of discoveredassets
+          example: 0
+          type: integer
+        num_unconnected_clients:
+          description: Number of unconnected Wi-Fi clients
+          example: 80
+          type: integer
         num_assets:
           description: Number of assets
           example: 0
@@ -90314,8 +90055,6 @@ components:
           type: integer
         org_id:
           $ref: '#/components/schemas/org_id'
-        sdkclients_waits:
-          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
         site_id:
           $ref: '#/components/schemas/site_id'
       required:
@@ -90412,6 +90151,24 @@ components:
         alarmtemplate_id:
           format: uuid
           nullable: true
+          type: string
+        analyticEnabled:
+          type: boolean
+        engagementEnabled:
+          type: boolean
+        aptemplate_id:
+          format: uuid
+          nullable: true
+          type: string
+        sitetemplate_id:
+          format: uuid
+          nullable: true
+          type: string
+        gatewaytemplate_id:
+          format: uuid
+          nullable: true
+          type: string
+        notes:
           type: string
         country_code:
           type: string
@@ -90695,6 +90452,10 @@ components:
           nullable: true
           readOnly: true
           type: string
+        boot_partition:
+          type: string
+        memory_stat:
+          $ref: '#/components/schemas/memory_stat'
         bios_version:
           nullable: true
           readOnly: true
@@ -91282,6 +91043,10 @@ components:
     stats_wireless_client:
       additionalProperties: false
       properties:
+        annotation:
+          type: string
+        assoc_time:
+          type: integer
         accuracy:
           description: Estimated client location accuracy, in meter
           type: integer
@@ -91296,6 +91061,12 @@ components:
         ap_mac:
           description: AP the client is connected to
           type: string
+        bssid:
+          type: string
+        group:
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
         band:
           $ref: '#/components/schemas/dot11_band'
         channel:
@@ -91617,10 +91388,16 @@ components:
       additionalProperties: false
       description: Zone statistics
       properties:
-        assets_waits:
+        assets_wait:
           $ref: '#/components/schemas/stats_zone_assets_waits'
-        clients_waits:
+        clients_wait:
           $ref: '#/components/schemas/stats_zone_clients_waits'
+        discovered_assets_wait:
+          $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
+        sdkclients_wait:
+          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
+        unconnected_clients_wait:
+          $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
         created_time:
           $ref: '#/components/schemas/created_time'
         id:
@@ -91640,8 +91417,16 @@ components:
           description: Number of assets
           example: 0
           type: integer
+        num_discovered_assets:
+          description: Number of discoveredassets
+          example: 0
+          type: integer
         num_clients:
           description: Number of Wi-Fi clients (unconnected + connected)
+          example: 80
+          type: integer
+        num_unconnected_clients:
+          description: Number of unconnected Wi-Fi clients
           example: 80
           type: integer
         num_sdkclients:
@@ -91653,8 +91438,6 @@ components:
           type: integer
         org_id:
           $ref: '#/components/schemas/org_id'
-        sdkclients_waits:
-          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
         site_id:
           $ref: '#/components/schemas/site_id'
         vertices:
@@ -91669,6 +91452,69 @@ components:
     stats_zone_assets_waits:
       additionalProperties: false
       description: BLE asset wait time right now
+      properties:
+        avg:
+          description: Average wait time in seconds
+          example: 0
+          type: number
+        max:
+          description: Longest wait time in seconds
+          example: 0
+          type: number
+        min:
+          description: Shortest wait time in seconds
+          example: 0
+          type: number
+        p95:
+          description: 95th percentile of all the wait time(s)
+          example: 0
+          type: number
+      type: object
+    stats_zone_discovered_assets_waits:
+      additionalProperties: false
+      description: Discovered asset wait time right now
+      properties:
+        avg:
+          description: Average wait time in seconds
+          example: 0
+          type: number
+        max:
+          description: Longest wait time in seconds
+          example: 0
+          type: number
+        min:
+          description: Shortest wait time in seconds
+          example: 0
+          type: number
+        p95:
+          description: 95th percentile of all the wait time(s)
+          example: 0
+          type: number
+      type: object
+    stats_zone_sdkclients_waits:
+      additionalProperties: false
+      description: SDK client wait time right now
+      properties:
+        avg:
+          description: Average wait time in seconds
+          example: 0
+          type: number
+        max:
+          description: Longest wait time in seconds
+          example: 0
+          type: number
+        min:
+          description: Shortest wait time in seconds
+          example: 0
+          type: number
+        p95:
+          description: 95th percentile of all the wait time(s)
+          example: 0
+          type: number
+      type: object
+    stats_zone_unconnected_clients_waits:
+      additionalProperties: false
+      description: Unconnected Wi-Fi client wait time right now
       properties:
         avg:
           description: Average wait time in seconds
@@ -91790,27 +91636,6 @@ components:
         example: 7e2b463d-c91c-ff7d-f3c0-6eccc6949ff8
         type: string
       type: array
-    stats_zone_sdkclients_waits:
-      additionalProperties: false
-      description: SDK Clients wait time right now
-      properties:
-        avg:
-          description: Average wait time in seconds
-          example: 1200
-          type: number
-        max:
-          description: Longest wait time in seconds
-          example: 3610
-          type: number
-        min:
-          description: Shortest wait time in seconds
-          example: 600
-          type: number
-        p95:
-          description: 95th percentile of all the wait time(s)
-          example: 2800
-          type: number
-      type: object
     stats_zones:
       items:
         $ref: '#/components/schemas/stats_zone'
@@ -94519,13 +94344,17 @@ components:
             false where all ports will be used.
           type: boolean
         upstream_port_vlan_id:
-          default: 1
-          description: Native VLAN id for upstream ports
-          example: 30
-          type: integer
+          $ref: '#/components/schemas/tunterm_port_config_upstream_port_vlan_id'
         upstream_ports:
           $ref: '#/components/schemas/tunterm_port_config_upstream_ports'
       type: object
+    tunterm_port_config_upstream_port_vlan_id:
+      description: Native VLAN id for upstream ports
+      oneOf:
+      - type: string
+      - maximum: 4094
+        minimum: 1
+        type: integer
     tunterm_port_config_downstream_ports:
       description: List of ports to be used for downstream (to AP) purpose
       example:
@@ -97794,9 +97623,18 @@ components:
       - events
       - topic
       type: object
+    webhook_location_centrak_event_type:
+      type: string
+      enum:
+      - wifi
     webhook_location_centrak_event:
       additionalProperties: false
       properties:
+        mac:
+          description: MAC address of the device
+          type: string
+        type:
+          $ref: '#/components/schemas/webhook_location_centrak_event_type'
         map_id:
           description: Map id
           type: string
@@ -97811,6 +97649,9 @@ components:
           $ref: '#/components/schemas/timestamp'
         wifi_beacon_extended_info:
           $ref: '#/components/schemas/wifi_beacon_extended_info'
+        site_id:
+          type: string
+          format: uuid
         x:
           description: x, in meter
           format: double
