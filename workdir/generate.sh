@@ -28,3 +28,7 @@ sleep 1
 echo "Checking Response Accept Header"
 python3 ./a6_check_response_header.py
 sleep 1
+
+echo "Setting missing Additional Properties attributes"
+python3 ./a7_additionalProperties.py
+sleep 1
