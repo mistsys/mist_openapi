@@ -10898,10 +10898,10 @@ paths:
                 value:
                   name: string
                   radsec:
-                    enabled: true
                     auth_servers:
                     - host: string
                       port: 0
+                    enabled: true
                   tunterm_ap_subnets:
                   - string
                   tunterm_hosts:
@@ -10978,10 +10978,10 @@ paths:
                 value:
                   name: string
                   radsec:
-                    enabled: true
                     auth_servers:
                     - host: string
                       port: 0
+                    enabled: true
                   tunterm_ap_subnets:
                   - string
                   tunterm_hosts:
@@ -11626,29 +11626,29 @@ paths:
             examples:
               Example:
                 value:
-                  name: me-gc1-01
                   model: ME-X1
-                  tunterm_ip_config:
-                    ip: 10.10.172.201
-                    netmask: "/24"
-                    gateway: 10.10.172.2
-                  tunterm_port_config:
-                    separate_upstream_downstream: true
-                    upstream_ports:
-                    - '1'
-                    downstream_ports:
-                    - '0'
-                    upstream_port_vlan_id: '1010'
-                  services:
-                  - tunterm
+                  name: me-gc1-01
                   oob_ip_config:
-                    type: static
-                    ip: 10.3.172.201
-                    netmask: "/24"
-                    gateway: 10.3.172.9
                     dns:
                     - 8.8.8.8
                     - 1.1.1.1
+                    gateway: 10.3.172.9
+                    ip: 10.3.172.201
+                    netmask: /24
+                    type: static
+                  services:
+                  - tunterm
+                  tunterm_ip_config:
+                    gateway: 10.10.172.2
+                    ip: 10.10.172.201
+                    netmask: /24
+                  tunterm_port_config:
+                    downstream_ports:
+                    - '0'
+                    separate_upstream_downstream: true
+                    upstream_port_vlan_id: '1010'
+                    upstream_ports:
+                    - '1'
             schema:
               $ref: '#/components/schemas/mxedge'
         description: Request Body
@@ -13160,13 +13160,13 @@ paths:
                       allow_ping: true
                       destination_nat:
                         property1:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                         property2:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13183,13 +13183,13 @@ paths:
                       allow_ping: true
                       destination_nat:
                         property1:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                         property2:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13318,13 +13318,13 @@ paths:
                       allow_ping: true
                       destination_nat:
                         property1:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                         property2:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13341,13 +13341,13 @@ paths:
                       allow_ping: true
                       destination_nat:
                         property1:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                         property2:
+                          internal_ip: 192.168.70.5/30
                           name: web server
                           port: '443'
-                          internal_ip: 192.168.70.5/30
                       nat_pool: 172.16.0.0/26
                       routed: true
                       source_nat:
@@ -13454,7 +13454,6 @@ paths:
                     property1:
                       all_networks: false
                       allow_dhcpd: true
-                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13464,6 +13463,7 @@ paths:
                       enable_qos: true
                       guest_network: string
                       mac_auth_only: true
+                      mac_auth_protocol: pap
                       mac_limit: 0
                       mode: access
                       networks:
@@ -13485,7 +13485,6 @@ paths:
                     property2:
                       all_networks: false
                       allow_dhcpd: true
-                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13495,6 +13494,7 @@ paths:
                       enable_qos: true
                       guest_network: string
                       mac_auth_only: true
+                      mac_auth_protocol: pap
                       mac_limit: 0
                       mode: access
                       networks:
@@ -13672,7 +13672,6 @@ paths:
                     property1:
                       all_networks: false
                       allow_dhcpd: true
-                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13682,6 +13681,7 @@ paths:
                       enable_qos: true
                       guest_network: string
                       mac_auth_only: true
+                      mac_auth_protocol: pap
                       mac_limit: 0
                       mode: access
                       networks:
@@ -13703,7 +13703,6 @@ paths:
                     property2:
                       all_networks: false
                       allow_dhcpd: true
-                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -13713,6 +13712,7 @@ paths:
                       enable_qos: true
                       guest_network: string
                       mac_auth_only: true
+                      mac_auth_protocol: pap
                       mac_limit: 0
                       mode: access
                       networks:
@@ -13824,7 +13824,6 @@ paths:
                       property1:
                         all_networks: false
                         allow_dhcpd: true
-                        mac_auth_protocol: pap
                         bypass_auth_when_server_down: true
                         description: string
                         disable_autoneg: false
@@ -13834,6 +13833,7 @@ paths:
                         enable_qos: true
                         guest_network: string
                         mac_auth_only: true
+                        mac_auth_protocol: pap
                         mac_limit: 0
                         mode: access
                         networks:
@@ -13855,7 +13855,6 @@ paths:
                       property2:
                         all_networks: false
                         allow_dhcpd: true
-                        mac_auth_protocol: pap
                         bypass_auth_when_server_down: true
                         description: string
                         disable_autoneg: false
@@ -13865,6 +13864,7 @@ paths:
                         enable_qos: true
                         guest_network: string
                         mac_auth_only: true
+                        mac_auth_protocol: pap
                         mac_limit: 0
                         mode: access
                         networks:
@@ -14645,7 +14645,6 @@ paths:
                     numerics_enabled: true
                     symbols: ()[]{}_%@#&$
                     symbols_enabled: true
-                  ssid: USR-test
                   sponsors:
                     idp_cert: '-----BEGIN CERTIFICATE-----
 
@@ -14654,6 +14653,7 @@ paths:
                     idp_sso_url: https://dev-00000000.okta.com/app/dev-00000000/a6b88bec5ab7/sso/saml
                     issuer: http://www.okta.com/a6b88bec5ab7
                     nameid_format: email
+                  ssid: USR-test
                   type: byod
                   vlan_id: nu42ll
             schema:
@@ -16204,11 +16204,11 @@ paths:
             examples:
               Example:
                 value:
+                  addresses:
+                  - 0.0.0.0/0
                   app_key: string
                   name: string
                   network_id: d6797cf4-42b9-4cad-8591-9dd91c3f0fc3
-                  addresses:
-                  - 0.0.0.0/0
                   specs:
                   - port_range: 8080,8443
                     protocol: any
@@ -18006,12 +18006,12 @@ paths:
                     role: admin
                     scope: org
                   - role: read
-                    site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     scope: site
+                    site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                   - org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     role: read
-                    sitegroup_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     scope: sitegroup
+                    sitegroup_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
             schema:
               $ref: '#/components/schemas/sso_role_org'
         description: Request Body
@@ -18088,12 +18088,12 @@ paths:
                     role: admin
                     scope: org
                   - role: read
-                    site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     scope: site
+                    site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                   - org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     role: read
-                    sitegroup_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                     scope: sitegroup
+                    sitegroup_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
             schema:
               $ref: '#/components/schemas/sso_role_org'
         description: Request Body
@@ -32570,7 +32570,6 @@ paths:
                     property1:
                       all_networks: false
                       allow_dhcpd: true
-                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -32580,6 +32579,7 @@ paths:
                       enable_qos: true
                       guest_network: string
                       mac_auth_only: true
+                      mac_auth_protocol: pap
                       mac_limit: 0
                       mode: access
                       networks:
@@ -32601,7 +32601,6 @@ paths:
                     property2:
                       all_networks: false
                       allow_dhcpd: true
-                      mac_auth_protocol: pap
                       bypass_auth_when_server_down: true
                       description: string
                       disable_autoneg: false
@@ -32611,6 +32610,7 @@ paths:
                       enable_qos: true
                       guest_network: string
                       mac_auth_only: true
+                      mac_auth_protocol: pap
                       mac_limit: 0
                       mode: access
                       networks:
@@ -40644,14 +40644,14 @@ components:
           client_n_streams: 0.00734270566701889
           client_radio_band: 0.5841414928436279
           client_rssi: 0.7594696879386902
-          client_rx_bytes: 0.00002365511655807
+          client_rx_bytes: 2.365511655807e-05
           client_rx_rates: 0.02441493794322014
           client_rx_retries: -0.14325742423534393
           client_tx_bytes: 0.00102365511655807
           client_tx_rates: 0.22236637771129608
           client_tx_retries: 0.3308201730251312
           client_vpn_distance: -0.0001660545531194657
-          client_wifi_version: 0.00000070566701889
+          client_wifi_version: 7.0566701889e-07
           expected: -2.8630001056670187
           radio_ap_change: 0.01850946433842182
           radio_bandwidth: -0.021175479516386986
@@ -40661,12 +40661,12 @@ components:
           radio_util: 0.2452986091375351
           radio_util_interference: 3.4367904663085938
           site_num_clients: 0.055026158690452576
-          site_wan_avg_download_mbps: 0.00000030566701889
-          site_wan_avg_upload_mbps: 0.00000005566701889
-          site_wan_download_mbps: 0.00000080566701889
+          site_wan_avg_download_mbps: 3.0566701889e-07
+          site_wan_avg_upload_mbps: 5.566701889e-08
+          site_wan_download_mbps: 8.0566701889e-07
           site_wan_jitter: 0.7875519659784105
           site_wan_rtt: 15.094849904378256
-          site_wan_upload_mbps: 0.00000020566701889
+          site_wan_upload_mbps: 2.0566701889e-07
           timestamp: 1695425115
           video_in:
             ap_num_clients: 45.48306793636746
@@ -45084,9 +45084,9 @@ components:
           t128agent_version: 3.8.0-201
           time_drifted: false
           timestamp: 1734001399.025
+          type: gateway
           uptime: 3586951
           version: 6.2.5-5.r2
-          type: gateway
         start: 0
         total: 0
     DevicesSearchSwitch:
@@ -45115,9 +45115,9 @@ components:
           site_id: a8178443-ecb5-461c-b854-f16627619ab3
           time_drifted: false
           timestamp: 1733998766.256
+          type: switch
           uptime: 19287811
           version: 22.4R3.25
-          type: switch
         start: 0
         total: 0
     Deviceswitch:
@@ -45911,9 +45911,9 @@ components:
       value:
         results:
         - common_name: john@corp.com
-          created_time: 2025-08-18T10:10:30.949165Z
+          created_time: 2025-08-18 10:10:30.949165+00:00
           device_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-          expire_time: 2026-08-18T10:06:00Z
+          expire_time: 2026-08-18 10:06:00+00:00
           serial_number: 91984382552102771A2B3C4E5F224719956718003374658
     JseInfoExample:
       value:
@@ -47383,13 +47383,13 @@ components:
             allow_ping: true
             destination_nat:
               property1:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
               property2:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
             nat_pool: 172.16.0.0/26
             routed: true
             source_nat:
@@ -47406,13 +47406,13 @@ components:
             allow_ping: true
             destination_nat:
               property1:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
               property2:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
             nat_pool: 172.16.0.0/26
             routed: true
             source_nat:
@@ -47478,13 +47478,13 @@ components:
             allow_ping: true
             destination_nat:
               property1:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
               property2:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
             nat_pool: 172.16.0.0/26
             routed: true
             source_nat:
@@ -47501,13 +47501,13 @@ components:
             allow_ping: true
             destination_nat:
               property1:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
               property2:
+                internal_ip: 192.168.70.5/30
                 name: web server
                 port: '443'
-                internal_ip: 192.168.70.5/30
             nat_pool: 172.16.0.0/26
             routed: true
             source_nat:
@@ -47574,7 +47574,6 @@ components:
           property1:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -47584,6 +47583,7 @@ components:
             enable_qos: true
             guest_network: string
             mac_auth_only: true
+            mac_auth_protocol: pap
             mac_limit: 0
             networks:
             - string
@@ -47604,7 +47604,6 @@ components:
           property2:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -47614,6 +47613,7 @@ components:
             enable_qos: true
             guest_network: string
             mac_auth_only: true
+            mac_auth_protocol: pap
             mac_limit: 0
             mode: access
             networks:
@@ -47715,7 +47715,6 @@ components:
           ap:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: WAP
             disable_autoneg: false
@@ -47724,6 +47723,7 @@ components:
             enable_mac_auth: false
             enable_qos: true
             mac_auth_only: false
+            mac_auth_protocol: pap
             mac_limit: 0
             mode: trunk
             networks:
@@ -49088,9 +49088,9 @@ components:
             antenna_mode: default
             bandwidth: 20
             channels:
-                - 1
-                - 6
-                - 11
+            - 1
+            - 6
+            - 11
             disabled: true
             power: 5
             power_max: 3
@@ -49101,18 +49101,18 @@ components:
             antenna_mode: default
             bandwidth: 20
             channels:
-                - 36
-                - 40
-                - 44
-                - 48
-                - 52
-                - 56
-                - 60
-                - 64
-                - 100
-                - 104
-                - 108
-                - 112
+            - 36
+            - 40
+            - 44
+            - 48
+            - 52
+            - 56
+            - 60
+            - 64
+            - 100
+            - 104
+            - 108
+            - 112
             disabled: true
             power: 9
             power_max: 6
@@ -49128,9 +49128,9 @@ components:
                 antenna_mode: default
                 bandwidth: 20
                 channels:
-                    - 1
-                    - 6
-                    - 11
+                - 1
+                - 6
+                - 11
                 disabled: true
                 power: 9
                 power_max: 6
@@ -49141,18 +49141,18 @@ components:
                 antenna_mode: default
                 bandwidth: 20
                 channels:
-                    - 36
-                    - 40
-                    - 44
-                    - 48
-                    - 52
-                    - 56
-                    - 60
-                    - 64
-                    - 100
-                    - 104
-                    - 108
-                    - 112
+                - 36
+                - 40
+                - 44
+                - 48
+                - 52
+                - 56
+                - 60
+                - 64
+                - 100
+                - 104
+                - 108
+                - 112
                 disabled: true
                 power: 10
                 power_max: 6
@@ -49802,7 +49802,6 @@ components:
           property1:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -49812,6 +49811,7 @@ components:
             enable_qos: true
             guest_network: string
             mac_auth_only: true
+            mac_auth_protocol: pap
             mac_limit: 0
             mode: access
             networks:
@@ -49833,7 +49833,6 @@ components:
           property2:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -49843,6 +49842,7 @@ components:
             enable_qos: true
             guest_network: string
             mac_auth_only: true
+            mac_auth_protocol: pap
             mac_limit: 0
             mode: access
             networks:
@@ -50331,7 +50331,6 @@ components:
           property1:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -50341,6 +50340,7 @@ components:
             enable_qos: true
             guest_network: string
             mac_auth_only: true
+            mac_auth_protocol: pap
             mac_limit: 0
             mode: access
             networks:
@@ -50362,7 +50362,6 @@ components:
           property2:
             all_networks: false
             allow_dhcpd: true
-            mac_auth_protocol: pap
             bypass_auth_when_server_down: true
             description: string
             disable_autoneg: false
@@ -50372,6 +50371,7 @@ components:
             enable_qos: true
             guest_network: string
             mac_auth_only: true
+            mac_auth_protocol: pap
             mac_limit: 0
             mode: access
             networks:
@@ -59845,11 +59845,11 @@ components:
         cloud_name:
           example: devcentral.juniperclouds.net
           type: string
+        org_names:
+          $ref: '#/components/schemas/strings'
         username:
           example: john@abc.com
           type: string
-        org_names:
-          $ref: '#/components/schemas/strings'
       type: object
     account_juniper_config:
       properties:
@@ -59966,14 +59966,6 @@ components:
           example: Test Company1 Ltd
           readOnly: true
           type: string
-        key_id:
-          description: For ZDX Account only, Customer account API key ID
-          example: L72frZcK3JvrZc
-          type: string
-        zdx_org_id:
-          description: For ZDX Account only, ZDX organization id
-          example: '123456'
-          type: string
         enable_probe:
           description: For Prisma accounts only, tunnel probe enable/disable
           example: false
@@ -59989,6 +59981,10 @@ components:
         instance_url:
           description: Customer account instance URL
           readOnly: true
+          type: string
+        key_id:
+          description: For ZDX Account only, Customer account API key ID
+          example: L72frZcK3JvrZc
           type: string
         last_status:
           description: Is the last data pull for account is successful or not
@@ -60070,6 +60066,10 @@ components:
         webhook_username:
           description: For VMWare accounts only
           example: username_1234
+          type: string
+        zdx_org_id:
+          description: For ZDX Account only, ZDX organization id
+          example: '123456'
           type: string
       type: object
     account_oauth_info_account_region:
@@ -63960,7 +63960,7 @@ components:
           example: 0.7594696879386902
           type: number
         client_rx_bytes:
-          example: 0.00002365511655807
+          example: 2.365511655807e-05
           type: number
         client_rx_rates:
           example: 0.02441493794322014
@@ -63981,7 +63981,7 @@ components:
           example: -0.0001660545531194657
           type: number
         client_wifi_version:
-          example: 0.00000070566701889
+          example: 7.0566701889e-07
           type: number
         expected:
           example: -2.8630001056670187
@@ -64011,13 +64011,13 @@ components:
           example: 0.055026158690452576
           type: number
         site_wan_avg_download_mbps:
-          example: 0.00000030566701889
+          example: 3.0566701889e-07
           type: number
         site_wan_avg_upload_mbps:
-          example: 0.00000005566701889
+          example: 5.566701889e-08
           type: number
         site_wan_download_mbps:
-          example: 0.00000080566701889
+          example: 8.0566701889e-07
           type: number
         site_wan_jitter:
           example: 0.7875519659784105
@@ -64026,7 +64026,7 @@ components:
           example: 15.094849904378256
           type: number
         site_wan_upload_mbps:
-          example: 0.00000020566701889
+          example: 2.0566701889e-07
           type: number
         timestamp:
           $ref: '#/components/schemas/timestamp'
@@ -64098,6 +64098,24 @@ components:
         site_num_clients:
           example: 0.017364305
           type: number
+        site_wan_avg_download_mbps:
+          example: 3.0566701889e-07
+          type: number
+        site_wan_avg_upload_mbps:
+          example: 5.566701889e-08
+          type: number
+        site_wan_download_mbps:
+          example: 8.0566701889e-07
+          type: number
+        site_wan_jitter:
+          example: 0.7875519659784105
+          type: number
+        site_wan_rtt:
+          example: 15.094849904378256
+          type: number
+        site_wan_upload_mbps:
+          example: 2.0566701889e-07
+          type: number
         wan_avg_download_mbps:
           example: 1.4803165
           type: number
@@ -64115,24 +64133,6 @@ components:
           type: number
         wan_rtt:
           example: 46.77899
-          type: number
-        site_wan_avg_download_mbps:
-          example: 0.00000030566701889
-          type: number
-        site_wan_avg_upload_mbps:
-          example: 0.00000005566701889
-          type: number
-        site_wan_download_mbps:
-          example: 0.00000080566701889
-          type: number
-        site_wan_jitter:
-          example: 0.7875519659784105
-          type: number
-        site_wan_rtt:
-          example: 15.094849904378256
-          type: number
-        site_wan_upload_mbps:
-          example: 0.00000020566701889
           type: number
       type: object
     call_troubleshoots:
@@ -64617,6 +64617,18 @@ components:
       example: scan
       type: string
     capture_site:
+      discriminator:
+        mapping:
+          client: '#/components/schemas/capture_client'
+          gateway: '#/components/schemas/capture_gateway'
+          new_assoc: '#/components/schemas/capture_new_assoc'
+          radiotap: '#/components/schemas/capture_radiotap'
+          radiotap,wired: '#/components/schemas/capture_radiotapwired'
+          scan: '#/components/schemas/capture_scan'
+          switch: '#/components/schemas/capture_switch'
+          wired: '#/components/schemas/capture_wired'
+          wireless: '#/components/schemas/capture_wireless'
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/capture_client'
       - $ref: '#/components/schemas/capture_gateway'
@@ -64627,18 +64639,6 @@ components:
       - $ref: '#/components/schemas/capture_switch'
       - $ref: '#/components/schemas/capture_wired'
       - $ref: '#/components/schemas/capture_wireless'
-      discriminator:
-        propertyName: type
-        mapping:
-          client: '#/components/schemas/capture_client'
-          gateway: '#/components/schemas/capture_gateway'
-          new_assoc: '#/components/schemas/capture_new_assoc'
-          radiotap: '#/components/schemas/capture_radiotap'
-          'radiotap,wired': '#/components/schemas/capture_radiotapwired'
-          scan: '#/components/schemas/capture_scan'
-          switch: '#/components/schemas/capture_switch'
-          wired: '#/components/schemas/capture_wired'
-          wireless: '#/components/schemas/capture_wireless'
     capture_switch:
       additionalProperties: false
       description: Initiate a Switch (Junos) Packet Capture
@@ -64968,8 +64968,6 @@ components:
     client_wireless:
       additionalProperties: false
       properties:
-        last_username:
-          type: string
         ap:
           $ref: '#/components/schemas/client_wireless_ap'
         app_version:
@@ -65033,6 +65031,8 @@ components:
           type: string
         last_ssid:
           $ref: '#/components/schemas/last_username'
+        last_username:
+          type: string
         last_vlan:
           $ref: '#/components/schemas/last_vlan'
         last_wlan_id:
@@ -65243,16 +65243,16 @@ components:
       - code
       type: object
     config_device:
+      discriminator:
+        mapping:
+          ap: '#/components/schemas/device_ap'
+          gateway: '#/components/schemas/device_gateway'
+          switch: '#/components/schemas/device_switch'
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/device_ap'
       - $ref: '#/components/schemas/device_switch'
       - $ref: '#/components/schemas/device_gateway'
-      discriminator:
-        propertyName: type
-        mapping:
-          ap: '#/components/schemas/device_ap'
-          switch: '#/components/schemas/device_switch'
-          gateway: '#/components/schemas/device_gateway'
     config_devices:
       items:
         $ref: '#/components/schemas/config_device'
@@ -65757,19 +65757,6 @@ components:
           example: 8
           type: integer
       type: object
-    const_device_gateway_defaults:
-          additionalProperties:
-            description: List of interfaces names (e.g. "ge-0/0/3,ge-1/0/3")
-            type: string
-          description: Object Key is the interface type name (e.g. "lan_ports", "wan_ports",
-            ...)
-          type: object
-    const_device_gateway_pic:
-          additionalProperties:
-            description: List of type and number of ports (e.g. "mge*8, ge*16")
-            type: string
-          description: Object Key is the PIC number
-          type: object
     const_device_gateway:
       additionalProperties: false
       properties:
@@ -65832,6 +65819,19 @@ components:
       required:
       - type
       type: object
+    const_device_gateway_defaults:
+      additionalProperties:
+        description: List of interfaces names (e.g. "ge-0/0/3,ge-1/0/3")
+        type: string
+      description: Object Key is the interface type name (e.g. "lan_ports", "wan_ports",
+        ...)
+      type: object
+    const_device_gateway_pic:
+      additionalProperties:
+        description: List of type and number of ports (e.g. "mge*8, ge*16")
+        type: string
+      description: Object Key is the PIC number
+      type: object
     const_device_gateway_ports:
       additionalProperties: false
       description: Object Key is the interface name (e.g. "ge-0/0/1", ...)
@@ -65844,16 +65844,16 @@ components:
           type: integer
       type: object
     const_device_model:
-      oneOf:
-      - $ref: '#/components/schemas/const_device_ap'
-      - $ref: '#/components/schemas/const_device_switch'
-      - $ref: '#/components/schemas/const_device_gateway'
       discriminator:
-        propertyName: type
         mapping:
           ap: '#/components/schemas/const_device_type_ap'
           gateway: '#/components/schemas/const_device_type_gateway'
           switch: '#/components/schemas/const_device_type_switch'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/const_device_ap'
+      - $ref: '#/components/schemas/const_device_switch'
+      - $ref: '#/components/schemas/const_device_gateway'
     const_device_models:
       items:
         $ref: '#/components/schemas/const_device_model'
@@ -65985,9 +65985,9 @@ components:
         example:
           additionalProperties: true
           type: object
-        key:
-          type: string
         group:
+          type: string
+        key:
           type: string
       required:
       - key
@@ -66485,13 +66485,13 @@ components:
           nullable: true
           readOnly: true
           type: number
-        user:
-          description: Percentage of CPU time being used by user processes
+        usage:
+          description: CPU usage
           nullable: true
           readOnly: true
           type: number
-        usage:
-          description: CPU usage
+        user:
+          description: Percentage of CPU time being used by user processes
           nullable: true
           readOnly: true
           type: number
@@ -67190,16 +67190,16 @@ components:
       - version
       type: object
     deviceprofile:
-      oneOf:
-      - $ref: '#/components/schemas/deviceprofile_ap'
-      - $ref: '#/components/schemas/deviceprofile_gateway'
-      - $ref: '#/components/schemas/deviceprofile_switch'
       discriminator:
-        propertyName: type
         mapping:
           ap: '#/components/schemas/deviceprofile_ap'
           gateway: '#/components/schemas/deviceprofile_gateway'
           switch: '#/components/schemas/deviceprofile_switch'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/deviceprofile_ap'
+      - $ref: '#/components/schemas/deviceprofile_gateway'
+      - $ref: '#/components/schemas/deviceprofile_switch'
     deviceprofile_ap:
       additionalProperties: false
       description: Device Profile
@@ -67772,12 +67772,12 @@ components:
       properties:
         hostname:
           type: string
+        inactive_wired_vlans:
+          $ref: '#/components/schemas/integers'
         mac:
           type: string
         poe_status:
           type: boolean
-        inactive_wired_vlans:
-          $ref: '#/components/schemas/integers'
         port:
           type: string
         port_id:
@@ -68316,12 +68316,6 @@ components:
       additionalProperties: false
       description: AP events
       properties:
-        last_reboot_time:
-          type: integer
-        type_code:
-          type: integer
-        model:
-          type: string
         ap:
           type: string
         apfw:
@@ -68330,7 +68324,11 @@ components:
           type: integer
         device_type:
           type: string
+        last_reboot_time:
+          type: integer
         mac:
+          type: string
+        model:
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
@@ -68344,6 +68342,8 @@ components:
           $ref: '#/components/schemas/timestamp'
         type:
           type: string
+        type_code:
+          type: integer
       required:
       - timestamp
       type: object
@@ -68594,12 +68594,12 @@ components:
     evpn_topology_response:
       additionalProperties: false
       properties:
-        for_site:
-          type: boolean
         created_time:
           $ref: '#/components/schemas/created_time'
         evpn_options:
           $ref: '#/components/schemas/evpn_options'
+        for_site:
+          type: boolean
         id:
           $ref: '#/components/schemas/id'
         modified_time:
@@ -70478,11 +70478,11 @@ components:
           type: integer
         interval:
           type: integer
+        limit:
+          type: integer
         results:
           $ref: '#/components/schemas/insight_metrics_results'
         start:
-          type: integer
-        limit:
           type: integer
       required:
       - end
@@ -71024,22 +71024,22 @@ components:
     issued_client_certificate:
       additionalProperties: false
       properties:
-        common_name:
-          example: john@corp.com
-          type: string
         cert_provider:
           example: byod
           type: string
-        expire_time:
-          example: 2026-08-18T10:06:00Z
+        common_name:
+          example: john@corp.com
           type: string
-          description: When the certificate will expire
         created_time:
-          type: string
-          example: 2025-08-18T10:10:30.949165Z
           description: When the certificate has been created
+          example: 2025-08-18 10:10:30.949165+00:00
+          type: string
         device_id:
           $ref: '#/components/schemas/device_id'
+        expire_time:
+          description: When the certificate will expire
+          example: 2026-08-18 10:06:00+00:00
+          type: string
         serial_number:
           example: 91984382552102771A2B3C4E5F224719956718003374658
           type: string
@@ -72482,16 +72482,16 @@ components:
       - qrcode
       type: string
     mist_device:
+      discriminator:
+        mapping:
+          ap: '#/components/schemas/device_ap'
+          gateway: '#/components/schemas/device_gateway'
+          switch: '#/components/schemas/device_switch'
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/device_ap'
       - $ref: '#/components/schemas/device_switch'
       - $ref: '#/components/schemas/device_gateway'
-      discriminator:
-        propertyName: type
-        mapping:
-          ap: '#/components/schemas/device_ap'
-          switch: '#/components/schemas/device_switch'
-          gateway: '#/components/schemas/device_gateway'
     mist_nacedge:
       additionalProperties: false
       properties:
@@ -72580,11 +72580,11 @@ components:
         name:
           example: Fan 0
           type: string
+        rpm:
+          type: integer
         status:
           example: ok
           type: string
-        rpm:
-          type: integer
       type: object
     module_stat_item_network_resource:
       additionalProperties: false
@@ -77408,10 +77408,10 @@ components:
           type: string
         thumbnail_url:
           type: string
-        ui_url:
-          type: string
         type:
           $ref: '#/components/schemas/psk_portal_type'
+        ui_url:
+          type: string
         vlan_id:
           $ref: '#/components/schemas/vlan_id_with_variable'
       required:
@@ -78242,10 +78242,6 @@ components:
       items:
         type: string
       type: array
-    response_async_license_details:
-      type: array
-      items:
-        $ref: '#/components/schemas/response_async_license_detail'
     response_async_license_detail:
       additionalProperties: false
       description: detail claim status per device
@@ -78258,6 +78254,10 @@ components:
         timestamp:
           $ref: '#/components/schemas/timestamp'
       type: object
+    response_async_license_details:
+      items:
+        $ref: '#/components/schemas/response_async_license_detail'
+      type: array
     response_async_license_incompleted:
       description: Current incompleted lists (macs)
       items:
@@ -80966,23 +80966,9 @@ components:
         example: 5c5b35000001
         type: string
       type: array
-    response_site_device_upgrade_canary_phases:
-      type: array
-      items:
-        type: integer
-      description: phases for canary deployment. Each phase represents percentage of devices that need to be upgraded in that phase.
-      default: [1, 10, 50, 100]
     response_site_device_upgrade:
       additionalProperties: false
       properties:
-        p2p_cluster_size:
-          type: integer
-          description: size to split the devices for p2p
-          default: 10
-        p2p_parallelism:
-          type: integer
-          description: number of parallel p2p download batches to create
-          default: 1
         canary_phases:
           $ref: '#/components/schemas/response_site_device_upgrade_canary_phases'
         current_phase:
@@ -81003,6 +80989,14 @@ components:
           type: integer
         max_failures:
           $ref: '#/components/schemas/upgrade_devices_max_failures'
+        p2p_cluster_size:
+          default: 10
+          description: size to split the devices for p2p
+          type: integer
+        p2p_parallelism:
+          default: 1
+          description: number of parallel p2p download batches to create
+          type: integer
         reboot_at:
           description: reboot start time in epoch
           type: integer
@@ -81024,6 +81018,17 @@ components:
       required:
       - id
       type: object
+    response_site_device_upgrade_canary_phases:
+      default:
+      - 1
+      - 10
+      - 50
+      - 100
+      description: phases for canary deployment. Each phase represents percentage
+        of devices that need to be upgraded in that phase.
+      items:
+        type: integer
+      type: array
     response_site_device_upgrades:
       items:
         $ref: '#/components/schemas/response_site_device_upgrades_item'
@@ -81183,9 +81188,9 @@ components:
     response_ssr_export_id_tokens_results_item:
       additionalProperties: false
       properties:
-        token:
-          type: string
         mac:
+          type: string
+        token:
           type: string
       type: object
     response_ssr_upgrade:
@@ -81323,6 +81328,9 @@ components:
     response_stats_calls_summary:
       additionalProperties: false
       properties:
+        bad_minutes:
+          example: 5566.0
+          type: number
         bad_minutes_client:
           example: 526.0
           type: number
@@ -81331,9 +81339,6 @@ components:
           type: number
         bad_minutes_wireless:
           example: 1428.0
-          type: number
-        bad_minutes:
-          example: 5566.0
           type: number
         num_aps:
           example: 1
@@ -81592,6 +81597,8 @@ components:
         locating:
           readOnly: true
           type: boolean
+        mac:
+          type: string
         members:
           $ref: '#/components/schemas/stats_switch_module_stat'
         model:
@@ -81610,8 +81617,6 @@ components:
           $ref: '#/components/schemas/site_id'
         status:
           readOnly: true
-          type: string
-        mac:
           type: string
         type:
           type: string
@@ -82310,31 +82315,15 @@ components:
           minLength: 1
           type: string
       type: object
-    rrm_band_metric_naps_by_channel:
-      type: object
-      additionalProperties:
-        type: number
-      description: Property key is the channel number, value is number of APs on
-        that channel
-    rrm_band_metric_naps_by_power:
-      type: object
-      additionalProperties:
-        type: number
-      description: Property key is the power level, value is number of APs on
-        that power level
     rrm_band_metric:
       additionalProperties: false
       properties:
         avg_aps_per_channel:
-          type: number
           description: Average number of APs per channel
-        channel_distribution_uniformity:
           type: number
+        channel_distribution_uniformity:
           description: Distribution of channel across the Access Points
-        naps_by_channel:
-          $ref: '#/components/schemas/rrm_band_metric_naps_by_channel'
-        naps_by_power:
-          $ref: '#/components/schemas/rrm_band_metric_naps_by_power'
+          type: number
         cochannel_neighbors:
           description: Average number of co-channel neighbors
           type: number
@@ -82354,6 +82343,10 @@ components:
             '153':
               radar: 0.2
           type: object
+        naps_by_channel:
+          $ref: '#/components/schemas/rrm_band_metric_naps_by_channel'
+        naps_by_power:
+          $ref: '#/components/schemas/rrm_band_metric_naps_by_power'
         neighbors:
           description: Average number of neighbors
           type: number
@@ -82372,6 +82365,18 @@ components:
         radar:
           type: number
       type: object
+    rrm_band_metric_naps_by_channel:
+      additionalProperties:
+        type: number
+      description: Property key is the channel number, value is number of APs on that
+        channel
+      type: object
+    rrm_band_metric_naps_by_power:
+      additionalProperties:
+        type: number
+      description: Property key is the power level, value is number of APs on that
+        power level
+      type: object
     rrm_consideration:
       additionalProperties: false
       properties:
@@ -82386,6 +82391,9 @@ components:
         other_ssid:
           description: SSID from other AP that we heard from with the max RSSI
           type: string
+        rssi:
+          description: Avg RSSI heard from APs (that belongs to the same site)
+          type: number
         util_score:
           description: utilization score, 0-1, lower means less utilization (cleaner
             RF)
@@ -82397,9 +82405,6 @@ components:
         util_score_other:
           description: other utilization score, 0-1, lower means less utilization
             (cleaner RF)
-          type: number
-        rssi:
-          description: Avg RSSI heard from APs (that belongs to the same site)
           type: number
       required:
       - channel
@@ -82800,6 +82805,33 @@ components:
         start:
           type: integer
         total:
+          type: integer
+      type: object
+    search_mxedge:
+      additionalProperties: false
+      properties:
+        distro:
+          type: string
+        last_seen:
+          type: number
+        model:
+          example: ME-VM
+          type: string
+        mxcluster_id:
+          $ref: '#/components/schemas/id'
+        mxedge_id:
+          $ref: '#/components/schemas/id'
+        name:
+          description: The name of the tunnel
+          example: me-vm-1
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        tunterm_version:
+          type: string
+        uptime:
           type: integer
       type: object
     search_org_devices_mxtunnel_status:
@@ -83464,39 +83496,6 @@ components:
       - standard
       - strict
       type: string
-    service_policy_skyatp_dns_dga_detection:
-          default: disabled
-          description: 'enum: `disabled`, `default`, `standard`, `strict`'
-          enum:
-          - disabled
-          - default
-          - standard
-          - strict
-          type: string
-    service_policy_skyatp_dns_tunnel_detection:
-          default: disabled
-          description: 'enum: `disabled`, `default`, `standard`, `strict`'
-          enum:
-          - disabled
-          - default
-          - standard
-          - strict
-          type: string
-    service_policy_skyatp_http_inspection:
-          default: disabled
-          description: 'enum: `disabled`, `standard`'
-          enum:
-          - disabled
-          - standard
-          - strict
-          type: string
-    service_policy_skyatp_iot_device_policy:
-          default: disabled
-          description: 'enum: `disabled`, `enabled`'
-          enum:
-          - disabled
-          - enabled
-          type: string
     service_policy_skyatp:
       additionalProperties: false
       description: SRX only
@@ -83510,6 +83509,39 @@ components:
         iot_device_policy:
           $ref: '#/components/schemas/service_policy_skyatp_iot_device_policy'
       type: object
+    service_policy_skyatp_dns_dga_detection:
+      default: disabled
+      description: 'enum: `disabled`, `default`, `standard`, `strict`'
+      enum:
+      - disabled
+      - default
+      - standard
+      - strict
+      type: string
+    service_policy_skyatp_dns_tunnel_detection:
+      default: disabled
+      description: 'enum: `disabled`, `default`, `standard`, `strict`'
+      enum:
+      - disabled
+      - default
+      - standard
+      - strict
+      type: string
+    service_policy_skyatp_http_inspection:
+      default: disabled
+      description: 'enum: `disabled`, `standard`'
+      enum:
+      - disabled
+      - standard
+      - strict
+      type: string
+    service_policy_skyatp_iot_device_policy:
+      default: disabled
+      description: 'enum: `disabled`, `enabled`'
+      enum:
+      - disabled
+      - enabled
+      type: string
     service_policy_ssl_proxy:
       additionalProperties: false
       description: For SRX-only
@@ -87351,19 +87383,19 @@ components:
         name:
           type: string
         org_id:
-          type: string
-          format: uuid
           example: 60f6bfdb-2f45-4022-8e2a-e00d977953fe
+          format: uuid
+          type: string
         privileges:
           $ref: '#/components/schemas/sso_role_org_privileges'
         site_id:
-          type: string
-          format: uuid
           example: 580eb9a7-e6cb-4d05-aa20-4c60808fb011
-        sitegroup_id:
-          type: string
           format: uuid
+          type: string
+        sitegroup_id:
           example: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+          format: uuid
+          type: string
       required:
       - name
       - privileges
@@ -87528,12 +87560,12 @@ components:
           nullable: true
           readOnly: true
           type: integer
-        cpu_util:
+        cpu_user:
           format: int32
           nullable: true
           readOnly: true
           type: integer
-        cpu_user:
+        cpu_util:
           format: int32
           nullable: true
           readOnly: true
@@ -87623,12 +87655,12 @@ components:
           nullable: true
           readOnly: true
           type: string
-        mem_used_kb:
+        mem_total_kb:
           format: int64
           nullable: true
           readOnly: true
           type: integer
-        mem_total_kb:
+        mem_used_kb:
           format: int64
           nullable: true
           readOnly: true
@@ -88665,16 +88697,16 @@ components:
           type: integer
       type: object
     stats_device:
+      discriminator:
+        mapping:
+          ap: '#/components/schemas/stats_ap'
+          gateway: '#/components/schemas/stats_gateway'
+          switch: '#/components/schemas/stats_switch'
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/stats_ap'
       - $ref: '#/components/schemas/stats_switch'
       - $ref: '#/components/schemas/stats_gateway'
-      discriminator:
-        propertyName: type
-        mapping:
-          ap: '#/components/schemas/stats_ap'
-          switch: '#/components/schemas/stats_switch'
-          gateway: '#/components/schemas/stats_gateway'
     stats_device_other:
       additionalProperties: false
       properties:
@@ -88798,7 +88830,7 @@ components:
       description: When `vendor`==`cradlepoint`
       properties:
         interfaces:
-          additionalProperties:            
+          additionalProperties:
             $ref: '#/components/schemas/stats_device_other_vendor_specific_port'
           example:
             mdm-4d0e073b:
@@ -88826,15 +88858,6 @@ components:
     stats_device_other_vendor_specific_port:
       additionalProperties: false
       properties:
-        display_name:
-          example: mdm-4d0e073b
-          type: string
-        port_parent:
-          example: mdm
-          type: string
-        mtu:
-          example: 1500
-          type: integer
         bytes_in:
           example: 5623096929
           type: integer
@@ -88843,6 +88866,9 @@ components:
           type: integer
         carrier:
           example: Orange
+          type: string
+        display_name:
+          example: mdm-4d0e073b
           type: string
         imei:
           example: '866401234567893'
@@ -88858,6 +88884,12 @@ components:
           type: boolean
         mode:
           example: wan
+          type: string
+        mtu:
+          example: 1500
+          type: integer
+        port_parent:
+          example: mdm
           type: string
         rsrp:
           example: -108
@@ -88888,36 +88920,16 @@ components:
       items:
         $ref: '#/components/schemas/stats_device'
       type: array
-    stats_gateway_mac_table_stats:
-      type: object
-      properties:
-        mac_table_count:
-          type: integer
-        max_mac_entries_supported:
-          type: integer
     stats_gateway:
       additionalProperties: false
       description: Gateway statistics
       properties:
-        tag_id:
-          type: integer
-        tag_uuid:
-          type: string
-          format: uuid
-        mac_table_stats:
-          $ref: '#/components/schemas/stats_gateway_mac_table_stats'
-        auto_upgrade_stat:
-          $ref: '#/components/schemas/stats_ap_auto_upgrade'
-        config_timestamp:
-          type: integer
-        config_version:
-          type: integer
-        deviceprofile_name:
-          type: string
         ap_redundancy:
           $ref: '#/components/schemas/ap_redundancy'
         arp_table_stats:
           $ref: '#/components/schemas/arp_table_stats'
+        auto_upgrade_stat:
+          $ref: '#/components/schemas/stats_ap_auto_upgrade'
         bgp_peers:
           $ref: '#/components/schemas/bgp_peers'
         cert_expiry:
@@ -88933,6 +88945,10 @@ components:
         config_status:
           readOnly: true
           type: string
+        config_timestamp:
+          type: integer
+        config_version:
+          type: integer
         cpu2_stat:
           $ref: '#/components/schemas/cpu_stat'
         cpu_stat:
@@ -88943,6 +88959,8 @@ components:
           format: uuid
           nullable: true
           readOnly: true
+          type: string
+        deviceprofile_name:
           type: string
         dhcpd2_stat:
           $ref: '#/components/schemas/dhcpd_stat'
@@ -88995,6 +89013,8 @@ components:
           description: Device mac
           example: dc38e1dbf3cd
           type: string
+        mac_table_stats:
+          $ref: '#/components/schemas/stats_gateway_mac_table_stats'
         map_id:
           description: Serial Number
           format: uuid
@@ -89056,6 +89076,11 @@ components:
           example: connected
           readOnly: true
           type: string
+        tag_id:
+          type: integer
+        tag_uuid:
+          format: uuid
+          type: string
         tunnels:
           $ref: '#/components/schemas/stats_gateway_wan_tunnels'
         type:
@@ -89084,6 +89109,14 @@ components:
           readOnly: true
           type: string
       type: object
+    stats_gateway_mac_table_stats:
+      additionalProperties: false
+      properties:
+        mac_table_count:
+          type: integer
+        max_mac_entries_supported:
+          type: integer
+      type: object
     stats_gateway_module_stat:
       items:
         $ref: '#/components/schemas/stats_gateway_module_stat_item'
@@ -89107,8 +89140,6 @@ components:
           nullable: true
           readOnly: true
           type: string
-        memory_stat:
-          $ref: '#/components/schemas/memory_stat'
         fans:
           $ref: '#/components/schemas/module_stat_item_fans'
         fpga_version:
@@ -89122,6 +89153,8 @@ components:
         mac:
           example: fc3342123456
           type: string
+        memory_stat:
+          $ref: '#/components/schemas/memory_stat'
         model:
           example: EX4300-48P
           nullable: true
@@ -89425,10 +89458,10 @@ components:
         spu_pending_session:
           example: 0
           type: integer
-        spu_valid_session:
+        spu_uptime:
           example: 0
           type: integer
-        spu_uptime:
+        spu_valid_session:
           example: 0
           type: integer
       type: object
@@ -89559,33 +89592,6 @@ components:
       items:
         $ref: '#/components/schemas/stats_gateway_wan_tunnel'
       type: array
-    search_mxedge:
-      additionalProperties: false
-      properties:
-        distro:
-          type: string
-        tunterm_version:
-          type: string
-        mxedge_id:
-          $ref: '#/components/schemas/id'
-        mxcluster_id:
-          $ref: '#/components/schemas/id'        
-        model:
-          example: ME-VM
-          type: string
-        name:
-          description: The name of the tunnel
-          example: me-vm-1
-          type: string
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        site_id:
-          $ref: '#/components/schemas/site_id'
-        last_seen:
-          type: number
-        uptime:
-          type: integer
-      type: object
     stats_mxedge:
       additionalProperties: false
       properties:
@@ -89615,10 +89621,10 @@ components:
           $ref: '#/components/schemas/stats_mxedge_lag_stats'
         last_seen:
           $ref: '#/components/schemas/last_seen'
-        magic:
-          type: string
         mac:
           example: 020000a80cb4
+          type: string
+        magic:
           type: string
         memory_stat:
           $ref: '#/components/schemas/stats_mxedge_memory_stat'
@@ -89885,66 +89891,25 @@ components:
         type8:
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type6'
       type: object
-    stats_mxedge_port_stat_lldp_stats:
-      type: object
-      properties:
-        mgmt_addr:
-          type: string
-        system_name:
-          type: string
-        system_desc:
-          type: string
-        port_id:
-          type: string
-        chassis_id:
-          type: string
-        port_desc:
-          type: string
-    stats_mxedge_port_stat_sfp:
-      type: object
-      properties:
-        codes:
-          type: string
-        part_no:
-          type: string
-        vendor:
-          type: string
-        mbps:
-          type: integer
-        type:
-          type: integer
-        serial_no:
-          type: string
-    stats_mxedge_port_stat_lacp:
-      type: object
-      properties:
-        rx_state:
-          type: string
-        rx_lacpdu:
-          type: integer
-        mux_state:
-          type: string
-        tx_lacpdu:
-          type: integer
     stats_mxedge_port_stat:
       additionalProperties: false
       properties:
         full_duplex:
           type: boolean
+        lacp:
+          $ref: '#/components/schemas/stats_mxedge_port_stat_lacp'
+        lldp_stats:
+          $ref: '#/components/schemas/stats_mxedge_port_stat_lldp_stats'
         mac:
           type: string
         rx_bytes:
           $ref: '#/components/schemas/rx_bytes'
-        lldp_stats:
-          $ref: '#/components/schemas/stats_mxedge_port_stat_lldp_stats'
-        sfp:
-          $ref: '#/components/schemas/stats_mxedge_port_stat_sfp'
-        lacp:
-          $ref: '#/components/schemas/stats_mxedge_port_stat_lacp'
         rx_errors:
           type: integer
         rx_pkts:
           $ref: '#/components/schemas/rx_pkts'
+        sfp:
+          $ref: '#/components/schemas/stats_mxedge_port_stat_sfp'
         speed:
           type: integer
         state:
@@ -89957,6 +89922,50 @@ components:
           $ref: '#/components/schemas/tx_pkts'
         up:
           type: boolean
+      type: object
+    stats_mxedge_port_stat_lacp:
+      additionalProperties: false
+      properties:
+        mux_state:
+          type: string
+        rx_lacpdu:
+          type: integer
+        rx_state:
+          type: string
+        tx_lacpdu:
+          type: integer
+      type: object
+    stats_mxedge_port_stat_lldp_stats:
+      additionalProperties: false
+      properties:
+        chassis_id:
+          type: string
+        mgmt_addr:
+          type: string
+        port_desc:
+          type: string
+        port_id:
+          type: string
+        system_desc:
+          type: string
+        system_name:
+          type: string
+      type: object
+    stats_mxedge_port_stat_sfp:
+      additionalProperties: false
+      properties:
+        codes:
+          type: string
+        mbps:
+          type: integer
+        part_no:
+          type: string
+        serial_no:
+          type: string
+        type:
+          type: integer
+        vendor:
+          type: string
       type: object
     stats_mxedge_port_stats:
       additionalProperties:
@@ -90283,16 +90292,12 @@ components:
           $ref: '#/components/schemas/stats_zone_assets_waits'
         clients_wait:
           $ref: '#/components/schemas/stats_zone_clients_waits'
-        discovered_assets_wait:
-          $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
-        sdkclients_wait:
-          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
-        unconnected_clients_wait:
-          $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
         created_time:
           $ref: '#/components/schemas/created_time'
         devices:
           $ref: '#/components/schemas/stats_rssi_zones_devices'
+        discovered_assets_wait:
+          $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
         id:
           $ref: '#/components/schemas/id'
         modified_time:
@@ -90301,14 +90306,6 @@ components:
           description: Name of the zone
           example: Zone A
           type: string
-        num_discovered_assets:
-          description: Number of discoveredassets
-          example: 0
-          type: integer
-        num_unconnected_clients:
-          description: Number of unconnected Wi-Fi clients
-          example: 80
-          type: integer
         num_assets:
           description: Number of assets
           example: 0
@@ -90317,17 +90314,29 @@ components:
           description: Number of Wi-Fi clients (unconnected + connected)
           example: 80
           type: integer
+        num_discovered_assets:
+          description: Number of discoveredassets
+          example: 0
+          type: integer
         num_sdkclients:
           description: Number of sdk clients
           example: 10
+          type: integer
+        num_unconnected_clients:
+          description: Number of unconnected Wi-Fi clients
+          example: 80
           type: integer
         occupancy_limit:
           example: 4
           type: integer
         org_id:
           $ref: '#/components/schemas/org_id'
+        sdkclients_wait:
+          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
         site_id:
           $ref: '#/components/schemas/site_id'
+        unconnected_clients_wait:
+          $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
       required:
       - id
       - name
@@ -90425,26 +90434,20 @@ components:
           type: string
         analyticEnabled:
           type: boolean
-        engagementEnabled:
-          type: boolean
         aptemplate_id:
           format: uuid
           nullable: true
-          type: string
-        sitetemplate_id:
-          format: uuid
-          nullable: true
-          type: string
-        gatewaytemplate_id:
-          format: uuid
-          nullable: true
-          type: string
-        notes:
           type: string
         country_code:
           type: string
         created_time:
           $ref: '#/components/schemas/created_time'
+        engagementEnabled:
+          type: boolean
+        gatewaytemplate_id:
+          format: uuid
+          nullable: true
+          type: string
         id:
           $ref: '#/components/schemas/id'
         lat:
@@ -90462,6 +90465,8 @@ components:
         networktemplate_id:
           format: uuid
           nullable: true
+          type: string
+        notes:
           type: string
         num_ap:
           type: integer
@@ -90493,6 +90498,10 @@ components:
           type: string
         sitegroup_ids:
           $ref: '#/components/schemas/site_stats_sitegroup_ids'
+        sitetemplate_id:
+          format: uuid
+          nullable: true
+          type: string
         timezone:
           type: string
         tzoffset:
@@ -90525,23 +90534,12 @@ components:
       additionalProperties: false
       description: Switch statistics
       properties:
-        tag_id:
-          type: integer
-        tag_uuid:
-          type: string
-          format: uuid
-        auto_upgrade_stat:
-          $ref: '#/components/schemas/stats_ap_auto_upgrade'
-        config_timestamp:
-          type: integer
-        config_version:
-          type: integer
-        ext_ip:
-          type: string
         ap_redundancy:
           $ref: '#/components/schemas/stats_switch_ap_redundancy'
         arp_table_stats:
           $ref: '#/components/schemas/arp_table_stats'
+        auto_upgrade_stat:
+          $ref: '#/components/schemas/stats_ap_auto_upgrade'
         cert_expiry:
           format: int64
           type: integer
@@ -90552,6 +90550,10 @@ components:
         config_status:
           readOnly: true
           type: string
+        config_timestamp:
+          type: integer
+        config_version:
+          type: integer
         cpu_stat:
           $ref: '#/components/schemas/cpu_stat'
         created_time:
@@ -90567,6 +90569,8 @@ components:
           format: uuid
           nullable: true
           readOnly: true
+          type: string
+        ext_ip:
           type: string
         fw_versions_outofsync:
           readOnly: true
@@ -90642,6 +90646,11 @@ components:
         status:
           example: connected
           readOnly: true
+          type: string
+        tag_id:
+          type: integer
+        tag_uuid:
+          format: uuid
           type: string
         type:
           $ref: '#/components/schemas/device_type_switch'
@@ -90736,13 +90745,11 @@ components:
           nullable: true
           readOnly: true
           type: string
-        boot_partition:
-          type: string
-        memory_stat:
-          $ref: '#/components/schemas/memory_stat'
         bios_version:
           nullable: true
           readOnly: true
+          type: string
+        boot_partition:
           type: string
         cpld_version:
           nullable: true
@@ -90768,6 +90775,8 @@ components:
         mac:
           example: fc3342123456
           type: string
+        memory_stat:
+          $ref: '#/components/schemas/memory_stat'
         model:
           example: EX4300-48P
           nullable: true
@@ -91327,10 +91336,6 @@ components:
     stats_wireless_client:
       additionalProperties: false
       properties:
-        annotation:
-          type: string
-        assoc_time:
-          type: integer
         accuracy:
           description: Estimated client location accuracy, in meter
           type: integer
@@ -91338,6 +91343,8 @@ components:
           type: string
         airwatch:
           $ref: '#/components/schemas/stats_wireless_client_airwatch'
+        annotation:
+          type: string
         ap_id:
           description: AP ID the client is connected to
           format: uuid
@@ -91345,14 +91352,12 @@ components:
         ap_mac:
           description: AP the client is connected to
           type: string
-        bssid:
-          type: string
-        group:
-          type: string
-        site_id:
-          $ref: '#/components/schemas/site_id'
+        assoc_time:
+          type: integer
         band:
           $ref: '#/components/schemas/dot11_band'
+        bssid:
+          type: string
         channel:
           description: Current channel
           type: integer
@@ -91363,6 +91368,8 @@ components:
         family:
           description: "Device family, through fingerprinting. iPod / Nexus Galaxy\
             \ / Windows Mobile or CE \u2026"
+          type: string
+        group:
           type: string
         guest:
           $ref: '#/components/schemas/guest'
@@ -91427,6 +91434,8 @@ components:
           $ref: '#/components/schemas/rx_rate'
         rx_retries:
           $ref: '#/components/schemas/rx_retries'
+        site_id:
+          $ref: '#/components/schemas/site_id'
         snr:
           description: Signal over noise
           type: number
@@ -91676,14 +91685,10 @@ components:
           $ref: '#/components/schemas/stats_zone_assets_waits'
         clients_wait:
           $ref: '#/components/schemas/stats_zone_clients_waits'
-        discovered_assets_wait:
-          $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
-        sdkclients_wait:
-          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
-        unconnected_clients_wait:
-          $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
         created_time:
           $ref: '#/components/schemas/created_time'
+        discovered_assets_wait:
+          $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
         id:
           $ref: '#/components/schemas/id'
         map_id:
@@ -91701,29 +91706,33 @@ components:
           description: Number of assets
           example: 0
           type: integer
-        num_discovered_assets:
-          description: Number of discoveredassets
-          example: 0
-          type: integer
         num_clients:
           description: Number of Wi-Fi clients (unconnected + connected)
           example: 80
           type: integer
-        num_unconnected_clients:
-          description: Number of unconnected Wi-Fi clients
-          example: 80
+        num_discovered_assets:
+          description: Number of discoveredassets
+          example: 0
           type: integer
         num_sdkclients:
           description: Number of sdk clients
           example: 10
+          type: integer
+        num_unconnected_clients:
+          description: Number of unconnected Wi-Fi clients
+          example: 80
           type: integer
         occupancy_limit:
           example: 4
           type: integer
         org_id:
           $ref: '#/components/schemas/org_id'
+        sdkclients_wait:
+          $ref: '#/components/schemas/stats_zone_sdkclients_waits'
         site_id:
           $ref: '#/components/schemas/site_id'
+        unconnected_clients_wait:
+          $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
         vertices:
           $ref: '#/components/schemas/zone_vertices'
         vertices_m:
@@ -91736,69 +91745,6 @@ components:
     stats_zone_assets_waits:
       additionalProperties: false
       description: BLE asset wait time right now
-      properties:
-        avg:
-          description: Average wait time in seconds
-          example: 0
-          type: number
-        max:
-          description: Longest wait time in seconds
-          example: 0
-          type: number
-        min:
-          description: Shortest wait time in seconds
-          example: 0
-          type: number
-        p95:
-          description: 95th percentile of all the wait time(s)
-          example: 0
-          type: number
-      type: object
-    stats_zone_discovered_assets_waits:
-      additionalProperties: false
-      description: Discovered asset wait time right now
-      properties:
-        avg:
-          description: Average wait time in seconds
-          example: 0
-          type: number
-        max:
-          description: Longest wait time in seconds
-          example: 0
-          type: number
-        min:
-          description: Shortest wait time in seconds
-          example: 0
-          type: number
-        p95:
-          description: 95th percentile of all the wait time(s)
-          example: 0
-          type: number
-      type: object
-    stats_zone_sdkclients_waits:
-      additionalProperties: false
-      description: SDK client wait time right now
-      properties:
-        avg:
-          description: Average wait time in seconds
-          example: 0
-          type: number
-        max:
-          description: Longest wait time in seconds
-          example: 0
-          type: number
-        min:
-          description: Shortest wait time in seconds
-          example: 0
-          type: number
-        p95:
-          description: 95th percentile of all the wait time(s)
-          example: 0
-          type: number
-      type: object
-    stats_zone_unconnected_clients_waits:
-      additionalProperties: false
-      description: Unconnected Wi-Fi client wait time right now
       properties:
         avg:
           description: Average wait time in seconds
@@ -91920,6 +91866,69 @@ components:
         example: 7e2b463d-c91c-ff7d-f3c0-6eccc6949ff8
         type: string
       type: array
+    stats_zone_discovered_assets_waits:
+      additionalProperties: false
+      description: Discovered asset wait time right now
+      properties:
+        avg:
+          description: Average wait time in seconds
+          example: 0
+          type: number
+        max:
+          description: Longest wait time in seconds
+          example: 0
+          type: number
+        min:
+          description: Shortest wait time in seconds
+          example: 0
+          type: number
+        p95:
+          description: 95th percentile of all the wait time(s)
+          example: 0
+          type: number
+      type: object
+    stats_zone_sdkclients_waits:
+      additionalProperties: false
+      description: SDK client wait time right now
+      properties:
+        avg:
+          description: Average wait time in seconds
+          example: 0
+          type: number
+        max:
+          description: Longest wait time in seconds
+          example: 0
+          type: number
+        min:
+          description: Shortest wait time in seconds
+          example: 0
+          type: number
+        p95:
+          description: 95th percentile of all the wait time(s)
+          example: 0
+          type: number
+      type: object
+    stats_zone_unconnected_clients_waits:
+      additionalProperties: false
+      description: Unconnected Wi-Fi client wait time right now
+      properties:
+        avg:
+          description: Average wait time in seconds
+          example: 0
+          type: number
+        max:
+          description: Longest wait time in seconds
+          example: 0
+          type: number
+        min:
+          description: Shortest wait time in seconds
+          example: 0
+          type: number
+        p95:
+          description: 95th percentile of all the wait time(s)
+          example: 0
+          type: number
+      type: object
     stats_zones:
       items:
         $ref: '#/components/schemas/stats_zone'
@@ -94632,13 +94641,6 @@ components:
         upstream_ports:
           $ref: '#/components/schemas/tunterm_port_config_upstream_ports'
       type: object
-    tunterm_port_config_upstream_port_vlan_id:
-      description: Native VLAN id for upstream ports
-      oneOf:
-      - type: string
-      - maximum: 4094
-        minimum: 1
-        type: integer
     tunterm_port_config_downstream_ports:
       description: List of ports to be used for downstream (to AP) purpose
       example:
@@ -94647,6 +94649,13 @@ components:
       items:
         type: string
       type: array
+    tunterm_port_config_upstream_port_vlan_id:
+      description: Native VLAN id for upstream ports
+      oneOf:
+      - type: string
+      - maximum: 4094
+        minimum: 1
+        type: integer
     tunterm_port_config_upstream_ports:
       description: List of ports to be used for upstream purpose (to LAN)
       example:
@@ -97907,18 +97916,12 @@ components:
       - events
       - topic
       type: object
-    webhook_location_centrak_event_type:
-      type: string
-      enum:
-      - wifi
     webhook_location_centrak_event:
       additionalProperties: false
       properties:
         mac:
           description: MAC address of the device
           type: string
-        type:
-          $ref: '#/components/schemas/webhook_location_centrak_event_type'
         map_id:
           description: Map id
           type: string
@@ -97929,13 +97932,15 @@ components:
           description: Optional, BLE manufacturing data in hex byte-string format
             (i.e. "112233AABBCC")
           type: string
+        site_id:
+          format: uuid
+          type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
+        type:
+          $ref: '#/components/schemas/webhook_location_centrak_event_type'
         wifi_beacon_extended_info:
           $ref: '#/components/schemas/wifi_beacon_extended_info'
-        site_id:
-          type: string
-          format: uuid
         x:
           description: x, in meter
           format: double
@@ -97945,6 +97950,10 @@ components:
           format: double
           type: number
       type: object
+    webhook_location_centrak_event_type:
+      enum:
+      - wifi
+      type: string
     webhook_location_centrak_events:
       description: List of events
       items:
