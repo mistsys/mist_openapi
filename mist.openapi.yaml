@@ -6278,7 +6278,7 @@ paths:
                   disabled: true
                   eddystone_uid_namespace: string
                   eddystone_url: string
-                  ibeacon_major: 0
+                  ibeacon_major: 1
                   ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
                   mfg_company_id: 0
                   name: string
@@ -6354,7 +6354,7 @@ paths:
                   disabled: true
                   eddystone_uid_namespace: string
                   eddystone_url: string
-                  ibeacon_major: 0
+                  ibeacon_major: 1
                   ibeacon_uuid: b069b358-4c97-5319-1f8c-7c5ca64d6ab2
                   mfg_company_id: 0
                   name: string
@@ -23964,8 +23964,8 @@ paths:
                   eddystone_instance: string
                   eddystone_namespace: string
                   eddystone_url: string
-                  ibeacon_major: 0
-                  ibeacon_minor: 0
+                  ibeacon_major: 1
+                  ibeacon_minor: 1
                   ibeacon_uuid: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                   mac: string
                   name: string
@@ -24046,8 +24046,8 @@ paths:
                   eddystone_instance: string
                   eddystone_namespace: string
                   eddystone_url: string
-                  ibeacon_major: 0
-                  ibeacon_minor: 0
+                  ibeacon_major: 1
+                  ibeacon_minor: 1
                   ibeacon_uuid: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
                   mac: string
                   name: string
@@ -39397,6 +39397,77 @@ webhooks:
         '200':
           description: Return a 200 status to indicate that the data was received
             successfully
+  asset_raw_rssi:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                events:
+                - ap_loc:
+                  - 36.03303862386182
+                  - 43.57022468463291
+                  - 2.75
+                  beam: 8
+                  device_id: 00000000-0000-0000-1000-ac2316eca70b
+                  ibeacon_major: 2
+                  ibeacon_minor: 2121
+                  ibeacon_uuid: ac950d7b-af31-42d2-be7c-e15639fab2cd
+                  is_asset: true
+                  mac: ed2cc53f2770
+                  map_id: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                  org_id: 9c3e516c-397d-11e6-ae35-0242ac110008
+                  rssi: -79
+                  service_packets:
+                  - service_data: 010441060606fe3d35700601cecbd902512f000001
+                    service_uuid: UUID
+                  site_id: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                  timestamp: 1661300746
+                - ap_loc:
+                  - 36.03303862386182
+                  - 43.57022468463291
+                  - 2.75
+                  beam: 7
+                  device_id: 00000000-0000-0000-1000-ac2316eca70b
+                  is_asset: true
+                  mac: ed2cc53f2771
+                  map_id: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                  mfg_company_id: 243
+                  mfg_data: '00000000000000000000000000'
+                  org_id: 9c3e516c-397d-11e6-ae35-0242ac110008
+                  rssi: -74
+                  site_id: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                  timestamp: 1661300746
+                value:topic: asset-raw-rssi
+            schema:
+              $ref: '#/components/schemas/webhook_asset_raw_rssi'
+        description: "Webhook sample for `asset-raw-rssi` topic.\n\n\nThis webhook\
+          \ topic provides raw data from packets emitted by named and filtered assets.\n\
+          \n\nRaw data webhooks are a special subset of webhooks that provide insight\
+          \ into raw data packets emitted by a client,\nidentified by their advertising\
+          \ MAC address (assets, discovered ble, connected wifi, unconnected wifi).\
+          \  \nThe data that client raw data webhooks encompasses are reporting AP\
+          \ information, RSSI Data, and any special packets/telemetry\npackets that\
+          \ the client may emit.\n\nNote that client raw webhooks are the raw data\
+          \ coming from the client and do not contain the X,Y location data of the\
+          \ client.\nIn order to get the location data for a client please see our\
+          \ location webhooks. \nClients can be identified uniquely across these client\
+          \ raw data topics and location webhook topic using MAC address as the Unique\
+          \ identifier (client identifier)."
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
   audits:
     post:
       parameters:
@@ -39688,8 +39759,8 @@ webhooks:
                     - 0
                     beam: 0
                     device_id: 3bafab7b-4400-4bcf-8e6e-09f954699940
-                    ibeacon_major: 0
-                    ibeacon_minor: 0
+                    ibeacon_major: 1
+                    ibeacon_minor: 1
                     ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
                     is_asset: true
                     mac: string
@@ -39779,8 +39850,8 @@ webhooks:
                     eddystone_uid_instance: string
                     eddystone_uid_namespace: string
                     eddystone_url_url: string
-                    ibeacon_major: 0
-                    ibeacon_minor: 0
+                    ibeacon_major: 1
+                    ibeacon_minor: 1
                     ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
                     id: 487f6eca-6276-4993-bfeb-e3cbbbba3f08
                     mac: string
@@ -39982,6 +40053,46 @@ webhooks:
             schema:
               $ref: '#/components/schemas/webhook_location_unclient'
         description: Webhook sample for `location-unclient` topic
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
+  mxedge_events:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  events:
+                  - audit_id: 8912e5cb-8ddd-41f7-be5f-476a7abbf658
+                    component: null
+                    mxedge_id: 00000000-0000-0000-1000-020000230522
+                    mxedge_name: demo123
+                    org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
+                    timestamp: '1763546876.209649'
+                    type: ME_CONFIG_CHANGED_BY_USER
+                  - audit_id: 48efa5bf-d290-4e93-80ca-4dbf72f4187a
+                    component: null
+                    mxedge_id: 00000000-0000-0000-1000-020000a5fca1
+                    mxedge_name: test123
+                    org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
+                    timestamp: '1763546876.417778'
+                    type: ME_CONFIG_CHANGED_BY_USER
+                  topic: mxedge-events
+            schema:
+              $ref: '#/components/schemas/webhook_mxedge_events'
+        description: Webhook sample for `mxedge-events` topic
       responses:
         '200':
           description: Return a 200 status to indicate that the data was received
@@ -40225,6 +40336,136 @@ webhooks:
             schema:
               $ref: '#/components/schemas/webhook_site_sle'
         description: Webhook sample for `site-sle` topic
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
+  wifi_conn_raw:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                events:
+                - ap_id: ac-23-16-ec-a7-0b
+                  ap_loc:
+                  - 36.03303862386182
+                  - 43.57022468463291
+                  - 2.75
+                  client_id: 28-f0-76-2d-22-1e
+                  connected_site: false
+                  mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                  orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                  packets:
+                  - band: 5GHz
+                    rssi: -92
+                  siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                - ap_id: ac-23-16-ec-a7-0b
+                  ap_loc:
+                  - 36.03303862386182
+                  - 43.57022468463291
+                  - 2.75
+                  client_id: 38-f9-d3-99-08-6e
+                  connected_site: false
+                  extended_info_list:
+                  - frame_ctrl: 776
+                    payload: 010441060606fe3d35700601cecbd902512f000001
+                    sequence_ctrl: 8432
+                  mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                  orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                  packets:
+                  - band: 5GHz
+                    rssi: -94.333336
+                  siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                topic: wifi-conn-raw
+            schema:
+              $ref: '#/components/schemas/webhook_wifi_conn_raw'
+        description: "Webhook sample for `wifi-conn-raw` topic.\n\n\nThis webhook\
+          \ topic provides raw data from packets emitted by connected devices.\n\n\
+          \nRaw data webhooks are a special subset of webhooks that provide insight\
+          \ into raw data packets emitted by a client,\nidentified by their advertising\
+          \ MAC address (assets, discovered ble, connected wifi, unconnected wifi).\
+          \  \nThe data that client raw data webhooks encompasses are reporting AP\
+          \ information, RSSI Data, and any special packets/telemetry\npackets that\
+          \ the client may emit.\n\nNote that client raw webhooks are the raw data\
+          \ coming from the client and do not contain the X,Y location data of the\
+          \ client.\nIn order to get the location data for a client please see our\
+          \ location webhooks. \nClients can be identified uniquely across these client\
+          \ raw data topics and location webhook topic using MAC address as the Unique\
+          \ identifier (client identifier)."
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
+  wifi_unconn_raw:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                events:
+                - ap_id: ac-23-16-ec-a7-0b
+                  ap_loc:
+                  - 36.03303862386182
+                  - 43.57022468463291
+                  - 2.75
+                  client_id: 28-f0-76-2d-22-1e
+                  connected_site: false
+                  mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                  orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                  packets:
+                  - band: 5GHz
+                    rssi: -92
+                  siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                - ap_id: ac-23-16-ec-a7-0b
+                  ap_loc:
+                  - 36.03303862386182
+                  - 43.57022468463291
+                  - 2.75
+                  client_id: 38-f9-d3-99-08-6e
+                  connected_site: false
+                  mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                  orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                  packets:
+                  - band: 5GHz
+                    rssi: -94.333336
+                  siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                topic: wifi-unconn-raw
+            schema:
+              $ref: '#/components/schemas/webhook_wifi_unconn_raw'
+        description: "Webhook sample for `wifi-unconn-raw` topic.\n\n\nThis webhook\
+          \ topic provides raw data from packets emitted by unconnected devices.\n\
+          \n\nRaw data webhooks are a special subset of webhooks that provide insight\
+          \ into raw data packets emitted by a client,\nidentified by their advertising\
+          \ MAC address (assets, discovered ble, connected wifi, unconnected wifi).\
+          \  \nThe data that client raw data webhooks encompasses are reporting AP\
+          \ information, RSSI Data, and any special packets/telemetry\npackets that\
+          \ the client may emit.\n\nNote that client raw webhooks are the raw data\
+          \ coming from the client and do not contain the X,Y location data of the\
+          \ client.\nIn order to get the location data for a client please see our\
+          \ location webhooks. \nClients can be identified uniquely across these client\
+          \ raw data topics and location webhook topic using MAC address as the Unique\
+          \ identifier (client identifier)."
       responses:
         '200':
           description: Return a 200 status to indicate that the data was received
@@ -40496,8 +40737,8 @@ components:
         eddystone_uid_instance: string
         eddystone_uid_namespace: string
         eddystone_url_url: string
-        ibeacon_major: 0
-        ibeacon_minor: 0
+        ibeacon_major: 1
+        ibeacon_minor: 1
         ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
         last_seen: 0
         mac: string
@@ -40518,7 +40759,7 @@ components:
         eddystone_uid_namespace: string
         eddystone_url: string
         for_site: true
-        ibeacon_major: 0
+        ibeacon_major: 1
         ibeacon_uuid: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         mfg_company_id: 0
@@ -40532,8 +40773,8 @@ components:
         eddystone_uid_instance: string
         eddystone_uid_namespace: string
         eddystone_url_url: string
-        ibeacon_major: 0
-        ibeacon_minor: 0
+        ibeacon_major: 1
+        ibeacon_minor: 1
         ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
         last_seen: 0
         mac: string
@@ -40557,8 +40798,8 @@ components:
           eddystone_uid_instance: string
           eddystone_uid_namespace: string
           eddystone_url_url: string
-          ibeacon_major: 0
-          ibeacon_minor: 0
+          ibeacon_major: 1
+          ibeacon_minor: 1
           ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
           last_seen: 0
           mac: string
@@ -40776,8 +41017,8 @@ components:
         eddystone_instance: string
         eddystone_namespace: string
         eddystone_url: string
-        ibeacon_major: 0
-        ibeacon_minor: 0
+        ibeacon_major: 1
+        ibeacon_minor: 1
         ibeacon_uuid: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         mac: string
@@ -40796,8 +41037,8 @@ components:
         eddystone_instance: string
         eddystone_namespace: string
         eddystone_url: string
-        ibeacon_major: 0
-        ibeacon_minor: 0
+        ibeacon_major: 1
+        ibeacon_minor: 1
         ibeacon_uuid: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         mac: string
@@ -45658,12 +45899,25 @@ components:
         limit: 2
         next: /api/v1/sites/8aaba0aa-09cc-44bd-9709-33b98040550c/devices/events/search?ap=5c5b350e0001&end=1531855849.000&limit=2&start=1531776183.0
         results:
-        - last_reboot_time: 1531854327
-          text: Success
-          timestamp: 1531855849.226722
-          type: AP_CONNECT_STATUS
-          type_code: 2002
-        - timestamp: 1531854326
+        - chassis_mac: 60c78d939c0f
+          count: 1
+          device_type: switch
+          mac: 60c78d939c0f
+          model: EX4100-48MP
+          org_id: 9777c1a0-6ef6-11e6-8bbf-02e208b2d34f
+          port_id: ge-0/0/17
+          site_id: 978c48e6-6ef6-11e6-8bbf-02e208b2d34f
+          text: ifIndex 533, ifAdminStatus up(1), ifOperStatus down(2), ifName ge-0/0/17
+          timestamp: 1764236687.435
+          type: SW_PORT_DOWN
+          version: 23.4R2-S4.11
+        - ap: 5c5b35d0077b
+          device_type: ap
+          mac: 5c5b35d0077b
+          model: AP43
+          org_id: 9777c1a0-6ef6-11e6-8bbf-02e208b2d34f
+          site_id: 46fc665e-9706-4296-8fe2-78f42f2e67e4
+          timestamp: 1764235684.467825
           type: AP_CONFIGURED
         start: 1531776183
         total: 14
@@ -63665,16 +63919,9 @@ components:
           readOnly: true
           type: boolean
         ibeacon_major:
-          description: ibeacon major value used to filter assets
-          examples:
-          - 13
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_uuid:
-          description: ibeacon uuid used to filter assets
-          examples:
-          - f3f17139-704a-f03a-2786-0400279e37c3
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/ibeacon_uuid'
         id:
           $ref: '#/components/schemas/id'
         mfg_company_id:
@@ -63997,15 +64244,11 @@ components:
           readOnly: true
           type: boolean
         ibeacon_major:
-          description: Bluetooth tag major
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          description: Bluetooth tag minor
-          type: integer
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
-          description: Bluetooth tag UUID
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/ibeacon_uuid'
         id:
           $ref: '#/components/schemas/id'
         mac:
@@ -64504,21 +64747,9 @@ components:
           description: Frequency (msec) of data emit for iBeacon
           type: integer
         ibeacon_major:
-          default: 0
-          description: Major number for iBeacon
-          examples:
-          - 13
-          maximum: 65535
-          minimum: 0
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          default: 0
-          description: Minor number for iBeacon
-          examples:
-          - 138
-          maximum: 65535
-          minimum: 1
-          type: integer
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
           default: ''
           description: Optional, if not specified, the same UUID as the beacon will
@@ -67751,6 +67982,88 @@ components:
           default: false
           type: boolean
       type: object
+    device_event:
+      additionalProperties: false
+      properties:
+        ap:
+          description: (will be deprecated soon; please use mac instead) ap mac
+          type: string
+        ap_name:
+          description: (will be deprecated soon; please use device_name instead) ap
+            name
+          type: string
+        apfw:
+          type: string
+        audit_id:
+          $ref: '#/components/schemas/id'
+        bandwidth:
+          type: integer
+        channel:
+          type: integer
+        chassis_mac:
+          type: string
+        count:
+          type: integer
+        device_name:
+          description: Device name
+          type: string
+        device_type:
+          $ref: '#/components/schemas/device_type'
+        ev_type:
+          $ref: '#/components/schemas/webhook_device_events_event_ev_type'
+        ext_ip:
+          type: string
+        mac:
+          description: Device mac
+          type: string
+        model:
+          type: string
+        node:
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        port_id:
+          type: string
+        power:
+          type: integer
+        pre_bandwidth:
+          type: integer
+        pre_channel:
+          type: integer
+        pre_power:
+          type: integer
+        pre_usage:
+          type: integer
+        reason:
+          description: (optional) event reason
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        site_name:
+          description: Site name
+          type: string
+        text:
+          description: (optional) event description
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        type:
+          description: Event type
+          type: string
+        usage:
+          type: integer
+        version:
+          type: string
+      required:
+      - org_id
+      - timestamp
+      - type
+      type: object
+    device_events:
+      items:
+        $ref: '#/components/schemas/device_event'
+      type: array
+      uniqueItems: true
     device_gateway:
       additionalProperties: false
       description: Device gateway
@@ -69341,6 +69654,13 @@ components:
           - cradlepoint
           type: string
       type: object
+    event_severity:
+      enum:
+      - normal
+      - critical
+      - high
+      - warning
+      type: string
     events_client:
       additionalProperties: false
       description: Client events
@@ -69405,41 +69725,6 @@ components:
           - 62bbfb75-10d8-49d1-dec7-d2df91624287
           format: uuid
           type: string
-      type: object
-    events_device_ap:
-      additionalProperties: false
-      description: AP events
-      properties:
-        ap:
-          type: string
-        apfw:
-          type: string
-        count:
-          type: integer
-        device_type:
-          type: string
-        last_reboot_time:
-          type: integer
-        mac:
-          type: string
-        model:
-          type: string
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        port_id:
-          type: string
-        site_id:
-          $ref: '#/components/schemas/site_id'
-        text:
-          type: string
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        type:
-          type: string
-        type_code:
-          type: integer
-      required:
-      - timestamp
       type: object
     events_rogue:
       additionalProperties: false
@@ -71442,6 +71727,29 @@ components:
         wed:
           $ref: '#/components/schemas/hour'
       type: object
+    ibeacon_major:
+      examples:
+      - 1234
+      maximum: 65535
+      minimum: 1
+      type:
+      - integer
+      - 'null'
+    ibeacon_minor:
+      examples:
+      - 1234
+      maximum: 65535
+      minimum: 1
+      type:
+      - integer
+      - 'null'
+    ibeacon_uuid:
+      examples:
+      - f3f17139-704a-f03a-2786-0400279e37c3
+      format: uuid
+      type:
+      - string
+      - 'null'
     id:
       description: Unique ID of the object instance in the Mist Organization
       examples:
@@ -74631,8 +74939,18 @@ components:
     mxedge_event:
       additionalProperties: false
       properties:
+        audit_id:
+          $ref: '#/components/schemas/id'
         component:
-          description: Component like PS1, PS2
+          examples:
+          - PS1
+          - Fan1
+          type: string
+        device_type:
+          type: string
+        from_version:
+          type: string
+        mac:
           type: string
         mxcluster_id:
           examples:
@@ -74644,17 +74962,41 @@ components:
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+        package:
+          type: string
         service:
           examples:
           - tunterm
           type: string
+        severity:
+          $ref: '#/components/schemas/event_severity'
+        sys_info.usage:
+          $ref: '#/components/schemas/mxedge_event_sys_info'
+        text:
+          type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
+        to_version:
+          type: string
         type:
           examples:
           - ME_SERVICE_STOPPED
           type: string
       type: object
+    mxedge_event_sys_info:
+      additionalProperties: false
+      properties:
+        resource:
+          type: string
+        severity:
+          $ref: '#/components/schemas/event_severity'
+      type: object
+    mxedge_events:
+      items:
+        $ref: '#/components/schemas/mxedge_event'
+      minItems: 1
+      type: array
+      uniqueItems: true
     mxedge_for_site:
       default: any
       description: 'enum: `any`, `false`, `true`'
@@ -80568,7 +80910,7 @@ components:
         next:
           type: string
         results:
-          $ref: '#/components/schemas/response_device_events_search_results'
+          $ref: '#/components/schemas/device_events'
         start:
           type: integer
         total:
@@ -80580,11 +80922,6 @@ components:
       - limit
       - total
       type: object
-    response_device_events_search_results:
-      items:
-        $ref: '#/components/schemas/events_device_ap'
-      type: array
-      uniqueItems: true
     response_device_metrics:
       additionalProperties: false
       properties:
@@ -80781,7 +81118,7 @@ components:
         next:
           type: string
         results:
-          $ref: '#/components/schemas/response_events_devices_results'
+          $ref: '#/components/schemas/device_events'
         start:
           type: integer
         total:
@@ -80793,11 +81130,6 @@ components:
       - start
       - total
       type: object
-    response_events_devices_results:
-      items:
-        $ref: '#/components/schemas/events_device_ap'
-      type: array
-      uniqueItems: true
     response_events_fastroam:
       additionalProperties: false
       properties:
@@ -81599,16 +81931,12 @@ components:
           - 3
           type: integer
         results:
-          $ref: '#/components/schemas/response_mxedge_events_search_results'
+          $ref: '#/components/schemas/mxedge_events'
         start:
           examples:
           - 1694622179
           type: integer
       type: object
-    response_mxedge_events_search_results:
-      items:
-        $ref: '#/components/schemas/mxedge_event'
-      type: array
     response_mxedge_search:
       additionalProperties: false
       properties:
@@ -89974,27 +90302,11 @@ components:
           - integer
           - 'null'
         ibeacon_major:
-          examples:
-          - 13
-          readOnly: true
-          type:
-          - integer
-          - 'null'
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          examples:
-          - 138
-          readOnly: true
-          type:
-          - integer
-          - 'null'
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
-          examples:
-          - f3f17139-704a-f03a-2786-0400279e37c3
-          format: uuid
-          readOnly: true
-          type:
-          - string
-          - 'null'
+          $ref: '#/components/schemas/ibeacon_uuid'
         major:
           examples:
           - 12345
@@ -90647,18 +90959,11 @@ components:
           - https://www.abc.com
           type: string
         ibeacon_major:
-          examples:
-          - 12
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          examples:
-          - 138
-          type: integer
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
-          examples:
-          - f3f17139-704a-f03a-2786-0400279e37c3
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/ibeacon_uuid'
         last_seen:
           $ref: '#/components/schemas/last_seen'
         mac:
@@ -99796,13 +100101,14 @@ components:
       readOnly: true
       type: array
     webhook_alarms:
-      description: "**N.B.**: Fields like `aps`, `bssids`, `ssids` are event specific.\
-        \ They are relevant to this event type ( rogue-ap-detected). For a different\
-        \ event type, different fields may be sent. These don\u2019t contain all affected\
-        \ entities and are representative samples of entities (capped at 10). For\
-        \ marvis action related events, we expose `details` to include more event\
-        \ specific details.\n\nEvents specific fields for other alarm event type can\
-        \ be found with API [List Alarm Definitions#](/#operations/listAlarmDefinitions),\
+      additionalProperties: false
+      description: "Sample of the `alarms` webhook payload.\n\n**N.B.**: Fields like\
+        \ `aps`, `bssids`, `ssids` are event specific. They are relevant to this event\
+        \ type ( rogue-ap-detected). For a different event type, different fields\
+        \ may be sent. These don\u2019t contain all affected entities and are representative\
+        \ samples of entities (capped at 10). For marvis action related events, we\
+        \ expose `details` to include more event specific details.\n\nEvents specific\
+        \ fields for other alarm event type can be found with API [List Alarm Definitions#](/#operations/listAlarmDefinitions),\
         \ under \"fields\" array of /alarm_defs response object."
       properties:
         events:
@@ -99824,6 +100130,112 @@ components:
       description: 'enum: `alarms`'
       enum:
       - alarms
+      type: string
+    webhook_asset_raw_rssi:
+      additionalProperties: false
+      description: "Sample of the `asset-raw-rssi` webhook payload.\n\n\nThis webhook\
+        \ topic provides raw data from packets emitted by named and filtered assets.\n\
+        \n\nRaw data webhooks are a special subset of webhooks that provide insight\
+        \ into raw data packets emitted by a client,\nidentified by their advertising\
+        \ MAC address (assets, discovered ble, connected wifi, unconnected wifi).\
+        \  \nThe data that client raw data webhooks encompasses are reporting AP information,\
+        \ RSSI Data, and any special packets/telemetry\npackets that the client may\
+        \ emit.\n\nNote that client raw webhooks are the raw data coming from the\
+        \ client and do not contain the X,Y location data of the client.\nIn order\
+        \ to get the location data for a client please see our location webhooks.\
+        \ \nClients can be identified uniquely across these client raw data topics\
+        \ and location webhook topic using MAC address as the Unique identifier (client\
+        \ identifier)."
+      properties:
+        events:
+          $ref: '#/components/schemas/webhook_asset_raw_rssi_events'
+        topic:
+          $ref: '#/components/schemas/webhook_asset_raw_rssi_topic'
+      required:
+      - events
+      - topic
+      type: object
+    webhook_asset_raw_rssi_event:
+      additionalProperties: false
+      properties:
+        ap_loc:
+          $ref: '#/components/schemas/webhook_asset_raw_rssi_event_ap_loc'
+        beam:
+          description: antenna index, clock-wise starting from the LED
+          maximum: 9
+          minimum: 1
+          type: integer
+        device_id:
+          $ref: '#/components/schemas/id'
+        ibeacon_major:
+          $ref: '#/components/schemas/ibeacon_major'
+        ibeacon_minor:
+          $ref: '#/components/schemas/ibeacon_minor'
+        ibeacon_uuid:
+          $ref: '#/components/schemas/ibeacon_uuid'
+        is_asset:
+          type: boolean
+        mac:
+          description: MAC of the asset/ beacon
+          type: string
+        map_id:
+          $ref: '#/components/schemas/id'
+        mfg_company_id:
+          description: optional, BLE manufacturing company ID
+          type:
+          - integer
+          - 'null'
+        mfg_data:
+          description: "optional, BLE manufacturing data in hex byte-string format\
+            \ (ie \u201C112233AABBCC\u201D)"
+          type:
+          - string
+          - 'null'
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        rssi:
+          type: integer
+        service_packets:
+          $ref: '#/components/schemas/webhook_asset_raw_rssi_event_service_packets'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+      type: object
+    webhook_asset_raw_rssi_event_ap_loc:
+      description: optional, coordinates (if any) of reporting AP (updated once in
+        60s per client)
+      items:
+        type: number
+      type: array
+    webhook_asset_raw_rssi_event_service_packet:
+      additionalProperties: false
+      properties:
+        service_data:
+          description: optional, data from service data
+          type:
+          - string
+          - 'null'
+        service_uuid:
+          description: optional, UUID from service data
+          type:
+          - string
+          - 'null'
+      type: object
+    webhook_asset_raw_rssi_event_service_packets:
+      items:
+        $ref: '#/components/schemas/webhook_asset_raw_rssi_event_service_packet'
+      type: array
+    webhook_asset_raw_rssi_events:
+      items:
+        $ref: '#/components/schemas/webhook_asset_raw_rssi_event'
+      minItems: 1
+      type: array
+      uniqueItems: true
+    webhook_asset_raw_rssi_topic:
+      description: 'enum: `asset-raw-rssi`'
+      enum:
+      - asset-raw-rssi
       type: string
     webhook_assetfilter_ids:
       description: Only if `type`==`asset-raw-rssi`. List of ids to associated asset
@@ -99863,7 +100275,8 @@ components:
       - timestamp
       type: object
     webhook_audits:
-      description: audit webhook sample
+      additionalProperties: false
+      description: Sample of the `audits` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_audits_events'
@@ -99885,6 +100298,8 @@ components:
       - audits
       type: string
     webhook_client_info:
+      additionalProperties: false
+      description: Sample of the `client-info` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_client_info_events'
@@ -99922,7 +100337,8 @@ components:
       - client-info
       type: string
     webhook_client_join:
-      description: Client join webhook sample
+      additionalProperties: false
+      description: Sample of the `client-join` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_client_join_events'
@@ -100004,6 +100420,8 @@ components:
       - client-join
       type: string
     webhook_client_latency:
+      additionalProperties: false
+      description: Sample of the `client-latency` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_client_latency_events'
@@ -100066,7 +100484,8 @@ components:
       - client-latency
       type: string
     webhook_client_sessions:
-      description: Client session webhook sample
+      additionalProperties: false
+      description: Sample of the `client-sessions` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_client_sessions_events'
@@ -100278,66 +100697,16 @@ components:
       - audits
       type: string
     webhook_device_events:
-      description: Device event webhook sample
+      additionalProperties: false
+      description: Sample of the `device-events` webhook payload.
       properties:
         events:
-          $ref: '#/components/schemas/webhook_device_events_events'
+          $ref: '#/components/schemas/device_events'
         topic:
           $ref: '#/components/schemas/webhook_device_events_topic'
       required:
       - events
       - topic
-      type: object
-    webhook_device_events_event:
-      additionalProperties: false
-      properties:
-        ap:
-          description: (will be deprecated soon; please use mac instead) ap mac
-          type: string
-        ap_name:
-          description: (will be deprecated soon; please use device_name instead) ap
-            name
-          type: string
-        audit_id:
-          description: (optional) audit id
-          format: uuid
-          type: string
-        device_name:
-          description: Device name
-          type: string
-        device_type:
-          $ref: '#/components/schemas/device_type'
-        ev_type:
-          $ref: '#/components/schemas/webhook_device_events_event_ev_type'
-        mac:
-          description: Device mac
-          type: string
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        reason:
-          description: (optional) event reason
-          type: string
-        site_id:
-          $ref: '#/components/schemas/site_id'
-        site_name:
-          description: Site name
-          type: string
-        text:
-          description: (optional) event description
-          type: string
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        type:
-          description: Event type
-          type: string
-      required:
-      - device_name
-      - device_type
-      - ev_type
-      - mac
-      - org_id
-      - timestamp
-      - type
       type: object
     webhook_device_events_event_ev_type:
       description: '(optional) event advisory. enum: `notice`, `warn`'
@@ -100345,19 +100714,13 @@ components:
       - notice
       - warn
       type: string
-    webhook_device_events_events:
-      description: List of events
-      items:
-        $ref: '#/components/schemas/webhook_device_events_event'
-      minItems: 1
-      type: array
-      uniqueItems: true
     webhook_device_events_topic:
       enum:
       - device_events
       type: string
     webhook_device_updowns:
-      description: Device up/down webhook sample
+      additionalProperties: false
+      description: Sample of the `device-updowns` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_device_updowns_events'
@@ -100411,6 +100774,8 @@ components:
       - device-updowns
       type: string
     webhook_discovered_raw_rssi:
+      additionalProperties: false
+      description: Sample of the `discovered-raw-rssi` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_discovered_raw_rssi_events'
@@ -100432,12 +100797,11 @@ components:
           format: uuid
           type: string
         ibeacon_major:
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          type: integer
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/ibeacon_uuid'
         is_asset:
           type: boolean
         mac:
@@ -100486,7 +100850,8 @@ components:
       - asset-raw-rssi
       type: string
     webhook_guest_authorizations:
-      description: guest-authorizations webhook sample
+      additionalProperties: false
+      description: Sample of the `guest-authorizations` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_guest_authorizations_events'
@@ -100601,7 +100966,7 @@ components:
       - guest-authorizations
       type: string
     webhook_location:
-      description: location webhook sample
+      description: Sample of the `location` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_events'
@@ -100612,7 +100977,8 @@ components:
       - topic
       type: object
     webhook_location_asset:
-      description: Location Asset sample
+      additionalProperties: false
+      description: Sample of the `location_asset` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_asset_events'
@@ -100642,18 +101008,11 @@ components:
           - https://www.abc.com
           type: string
         ibeacon_major:
-          examples:
-          - 13
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          examples:
-          - 138
-          type: integer
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
-          examples:
-          - f3f17139-704a-f03a-2786-0400279e37c3
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/ibeacon_uuid'
         mac:
           examples:
           - 7fc2936fd243
@@ -100704,7 +101063,8 @@ components:
       - location_asset
       type: string
     webhook_location_centrak:
-      description: location webhook sample
+      additionalProperties: false
+      description: Sample of the `location-centrak` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_centrak_events'
@@ -100761,10 +101121,11 @@ components:
       uniqueItems: true
     webhook_location_centrak_topic:
       enum:
-      - location_centrak
+      - location-centrak
       type: string
     webhook_location_client:
-      description: Location Client sample
+      additionalProperties: false
+      description: Sample of the `location-client` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_client_events'
@@ -100829,12 +101190,11 @@ components:
         eddystone_url_url:
           type: string
         ibeacon_major:
-          type: integer
+          $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
-          type: integer
+          $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/ibeacon_uuid'
         id:
           $ref: '#/components/schemas/id'
         mac:
@@ -100886,7 +101246,8 @@ components:
       type: array
       uniqueItems: true
     webhook_location_sdk:
-      description: Location SDK sample
+      additionalProperties: false
+      description: Sample of the `location-sdk` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_sdk_events'
@@ -100944,7 +101305,8 @@ components:
       - location
       type: string
     webhook_location_unclient:
-      description: Location Unconnected Client sample
+      additionalProperties: false
+      description: Sample of the `location-unclient` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_location_unclient_events'
@@ -100997,8 +101359,25 @@ components:
       enum:
       - location_unclient
       type: string
+    webhook_mxedge_event_topic:
+      enum:
+      - mxedge-events
+      type: string
+    webhook_mxedge_events:
+      additionalProperties: false
+      description: Sample of the `mxedge-events` webhook payload.
+      properties:
+        events:
+          $ref: '#/components/schemas/mxedge_events'
+        topic:
+          $ref: '#/components/schemas/webhook_mxedge_event_topic'
+      required:
+      - events
+      - topic
+      type: object
     webhook_nac_accounting:
-      description: nac-accounting webhook sample
+      additionalProperties: false
+      description: Sample of the `nac-accounting` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_nac_accounting_events'
@@ -101076,6 +101455,8 @@ components:
       - nac-accounting
       type: string
     webhook_nac_events:
+      additionalProperties: false
+      description: Sample of the `nac-events` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_nac_events_events'
@@ -101181,7 +101562,8 @@ components:
       - COMPLIANCE-VIOLATION
       type: string
     webhook_occupancy_alerts:
-      description: Occupancy alert webhook sample
+      additionalProperties: false
+      description: Sample of the `occupancy-alerts` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_occupancy_alerts_events'
@@ -101259,7 +101641,12 @@ components:
       - occupancy-alerts
       type: string
     webhook_ping:
-      description: Ping webhook
+      additionalProperties: false
+      description: Sample of the `ping` webhook payload.\n\nThe `ping` webhook can
+        be manually sent with the following API calls:\n- for a Site level webhook
+        with the [Ping Site Webhook](/#operations/pingOrgWebhook) endpoint\n- for
+        an Org level webhook with the [Ping Org Webhook](/#operations/pingOrgWebhook)
+        endpoint
       properties:
         events:
           $ref: '#/components/schemas/webhook_ping_events'
@@ -101297,6 +101684,8 @@ components:
       - ping
       type: string
     webhook_sdkclient_scan_data:
+      additionalProperties: false
+      description: Sample of the `sdkclient-scan-data` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_sdkclient_scan_data_events'
@@ -101387,11 +101776,13 @@ components:
       uniqueItems: true
     webhook_sdkclient_scan_data_topic:
       default: sdkclient_scan_data
-      description: 'enum: `sdkclient_scan_data`'
+      description: 'enum: `sdkclient-scan-data`'
       enum:
-      - sdkclient_scan_data
+      - sdkclient-scan-data
       type: string
     webhook_site_sle:
+      additionalProperties: false
+      description: Sample of the `site-sle` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_site_sle_events'
@@ -101453,8 +101844,173 @@ components:
       - oauth2
       - splunk
       type: string
+    webhook_wifi_conn_raw:
+      additionalProperties: false
+      description: "Sample of the `wifi-conn-raw` webhook payload.\n\n\nThis webhook\
+        \ topic provides raw data from packets emitted by connected devices.\n\n\n\
+        Raw data webhooks are a special subset of webhooks that provide insight into\
+        \ raw data packets emitted by a client,\nidentified by their advertising MAC\
+        \ address (assets, discovered ble, connected wifi, unconnected wifi).  \n\
+        The data that client raw data webhooks encompasses are reporting AP information,\
+        \ RSSI Data, and any special packets/telemetry\npackets that the client may\
+        \ emit.\n\nNote that client raw webhooks are the raw data coming from the\
+        \ client and do not contain the X,Y location data of the client.\nIn order\
+        \ to get the location data for a client please see our location webhooks.\
+        \ \nClients can be identified uniquely across these client raw data topics\
+        \ and location webhook topic using MAC address as the Unique identifier (client\
+        \ identifier)."
+      properties:
+        events:
+          $ref: '#/components/schemas/webhook_wifi_conn_raw_events'
+        topic:
+          $ref: '#/components/schemas/webhook_wifi_conn_raw_topic'
+      required:
+      - events
+      - topic
+      type: object
+    webhook_wifi_conn_raw_event:
+      additionalProperties: false
+      properties:
+        ap_id:
+          type: string
+        ap_loc:
+          $ref: '#/components/schemas/webhook_wifi_conn_raw_event_ap_loc'
+        client_id:
+          type: string
+        connected_site:
+          type: boolean
+        extended_info_list:
+          $ref: '#/components/schemas/webhook_wifi_conn_raw_event_extended_info_list'
+        map_id:
+          $ref: '#/components/schemas/id'
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        packets:
+          $ref: '#/components/schemas/webhook_wifi_conn_raw_event_packets'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+      type: object
+    webhook_wifi_conn_raw_event_ap_loc:
+      description: optional, coordinates (if any) of reporting AP (updated once in
+        60s per client)
+      items:
+        type: number
+      type: array
+    webhook_wifi_conn_raw_event_extended_info:
+      additionalProperties: false
+      properties:
+        frame_ctrl:
+          type: integer
+        payload:
+          type: string
+        sequence_ctrl:
+          type: integer
+      type: object
+    webhook_wifi_conn_raw_event_extended_info_list:
+      description: optional, list of specific telemetry packets emited by certain
+        wifi tags (Eg. Centrak)
+      items:
+        $ref: '#/components/schemas/webhook_wifi_conn_raw_event_extended_info'
+      type: array
+    webhook_wifi_conn_raw_event_packet:
+      additionalProperties: false
+      properties:
+        band:
+          type: string
+        rssi:
+          type: integer
+      type: object
+    webhook_wifi_conn_raw_event_packets:
+      items:
+        $ref: '#/components/schemas/webhook_wifi_conn_raw_event_packet'
+      type: array
+    webhook_wifi_conn_raw_events:
+      items:
+        $ref: '#/components/schemas/webhook_wifi_conn_raw_event'
+      minItems: 1
+      type: array
+      uniqueItems: true
+    webhook_wifi_conn_raw_topic:
+      description: 'enum: `wifi-conn-raw`'
+      enum:
+      - wifi-conn-raw
+      type: string
+    webhook_wifi_unconn_raw:
+      additionalProperties: false
+      description: "Sample of the `wifi-unconn-raw` webhook payload.\n\n\nThis webhook\
+        \ topic provides raw data from packets emitted by unconnected devices.\n\n\
+        \nRaw data webhooks are a special subset of webhooks that provide insight\
+        \ into raw data packets emitted by a client,\nidentified by their advertising\
+        \ MAC address (assets, discovered ble, connected wifi, unconnected wifi).\
+        \  \nThe data that client raw data webhooks encompasses are reporting AP information,\
+        \ RSSI Data, and any special packets/telemetry\npackets that the client may\
+        \ emit.\n\nNote that client raw webhooks are the raw data coming from the\
+        \ client and do not contain the X,Y location data of the client.\nIn order\
+        \ to get the location data for a client please see our location webhooks.\
+        \ \nClients can be identified uniquely across these client raw data topics\
+        \ and location webhook topic using MAC address as the Unique identifier (client\
+        \ identifier)."
+      properties:
+        events:
+          $ref: '#/components/schemas/webhook_wifi_unconn_raw_events'
+        topic:
+          $ref: '#/components/schemas/webhook_wifi_unconn_raw_topic'
+      required:
+      - events
+      - topic
+      type: object
+    webhook_wifi_unconn_raw_event:
+      additionalProperties: false
+      properties:
+        ap_id:
+          type: string
+        ap_loc:
+          $ref: '#/components/schemas/webhook_wifi_unconn_raw_event_ap_loc'
+        client_id:
+          type: string
+        connected_site:
+          type: boolean
+        map_id:
+          $ref: '#/components/schemas/id'
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        packets:
+          $ref: '#/components/schemas/webhook_wifi_unconn_raw_event_packets'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+      type: object
+    webhook_wifi_unconn_raw_event_ap_loc:
+      description: optional, coordinates (if any) of reporting AP (updated once in
+        60s per client)
+      items:
+        type: number
+      type: array
+    webhook_wifi_unconn_raw_event_packet:
+      additionalProperties: false
+      properties:
+        band:
+          type: string
+        rssi:
+          type: integer
+      type: object
+    webhook_wifi_unconn_raw_event_packets:
+      items:
+        $ref: '#/components/schemas/webhook_wifi_unconn_raw_event_packet'
+      type: array
+    webhook_wifi_unconn_raw_events:
+      items:
+        $ref: '#/components/schemas/webhook_wifi_unconn_raw_event'
+      minItems: 1
+      type: array
+      uniqueItems: true
+    webhook_wifi_unconn_raw_topic:
+      description: 'enum: `wifi-unconn-raw`'
+      enum:
+      - wifi-unconn-raw
+      type: string
     webhook_zone:
-      description: Zone webhook sample
+      additionalProperties: false
+      description: Sample of the `zone` webhook payload.
       properties:
         events:
           $ref: '#/components/schemas/webhook_zone_events'
