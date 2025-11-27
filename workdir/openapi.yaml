@@ -60534,8 +60534,7 @@ components:
           type: string
         zdx_org_id:
           description: For ZDX Account only, ZDX organization id
-          examples:
-          - '123456'
+          example: '123456'
           type: string
       type: object
     account_oauth_info_account_region:
@@ -64874,28 +64873,22 @@ components:
           - 0.017364305
           type: number
         site_wan_avg_download_mbps:
-          examples:
-          - 3.0566701889e-07
+          example: 3.0566701889e-07
           type: number
         site_wan_avg_upload_mbps:
-          examples:
-          - 5.566701889e-08
+          example: 5.566701889e-08
           type: number
         site_wan_download_mbps:
-          examples:
-          - 8.0566701889e-07
+          example: 8.0566701889e-07
           type: number
         site_wan_jitter:
-          examples:
-          - 0.7875519659784105
+          example: 0.7875519659784105
           type: number
         site_wan_rtt:
-          examples:
-          - 15.094849904378256
+          example: 15.094849904378256
           type: number
         site_wan_upload_mbps:
-          examples:
-          - 2.0566701889e-07
+          example: 2.0566701889e-07
           type: number
         wan_avg_download_mbps:
           examples:
@@ -66999,7 +66992,7 @@ components:
         description:
           type: string
         example:
-          $ref: '#/components/schemas/const_insight_metrics_property_examples'
+          $ref: '#/components/schemas/const_insight_metrics_property_example_any_of'
         intervals:
           $ref: '#/components/schemas/const_insight_metrics_property_intervals'
         keys:
@@ -67030,6 +67023,10 @@ components:
       - type: string
       - type: boolean
       - type: 'null'
+    const_insight_metrics_property_example_any_of:
+      anyOf:
+      - $ref: '#/components/schemas/const_insight_metrics_property_examples'
+      - $ref: '#/components/schemas/const_insight_metrics_property_examples_object'
     const_insight_metrics_property_examples:
       items:
         $ref: '#/components/schemas/const_insight_metrics_property_example'
@@ -91029,8 +91026,7 @@ components:
           - Orange
           type: string
         display_name:
-          examples:
-          - mdm-4d0e073b
+          example: mdm-4d0e073b
           type: string
         imei:
           examples:
@@ -91053,12 +91049,10 @@ components:
           - wan
           type: string
         mtu:
-          examples:
-          - 1500
+          example: 1500
           type: integer
         port_parent:
-          examples:
-          - mdm
+          example: mdm
           type: string
         rsrp:
           examples:
@@ -91700,8 +91694,7 @@ components:
           - 0
           type: integer
         spu_uptime:
-          examples:
-          - 0
+          example: 0
           type: integer
         spu_valid_session:
           examples:
@@ -92601,8 +92594,7 @@ components:
           type: integer
         num_discovered_assets:
           description: Number of discoveredassets
-          examples:
-          - 0
+          example: 0
           type: integer
         num_sdkclients:
           description: Number of sdk clients
@@ -92611,8 +92603,7 @@ components:
           type: integer
         num_unconnected_clients:
           description: Number of unconnected Wi-Fi clients
-          examples:
-          - 80
+          example: 80
           type: integer
         occupancy_limit:
           examples:
@@ -94093,8 +94084,7 @@ components:
           type: integer
         num_discovered_assets:
           description: Number of discoveredassets
-          examples:
-          - 0
+          example: 0
           type: integer
         num_sdkclients:
           description: Number of sdk clients
@@ -94103,8 +94093,7 @@ components:
           type: integer
         num_unconnected_clients:
           description: Number of unconnected Wi-Fi clients
-          examples:
-          - 80
+          example: 80
           type: integer
         occupancy_limit:
           examples:
