@@ -67038,6 +67038,11 @@ components:
       items:
         $ref: '#/components/schemas/const_insight_metrics_property_example'
       type: array
+    const_insight_metrics_property_examples_object:
+      additionalProperties:
+        $ref: '#/components/schemas/const_insight_metrics_property_examples'
+      description: Object containing named fields, each with array of example values
+      type: object
     const_insight_metrics_property_interval:
       additionalProperties: false
       properties:
