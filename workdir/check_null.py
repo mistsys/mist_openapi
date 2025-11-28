@@ -30,7 +30,7 @@ for schema_name, schema in schemas.items():
         schema.pop("nullable")
     elif schema.get("nullable") is True:
             print(f"Setting nullable to OAS3.1 format: {schema_name}")
-            schema["type"] = [schema["type"], 'null']
+            schema["type"] = [schema["type"], "null"]
             schema.pop("nullable")
 data["components"]["schemas"] = schemas
 
