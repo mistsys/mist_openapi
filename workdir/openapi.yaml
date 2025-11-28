@@ -67305,6 +67305,7 @@ components:
       - type: string
       - type: boolean
       - type: 'null'
+      - type: object
     const_insight_metrics_property_example_any_of:
       anyOf:
       - $ref: '#/components/schemas/const_insight_metrics_property_examples'
@@ -67359,14 +67360,26 @@ components:
       description: Property key is the duration (e.g. 1d, 1w, ...)
       type: object
     const_insight_metrics_property_scope:
-      description: 'enum: `ap`, `client`, `device`, `mxedge`, `site`, `switch`'
+      description: 'enum: `ap`, `client`, `device`, `gateway`, `map`, `msp`, `mxcluster`,
+        `mxedge`, `org`, `otherdevice`, `rssizone`, `sdkclient`, `site`, `switch`,
+        `wlan`, `zone`'
       enum:
       - ap
       - client
       - device
+      - gateway
+      - map
+      - msp
+      - mxcluster
       - mxedge
+      - org
+      - otherdevice
+      - rssizone
+      - sdkclient
       - site
       - switch
+      - wlan
+      - zone
       type: string
     const_insight_metrics_property_scopes:
       items:
