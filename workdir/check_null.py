@@ -32,7 +32,6 @@ for schema_name, schema in schemas.items():
             print(f"Setting nullable to OAS3.1 format: {schema_name}")
             schema["type"] = [schema["type"], 'null']
             schema.pop("nullable")
-        
 data["components"]["schemas"] = schemas
 
 with open(SPEC_FILE, "w", encoding="utf-8") as f:
