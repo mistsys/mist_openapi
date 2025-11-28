@@ -6,8 +6,6 @@ add missing response errors
 import yaml
 import json
 
-ORDER = ["openapi", "info", "servers", "security", "tags", "paths", "webhooks", "components"]
-
 FILENAME = "openapi"
 SRC_FILE = f"./{FILENAME}.yaml"
 
@@ -31,7 +29,7 @@ def open_src():
     oas = ""
     display_mess("Opening file")
     try:
-        with open(SRC_FILE, "r") as oas_in_file:
+        with open(SRC_FILE, "r" , encoding="utf-8") as oas_in_file:
             oas = yaml.safe_load(oas_in_file)
         display_success()
         return oas
@@ -42,7 +40,7 @@ def open_src():
 def save_json(oas, filename):
     display_mess(f"Saving JSON to {filename}")
     try:
-        with open(filename, "w") as oas_out_file:
+        with open(filename, "w", encoding="utf-8") as oas_out_file:
             json.dump(oas, oas_out_file)
         display_success()
     except:
@@ -52,9 +50,8 @@ def save_json(oas, filename):
 def save_yaml(oas):
     display_mess(f"Saving YAML to {SRC_FILE}")
     try:
-        with open(SRC_FILE, "w") as oas_out_file:
-            for item in ORDER:
-                yaml.dump({item: oas[item]}, oas_out_file, Dumper=NoAliasYamlDumper, default_flow_style=False)
+        with open(SRC_FILE, "w", encoding="utf-8") as oas_out_file:
+            yaml.dump(oas, oas_out_file, sort_keys=False)
         display_success()
     except:
         display_failure()

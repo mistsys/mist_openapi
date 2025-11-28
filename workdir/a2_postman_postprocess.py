@@ -1,4 +1,3 @@
-from dis import dis
 import json
 import yaml
 
@@ -21,7 +20,7 @@ def add_usage():
     display_mess("Loading Postman collection")
     try:
         postman_json = {}
-        with open(f"{POSTMAN_FILE}.json", 'r') as postman_data:
+        with open(f"{POSTMAN_FILE}.json", 'r', encoding="utf-8") as postman_data:
             postman_json = json.load(postman_data)
         display_success()
     except:
@@ -31,7 +30,7 @@ def add_usage():
     display_mess("Loading Postman usage")
     try:
         postman_usage_json = {}
-        with open(f"{POSTMAN_USAGE_FILE}", 'r') as postman_usage_data:
+        with open(f"{POSTMAN_USAGE_FILE}", 'r', encoding="utf-8") as postman_usage_data:
             postman_usage_json = json.load(postman_usage_data)
         display_success()
     except:
@@ -44,7 +43,7 @@ def add_usage():
 
     display_mess("Saving Postman collection with usage")
     try:
-        with open(f"{POSTMAN_FILE}.v2.json", 'w') as postman_data:
+        with open(f"{POSTMAN_FILE}.v2.json", 'w', encoding="utf-8") as postman_data:
             json.dump(postman_json, postman_data)
         display_success()
     except:
@@ -57,7 +56,7 @@ def create_env():
 
     display_mess("Loading OAS data")
     try:
-        with open(OAS_FILE, 'r') as oas_data:
+        with open(OAS_FILE, 'r', encoding="utf-8") as oas_data:
             oas_json = yaml.safe_load(oas_data)
         display_success()
     except:
@@ -90,7 +89,7 @@ def create_env():
 
     display_mess("Saving Postman environment")
     try:
-        with open(POSTMAN_ENV_FILE, "w") as f:
+        with open(POSTMAN_ENV_FILE, "w", encoding="utf-8") as f:
             json.dump(post_params, f)
         display_success()
     except:

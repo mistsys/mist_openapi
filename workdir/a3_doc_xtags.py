@@ -65,7 +65,7 @@ def register_tags():
             print(f"UNUSED TAG: {tag}")
         
 
-with open(FILE_IN, "r") as f:
+with open(FILE_IN, "r", encoding="utf-8") as f:
     data = yaml.load(f, Loader=yaml.loader.SafeLoader)
     PATHS = data.get("paths", {})
     TAGS = data.get("tags", [])
@@ -79,17 +79,9 @@ LINK_RE = r"\$e/[^^/]*/"
 data_str=re.sub(LINK_RE, "/#operations/", data_str)
 data = json.loads(data_str)
 
-with open(FILE_OUT_YAML, "w") as f:
-    yaml.dump({"openapi": data["openapi"]}, f)
-    yaml.dump({"info": data["info"]}, f)
-    yaml.dump({"servers": data["servers"]}, f)
-    yaml.dump({"security": data["security"]}, f)
-    yaml.dump({"tags": data["tags"]}, f)
-    yaml.dump({"paths": data["paths"]}, f)
-    yaml.dump({"webhooks": data["webhooks"]}, f)
-    yaml.dump({"components": data["components"]}, f)
-    yaml.dump({"x-tagGroups": GROUPS}, f)
+with open(FILE_OUT_YAML, "w", encoding="utf-8") as f:
+    yaml.dump(data, f, sort_keys=False)
 
 
-with open(FILE_OUT_JSON, "w") as oas_out_file:
+with open(FILE_OUT_JSON, "w", encoding="utf-8") as oas_out_file:
     json.dump(data, oas_out_file)
