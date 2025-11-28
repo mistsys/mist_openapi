@@ -6,7 +6,7 @@ add missing response errors
 import yaml
 import json
 
-ORDER = ["openapi", "info", "servers", "security", "tags", "paths", "components"]
+ORDER = ["openapi", "info", "servers", "security", "tags", "paths", "webhooks", "components"]
 
 FILENAME = "openapi"
 SRC_FILE = f"./{FILENAME}.yaml"

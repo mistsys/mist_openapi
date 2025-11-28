@@ -86,6 +86,7 @@ with open(FILE_OUT_YAML, "w") as f:
     yaml.dump({"security": data["security"]}, f)
     yaml.dump({"tags": data["tags"]}, f)
     yaml.dump({"paths": data["paths"]}, f)
+    yaml.dump({"webhooks": data["webhooks"]}, f)
     yaml.dump({"components": data["components"]}, f)
     yaml.dump({"x-tagGroups": GROUPS}, f)
 

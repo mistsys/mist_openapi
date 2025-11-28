@@ -30,10 +30,4 @@ for n, s in schemas.items():
 data["components"]["schemas"] = schemas
 
 with open(SPEC_FILE, "w") as f:
-    yaml.dump({"openapi": data["openapi"]}, f)
-    yaml.dump({"info": data["info"]}, f)
-    yaml.dump({"servers": data["servers"]}, f)
-    yaml.dump({"security": data["security"]}, f)
-    yaml.dump({"tags": data["tags"]}, f)
-    yaml.dump({"paths": data["paths"]}, f)
-    yaml.dump({"components": data["components"]}, f)
+    yaml.dump(data, f, sort_keys=False)
