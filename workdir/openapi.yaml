@@ -67306,6 +67306,7 @@ components:
       - type: boolean
       - type: 'null'
       - type: object
+        additionalProperties: true
     const_insight_metrics_property_example_any_of:
       anyOf:
       - $ref: '#/components/schemas/const_insight_metrics_property_examples'
@@ -95720,11 +95721,11 @@ components:
       type: string
     switch_port_usage_mac_limit:
       anyOf:
-      - maximum: 16383
+      - default: 0
+        maximum: 16383
         minimum: 0
-        type: integer
+        type: integer      
       - type: string
-      default: 0
       description: Only if `mode`!=`dynamic`, max number of mac addresses, default
         is 0 for unlimited, otherwise range is 1 to 16383 (upper bound constrained
         by platform)
@@ -103208,12 +103209,12 @@ components:
       - object
       - 'null'
     wlan_dynamic_vlan_default_vlan_id:
-      default: 999
       description: "VLAN ID, VLAN range or variable to use when there\u2019s no match\
         \ from RADIUS"
       oneOf:
       - type: string
-      - maximum: 4094
+      - default: 999
+        maximum: 4094
         minimum: 1
         type: integer
     wlan_dynamic_vlan_default_vlan_id_deprecated:
