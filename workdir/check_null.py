@@ -42,5 +42,5 @@ with open(SPEC_FILE, "w", encoding="utf-8") as f:
     yaml.dump({"security": data["security"]}, f)
     yaml.dump({"tags": data["tags"]}, f)
     yaml.dump({"paths": data["paths"]}, f)
-    yaml.dump({"paths": data["webhooks"]}, f)
+    yaml.dump({"webhooks": data["webhooks"]}, f)
     yaml.dump({"components": data["components"]}, f)
