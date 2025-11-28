@@ -25,7 +25,7 @@ for schema_name, schema in schemas.items():
         print(f"Setting nullable to OAS3.1 format: {schema_name}")
         schema.pop("nullable")
     elif schema.get("oneOf") and schema.get("nullable") is True:
-        schema["oneOf"].append({"type": 'null'})
+        schema["oneOf"].append({"type": "null"})
         print(f"Setting nullable to OAS3.1 format: {schema_name}")
         schema.pop("nullable")
     elif schema.get("nullable") is True:
