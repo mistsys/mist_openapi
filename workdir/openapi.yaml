@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.1**
+  description: '> Version: **2511.1.2**
 
     >
 
-    > Date: **November 26, 2025**
+    > Date: **November 28, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.1
+  version: 2511.1.2
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -95724,7 +95724,7 @@ components:
       - default: 0
         maximum: 16383
         minimum: 0
-        type: integer      
+        type: integer
       - type: string
       description: Only if `mode`!=`dynamic`, max number of mac addresses, default
         is 0 for unlimited, otherwise range is 1 to 16383 (upper bound constrained

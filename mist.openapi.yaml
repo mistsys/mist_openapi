@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.1**
+  description: '> Version: **2511.1.2**
 
     >
 
-    > Date: **November 26, 2025**
+    > Date: **November 28, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.1
+  version: 2511.1.2
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -67309,6 +67309,8 @@ components:
       - type: string
       - type: boolean
       - type: 'null'
+      - type: object
+        additionalProperties: true
     const_insight_metrics_property_example_any_of:
       anyOf:
       - $ref: '#/components/schemas/const_insight_metrics_property_examples'
@@ -67363,14 +67365,26 @@ components:
       description: Property key is the duration (e.g. 1d, 1w, ...)
       type: object
     const_insight_metrics_property_scope:
-      description: 'enum: `ap`, `client`, `device`, `mxedge`, `site`, `switch`'
+      description: 'enum: `ap`, `client`, `device`, `gateway`, `map`, `msp`, `mxcluster`,
+        `mxedge`, `org`, `otherdevice`, `rssizone`, `sdkclient`, `site`, `switch`,
+        `wlan`, `zone`'
       enum:
       - ap
       - client
       - device
+      - gateway
+      - map
+      - msp
+      - mxcluster
       - mxedge
+      - org
+      - otherdevice
+      - rssizone
+      - sdkclient
       - site
       - switch
+      - wlan
+      - zone
       type: string
     const_insight_metrics_property_scopes:
       items:
@@ -95706,11 +95720,11 @@ components:
       type: string
     switch_port_usage_mac_limit:
       anyOf:
-      - maximum: 16383
+      - default: 0
+        maximum: 16383
         minimum: 0
         type: integer
       - type: string
-      default: 0
       description: Only if `mode`!=`dynamic`, max number of mac addresses, default
         is 0 for unlimited, otherwise range is 1 to 16383 (upper bound constrained
         by platform)
@@ -103194,12 +103208,12 @@ components:
       - object
       - 'null'
     wlan_dynamic_vlan_default_vlan_id:
-      default: 999
       description: "VLAN ID, VLAN range or variable to use when there\u2019s no match\
         \ from RADIUS"
       oneOf:
       - type: string
-      - maximum: 4094
+      - default: 999
+        maximum: 4094
         minimum: 1
         type: integer
     wlan_dynamic_vlan_default_vlan_id_deprecated:
