@@ -21,7 +21,7 @@ for schema_name, schema in schemas.items():
                     additional_props["type"] = [additional_props["type"], 'null']
                     additional_props.pop("nullable")
     elif schema.get("anyOf") and schema.get("nullable") is True:
-        schema["anyOf"].append({"type": 'null'})
+        schema["anyOf"].append({"type": "null"})
         print(f"Setting nullable to OAS3.1 format: {schema_name}")
         schema.pop("nullable")
     elif schema.get("oneOf") and schema.get("nullable") is True:
