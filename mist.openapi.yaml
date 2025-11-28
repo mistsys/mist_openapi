@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.0**
+  description: '> Version: **2511.1.1**
 
     >
 
-    > Date: **November 17, 2025**
+    > Date: **November 26, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2509.1.7
+  version: 2511.1.1
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -40170,7 +40170,7 @@ webhooks:
                     nacrule_matched: true
                     nas_vendor: juniper-mist
                     org_id: 27547ac2-d114-4e04-beb1-f3f1e6e81ec6
-                    random_mac: true
+                    random_mac: 'true'
                     resp_attrs:
                     - Tunnel-Type=VLAN
                     - Tunnel-Medium-Type=IEEE-802
@@ -67277,7 +67277,7 @@ components:
         description:
           type: string
         example:
-          $ref: '#/components/schemas/const_insight_metrics_property_examples'
+          $ref: '#/components/schemas/const_insight_metrics_property_example_any_of'
         intervals:
           $ref: '#/components/schemas/const_insight_metrics_property_intervals'
         keys:
@@ -67308,10 +67308,19 @@ components:
       - type: string
       - type: boolean
       - type: 'null'
+    const_insight_metrics_property_example_any_of:
+      anyOf:
+      - $ref: '#/components/schemas/const_insight_metrics_property_examples'
+      - $ref: '#/components/schemas/const_insight_metrics_property_examples_object'
     const_insight_metrics_property_examples:
       items:
         $ref: '#/components/schemas/const_insight_metrics_property_example'
       type: array
+    const_insight_metrics_property_examples_object:
+      additionalProperties:
+        $ref: '#/components/schemas/const_insight_metrics_property_examples'
+      description: Object containing named fields, each with array of example values
+      type: object
     const_insight_metrics_property_interval:
       additionalProperties: false
       properties:
@@ -69538,94 +69547,6 @@ components:
       - slow
       - success
       type: string
-    event_nac_client:
-      additionalProperties: false
-      properties:
-        ap:
-          examples:
-          - 5c5b35513227
-          readOnly: true
-          type: string
-        auth_type:
-          $ref: '#/components/schemas/nac_auth_type'
-        bssid:
-          description: BSSID
-          examples:
-          - 5c5b355fafcc
-          readOnly: true
-          type: string
-        device_mac:
-          $ref: '#/components/schemas/nac_device_mac'
-        dryrun_nacrule_id:
-          $ref: '#/components/schemas/nac_event_dryrun_nacrule_id'
-        dryrun_nacrule_matched:
-          $ref: '#/components/schemas/nac_event_dryrun_nacrule_matched'
-        idp_id:
-          $ref: '#/components/schemas/nac_event_idp_id'
-        idp_role:
-          $ref: '#/components/schemas/event_nac_client_idp_role'
-        idp_username:
-          $ref: '#/components/schemas/nac_event_idp_username'
-        mac:
-          $ref: '#/components/schemas/nac_client_mac'
-        mxedge_id:
-          description: Mist Edge ID used to connect to cloud
-          type: string
-        nacrule_id:
-          $ref: '#/components/schemas/nac_event_nacrule_id'
-        nacrule_matched:
-          $ref: '#/components/schemas/nac_event_nacrule_matched'
-        nas_vendor:
-          $ref: '#/components/schemas/nac_event_nas_vendor'
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        port_id:
-          $ref: '#/components/schemas/nac_event_port_id'
-        port_type:
-          $ref: '#/components/schemas/nac_access_type'
-        random_mac:
-          $ref: '#/components/schemas/random_mac'
-        resp_attrs:
-          $ref: '#/components/schemas/resp_attrs'
-        site_id:
-          $ref: '#/components/schemas/site_id'
-        ssid:
-          $ref: '#/components/schemas/nac_event_ssid'
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        type:
-          $ref: '#/components/schemas/nac_event_type'
-        usermac_label:
-          $ref: '#/components/schemas/event_nac_client_usermac_labels'
-        username:
-          $ref: '#/components/schemas/nac_event_username'
-        vlan:
-          $ref: '#/components/schemas/nac_event_vlan'
-        vlan_source:
-          description: Vlan source, e.g. "nactag", "usermac"
-          examples:
-          - nactag
-          type: string
-      type: object
-    event_nac_client_idp_role:
-      examples:
-      - - itsuperusers
-        - vip
-      items:
-        type: string
-      type: array
-    event_nac_client_usermac_labels:
-      description: Labels derived from usermac entry
-      examples:
-      - - bldg5
-        - printer
-      items:
-        type: string
-      type: array
-    event_nac_clients:
-      items:
-        $ref: '#/components/schemas/event_nac_client'
-      type: array
     event_otherdevice:
       additionalProperties: false
       properties:
@@ -73472,6 +73393,64 @@ components:
           - f01c2d4ff760
           type: string
       type: object
+    log_event:
+      additionalProperties: false
+      properties:
+        admin_id:
+          description: admin id
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        admin_name:
+          description: Name of the admin that performs the action
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        after:
+          additionalProperties: true
+          description: field values after the change
+          readOnly: true
+          type: object
+        before:
+          additionalProperties: true
+          description: field values prior to the change
+          readOnly: true
+          type: object
+        for_site:
+          readOnly: true
+          type: boolean
+        id:
+          $ref: '#/components/schemas/id'
+        message:
+          description: log message
+          readOnly: true
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        site_id:
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        src_ip:
+          description: sender source ip address
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+      required:
+      - message
+      - org_id
+      - timestamp
+      type: object
+    log_events:
+      items:
+        $ref: '#/components/schemas/log_event'
+      type: array
+      uniqueItems: true
     login:
       properties:
         email:
@@ -75699,6 +75678,95 @@ components:
       items:
         type: string
       readOnly: true
+      type: array
+    nac_client_event:
+      additionalProperties: false
+      properties:
+        ap:
+          description: AP mac
+          examples:
+          - 5c5b35513227
+          type: string
+        auth_type:
+          $ref: '#/components/schemas/nac_auth_type'
+        bssid:
+          description: BSSID
+          examples:
+          - 5c5b355fafcc
+          type: string
+        client_type:
+          $ref: '#/components/schemas/nac_access_type'
+        device_mac:
+          $ref: '#/components/schemas/nac_device_mac'
+        dryrun_nacrule_id:
+          $ref: '#/components/schemas/nac_event_dryrun_nacrule_id'
+        dryrun_nacrule_matched:
+          $ref: '#/components/schemas/nac_event_dryrun_nacrule_matched'
+        idp_id:
+          $ref: '#/components/schemas/nac_event_idp_id'
+        idp_role:
+          $ref: '#/components/schemas/nac_client_event_idp_role'
+        idp_username:
+          $ref: '#/components/schemas/nac_event_idp_username'
+        mac:
+          $ref: '#/components/schemas/nac_client_mac'
+        mxedge_id:
+          description: Mist Edge ID used to connect to cloud
+          type: string
+        nacrule_id:
+          $ref: '#/components/schemas/nac_event_nacrule_id'
+        nacrule_matched:
+          $ref: '#/components/schemas/nac_event_nacrule_matched'
+        nas_vendor:
+          $ref: '#/components/schemas/nac_event_nas_vendor'
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        port_id:
+          $ref: '#/components/schemas/nac_event_port_id'
+        port_type:
+          $ref: '#/components/schemas/nac_access_type'
+        random_mac:
+          $ref: '#/components/schemas/random_mac'
+        resp_attrs:
+          $ref: '#/components/schemas/resp_attrs'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        ssid:
+          $ref: '#/components/schemas/nac_event_ssid'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        type:
+          $ref: '#/components/schemas/nac_event_type'
+        usermac_label:
+          $ref: '#/components/schemas/nac_client_event_usermac_labels'
+        username:
+          $ref: '#/components/schemas/nac_event_username'
+        vlan:
+          $ref: '#/components/schemas/nac_event_vlan'
+        vlan_source:
+          description: Vlan source, e.g. "nactag", "usermac"
+          examples:
+          - nactag
+          type: string
+      type: object
+    nac_client_event_idp_role:
+      examples:
+      - - itsuperusers
+        - vip
+      items:
+        type: string
+      type: array
+    nac_client_event_usermac_labels:
+      description: Labels derived from usermac entry
+      examples:
+      - - bldg5
+        - printer
+      items:
+        type: string
+      type: array
+    nac_client_events:
+      items:
+        $ref: '#/components/schemas/nac_client_event'
       type: array
     nac_client_ip:
       description: The known IP Addresses used by the client for the specified duration
@@ -81170,7 +81238,7 @@ components:
         next:
           type: string
         results:
-          $ref: '#/components/schemas/event_nac_clients'
+          $ref: '#/components/schemas/nac_client_events'
         start:
           examples:
           - 1512572151
@@ -81648,7 +81716,7 @@ components:
         next:
           type: string
         results:
-          $ref: '#/components/schemas/response_log_search_results'
+          $ref: '#/components/schemas/log_events'
         start:
           type: integer
         total:
@@ -81660,64 +81728,6 @@ components:
       - start
       - total
       type: object
-    response_log_search_item:
-      additionalProperties: false
-      properties:
-        admin_id:
-          description: admin id
-          format: uuid
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        admin_name:
-          description: Name of the admin that performs the action
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        after:
-          additionalProperties: true
-          description: field values after the change
-          readOnly: true
-          type: object
-        before:
-          additionalProperties: true
-          description: field values prior to the change
-          readOnly: true
-          type: object
-        for_site:
-          readOnly: true
-          type: boolean
-        id:
-          $ref: '#/components/schemas/id'
-        message:
-          description: log message
-          readOnly: true
-          type: string
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        site_id:
-          format: uuid
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        src_ip:
-          description: sender source ip address
-          type: string
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-      required:
-      - message
-      - org_id
-      - timestamp
-      type: object
-    response_log_search_results:
-      items:
-        $ref: '#/components/schemas/response_log_search_item'
-      type: array
-      uniqueItems: true
     response_login_failure:
       additionalProperties: false
       properties:
@@ -92046,10 +92056,7 @@ components:
           - 0
           type: integer
         spu_valid_session:
-          examples:
-          - 0
-          type: integer
-      type: object
+          examples: null
     stats_gateway_vpn_peer:
       additionalProperties: false
       properties:
@@ -100245,53 +100252,18 @@ components:
         format: uuid
         type: string
       type: array
-    webhook_audit_event:
-      additionalProperties: false
-      properties:
-        admin_name:
-          type: string
-        device_id:
-          $ref: '#/components/schemas/device_id'
-        id:
-          $ref: '#/components/schemas/id'
-        message:
-          type: string
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        site_id:
-          $ref: '#/components/schemas/site_id'
-        src_ip:
-          type: string
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-      required:
-      - admin_name
-      - device_id
-      - id
-      - message
-      - org_id
-      - site_id
-      - src_ip
-      - timestamp
-      type: object
     webhook_audits:
       additionalProperties: false
       description: Sample of the `audits` webhook payload.
       properties:
         events:
-          $ref: '#/components/schemas/webhook_audits_events'
+          $ref: '#/components/schemas/log_events'
         topic:
           $ref: '#/components/schemas/webhook_audits_topic'
       required:
       - events
       - topic
       type: object
-    webhook_audits_events:
-      items:
-        $ref: '#/components/schemas/webhook_audit_event'
-      minItems: 1
-      type: array
-      uniqueItems: true
     webhook_audits_topic:
       description: 'enum: `audits`'
       enum:
@@ -100716,7 +100688,7 @@ components:
       type: string
     webhook_device_events_topic:
       enum:
-      - device_events
+      - device-events
       type: string
     webhook_device_updowns:
       additionalProperties: false
@@ -101060,7 +101032,7 @@ components:
       type: array
     webhook_location_asset_topic:
       enum:
-      - location_asset
+      - location-asset
       type: string
     webhook_location_centrak:
       additionalProperties: false
@@ -101176,7 +101148,7 @@ components:
       type: array
     webhook_location_client_topic:
       enum:
-      - location_client
+      - location-client
       type: string
     webhook_location_event:
       additionalProperties: false
@@ -101298,7 +101270,7 @@ components:
       type: array
     webhook_location_sdk_topic:
       enum:
-      - location_sdk
+      - location-sdk
       type: string
     webhook_location_topic:
       enum:
@@ -101357,7 +101329,7 @@ components:
       type: array
     webhook_location_unclient_topic:
       enum:
-      - location_unclient
+      - location-unclient
       type: string
     webhook_mxedge_event_topic:
       enum:
@@ -101459,89 +101431,13 @@ components:
       description: Sample of the `nac-events` webhook payload.
       properties:
         events:
-          $ref: '#/components/schemas/webhook_nac_events_events'
+          $ref: '#/components/schemas/nac_client_events'
         topic:
           $ref: '#/components/schemas/webhook_nac_events_topic'
       type: object
-    webhook_nac_events_event:
-      additionalProperties: false
-      properties:
-        ap:
-          description: AP mac
-          examples:
-          - 5c5b35513227
-          readOnly: true
-          type: string
-        auth_type:
-          $ref: '#/components/schemas/nac_auth_type'
-        bssid:
-          description: BSSID
-          examples:
-          - 5c5b355fafcc
-          type: string
-        client_type:
-          $ref: '#/components/schemas/nac_access_type'
-        device_mac:
-          $ref: '#/components/schemas/nac_device_mac'
-        dryrun_nacrule_id:
-          $ref: '#/components/schemas/nac_event_dryrun_nacrule_id'
-        dryrun_nacrule_matched:
-          $ref: '#/components/schemas/nac_event_dryrun_nacrule_matched'
-        idp_id:
-          $ref: '#/components/schemas/nac_event_idp_id'
-        idp_role:
-          $ref: '#/components/schemas/webhook_nac_events_event_idp_role'
-        idp_username:
-          $ref: '#/components/schemas/nac_event_idp_username'
-        mac:
-          $ref: '#/components/schemas/nac_client_mac'
-        nacrule_id:
-          $ref: '#/components/schemas/nac_event_nacrule_id'
-        nacrule_matched:
-          $ref: '#/components/schemas/nac_event_nacrule_matched'
-        nas_vendor:
-          $ref: '#/components/schemas/nac_event_nas_vendor'
-        org_id:
-          $ref: '#/components/schemas/org_id'
-        port_id:
-          $ref: '#/components/schemas/nac_event_port_id'
-        random_mac:
-          $ref: '#/components/schemas/random_mac'
-        resp_attrs:
-          $ref: '#/components/schemas/resp_attrs'
-        site_id:
-          $ref: '#/components/schemas/site_id'
-        ssid:
-          $ref: '#/components/schemas/nac_event_ssid'
-        timestamp:
-          $ref: '#/components/schemas/timestamp'
-        type:
-          $ref: '#/components/schemas/nac_event_type'
-        username:
-          $ref: '#/components/schemas/nac_event_username'
-        vlan:
-          $ref: '#/components/schemas/nac_event_vlan'
-        vlan_source:
-          description: Vlan source, e.g. "nactag", "usermac"
-          examples:
-          - nactag
-          type: string
-      type: object
-    webhook_nac_events_event_idp_role:
-      description: IDP returned roles/groups for the user
-      examples:
-      - - itsuperusers
-        - vip
-      items:
-        type: string
-      type: array
-    webhook_nac_events_events:
-      items:
-        $ref: '#/components/schemas/webhook_nac_events_event'
-      type: array
     webhook_nac_events_topic:
       enum:
-      - nac_events
+      - nac-events
       type: string
     webhook_oauth2_grant_type:
       description: 'required when `type`==`oauth2`. enum: `client_credentials`, `password`'
@@ -101826,7 +101722,7 @@ components:
       type: array
     webhook_site_sle_topic:
       enum:
-      - site_sle
+      - site-sle
       type: string
     webhook_topics:
       description: List of supported webhook topics available with the API Call [List
