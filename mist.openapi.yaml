@@ -95687,8 +95687,8 @@ components:
       type: array
     switch_port_usage_dynamic_rule_src:
       description: 'enum: `link_peermac`, `lldp_chassis_id`, `lldp_hardware_revision`,
-        `lldp_manufacturer_name`, `lldp_oui`, `lldp_serial_number`, `lldp_system_name`,
-        `radius_dynamicfilter`, `radius_usermac`, `radius_username`'
+        `lldp_manufacturer_name`, `lldp_oui`, `lldp_serial_number`, `lldp_system_description`,
+        `lldp_system_name`, `radius_dynamicfilter`, `radius_usermac`, `radius_username`'
       enum:
       - link_peermac
       - lldp_chassis_id
@@ -95696,6 +95696,7 @@ components:
       - lldp_manufacturer_name
       - lldp_oui
       - lldp_serial_number
+      - lldp_system_description
       - lldp_system_name
       - radius_dynamicfilter
       - radius_usermac
