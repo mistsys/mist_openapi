@@ -104962,8 +104962,6 @@ components:
           type: string
       required:
       - order
-      - dst_allow_wxtags
-      - dst_deny_wxtags
       - src_wxtags
       type: object
     wxlan_rule_action:
