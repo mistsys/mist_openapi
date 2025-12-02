@@ -32,3 +32,9 @@ sleep 1
 echo "Setting missing Additional Properties attributes"
 python3 ./a7_additionalProperties.py
 sleep 1
+
+# This muust be done at the end because the openapi-generator tool
+# is not able to handle the size of the OAS when using YAML format, 
+# so the validation is done on the JSON version of the OAS.
+echo "Validating OAS"
+openapi-generator validate -i ../mist.openapi.json
