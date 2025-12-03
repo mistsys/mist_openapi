@@ -6034,10 +6034,7 @@ paths:
                             use_mxedge: true
                             use_site_mxedge: false
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                           wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
                           wxtunnel_remote_id: wifiguest
                         property2:
@@ -6093,10 +6090,7 @@ paths:
                             use_mxedge: true
                             use_site_mxedge: false
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                           wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
                           wxtunnel_remote_id: wifiguest
                   wifi:
@@ -6194,10 +6188,7 @@ paths:
                             enabled: true
                           port_vlan_id: 1
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                   wifi:
                     cisco_enabled: true
                     disable_11k: false
@@ -32590,19 +32581,13 @@ paths:
                             enabled: true
                           port_vlan_id: 1
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                   ap_port_config:
                     model_specific:
                       AP32:
                         eth1,eth2:
                           port_vlan_id: 1
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                   auto_upgrade:
                     custom_versions:
                       AP21: stable
@@ -40645,10 +40630,7 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         created_time: 0
         for_site: true
         id: 497f6eca-6276-4993-bfeb-53cbbbba8f08
@@ -40683,10 +40665,7 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         created_time: 0
         for_site: true
         id: 497f6eca-6276-4993-bfeb-53cbbbba9f08
@@ -50216,19 +50195,13 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         ap_port_config:
           model_specific:
             AP32:
               eth1,eth2:
                 port_vlan_id: 1
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         auto_placement:
           orientation: 45
           x: 30
@@ -50743,19 +50716,13 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         ap_port_config:
           model_specific:
             AP32:
               eth1,eth2:
                 port_vlan_id: 1
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         auto_placement:
           orientation: 45
           x: 30
@@ -62780,7 +62747,11 @@ components:
           minimum: 1
           type: integer
         vlan_ids:
-          $ref: '#/components/schemas/ap_port_config_vlan_ids'
+          description: If `forwarding`==`limited`, comma separated list of additional
+            vlan ids allowed on this port
+          examples:
+          - 10,20,30
+          type: string
         wxtunnel_id:
           default: ''
           description: If `forwarding`==`wxtunnel`, the port is bridged to the vlan
@@ -62855,17 +62826,6 @@ components:
       examples:
       - none
       type: string
-    ap_port_config_vlan_ids:
-      description: If `forwarding`==`limited`
-      examples:
-      - - 1
-        - 10
-        - 50
-      items:
-        maximum: 4094
-        minimum: 1
-        type: integer
-      type: array
     ap_pwr_config:
       additionalProperties: false
       description: Power related configs
