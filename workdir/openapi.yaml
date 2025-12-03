@@ -27169,7 +27169,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: changeSiteSwitchVcPortMode
       tags:
-      - Sites Devices
+      - Sites Devices - Wired - Virtual Chassis
   /api/v1/sites/{site_id}/devices/{device_id}/shell:
     parameters:
     - $ref: '#/components/parameters/site_id'
