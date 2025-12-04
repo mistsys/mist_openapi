@@ -89661,16 +89661,6 @@ components:
           type: string
         privileges:
           $ref: '#/components/schemas/sso_role_org_privileges'
-        site_id:
-          examples:
-          - 580eb9a7-e6cb-4d05-aa20-4c60808fb011
-          format: uuid
-          type: string
-        sitegroup_id:
-          examples:
-          - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-          format: uuid
-          type: string
       required:
       - name
       - privileges
