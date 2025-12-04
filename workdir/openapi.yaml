@@ -78108,9 +78108,10 @@ components:
           description: Whether the policy is enabled
           type: boolean
         expiry_in_days:
-          description: password expiry in days
+          description: Password expiry in days. Password Expiry Notice banner will display in the UI 14 days before expiration
           examples:
           - 60
+          minimum: 1
           maximum: 365
           type: integer
         min_length:
