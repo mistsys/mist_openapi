@@ -99359,7 +99359,7 @@ components:
           $ref: '#/components/schemas/vc_port_mode'
       type: object
     vc_port_mode:
-      description: 'enum: `network`, `vcp-higig`, `vcp-hgoe` (only for EX4400-24X)'
+      description: 'enum: `network`, `vcp-higig`, `vcp-hgoe`'
       enum:
       - network
       - vcp-higig
