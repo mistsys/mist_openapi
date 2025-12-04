@@ -71624,6 +71624,7 @@ components:
           $ref: '#/components/schemas/hour'
       type: object
     ibeacon_major:
+      description: Major number for iBeacon
       examples:
       - 1234
       maximum: 65535
@@ -71632,6 +71633,7 @@ components:
       - integer
       - 'null'
     ibeacon_minor:
+      description: Minor number for iBeacon
       examples:
       - 1234
       maximum: 65535
