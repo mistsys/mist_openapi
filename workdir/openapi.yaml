@@ -89626,8 +89626,6 @@ components:
           $ref: '#/components/schemas/org_id'
         privileges:
           $ref: '#/components/schemas/sso_role_msp_privileges'
-        site_id:
-          $ref: '#/components/schemas/site_id'
       required:
       - name
       - privileges
