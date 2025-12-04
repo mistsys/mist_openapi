@@ -48884,7 +48884,7 @@ components:
         name: string
         password_policy:
           enabled: true
-          expiry_in_days: 0
+          expiry_in_days: 180
           min_length: 8
           requires_special_char: true
           requires_two_factor_auth: true
