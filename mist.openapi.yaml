@@ -6038,10 +6038,7 @@ paths:
                             use_mxedge: true
                             use_site_mxedge: false
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                           wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
                           wxtunnel_remote_id: wifiguest
                         property2:
@@ -6097,10 +6094,7 @@ paths:
                             use_mxedge: true
                             use_site_mxedge: false
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                           wxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
                           wxtunnel_remote_id: wifiguest
                   wifi:
@@ -6198,10 +6192,7 @@ paths:
                             enabled: true
                           port_vlan_id: 1
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                   wifi:
                     cisco_enabled: true
                     disable_11k: false
@@ -13133,8 +13124,8 @@ paths:
           type: string
       - description: 'if `type`==`match`, Type of NAC Tag. enum: `cert_cn`, `cert_eku`,
           `cert_issuer`, `cert_san`, `cert_serial`, `cert_sub`, `cert_template`, `client_mac`,
-          `edr_health`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`, `radius_group`,
-          `realm`, `ssid`, `user_name`, `usermac_label`'
+          `edr_status`, `gbp_tag`, `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`,
+          `nas_ip`, `radius_group`, `realm`, `ssid`, `user_name`, `usermac_label`'
         in: query
         name: match
         schema:
@@ -27182,7 +27173,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: changeSiteSwitchVcPortMode
       tags:
-      - Sites Devices
+      - Sites Devices - Wired - Virtual Chassis
   /api/v1/sites/{site_id}/devices/{device_id}/shell:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -32594,19 +32585,13 @@ paths:
                             enabled: true
                           port_vlan_id: 1
                           vlan_id: 9
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                   ap_port_config:
                     model_specific:
                       AP32:
                         eth1,eth2:
                           port_vlan_id: 1
-                          vlan_ids:
-                          - 1
-                          - 10
-                          - 50
+                          vlan_ids: 1, 10, 50
                   auto_upgrade:
                     custom_versions:
                       AP21: stable
@@ -40649,10 +40634,7 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         created_time: 0
         for_site: true
         id: 497f6eca-6276-4993-bfeb-53cbbbba8f08
@@ -40687,10 +40669,7 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         created_time: 0
         for_site: true
         id: 497f6eca-6276-4993-bfeb-53cbbbba9f08
@@ -48909,7 +48888,7 @@ components:
         name: string
         password_policy:
           enabled: true
-          expiry_in_days: 0
+          expiry_in_days: 180
           min_length: 8
           requires_special_char: true
           requires_two_factor_auth: true
@@ -50220,19 +50199,13 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         ap_port_config:
           model_specific:
             AP32:
               eth1,eth2:
                 port_vlan_id: 1
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         auto_placement:
           orientation: 45
           x: 30
@@ -50747,19 +50720,13 @@ components:
                   enabled: true
                 port_vlan_id: 1
                 vlan_id: 9
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         ap_port_config:
           model_specific:
             AP32:
               eth1,eth2:
                 port_vlan_id: 1
-                vlan_ids:
-                - 1
-                - 10
-                - 50
+                vlan_ids: 1, 10, 50
         auto_placement:
           orientation: 45
           x: 30
@@ -62784,7 +62751,11 @@ components:
           minimum: 1
           type: integer
         vlan_ids:
-          $ref: '#/components/schemas/ap_port_config_vlan_ids'
+          description: If `forwarding`==`limited`, comma separated list of additional
+            vlan ids allowed on this port
+          examples:
+          - 10,20,30
+          type: string
         wxtunnel_id:
           default: ''
           description: If `forwarding`==`wxtunnel`, the port is bridged to the vlan
@@ -62859,17 +62830,6 @@ components:
       examples:
       - none
       type: string
-    ap_port_config_vlan_ids:
-      description: If `forwarding`==`limited`
-      examples:
-      - - 1
-        - 10
-        - 50
-      items:
-        maximum: 4094
-        minimum: 1
-        type: integer
-      type: array
     ap_pwr_config:
       additionalProperties: false
       description: Power related configs
@@ -71668,6 +71628,7 @@ components:
           $ref: '#/components/schemas/hour'
       type: object
     ibeacon_major:
+      description: Major number for iBeacon
       examples:
       - 1234
       maximum: 65535
@@ -71676,6 +71637,7 @@ components:
       - integer
       - 'null'
     ibeacon_minor:
+      description: Minor number for iBeacon
       examples:
       - 1234
       maximum: 65535
@@ -76453,8 +76415,8 @@ components:
     nac_tag_match:
       description: 'if `type`==`match`. enum: `cert_cn`, `cert_eku`, `cert_issuer`,
         `cert_san`, `cert_serial`, `cert_sub`, `cert_template`, `client_mac`, `edr_status`,
-        `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`, `radius_group`,
-        `realm`, `ssid`, `user_name`, `usermac_label`'
+        `gbp_tag`, `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`,
+        `radius_group`, `realm`, `ssid`, `user_name`, `usermac_label`'
       enum:
       - cert_cn
       - cert_eku
@@ -76465,6 +76427,7 @@ components:
       - cert_template
       - client_mac
       - edr_status
+      - gbp_tag
       - hostname
       - idp_role
       - ingress_vlan
@@ -78146,9 +78109,11 @@ components:
           description: Whether the policy is enabled
           type: boolean
         expiry_in_days:
-          description: password expiry in days
+          description: Password expiry in days. Password Expiry Notice banner will
+            display in the UI 14 days before expiration
           examples:
           - 60
+          minimum: 1
           maximum: 365
           type: integer
         min_length:
@@ -89665,8 +89630,6 @@ components:
           $ref: '#/components/schemas/org_id'
         privileges:
           $ref: '#/components/schemas/sso_role_msp_privileges'
-        site_id:
-          $ref: '#/components/schemas/site_id'
       required:
       - name
       - privileges
@@ -89700,16 +89663,6 @@ components:
           type: string
         privileges:
           $ref: '#/components/schemas/sso_role_org_privileges'
-        site_id:
-          examples:
-          - 580eb9a7-e6cb-4d05-aa20-4c60808fb011
-          format: uuid
-          type: string
-        sitegroup_id:
-          examples:
-          - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-          format: uuid
-          type: string
       required:
       - name
       - privileges
@@ -99407,7 +99360,7 @@ components:
           $ref: '#/components/schemas/vc_port_mode'
       type: object
     vc_port_mode:
-      description: 'enum: `network`, `vcp-higig`, `vcp-hgoe` (only for EX4400-24X)'
+      description: 'enum: `network`, `vcp-higig`, `vcp-hgoe`'
       enum:
       - network
       - vcp-higig
