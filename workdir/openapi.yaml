@@ -90713,6 +90713,7 @@ components:
         $ref: '#/components/schemas/stats_ap_lldp_stat_power_src'
       type: array
     stats_ap_lldp_stats:
+      type: object
       additionalProperties:
         $ref: '#/components/schemas/stats_ap_lldp_stat'
       description: Property key is the port name (e.g. "eth0", "eth1", ...). Map of
