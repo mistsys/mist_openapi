@@ -13120,8 +13120,8 @@ paths:
           type: string
       - description: 'if `type`==`match`, Type of NAC Tag. enum: `cert_cn`, `cert_eku`,
           `cert_issuer`, `cert_san`, `cert_serial`, `cert_sub`, `cert_template`, `client_mac`,
-          `edr_health`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`, `radius_group`,
-          `realm`, `ssid`, `user_name`, `usermac_label`'
+          `edr_status`, `gbp_tag`, `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`,
+          `radius_group`, `realm`, `ssid`, `user_name`, `usermac_label`'
         in: query
         name: match
         schema:
@@ -76415,7 +76415,7 @@ components:
     nac_tag_match:
       description: 'if `type`==`match`. enum: `cert_cn`, `cert_eku`, `cert_issuer`,
         `cert_san`, `cert_serial`, `cert_sub`, `cert_template`, `client_mac`, `edr_status`,
-        `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`, `radius_group`,
+        `gbp_tag`, `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`, `radius_group`,
         `realm`, `ssid`, `user_name`, `usermac_label`'
       enum:
       - cert_cn
@@ -76427,6 +76427,7 @@ components:
       - cert_template
       - client_mac
       - edr_status
+      - gbp_tag
       - hostname
       - idp_role
       - ingress_vlan
