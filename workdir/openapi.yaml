@@ -68301,6 +68301,10 @@ components:
           $ref: '#/components/schemas/aggregate_routes'
         aggregate_routes6:
           $ref: '#/components/schemas/aggregate_routes6'
+        bgp_config:
+          additionalProperties:
+            $ref: '#/components/schemas/switch_bgp_config'
+          type: object
         created_time:
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
@@ -94769,6 +94773,53 @@ components:
       - QFX5120-32C: 23.4R2-S2.1
         QFX5130-32CD: 23.4R2-S2.3
       type: object
+    switch_bgp_config:
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          enum: [internal, external]
+        networks:
+          type: array
+          items:
+            type: string
+        bfd_minimum_interval:
+          type: string
+        local_as:
+          type: integer
+        hold_time:
+          type: integer
+        auth_key:
+          type: string
+        neighbors:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              neighbor_as:
+                type: integer
+              hold_time:
+                type: integer
+              import_policy:
+                type: string
+              export_policy:
+                type: string
+              multihop_ttl:
+                type: integer
+                description: Required for external BGP type
+            required:
+              - neighbor_as
+        export_policy:
+          type: string
+        import_policy:
+          type: string
+      type: object
+    switch_bgp_config_type:
+      description: 'enum: `external`, `internal`'
+      enum:
+      - external
+      - internal
+      type: string
     switch_dhcpd_config:
       additionalProperties:
         $ref: '#/components/schemas/switch_dhcpd_config_property'
