@@ -64261,10 +64261,10 @@ components:
     bgp_as:
       anyOf:
       - type: string
-      - maximum: 4294967295
+      - maximum: 4294967294
         minimum: 1
         type: integer
-      description: BGP AS, value in range 1-4294967295
+      description: BGP AS, value in range 1-4294967294
       examples:
       - 65000
     bgp_config:
@@ -72947,6 +72947,11 @@ components:
           description: Media maximum transmission unit (MTU) is the largest data unit
             that can be forwarded without fragmentation
           type: integer
+        networks:
+          description: List of network names. Required if `usage`==`inet`
+          items:
+            type: string
+          type: array
         no_local_overwrite:
           default: true
           description: Prevent helpdesk to override the port config
@@ -76706,6 +76711,10 @@ components:
           $ref: '#/components/schemas/acl_tags'
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+        bgp_config:
+          additionalProperties:
+            $ref: '#/components/schemas/switch_bgp_config'
+          type: object
         created_time:
           $ref: '#/components/schemas/created_time'
         dhcp_snooping:
@@ -94777,43 +94786,61 @@ components:
       additionalProperties: false
       properties:
         type:
-          type: string
-          enum: [internal, external]
+          $ref: '#/components/schemas/switch_bgp_config_type'
         networks:
-          type: array
-          items:
-            type: string
+          $ref: '#/components/schemas/switch_bgp_config_networks'
         bfd_minimum_interval:
-          type: string
+          description: 'Minimum interval in milliseconds for BFD hello packets. A neighbor is considered failed when the device stops receiving replies after the specified interval.'
+          type: integer
         local_as:
-          type: integer
+          $ref: '#/components/schemas/bgp_as'
         hold_time:
-          type: integer
+          $ref: '#/components/schemas/switch_bgp_config_hold_time'
         auth_key:
           type: string
         neighbors:
-          type: object
           additionalProperties:
-            type: object
-            properties:
-              neighbor_as:
-                type: integer
-              hold_time:
-                type: integer
-              import_policy:
-                type: string
-              export_policy:
-                type: string
-              multihop_ttl:
-                type: integer
-                description: Required for external BGP type
-            required:
-              - neighbor_as
+            $ref: '#/components/schemas/switch_bgp_config_neighbors'
+          type: object
         export_policy:
           type: string
         import_policy:
           type: string
+      required:
+      - type
+      - local_as 
       type: object
+    switch_bgp_config_networks:
+      description: List of network names for BGP configuration. When a network is specified, a BGP group will be added to the VRF that network is part of.
+      items:
+        type: string
+      type: array
+    switch_bgp_config_neighbors:
+      additionalProperties: false
+      properties:
+        neighbor_as:
+          $ref: '#/components/schemas/bgp_as'
+        hold_time:
+          $ref: '#/components/schemas/switch_bgp_config_hold_time'
+        import_policy:
+          type: string
+        export_policy:
+          type: string
+        multihop_ttl:
+          maximum: 255
+          minimum: 1
+          type: integer
+      required:
+      - neighbor_as
+      type: object
+    switch_bgp_config_hold_time:
+      oneOf:
+        - type: integer
+          enum: [0]
+        - type: integer
+          minimum: 3
+          maximum: 65535
+      description: "Hold time is three times the interval at which keepalive messages are sent. It indicates to the peer the length of time that it should consider the sender valid. Must be 0 or a number in the range 3-65535."
     switch_bgp_config_type:
       description: 'enum: `external`, `internal`'
       enum:
