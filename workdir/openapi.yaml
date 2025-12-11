@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.5**
+  description: '> Version: **2511.1.6**
 
     >
 
-    > Date: **December 6, 2025**
+    > Date: **December 11, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.5
+  version: 2511.1.6
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -94790,7 +94790,9 @@ components:
         networks:
           $ref: '#/components/schemas/switch_bgp_config_networks'
         bfd_minimum_interval:
-          description: 'Minimum interval in milliseconds for BFD hello packets. A neighbor is considered failed when the device stops receiving replies after the specified interval.'
+          description: Minimum interval in milliseconds for BFD hello packets. A neighbor
+            is considered failed when the device stops receiving replies after the
+            specified interval.
           type: integer
         local_as:
           $ref: '#/components/schemas/bgp_as'
@@ -94808,13 +94810,19 @@ components:
           type: string
       required:
       - type
-      - local_as 
+      - local_as
       type: object
-    switch_bgp_config_networks:
-      description: List of network names for BGP configuration. When a network is specified, a BGP group will be added to the VRF that network is part of.
-      items:
-        type: string
-      type: array
+    switch_bgp_config_hold_time:
+      oneOf:
+      - type: integer
+        enum:
+        - 0
+      - type: integer
+        minimum: 3
+        maximum: 65535
+      description: Hold time is three times the interval at which keepalive messages
+        are sent. It indicates to the peer the length of time that it should consider
+        the sender valid. Must be 0 or a number in the range 3-65535.
     switch_bgp_config_neighbors:
       additionalProperties: false
       properties:
@@ -94833,14 +94841,12 @@ components:
       required:
       - neighbor_as
       type: object
-    switch_bgp_config_hold_time:
-      oneOf:
-        - type: integer
-          enum: [0]
-        - type: integer
-          minimum: 3
-          maximum: 65535
-      description: "Hold time is three times the interval at which keepalive messages are sent. It indicates to the peer the length of time that it should consider the sender valid. Must be 0 or a number in the range 3-65535."
+    switch_bgp_config_networks:
+      description: List of network names for BGP configuration. When a network is
+        specified, a BGP group will be added to the VRF that network is part of.
+      items:
+        type: string
+      type: array
     switch_bgp_config_type:
       description: 'enum: `external`, `internal`'
       enum:
