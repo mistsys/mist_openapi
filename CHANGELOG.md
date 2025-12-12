@@ -37,7 +37,8 @@ All notable changes to this project will be documented in this file.
   Updated `/api/v1/sites/{site_id}/gatewaytemplates/derived`
   Updated `/api/v1/sites/{site_id}/setting`
   Updated `/api/v1/sites/{site_id}/setting/derived`
-  - Updated `gateway_matching` to use `wired_port_config` component for `port_config` property
+  - Updated `gateway_matching` to use `gateway_port_config` component for `port_config` property
+
 
 ## [2511.1.0] - 2025-11-17
 

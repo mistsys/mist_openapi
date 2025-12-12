@@ -70494,7 +70494,7 @@ components:
       type: object
     gateway_matching_rule:
       additionalProperties:
-        description: 'property key defines the type of matching. e.g: `match_name[0:3]`,
+        description: 'Property key defines the type of matching. e.g: `match_name[0:3]`,
           `match_model[0-6]` or `match_role`'
         type: string
       properties:
@@ -70503,7 +70503,10 @@ components:
         name:
           type: string
         port_config:
-          $ref: '#/components/schemas/gateway_port_config'
+          additionalProperties:
+            $ref: '#/components/schemas/gateway_port_config'
+          description: Property key is the port(s) name or range (e.g. "ge-0/0/0-10").
+          type: object
       type: object
     gateway_matching_rules:
       items:
