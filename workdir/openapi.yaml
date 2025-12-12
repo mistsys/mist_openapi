@@ -94803,9 +94803,7 @@ components:
         auth_key:
           type: string
         neighbors:
-          additionalProperties:
-            $ref: '#/components/schemas/switch_bgp_config_neighbors'
-          type: object
+          $ref: '#/components/schemas/switch_bgp_config_neighbors'
         export_policy:
           description: Export policy must match one of the policy names defined in
             the `routing_policies` property.
