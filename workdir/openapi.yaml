@@ -70499,7 +70499,7 @@ components:
         name:
           type: string
         port_config:
-          $ref: '#/components/schemas/wired_port_config'
+          $ref: '#/components/schemas/gateway_port_config'
       type: object
     gateway_matching_rules:
       items:
@@ -94792,8 +94792,10 @@ components:
         bfd_minimum_interval:
           description: Minimum interval in milliseconds for BFD hello packets. A neighbor
             is considered failed when the device stops receiving replies after the
-            specified interval.
+            specified interval. Value must be between 1 and 255000.
           type: integer
+          minimum: 1
+          maximum: 255000
         local_as:
           $ref: '#/components/schemas/bgp_as'
         hold_time:
@@ -94805,8 +94807,10 @@ components:
             $ref: '#/components/schemas/switch_bgp_config_neighbors'
           type: object
         export_policy:
+          description: Export policy must match one of the policy names defined in the `routing_policies` property.
           type: string
         import_policy:
+          description: Import policy must match one of the policy names defined in the `routing_policies` property.
           type: string
       required:
       - type
@@ -94823,16 +94827,19 @@ components:
       description: Hold time is three times the interval at which keepalive messages
         are sent. It indicates to the peer the length of time that it should consider
         the sender valid. Must be 0 or a number in the range 3-65535.
-    switch_bgp_config_neighbors:
+    switch_bgp_config_neighbor:
       additionalProperties: false
       properties:
         neighbor_as:
           $ref: '#/components/schemas/bgp_as'
+          description: Autonomous System (AS) number of the BGP neighbor. For internal BGP, this must match `local_as`. For external BGP, this must differ from `local_as`.
         hold_time:
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
-        import_policy:
-          type: string
         export_policy:
+          description: Export policy must match one of the policy names defined in the `routing_policies` property.
+          type: string
+        import_policy:
+          description: Import policy must match one of the policy names defined in the `routing_policies` property.
           type: string
         multihop_ttl:
           maximum: 255
@@ -94840,6 +94847,11 @@ components:
           type: integer
       required:
       - neighbor_as
+      type: object
+    switch_bgp_config_neighbors:
+      description: Property key is the BGP Neighbor IP Address.
+      additionalProperties:
+        $ref: '#/components/schemas/switch_bgp_config_neighbor'
       type: object
     switch_bgp_config_networks:
       description: List of network names for BGP configuration. When a network is
