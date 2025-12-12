@@ -94807,10 +94807,12 @@ components:
             $ref: '#/components/schemas/switch_bgp_config_neighbors'
           type: object
         export_policy:
-          description: Export policy must match one of the policy names defined in the `routing_policies` property.
+          description: Export policy must match one of the policy names defined in
+            the `routing_policies` property.
           type: string
         import_policy:
-          description: Import policy must match one of the policy names defined in the `routing_policies` property.
+          description: Import policy must match one of the policy names defined in
+            the `routing_policies` property.
           type: string
       required:
       - type
@@ -94832,14 +94834,18 @@ components:
       properties:
         neighbor_as:
           $ref: '#/components/schemas/bgp_as'
-          description: Autonomous System (AS) number of the BGP neighbor. For internal BGP, this must match `local_as`. For external BGP, this must differ from `local_as`.
+          description: Autonomous System (AS) number of the BGP neighbor. For internal
+            BGP, this must match `local_as`. For external BGP, this must differ from
+            `local_as`.
         hold_time:
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
         export_policy:
-          description: Export policy must match one of the policy names defined in the `routing_policies` property.
+          description: Export policy must match one of the policy names defined in
+            the `routing_policies` property.
           type: string
         import_policy:
-          description: Import policy must match one of the policy names defined in the `routing_policies` property.
+          description: Import policy must match one of the policy names defined in
+            the `routing_policies` property.
           type: string
         multihop_ttl:
           maximum: 255
