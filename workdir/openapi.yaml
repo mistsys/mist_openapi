@@ -39678,7 +39678,7 @@ webhooks:
                     text: string
                     timestamp: 0
                     type: string
-                  topic: device_events
+                  topic: device-events
             schema:
               $ref: '#/components/schemas/webhook_device_events'
         description: Webhook sample for `device-events` topic
@@ -39757,7 +39757,7 @@ webhooks:
                       service_uuid: 7138cc00-c611-4dec-a05e-5c4b1cae13c0
                     site_id: 72771e6a-6f5e-4de4-a5b9-1266c4197811
                     timestamp: 0
-                  topic: string
+                  topic: discovered-raw-rssi
             schema:
               $ref: '#/components/schemas/webhook_discovered_raw_rssi'
         description: Webhook sample for `discovered-raw-rssi` topic
@@ -39889,7 +39889,7 @@ webhooks:
                     type: asset
                     x: 13.5
                     y: 3.2
-                  topic: location_asset
+                  topic: location-asset
             schema:
               $ref: '#/components/schemas/webhook_location_asset'
         description: Webhook sample for `location-asset` topic
@@ -39926,7 +39926,9 @@ webhooks:
                       seq_ctrl: 772
                     x: 13.5
                     y: 3.2
-                  topic: location_centrak
+                  topic: location-centrak
+            schema:
+              $ref: '#/components/schemas/webhook_location_centrak'
         description: Webhook sample for `location-centrak` topic
       responses:
         '200':
@@ -39961,7 +39963,7 @@ webhooks:
                       seq_ctrl: 772
                     x: 13.5
                     y: 3.2
-                  topic: location_client
+                  topic: location-client
             schema:
               $ref: '#/components/schemas/webhook_location_client'
         description: Webhook sample for `location-client` topic
@@ -39995,7 +39997,7 @@ webhooks:
                     type: sdk
                     x: 13.5
                     y: 3.2
-                  topic: location_sdk
+                  topic: location-sdk
             schema:
               $ref: '#/components/schemas/webhook_location_sdk'
         description: Webhook sample for `location-sdk` topic
@@ -40032,7 +40034,7 @@ webhooks:
                       seq_ctrl: 772
                     x: 13.5
                     y: 3.2
-                  topic: location_unclient
+                  topic: location-unclient
             schema:
               $ref: '#/components/schemas/webhook_location_unclient'
         description: Webhook sample for `location-unclient` topic
@@ -40063,14 +40065,14 @@ webhooks:
                     mxedge_id: 00000000-0000-0000-1000-020000230522
                     mxedge_name: demo123
                     org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
-                    timestamp: '1763546876.209649'
+                    timestamp: 1763546876.209649
                     type: ME_CONFIG_CHANGED_BY_USER
                   - audit_id: 48efa5bf-d290-4e93-80ca-4dbf72f4187a
                     component: null
                     mxedge_id: 00000000-0000-0000-1000-020000a5fca1
                     mxedge_name: test123
                     org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
-                    timestamp: '1763546876.417778'
+                    timestamp: 1763546876.417778
                     type: ME_CONFIG_CHANGED_BY_USER
                   topic: mxedge-events
             schema:
@@ -40165,7 +40167,7 @@ webhooks:
                     type: NAC_CLIENT_PERMIT
                     username: user@deaflyz.net
                     vlan: '750'
-                  topic: string
+                  topic: nac-events
             schema:
               $ref: '#/components/schemas/webhook_nac_events'
         description: Webhook sample for `nac-events` topic
@@ -40207,6 +40209,39 @@ webhooks:
             schema:
               $ref: '#/components/schemas/webhook_occupancy_alerts'
         description: Webhook sample for `occupancy-alerts` topic
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
+  rssizone:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  topic: rssizone
+                  events:
+                  - mac: 500291xxxxxx
+                    map_id: f5d26c7f-1670-4921-xxxx-xxxxxxxxxxxx
+                    rssizone_id: e38f8e76-40db-4144-xxxx-xxxxxxxxxxxx
+                    site_id: f5fcbee5-fbca-45b3-xxxx-xxxxxxxxxxxx
+                    timestamp: 1694158990.986472
+                    trigger: enter
+                    type: wifi
+            schema:
+              $ref: '#/components/schemas/webhook_rssizone'
+        description: Webhook sample for `rssizone` topic
       responses:
         '200':
           description: Return a 200 status to indicate that the data was received
@@ -40282,7 +40317,7 @@ webhooks:
                       ssid: mist-wifi
                       timestamp: 1592333828
                     site_id: 93986f10-773b-42be-9438-8d3e6d127f1a
-                  topic: sdkclient_scan_data
+                  topic: sdkclient-scan-data
             schema:
               $ref: '#/components/schemas/webhook_sdkclient_scan_data'
         description: Webhook sample for `sdkclient-scan-data` topic
@@ -40315,7 +40350,7 @@ webhooks:
                       successful-connect: 0.7
                       time-to-connect: 0.9
                     timestamp: 1694620800
-                  topic: site_sle
+                  topic: site-sle
             schema:
               $ref: '#/components/schemas/webhook_site_sle'
         description: Webhook sample for `site-sle` topic
@@ -40348,12 +40383,12 @@ webhooks:
                     - 2.75
                     client_id: 28-f0-76-2d-22-1e
                     connected_site: false
-                    mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
-                    orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                    map_id: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                    org_id: 9c3e516c-397d-11e6-ae35-0242ac110008
                     packets:
                     - band: 5GHz
                       rssi: -92
-                    siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                    site_id: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
                   - ap_id: ac-23-16-ec-a7-0b
                     ap_loc:
                     - 36.03303862386182
@@ -40365,12 +40400,12 @@ webhooks:
                     - frame_ctrl: 776
                       payload: 010441060606fe3d35700601cecbd902512f000001
                       sequence_ctrl: 8432
-                    mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
-                    orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                    map_id: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                    org_id: 9c3e516c-397d-11e6-ae35-0242ac110008
                     packets:
                     - band: 5GHz
-                      rssi: -94.333336
-                    siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                      rssi: -94
+                    site_id: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
                   topic: wifi-conn-raw
             schema:
               $ref: '#/components/schemas/webhook_wifi_conn_raw'
@@ -40416,12 +40451,12 @@ webhooks:
                     - 2.75
                     client_id: 28-f0-76-2d-22-1e
                     connected_site: false
-                    mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
-                    orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                    map_id: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                    org_id: 9c3e516c-397d-11e6-ae35-0242ac110008
                     packets:
                     - band: 5GHz
                       rssi: -92
-                    siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                    site_id: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
                   - ap_id: ac-23-16-ec-a7-0b
                     ap_loc:
                     - 36.03303862386182
@@ -40429,12 +40464,12 @@ webhooks:
                     - 2.75
                     client_id: 38-f9-d3-99-08-6e
                     connected_site: false
-                    mapid: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
-                    orgid: 9c3e516c-397d-11e6-ae35-0242ac110008
+                    map_id: bd42f0c3-2e6a-4f8a-ac2d-d34e268c1418
+                    org_id: 9c3e516c-397d-11e6-ae35-0242ac110008
                     packets:
                     - band: 5GHz
-                      rssi: -94.333336
-                    siteid: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
+                      rssi: -94
+                    site_id: 27ea2f07-6fe6-4eab-be1b-b8e3ce083d67
                   topic: wifi-unconn-raw
             schema:
               $ref: '#/components/schemas/webhook_wifi_unconn_raw'
@@ -40477,8 +40512,10 @@ webhooks:
                     map_id: 09d2b626-2e4e-45ef-a3c4-e6aeb6c83db1
                     name: string
                     site_id: 72771e6a-6f5e-4de4-a5b9-1266c4197811
+                    zone_id: 4495020a-236f-46e0-9453-e3f9cc6476f4
                     timestamp: 0
-                    type: string
+                    trigger: enter
+                    type: wifi
                   topic: zone
             schema:
               $ref: '#/components/schemas/webhook_zone'
@@ -73379,6 +73416,10 @@ components:
     log_event:
       additionalProperties: false
       properties:
+        device_id:
+          type: string
+          format: uuid
+          readOnly: true
         admin_id:
           description: admin id
           format: uuid
@@ -74912,7 +74953,9 @@ components:
           examples:
           - PS1
           - Fan1
-          type: string
+          type:
+          - string
+          - null
         device_type:
           type: string
         from_version:
@@ -74922,6 +74965,8 @@ components:
         mxcluster_id:
           examples:
           - 2815c917-58e7-472f-a190-bfd44fb58d05
+          type: string
+        mxedge_name:
           type: string
         mxedge_id:
           examples:
@@ -100804,7 +100849,7 @@ components:
       type: array
     webhook_discovered_raw_rssi_topic:
       enum:
-      - asset-raw-rssi
+      - discovered-raw-rssi
       type: string
     webhook_guest_authorizations:
       additionalProperties: false
@@ -101564,6 +101609,58 @@ components:
     webhook_ping_topic:
       enum:
       - ping
+      type: string
+    webhook_rssizone:
+      additionalProperties: false
+      description: Sample of the `rssizone` webhook payload.
+      properties:
+        events:
+          $ref: '#/components/schemas/webhook_rssizone_events'
+        topic:
+          $ref: '#/components/schemas/webhook_rssizone_topic'
+      required:
+      - events
+      - topic
+      type: object
+    webhook_rssizone_event:
+      additionalProperties: false
+      properties:
+        mac:
+          description: Client MAC address
+          type: string
+        map_id:
+          type: string
+          format: uuid
+        rssizone_id:
+          description: RSSI zone name
+          type: string
+          format: uuid
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        trigger:
+          $ref: '#/components/schemas/webhook_zone_event_trigger'
+        type:
+          $ref: '#/components/schemas/webhook_zone_event_type'
+      required:
+      - mac
+      - map_id
+      - rssizone_id
+      - site_id
+      - timestamp
+      - trigger
+      - type
+      type: object
+    webhook_rssizone_events:
+      items:
+        $ref: '#/components/schemas/webhook_rssizone_event'
+      minItems: 1
+      type: array
+      uniqueItems: true
+    webhook_rssizone_topic:
+      enum:
+      - rssizone
       type: string
     webhook_sdkclient_scan_data:
       additionalProperties: false
