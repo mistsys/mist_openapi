@@ -7,3 +7,4 @@ converter.js
 tmp/
 workdir/*.bak
 venv/
+workdir/.vscode/
