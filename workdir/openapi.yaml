@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.5**
+  description: '> Version: **2511.1.6**
 
     >
 
-    > Date: **December 6, 2025**
+    > Date: **December 11, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.5
+  version: 2511.1.6
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -64298,10 +64298,10 @@ components:
     bgp_as:
       anyOf:
       - type: string
-      - maximum: 4294967295
+      - maximum: 4294967294
         minimum: 1
         type: integer
-      description: BGP AS, value in range 1-4294967295
+      description: BGP AS, value in range 1-4294967294
       examples:
       - 65000
     bgp_config:
@@ -68338,6 +68338,10 @@ components:
           $ref: '#/components/schemas/aggregate_routes'
         aggregate_routes6:
           $ref: '#/components/schemas/aggregate_routes6'
+        bgp_config:
+          additionalProperties:
+            $ref: '#/components/schemas/switch_bgp_config'
+          type: object
         created_time:
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
@@ -70532,7 +70536,7 @@ components:
         name:
           type: string
         port_config:
-          $ref: '#/components/schemas/wired_port_config'
+          $ref: '#/components/schemas/gateway_port_config'
       type: object
     gateway_matching_rules:
       items:
@@ -72980,6 +72984,11 @@ components:
           description: Media maximum transmission unit (MTU) is the largest data unit
             that can be forwarded without fragmentation
           type: integer
+        networks:
+          description: List of network names. Required if `usage`==`inet`
+          items:
+            type: string
+          type: array
         no_local_overwrite:
           default: true
           description: Prevent helpdesk to override the port config
@@ -76747,6 +76756,10 @@ components:
           $ref: '#/components/schemas/acl_tags'
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+        bgp_config:
+          additionalProperties:
+            $ref: '#/components/schemas/switch_bgp_config'
+          type: object
         created_time:
           $ref: '#/components/schemas/created_time'
         dhcp_snooping:
@@ -94815,6 +94828,93 @@ components:
       - QFX5120-32C: 23.4R2-S2.1
         QFX5130-32CD: 23.4R2-S2.3
       type: object
+    switch_bgp_config:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/switch_bgp_config_type'
+        networks:
+          $ref: '#/components/schemas/switch_bgp_config_networks'
+        bfd_minimum_interval:
+          description: Minimum interval in milliseconds for BFD hello packets. A neighbor
+            is considered failed when the device stops receiving replies after the
+            specified interval. Value must be between 1 and 255000.
+          type: integer
+          minimum: 1
+          maximum: 255000
+        local_as:
+          $ref: '#/components/schemas/bgp_as'
+        hold_time:
+          $ref: '#/components/schemas/switch_bgp_config_hold_time'
+        auth_key:
+          type: string
+        neighbors:
+          $ref: '#/components/schemas/switch_bgp_config_neighbors'
+        export_policy:
+          description: Export policy must match one of the policy names defined in
+            the `routing_policies` property.
+          type: string
+        import_policy:
+          description: Import policy must match one of the policy names defined in
+            the `routing_policies` property.
+          type: string
+      required:
+      - type
+      - local_as
+      type: object
+    switch_bgp_config_hold_time:
+      oneOf:
+      - type: integer
+        enum:
+        - 0
+      - type: integer
+        minimum: 3
+        maximum: 65535
+      description: Hold time is three times the interval at which keepalive messages
+        are sent. It indicates to the peer the length of time that it should consider
+        the sender valid. Must be 0 or a number in the range 3-65535.
+    switch_bgp_config_neighbor:
+      additionalProperties: false
+      properties:
+        neighbor_as:
+          $ref: '#/components/schemas/bgp_as'
+          description: Autonomous System (AS) number of the BGP neighbor. For internal
+            BGP, this must match `local_as`. For external BGP, this must differ from
+            `local_as`.
+        hold_time:
+          $ref: '#/components/schemas/switch_bgp_config_hold_time'
+        export_policy:
+          description: Export policy must match one of the policy names defined in
+            the `routing_policies` property.
+          type: string
+        import_policy:
+          description: Import policy must match one of the policy names defined in
+            the `routing_policies` property.
+          type: string
+        multihop_ttl:
+          maximum: 255
+          minimum: 1
+          type: integer
+      required:
+      - neighbor_as
+      type: object
+    switch_bgp_config_neighbors:
+      description: Property key is the BGP Neighbor IP Address.
+      additionalProperties:
+        $ref: '#/components/schemas/switch_bgp_config_neighbor'
+      type: object
+    switch_bgp_config_networks:
+      description: List of network names for BGP configuration. When a network is
+        specified, a BGP group will be added to the VRF that network is part of.
+      items:
+        type: string
+      type: array
+    switch_bgp_config_type:
+      description: 'enum: `external`, `internal`'
+      enum:
+      - external
+      - internal
+      type: string
     switch_dhcpd_config:
       additionalProperties:
         $ref: '#/components/schemas/switch_dhcpd_config_property'

@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2511.1.6] - 2025-12-11
+
+- Updated `/api/v1/orgs/{org_id}/networktemplates`
+  Updated `/api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}`
+  Updated `/api/v1/sites/{site_id}/devices`
+  Updated `/api/v1/sites/{site_id}/devices/import`
+  Updated `/api/v1/sites/{site_id}/devices/{device_id}`
+  Updated `/api/v1/sites/{site_id}/networktemplates/derived`
+  Updated `/api/v1/sites/{site_id}/setting`
+  Updated `/api/v1/sites/{site_id}/setting/derived`
+  - Added `bgp_config` for switches
+- Updated `/api/v1/orgs/{org_id}/deviceprofiles`
+  Updated `/api/v1/orgs/{org_id}/deviceprofiles/{deviceprofile_id}`
+  Updated `/api/v1/orgs/{org_id}/evpn_topologies`
+  Updated `/api/v1/orgs/{org_id}/evpn_topologies/{evpn_topology_id}`
+  Updated `/api/v1/orgs/{org_id}/networktemplates`
+  Updated `/api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}`
+  Updated `/api/v1/sites/{site_id}/deviceprofiles/derived`
+  Updated `/api/v1/sites/{site_id}/devices`
+  Updated `/api/v1/sites/{site_id}/devices/import`
+  Updated `/api/v1/sites/{site_id}/devices/{device_id}`
+  Updated `/api/v1/sites/{site_id}/evpn_topologies`
+  Updated `/api/v1/sites/{site_id}/evpn_topologies/{evpn_topology_id}`
+  Updated `/api/v1/sites/{site_id}/networktemplates/derived`
+  Updated `/api/v1/sites/{site_id}/setting`
+  Updated `/api/v1/sites/{site_id}/setting/derived`
+  - Added `networks` to `port_config`
+- Updated `/api/v1/orgs/{org_id}/deviceprofiles`
+  Updated `/api/v1/orgs/{org_id}/deviceprofiles/{deviceprofile_id}`
+  Updated `/api/v1/orgs/{org_id}/gatewaytemplates`
+  Updated `/api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}`
+  Updated `/api/v1/sites/{site_id}/deviceprofiles/derived`
+  Updated `/api/v1/sites/{site_id}/gatewaytemplates/derived`
+  Updated `/api/v1/sites/{site_id}/setting`
+  Updated `/api/v1/sites/{site_id}/setting/derived`
+  - Updated `gateway_matching` to use `wired_port_config` component for `port_config` property
+
 ## [2511.1.0] - 2025-11-17
 
 - Marked `/api/v1/orgs/{org_id}/128routers/register_cmd` as deprecated, replaced by `/api/v1/orgs/{org_id}/ssr/register_cmd`
