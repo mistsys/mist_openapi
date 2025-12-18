@@ -71652,13 +71652,17 @@ components:
       items:
         type: string
       type: array
+    routing_policy_term_matching_as_path:
+      type: array
+      items:
+          $ref: '#/components/schemas/bgp_as'
     gw_routing_policy_term_matching:
       additionalProperties: false
       description: zero or more criteria/filter can be specified to match the term,
         all criteria have to be met
       properties:
         as_path:
-          $ref: '#/components/schemas/bgp_as'
+          $ref: '#/components/schemas/routing_policy_term_matching_as_path'
         community:
           $ref: '#/components/schemas/routing_policy_term_matching_community'
         network:
@@ -94860,7 +94864,7 @@ components:
         all criteria have to be met
       properties:
         as_path:
-          $ref: '#/components/schemas/bgp_as'
+          $ref: '#/components/schemas/routing_policy_term_matching_as_path'
         community:
           $ref: '#/components/schemas/routing_policy_term_matching_community'
         prefix:
