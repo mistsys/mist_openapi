@@ -71681,11 +71681,8 @@ components:
           $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path_sla'
       type: object
     gw_routing_policy_term_matching_protocol:
-      description: '`direct`, `bgp`, `osp`, `static`, `aggregate`...'
       items:
-        examples:
-        - direct
-        type: string
+        $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
       type: array
     gw_routing_policy_term_matching_protocol_enum:
       description: 'enum: `bgp`, `direct`, `ospf`, `static` (SRX Only), `aggregate`'
@@ -84411,8 +84408,12 @@ components:
         type: string
       type: array
     routing_policy_term_matching_prefix:
+      description: zero or more criteria/filter can be specified to match the term,
+        all criteria have to be met
       items:
-        $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
+        examples:
+        - 192.168.0.0/16-30
+        type: string
       type: array
     rrm:
       additionalProperties: false
