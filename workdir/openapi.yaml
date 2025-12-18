@@ -74962,6 +74962,8 @@ components:
     mxedge_event:
       additionalProperties: false
       properties:
+        mxedge_name:
+          type: string
         device_id:
           description: Device id
           format: uuid
