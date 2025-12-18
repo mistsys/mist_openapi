@@ -100905,6 +100905,7 @@ components:
       - warn
       type: string
     webhook_device_events_topic:
+      description: 'enum: `device-events`'
       enum:
       - device-events
       type: string
@@ -100960,6 +100961,7 @@ components:
       type: array
       uniqueItems: true
     webhook_device_updowns_topic:
+      description: 'enum: `device-updowns`'
       enum:
       - device-updowns
       type: string
@@ -101036,6 +101038,7 @@ components:
         $ref: '#/components/schemas/webhook_discovered_raw_rssi_event'
       type: array
     webhook_discovered_raw_rssi_topic:
+      description: 'enum: `discovered-raw-rssi`'
       enum:
       - discovered-raw-rssi
       type: string
@@ -101152,6 +101155,7 @@ components:
         $ref: '#/components/schemas/webhook_guest_authorizations_event'
       type: array
     webhook_guest_authorizations_topic:
+      description: 'enum: `guest-authorizations`'
       enum:
       - guest-authorizations
       type: string
@@ -101250,6 +101254,7 @@ components:
         $ref: '#/components/schemas/webhook_location_asset_event'
       type: array
     webhook_location_asset_topic:
+      description: 'enum: `location-asset`'
       enum:
       - location-asset
       type: string
@@ -101311,6 +101316,7 @@ components:
       type: array
       uniqueItems: true
     webhook_location_centrak_topic:
+      description: 'enum: `location-centrak`'
       enum:
       - location-centrak
       type: string
@@ -101366,6 +101372,7 @@ components:
         $ref: '#/components/schemas/webhook_location_client_event'
       type: array
     webhook_location_client_topic:
+      description: 'enum: `location-client`'
       enum:
       - location-client
       type: string
@@ -101488,10 +101495,12 @@ components:
         $ref: '#/components/schemas/webhook_location_sdk_event'
       type: array
     webhook_location_sdk_topic:
+      description: 'enum: `location-sdk`'
       enum:
       - location-sdk
       type: string
     webhook_location_topic:
+      description: 'enum: `location`'
       enum:
       - location
       type: string
@@ -101547,10 +101556,12 @@ components:
         $ref: '#/components/schemas/webhook_location_unclient_event'
       type: array
     webhook_location_unclient_topic:
+      description: 'enum: `location-unclient`'
       enum:
       - location-unclient
       type: string
     webhook_mxedge_event_topic:
+      description: 'enum: `mxedge-events`'
       enum:
       - mxedge-events
       type: string
@@ -101642,6 +101653,7 @@ components:
         $ref: '#/components/schemas/webhook_nac_accounting_event'
       type: array
     webhook_nac_accounting_topic:
+      description: 'enum: `nac-accounting`'
       enum:
       - nac-accounting
       type: string
@@ -101655,6 +101667,7 @@ components:
           $ref: '#/components/schemas/webhook_nac_events_topic'
       type: object
     webhook_nac_events_topic:
+      description: 'enum: `nac-events`'
       enum:
       - nac-events
       type: string
@@ -101752,6 +101765,7 @@ components:
       type: array
       uniqueItems: true
     webhook_occupancy_alerts_topic:
+      description: 'enum: `occupeancy-alerts`'
       enum:
       - occupancy-alerts
       type: string
@@ -101795,6 +101809,7 @@ components:
       type: array
       uniqueItems: true
     webhook_ping_topic:
+      description: 'enum: `ping`'
       enum:
       - ping
       type: string
@@ -101847,6 +101862,7 @@ components:
       type: array
       uniqueItems: true
     webhook_rssizone_topic:
+      description: 'enum: `site-sle`'
       enum:
       - rssizone
       type: string
@@ -102248,6 +102264,7 @@ components:
       type: array
       uniqueItems: true
     webhook_zone_topic:
+      description: 'enum: `zone`'
       enum:
       - zone
       type: string
