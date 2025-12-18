@@ -40514,6 +40514,7 @@ webhooks:
                     site_id: 72771e6a-6f5e-4de4-a5b9-1266c4197811
                     timestamp: 0
                     trigger: enter
+                    zone_id: d38f8e76-40db-4144-8cbb-1266c4197811
                     type: wifi
                   topic: zone
             schema:
@@ -73440,6 +73441,13 @@ components:
           type:
           - string
           - 'null'
+        device_id:
+          description: Device id
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
         after:
           additionalProperties: true
           description: field values after the change
@@ -74954,13 +74962,22 @@ components:
     mxedge_event:
       additionalProperties: false
       properties:
+        device_id:
+          description: Device id
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
         audit_id:
           $ref: '#/components/schemas/id'
         component:
           examples:
           - PS1
           - Fan1
-          type: string
+          type: 
+          - string
+          - 'null'          
         device_type:
           type: string
         from_version:
@@ -101925,7 +101942,6 @@ components:
       type: array
       uniqueItems: true
     webhook_sdkclient_scan_data_topic:
-      default: sdkclient_scan_data
       description: 'enum: `sdkclient-scan-data`'
       enum:
       - sdkclient-scan-data
