@@ -9,6 +9,7 @@ import json
 FILENAME = "openapi"
 SRC_FILE = f"./{FILENAME}.yaml"
 
+ORDER = ["openapi", "info", "servers", "security", "tags", "paths", "webhooks", "components"]
 
 def display_mess(message):
     print("{0} ".format(message).ljust(79, "."), end="", flush=True)
@@ -49,7 +50,8 @@ def save_yaml(oas):
     display_mess(f"Saving YAML to {SRC_FILE}")
     try:
         with open(SRC_FILE, "w", encoding="utf-8") as oas_out_file:
-            yaml.dump(oas, oas_out_file, sort_keys=False)
+            for item in ORDER:
+                yaml.dump({item: oas[item]}, oas_out_file)
         display_success()
     except:
         display_failure()
