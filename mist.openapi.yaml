@@ -72937,7 +72937,7 @@ components:
         allow_dhcpd:
           description: 'Controls whether DHCP server traffic is allowed on ports using
             this configuration if DHCP snooping is enabled. This is a tri-state setting;
-            true: ports become trusted ports allowing DHCP server traffic, false:
+            `true`: ports become trusted ports allowing DHCP server traffic, `false`:
             ports become untrusted blocking DHCP server traffic, undefined: use system
             defaults (access ports default to untrusted, trunk ports default to trusted).'
           type: boolean
@@ -95647,10 +95647,10 @@ components:
         allow_dhcpd:
           description: 'Only applies when `mode`!=`dynamic`. Controls whether DHCP
             server traffic is allowed on ports using this configuration if DHCP snooping
-            is enabled. This is a tri-state setting; true: ports become trusted ports
-            allowing DHCP server traffic, false: ports become untrusted blocking DHCP
-            server traffic, undefined: use system defaults (access ports default to
-            untrusted, trunk ports default to trusted).'
+            is enabled. This is a tri-state setting; `true`: ports become trusted
+            ports allowing DHCP server traffic, `false`: ports become untrusted blocking
+            DHCP server traffic, undefined: use system defaults (access ports default
+            to untrusted, trunk ports default to trusted).'
           type: boolean
         allow_multiple_supplicants:
           default: false
