@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.7**
+  description: '> Version: **2511.1.8**
 
     >
 
-    > Date: **December 17, 2025**
+    > Date: **December 18, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.7
+  version: 2511.1.8
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -40518,6 +40518,7 @@ webhooks:
                     site_id: 72771e6a-6f5e-4de4-a5b9-1266c4197811
                     timestamp: 0
                     trigger: enter
+                    zone_id: d38f8e76-40db-4144-8cbb-1266c4197811
                     type: wifi
                   topic: zone
             schema:
@@ -64304,7 +64305,8 @@ components:
       - maximum: 4294967294
         minimum: 1
         type: integer
-      description: BGP AS, value in range 1-4294967294
+      description: BGP AS, value in range 1-4294967294. Can be a Variable (e.g. `{{bgp_as}}`
+        )
       examples:
       - 65000
     bgp_config:
@@ -68187,10 +68189,7 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
-          additionalProperties:
-            $ref: '#/components/schemas/routing_policy'
-          description: Property key is the routing policy name
-          type: object
+          $ref: '#/components/schemas/gw_routing_policies'
         serial:
           description: Device Serial
           readOnly: true
@@ -68749,10 +68748,7 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
-          additionalProperties:
-            $ref: '#/components/schemas/routing_policy'
-          description: Property key is the routing policy name
-          type: object
+          $ref: '#/components/schemas/gw_routing_policies'
         service_policies:
           $ref: '#/components/schemas/service_policies'
         tunnel_configs:
@@ -68785,6 +68781,8 @@ components:
         The settings from the Device Profile will override the settings from the Switch
         Template and the Site Settings.
       properties:
+        routing_policies:
+          $ref: '#/components/schemas/sw_routing_policies'
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
@@ -71267,10 +71265,7 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
-          additionalProperties:
-            $ref: '#/components/schemas/routing_policy'
-          description: Property key is the routing policy name
-          type: object
+          $ref: '#/components/schemas/gw_routing_policies'
         service_policies:
           $ref: '#/components/schemas/service_policies'
         tunnel_configs:
@@ -71590,6 +71585,167 @@ components:
       items:
         $ref: '#/components/schemas/guest'
       type: array
+    gw_routing_policies:
+      additionalProperties:
+        $ref: '#/components/schemas/gw_routing_policy'
+      description: Property key is the routing policy name
+      type: object
+    gw_routing_policy:
+      additionalProperties: false
+      properties:
+        terms:
+          $ref: '#/components/schemas/gw_routing_policy_terms'
+      type: object
+    gw_routing_policy_term:
+      additionalProperties: false
+      properties:
+        actions:
+          $ref: '#/components/schemas/gw_routing_policy_term_action'
+        matching:
+          $ref: '#/components/schemas/gw_routing_policy_term_matching'
+      type: object
+    gw_routing_policy_term_action:
+      additionalProperties: false
+      description: When used as import policy
+      properties:
+        accept:
+          type: boolean
+        add_community:
+          $ref: '#/components/schemas/gw_routing_policy_term_action_add_community'
+        add_target_vrfs:
+          $ref: '#/components/schemas/gw_routing_policy_term_action_add_target_vrfs'
+        community:
+          $ref: '#/components/schemas/routing_policy_term_action_community'
+        exclude_as_path:
+          $ref: '#/components/schemas/gw_routing_policy_term_action_exclude_as_path'
+        exclude_community:
+          $ref: '#/components/schemas/gw_routing_policy_term_action_exclude_community'
+        export_communities:
+          $ref: '#/components/schemas/gw_routing_policy_term_action_export_communities'
+        local_preference:
+          $ref: '#/components/schemas/routing_policy_local_preference'
+        prepend_as_path:
+          $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
+      type: object
+    gw_routing_policy_term_action_add_community:
+      items:
+        examples:
+        - '3900190'
+        type: string
+      type: array
+    gw_routing_policy_term_action_add_target_vrfs:
+      description: For SSR, hub decides how VRF routes are leaked on spoke
+      items:
+        type: string
+      type: array
+    gw_routing_policy_term_action_exclude_as_path:
+      description: When used as export policy, optional. To exclude certain AS
+      items:
+        examples:
+        - '65002'
+        type: string
+      type: array
+    gw_routing_policy_term_action_exclude_community:
+      items:
+        examples:
+        - '3900190'
+        type: string
+      type: array
+    gw_routing_policy_term_action_export_communities:
+      description: When used as export policy, optional
+      items:
+        type: string
+      type: array
+    gw_routing_policy_term_matching:
+      additionalProperties: false
+      description: zero or more criteria/filter can be specified to match the term,
+        all criteria have to be met
+      properties:
+        as_path:
+          $ref: '#/components/schemas/bgp_as'
+        community:
+          $ref: '#/components/schemas/routing_policy_term_matching_community'
+        network:
+          $ref: '#/components/schemas/strings'
+        prefix:
+          $ref: '#/components/schemas/routing_policy_term_matching_prefix'
+        protocol:
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol'
+        route_exists:
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_route_exists'
+        vpn_neighbor_mac:
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_neighbor_mac'
+        vpn_path:
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path'
+        vpn_path_sla:
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path_sla'
+      type: object
+    gw_routing_policy_term_matching_protocol:
+      description: '`direct`, `bgp`, `osp`, `static`, `aggregate`...'
+      items:
+        examples:
+        - direct
+        type: string
+      type: array
+    gw_routing_policy_term_matching_protocol_enum:
+      description: 'enum: `bgp`, `direct`, `ospf`, `static` (SRX Only), `aggregate`'
+      enum:
+      - bgp
+      - direct
+      - ospf
+      - static
+      - aggregate
+      type: string
+    gw_routing_policy_term_matching_route_exists:
+      additionalProperties: false
+      properties:
+        route:
+          examples:
+          - 192.168.0.0/24
+          type: string
+        vrf_name:
+          default: default
+          description: Name of the vrf instance, it can also be the name of the VPN
+            or wan if they
+          type: string
+      type: object
+    gw_routing_policy_term_matching_vpn_neighbor_mac:
+      description: overlay-facing criteria (used for bgp_config where via=vpn)
+      items:
+        type: string
+      type: array
+    gw_routing_policy_term_matching_vpn_path:
+      description: overlay-facing criteria (used for bgp_config where via=vpn). ordered-
+      items:
+        type: string
+      type: array
+    gw_routing_policy_term_matching_vpn_path_sla:
+      additionalProperties: false
+      properties:
+        max_jitter:
+          type:
+          - integer
+          - 'null'
+        max_latency:
+          examples:
+          - 1500
+          type:
+          - integer
+          - 'null'
+        max_loss:
+          examples:
+          - 30
+          type:
+          - integer
+          - 'null'
+      type: object
+    gw_routing_policy_terms:
+      description: zero or more criteria/filter can be specified to match the term,
+        all criteria have to be met
+      items:
+        $ref: '#/components/schemas/gw_routing_policy_term'
+      type: array
+      uniqueItems: true
     ha_cluster_config:
       properties:
         disable_auto_config:
@@ -73443,6 +73599,13 @@ components:
           type:
           - string
           - 'null'
+        device_id:
+          description: Device id
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
         after:
           additionalProperties: true
           description: field values after the change
@@ -74957,13 +75120,24 @@ components:
     mxedge_event:
       additionalProperties: false
       properties:
+        mxedge_name:
+          type: string
+        device_id:
+          description: Device id
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
         audit_id:
           $ref: '#/components/schemas/id'
         component:
           examples:
           - PS1
           - Fan1
-          type: string
+          type:
+          - string
+          - 'null'
         device_type:
           type: string
         from_version:
@@ -76744,6 +76918,8 @@ components:
     network_template:
       description: Network Template
       properties:
+        routing_policies:
+          $ref: '#/components/schemas/sw_routing_policies'
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
@@ -84205,55 +84381,14 @@ components:
         total_routes:
           type: integer
       type: object
-    routing_policy:
-      additionalProperties: false
-      properties:
-        terms:
-          $ref: '#/components/schemas/routing_policy_terms'
-      type: object
-    routing_policy_term:
-      additionalProperties: false
-      properties:
-        actions:
-          $ref: '#/components/schemas/routing_policy_term_action'
-        matching:
-          $ref: '#/components/schemas/routing_policy_term_matching'
-      type: object
-    routing_policy_term_action:
-      additionalProperties: false
-      description: When used as import policy
-      properties:
-        accept:
-          type: boolean
-        add_community:
-          $ref: '#/components/schemas/routing_policy_term_action_add_community'
-        add_target_vrfs:
-          $ref: '#/components/schemas/routing_policy_term_action_add_target_vrfs'
-        community:
-          $ref: '#/components/schemas/routing_policy_term_action_community'
-        exclude_as_path:
-          $ref: '#/components/schemas/routing_policy_term_action_exclude_as_path'
-        exclude_community:
-          $ref: '#/components/schemas/routing_policy_term_action_exclude_community'
-        export_communities:
-          $ref: '#/components/schemas/routing_policy_term_action_export_communities'
-        local_preference:
-          description: Optional, for an import policy, local_preference can be changed
-          type: string
-        prepend_as_path:
-          $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
-      type: object
-    routing_policy_term_action_add_community:
-      items:
-        examples:
-        - '3900190'
-        type: string
-      type: array
-    routing_policy_term_action_add_target_vrfs:
-      description: For SSR, hub decides how VRF routes are leaked on spoke
-      items:
-        type: string
-      type: array
+    routing_policy_local_preference:
+      anyOf:
+      - type: string
+      - maximum: 4294967295
+        minimum: 1
+        type: integer
+      description: Optional, for an import policy, local_preference can be changed,
+        value in range 1-4294967294. Can be a Variable (e.g. `{{bgp_as}}`)
     routing_policy_term_action_community:
       description: When used as export policy, optional
       items:
@@ -84261,61 +84396,12 @@ components:
         - '3900190'
         type: string
       type: array
-    routing_policy_term_action_exclude_as_path:
-      description: When used as export policy, optional. To exclude certain AS
-      items:
-        examples:
-        - '65002'
-        type: string
-      type: array
-    routing_policy_term_action_exclude_community:
-      items:
-        examples:
-        - '3900190'
-        type: string
-      type: array
-    routing_policy_term_action_export_communities:
-      description: When used as export policy, optional
-      items:
-        type: string
-      type: array
     routing_policy_term_action_prepend_as_path:
       description: When used as export policy, optional. By default, the local AS
-        will be prepended, to change it
+        will be prepended, to change it. Can be a Variable (e.g. `{{as_path}}`)
       items:
         examples:
-        - '65003'
-        type: string
-      type: array
-    routing_policy_term_matching:
-      additionalProperties: false
-      description: zero or more criteria/filter can be specified to match the term,
-        all criteria have to be met
-      properties:
-        as_path:
-          $ref: '#/components/schemas/routing_policy_term_matching_as_path'
-        community:
-          $ref: '#/components/schemas/routing_policy_term_matching_community'
-        network:
-          $ref: '#/components/schemas/strings'
-        prefix:
-          $ref: '#/components/schemas/routing_policy_term_matching_prefix'
-        protocol:
-          $ref: '#/components/schemas/routing_policy_term_matching_protocol'
-        route_exists:
-          $ref: '#/components/schemas/routing_policy_term_matching_route_exists'
-        vpn_neighbor_mac:
-          $ref: '#/components/schemas/routing_policy_term_matching_vpn_neighbor_mac'
-        vpn_path:
-          $ref: '#/components/schemas/routing_policy_term_matching_vpn_path'
-        vpn_path_sla:
-          $ref: '#/components/schemas/routing_policy_term_matching_vpn_path_sla'
-      type: object
-    routing_policy_term_matching_as_path:
-      description: takes regular expression
-      items:
-        examples:
-        - '65001'
+        - 65000 400
         type: string
       type: array
     routing_policy_term_matching_community:
@@ -84325,70 +84411,9 @@ components:
         type: string
       type: array
     routing_policy_term_matching_prefix:
-      description: zero or more criteria/filter can be specified to match the term,
-        all criteria have to be met
       items:
-        examples:
-        - 192.168.0.0/16-30
-        type: string
+        $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
       type: array
-    routing_policy_term_matching_protocol:
-      description: '`direct`, `bgp`, `osp`, `static`, `aggregate`...'
-      items:
-        examples:
-        - direct
-        type: string
-      type: array
-    routing_policy_term_matching_route_exists:
-      additionalProperties: false
-      properties:
-        route:
-          examples:
-          - 192.168.0.0/24
-          type: string
-        vrf_name:
-          default: default
-          description: Name of the vrf instance, it can also be the name of the VPN
-            or wan if they
-          type: string
-      type: object
-    routing_policy_term_matching_vpn_neighbor_mac:
-      description: overlay-facing criteria (used for bgp_config where via=vpn)
-      items:
-        type: string
-      type: array
-    routing_policy_term_matching_vpn_path:
-      description: overlay-facing criteria (used for bgp_config where via=vpn). ordered-
-      items:
-        type: string
-      type: array
-    routing_policy_term_matching_vpn_path_sla:
-      additionalProperties: false
-      properties:
-        max_jitter:
-          type:
-          - integer
-          - 'null'
-        max_latency:
-          examples:
-          - 1500
-          type:
-          - integer
-          - 'null'
-        max_loss:
-          examples:
-          - 30
-          type:
-          - integer
-          - 'null'
-      type: object
-    routing_policy_terms:
-      description: zero or more criteria/filter can be specified to match the term,
-        all criteria have to be met
-      items:
-        $ref: '#/components/schemas/routing_policy_term'
-      type: array
-      uniqueItems: true
     rrm:
       additionalProperties: false
       description: RRM
@@ -86655,6 +86680,8 @@ components:
     site_setting:
       description: Site Settings
       properties:
+        routing_policies:
+          $ref: '#/components/schemas/sw_routing_policies'
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
@@ -94793,6 +94820,73 @@ components:
       - org
       - site
       type: string
+    sw_routing_policies:
+      additionalProperties:
+        $ref: '#/components/schemas/sw_routing_policy'
+      description: Property key is the routing policy name
+      type: object
+    sw_routing_policy:
+      additionalProperties: false
+      properties:
+        terms:
+          $ref: '#/components/schemas/sw_routing_policy_terms'
+      type: object
+    sw_routing_policy_term:
+      additionalProperties: false
+      properties:
+        actions:
+          $ref: '#/components/schemas/sw_routing_policy_term_action'
+        matching:
+          $ref: '#/components/schemas/sw_routing_policy_term_matching'
+      type: object
+    sw_routing_policy_term_action:
+      additionalProperties: false
+      description: When used as import policy
+      properties:
+        accept:
+          type: boolean
+        community:
+          $ref: '#/components/schemas/routing_policy_term_action_community'
+        local_preference:
+          $ref: '#/components/schemas/routing_policy_local_preference'
+        prepend_as_path:
+          $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
+      type: object
+    sw_routing_policy_term_matching:
+      additionalProperties: false
+      description: zero or more criteria/filter can be specified to match the term,
+        all criteria have to be met
+      properties:
+        as_path:
+          $ref: '#/components/schemas/bgp_as'
+        community:
+          $ref: '#/components/schemas/routing_policy_term_matching_community'
+        prefix:
+          $ref: '#/components/schemas/routing_policy_term_matching_prefix'
+        protocol:
+          $ref: '#/components/schemas/sw_routing_policy_term_matching_protocol'
+      type: object
+    sw_routing_policy_term_matching_protocol:
+      items:
+        $ref: '#/components/schemas/sw_routing_policy_term_matching_protocol_enum'
+      type: array
+    sw_routing_policy_term_matching_protocol_enum:
+      description: 'enum: `bgp`, `direct`, `evpn`, `ospf`, `static`'
+      enum:
+      - bgp
+      - direct
+      - evpn
+      - ospf
+      - static
+      type: string
+    sw_routing_policy_terms:
+      description: at least criteria/filter must be specified to match the term, all
+        criteria have to be met
+      items:
+        $ref: '#/components/schemas/sw_routing_policy_term'
+      type: array
+      minItems: 1
+      uniqueItems: true
     switch_auto_upgrade:
       additionalProperties: false
       properties:
@@ -94857,15 +94951,19 @@ components:
       type: object
     switch_bgp_config_hold_time:
       oneOf:
-      - type: integer
-        enum:
-        - 0
-      - type: integer
-        minimum: 3
-        maximum: 65535
+      - $ref: '#/components/schemas/switch_bgp_config_hold_time_zero'
+      - $ref: '#/components/schemas/switch_bgp_config_hold_time_integer'
       description: Hold time is three times the interval at which keepalive messages
         are sent. It indicates to the peer the length of time that it should consider
         the sender valid. Must be 0 or a number in the range 3-65535.
+    switch_bgp_config_hold_time_integer:
+      type: integer
+      minimum: 3
+      maximum: 65535
+    switch_bgp_config_hold_time_zero:
+      type: integer
+      enum:
+      - 0
     switch_bgp_config_neighbor:
       additionalProperties: false
       properties:
@@ -100810,6 +100908,7 @@ components:
       - warn
       type: string
     webhook_device_events_topic:
+      description: 'enum: `device-events`'
       enum:
       - device-events
       type: string
@@ -100865,6 +100964,7 @@ components:
       type: array
       uniqueItems: true
     webhook_device_updowns_topic:
+      description: 'enum: `device-updowns`'
       enum:
       - device-updowns
       type: string
@@ -100941,6 +101041,7 @@ components:
         $ref: '#/components/schemas/webhook_discovered_raw_rssi_event'
       type: array
     webhook_discovered_raw_rssi_topic:
+      description: 'enum: `discovered-raw-rssi`'
       enum:
       - discovered-raw-rssi
       type: string
@@ -101057,6 +101158,7 @@ components:
         $ref: '#/components/schemas/webhook_guest_authorizations_event'
       type: array
     webhook_guest_authorizations_topic:
+      description: 'enum: `guest-authorizations`'
       enum:
       - guest-authorizations
       type: string
@@ -101155,6 +101257,7 @@ components:
         $ref: '#/components/schemas/webhook_location_asset_event'
       type: array
     webhook_location_asset_topic:
+      description: 'enum: `location-asset`'
       enum:
       - location-asset
       type: string
@@ -101216,6 +101319,7 @@ components:
       type: array
       uniqueItems: true
     webhook_location_centrak_topic:
+      description: 'enum: `location-centrak`'
       enum:
       - location-centrak
       type: string
@@ -101271,6 +101375,7 @@ components:
         $ref: '#/components/schemas/webhook_location_client_event'
       type: array
     webhook_location_client_topic:
+      description: 'enum: `location-client`'
       enum:
       - location-client
       type: string
@@ -101393,10 +101498,12 @@ components:
         $ref: '#/components/schemas/webhook_location_sdk_event'
       type: array
     webhook_location_sdk_topic:
+      description: 'enum: `location-sdk`'
       enum:
       - location-sdk
       type: string
     webhook_location_topic:
+      description: 'enum: `location`'
       enum:
       - location
       type: string
@@ -101452,10 +101559,12 @@ components:
         $ref: '#/components/schemas/webhook_location_unclient_event'
       type: array
     webhook_location_unclient_topic:
+      description: 'enum: `location-unclient`'
       enum:
       - location-unclient
       type: string
     webhook_mxedge_event_topic:
+      description: 'enum: `mxedge-events`'
       enum:
       - mxedge-events
       type: string
@@ -101547,6 +101656,7 @@ components:
         $ref: '#/components/schemas/webhook_nac_accounting_event'
       type: array
     webhook_nac_accounting_topic:
+      description: 'enum: `nac-accounting`'
       enum:
       - nac-accounting
       type: string
@@ -101560,6 +101670,7 @@ components:
           $ref: '#/components/schemas/webhook_nac_events_topic'
       type: object
     webhook_nac_events_topic:
+      description: 'enum: `nac-events`'
       enum:
       - nac-events
       type: string
@@ -101657,6 +101768,7 @@ components:
       type: array
       uniqueItems: true
     webhook_occupancy_alerts_topic:
+      description: 'enum: `occupeancy-alerts`'
       enum:
       - occupancy-alerts
       type: string
@@ -101700,6 +101812,7 @@ components:
       type: array
       uniqueItems: true
     webhook_ping_topic:
+      description: 'enum: `ping`'
       enum:
       - ping
       type: string
@@ -101752,6 +101865,7 @@ components:
       type: array
       uniqueItems: true
     webhook_rssizone_topic:
+      description: 'enum: `site-sle`'
       enum:
       - rssizone
       type: string
@@ -101847,7 +101961,6 @@ components:
       type: array
       uniqueItems: true
     webhook_sdkclient_scan_data_topic:
-      default: sdkclient_scan_data
       description: 'enum: `sdkclient-scan-data`'
       enum:
       - sdkclient-scan-data
@@ -102154,6 +102267,7 @@ components:
       type: array
       uniqueItems: true
     webhook_zone_topic:
+      description: 'enum: `zone`'
       enum:
       - zone
       type: string
