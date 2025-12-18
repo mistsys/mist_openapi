@@ -71687,13 +71687,13 @@ components:
         $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
       type: array
     gw_routing_policy_term_matching_protocol_enum:
-      description: 'enum: `bgp`, `direct`, `ospf`, `static` (SRX Only), `aggregate`'
+      description: 'enum: `aggregate`, `bgp`, `direct`, `ospf`, `static` (SRX Only)'
       enum:
+      - aggregate
       - bgp
       - direct
       - ospf
       - static
-      - aggregate
       type: string
     gw_routing_policy_term_matching_route_exists:
       additionalProperties: false
@@ -94845,6 +94845,10 @@ components:
           $ref: '#/components/schemas/sw_routing_policy_term_action'
         matching:
           $ref: '#/components/schemas/sw_routing_policy_term_matching'
+        name:
+          type: string
+      required:
+      - name
       type: object
     sw_routing_policy_term_action:
       additionalProperties: false
