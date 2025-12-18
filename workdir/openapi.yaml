@@ -101873,7 +101873,7 @@ components:
       type: array
       uniqueItems: true
     webhook_rssizone_topic:
-      description: 'enum: `site-sle`'
+      description: 'enum: `rssizone`'
       enum:
       - rssizone
       type: string
