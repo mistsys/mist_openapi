@@ -64300,9 +64300,16 @@ components:
       - maximum: 4294967294
         minimum: 1
         type: integer
-      description: BGP AS, value in range 1-4294967294
+      description: BGP AS, value in range 1-4294967294. Can be a Variable (e.g. `{{bgp_as}}` )
       examples:
       - 65000
+    routing_policy_local_preference:
+      anyOf:
+      - type: string
+      - maximum: 4294967295
+        minimum: 1
+        type: integer
+      description: Optional, for an import policy, local_preference can be changed, value in range 1-4294967294. Can be a Variable (e.g. `{{bgp_as}}`)
     bgp_config:
       additionalProperties: false
       description: BFD is enabled when either bfd_minimum_interval or bfd_multiplier
@@ -68183,10 +68190,7 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
-          additionalProperties:
-            $ref: '#/components/schemas/routing_policy'
-          description: Property key is the routing policy name
-          type: object
+          $ref: '#/components/schemas/gw_routing_policies'
         serial:
           description: Device Serial
           readOnly: true
@@ -68745,10 +68749,7 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
-          additionalProperties:
-            $ref: '#/components/schemas/routing_policy'
-          description: Property key is the routing policy name
-          type: object
+          $ref: '#/components/schemas/gw_routing_policies'
         service_policies:
           $ref: '#/components/schemas/service_policies'
         tunnel_configs:
@@ -68781,6 +68782,8 @@ components:
         The settings from the Device Profile will override the settings from the Switch
         Template and the Site Settings.
       properties:
+        routing_policies:
+          $ref: '#/components/schemas/sw_routing_policies'
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
@@ -71263,10 +71266,7 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
-          additionalProperties:
-            $ref: '#/components/schemas/routing_policy'
-          description: Property key is the routing policy name
-          type: object
+          $ref: '#/components/schemas/gw_routing_policies'
         service_policies:
           $ref: '#/components/schemas/service_policies'
         tunnel_configs:
@@ -76744,6 +76744,8 @@ components:
     network_template:
       description: Network Template
       properties:
+        routing_policies:
+          $ref: '#/components/schemas/sw_routing_policies'
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
@@ -84205,51 +84207,50 @@ components:
         total_routes:
           type: integer
       type: object
-    routing_policy:
+    gw_routing_policy:
       additionalProperties: false
       properties:
         terms:
-          $ref: '#/components/schemas/routing_policy_terms'
+          $ref: '#/components/schemas/gw_routing_policy_terms'
       type: object
-    routing_policy_term:
+    gw_routing_policy_term:
       additionalProperties: false
       properties:
         actions:
-          $ref: '#/components/schemas/routing_policy_term_action'
+          $ref: '#/components/schemas/gw_routing_policy_term_action'
         matching:
-          $ref: '#/components/schemas/routing_policy_term_matching'
+          $ref: '#/components/schemas/gw_routing_policy_term_matching'
       type: object
-    routing_policy_term_action:
+    gw_routing_policy_term_action:
       additionalProperties: false
       description: When used as import policy
       properties:
         accept:
           type: boolean
         add_community:
-          $ref: '#/components/schemas/routing_policy_term_action_add_community'
+          $ref: '#/components/schemas/gw_routing_policy_term_action_add_community'
         add_target_vrfs:
-          $ref: '#/components/schemas/routing_policy_term_action_add_target_vrfs'
+          $ref: '#/components/schemas/gw_routing_policy_term_action_add_target_vrfs'
         community:
           $ref: '#/components/schemas/routing_policy_term_action_community'
         exclude_as_path:
-          $ref: '#/components/schemas/routing_policy_term_action_exclude_as_path'
+          $ref: '#/components/schemas/gw_routing_policy_term_action_exclude_as_path'
         exclude_community:
-          $ref: '#/components/schemas/routing_policy_term_action_exclude_community'
+          $ref: '#/components/schemas/gw_routing_policy_term_action_exclude_community'
         export_communities:
-          $ref: '#/components/schemas/routing_policy_term_action_export_communities'
+          $ref: '#/components/schemas/gw_routing_policy_term_action_export_communities'
         local_preference:
-          description: Optional, for an import policy, local_preference can be changed
-          type: string
+          $ref: '#/components/schemas/routing_policy_local_preference'
         prepend_as_path:
           $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
       type: object
-    routing_policy_term_action_add_community:
+    gw_routing_policy_term_action_add_community:
       items:
         examples:
         - '3900190'
         type: string
       type: array
-    routing_policy_term_action_add_target_vrfs:
+    gw_routing_policy_term_action_add_target_vrfs:
       description: For SSR, hub decides how VRF routes are leaked on spoke
       items:
         type: string
@@ -84261,39 +84262,39 @@ components:
         - '3900190'
         type: string
       type: array
-    routing_policy_term_action_exclude_as_path:
+    gw_routing_policy_term_action_exclude_as_path:
       description: When used as export policy, optional. To exclude certain AS
       items:
         examples:
         - '65002'
         type: string
       type: array
-    routing_policy_term_action_exclude_community:
+    gw_routing_policy_term_action_exclude_community:
       items:
         examples:
         - '3900190'
         type: string
       type: array
-    routing_policy_term_action_export_communities:
+    gw_routing_policy_term_action_export_communities:
       description: When used as export policy, optional
       items:
         type: string
       type: array
     routing_policy_term_action_prepend_as_path:
       description: When used as export policy, optional. By default, the local AS
-        will be prepended, to change it
+        will be prepended, to change it. Can be a Variable (e.g. `{{as_path}}`)
       items:
         examples:
-        - '65003'
+        - '65000 400'
         type: string
       type: array
-    routing_policy_term_matching:
+    gw_routing_policy_term_matching:
       additionalProperties: false
       description: zero or more criteria/filter can be specified to match the term,
         all criteria have to be met
       properties:
         as_path:
-          $ref: '#/components/schemas/routing_policy_term_matching_as_path'
+          $ref: '#/components/schemas/bgp_as'
         community:
           $ref: '#/components/schemas/routing_policy_term_matching_community'
         network:
@@ -84301,23 +84302,16 @@ components:
         prefix:
           $ref: '#/components/schemas/routing_policy_term_matching_prefix'
         protocol:
-          $ref: '#/components/schemas/routing_policy_term_matching_protocol'
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol'
         route_exists:
-          $ref: '#/components/schemas/routing_policy_term_matching_route_exists'
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_route_exists'
         vpn_neighbor_mac:
-          $ref: '#/components/schemas/routing_policy_term_matching_vpn_neighbor_mac'
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_neighbor_mac'
         vpn_path:
-          $ref: '#/components/schemas/routing_policy_term_matching_vpn_path'
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path'
         vpn_path_sla:
-          $ref: '#/components/schemas/routing_policy_term_matching_vpn_path_sla'
+          $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path_sla'
       type: object
-    routing_policy_term_matching_as_path:
-      description: takes regular expression
-      items:
-        examples:
-        - '65001'
-        type: string
-      type: array
     routing_policy_term_matching_community:
       items:
         examples:
@@ -84325,21 +84319,26 @@ components:
         type: string
       type: array
     routing_policy_term_matching_prefix:
-      description: zero or more criteria/filter can be specified to match the term,
-        all criteria have to be met
       items:
-        examples:
-        - 192.168.0.0/16-30
-        type: string
+         $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
       type: array
-    routing_policy_term_matching_protocol:
+    gw_routing_policy_term_matching_protocol:
       description: '`direct`, `bgp`, `osp`, `static`, `aggregate`...'
       items:
         examples:
         - direct
         type: string
       type: array
-    routing_policy_term_matching_route_exists:
+    gw_routing_policy_term_matching_protocol_enum:
+      description: 'enum: `bgp`, `direct`, `ospf`, `static` (SRX Only), `aggregate`'
+      enum:
+      - bgp
+      - direct
+      - ospf
+      - static
+      - aggregate
+      type: string
+    gw_routing_policy_term_matching_route_exists:
       additionalProperties: false
       properties:
         route:
@@ -84352,17 +84351,17 @@ components:
             or wan if they
           type: string
       type: object
-    routing_policy_term_matching_vpn_neighbor_mac:
+    gw_routing_policy_term_matching_vpn_neighbor_mac:
       description: overlay-facing criteria (used for bgp_config where via=vpn)
       items:
         type: string
       type: array
-    routing_policy_term_matching_vpn_path:
+    gw_routing_policy_term_matching_vpn_path:
       description: overlay-facing criteria (used for bgp_config where via=vpn). ordered-
       items:
         type: string
       type: array
-    routing_policy_term_matching_vpn_path_sla:
+    gw_routing_policy_term_matching_vpn_path_sla:
       additionalProperties: false
       properties:
         max_jitter:
@@ -84382,12 +84381,84 @@ components:
           - integer
           - 'null'
       type: object
-    routing_policy_terms:
+    gw_routing_policies:
+      additionalProperties:
+        $ref: '#/components/schemas/gw_routing_policy'
+      description: Property key is the routing policy name
+      type: object
+    sw_routing_policies:
+      additionalProperties:
+        $ref: '#/components/schemas/sw_routing_policy'
+      description: Property key is the routing policy name
+      type: object
+    gw_routing_policy_terms:
       description: zero or more criteria/filter can be specified to match the term,
         all criteria have to be met
       items:
-        $ref: '#/components/schemas/routing_policy_term'
+        $ref: '#/components/schemas/gw_routing_policy_term'
       type: array
+      uniqueItems: true
+    sw_routing_policy:
+      additionalProperties: false
+      properties:
+        terms:
+          $ref: '#/components/schemas/sw_routing_policy_terms'
+      type: object
+    sw_routing_policy_term:
+      additionalProperties: false
+      properties:
+        actions:
+          $ref: '#/components/schemas/sw_routing_policy_term_action'
+        matching:
+          $ref: '#/components/schemas/sw_routing_policy_term_matching'
+      type: object
+    sw_routing_policy_term_action:
+      additionalProperties: false
+      description: When used as import policy
+      properties:
+        accept:
+          type: boolean
+        community:
+          $ref: '#/components/schemas/routing_policy_term_action_community'
+        local_preference:
+          $ref: '#/components/schemas/routing_policy_local_preference'
+        prepend_as_path:
+          $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
+      type: object
+    sw_routing_policy_term_matching:
+      additionalProperties: false
+      description: zero or more criteria/filter can be specified to match the term,
+        all criteria have to be met
+      properties:
+        as_path:
+          $ref: '#/components/schemas/bgp_as'
+        community:
+          $ref: '#/components/schemas/routing_policy_term_matching_community'
+        prefix:
+          $ref: '#/components/schemas/routing_policy_term_matching_prefix'
+        protocol:
+          $ref: '#/components/schemas/sw_routing_policy_term_matching_protocol'
+      type: object
+    sw_routing_policy_term_matching_protocol:
+      items:
+        $ref: '#/components/schemas/sw_routing_policy_term_matching_protocol_enum'
+      type: array
+    sw_routing_policy_term_matching_protocol_enum:
+      description: 'enum: `bgp`, `direct`, `evpn`, `ospf`, `static`'
+      enum:
+      - bgp
+      - direct
+      - evpn
+      - ospf
+      - static
+      type: string
+    sw_routing_policy_terms:
+      description: at least criteria/filter must be specified to match the term,
+        all criteria have to be met
+      items:
+        $ref: '#/components/schemas/sw_routing_policy_term'
+      type: array
+      minItems: 1
       uniqueItems: true
     rrm:
       additionalProperties: false
@@ -86656,6 +86727,8 @@ components:
     site_setting:
       description: Site Settings
       properties:
+        routing_policies:
+          $ref: '#/components/schemas/sw_routing_policies'
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
@@ -94856,14 +94929,18 @@ components:
       - type
       - local_as
       type: object
+    switch_bgp_config_hold_time_zero:
+      type: integer
+      enum:
+      - 0
+    switch_bgp_config_hold_time_integer:
+      type: integer
+      minimum: 3
+      maximum: 65535
     switch_bgp_config_hold_time:
       oneOf:
-      - type: integer
-        enum:
-        - 0
-      - type: integer
-        minimum: 3
-        maximum: 65535
+      - $ref: '#/components/schemas/switch_bgp_config_hold_time_zero'
+      - $ref: '#/components/schemas/switch_bgp_config_hold_time_integer'
       description: Hold time is three times the interval at which keepalive messages
         are sent. It indicates to the peer the length of time that it should consider
         the sender valid. Must be 0 or a number in the range 3-65535.
