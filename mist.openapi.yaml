@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.8**
+  description: '> Version: **2511.1.9**
 
     >
 
-    > Date: **December 18, 2025**
+    > Date: **December 22, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.8
+  version: 2511.1.9
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -29110,6 +29110,72 @@ paths:
       - Orgs NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats/{metric}:
+    get:
+      description: 'Get Gateway Insight Metrics
+
+        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      operationId: getSiteInsightMetricsForGateway
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForGateway
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/metric'
+    - $ref: '#/components/parameters/device_id'
+  /api/v1/sites/{site_id}/insights/mxedge/{device_mac}/{metric}:
+    get:
+      description: 'Get MxEdge Insight Metrics
+
+        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      operationId: getSiteInsightMetricsForMxEdge
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForMxEdge
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/metric'
+    - $ref: '#/components/parameters/device_mac'
   /api/v1/sites/{site_id}/insights/rogues:
     get:
       description: Get List of Site Rogue/Neighbor APs
@@ -29167,6 +29233,39 @@ paths:
       - Sites Rogues
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/insights/switch/{device_mac}/{metric}:
+    get:
+      description: 'Get Switch Insight Metrics
+
+        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      operationId: getSiteInsightMetricsForSwitch
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForSwitch
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/metric'
+    - $ref: '#/components/parameters/device_mac'
   /api/v1/sites/{site_id}/insights/{metric}:
     get:
       description: 'Get Site Insight Metrics
