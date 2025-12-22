@@ -35478,10 +35478,6 @@ paths:
       operationId: searchSiteOspfStats
       parameters:
       - in: query
-        name: site_id
-        schema:
-          type: string
-      - in: query
         name: mac
         schema:
           type: string
