@@ -19345,17 +19345,17 @@ paths:
         in: query
         name: stp_state
         schema:
-          $ref: '#/components/schemas/port_stp_state'
+          $ref: '#/components/schemas/count_ports_stp_state'
       - description: If `up`==`true`
         in: query
         name: stp_role
         schema:
-          $ref: '#/components/schemas/port_stp_role'
+          $ref: '#/components/schemas/count_ports_stp_role'
       - description: If `up`==`true` && has Authenticator role
         in: query
         name: auth_state
         schema:
-          $ref: '#/components/schemas/port_auth_state'
+          $ref: '#/components/schemas/count_ports_auth_state'
       - description: Indicates if interface is up
         in: query
         name: up
@@ -19539,17 +19539,17 @@ paths:
         in: query
         name: stp_state
         schema:
-          $ref: '#/components/schemas/port_stp_state'
+          $ref: '#/components/schemas/search_org_sw_or_gw_ports_stp_state'
       - description: If `up`==`true`
         in: query
         name: stp_role
         schema:
-          $ref: '#/components/schemas/port_stp_role'
+          $ref: '#/components/schemas/search_org_sw_or_gw_ports_stp_role'
       - description: If `up`==`true` && has Authenticator role
         in: query
         name: auth_state
         schema:
-          $ref: '#/components/schemas/port_auth_state'
+          $ref: '#/components/schemas/search_org_sw_or_gw_ports_auth_state'
       - description: Bias current of the optics in mA
         in: query
         name: optics_bias_current
@@ -35788,17 +35788,17 @@ paths:
         in: query
         name: stp_state
         schema:
-          $ref: '#/components/schemas/port_stp_state'
+          $ref: '#/components/schemas/count_ports_stp_state'
       - description: If `up`==`true`
         in: query
         name: stp_role
         schema:
-          $ref: '#/components/schemas/port_stp_role'
+          $ref: '#/components/schemas/count_ports_stp_role'
       - description: If `up`==`true` && has Authenticator role
         in: query
         name: auth_state
         schema:
-          $ref: '#/components/schemas/port_auth_state'
+          $ref: '#/components/schemas/count_ports_auth_state'
       - description: Indicates if interface is up
         in: query
         name: up
@@ -36061,12 +36061,12 @@ paths:
         in: query
         name: stp_state
         schema:
-          $ref: '#/components/schemas/port_stp_state'
+          $ref: '#/components/schemas/search_site_sw_or_gw_ports_stp_state'
       - description: If `up`==`true`
         in: query
         name: stp_role
         schema:
-          $ref: '#/components/schemas/port_stp_role'
+          $ref: '#/components/schemas/search_site_sw_or_gw_ports_stp_role'
       - description: Optic Slot Partnumber, Check for null/empty
         in: query
         name: xcvr_part_number
@@ -36078,7 +36078,7 @@ paths:
         in: query
         name: auth_state
         schema:
-          $ref: '#/components/schemas/port_auth_state'
+          $ref: '#/components/schemas/search_site_sw_or_gw_ports_auth_state'
       - description: LTE IMSI value, Check for null/empty
         in: query
         name: lte_imsi
@@ -68422,6 +68422,32 @@ components:
       - down
       - up
       type: string
+    count_ports_auth_state:
+      description: 'enum: `authenticated`, `authenticating`, `held`, `init`'
+      enum:
+      - authenticated
+      - authenticating
+      - held
+      - init
+      type: string
+    count_ports_stp_role:
+      description: 'enum: `alternate`, `backup`, `designated`, `root`, `root-prevented`'
+      enum:
+      - alternate
+      - backup
+      - designated
+      - root
+      - root-prevented
+      type: string
+    count_ports_stp_state:
+      description: 'enum: `blocking`, `disabled`, `forwarding`, `learning`, `listening`'
+      enum:
+      - blocking
+      - disabled
+      - forwarding
+      - learning
+      - listening
+      type: string
     count_result:
       additionalProperties:
         type: string
@@ -79940,35 +79966,6 @@ components:
       - low
       - high
       type: string
-    port_auth_state:
-      description: 'enum: `authenticated`, `authenticating`, `held`, `init`'
-      enum:
-      - ''
-      - authenticated
-      - authenticating
-      - held
-      - init
-      type: string
-    port_stp_role:
-      description: 'enum: `alternate`, `backup`, `designated`, `root`, `root-prevented`'
-      enum:
-      - ''
-      - alternate
-      - backup
-      - designated
-      - root
-      - root-prevented
-      type: string
-    port_stp_state:
-      description: 'enum: `blocking`, `disabled`, `forwarding`, `learning`, `listening`'
-      enum:
-      - ''
-      - blocking
-      - disabled
-      - forwarding
-      - learning
-      - listening
-      type: string
     portal_template_alignment:
       default: center
       description: 'defines alignment on portal. enum: `center`, `left`, `right`'
@@ -85774,6 +85771,32 @@ components:
       - down
       - up
       type: string
+    search_org_sw_or_gw_ports_auth_state:
+      description: 'enum: `authenticated`, `authenticating`, `held`, `init`'
+      enum:
+      - authenticated
+      - authenticating
+      - held
+      - init
+      type: string
+    search_org_sw_or_gw_ports_stp_role:
+      description: 'enum: `alternate`, `backup`, `designated`, `root`, `root-prevented`'
+      enum:
+      - alternate
+      - backup
+      - designated
+      - root
+      - root-prevented
+      type: string
+    search_org_sw_or_gw_ports_stp_state:
+      description: 'enum: `blocking`, `disabled`, `forwarding`, `learning`, `listening`'
+      enum:
+      - blocking
+      - disabled
+      - forwarding
+      - learning
+      - listening
+      type: string
     search_org_sw_or_gw_ports_type:
       default: all
       description: 'enum: `switch`,  `gateway`, `all`'
@@ -85809,6 +85832,14 @@ components:
       - sku
       - timestamp
       type: string
+    search_site_sw_or_gw_ports_auth_state:
+      description: 'enum: `authenticated`, `authenticating`, `held`, `init`'
+      enum:
+      - authenticated
+      - authenticating
+      - held
+      - init
+      type: string
     search_site_sw_or_gw_ports_device_type:
       description: 'enum: `ap`, `ble`, `gateway`, `mxedge`, `nac`, `switch`'
       enum:
@@ -85818,6 +85849,24 @@ components:
       - mxedge
       - nac
       - switch
+      type: string
+    search_site_sw_or_gw_ports_stp_role:
+      description: 'enum: `alternate`, `backup`, `designated`, `root`, `root-prevented`'
+      enum:
+      - alternate
+      - backup
+      - designated
+      - root
+      - root-prevented
+      type: string
+    search_site_sw_or_gw_ports_stp_state:
+      description: 'enum: `blocking`, `disabled`, `forwarding`, `learning`, `listening`'
+      enum:
+      - blocking
+      - disabled
+      - forwarding
+      - learning
+      - listening
       type: string
     search_wan_client:
       additionalProperties: false
@@ -92631,7 +92680,7 @@ components:
           readOnly: true
           type: boolean
         auth_state:
-          $ref: '#/components/schemas/port_auth_state'
+          $ref: '#/components/schemas/stats_switch_port_auth_state'
         disabled:
           description: Indicates if interface is disabled
           readOnly: true
@@ -92754,9 +92803,9 @@ components:
           readOnly: true
           type: integer
         stp_role:
-          $ref: '#/components/schemas/port_stp_role'
+          $ref: '#/components/schemas/stats_switch_port_stp_role'
         stp_state:
-          $ref: '#/components/schemas/port_stp_state'
+          $ref: '#/components/schemas/stats_switch_port_stp_state'
         tx_bcast_pkts:
           description: Broadcast output packets
           readOnly: true
@@ -94379,7 +94428,7 @@ components:
           readOnly: true
           type: boolean
         auth_state:
-          $ref: '#/components/schemas/port_auth_state'
+          $ref: '#/components/schemas/stats_switch_port_auth_state'
         disabled:
           description: Indicates if interface is disabled
           readOnly: true
@@ -94518,9 +94567,9 @@ components:
           readOnly: true
           type: integer
         stp_role:
-          $ref: '#/components/schemas/port_stp_role'
+          $ref: '#/components/schemas/stats_switch_port_stp_role'
         stp_state:
-          $ref: '#/components/schemas/port_stp_state'
+          $ref: '#/components/schemas/stats_switch_port_stp_state'
         tx_bcast_pkts:
           description: Broadcast output packets
           readOnly: true
@@ -94574,12 +94623,41 @@ components:
       - port_mac
       - site_id
       type: object
+    stats_switch_port_auth_state:
+      description: 'if `up`==`true` and has Authenticator role. enum: `authenticated`,
+        `authenticating`, `held`, `init`'
+      enum:
+      - authenticated
+      - authenticating
+      - held
+      - init
+      type: string
     stats_switch_port_poe_mode:
       description: 'enum: `802.3af`, `802.3at`, `802.3bt`'
       enum:
       - 802.3af
       - 802.3at
       - 802.3bt
+      type: string
+    stats_switch_port_stp_role:
+      description: 'if `up`==`true`. enum: `alternate`, `backup`, `designated`, `root`,
+        `root-prevented`'
+      enum:
+      - alternate
+      - backup
+      - designated
+      - root
+      - root-prevented
+      type: string
+    stats_switch_port_stp_state:
+      description: 'if `up`==`true`. enum: `blocking`, `disabled`, `forwarding`, `learning`,
+        `listening`'
+      enum:
+      - blocking
+      - disabled
+      - forwarding
+      - learning
+      - listening
       type: string
     stats_switch_port_type:
       description: 'device type. enum: `ap`, `ble`, `gateway`, `mxedge`, `nac`, `switch`'
