@@ -92770,7 +92770,9 @@ components:
           readOnly: true
           type: string
         port_usage:
-          $ref: '#/components/schemas/stats_switch_port_port_usage'
+          examples:
+          - lan
+          type: string
         power_draw:
           description: Amount of power being used by the interface at the time the
             command is executed. Unit in watts.
@@ -94530,7 +94532,9 @@ components:
           readOnly: true
           type: string
         port_usage:
-          $ref: '#/components/schemas/stats_switch_port_port_usage'
+          examples:
+          - lan
+          type: string
         power_draw:
           description: Amount of power being used by the interface at the time the
             command is executed. Unit in watts.
@@ -94634,11 +94638,6 @@ components:
       - 802.3af
       - 802.3at
       - 802.3bt
-      type: string
-    stats_switch_port_port_usage:
-      description: 'gateway port usage. enum: `lan`'
-      enum:
-      - lan
       type: string
     stats_switch_port_stp_role:
       description: 'if `up`==`true`. enum: `alternate`, `backup`, `designated`, `root`,
