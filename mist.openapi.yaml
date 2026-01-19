@@ -80456,6 +80456,7 @@ components:
           $ref: '#/components/schemas/psk_portal_template_setting'
       type: object
     psk_portal_template_setting:
+      additionalProperties: false
       properties:
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
@@ -83637,10 +83638,8 @@ components:
         total:
           type: integer
       required:
-      - end
       - limit
       - results
-      - start
       - total
       type: object
     response_psk_portal_logs_search:
@@ -84425,8 +84424,6 @@ components:
           - 100
           type: integer
       required:
-      - start
-      - end
       - limit
       - total
       - results
