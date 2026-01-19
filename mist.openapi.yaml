@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.10**
+  description: '> Version: **2511.1.11**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.10
+  version: 2511.1.11
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -94614,7 +94614,6 @@ components:
           type: string
       required:
       - mac
-      - neighbor_mac
       - org_id
       - port_id
       - port_mac
