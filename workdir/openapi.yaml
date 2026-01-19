@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.9**
+  description: '> Version: **2511.1.10**
 
     >
 
-    > Date: **December 22, 2025**
+    > Date: **January 18, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.9
+  version: 2511.1.10
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -80452,6 +80452,11 @@ components:
       type: string
     psk_portal_template:
       properties:
+        portal_template:
+          $ref: '#/components/schemas/psk_portal_template_setting'
+      type: object
+    psk_portal_template_setting:
+      properties:
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
         color:
@@ -80491,6 +80496,7 @@ components:
           - https://company.com/wifi-policy
           type: string
       type: object
+      additionalProperties: false
     psk_portal_type:
       description: 'for personal psk portal. enum: `admin`, `byod`'
       enum:
