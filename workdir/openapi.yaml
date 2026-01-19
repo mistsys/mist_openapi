@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.8**
+  description: '> Version: **2511.1.10**
 
     >
 
-    > Date: **December 18, 2025**
+    > Date: **January 18, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.8
+  version: 2511.1.10
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -29106,6 +29106,72 @@ paths:
       - Orgs NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats/{metric}:
+    get:
+      description: 'Get Gateway Insight Metrics
+
+        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      operationId: getSiteInsightMetricsForGateway
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForGateway
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/metric'
+    - $ref: '#/components/parameters/device_id'
+  /api/v1/sites/{site_id}/insights/mxedge/{device_mac}/{metric}:
+    get:
+      description: 'Get MxEdge Insight Metrics
+
+        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      operationId: getSiteInsightMetricsForMxEdge
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForMxEdge
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/metric'
+    - $ref: '#/components/parameters/device_mac'
   /api/v1/sites/{site_id}/insights/rogues:
     get:
       description: Get List of Site Rogue/Neighbor APs
@@ -29163,6 +29229,39 @@ paths:
       - Sites Rogues
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/insights/switch/{device_mac}/{metric}:
+    get:
+      description: 'Get Switch Insight Metrics
+
+        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      operationId: getSiteInsightMetricsForSwitch
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForSwitch
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/metric'
+    - $ref: '#/components/parameters/device_mac'
   /api/v1/sites/{site_id}/insights/{metric}:
     get:
       description: 'Get Site Insight Metrics
@@ -33248,7 +33347,13 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/classifier/{classifier}/summary:
     get:
-      description: Get SLE classifier details
+      deprecated: true
+      description: 'Get SLE classifier details
+
+
+
+        This API Endpoint is deprecated and replaced by [Get Site SLE Classifier Summary
+        Trend]($e/Sites%20SLEs/getSiteSleClassifierSummaryTrend)'
       operationId: getSiteSleClassifierDetails
       parameters:
       - $ref: '#/components/parameters/start'
@@ -33268,6 +33373,58 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: getSiteSleClassifierDetails
+      tags:
+      - Sites SLEs
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - in: path
+      name: scope
+      required: true
+      schema:
+        $ref: '#/components/schemas/sle_summary_scope'
+    - description: '* site_id if `scope`==`site`
+
+        * device_id if `scope`==`ap`, `scope`==`switch` or `scope`==`gateway`
+
+        * mac if `scope`==`client`'
+      in: path
+      name: scope_id
+      required: true
+      schema:
+        type: string
+    - description: Values from `listSiteSlesMetrics`
+      in: path
+      name: metric
+      required: true
+      schema:
+        type: string
+    - in: path
+      name: classifier
+      required: true
+      schema:
+        type: string
+  /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/classifier/{classifier}/summary-trend:
+    get:
+      description: Get SLE classifier Summary Trend
+      operationId: getSiteSleClassifierSummaryTrend
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/SleClassifierSummaryTrend'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteSleClassifierSummaryTrend
       tags:
       - Sites SLEs
     parameters:
@@ -33843,7 +34000,12 @@ paths:
         type: string
   /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/summary:
     get:
-      description: Get the summary for the SLE metric
+      deprecated: true
+      description: 'Get the summary for the SLE metric
+
+
+
+        This API Endpoint is deprecated and replaced by [Get Site SLE Summary Trend]($e/Sites%20SLEs/getSiteSleSummaryTrend)'
       operationId: getSiteSleSummary
       parameters:
       - $ref: '#/components/parameters/start'
@@ -33863,6 +34025,53 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: getSiteSleSummary
+      tags:
+      - Sites SLEs
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - in: path
+      name: scope
+      required: true
+      schema:
+        $ref: '#/components/schemas/site_sle_metric_summary_scope_parameters'
+    - description: '* site_id if `scope`==`site`
+
+        * device_id if `scope`==`ap`, `scope`==`switch` or `scope`==`gateway`
+
+        * mac if `scope`==`client`'
+      in: path
+      name: scope_id
+      required: true
+      schema:
+        type: string
+    - description: Values from `listSiteSlesMetrics`
+      in: path
+      name: metric
+      required: true
+      schema:
+        type: string
+  /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/summary-trend:
+    get:
+      description: Get the summary for the SLE metric trend
+      operationId: getSiteSleSummaryTrend
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/SleSummaryTrend'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteSleSummaryTrend
       tags:
       - Sites SLEs
     parameters:
@@ -35378,10 +35587,6 @@ paths:
       description: Search OSPF Neighbor Stats
       operationId: searchSiteOspfStats
       parameters:
-      - in: query
-        name: site_id
-        schema:
-          type: string
       - in: query
         name: mac
         schema:
@@ -51526,6 +51731,92 @@ components:
           total_users: 26
         metric: capacity
         start: 1627226471
+    SleClassifierSummaryTrendExample:
+      value:
+        classifier:
+          interval: 3600
+          name: wifi-interference
+          samples:
+            degraded:
+            - 0
+            - 0
+            - 210.03334
+            - 3.1333334
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 102.5
+            - 108.03333
+            - 0
+            - 0
+            - 201.9
+            - 566.48334
+            - 135.63333
+            - 0
+            duration:
+            - 0
+            - 0
+            - 210.03334
+            - 3.1333334
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 102.5
+            - 108.03333
+            - 0
+            - 0
+            - 201.9
+            - 566.48334
+            - 135.63333
+            - 0
+            total:
+            - 1302.3
+            - 1289.0167
+            - 1396.3167
+            - 1423.6666
+            - 1439.2167
+            - 1414.7
+            - 1361.0834
+            - 1371.5834
+            - 1372.0667
+            - 1339.1
+            - 1374.3667
+            - 1369.9
+            - 1352.4833
+            - 1382.8
+            - 1426.7167
+            - 1425.6333
+            - 1403.9333
+            - 1420.75
+            - 1416.8334
+            - 1437.3334
+            - 1425.1
+            - 1485.3667
+            - 1426.4333
+            - 444.13333
+          x_label: seconds
+          y_label: user-minutes
+        end: 1627312871
+        metric: capacity
+        start: 1627226471
     SleHistogramExample:
       value:
         data:
@@ -52223,6 +52514,412 @@ components:
           num_users: 21
           total_aps: 3
           total_users: 26
+        sle:
+          interval: 3600
+          name: capacity
+          samples:
+            degraded:
+            - 0
+            - 0
+            - 210.03334
+            - 3.1333334
+            - 16.65
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 5.8
+            - 102.5
+            - 139.18333
+            - 17.616667
+            - 22.5
+            - 201.9
+            - 574.0333
+            - 183.18333
+            - 13.266666
+            total:
+            - 1302.3
+            - 1289.0167
+            - 1396.3167
+            - 1423.6666
+            - 1439.2167
+            - 1414.7
+            - 1361.0834
+            - 1371.5834
+            - 1372.0667
+            - 1339.1
+            - 1374.3667
+            - 1369.9
+            - 1352.4833
+            - 1382.8
+            - 1426.7167
+            - 1425.6333
+            - 1403.9333
+            - 1420.75
+            - 1416.8334
+            - 1437.3334
+            - 1425.1
+            - 1485.3667
+            - 1426.4333
+            - 289.83334
+            value:
+            - 0.6764934
+            - 0.6783766
+            - 0.641645
+            - 0.6934629
+            - 0.68676674
+            - 0.6834809
+            - 0.6961604
+            - 0.6979584
+            - 0.7033722
+            - 0.70410794
+            - 0.7025278
+            - 0.70305353
+            - 0.70292175
+            - 0.7009334
+            - 0.69344264
+            - 0.68596864
+            - 0.5952168
+            - 0.62183666
+            - 0.68161446
+            - 0.65352744
+            - 0.6183489
+            - 0.54178274
+            - 0.6044712
+            - 0.66845906
+          x_label: seconds
+          y_label: '%'
+        start: 1627226206
+    SleSummaryTrendExample:
+      value:
+        classifiers:
+        - interval: 3600
+          name: client-count
+          samples:
+            degraded:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 5.8
+            - 0
+            - 0
+            - 0
+            - 4.65
+            - 0
+            - 7.55
+            - 47.55
+            - 13.266666
+            duration:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 5.8
+            - 0
+            - 0
+            - 0
+            - 4.65
+            - 0
+            - 7.55
+            - 47.55
+            - 13.266666
+            total:
+            - 1302.3
+            - 1289.0167
+            - 1396.3167
+            - 1423.6666
+            - 1439.2167
+            - 1414.7
+            - 1361.0834
+            - 1371.5834
+            - 1372.0667
+            - 1339.1
+            - 1374.3667
+            - 1369.9
+            - 1352.4833
+            - 1382.8
+            - 1426.7167
+            - 1425.6333
+            - 1403.9333
+            - 1420.75
+            - 1416.8334
+            - 1437.3334
+            - 1425.1
+            - 1485.3667
+            - 1426.4333
+            - 289.83334
+          x_label: seconds
+          y_label: user-minutes
+        - interval: 3600
+          name: wifi-interference
+          samples:
+            degraded:
+            - 0
+            - 0
+            - 210.03334
+            - 3.1333334
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 102.5
+            - 108.03333
+            - 0
+            - 0
+            - 201.9
+            - 566.48334
+            - 135.63333
+            - 0
+            duration:
+            - 0
+            - 0
+            - 210.03334
+            - 3.1333334
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 102.5
+            - 108.03333
+            - 0
+            - 0
+            - 201.9
+            - 566.48334
+            - 135.63333
+            - 0
+            total:
+            - 1302.3
+            - 1289.0167
+            - 1396.3167
+            - 1423.6666
+            - 1439.2167
+            - 1414.7
+            - 1361.0834
+            - 1371.5834
+            - 1372.0667
+            - 1339.1
+            - 1374.3667
+            - 1369.9
+            - 1352.4833
+            - 1382.8
+            - 1426.7167
+            - 1425.6333
+            - 1403.9333
+            - 1420.75
+            - 1416.8334
+            - 1437.3334
+            - 1425.1
+            - 1485.3667
+            - 1426.4333
+            - 289.83334
+          x_label: seconds
+          y_label: user-minutes
+        - interval: 3600
+          name: client_usage
+          samples:
+            degraded:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            duration:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            total:
+            - 1302.3
+            - 1289.0167
+            - 1396.3167
+            - 1423.6666
+            - 1439.2167
+            - 1414.7
+            - 1361.0834
+            - 1371.5834
+            - 1372.0667
+            - 1339.1
+            - 1374.3667
+            - 1369.9
+            - 1352.4833
+            - 1382.8
+            - 1426.7167
+            - 1425.6333
+            - 1403.9333
+            - 1420.75
+            - 1416.8334
+            - 1437.3334
+            - 1425.1
+            - 1485.3667
+            - 1426.4333
+            - 289.83334
+          x_label: seconds
+          y_label: user-minutes
+        - interval: 3600
+          name: non-wifi-interference
+          samples:
+            degraded:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 16.65
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 31.15
+            - 17.616667
+            - 17.85
+            - 0
+            - 0
+            - 0
+            - 0
+            duration:
+            - 0
+            - 0
+            - 0
+            - 0
+            - 16.65
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 0
+            - 31.15
+            - 17.616667
+            - 17.85
+            - 0
+            - 0
+            - 0
+            - 0
+            total:
+            - 1302.3
+            - 1289.0167
+            - 1396.3167
+            - 1423.6666
+            - 1439.2167
+            - 1414.7
+            - 1361.0834
+            - 1371.5834
+            - 1372.0667
+            - 1339.1
+            - 1374.3667
+            - 1369.9
+            - 1352.4833
+            - 1382.8
+            - 1426.7167
+            - 1425.6333
+            - 1403.9333
+            - 1420.75
+            - 1416.8334
+            - 1437.3334
+            - 1425.1
+            - 1485.3667
+            - 1426.4333
+            - 289.83334
+          x_label: seconds
+          y_label: user-minutes
+        end: 1627312606
         sle:
           interval: 3600
           name: capacity
@@ -59178,6 +59875,21 @@ components:
           schema:
             $ref: '#/components/schemas/sle_classifier_summary'
       description: Example response
+    SleClassifierSummaryTrend:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SleClassifierSummaryTrendExample'
+          schema:
+            $ref: '#/components/schemas/sle_classifier_summary_trend'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SleClassifierSummaryTrendExample'
+          schema:
+            $ref: '#/components/schemas/sle_classifier_summary_trend'
+      description: Example response
     SleHistogram:
       content:
         application/json:
@@ -59342,6 +60054,21 @@ components:
               $ref: '#/components/examples/SleSummaryExample'
           schema:
             $ref: '#/components/schemas/sle_summary'
+      description: Example response
+    SleSummaryTrend:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SleSummaryTrendExample'
+          schema:
+            $ref: '#/components/schemas/sle_summary_trend'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SleSummaryTrendExample'
+          schema:
+            $ref: '#/components/schemas/sle_summary_trend'
       description: Example response
     SleThreshold:
       content:
@@ -71683,13 +72410,13 @@ components:
         $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
       type: array
     gw_routing_policy_term_matching_protocol_enum:
-      description: 'enum: `bgp`, `direct`, `ospf`, `static` (SRX Only), `aggregate`'
+      description: 'enum: `aggregate`, `bgp`, `direct`, `ospf`, `static` (SRX Only)'
       enum:
+      - aggregate
       - bgp
       - direct
       - ospf
       - static
-      - aggregate
       type: string
     gw_routing_policy_term_matching_route_exists:
       additionalProperties: false
@@ -79725,6 +80452,12 @@ components:
       type: string
     psk_portal_template:
       properties:
+        portal_template:
+          $ref: '#/components/schemas/psk_portal_template_setting'
+      type: object
+    psk_portal_template_setting:
+      additionalProperties: false
+      properties:
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
         color:
@@ -82905,10 +83638,8 @@ components:
         total:
           type: integer
       required:
-      - end
       - limit
       - results
-      - start
       - total
       type: object
     response_psk_portal_logs_search:
@@ -83693,8 +84424,6 @@ components:
           - 100
           type: integer
       required:
-      - start
-      - end
       - limit
       - total
       - results
@@ -87954,6 +88683,7 @@ components:
       type: array
     sle_classifier_summary:
       additionalProperties: false
+      deprecated: true
       properties:
         classifier:
           $ref: '#/components/schemas/sle_classifier'
@@ -87997,6 +88727,24 @@ components:
       - num_aps
       - total_users
       - total_aps
+      type: object
+    sle_classifier_summary_trend:
+      additionalProperties: false
+      properties:
+        classifier:
+          $ref: '#/components/schemas/sle_trend_classifier'
+        end:
+          type: number
+        metric:
+          minLength: 1
+          type: string
+        start:
+          type: number
+      required:
+      - start
+      - end
+      - metric
+      - classifier
       type: object
     sle_histogram:
       additionalProperties: false
@@ -88654,6 +89402,7 @@ components:
       uniqueItems: true
     sle_summary:
       additionalProperties: false
+      deprecated: true
       properties:
         classifiers:
           $ref: '#/components/schemas/sle_summary_classifiers'
@@ -88760,6 +89509,28 @@ components:
       items:
         $ref: '#/components/schemas/number_or_null'
       type: array
+    sle_summary_trend:
+      additionalProperties: false
+      properties:
+        classifiers:
+          $ref: '#/components/schemas/sle_summary_trend_classifiers'
+        end:
+          type: number
+        sle:
+          $ref: '#/components/schemas/sle_summary_sle'
+        start:
+          type: number
+      required:
+      - start
+      - end
+      - sle
+      - classifiers
+      type: object
+    sle_summary_trend_classifiers:
+      items:
+        $ref: '#/components/schemas/sle_trend_classifier'
+      type: array
+      uniqueItems: true
     sle_threshold:
       properties:
         default:
@@ -88813,6 +89584,28 @@ components:
           maximum: 10
           minimum: 2
           type: integer
+      type: object
+    sle_trend_classifier:
+      additionalProperties: false
+      properties:
+        interval:
+          type: number
+        name:
+          minLength: 1
+          type: string
+        samples:
+          $ref: '#/components/schemas/sle_classifier_samples'
+        x_label:
+          minLength: 1
+          type: string
+        y_label:
+          minLength: 1
+          type: string
+      required:
+      - name
+      - x_label
+      - y_label
+      - interval
       type: object
     snmp_config:
       additionalProperties: false
@@ -94846,6 +95639,10 @@ components:
           $ref: '#/components/schemas/sw_routing_policy_term_action'
         matching:
           $ref: '#/components/schemas/sw_routing_policy_term_matching'
+        name:
+          type: string
+      required:
+      - name
       type: object
     sw_routing_policy_term_action:
       additionalProperties: false
