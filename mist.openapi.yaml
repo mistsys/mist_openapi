@@ -79950,12 +79950,14 @@ components:
       - init
       type: string
     port_stp_role:
-      description: 'enum: `alternate`, `backup`, `designated`, `root`, `root-prevented`'
+      description: 'enum: `alternate`, `backup`, `designated`, `disabled`, `root`,
+        `root-prevented`'
       enum:
       - ''
       - alternate
       - backup
       - designated
+      - disabled
       - root
       - root-prevented
       type: string
