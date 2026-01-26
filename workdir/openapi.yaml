@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.11**
+  description: '> Version: **2511.1.12**
 
     >
 
-    > Date: **January 18, 2025**
+    > Date: **January 26, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.11
+  version: 2511.1.12
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -67807,6 +67807,11 @@ components:
           examples:
           - EX4100-48P-CHAS
           type: string
+        default_port_usage:
+          default: default
+          description: 'Port usage to assign to switch ports without any port usage
+            assigned. Default: `default` to preserve default behavior'
+          type: string
         defaults:
           $ref: '#/components/schemas/const_device_switch_default'
         description:
@@ -79950,12 +79955,14 @@ components:
       - init
       type: string
     port_stp_role:
-      description: 'enum: `alternate`, `backup`, `designated`, `root`, `root-prevented`'
+      description: 'enum: `alternate`, `backup`, `designated`, `disabled`, `root`,
+        `root-prevented`'
       enum:
       - ''
       - alternate
       - backup
       - designated
+      - disabled
       - root
       - root-prevented
       type: string
@@ -87426,11 +87433,6 @@ components:
           $ref: '#/components/schemas/created_time'
         critical_url_monitoring:
           $ref: '#/components/schemas/site_setting_critical_url_monitoring'
-        default_port_usage:
-          default: default
-          description: 'Port usage to assign to switch ports without any port usage
-            assigned. Default: `default` to preserve default behavior'
-          type: string
         device_updown_threshold:
           default: 0
           description: By default, device_updown_threshold, if set, will apply to
@@ -94572,7 +94574,6 @@ components:
       - mac
       - org_id
       - port_id
-      - port_mac
       - site_id
       type: object
     stats_switch_port_poe_mode:
@@ -95922,6 +95923,11 @@ components:
       properties:
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+        default_port_usage:
+          default: default
+          description: 'Port usage to assign to switch ports without any port usage
+            assigned. Default: `default` to preserve default behavior'
+          type: string
         ip_config:
           $ref: '#/components/schemas/switch_matching_rule_ip_config'
         name:
