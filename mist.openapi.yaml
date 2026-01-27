@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.12**
+  description: '> Version: **2511.1.13**
 
     >
 
-    > Date: **January 26, 2025**
+    > Date: **January 27, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.12
+  version: 2511.1.13
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -72789,7 +72789,6 @@ components:
       required:
       - end
       - interval
-      - results
       - start
       type: object
     insight_metrics_results:
