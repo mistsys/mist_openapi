@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.13**
+  description: '> Version: **2511.1.14**
 
     >
 
-    > Date: **January 27, 2025**
+    > Date: **January 28, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.13
+  version: 2511.1.14
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -67811,11 +67811,6 @@ components:
           examples:
           - EX4100-48P-CHAS
           type: string
-        default_port_usage:
-          default: default
-          description: 'Port usage to assign to switch ports without any port usage
-            assigned. Default: `default` to preserve default behavior'
-          type: string
         defaults:
           $ref: '#/components/schemas/const_device_switch_default'
         description:
@@ -69052,6 +69047,11 @@ components:
           type: object
         created_time:
           $ref: '#/components/schemas/created_time'
+        default_port_usage:
+          default: default
+          description: 'Port usage to assign to switch ports without any port usage
+            assigned. Default: `default` to preserve default behavior'
+          type: string
         deviceprofile_id:
           format: uuid
           readOnly: true
