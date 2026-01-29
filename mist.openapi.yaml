@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.13**
+  description: '> Version: **2511.1.14**
 
     >
 
-    > Date: **January 28, 2025**
+    > Date: **January 29, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.13
+  version: 2511.1.14
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -5143,21 +5143,27 @@ paths:
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
-      - description: Alarm type
+      - $ref: '#/components/parameters/alarm_group'
+      - $ref: '#/components/parameters/alarm_severity'
+      - description: Type of the alarm. Accepts multiple values separated by comma.
+          Use [List Alarm Definitions](/#operations/listAlarmDefinitions) to get the
+          list of possible alarm types.
         in: query
         name: type
         schema:
           examples:
-          - marvis
+          - infra_dhcp_failure
           type: string
-      - description: 'Alarm status. Accepts multiple values separated by comma. enum:
-          `open`, `resolved`'
+      - description: Name of the admins who have acked the alarms; accepts multiple
+          values separated by comma
         in: query
-        name: status
+        name: ack_admin_name
         schema:
-          examples:
-          - open
           type: string
+      - in: query
+        name: acked
+        schema:
+          type: boolean
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -23260,11 +23266,16 @@ paths:
       description: Search Site Alarms
       operationId: searchSiteAlarms
       parameters:
-      - description: Key-name of the alarms; accepts multiple values separated by
-          comma
+      - $ref: '#/components/parameters/alarm_group'
+      - $ref: '#/components/parameters/alarm_severity'
+      - description: Type of the alarm. Accepts multiple values separated by comma.
+          Use [List Alarm Definitions](/#operations/listAlarmDefinitions) to get the
+          list of possible alarm types.
         in: query
         name: type
         schema:
+          examples:
+          - infra_dhcp_failure
           type: string
       - description: Name of the admins who have acked the alarms; accepts multiple
           values separated by comma
@@ -23276,16 +23287,6 @@ paths:
         name: acked
         schema:
           type: boolean
-      - description: Alarm severity; accepts multiple values separated by comma
-        in: query
-        name: severity
-        schema:
-          type: string
-      - description: Alarm group name; accepts multiple values separated by comma
-        in: query
-        name: group
-        schema:
-          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -54406,6 +54407,12 @@ components:
         - 000000ab-00ab-00ab-00ab-0000000000ab
         format: uuid
         type: string
+    alarm_group:
+      description: 'Alarm group. enum: `infrastructure`, `marvis`, `security`'
+      in: query
+      name: group
+      schema:
+        $ref: '#/components/schemas/alarm_group'
     alarm_id:
       in: path
       name: alarm_id
@@ -54415,6 +54422,12 @@ components:
         - 000000ab-00ab-00ab-00ab-0000000000ab
         format: uuid
         type: string
+    alarm_severity:
+      description: 'Severity of the alarm. enum: `critical`, `info`, `warn`'
+      in: query
+      name: severity
+      schema:
+        $ref: '#/components/schemas/alarm_severity'
     alarmtemplate_id:
       in: path
       name: alarmtemplate_id
@@ -62496,6 +62509,13 @@ components:
       items:
         type: string
       type: array
+    alarm_group:
+      description: 'Alarm group. enum: `infrastructure`, `marvis`, `security`'
+      enum:
+      - infrastructure
+      - marvis
+      - security
+      type: string
     alarm_hostnames:
       description: 'additional information: List of Hostnames of the devices (AP/Switch/Gateway)'
       examples:
@@ -62552,6 +62572,13 @@ components:
       items:
         $ref: '#/components/schemas/alarm'
       type: array
+    alarm_severity:
+      description: 'Severity of the alarm. enum: `critical`, `info`, `warn`'
+      enum:
+      - critical
+      - info
+      - warn
+      type: string
     alarm_ssids:
       description: List of SSIDs
       items:
