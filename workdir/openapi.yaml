@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.15**
+  description: '> Version: **2511.1.16**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.15
+  version: 2511.1.16
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -19397,14 +19397,58 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/ports/search:
     get:
-      description: Search Switch / Gateway Ports
+      description: 'Search Switch / Gateway Ports Stats.
+
+        Returns a list of switch/gateway ports stats that match the search criteria.
+
+
+        The response provide current/last port status and statistics within the hour.
+
+        Traffic information (Tx/Rx) are cumulative counters since the last device
+        reboot.'
       operationId: searchOrgSwOrGwPorts
       parameters:
+      - description: Site ID
+        in: query
+        name: site_id
+        schema:
+          type: string
+      - description: 'Type of device. enum: `switch`, `gateway`, `all`'
+        in: query
+        name: device_type
+        schema:
+          $ref: '#/components/schemas/search_org_sw_or_gw_ports_type'
+      - description: If `up`==`true` && has Authenticator role
+        in: query
+        name: auth_state
+        schema:
+          $ref: '#/components/schemas/port_auth_state'
       - description: Indicates full or half duplex
         in: query
         name: full_duplex
         schema:
           type: boolean
+      - description: LTE IMSI value, Check for null/empty
+        in: query
+        name: lte_imsi
+        schema:
+          examples:
+          - '310260000000001'
+          type: string
+      - description: LTE ICCID value, Check for null/empty
+        in: query
+        name: lte_iccid
+        schema:
+          examples:
+          - '89014103211118510720'
+          type: string
+      - description: LTE IMEI value, Check for null/empty
+        in: query
+        name: lte_imei
+        schema:
+          examples:
+          - '123456789012345'
+          type: string
       - description: Device identifier
         in: query
         name: mac
@@ -19431,11 +19475,6 @@ paths:
         name: poe_disabled
         schema:
           type: boolean
-      - description: PoE priority.
-        in: query
-        name: poe_priority
-        schema:
-          $ref: '#/components/schemas/poe_priority'
       - description: POE mode depending on class E.g. "802.3at"
         in: query
         name: poe_mode
@@ -19446,6 +19485,11 @@ paths:
         name: poe_on
         schema:
           type: boolean
+      - description: PoE priority.
+        in: query
+        name: poe_priority
+        schema:
+          $ref: '#/components/schemas/poe_priority'
       - description: Interface name
         in: query
         name: port_id
@@ -19456,87 +19500,11 @@ paths:
         name: port_mac
         schema:
           type: string
-      - description: Amount of power being used by the interface at the time the command
-          is executed. Unit in watts.
-        in: query
-        name: power_draw
-        schema:
-          type: number
-      - description: Output packets
-        in: query
-        name: tx_pkts
-        schema:
-          type: integer
-      - description: Input packets
-        in: query
-        name: rx_pkts
-        schema:
-          type: integer
-      - description: Input bytes
-        in: query
-        name: rx_bytes
-        schema:
-          type: integer
-      - description: Output rate
-        in: query
-        name: tx_bps
-        schema:
-          type: integer
-      - description: Input rate
-        in: query
-        name: rx_bps
-        schema:
-          type: integer
-      - description: Output errors
-        in: query
-        name: tx_errors
-        schema:
-          type: integer
-      - description: Input errors
-        in: query
-        name: rx_errors
-        schema:
-          type: integer
-      - description: Multicast output packets
-        in: query
-        name: tx_mcast_pkts
-        schema:
-          type: integer
-      - description: Broadcast output packets
-        in: query
-        name: tx_bcast_pkts
-        schema:
-          type: integer
-      - description: Multicast input packets
-        in: query
-        name: rx_mcast_pkts
-        schema:
-          type: integer
-      - description: Broadcast input packets
-        in: query
-        name: rx_bcast_pkts
-        schema:
-          type: integer
       - description: Port speed
         in: query
         name: speed
         schema:
           type: integer
-      - description: Limit on number of dynamically learned macs
-        in: query
-        name: mac_limit
-        schema:
-          type: integer
-      - description: Number of mac addresses in the forwarding table
-        in: query
-        name: mac_count
-        schema:
-          type: integer
-      - description: Indicates if interface is up
-        in: query
-        name: up
-        schema:
-          type: boolean
       - description: If `up`==`true`
         in: query
         name: stp_state
@@ -19547,45 +19515,19 @@ paths:
         name: stp_role
         schema:
           $ref: '#/components/schemas/port_stp_role'
-      - description: If `up`==`true` && has Authenticator role
+      - description: Indicates if interface is up
         in: query
-        name: auth_state
+        name: up
         schema:
-          $ref: '#/components/schemas/port_auth_state'
-      - description: Bias current of the optics in mA
+          type: boolean
+      - description: Optic Slot Partnumber, Check for null/empty
         in: query
-        name: optics_bias_current
+        name: xcvr_part_number
         schema:
-          type: number
-      - description: Transmit power of the optics in dBm
-        in: query
-        name: optics_tx_power
-        schema:
-          type: number
-      - description: Receive power of the optics in dBm
-        in: query
-        name: optics_rx_power
-        schema:
-          type: number
-      - description: Temperature of the optics module in Celsius
-        in: query
-        name: optics_module_temperature
-        schema:
-          type: number
-      - description: Voltage of the optics module in mV
-        in: query
-        name: optics_module_voltage
-        schema:
-          type: number
-      - description: 'Type of device. enum: `switch`, `gateway`, `all`'
-        in: query
-        name: type
-        schema:
-          $ref: '#/components/schemas/search_org_sw_or_gw_ports_type'
+          examples:
+          - SFP-10G-SR
+          type: string
       - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/search_after'
       responses:
@@ -35827,255 +35769,32 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/ports/search:
     get:
-      description: Search Switch / Gateway Ports
+      description: 'Search Switch / Gateway Ports Stats for a specific site.
+
+        Returns a list of switch/gateway ports stats that match the search criteria.
+
+
+        The response provide current/last port status and statistics within the hour.
+
+        Traffic information (Tx/Rx) are cumulative counters since the last device
+        reboot.'
       operationId: searchSiteSwOrGwPorts
       parameters:
-      - description: Indicates full or half duplex
-        in: query
-        name: full_duplex
-        schema:
-          examples:
-          - true
-          type: boolean
-      - description: Indicates if interface is disabled
-        in: query
-        name: disabled
-        schema:
-          examples:
-          - false
-          type: boolean
-      - description: Device identifier
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b350e0410
-          type: string
-      - description: Device type
+      - description: 'Type of device. enum: `switch`, `gateway`, `all`'
         in: query
         name: device_type
         schema:
-          $ref: '#/components/schemas/search_site_sw_or_gw_ports_device_type'
-      - description: Chassis identifier of the chassis type listed
-        in: query
-        name: neighbor_mac
-        schema:
-          examples:
-          - 5c5b350e0410
-          type: string
-      - description: Description supplied by the system on the interface E.g. "GigabitEthernet2/0/39"
-        in: query
-        name: neighbor_port_desc
-        schema:
-          examples:
-          - ge-2/0/39
-          type: string
-      - description: Name supplied by the system on the interface E.g. neighbor system
-          name E.g. "Kumar-Acc-SW.mist.local"
-        in: query
-        name: neighbor_system_name
-        schema:
-          examples:
-          - Kumar-Acc-SW.mist.local
-          type: string
-      - description: Is the POE configured not be disabled.
-        in: query
-        name: poe_disabled
-        schema:
-          examples:
-          - false
-          type: boolean
-      - description: POE mode depending on class E.g. "802.3at"
-        in: query
-        name: poe_mode
-        schema:
-          examples:
-          - 802.3at
-          type: string
-      - description: Is the device attached to POE
-        in: query
-        name: poe_on
-        schema:
-          examples:
-          - true
-          type: boolean
-      - description: Interface name
-        in: query
-        name: port_id
-        schema:
-          examples:
-          - ge-2/0/39
-          type: string
-      - description: Interface mac address
-        in: query
-        name: port_mac
-        schema:
-          examples:
-          - 5c5b350e0410
-          type: string
-      - description: Amount of power being used by the interface at the time the command
-          is executed. Unit in watts.
-        in: query
-        name: power_draw
-        schema:
-          examples:
-          - 15.4
-          type: number
-      - description: Output packets
-        in: query
-        name: tx_pkts
-        schema:
-          examples:
-          - 1000000
-          type: integer
-      - description: Input packets
-        in: query
-        name: rx_pkts
-        schema:
-          examples:
-          - 1000000
-          type: integer
-      - description: Input bytes
-        in: query
-        name: rx_bytes
-        schema:
-          examples:
-          - 1000000
-          type: integer
-      - description: Output rate
-        in: query
-        name: tx_bps
-        schema:
-          examples:
-          - 1000000
-          type: integer
-      - description: Input rate
-        in: query
-        name: rx_bps
-        schema:
-          examples:
-          - 1000000
-          type: integer
-      - description: Output errors
-        in: query
-        name: tx_errors
-        schema:
-          examples:
-          - 0
-          type: integer
-      - description: Input errors
-        in: query
-        name: rx_errors
-        schema:
-          examples:
-          - 0
-          type: integer
-      - description: Multicast output packets
-        in: query
-        name: tx_mcast_pkts
-        schema:
-          examples:
-          - 100
-          type: integer
-      - description: Broadcast output packets
-        in: query
-        name: tx_bcast_pkts
-        schema:
-          examples:
-          - 100
-          type: integer
-      - description: Multicast input packets
-        in: query
-        name: rx_mcast_pkts
-        schema:
-          examples:
-          - 100
-          type: integer
-      - description: Broadcast input packets
-        in: query
-        name: rx_bcast_pkts
-        schema:
-          examples:
-          - 100
-          type: integer
-      - description: Port speed
-        in: query
-        name: speed
-        schema:
-          examples:
-          - 1000
-          type: integer
-      - description: Limit on number of dynamically learned macs
-        in: query
-        name: mac_limit
-        schema:
-          examples:
-          - 1000
-          type: integer
-      - description: Number of mac addresses in the forwarding table
-        in: query
-        name: mac_count
-        schema:
-          examples:
-          - 10
-          type: integer
-      - description: Indicates if interface is up
-        in: query
-        name: up
-        schema:
-          examples:
-          - true
-          type: boolean
-      - description: Indicates if interface is active/inactive
-        in: query
-        name: active
-        schema:
-          examples:
-          - true
-          type: boolean
-      - description: Last sampled jitter of the interface
-        in: query
-        name: jitter
-        schema:
-          examples:
-          - 0.456
-          type: number
-      - description: Last sampled loss of the interface
-        in: query
-        name: loss
-        schema:
-          examples:
-          - 0.01
-          type: number
-      - description: Last sampled latency of the interface
-        in: query
-        name: latency
-        schema:
-          examples:
-          - 0.123
-          type: number
-      - description: If `up`==`true`
-        in: query
-        name: stp_state
-        schema:
-          $ref: '#/components/schemas/port_stp_state'
-      - description: If `up`==`true`
-        in: query
-        name: stp_role
-        schema:
-          $ref: '#/components/schemas/port_stp_role'
-      - description: Optic Slot Partnumber, Check for null/empty
-        in: query
-        name: xcvr_part_number
-        schema:
-          examples:
-          - SFP-10G-SR
-          type: string
+          $ref: '#/components/schemas/search_org_sw_or_gw_ports_type'
       - description: If `up`==`true` && has Authenticator role
         in: query
         name: auth_state
         schema:
           $ref: '#/components/schemas/port_auth_state'
+      - description: Indicates full or half duplex
+        in: query
+        name: full_duplex
+        schema:
+          type: boolean
       - description: LTE IMSI value, Check for null/empty
         in: query
         name: lte_imsi
@@ -36097,35 +35816,85 @@ paths:
           examples:
           - '123456789012345'
           type: string
-      - description: Bias current of the optics in mA
+      - description: Device identifier
         in: query
-        name: optics_bias_current
+        name: mac
         schema:
-          type: number
-      - description: Transmit power of the optics in dBm
+          type: string
+      - description: Chassis identifier of the chassis type listed
         in: query
-        name: optics_tx_power
+        name: neighbor_mac
         schema:
-          type: number
-      - description: Receive power of the optics in dBm
+          type: string
+      - description: Description supplied by the system on the interface E.g. "GigabitEthernet2/0/39"
         in: query
-        name: optics_rx_power
+        name: neighbor_port_desc
         schema:
-          type: number
-      - description: Temperature of the optics module in Celsius
+          type: string
+      - description: Name supplied by the system on the interface E.g. neighbor system
+          name E.g. "Kumar-Acc-SW.mist.local"
         in: query
-        name: optics_module_temperature
+        name: neighbor_system_name
         schema:
-          type: number
-      - description: Voltage of the optics module in mV
+          type: string
+      - description: Is the POE configured not be disabled.
         in: query
-        name: optics_module_voltage
+        name: poe_disabled
         schema:
-          type: number
+          type: boolean
+      - description: POE mode depending on class E.g. "802.3at"
+        in: query
+        name: poe_mode
+        schema:
+          type: string
+      - description: Is the device attached to POE
+        in: query
+        name: poe_on
+        schema:
+          type: boolean
+      - description: PoE priority.
+        in: query
+        name: poe_priority
+        schema:
+          $ref: '#/components/schemas/poe_priority'
+      - description: Interface name
+        in: query
+        name: port_id
+        schema:
+          type: string
+      - description: Interface mac address
+        in: query
+        name: port_mac
+        schema:
+          type: string
+      - description: Port speed
+        in: query
+        name: speed
+        schema:
+          type: integer
+      - description: If `up`==`true`
+        in: query
+        name: stp_state
+        schema:
+          $ref: '#/components/schemas/port_stp_state'
+      - description: If `up`==`true`
+        in: query
+        name: stp_role
+        schema:
+          $ref: '#/components/schemas/port_stp_role'
+      - description: Indicates if interface is up
+        in: query
+        name: up
+        schema:
+          type: boolean
+      - description: Optic Slot Partnumber, Check for null/empty
+        in: query
+        name: xcvr_part_number
+        schema:
+          examples:
+          - SFP-10G-SR
+          type: string
       - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/search_after'
       responses:
