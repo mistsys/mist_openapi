@@ -20861,33 +20861,16 @@ paths:
       description: Search Org User MACs
       operationId: searchOrgUserMacs
       parameters:
-      - description: Single or array of partial/full MAC address
+      - description: Partial/full MAC address
         in: query
         name: mac
         schema:
-          oneOf:
-          - type: string
-          - items:
-              type: string
-            type: array
-      - description: Single string or array of strings of labels
+          type: string
+      - description: Optional, array of strings of labels
         in: query
         name: labels
         schema:
-          oneOf:
-          - type: string
-          - items:
-              type: string
-            type: array
-      - description: Single string or array of strings of name
-        in: query
-        name: name
-        schema:
-          oneOf:
-          - type: string
-          - items:
-              type: string
-            type: array
+          $ref: '#/components/schemas/search_org_user_macs_labels'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/sort'
