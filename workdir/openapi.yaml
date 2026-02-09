@@ -57640,10 +57640,10 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/jsi_sirt_count'
+            $ref: '#/components/schemas/response_count'
         application/vnd.api+json:
           schema:
-            $ref: '#/components/schemas/jsi_sirt_count'
+            $ref: '#/components/schemas/response_count'
       description: OK
     JsiPbnSearch:
       content:
@@ -57658,10 +57658,10 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/jsi_pbn_count'
+            $ref: '#/components/schemas/response_count'
         application/vnd.api+json:
           schema:
-            $ref: '#/components/schemas/jsi_pbn_count'
+            $ref: '#/components/schemas/response_count'
       description: OK
     JuniperLinkAccountFailed:
       content:
@@ -73763,38 +73763,6 @@ components:
           description: Total number of results
           type: integer
       type: object
-    jsi_sirt_count:
-      additionalProperties: false
-      description: SIRT count response grouped by specified field
-      properties:
-        distinct:
-          description: Field that was used for grouping
-          enum:
-          - versions
-          - models
-          - severity
-          - jsa_updated_date
-          type: string
-        end:
-          description: End timestamp
-          type: integer
-        limit:
-          description: Number of results to return
-          type: integer
-        results:
-          description: Count results grouped by the distinct field
-          items:
-            additionalProperties:
-              type: integer
-            type: object
-          type: array
-        start:
-          description: Start timestamp
-          type: integer
-        total:
-          description: Total number of distinct values
-          type: integer
-      type: object
     jsi_pbn_item:
       additionalProperties: false
       description: PBN (Problem Bug Notification) advisory item
@@ -73871,38 +73839,6 @@ components:
           type: integer
         total:
           description: Total number of results
-          type: integer
-      type: object
-    jsi_pbn_count:
-      additionalProperties: false
-      description: PBN count response grouped by specified field
-      properties:
-        distinct:
-          description: Field that was used for grouping
-          enum:
-          - versions
-          - models
-          - customer_risk
-          - bug_type
-          type: string
-        end:
-          description: End timestamp
-          type: integer
-        limit:
-          description: Number of results to return
-          type: integer
-        results:
-          description: Count results grouped by the distinct field
-          items:
-            additionalProperties:
-              type: integer
-            type: object
-          type: array
-        start:
-          description: Start timestamp
-          type: integer
-        total:
-          description: Total number of distinct values
           type: integer
       type: object
     jse_device:
