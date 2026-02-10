@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.16**
+  description: '> Version: **2602.1.0**
 
     >
 
-    > Date: **January 30, 2025**
+    > Date: **February 10, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.16
+  version: 2602.1.0
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -5824,6 +5824,31 @@ paths:
       summary: updateOrgAlarmTemplate
       tags:
       - Orgs Alarm Templates
+  /api/v1/orgs/{org_id}/aos/register_cmd:
+    get:
+      description: Generates a registration challenge token and AOS-specific CLI commands
+        for TPM-based brownfield registration of AOS devices. The returned command
+        string can be copied and pasted directly into an AOS device to register it
+        with Mist.
+      operationId: getOrgAosRegisterCmd
+      responses:
+        '200':
+          $ref: '#/components/responses/AosRegisterCmd'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgAosRegisterCmd
+      tags:
+      - Orgs AOS
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
     get:
       description: Get List of Org API Tokens
@@ -5947,31 +5972,6 @@ paths:
       summary: updateOrgApiToken
       tags:
       - Orgs API Tokens
-  /api/v1/orgs/{org_id}/aos/register_cmd:
-    get:
-      description: Generates a registration challenge token and AOS-specific CLI commands
-        for TPM-based brownfield registration of AOS devices. The returned command
-        string can be copied and pasted directly into an AOS device to register it
-        with Mist.
-      operationId: getOrgAosRegisterCmd
-      responses:
-        '200':
-          $ref: '#/components/responses/AosRegisterCmd'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: getOrgAosRegisterCmd
-      tags:
-      - Orgs AOS
-    parameters:
-    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/aptemplates:
     get:
       description: Get List of Org AP Templates
@@ -10631,63 +10631,10 @@ paths:
       - Orgs JSI
     parameters:
     - $ref: '#/components/parameters/org_id'
-  /api/v1/orgs/{org_id}/jsi/sirt/search:
+  /api/v1/orgs/{org_id}/jsi/pbn/count:
     get:
-      description: Text search for SIRT (Security Incident Response Team) advisories.
-        Search can be done on versions, models, severity, and id fields.
-      operationId: searchOrgJsiSirt
-      parameters:
-      - description: OS versions to search for
-        in: query
-        name: versions
-        schema:
-          examples:
-          - 20.4R3
-          type: string
-      - description: Device models to search for
-        in: query
-        name: models
-        schema:
-          type: string
-      - description: Severity level to filter by
-        in: query
-        name: severity
-        schema:
-          type: string
-      - description: SIRT ID to search for
-        in: query
-        name: id
-        schema:
-          examples:
-          - JSA100053
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/page'
-      - $ref: '#/components/parameters/search_after'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      responses:
-        '200':
-          $ref: '#/components/responses/JsiSirtSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: searchOrgJsiSirt
-      tags:
-      - Orgs JSI
-    parameters:
-    - $ref: '#/components/parameters/org_id'
-  /api/v1/orgs/{org_id}/jsi/sirt/count:
-    get:
-      description: Get count of SIRT advisories grouped by specified field
-      operationId: countOrgJsiSirt
+      description: Get count of PBN advisories grouped by specified field
+      operationId: countOrgJsiPbn
       parameters:
       - description: Field to group by
         in: query
@@ -10697,8 +10644,8 @@ paths:
           enum:
           - versions
           - models
-          - severity
-          - jsa_updated_date
+          - customer_risk
+          - bug_type
           examples:
           - versions
           type: string
@@ -10707,7 +10654,7 @@ paths:
       - $ref: '#/components/parameters/end'
       responses:
         '200':
-          $ref: '#/components/responses/JsiSirtCount'
+          $ref: '#/components/responses/JsiPbnCount'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -10718,7 +10665,7 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: countOrgJsiSirt
+      summary: countOrgJsiPbn
       tags:
       - Orgs JSI
     parameters:
@@ -10781,10 +10728,10 @@ paths:
       - Orgs JSI
     parameters:
     - $ref: '#/components/parameters/org_id'
-  /api/v1/orgs/{org_id}/jsi/pbn/count:
+  /api/v1/orgs/{org_id}/jsi/sirt/count:
     get:
-      description: Get count of PBN advisories grouped by specified field
-      operationId: countOrgJsiPbn
+      description: Get count of SIRT advisories grouped by specified field
+      operationId: countOrgJsiSirt
       parameters:
       - description: Field to group by
         in: query
@@ -10794,8 +10741,8 @@ paths:
           enum:
           - versions
           - models
-          - customer_risk
-          - bug_type
+          - severity
+          - jsa_updated_date
           examples:
           - versions
           type: string
@@ -10804,7 +10751,7 @@ paths:
       - $ref: '#/components/parameters/end'
       responses:
         '200':
-          $ref: '#/components/responses/JsiPbnCount'
+          $ref: '#/components/responses/JsiSirtCount'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -10815,7 +10762,60 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: countOrgJsiPbn
+      summary: countOrgJsiSirt
+      tags:
+      - Orgs JSI
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/jsi/sirt/search:
+    get:
+      description: Text search for SIRT (Security Incident Response Team) advisories.
+        Search can be done on versions, models, severity, and id fields.
+      operationId: searchOrgJsiSirt
+      parameters:
+      - description: OS versions to search for
+        in: query
+        name: versions
+        schema:
+          examples:
+          - 20.4R3
+          type: string
+      - description: Device models to search for
+        in: query
+        name: models
+        schema:
+          type: string
+      - description: Severity level to filter by
+        in: query
+        name: severity
+        schema:
+          type: string
+      - description: SIRT ID to search for
+        in: query
+        name: id
+        schema:
+          examples:
+          - JSA100053
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/search_after'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/JsiSirtSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgJsiSirt
       tags:
       - Orgs JSI
     parameters:
@@ -20773,6 +20773,45 @@ paths:
       summary: updateOrgMultipleUserMacs
       tags:
       - Orgs User MACs
+  /api/v1/orgs/{org_id}/usermacs/count:
+    get:
+      description: Count by Distinct Attributes of User MACs
+      operationId: countOrgUserMacs
+      parameters:
+      - description: Attribute to count by
+        in: query
+        name: distinct
+        required: true
+        schema:
+          enum:
+          - mac
+          - name
+          - labels
+          - org_id
+          examples:
+          - org_id
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserMacsCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgUserMacs
+      tags:
+      - Orgs User MACs
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/usermacs/delete:
     parameters:
     - $ref: '#/components/parameters/org_id'
@@ -20888,45 +20927,6 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: searchOrgUserMacs
-      tags:
-      - Orgs User MACs
-    parameters:
-    - $ref: '#/components/parameters/org_id'
-  /api/v1/orgs/{org_id}/usermacs/count:
-    get:
-      description: Count by Distinct Attributes of User MACs
-      operationId: countOrgUserMacs
-      parameters:
-      - description: Attribute to count by
-        in: query
-        name: distinct
-        required: true
-        schema:
-          enum:
-          - mac
-          - name
-          - labels
-          - org_id
-          examples:
-          - org_id
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      responses:
-        '200':
-          $ref: '#/components/responses/UserMacsCount'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: countOrgUserMacs
       tags:
       - Orgs User MACs
     parameters:
@@ -29943,6 +29943,33 @@ paths:
       summary: createSiteMap
       tags:
       - Sites Maps
+  /api/v1/sites/{site_id}/maps/auto_geofences:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: The auto geofence service is a map parsing service that uses map
+        image data to identify the exterior of buildings in the map image also known
+        as "geofences". This API processes all maps for a given SiteId. The maps must
+        have an image to parse for the auto geofence service. Repeated POST requests
+        to this endpoint while the auto geofence service is processing the map will
+        be rejected.
+      operationId: startSiteMapsAutoGeofence
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteMapsAutoGeofence
+      tags:
+      - Sites Maps
   /api/v1/sites/{site_id}/maps/import:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -30112,6 +30139,34 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: updateSiteMap
+      tags:
+      - Sites Maps
+  /api/v1/sites/{site_id}/maps/{map_id}/auto_geofences:
+    parameters:
+    - $ref: '#/components/parameters/map_id'
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: The auto geofence service is a map parsing service that uses map
+        image data to identify the exterior of buildings in the map image also known
+        as "geofences". This API processes a single given MapId. This map must have
+        an image to parse for the auto geofence service. Repeated POST requests to
+        this endpoint while the auto geofence service is processing the map will be
+        rejected.
+      operationId: startSiteMapAutoGeofence
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteMapAutoGeofence
       tags:
       - Sites Maps
   /api/v1/sites/{site_id}/maps/{map_id}/auto_orient:
@@ -30369,61 +30424,6 @@ paths:
       summary: startSiteMapAutoZone
       tags:
       - Sites Maps - Auto-Zone
-  /api/v1/sites/{site_id}/maps/{map_id}/auto_geofences:
-    parameters:
-    - $ref: '#/components/parameters/map_id'
-    - $ref: '#/components/parameters/site_id'
-    post:
-      description: The auto geofence service is a map parsing service that uses map
-        image data to identify the exterior of buildings in the map image also known
-        as "geofences". This API processes a single given MapId. This map must have
-        an image to parse for the auto geofence service. Repeated POST requests to
-        this endpoint while the auto geofence service is processing the map will be
-        rejected.
-      operationId: startSiteMapAutoGeofence
-      responses:
-        '200':
-          $ref: '#/components/responses/OK'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: startSiteMapAutoGeofence
-      tags:
-      - Sites Maps
-  /api/v1/sites/{site_id}/maps/auto_geofences:
-    parameters:
-    - $ref: '#/components/parameters/site_id'
-    post:
-      description: The auto geofence service is a map parsing service that uses map
-        image data to identify the exterior of buildings in the map image also known
-        as "geofences". This API processes all maps for a given SiteId. The maps
-        must have an image to parse for the auto geofence service. Repeated POST
-        requests to this endpoint while the auto geofence service is processing the
-        map will be rejected.
-      operationId: startSiteMapsAutoGeofence
-      responses:
-        '200':
-          $ref: '#/components/responses/OK'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: startSiteMapsAutoGeofence
-      tags:
-      - Sites Maps
   /api/v1/sites/{site_id}/maps/{map_id}/clear_auto_orient:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -55558,6 +55558,15 @@ components:
           schema:
             $ref: '#/components/schemas/response_anomaly_search'
       description: OK
+    AosRegisterCmd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/aos_register_cmd'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/aos_register_cmd'
+      description: AOS Brownfield Registration Commands
     ApiUsage:
       content:
         application/json:
@@ -55633,15 +55642,6 @@ components:
           schema:
             $ref: '#/components/schemas/user_apitokens'
       description: OK
-    AosRegisterCmd:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/aos_register_cmd'
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/aos_register_cmd'
-      description: AOS Brownfield Registration Commands
     Aptemplate:
       content:
         application/json:
@@ -57737,16 +57737,7 @@ components:
           schema:
             $ref: '#/components/schemas/js_inventory_search'
       description: OK
-    JsiSirtSearch:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/jsi_sirt_search'
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/jsi_sirt_search'
-      description: OK
-    JsiSirtCount:
+    JsiPbnCount:
       content:
         application/json:
           schema:
@@ -57764,7 +57755,7 @@ components:
           schema:
             $ref: '#/components/schemas/jsi_pbn_search'
       description: OK
-    JsiPbnCount:
+    JsiSirtCount:
       content:
         application/json:
           schema:
@@ -57772,6 +57763,15 @@ components:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/response_count'
+      description: OK
+    JsiSirtSearch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/jsi_sirt_search'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/jsi_sirt_search'
       description: OK
     JuniperLinkAccountFailed:
       content:
@@ -58199,6 +58199,15 @@ components:
           schema:
             $ref: '#/components/schemas/response_mxedge_upgrades'
       description: Example response
+    MxEdgeVmParams:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/mxedge_vm_params'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/mxedge_vm_params'
+      description: Mist Edge VM Parameters
     MxTunnelsPreemptAps:
       content:
         application/json:
@@ -58298,15 +58307,6 @@ components:
           schema:
             $ref: '#/components/schemas/mxedge_upgrade_info'
       description: OK
-    MxEdgeVmParams:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/mxedge_vm_params'
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/mxedge_vm_params'
-      description: Mist Edge VM Parameters
     MxedgesArray:
       content:
         application/json:
@@ -62947,6 +62947,16 @@ components:
       examples:
       - external
       type: string
+    aos_register_cmd:
+      additionalProperties: false
+      description: AOS Brownfield Registration Commands
+      properties:
+        cli_commands:
+          description: AOS-specific CLI commands that can be copied and pasted directly
+            into an AOS device to register it with Mist. Includes registration code
+            and configuration commands.
+          type: string
+      type: object
     ap_aeroscout:
       additionalProperties: false
       description: Aeroscout AP settings
@@ -64598,16 +64608,6 @@ components:
         minimum: 1
         type: integer
       type: array
-    aos_register_cmd:
-      additionalProperties: false
-      description: AOS Brownfield Registration Commands
-      properties:
-        cli_commands:
-          description: AOS-specific CLI commands that can be copied and pasted directly
-            into an AOS device to register it with Mist. Includes registration code
-            and configuration commands.
-          type: string
-      type: object
     ap_template:
       properties:
         ap_matching:
@@ -69387,9 +69387,8 @@ components:
           format: uuid
           type: string
         mist_configured:
-          description: whether the device can be configured by Mist or not. This
-            deprecates `managed` (for adopted device) and `disable_auto_config` for
-            claimed device)
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         mist_nac:
           $ref: '#/components/schemas/switch_mist_nac'
@@ -71851,17 +71850,6 @@ components:
           $ref: '#/components/schemas/gateway_port_vpn_paths'
         wan_arp_policer:
           $ref: '#/components/schemas/gateway_port_wan_arp_policer'
-        wan_speedtest_mode:
-          default: auto
-          description: Controls whether Marvis/scheduler can run speedtest on this
-            port
-          enum:
-          - auto
-          - enabled
-          - disabled
-          examples:
-          - auto
-          type: string
         wan_ext_ip:
           description: Only if `usage`==`wan`, optional. If spoke should reach this
             port by a different IP
@@ -71892,6 +71880,17 @@ components:
           $ref: '#/components/schemas/gateway_wan_probe_override'
         wan_source_nat:
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
+        wan_speedtest_mode:
+          default: auto
+          description: Controls whether Marvis/scheduler can run speedtest on this
+            port
+          enum:
+          - auto
+          - enabled
+          - disabled
+          examples:
+          - auto
+          type: string
         wan_type:
           $ref: '#/components/schemas/gateway_port_wan_type'
       required:
@@ -73729,14 +73728,14 @@ components:
         device_name:
           description: Name of the device
           type: string
-        eol_time:
-          description: End of life time
-          type: integer
         eol_psn:
           description: EOL PSN
           examples:
           - TSB18097
           type: string
+        eol_time:
+          description: End of life time
+          type: integer
         eos_time:
           description: End of support time
           type: integer
@@ -73806,78 +73805,42 @@ components:
           description: Total number of results
           type: integer
       type: object
-    jsi_sirt_item:
+    jse_device:
       additionalProperties: false
-      description: SIRT advisory item
       properties:
-        cvss_score:
-          description: CVSS score
-          type: number
-        id:
-          description: ID of the SIRT
-          examples:
-          - JSA100053
+        ext_ip:
+          description: When available
           type: string
-        models:
-          description: OS models affected
-          items:
-            type: string
-          type: array
-        problem:
-          description: Problem description
+        last_seen:
+          $ref: '#/components/schemas/last_seen'
+        mac:
           type: string
-        published_date:
-          description: Release date of the SIRT issue
-          type: integer
-        release_notes:
-          description: Release notes if any
+        model:
           type: string
-        severity:
-          description: Severity of the issue
-          type: string
-        solution:
-          description: Solution for the security issue
-          type: string
-        title:
-          description: Title of the SIRT
-          type: string
-        updated_date:
-          description: JSA updated timestamp
-          type: integer
-        versions:
-          description: OS versions affected
-          items:
-            type: string
-          type: array
-        workaround:
-          description: Workaround provided
+        serial:
           type: string
       type: object
-    jsi_sirt_search:
-      additionalProperties: false
-      description: SIRT search response
-      properties:
-        end:
-          description: End timestamp
-          type: integer
-        limit:
-          description: Number of results to return
-          type: integer
-        next:
-          description: Next page URL
-          type: string
-        results:
-          description: List of SIRT advisories
-          items:
-            $ref: '#/components/schemas/jsi_sirt_item'
-          type: array
-        start:
-          description: Start timestamp
-          type: integer
-        total:
-          description: Total number of results
-          type: integer
-      type: object
+    jse_devices:
+      items:
+        $ref: '#/components/schemas/jse_device'
+      type: array
+    jsi_inventory_count_distinct:
+      description: 'enum: `account_id`, `claimed`, `eol_time`, `eos_time`, `has_support`,
+        `version_time`, `model`, `sku`, `status`, `type`, `version`, `warranty_type'
+      enum:
+      - account_id
+      - claimed
+      - has_support
+      - eol_time
+      - eos_time
+      - version_time
+      - model
+      - sku
+      - status
+      - type
+      - version
+      - warranty_type
+      type: string
     jsi_pbn_item:
       additionalProperties: false
       description: PBN (Problem Bug Notification) advisory item
@@ -73956,42 +73919,78 @@ components:
           description: Total number of results
           type: integer
       type: object
-    jse_device:
+    jsi_sirt_item:
       additionalProperties: false
+      description: SIRT advisory item
       properties:
-        ext_ip:
-          description: When available
+        cvss_score:
+          description: CVSS score
+          type: number
+        id:
+          description: ID of the SIRT
+          examples:
+          - JSA100053
           type: string
-        last_seen:
-          $ref: '#/components/schemas/last_seen'
-        mac:
+        models:
+          description: OS models affected
+          items:
+            type: string
+          type: array
+        problem:
+          description: Problem description
           type: string
-        model:
+        published_date:
+          description: Release date of the SIRT issue
+          type: integer
+        release_notes:
+          description: Release notes if any
           type: string
-        serial:
+        severity:
+          description: Severity of the issue
+          type: string
+        solution:
+          description: Solution for the security issue
+          type: string
+        title:
+          description: Title of the SIRT
+          type: string
+        updated_date:
+          description: JSA updated timestamp
+          type: integer
+        versions:
+          description: OS versions affected
+          items:
+            type: string
+          type: array
+        workaround:
+          description: Workaround provided
           type: string
       type: object
-    jse_devices:
-      items:
-        $ref: '#/components/schemas/jse_device'
-      type: array
-    jsi_inventory_count_distinct:
-      description: 'enum: `account_id`, `claimed`, `eol_time`, `eos_time`, `has_support`,
-        `version_time`, `model`, `sku`, `status`, `type`, `version`, `warranty_type'
-      enum:
-      - account_id
-      - claimed
-      - has_support
-      - eol_time
-      - eos_time
-      - version_time
-      - model
-      - sku
-      - status
-      - type
-      - version
-      - warranty_type
-      type: string
+    jsi_sirt_search:
+      additionalProperties: false
+      description: SIRT search response
+      properties:
+        end:
+          description: End timestamp
+          type: integer
+        limit:
+          description: Number of results to return
+          type: integer
+        next:
+          description: Next page URL
+          type: string
+        results:
+          description: List of SIRT advisories
+          items:
+            $ref: '#/components/schemas/jsi_sirt_item'
+          type: array
+        start:
+          description: Start timestamp
+          type: integer
+        total:
+          description: Total number of results
+          type: integer
+      type: object
     jsi_warranty_type:
       description: "Warranty type for Juniper Support Insight (JSI) devices. The warranty\
         \ type\nis used to determine the support level and duration of the warranty\
@@ -76734,22 +76733,6 @@ components:
       - package
       - version
       type: object
-    mxedge_vm_params:
-      additionalProperties: false
-      description: Mist Edge VM parameters
-      properties:
-        model:
-          description: SKU
-          examples:
-          - ME-VM
-          type: string
-        name:
-          description: User given name (optional)
-          type: string
-        user_data:
-          description: Base64 encoded user data
-          type: string
-      type: object
     mxedge_upgrade_multi:
       properties:
         allow_downgrades:
@@ -76868,6 +76851,22 @@ components:
           readOnly: true
           type: string
       readOnly: true
+      type: object
+    mxedge_vm_params:
+      additionalProperties: false
+      description: Mist Edge VM parameters
+      properties:
+        model:
+          description: SKU
+          examples:
+          - ME-VM
+          type: string
+        name:
+          description: User given name (optional)
+          type: string
+        user_data:
+          description: Base64 encoded user data
+          type: string
       type: object
     mxedges:
       items:
