@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2026-02-10
+## [2602.1.0] - 2026-02-10
 
 - Added `/api/v1/orgs/{org_id}/aos/register_cmd`
 - Added `/api/v1/orgs/{org_id}/jsi/pbn/count`
