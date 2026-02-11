@@ -10636,7 +10636,7 @@ paths:
       description: Get count of PBN advisories grouped by specified field
       operationId: countOrgJsiPbn
       parameters:
-      - description: Field to group by
+      - description: 'Field to group by enum: `versions`, `models`, `customer_risk`, `bug_type`'
         in: query
         name: distinct
         required: true
@@ -20778,7 +20778,7 @@ paths:
       description: Count by Distinct Attributes of User MACs
       operationId: countOrgUserMacs
       parameters:
-      - description: Attribute to count by
+      - description: 'Attribute to count by. enum: `mac`, `name`, `labels`, `org_id`'
         in: query
         name: distinct
         required: true
@@ -71882,8 +71882,7 @@ components:
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
         wan_speedtest_mode:
           default: auto
-          description: Controls whether Marvis/scheduler can run speedtest on this
-            port
+          description: 'Controls whether Marvis/scheduler can run speedtest on this port. enum: `auto`, `enabled`, `disabled`'
           enum:
           - auto
           - enabled
