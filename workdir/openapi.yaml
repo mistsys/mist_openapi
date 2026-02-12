@@ -5846,7 +5846,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: getOrgAosRegisterCmd
       tags:
-      - Orgs AOS
+      - Orgs Devices -OAS
     parameters:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
