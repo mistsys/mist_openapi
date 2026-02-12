@@ -455,6 +455,8 @@ tags:
   name: Orgs Devices
 - description: API Calls specific to SSR devices
   name: Orgs Devices - SSR
+- description: API Calls specific to AOS (Apstra Operating System) devices
+  name: Orgs Devices -AOS
 - description: 'EVPN allows an alternative but more efficient LAN architecture utilizing
     VxLAN / MP-BGP - separating control plane (MAC / IP Learning) from forwarding
     plane.
@@ -5850,7 +5852,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: getOrgAosRegisterCmd
       tags:
-      - Orgs AOS
+      - Orgs Devices -AOS
     parameters:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
