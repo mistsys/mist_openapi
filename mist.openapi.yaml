@@ -455,7 +455,7 @@ tags:
   name: Orgs Devices
 - description: API Calls specific to SSR devices
   name: Orgs Devices - SSR
-- description: API Calls specific to AOS (Apstra Operating System) devices
+- description: API Calls specific to AOS (Aruba Operating System) devices
   name: Orgs Devices -AOS
 - description: 'EVPN allows an alternative but more efficient LAN architecture utilizing
     VxLAN / MP-BGP - separating control plane (MAC / IP Learning) from forwarding
@@ -7988,8 +7988,9 @@ paths:
           examples:
           - MR84
           type: string
-      - description: 'for switches and gateways, to filter on managed/unmanaged devices.
-          enum: `true`, `false`'
+      - deprecated: true
+        description: 'for switches and gateways, to filter on managed/unmanaged devices.
+          Deprecated in favour of mist_configured. enum: `true`, `false`'
         in: query
         name: managed
         schema:
@@ -9938,7 +9939,6 @@ paths:
                   disable_auto_config: false
                   macs:
                   - 5c5b350e0001
-                  managed: false
                   no_reassign: false
                   op: assign
                   site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
@@ -10013,7 +10013,7 @@ paths:
               Example:
                 value:
                   disable_auto_config: true
-                  managed: true
+                  mist_configured: true
                   nodes:
                   - mac: aff827549235
                   - mac: 8396cd006c8c
@@ -10642,7 +10642,8 @@ paths:
       description: Get count of PBN advisories grouped by specified field
       operationId: countOrgJsiPbn
       parameters:
-      - description: Field to group by
+      - description: 'Field to group by enum: `versions`, `models`, `customer_risk`,
+          `bug_type`'
         in: query
         name: distinct
         required: true
@@ -20784,7 +20785,7 @@ paths:
       description: Count by Distinct Attributes of User MACs
       operationId: countOrgUserMacs
       parameters:
-      - description: Attribute to count by
+      - description: 'Attribute to count by. enum: `mac`, `name`, `labels`, `org_id`'
         in: query
         name: distinct
         required: true
@@ -44286,7 +44287,7 @@ components:
           corp:
             ip: 192.168.10.1
             type: static
-        managed: true
+        mist_configured: true
         modified_time: 0
         name: corp-a135
         ntp_servers:
@@ -46104,7 +46105,7 @@ components:
           last_config_status: success
           last_hostname: wan-teleworker
           mac: 00ec77599d00
-          managed: true
+          mist_configured: true
           model: SSR120
           node: node1
           node0_mac: 00ec77599d00
@@ -46139,7 +46140,7 @@ components:
           last_trouble_code: '106'
           last_trouble_timestamp: 1719540
           mac: 00c78d939c00
-          managed: true
+          mist_configured: true
           model: EX4100-48MP
           num_members: 1
           org_id: 6748cfa6-4e12-11e6-9188-0242ac110007
@@ -46173,7 +46174,6 @@ components:
           netmask: 255.255.255.0
           network: default
           type: static
-        managed: false
         modified_time: 0
         name: corp
         notes: slightly off center
@@ -69125,6 +69125,9 @@ components:
           readOnly: true
           type: string
         managed:
+          deprecated: true
+          description: Whether the device is managed by Mist. Deprecated in favour
+            of mist_configured.
           type: boolean
         map_id:
           description: Map where the device belongs to
@@ -69382,9 +69385,12 @@ components:
           type: string
         managed:
           default: false
+          deprecated: true
           description: An adopted switch/gateway will not be managed/configured by
             Mist by default. Setting this parameter to `true` enables the adopted
-            switch/gateway to be managed/configured by Mist.
+            switch/gateway to be managed/configured by Mist. Deprecated in favour
+            of mist_configured, which is more intuitive and can be used for both adopted
+            and claimed devices.
           type: boolean
         map_id:
           description: Map where the device belongs to
@@ -71888,8 +71894,8 @@ components:
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
         wan_speedtest_mode:
           default: auto
-          description: Controls whether Marvis/scheduler can run speedtest on this
-            port
+          description: 'Controls whether Marvis/scheduler can run speedtest on this
+            port. enum: `auto`, `enabled`, `disabled`'
           enum:
           - auto
           - enabled
