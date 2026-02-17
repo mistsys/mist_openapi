@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.0] - 2026-02-10
+
+- Added `/api/v1/orgs/{org_id}/aos/register_cmd`
+- Added `/api/v1/orgs/{org_id}/jsi/pbn/count`
+- Added `/api/v1/orgs/{org_id}/jsi/pbn/search`
+- Added `/api/v1/orgs/{org_id}/jsi/sirt/count`
+- Added `/api/v1/orgs/{org_id}/jsi/sirt/search`
+- Added `/api/v1/orgs/{org_id}/mxedges/{mxedge_id}/vm_params`
+- Added `/api/v1/orgs/{org_id}/usermacs/count`
+- Added `/api/v1/sites/{site_id}/maps/auto_geofences`
+  - Run auto geofence service for all maps in a site
+- Added `/api/v1/sites/{site_id}/maps/{map_id}/auto_geofences`
+  - Run auto geofence service for a single map
+- Updated `/api/v1/orgs/{org_id}/nac_clients/search`
+- Updated `/api/v1/orgs/{org_id}/setting`
+  - Added `allow_mist` field
+- Updated `/api/v1/orgs/{org_id}/stats`
+  - Added `allow_mist` field to response
+- Updated `/api/v1/sites/{site_id}/analyze_spectrum`
+  - Added `channels` parameter to request body
+  - Added `minimum: 60` constraint to `duration` parameter
+- Updated `/api/v1/sites/{site_id}/setting/derived`
+  - Added `allow_mist` field to response
+- Updated `/api/v1/sites/{site_id}/stats/devices`
+  - Added `ip`, `mac`, `product_id`, `vendor_id` fields to `esl_stat` for Hanshow and SoluM dongles
+
 ## [2511.1.6] - 2025-12-11
 
 - Updated `/api/v1/orgs/{org_id}/networktemplates`

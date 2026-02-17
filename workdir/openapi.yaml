@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2511.1.16**
+  description: '> Version: **2602.1.0**
 
     >
 
-    > Date: **January 30, 2025**
+    > Date: **February 10, 2025**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2511.1.16
+  version: 2602.1.0
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -451,6 +451,8 @@ tags:
   name: Orgs Devices
 - description: API Calls specific to SSR devices
   name: Orgs Devices - SSR
+- description: API Calls specific to AOS (Aruba Operating System) devices
+  name: Orgs Devices - AOS
 - description: 'EVPN allows an alternative but more efficient LAN architecture utilizing
     VxLAN / MP-BGP - separating control plane (MAC / IP Learning) from forwarding
     plane.
@@ -5824,6 +5826,31 @@ paths:
       summary: updateOrgAlarmTemplate
       tags:
       - Orgs Alarm Templates
+  /api/v1/orgs/{org_id}/aos/register_cmd:
+    get:
+      description: Generates a registration challenge token and AOS-specific CLI commands
+        for TPM-based brownfield registration of AOS devices. The returned command
+        string can be copied and pasted directly into an AOS device to register it
+        with Mist.
+      operationId: getOrgAosRegisterCmd
+      responses:
+        '200':
+          $ref: '#/components/responses/AosRegisterCmd'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgAosRegisterCmd
+      tags:
+      - Orgs Devices - AOS
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
     get:
       description: Get List of Org API Tokens
@@ -7957,8 +7984,9 @@ paths:
           examples:
           - MR84
           type: string
-      - description: 'for switches and gateways, to filter on managed/unmanaged devices.
-          enum: `true`, `false`'
+      - deprecated: true
+        description: 'for switches and gateways, to filter on managed/unmanaged devices.
+          Deprecated in favour of mist_configured. enum: `true`, `false`'
         in: query
         name: managed
         schema:
@@ -9907,7 +9935,6 @@ paths:
                   disable_auto_config: false
                   macs:
                   - 5c5b350e0001
-                  managed: false
                   no_reassign: false
                   op: assign
                   site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
@@ -9982,7 +10009,7 @@ paths:
               Example:
                 value:
                   disable_auto_config: true
-                  managed: true
+                  mist_configured: true
                   nodes:
                   - mac: aff827549235
                   - mac: 8396cd006c8c
@@ -10602,6 +10629,196 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: searchOrgJsiAssetsAndContracts
+      tags:
+      - Orgs JSI
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/jsi/pbn/count:
+    get:
+      description: Get count of PBN advisories grouped by specified field
+      operationId: countOrgJsiPbn
+      parameters:
+      - description: 'Field to group by enum: `versions`, `models`, `customer_risk`,
+          `bug_type`'
+        in: query
+        name: distinct
+        required: true
+        schema:
+          enum:
+          - versions
+          - models
+          - customer_risk
+          - bug_type
+          examples:
+          - versions
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/JsiPbnCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgJsiPbn
+      tags:
+      - Orgs JSI
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/jsi/pbn/search:
+    get:
+      description: Text search for PBN (Problem Bug Notification) advisories. Search
+        can be done on versions, models, customer_risk, id, and bug_type fields.
+      operationId: searchOrgJsiPbn
+      parameters:
+      - description: OS versions to search for
+        in: query
+        name: versions
+        schema:
+          examples:
+          - 20.4R3
+          type: string
+      - description: Device models to search for
+        in: query
+        name: models
+        schema:
+          type: string
+      - description: Customer risk level to filter by
+        in: query
+        name: customer_risk
+        schema:
+          type: string
+      - description: PBN ID to search for
+        in: query
+        name: id
+        schema:
+          examples:
+          - '1403338'
+          type: string
+      - description: Bug type to filter by
+        in: query
+        name: bug_type
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/search_after'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/JsiPbnSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgJsiPbn
+      tags:
+      - Orgs JSI
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/jsi/sirt/count:
+    get:
+      description: Get count of SIRT advisories grouped by specified field
+      operationId: countOrgJsiSirt
+      parameters:
+      - description: Field to group by
+        in: query
+        name: distinct
+        required: true
+        schema:
+          enum:
+          - versions
+          - models
+          - severity
+          - jsa_updated_date
+          examples:
+          - versions
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/JsiSirtCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgJsiSirt
+      tags:
+      - Orgs JSI
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/jsi/sirt/search:
+    get:
+      description: Text search for SIRT (Security Incident Response Team) advisories.
+        Search can be done on versions, models, severity, and id fields.
+      operationId: searchOrgJsiSirt
+      parameters:
+      - description: OS versions to search for
+        in: query
+        name: versions
+        schema:
+          examples:
+          - 20.4R3
+          type: string
+      - description: Device models to search for
+        in: query
+        name: models
+        schema:
+          type: string
+      - description: Severity level to filter by
+        in: query
+        name: severity
+        schema:
+          type: string
+      - description: SIRT ID to search for
+        in: query
+        name: id
+        schema:
+          examples:
+          - JSA100053
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/search_after'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/JsiSirtSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgJsiSirt
       tags:
       - Orgs JSI
     parameters:
@@ -12069,6 +12286,29 @@ paths:
       summary: unregisterOrgMxEdge
       tags:
       - Orgs MxEdges
+  /api/v1/orgs/{org_id}/mxedges/{mxedge_id}/vm_params:
+    get:
+      description: Get Mist Edge VM parameters
+      operationId: getOrgMxEdgeVmParams
+      responses:
+        '200':
+          $ref: '#/components/responses/MxEdgeVmParams'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgMxEdgeVmParams
+      tags:
+      - Orgs MxEdges
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - $ref: '#/components/parameters/mxedge_id'
   /api/v1/orgs/{org_id}/mxtunnels:
     get:
       description: Get List of Org MxTunnels
@@ -12514,6 +12754,15 @@ paths:
         in: query
         name: auth_type
         schema:
+          type: string
+      - description: Filter by certificate expiry within a specific duration from
+          now (e.g., "7d" for 7 days, "1m" for 1 month)
+        in: query
+        name: cert_expiry_duration
+        schema:
+          examples:
+          - 7d
+          - 1m
           type: string
       - description: Filters NAC clients that are integrated with EDR providers
         in: query
@@ -20527,6 +20776,45 @@ paths:
       summary: updateOrgMultipleUserMacs
       tags:
       - Orgs User MACs
+  /api/v1/orgs/{org_id}/usermacs/count:
+    get:
+      description: Count by Distinct Attributes of User MACs
+      operationId: countOrgUserMacs
+      parameters:
+      - description: 'Attribute to count by. enum: `mac`, `name`, `labels`, `org_id`'
+        in: query
+        name: distinct
+        required: true
+        schema:
+          enum:
+          - mac
+          - name
+          - labels
+          - org_id
+          examples:
+          - org_id
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserMacsCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgUserMacs
+      tags:
+      - Orgs User MACs
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/usermacs/delete:
     parameters:
     - $ref: '#/components/parameters/org_id'
@@ -23831,6 +24119,61 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: updateSiteAsset
+      tags:
+      - Sites Assets
+  /api/v1/sites/{site_id}/assets/{asset_id}/image:
+    delete:
+      description: Delete Site Asset Image
+      operationId: deleteSiteAssetImage
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteSiteAssetImage
+      tags:
+      - Sites Assets
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/asset_id'
+    post:
+      description: Attach Image to Site Asset
+      operationId: attachSiteAssetImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: Binary file
+                  format: binary
+                  type: string
+              required:
+              - file
+              type: object
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: attachSiteAssetImage
       tags:
       - Sites Assets
   /api/v1/sites/{site_id}/avprofiles/derived:
@@ -29603,6 +29946,33 @@ paths:
       summary: createSiteMap
       tags:
       - Sites Maps
+  /api/v1/sites/{site_id}/maps/auto_geofences:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: The auto geofence service is a map parsing service that uses map
+        image data to identify the exterior of buildings in the map image also known
+        as "geofences". This API processes all maps for a given SiteId. The maps must
+        have an image to parse for the auto geofence service. Repeated POST requests
+        to this endpoint while the auto geofence service is processing the map will
+        be rejected.
+      operationId: startSiteMapsAutoGeofence
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteMapsAutoGeofence
+      tags:
+      - Sites Maps
   /api/v1/sites/{site_id}/maps/import:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -29772,6 +30142,34 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: updateSiteMap
+      tags:
+      - Sites Maps
+  /api/v1/sites/{site_id}/maps/{map_id}/auto_geofences:
+    parameters:
+    - $ref: '#/components/parameters/map_id'
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: The auto geofence service is a map parsing service that uses map
+        image data to identify the exterior of buildings in the map image also known
+        as "geofences". This API processes a single given MapId. This map must have
+        an image to parse for the auto geofence service. Repeated POST requests to
+        this endpoint while the auto geofence service is processing the map will be
+        rejected.
+      operationId: startSiteMapAutoGeofence
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteMapAutoGeofence
       tags:
       - Sites Maps
   /api/v1/sites/{site_id}/maps/{map_id}/auto_orient:
@@ -43885,7 +44283,7 @@ components:
           corp:
             ip: 192.168.10.1
             type: static
-        managed: true
+        mist_configured: true
         modified_time: 0
         name: corp-a135
         ntp_servers:
@@ -45703,7 +46101,7 @@ components:
           last_config_status: success
           last_hostname: wan-teleworker
           mac: 00ec77599d00
-          managed: true
+          mist_configured: true
           model: SSR120
           node: node1
           node0_mac: 00ec77599d00
@@ -45738,7 +46136,7 @@ components:
           last_trouble_code: '106'
           last_trouble_timestamp: 1719540
           mac: 00c78d939c00
-          managed: true
+          mist_configured: true
           model: EX4100-48MP
           num_members: 1
           org_id: 6748cfa6-4e12-11e6-9188-0242ac110007
@@ -45772,7 +46170,6 @@ components:
           netmask: 255.255.255.0
           network: default
           type: static
-        managed: false
         modified_time: 0
         name: corp
         notes: slightly off center
@@ -55163,6 +55560,15 @@ components:
           schema:
             $ref: '#/components/schemas/response_anomaly_search'
       description: OK
+    AosRegisterCmd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/aos_register_cmd'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/aos_register_cmd'
+      description: AOS Brownfield Registration Commands
     ApiUsage:
       content:
         application/json:
@@ -57333,6 +57739,42 @@ components:
           schema:
             $ref: '#/components/schemas/js_inventory_search'
       description: OK
+    JsiPbnCount:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response_count'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/response_count'
+      description: OK
+    JsiPbnSearch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/jsi_pbn_search'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/jsi_pbn_search'
+      description: OK
+    JsiSirtCount:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response_count'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/response_count'
+      description: OK
+    JsiSirtSearch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/jsi_sirt_search'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/jsi_sirt_search'
+      description: OK
     JuniperLinkAccountFailed:
       content:
         application/json:
@@ -57759,6 +58201,15 @@ components:
           schema:
             $ref: '#/components/schemas/response_mxedge_upgrades'
       description: Example response
+    MxEdgeVmParams:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/mxedge_vm_params'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/mxedge_vm_params'
+      description: Mist Edge VM Parameters
     MxTunnelsPreemptAps:
       content:
         application/json:
@@ -60395,6 +60846,15 @@ components:
           schema:
             $ref: '#/components/schemas/user_macs'
       description: OK
+    UserMacsCount:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_macs_count'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/user_macs_count'
+      description: OK
     UserMacsUpdate:
       content:
         application/json:
@@ -61324,21 +61784,35 @@ components:
           readOnly: true
           type: string
         webhook_auth_type:
-          description: For VMWare accounts only
+          description: For Crowdstrike, JAMF, SentinelOne and VMWare accounts only
           examples:
           - Basic
+          - Bearer
           type: string
         webhook_enabled:
-          description: For VMWare accounts only
+          description: For Crowdstrike, JAMF, SentinelOne and VMWare accounts only
           type: boolean
         webhook_password:
           description: For VMWare accounts only
           examples:
           - password_1234
           type: string
-        webhook_url:
-          description: For VMWare accounts only
+        webhook_secret:
+          description: For Crowdstrike accounts only
           examples:
+          - secret-value
+          type: string
+        webhook_token:
+          description: For JAMF and SentinelOne accounts only
+          examples:
+          - token-value
+          type: string
+        webhook_url:
+          description: For Crowdstrike, JAMF, SentinelOne and VMWare accounts only
+          examples:
+          - https://websync.nac-staging.mistsys.com/v1/S_org-8dcbe9005/ae9dee49-69e7-4710-a114-5b827a777738/crowdstrike/edr
+          - https://websync.nac-staging.mistsys.com/v1/S_org-8dcbe9005/ae9dee49-69e7-4710-a114-5b827a777738/jamf/mdm
+          - https://websync.nac-staging.mistsys.com/v1/S_org-8dcbe9005/00fd8b39-cf92-4b43-a2ff-a461b48e7059/sentinelone/edr
           - https://websync.nac-staging.mistsys.com/v1/S_41b2525af1d8dcbe9005/f43ea4c48f22/vmware/mdm
           type: string
         webhook_username:
@@ -62475,6 +62949,16 @@ components:
       examples:
       - external
       type: string
+    aos_register_cmd:
+      additionalProperties: false
+      description: AOS Brownfield Registration Commands
+      properties:
+        cli_commands:
+          description: AOS-specific CLI commands that can be copied and pasted directly
+            into an AOS device to register it with Mist. Includes registration code
+            and configuration commands.
+          type: string
+      type: object
     ap_aeroscout:
       additionalProperties: false
       description: Aeroscout AP settings
@@ -68637,6 +69121,9 @@ components:
           readOnly: true
           type: string
         managed:
+          deprecated: true
+          description: Whether the device is managed by Mist. Deprecated in favour
+            of mist_configured.
           type: boolean
         map_id:
           description: Map where the device belongs to
@@ -68894,9 +69381,12 @@ components:
           type: string
         managed:
           default: false
+          deprecated: true
           description: An adopted switch/gateway will not be managed/configured by
             Mist by default. Setting this parameter to `true` enables the adopted
-            switch/gateway to be managed/configured by Mist.
+            switch/gateway to be managed/configured by Mist. Deprecated in favour
+            of mist_configured, which is more intuitive and can be used for both adopted
+            and claimed devices.
           type: boolean
         map_id:
           description: Map where the device belongs to
@@ -68904,6 +69394,10 @@ components:
           - 63eda950-c6da-11e4-a628-60f81dd250cc
           format: uuid
           type: string
+        mist_configured:
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
+          type: boolean
         mist_nac:
           $ref: '#/components/schemas/switch_mist_nac'
         model:
@@ -71364,10 +71858,6 @@ components:
           $ref: '#/components/schemas/gateway_port_vpn_paths'
         wan_arp_policer:
           $ref: '#/components/schemas/gateway_port_wan_arp_policer'
-        wan_disable_speedtest:
-          default: false
-          description: If `wan_type`==`wan`, disable speedtest
-          type: boolean
         wan_ext_ip:
           description: Only if `usage`==`wan`, optional. If spoke should reach this
             port by a different IP
@@ -71398,6 +71888,17 @@ components:
           $ref: '#/components/schemas/gateway_wan_probe_override'
         wan_source_nat:
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
+        wan_speedtest_mode:
+          default: auto
+          description: 'Controls whether Marvis/scheduler can run speedtest on this
+            port. enum: `auto`, `enabled`, `disabled`'
+          enum:
+          - auto
+          - enabled
+          - disabled
+          examples:
+          - auto
+          type: string
         wan_type:
           $ref: '#/components/schemas/gateway_port_wan_type'
       required:
@@ -73235,6 +73736,11 @@ components:
         device_name:
           description: Name of the device
           type: string
+        eol_psn:
+          description: EOL PSN
+          examples:
+          - TSB18097
+          type: string
         eol_time:
           description: End of life time
           type: integer
@@ -73268,6 +73774,9 @@ components:
           $ref: '#/components/schemas/device_type'
         version:
           description: SW version running
+          type: string
+        version_description:
+          description: Version description
           type: string
         version_eos_time:
           description: End of Service of version
@@ -73340,6 +73849,156 @@ components:
       - version
       - warranty_type
       type: string
+    jsi_pbn_item:
+      additionalProperties: false
+      description: PBN (Problem Bug Notification) advisory item
+      properties:
+        bug_type:
+          description: Type of the bug (Day-1, Regression)
+          type: string
+        customer_risk:
+          description: Risk level
+          type: string
+        fixed_in:
+          description: Release in which the issue was fixed
+          type: string
+        id:
+          description: ID of the PBN
+          examples:
+          - '1403338'
+          type: string
+        introduced_in:
+          description: Release introduced in
+          type: string
+        models:
+          description: OS models affected
+          items:
+            type: string
+          type: array
+        product_family:
+          description: Product family affected
+          type: string
+        release_notes:
+          description: Release notes for this PBN
+          type: string
+        restoration:
+          description: Restoration steps
+          type: string
+        title:
+          description: Title of the issue
+          type: string
+        updated_date:
+          description: PBN updated timestamp
+          type: integer
+        versions:
+          description: OS versions affected
+          items:
+            type: string
+          type: array
+        workaround:
+          description: Workaround for this issue
+          type: string
+        workaround_provided:
+          description: Any workaround available
+          type: string
+      type: object
+    jsi_pbn_search:
+      additionalProperties: false
+      description: PBN search response
+      properties:
+        end:
+          description: End timestamp
+          type: integer
+        limit:
+          description: Number of results to return
+          type: integer
+        next:
+          description: Next page URL
+          type: string
+        results:
+          description: List of PBN advisories
+          items:
+            $ref: '#/components/schemas/jsi_pbn_item'
+          type: array
+        start:
+          description: Start timestamp
+          type: integer
+        total:
+          description: Total number of results
+          type: integer
+      type: object
+    jsi_sirt_item:
+      additionalProperties: false
+      description: SIRT advisory item
+      properties:
+        cvss_score:
+          description: CVSS score
+          type: number
+        id:
+          description: ID of the SIRT
+          examples:
+          - JSA100053
+          type: string
+        models:
+          description: OS models affected
+          items:
+            type: string
+          type: array
+        problem:
+          description: Problem description
+          type: string
+        published_date:
+          description: Release date of the SIRT issue
+          type: integer
+        release_notes:
+          description: Release notes if any
+          type: string
+        severity:
+          description: Severity of the issue
+          type: string
+        solution:
+          description: Solution for the security issue
+          type: string
+        title:
+          description: Title of the SIRT
+          type: string
+        updated_date:
+          description: JSA updated timestamp
+          type: integer
+        versions:
+          description: OS versions affected
+          items:
+            type: string
+          type: array
+        workaround:
+          description: Workaround provided
+          type: string
+      type: object
+    jsi_sirt_search:
+      additionalProperties: false
+      description: SIRT search response
+      properties:
+        end:
+          description: End timestamp
+          type: integer
+        limit:
+          description: Number of results to return
+          type: integer
+        next:
+          description: Next page URL
+          type: string
+        results:
+          description: List of SIRT advisories
+          items:
+            $ref: '#/components/schemas/jsi_sirt_item'
+          type: array
+        start:
+          description: Start timestamp
+          type: integer
+        total:
+          description: Total number of results
+          type: integer
+      type: object
     jsi_warranty_type:
       description: "Warranty type for Juniper Support Insight (JSI) devices. The warranty\
         \ type\nis used to determine the support level and duration of the warranty\
@@ -73391,6 +74050,12 @@ components:
         snapshot:
           default: false
           type: boolean
+        version:
+          description: Firmware version to deploy (e.g. 23.4R2-S5.5). Optional, used
+            when custom_versions not specified
+          examples:
+          - 23.4R2-S5.5
+          type: string
       type: object
     juniper_srx_auto_upgrade_custom_versions:
       additionalProperties:
@@ -74247,16 +74912,33 @@ components:
         for_site:
           readOnly: true
           type: boolean
-        group_idx:
-          description: The group index of the map, typically used for floor
-          examples:
-          - 1
-          type: integer
-        group_name:
-          description: The group name of the map
-          examples:
-          - East Wing
-          type: string
+        geofences:
+          description: List of geofences for the map
+          items:
+            properties:
+              name:
+                description: Name of the geofence
+                examples:
+                - example
+                type: string
+              vertices:
+                description: List of vertices defining the geofence
+                items:
+                  properties:
+                    X:
+                      description: X coordinate
+                      examples:
+                      - 700
+                      type: number
+                    Y:
+                      description: Y coordinate
+                      examples:
+                      - 100
+                      type: number
+                  type: object
+                type: array
+            type: object
+          type: array
         height:
           description: When type=image, height of the image map
           examples:
@@ -74275,6 +74957,17 @@ components:
           default: false
           description: Whether this map is considered locked down
           type: boolean
+        mapstack_floor:
+          description: maps stack, optional
+          examples:
+          - 1
+          type: integer
+        mapstack_id:
+          description: maps stack, optional
+          examples:
+          - 424ef025-a5c0-9a8f-62a8-e6fcbb6a0fc2
+          format: uuid
+          type: string
         modified_time:
           $ref: '#/components/schemas/modified_time'
         name:
@@ -76167,6 +76860,22 @@ components:
           type: string
       readOnly: true
       type: object
+    mxedge_vm_params:
+      additionalProperties: false
+      description: Mist Edge VM parameters
+      properties:
+        model:
+          description: SKU
+          examples:
+          - ME-VM
+          type: string
+        name:
+          description: User given name (optional)
+          type: string
+        user_data:
+          description: Base64 encoded user data
+          type: string
+      type: object
     mxedges:
       items:
         $ref: '#/components/schemas/mxedge'
@@ -76660,6 +77369,14 @@ components:
           $ref: '#/components/schemas/nac_portal_access_type'
         additional_cacerts:
           $ref: '#/components/schemas/nac_portal_additional_cacerts'
+        additional_nac_server_name:
+          description: Optional list of additional NAC server names
+          examples:
+          - - nac1.corp.com
+            - nac2.corp.com
+          items:
+            type: string
+          type: array
         bg_image_url:
           description: Background image
           type: string
@@ -76792,12 +77509,15 @@ components:
           examples:
           - https://yourorg.com/guest-portal-redirect
           type: string
-        portal_allowed_hostnames:
-          $ref: '#/components/schemas/wlan_portal_allowed_hostnames'
-        portal_allowed_subnets:
-          $ref: '#/components/schemas/wlan_portal_allowed_subnets'
-        portal_denied_hostnames:
-          $ref: '#/components/schemas/wlan_portal_denied_hostnames'
+        max_num_devices:
+          default: 0
+          description: Maximum number of clients allowed per guest. 0 (default, unlimited),
+            1-100 range
+          examples:
+          - 10
+          maximum: 100
+          minimum: 0
+          type: integer
         privacy:
           description: If `auth`==`none` or `auth`==`multi`, whether to show the privacy
             policy
@@ -78756,6 +79476,8 @@ components:
             that is applicable to WLANs, switch templates, mxedge clusters that have
             mist_nac enabled
           type: boolean
+        fingerprinting:
+          $ref: '#/components/schemas/org_setting_mist_nac_fingerprinting'
         idp_machine_cert_lookup_field:
           $ref: '#/components/schemas/idp_machine_cert_lookup_field'
         idp_user_cert_lookup_field:
@@ -78774,6 +79496,42 @@ components:
             is applicable to wlans, switch_templates, and mxedge_clusters that have
             mist-nac enabled
           type: boolean
+        usermac_expiry:
+          default: 0
+          description: Allow customer to configure an expiry time for usermacs by
+            attaching a Quarantine label to those which have been inactive for the
+            configured period of time (in days). 0 means no expiry
+          examples:
+          - 30
+          maximum: 1095
+          minimum: 0
+          type: integer
+      type: object
+    org_setting_mist_nac_fingerprinting:
+      additionalProperties: false
+      description: Allows customer to enable client fingerprinting for policy enforcement
+      properties:
+        enabled:
+          default: false
+          description: enable/disable writes to NAC DDB fingerprint table
+          type: boolean
+        generate_coa:
+          default: false
+          description: enable/disable CoA triggers on fingerprint change for wired
+            clients, always port-bounce
+          type: boolean
+        generate_wireless_coa:
+          default: false
+          description: enable/disable CoA triggers on fingerprint change for wireless
+            clients
+          type: boolean
+        wireless_coa_type:
+          default: reauth
+          description: type of CoA trigger for wireless clients
+          enum:
+          - reauth
+          - disconnect
+          type: string
       type: object
     org_setting_mist_nac_idp:
       additionalProperties: false
@@ -86216,38 +86974,49 @@ components:
           $ref: '#/components/schemas/service_policy_skyatp_iot_device_policy'
       type: object
     service_policy_skyatp_dns_dga_detection:
-      default: disabled
-      description: 'enum: `disabled`, `default`, `standard`, `strict`'
-      enum:
-      - disabled
-      - default
-      - standard
-      - strict
-      type: string
+      additionalProperties: false
+      properties:
+        enabled:
+          type: boolean
+        profile:
+          description: 'enum: `default`, `standard`, `strict`'
+          enum:
+          - default
+          - standard
+          - strict
+          type: string
+      type: object
     service_policy_skyatp_dns_tunnel_detection:
-      default: disabled
-      description: 'enum: `disabled`, `default`, `standard`, `strict`'
-      enum:
-      - disabled
-      - default
-      - standard
-      - strict
-      type: string
+      additionalProperties: false
+      properties:
+        enabled:
+          type: boolean
+        profile:
+          description: 'enum: `default`, `standard`, `strict`'
+          enum:
+          - default
+          - standard
+          - strict
+          type: string
+      type: object
     service_policy_skyatp_http_inspection:
-      default: disabled
-      description: 'enum: `disabled`, `standard`'
-      enum:
-      - disabled
-      - standard
-      - strict
-      type: string
+      additionalProperties: false
+      properties:
+        enabled:
+          type: boolean
+        profile:
+          description: 'enum: `standard`, `strict`'
+          enum:
+          - standard
+          - strict
+          type: string
+      type: object
     service_policy_skyatp_iot_device_policy:
-      default: disabled
-      description: 'enum: `disabled`, `enabled`'
-      enum:
-      - disabled
-      - enabled
-      type: string
+      additionalProperties: false
+      properties:
+        enabled:
+          type: boolean
+      type: object
     service_policy_ssl_proxy:
       additionalProperties: false
       description: For SRX-only
@@ -86374,6 +87143,12 @@ components:
         enabled:
           default: false
           type: boolean
+        version:
+          description: Firmware version to deploy (e.g. 6.3.0-107.r1). Optional, used
+            when custom_versions not specified
+          examples:
+          - 6.3.0-107.r1
+          type: string
       type: object
     setting_ssr_auto_upgrade_custom_versions:
       additionalProperties:
@@ -87398,6 +88173,11 @@ components:
           $ref: '#/components/schemas/site_setting_tunterm_multicast_config'
         uplink_port_config:
           $ref: '#/components/schemas/ap_uplink_port_config'
+        uses_description_from_port_usage:
+          default: false
+          description: by default, we only honor description provided in port_config.
+            This allows fallback to those defined in port_usages
+          type: boolean
         vars:
           $ref: '#/components/schemas/vars'
         vna:
@@ -89825,6 +90605,17 @@ components:
       properties:
         band:
           $ref: '#/components/schemas/spectrum_analysis_band'
+        channels:
+          description: Optional list of channels to scan. If not specified, all supported
+            channels will be scanned
+          examples:
+          - - '36'
+            - '40'
+            - '44'
+            - '48'
+          items:
+            type: string
+          type: array
         device_id:
           description: Device ID of the AP that is performing spectrum analysis
           format: uuid
@@ -89833,6 +90624,7 @@ components:
           default: 300
           description: Duration of the spectrum analysis in seconds
           maximum: 600
+          minimum: 60
           type: integer
         format:
           $ref: '#/components/schemas/spectrum_analysis_format'
@@ -90006,6 +90798,20 @@ components:
           type: string
         oauth_ping_identity_region:
           $ref: '#/components/schemas/oauth_ping_identity_region'
+        oauth_provider_domain:
+          default: okta.com
+          description: If `oauth_type`==`okta`, specifies the region-specific OAuth
+            provider domain
+          enum:
+          - okta.com
+          - oktapreview.com
+          - okta-emea.com
+          - okta-gov.com
+          - okta.mil
+          - mtls.okta.com
+          examples:
+          - okta.com
+          type: string
         oauth_ropc_client_id:
           description: If `idp_type`==`oauth`, ropc = Resource Owner Password Credentials
           examples:
@@ -91083,7 +91889,33 @@ components:
           type:
           - boolean
           - 'null'
+        ip:
+          description: IP address of Hanshow and SoluM dongles
+          examples:
+          - 172.16.2.249
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        mac:
+          description: MAC address of Hanshow and SoluM dongles
+          examples:
+          - 98-6d-35-79-76-3b
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        product_id:
+          description: Product ID of Hanshow and SoluM dongles
+          examples:
+          - A4A2
+          readOnly: true
+          type:
+          - string
+          - 'null'
         type:
+          examples:
+          - imagotag
           readOnly: true
           type:
           - string
@@ -91092,6 +91924,14 @@ components:
           readOnly: true
           type:
           - boolean
+          - 'null'
+        vendor_id:
+          description: Vendor ID of Hanshow and SoluM dongles
+          examples:
+          - '0525'
+          readOnly: true
+          type:
+          - string
           - 'null'
       readOnly: true
       type:
@@ -96386,6 +97226,9 @@ components:
     switch_port_usage_dynamic_rule:
       additionalProperties: false
       properties:
+        description:
+          description: Optional description of the rule
+          type: string
         equals:
           type: string
         equals_any:
@@ -96818,17 +97661,12 @@ components:
       properties:
         aggressiveness:
           $ref: '#/components/schemas/synthetictest_config_aggressiveness'
-        host:
-          description: If `type`==`icmp` or `type`==`tcp`, Host to be used for the
-            custom probe
+        target:
+          description: Can be URL (e.g. http://x.com, https://x.com:8080/path/to/resource),
+            IP address, or IP:port combination
           examples:
-          - internal.host
+          - 10.3.5.3:8080
           type: string
-        port:
-          description: If `type`==`tcp`, Port to be used for the custom probe
-          examples:
-          - 443
-          type: integer
         threshold:
           description: In milliseconds
           examples:
@@ -96836,19 +97674,15 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/synthetictest_config_custom_probe_type'
-        url:
-          description: If `type`==`curl`, URL to be used for the custom probe, can
-            be url or IP
-          examples:
-          - https://10.3.5.1:8080/about
-          type: string
       type: object
     synthetictest_config_custom_probe_type:
       default: icmp
-      description: 'enum: `curl`, `icmp`, `tcp`'
+      description: 'enum: `application`, `curl`, `icmp`, `reachability`, `tcp`'
       enum:
+      - application
       - curl
       - icmp
+      - reachability
       - tcp
       type: string
     synthetictest_config_custom_probes:
@@ -99288,6 +100122,28 @@ components:
       items:
         $ref: '#/components/schemas/user_mac'
       type: array
+    user_macs_count:
+      additionalProperties: false
+      description: User MACs count response
+      properties:
+        end:
+          description: End timestamp
+          type: integer
+        limit:
+          description: Number of results to return
+          type: integer
+        results:
+          description: List of user MAC entries
+          items:
+            $ref: '#/components/schemas/user_mac'
+          type: array
+        start:
+          description: Start timestamp
+          type: integer
+        total:
+          description: Total number of results
+          type: integer
+      type: object
     user_macs_update:
       additionalProperties: false
       properties:
@@ -99494,6 +100350,9 @@ components:
           maximum: 65535
           minimum: 56
           type: integer
+        use_ipv6:
+          default: false
+          type: boolean
         vrf:
           description: VRF/Routing instance through which the packet needs to be sent
           type: string
@@ -99978,6 +100837,9 @@ components:
           description: Not supported in SSR. Maximum time in seconds to wait for the
             response
           type: integer
+        use_ipv6:
+          default: false
+          type: boolean
         vrf:
           description: For SRX, optional, the source to initiate traceroute from.
             by default, master VRF/RI is assumed
