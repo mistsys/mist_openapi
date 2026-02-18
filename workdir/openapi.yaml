@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.0**
+  description: '> Version: **2602.1.1**
 
     >
 
-    > Date: **February 10, 2026**
+    > Date: **February 18, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.0
+  version: 2602.1.1
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -18138,7 +18138,8 @@ paths:
         name: mesh_enabled
         schema:
           type: boolean
-      - description: Site name
+      - description: Site name. Case insensitive. Add a wildcard (`*`) at the end
+          for partial search
         in: query
         name: name
         schema:
@@ -19657,11 +19658,6 @@ paths:
         reboot.'
       operationId: searchOrgSwOrGwPorts
       parameters:
-      - description: Site ID
-        in: query
-        name: site_id
-        schema:
-          type: string
       - description: 'Type of device. enum: `switch`, `gateway`, `all`'
         in: query
         name: device_type
