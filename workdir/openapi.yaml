@@ -7,7 +7,7 @@ info:
 
     >
 
-    > Date: **February 10, 2025**
+    > Date: **February 10, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -69131,6 +69131,10 @@ components:
           - 63eda950-c6da-11e4-a628-60f81dd250cc
           format: uuid
           type: string
+        mist_configured:
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed`
+          type: boolean
         model:
           description: Device Model
           readOnly: true
