@@ -10648,14 +10648,7 @@ paths:
         name: distinct
         required: true
         schema:
-          enum:
-          - versions
-          - models
-          - customer_risk
-          - bug_type
-          examples:
-          - versions
-          type: string
+          $ref: '#/components/schemas/count_pbn_distinct'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -10740,19 +10733,13 @@ paths:
       description: Get count of SIRT advisories grouped by specified field
       operationId: countOrgJsiSirt
       parameters:
-      - description: Field to group by
+      - description: 'Field to group by. enum: `jsa_updated_date`, `models`, `severity`,
+          `versions`'
         in: query
         name: distinct
         required: true
         schema:
-          enum:
-          - versions
-          - models
-          - severity
-          - jsa_updated_date
-          examples:
-          - versions
-          type: string
+          $ref: '#/components/schemas/count_sirt_distinct'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -12087,7 +12074,7 @@ paths:
       operationId: addOrgMxEdgeImage
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/image_import'
       responses:
@@ -20786,14 +20773,7 @@ paths:
         name: distinct
         required: true
         schema:
-          enum:
-          - mac
-          - name
-          - labels
-          - org_id
-          examples:
-          - org_id
-          type: string
+          $ref: '#/components/schemas/count_usermac_disting'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -24151,15 +24131,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              properties:
-                file:
-                  description: Binary file
-                  format: binary
-                  type: string
-              required:
-              - file
-              type: object
-        description: Request Body
+              $ref: '#/components/schemas/image_import'
       responses:
         '200':
           $ref: '#/components/responses/OK'
@@ -68698,6 +68670,15 @@ components:
       - down
       - up
       type: string
+    count_pbn_distinct:
+      enum:
+      - versions
+      - models
+      - customer_risk
+      - bug_type
+      examples:
+      - versions
+      type: string
     count_result:
       additionalProperties:
         type: string
@@ -68712,11 +68693,29 @@ components:
         $ref: '#/components/schemas/count_result'
       type: array
       uniqueItems: true
+    count_sirt_distinct:
+      enum:
+      - versions
+      - models
+      - severity
+      - jsa_updated_date
+      examples:
+      - versions
+      type: string
     count_site_calls_distinct:
       default: mac
       description: 'enum: `mac`'
       enum:
       - mac
+      type: string
+    count_usermac_disting:
+      enum:
+      - mac
+      - name
+      - labels
+      - org_id
+      examples:
+      - org_id
       type: string
     cpu_stat:
       additionalProperties: false
@@ -71893,16 +71892,7 @@ components:
         wan_source_nat:
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
         wan_speedtest_mode:
-          default: auto
-          description: 'Controls whether Marvis/scheduler can run speedtest on this
-            port. enum: `auto`, `enabled`, `disabled`'
-          enum:
-          - auto
-          - enabled
-          - disabled
-          examples:
-          - auto
-          type: string
+          $ref: '#/components/schemas/gateway_port_config_wan_speedtest_mode'
         wan_type:
           $ref: '#/components/schemas/gateway_port_wan_type'
       required:
@@ -71982,6 +71972,17 @@ components:
       items:
         type: string
       type: array
+    gateway_port_config_wan_speedtest_mode:
+      default: auto
+      description: 'Controls whether Marvis/scheduler can run speedtest on this port.
+        enum: `auto`, `enabled`, `disabled`'
+      enum:
+      - auto
+      - enabled
+      - disabled
+      examples:
+      - auto
+      type: string
     gateway_port_dsl_type:
       default: vdsl
       description: 'if `wan_type`==`dsl`. enum: `adsl`, `vdsl`'
@@ -72170,6 +72171,11 @@ components:
         mac:
           type: string
         managed:
+          deprecated: true
+          type: boolean
+        mist_configured:
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed`
           type: boolean
         model:
           type: string
@@ -72751,14 +72757,20 @@ components:
     ha_cluster_config:
       properties:
         disable_auto_config:
+          deprecated: true
           description: This disables the default behavior of a cloud-ready switch/gateway
             being managed/configured by Mist. Setting this to `true` means you want
             to disable the default behavior and do not want the device to be Mist-managed.
           type: boolean
         managed:
+          deprecated: true
           description: An adopted switch/gateway will not be managed/configured by
             Mist by default. Setting this parameter to `true` enables the adopted
             switch/gateway to be managed/configured by Mist.
+          type: boolean
+        mist_configured:
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed`
           type: boolean
         nodes:
           $ref: '#/components/schemas/ha_cluster_config_nodes'
@@ -73549,6 +73561,7 @@ components:
       properties:
         disable_auto_config:
           default: false
+          deprecated: true
           description: If `op`==`assign`, this disables the default behavior of a
             cloud-ready switch/gateway being managed/configured by Mist. Setting this
             to `true` means you want to disable the default behavior and do not want
@@ -73558,9 +73571,14 @@ components:
           $ref: '#/components/schemas/inventory_update_macs'
         managed:
           default: false
+          deprecated: true
           description: If `op`==`assign`. An adopted switch/gateway will not be managed/configured
             by Mist by default. Setting this parameter to `true` enables the adopted
             switch/gateway to be managed/configured by Mist.
+          type: boolean
+        mist_configured:
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed`
           type: boolean
         no_reassign:
           default: false
@@ -74916,32 +74934,7 @@ components:
           readOnly: true
           type: boolean
         geofences:
-          description: List of geofences for the map
-          items:
-            properties:
-              name:
-                description: Name of the geofence
-                examples:
-                - example
-                type: string
-              vertices:
-                description: List of vertices defining the geofence
-                items:
-                  properties:
-                    X:
-                      description: X coordinate
-                      examples:
-                      - 700
-                      type: number
-                    Y:
-                      description: Y coordinate
-                      examples:
-                      - 100
-                      type: number
-                  type: object
-                type: array
-            type: object
-          type: array
+          $ref: '#/components/schemas/map_geofences'
         height:
           description: When type=image, height of the image map
           examples:
@@ -75041,6 +75034,39 @@ components:
           format: double
           type: number
       type: object
+    map_geofence:
+      properties:
+        name:
+          description: Name of the geofence
+          examples:
+          - example
+          type: string
+        vertices:
+          $ref: '#/components/schemas/map_geofence_vertices'
+      type: object
+    map_geofence_vertice:
+      properties:
+        X:
+          description: X coordinate
+          examples:
+          - 700
+          type: number
+        Y:
+          description: Y coordinate
+          examples:
+          - 100
+          type: number
+      type: object
+    map_geofence_vertices:
+      description: List of vertices defining the geofence
+      items:
+        $ref: '#/components/schemas/map_geofence_vertice'
+      type: array
+    map_geofences:
+      description: List of geofences for the map
+      items:
+        $ref: '#/components/schemas/map_geofence'
+      type: array
     map_import_json:
       additionalProperties: false
       properties:
@@ -78420,6 +78446,21 @@ components:
       - eu
       - us
       type: string
+    oauth_provider_domain:
+      default: okta.com
+      description: 'If `oauth_type`==`okta`, specifies the region-specific OAuth provider
+        domain. enum: `okta.com`, `oktapreview.com`, `okta-emea.com`, `okta-gov.com`,
+        `okta.mil`, `mtls.okta.com`'
+      enum:
+      - okta.com
+      - oktapreview.com
+      - okta-emea.com
+      - okta-gov.com
+      - okta.mil
+      - mtls.okta.com
+      examples:
+      - okta.com
+      type: string
     optic_port_config:
       additionalProperties:
         $ref: '#/components/schemas/optic_port_config_port'
@@ -79526,13 +79567,14 @@ components:
             clients
           type: boolean
         wireless_coa_type:
-          default: reauth
-          description: type of CoA trigger for wireless clients
-          enum:
-          - reauth
-          - disconnect
-          type: string
+          $ref: '#/components/schemas/org_setting_mist_nac_fingerprinting_wireless_coa'
       type: object
+    org_setting_mist_nac_fingerprinting_wireless_coa:
+      description: 'enum: `reauth`, `disconnect`'
+      enum:
+      - reauth
+      - disconnect
+      type: string
     org_setting_mist_nac_idp:
       additionalProperties: false
       properties:
@@ -86369,16 +86411,6 @@ components:
       - sku
       - timestamp
       type: string
-    search_site_sw_or_gw_ports_device_type:
-      description: 'enum: `ap`, `ble`, `gateway`, `mxedge`, `nac`, `switch`'
-      enum:
-      - ap
-      - ble
-      - gateway
-      - mxedge
-      - nac
-      - switch
-      type: string
     search_wan_client:
       additionalProperties: false
       properties:
@@ -86978,38 +87010,44 @@ components:
         enabled:
           type: boolean
         profile:
-          description: 'enum: `default`, `standard`, `strict`'
-          enum:
-          - default
-          - standard
-          - strict
-          type: string
+          $ref: '#/components/schemas/service_policy_skyatp_dns_dga_detection_profile'
       type: object
+    service_policy_skyatp_dns_dga_detection_profile:
+      description: 'enum: `default`, `standard`, `strict`'
+      enum:
+      - default
+      - standard
+      - strict
+      type: string
     service_policy_skyatp_dns_tunnel_detection:
       additionalProperties: false
       properties:
         enabled:
           type: boolean
         profile:
-          description: 'enum: `default`, `standard`, `strict`'
-          enum:
-          - default
-          - standard
-          - strict
-          type: string
+          $ref: '#/components/schemas/service_policy_skyatp_dns_tunnel_detection_profile'
       type: object
+    service_policy_skyatp_dns_tunnel_detection_profile:
+      description: 'enum: `default`, `standard`, `strict`'
+      enum:
+      - default
+      - standard
+      - strict
+      type: string
     service_policy_skyatp_http_inspection:
       additionalProperties: false
       properties:
         enabled:
           type: boolean
         profile:
-          description: 'enum: `standard`, `strict`'
-          enum:
-          - standard
-          - strict
-          type: string
+          $ref: '#/components/schemas/service_policy_skyatp_http_inspection_profile'
       type: object
+    service_policy_skyatp_http_inspection_profile:
+      description: 'enum: `standard`, `strict`'
+      enum:
+      - standard
+      - strict
+      type: string
     service_policy_skyatp_iot_device_policy:
       additionalProperties: false
       properties:
@@ -90798,19 +90836,7 @@ components:
         oauth_ping_identity_region:
           $ref: '#/components/schemas/oauth_ping_identity_region'
         oauth_provider_domain:
-          default: okta.com
-          description: If `oauth_type`==`okta`, specifies the region-specific OAuth
-            provider domain
-          enum:
-          - okta.com
-          - oktapreview.com
-          - okta-emea.com
-          - okta-gov.com
-          - okta.mil
-          - mtls.okta.com
-          examples:
-          - okta.com
-          type: string
+          $ref: '#/components/schemas/oauth_provider_domain'
         oauth_ropc_client_id:
           description: If `idp_type`==`oauth`, ropc = Resource Owner Password Credentials
           examples:
@@ -97505,6 +97531,11 @@ components:
         mac:
           type: string
         managed:
+          deprecated: true
+          type: boolean
+        mist_configured:
+          description: whether the device can be configured by Mist or not. This deprecates
+            `managed`
           type: boolean
         model:
           type: string
