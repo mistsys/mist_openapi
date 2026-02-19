@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.1] - 2026-02-19
+
+- Updated `/api/v1/orgs/{org_id}/sites/search`
+  - Updated `name` parameter description to clarify it is case insensitive and supports partial search with wildcard (`*`)
+- Updated `/api/v1/orgs/{org_id}/stats/ports/search`
+  - Removed unsupported `site_id` query parameter
+- Updated schema definitions
+  - Added `deprecated: true` attribute to `managed` and `disable_auto_config` fields
+  - Fixed inline complex definitions
+
 ## [2602.1.0] - 2026-02-10
 
 - Added `/api/v1/orgs/{org_id}/aos/register_cmd`
