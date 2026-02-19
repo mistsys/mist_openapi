@@ -20773,7 +20773,7 @@ paths:
         name: distinct
         required: true
         schema:
-          $ref: '#/components/schemas/count_usermac_disting'
+          $ref: '#/components/schemas/count_usermac_distinct'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -68708,7 +68708,7 @@ components:
       enum:
       - mac
       type: string
-    count_usermac_disting:
+    count_usermac_distinct:
       enum:
       - mac
       - name
@@ -69132,7 +69132,7 @@ components:
           type: string
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
-            `managed`
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         model:
           description: Device Model
@@ -72175,7 +72175,7 @@ components:
           type: boolean
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
-            `managed`
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         model:
           type: string
@@ -72770,7 +72770,7 @@ components:
           type: boolean
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
-            `managed`
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         nodes:
           $ref: '#/components/schemas/ha_cluster_config_nodes'
@@ -73065,6 +73065,7 @@ components:
           type: string
       type: object
     image_import:
+      additionalProperties: false
       properties:
         file:
           contentMediaType: application/octet-stream
@@ -73578,7 +73579,7 @@ components:
           type: boolean
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
-            `managed`
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         no_reassign:
           default: false
@@ -75035,6 +75036,7 @@ components:
           type: number
       type: object
     map_geofence:
+      additionalProperties: false
       properties:
         name:
           description: Name of the geofence
@@ -75045,6 +75047,7 @@ components:
           $ref: '#/components/schemas/map_geofence_vertices'
       type: object
     map_geofence_vertice:
+      additionalProperties: false
       properties:
         X:
           description: X coordinate
@@ -97535,7 +97538,7 @@ components:
           type: boolean
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
-            `managed`
+            `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         model:
           type: string
