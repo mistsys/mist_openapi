@@ -37192,6 +37192,14 @@ paths:
       description: Search Site WAN Clients
       operationId: searchSiteWanClients
       parameters:
+      - description: Site ID
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 72771e6a-6f5e-4de4-a5b9-1266c4197811
+          format: uuid
+          type: string
       - description: Partial / full MAC address
         in: query
         name: mac
