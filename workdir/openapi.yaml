@@ -22980,6 +22980,18 @@ paths:
         all orgs'
       operationId: listSelfAuditLogs
       parameters:
+      - description: Message
+        in: query
+        name: message
+        schema:
+          examples:
+          - Created a new site
+          type: string
+      - description: Sort order
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/list_org_logs_sort'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
