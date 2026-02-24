@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.3] - 2026-02-24
+
+- Updated websocket API examples for clarity and completeness
+- Improved `alarm_group` description
+- Added missing `site_id` query parameter to `searchOrgWanClients`
+- Added missing query parameter `message` and `sort` to `listSelfAuditLogs`
+
 ## [2602.1.2] - 2026-02-24
 
 - Updated `/api/v1/sites/{site_id}`
