@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.2] - 2026-02-24
+
+- Updated `/api/v1/sites/{site_id}`
+  - Added `routertemplate_id` field
+- Updated `/api/v1/orgs/{org_id}/sites`
+  - Added `routertemplate_id` field
+
 ## [2602.1.1] - 2026-02-19
 
 - Updated `/api/v1/orgs/{org_id}/sites/search`
