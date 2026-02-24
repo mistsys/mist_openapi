@@ -87344,6 +87344,14 @@ components:
           type:
           - string
           - 'null'
+        routertemplate_id:
+          description: Router Template ID, used by gateways
+          examples:
+          - 6f9b2e75-9b2f-b5ae-81e3-e14c76f1a90f
+          format: uuid
+          type:
+          - string
+          - 'null'
         secpolicy_id:
           description: SecPolicy ID
           examples:
