@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.2**
+  description: '> Version: **2602.1.3**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.2
+  version: 2602.1.3
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -21277,6 +21277,14 @@ paths:
       description: Search Org WAN Clients
       operationId: searchOrgWanClients
       parameters:
+      - description: Site ID
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 72771e6a-6f5e-4de4-a5b9-1266c4197811
+          format: uuid
+          type: string
       - description: Partial / full MAC address
         in: query
         name: mac
@@ -22980,6 +22988,18 @@ paths:
         all orgs'
       operationId: listSelfAuditLogs
       parameters:
+      - description: Message
+        in: query
+        name: message
+        schema:
+          examples:
+          - Created a new site
+          type: string
+      - description: Sort order
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/list_org_logs_sort'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -26243,10 +26263,20 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: "Ping test from the AP to confirm \u2018reachability\u2019 of the\
-        \ Radius server. Utilize Juniper EX switch(to which an AP is connected to)\
-        \ radius test capabilities to get details on the Radius Server \u2018availability\u2019\
-        \ ."
+      description: "Ping test from the AP to confirm 'reachability' of the Radius\
+        \ server. \n\nUtilize Juniper EX switch(to which an AP is connected to) radius\
+        \ test capabilities to get details on the Radius Server 'availability'.\n\n\
+        \n\n#### Subscribe to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n\
+        \n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
+        \n}\n```\n\n#### Example output from ws stream\n\n```json\n{\n  \"event\"\
+        : \"data\",\n  \"channel\": \"/sites/d6fb4f96-3ba4-4cf5-8af2-a8d7b85087ac/devices/00000000-0000-0000-1000-2093390b3580/cmd\"\
+        ,\n  \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-3ba4-4cf5-8af2-a8d7b85087ac/devices/2093390b3580/cmd\\\
+        \", \\\"data\\\": {\\\"session\\\": \\\"6043daff-884e-48bc-aa9a-810d268aceb1\\\
+        \", \\\"raw\\\": \\\"    Reason : fail\\\"}}\"\n}\n{\n  \"event\": \"data\"\
+        ,\n  \"channel\": \"/sites/d6fb4f96-3ba4-4cf5-8af2-a8d7b85087ac/devices/00000000-0000-0000-1000-2093390b3580/cmd\"\
+        ,\n  \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-3ba4-4cf5-8af2-a8d7b85087ac/devices/2093390b3580/cmd\\\
+        \", \\\"data\\\": {\\\"session\\\": \\\"6043daff-884e-48bc-aa9a-810d268aceb1\\\
+        \", \\\"raw\\\": \\\"    Test complete. Exiting\\\"}}\"\n}\n```"
       operationId: startSiteSwitchRadiusSyntheticTest
       requestBody:
         content:
@@ -27092,19 +27122,21 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: "Releases an active DHCP lease.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued  against the\
-        \ same Device at the same time and the output all goes through the same websocket\
-        \ stream, session is introduced for demux.\n\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}```\n\n\n\n#### Example output from ws stream\n\n```json\n{  \n  \"channel\"\
-        : \"/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd\"\
-        ,\n  \"event\": \"data\",\n  \"data\": {\n    \"session\": \"9106e908-74dc-4a4f-9050-9c2adcaf44a5\"\
-        ,\n    \"raw\": \"Running traceroute...\\ntraceroute to 8.8.8.8, 64 hops max\\\
-        n 0  192.168.1.1 1 ms  192.168.1.1 1 ms  192.168.1.1 1 ms\\n 1  80.10.236.81\
-        \ 2 ms  80.10.236.81 4 ms  80.10.236.81 2 ms\\n 2  193.253.80.250 3 ms  193.253.80.250\
-        \ 2 ms  193.253.80.250 2 ms\\n 3  193.252.159.41 2 ms  193.252.159.41 1 ms\
-        \  193.252.159.41 3 ms\\n\"\n  }\n}\n```\n\""
+      description: "Releases an active DHCP lease.\n\n\nThe output will be available\
+        \ through websocket.\n\nAs there can be multiple command issued  against the\
+        \ same Device at the same\ntime and the output all goes through the same websocket\
+        \ stream, session is\nintroduced for demux.\n\n\n\n#### Subscribe to Device\
+        \ Command outputs\n\n\n`WS /api-ws/v1/stream`\n\n\n```json\n\n{ \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\" }\n\n```\n\n\n\n#### Example\
+        \ output from ws stream\n\n\n```json\n{\n    \"event\": \"data\",\n    \"\
+        channel\": \"/sites/d6fb4f96-3ba4-4cf5-8af2-a8d7b85087ac/devices/00000000-0000-0000-1000-0200010edbca/cmd\"\
+        ,\n    \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/0200010edbca/cmd\\\
+        \",\\\"data\\\": {\\\"session\\\": \\\"356b2150-7307-4165-8411-52794c1ee8b0\\\
+        \",\\\"raw\\\": \\\"Releasing dhcp...\\\"}}\"\n}\n{\n    \"event\": \"data\"\
+        ,\n    \"channel\": \"/sites/d6fb4f96-3ba4-4cf5-8af2-a8d7b85087ac/devices/00000000-0000-0000-1000-0200010edbca/cmd\"\
+        ,\n    \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/0200010edbca/cmd\\\
+        \",\\\"data\\\": {\\\"session\\\": \\\"356b2150-7307-4165-8411-52794c1ee8b0\\\
+        \",\\\"raw\\\": \\\"Successfully released DHCP lease.\\\"}}\"\n}\n```"
       operationId: releaseSiteSsrDhcpLease
       requestBody:
         content:
@@ -27678,9 +27710,38 @@ paths:
       description: "Get MAC Table from the Device.\n\nThe output will be available\
         \ through websocket. As there can be multiple command issued against the same\
         \ device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n"
+        \ stream, `session` is introduced for demux.\n\n\n\n#### Subscribe to Device\
+        \ Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n```\n\n\n#### Example output\
+        \ from ws stream\n\n```json \n{\n    \"event\": \"data\",\n    \"channel\"\
+        : \"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/00000000-0000-0000-1000-209339xxxxxx/cmd\"\
+        ,\n    \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/209339xxxxxx/cmd\\\
+        \", \\\"data\\\": {\\\"session\\\": \\\"eec2b6e4-1e63-4f9f-9cf8-ef7f9632861e\\\
+        \", \\\"raw\\\": \\\"\\\\nMAC flags (S - static MAC, D - dynamic MAC, L -\
+        \ locally learned, P - Persistent static, C - Control MAC\\\\n           SE\
+        \ - statistics enabled, NM - non configured MAC, R - remote PE MAC, O - ovsdb\
+        \ MAC\\\\n           GBP - group based policy, B - Blocked MAC)\\\\n\\\\n\\\
+        \\nE\\\"}}\"\n}\n{\n    \"event\": \"data\",\n    \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/00000000-0000-0000-1000-209339xxxxxx/cmd\"\
+        ,\n    \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/209339xxxxxx/cmd\\\
+        \", \\\"data\\\": {\\\"session\\\": \\\"eec2b6e4-1e63-4f9f-9cf8-ef7f9632861e\\\
+        \", \\\"raw\\\": \\\"thernet switching table : 59 entries, 59 learned\\\\\
+        nRouting instance : default-switch\\\\n    Vlan                MAC       \
+        \          MAC         Age   GBP     Logical                NH        MAC\
+        \        RTR\\\\n    name                address             flags      \\\
+        \"}}\"\n}\n{\n    \"event\": \"data\",\n    \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/00000000-0000-0000-1000-209339xxxxxx/cmd\"\
+        ,\n    \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/209339xxxxxx/cmd\\\
+        \", \\\"data\\\": {\\\"session\\\": \\\"eec2b6e4-1e63-4f9f-9cf8-ef7f9632861e\\\
+        \", \\\"raw\\\": \\\"       Tag     interface              Index     property\
+        \   ID\\\\n    corp                00:50:56:87:4f:69   D             -   \
+        \        xe-0/1/3.0             0                    0       \\\\n    corp\
+        \                00:50:56:87:ce:f5   D             -           x\\\"}}\"\n\
+        }\n{\n    \"event\": \"data\",\n    \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/00000000-0000-0000-1000-209339xxxxxx/cmd\"\
+        ,\n    \"data\": \"{\\\"event\\\": \\\"data\\\", \\\"channel\\\": \\\"/sites/d6fb4f96-xxxx-xxxx-xxxx-a8d7b85087ac/devices/209339xxxxxx/cmd\\\
+        \", \\\"data\\\": {\\\"session\\\": \\\"eec2b6e4-1e63-4f9f-9cf8-ef7f9632861e\\\
+        \", \\\"raw\\\": \\\"e-0/1/3.0             0                    0       \\\
+        \\n    corp                20:93:39:0f:62:00   D             -           xe-0/1/3.0\
+        \             0                    0       \\\\n    ifo                 00:50:56:87:2d:42\
+        \   D             -           xe-0/1/3.0 \\\"}}\"\n}\n...\n```"
       operationId: showSiteDeviceMacTable
       requestBody:
         content:
@@ -27925,28 +27986,25 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: 'Get service path information of the Device.
-
-
-        The output will be available through websocket. As there can be multiple command
-        issued against the same device at the same time and the output all goes through
-        the same websocket stream, session is introduced for demux.
-
-
-
-        #### Subscribe to Device Command outputs
-
-        `WS /api-ws/v1/stream`
-
-
-        ```json { "subscribe": "/sites/{site_id}/devices/{device_id}/cmd" } ```
-
-        #### Example output from ws stream
-
-        ```json { "channel": "/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd",
-        "event": "data", "data": { "session":"5cb8a6db-d11a-42cd-bed7-19e9f29e637",
-        "raw":"{\"status\":\"SUCCESS\",\"finished\":true,\"rows\":[{\"service\":\"management\",\"type\":\"service-agent\",\"network_interface\":\"ge-0/0/0\",\"destination\":\"\",\"gateway_ip\":\"192.168.1.1\",\"vector\":\"\",\"cost\":0,\"rate\":0,\"state\":\"Up\",\"capacity\":\"0/unlimited\",\"meetsSLA\":\"Yes\"},{\"service\":\"management\",\"type\":\"service-agent\",\"network_interface\":\"ge-0/0/1\",\"destination\":\"\",\"gateway_ip\":\"192.168.0.1\",\"vector\":\"\",\"cost\":0,\"rate\":0,\"state\":\"Up\",\"capacity\":\"0/unlimited\",\"meetsSLA\":\"Yes\"}]}"
-        } } ```'
+      description: "Get service path information of the Device.\n\n\nThe output will\
+        \ be available through websocket. As there can be multiple command\nissued\
+        \ against the same device at the same time and the output all goes through\n\
+        the same websocket stream, session is introduced for demux.\n\n\n\n#### Subscribe\
+        \ to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n\n```json\n{ \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\" }\n```\n\n#### Example output\
+        \ from ws stream\n\n```json\n{\n      \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd\"\
+        ,\n      \"event\": \"data\",\n      \"data\": {\n              \"session\"\
+        : \"5cb8a6db-d11a-42cd-bed7-19e9f29e637\",\n              \"raw\": \"{\\\"\
+        status\\\":\\\"SUCCESS\\\",\\\"finished\\\":true,\\\"rows\\\":[{\\\"service\\\
+        \":\\\"management\\\",\\\"type\\\":\\\"service-agent\\\",\\\"network_interface\\\
+        \":\\\"ge-0/0/0\\\",\\\"destination\\\":\\\"\\\",\\\"gateway_ip\\\":\\\"192.168.1.1\\\
+        \",\\\"vector\\\":\\\"\\\",\\\"cost\\\":0,\\\"rate\\\":0,\\\"state\\\":\\\"\
+        Up\\\",\\\"capacity\\\":\\\"0/unlimited\\\",\\\"meetsSLA\\\":\\\"Yes\\\"},{\\\
+        \"service\\\":\\\"management\\\",\\\"type\\\":\\\"service-agent\\\",\\\"network_interface\\\
+        \":\\\"ge-0/0/1\\\",\\\"destination\\\":\\\"\\\",\\\"gateway_ip\\\":\\\"192.168.0.1\\\
+        \",\\\"vector\\\":\\\"\\\",\\\"cost\\\":0,\\\"rate\\\":0,\\\"state\\\":\\\"\
+        Up\\\",\\\"capacity\\\":\\\"0/unlimited\\\",\\\"meetsSLA\\\":\\\"Yes\\\"}]}\"\
+        \n      }\n}\n```"
       operationId: showSiteSsrServicePath
       requestBody:
         content:
@@ -27979,29 +28037,30 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: 'Get active sessions passing through the Device.
-
-
-        The output will be available through websocket. As there can be multiple command
-        issued against the same device at the same time and the output all goes through
-        the same websocket stream, session is introduced for demux.
-
-
-
-        #### Subscribe to Device Command outputs
-
-        `WS /api-ws/v1/stream`
-
-
-        ```json { "subscribe": "/sites/{site_id}/devices/{device_id}/cmd" }```
-
-
-        #### Example output from ws stream
-
-        ```json { "channel": "/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd",
-        "event": "data", "data": { "session": "f517bf29-1141-41ae-a084-17cacb0ccb57",
-        "raw": "{\"status\":\"SUCCESS\",\"finished\":true,\"rows\":[{\"session_id\":\"a04b1cc7-dcc1-40a6-a010-0fe46ca38551\",\"direction\":\"forward\",\"service\":\"internet\",\"tenant\":\"SRV.PRD-Core\",\"device_interface\":\"ge-0/0/3\",\"network_interface\":\"ge-0/0/3.100\",\"protocol\":\"TCP\",\"source_ip\":\"10.3.20.101\",\"source_port\":45733,\"destination_ip\":\"13.38.46.35\",\"destination_port\":443,\"nat_ip\":\"192.168.1.115\",\"nat_port\":45256,\"payload_encrypted\":false,\"timeout\":1581,\"uptime\":319},{\"session_id\":\"a04b1cc7-dcc1-40a6-a010-0fe46ca38551\",\"direction\":\"reverse\",\"service\":\"internet\",\"tenant\":\"SRV.PRD-Core\",\"device_interface\":\"ge-0/0/0\",\"network_interface\":\"ge-0/0/0\",\"protocol\":\"TCP\",\"source_ip\":\"13.38.46.35\",\"source_port\":443,\"destination_ip\":\"192.168.1.115\",\"destination_port\":45256,\"nat_ip\":\"0.0.0.0\",\"nat_port\":0,\"payload_encrypted\":false,\"timeout\":1581,\"uptime\":319}]}\n"
-        } } ```'
+      description: "Get active sessions passing through the Device.\n\n\nThe output\
+        \ will be available through websocket. As there can be multiple command\n\
+        issued against the same device at the same time and the output all goes through\n\
+        the same websocket stream, session is introduced for demux.\n\n\n\n#### Subscribe\
+        \ to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n\n```json \n{ \"\
+        subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\" }\n```\n\n\n####\
+        \ Example output from ws stream\n\n```json \n{\n      \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd\"\
+        ,\n      \"event\": \"data\",\n      \"data\": {\n              \"session\"\
+        : \"f517bf29-1141-41ae-a084-17cacb0ccb57\",\n              \"raw\": \"{\\\"\
+        status\\\":\\\"SUCCESS\\\",\\\"finished\\\":true,\\\"rows\\\":[{\\\"session_id\\\
+        \":\\\"a04b1cc7-dcc1-40a6-a010-0fe46ca38551\\\",\\\"direction\\\":\\\"forward\\\
+        \",\\\"service\\\":\\\"internet\\\",\\\"tenant\\\":\\\"SRV.PRD-Core\\\",\\\
+        \"device_interface\\\":\\\"ge-0/0/3\\\",\\\"network_interface\\\":\\\"ge-0/0/3.100\\\
+        \",\\\"protocol\\\":\\\"TCP\\\",\\\"source_ip\\\":\\\"10.3.20.101\\\",\\\"\
+        source_port\\\":45733,\\\"destination_ip\\\":\\\"13.38.46.35\\\",\\\"destination_port\\\
+        \":443,\\\"nat_ip\\\":\\\"192.168.1.115\\\",\\\"nat_port\\\":45256,\\\"payload_encrypted\\\
+        \":false,\\\"timeout\\\":1581,\\\"uptime\\\":319},{\\\"session_id\\\":\\\"\
+        a04b1cc7-dcc1-40a6-a010-0fe46ca38551\\\",\\\"direction\\\":\\\"reverse\\\"\
+        ,\\\"service\\\":\\\"internet\\\",\\\"tenant\\\":\\\"SRV.PRD-Core\\\",\\\"\
+        device_interface\\\":\\\"ge-0/0/0\\\",\\\"network_interface\\\":\\\"ge-0/0/0\\\
+        \",\\\"protocol\\\":\\\"TCP\\\",\\\"source_ip\\\":\\\"13.38.46.35\\\",\\\"\
+        source_port\\\":443,\\\"destination_ip\\\":\\\"192.168.1.115\\\",\\\"destination_port\\\
+        \":45256,\\\"nat_ip\\\":\\\"0.0.0.0\\\",\\\"nat_port\\\":0,\\\"payload_encrypted\\\
+        \":false,\\\"timeout\\\":1581,\\\"uptime\\\":319}]}\\n\"\n      }\n}\n```"
       operationId: showSiteSsrAndSrxSessions
       requestBody:
         content:
@@ -28181,15 +28240,15 @@ paths:
         \ be available through websocket. As there can be multiple command issued\
         \ against the same Device at the same time and the output all goes through\
         \ the same websocket stream, session is introduced for demux.\n\n\n#### Subscribe\
-        \ to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
-        subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\n}```\n\n\n\n####\
-        \ Example output from ws stream\n\n```json\n{  \n  \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd\"\
+        \ to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
+        subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n\n####\
+        \ Example output from ws stream\n```json\n{\n  \"channel\": \"/sites/d6fb4f96-xxxx-xxxx-xxxx-xxxxxxxxxxxx/devices/00000000-0000-0000-1000-xxxxxxxxxxxx/cmd\"\
         ,\n  \"event\": \"data\",\n  \"data\": {\n    \"session\": \"9106e908-74dc-4a4f-9050-9c2adcaf44a5\"\
         ,\n    \"raw\": \"Running traceroute...\\ntraceroute to 8.8.8.8, 64 hops max\\\
         n 0  192.168.1.1 1 ms  192.168.1.1 1 ms  192.168.1.1 1 ms\\n 1  80.10.236.81\
         \ 2 ms  80.10.236.81 4 ms  80.10.236.81 2 ms\\n 2  193.253.80.250 3 ms  193.253.80.250\
         \ 2 ms  193.253.80.250 2 ms\\n 3  193.252.159.41 2 ms  193.252.159.41 1 ms\
-        \  193.252.159.41 3 ms\\n\"\n  }\n}\n```\n\""
+        \  193.252.159.41 3 ms\\n\"\n}\n```"
       operationId: tracerouteFromDevice
       requestBody:
         content:
@@ -54538,7 +54597,12 @@ components:
         format: uuid
         type: string
     alarm_group:
-      description: 'Alarm group. enum: `infrastructure`, `marvis`, `security`'
+      description: "Alarm group. enum: `infrastructure`, `marvis`, `security`. \n\
+        The `marvis` group is used to retrieve AI-driven network issue detections.\
+        \ \nKnown Marvis alarm types include: `bad_cable`, `bad_wan_uplink`, `dns_failure`,\
+        \ \n`arp_failure`, `auth_failure`, `dhcp_failure`, `missing_vlan`, \n`negotiation_mismatch`,\
+        \ `port_flap`. Results include resolution status \n(`status`, `resolved_time`)\
+        \ and affected entity details.\""
       in: query
       name: group
       schema:
@@ -87337,18 +87401,18 @@ components:
           - 'null'
         org_id:
           $ref: '#/components/schemas/org_id'
-        routertemplate_id:
-          description: Router Template ID, used by gateways
-          examples:
-          - 6f9b2e75-9b2f-b5ae-81e3-e14c76f1a90f
-          format: uuid
-          type:
-          - string
-          - 'null'
         rftemplate_id:
           description: RF Template ID, this takes precedence over Site Settings
           examples:
           - bb8a9017-1e36-5d6c-6f2b-551abe8a76a2
+          format: uuid
+          type:
+          - string
+          - 'null'
+        routertemplate_id:
+          description: Router Template ID, used by gateways
+          examples:
+          - 6f9b2e75-9b2f-b5ae-81e3-e14c76f1a90f
           format: uuid
           type:
           - string
