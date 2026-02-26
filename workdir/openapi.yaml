@@ -78660,11 +78660,6 @@ components:
         $ref: '#/components/schemas/network'
       type: array
     next_hop_via:
-      anyOf:
-      - type: string
-      - items:
-          type: string
-        type: array
       description: Next-hop IP Address. Can be a single IP address or an array of
         IP addresses for ECMP (Equal-Cost Multi-Path) load balancing across multiple
         next-hops.
@@ -78672,6 +78667,11 @@ components:
       - 10.2.1.1
       - - 10.2.1.1
         - 10.2.1.2
+      oneOf:
+      - type: string
+      - items:
+          type: string
+        type: array
     note_string:
       properties:
         note:
