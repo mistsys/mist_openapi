@@ -30821,7 +30821,7 @@ paths:
         description: Request Body
       responses:
         '200':
-          $ref: '#/components/responses/MapstacksArray'
+          $ref: '#/components/responses/Mapstack'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -58222,6 +58222,15 @@ components:
           schema:
             $ref: '#/components/schemas/maps'
       description: OK
+    Mapstack:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/mapstack_response'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/mapstack_response'
+      description: OK
     MapstacksArray:
       content:
         application/json:
@@ -71370,9 +71379,13 @@ components:
           - items:
               type: string
             type: array
-          description: Next-hop IP Address
+          description: Next-hop IP Address. Can be a single IP address or an array
+            of IP addresses for ECMP (Equal-Cost Multi-Path) load balancing across
+            multiple next-hops.
           examples:
           - 10.2.1.1
+          - - 10.2.1.1
+            - 10.2.1.2
       type: object
     extra_route6:
       additionalProperties: false
@@ -71414,9 +71427,13 @@ components:
           - items:
               type: string
             type: array
-          description: Next-hop IP Address
+          description: Next-hop IP Address. Can be a single IP address or an array
+            of IP addresses for ECMP (Equal-Cost Multi-Path) load balancing across
+            multiple next-hops.
           examples:
           - 2a02:1234:200a::100
+          - - 2a02:1234:200a::100
+            - 2a02:1234:200a::101
       type: object
     extra_route6_next_qualified_properties:
       additionalProperties: false
@@ -103339,9 +103356,7 @@ components:
           - ping
           type: string
         timestamp:
-          description: UNIX timestamp when the test was performed
-          format: double
-          type: number
+          $ref: '#/components/schemas/timestamp'
         vlan:
           description: VLAN ID used for the test
           examples:
