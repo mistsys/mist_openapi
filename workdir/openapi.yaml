@@ -75169,6 +75169,16 @@ components:
           type: boolean
         geofences:
           $ref: '#/components/schemas/map_geofences'
+        group_idx:
+          description: maps grouping, typically used for floor, optional
+          examples:
+          - 1
+          type: integer
+        group_name:
+          description: maps grouping, optional
+          examples:
+          - East Wing
+          type: string
         height:
           description: When type=image, height of the image map
           examples:
@@ -75187,17 +75197,6 @@ components:
           default: false
           description: Whether this map is considered locked down
           type: boolean
-        mapstack_floor:
-          description: maps stack, optional
-          examples:
-          - 1
-          type: integer
-        mapstack_id:
-          description: maps stack, optional
-          examples:
-          - 424ef025-a5c0-9a8f-62a8-e6fcbb6a0fc2
-          format: uuid
-          type: string
         modified_time:
           $ref: '#/components/schemas/modified_time'
         name:
