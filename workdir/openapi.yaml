@@ -1231,9 +1231,9 @@ tags:
 - description: The auto zones service is a map parsing service that uses map image
     data to suggest spaces to designate as location zones.
   name: Sites Maps - Auto-Zone
-- description: 'Map Stacks are a way to group multiple maps together within a site,
+- description: Map Stacks are a way to group multiple maps together within a site,
     typically representing different floors or levels in a building. Map Stacks help
-    organize and manage floorplans for multi-story buildings or complex deployments.'
+    organize and manage floorplans for multi-story buildings or complex deployments.
   name: Sites Map Stacks
 - description: 'MxEdges (Mist Edges) at the site level are deployed to tunnel traffic
     at each site due to network constraints or security concerns.
@@ -75688,6 +75688,7 @@ components:
         site_id:
           $ref: '#/components/schemas/site_id'
       type: object
+      additionalProperties: false
     mapstacks:
       items:
         $ref: '#/components/schemas/mapstack_response'
@@ -79169,6 +79170,10 @@ components:
     org_setting:
       description: Org Settings
       properties:
+        allow_mist:
+          default: false
+          description: whether to allow Mist to look at this org
+          type: boolean
         ap_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for AP devices
@@ -79231,6 +79236,15 @@ components:
           type: boolean
         gateway_mgmt:
           $ref: '#/components/schemas/org_setting_gateway_mgmt'
+        gateway_tunnel_updown_threshold:
+          description: enable threshold-based gateway tunnel (secure edge tunnels)
+            up-down delivery.
+          examples:
+          - null
+          minimum: 0
+          type:
+          - integer
+          - 'null'
         gateway_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for Gateway devices
@@ -79243,19 +79257,6 @@ components:
           type:
           - integer
           - 'null'
-        gateway_tunnel_updown_threshold:
-          description: enable threshold-based gateway tunnel (secure edge tunnels)
-            up-down delivery.
-          examples:
-          - null
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        allow_mist:
-          default: false
-          description: whether to allow Mist to look at this org
-          type: boolean
         id:
           $ref: '#/components/schemas/id'
         installer:
@@ -88258,12 +88259,18 @@ components:
           $ref: '#/components/schemas/acl_tags'
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+        allow_mist:
+          default: false
+          description: whether to allow Mist to look at this org
+          type: boolean
         analytic:
           $ref: '#/components/schemas/site_setting_analytic'
         ap_matching:
           $ref: '#/components/schemas/site_setting_ap_matching'
         ap_port_config:
           $ref: '#/components/schemas/site_setting_ap_port_config'
+        ap_synthetic_test:
+          $ref: '#/components/schemas/site_setting_ap_synthetic_test'
         ap_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for AP devices
@@ -88276,8 +88283,6 @@ components:
           type:
           - integer
           - 'null'
-        ap_synthetic_test:
-          $ref: '#/components/schemas/site_setting_ap_synthetic_test'
         auto_placement:
           $ref: '#/components/schemas/site_setting_auto_placement'
         auto_upgrade:
@@ -88354,6 +88359,15 @@ components:
           $ref: '#/components/schemas/additional_config_cmds'
         gateway_mgmt:
           $ref: '#/components/schemas/site_setting_gateway_mgmt'
+        gateway_tunnel_updown_threshold:
+          description: enable threshold-based gateway tunnel (secure edge tunnels)
+            up-down delivery.
+          examples:
+          - null
+          minimum: 0
+          type:
+          - integer
+          - 'null'
         gateway_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for Gateway devices
@@ -88366,19 +88380,6 @@ components:
           type:
           - integer
           - 'null'
-        gateway_tunnel_updown_threshold:
-          description: enable threshold-based gateway tunnel (secure edge tunnels)
-            up-down delivery.
-          examples:
-          - null
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        allow_mist:
-          default: false
-          description: whether to allow Mist to look at this org
-          type: boolean
         id:
           $ref: '#/components/schemas/id'
         juniper_srx:
