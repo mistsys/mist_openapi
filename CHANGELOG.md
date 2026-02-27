@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.4] - 2026-02-26
+
+- Updated `/api/v1/orgs/{org_id}/inventory`
+  - Updated `type` parameter to support multiple comma-separated values from: `ap`, `gateway`, `router`, `switch`, `all` (default: `ap`)
+- Updated `/api/v1/orgs/{org_id}/jsi/inventory/search`
+  - Replaced `eol_duration` and `eos_duration` with date-based filters: `eol_after`, `eol_before`, `eos_after`, `eos_before`
+  - Added `version_eos_after` and `version_eos_before` parameters for software version end-of-support filtering
+  - Added `sirt_id` and `pbn_id` parameters for security advisory filtering
+  - Updated `text` parameter description to clarify wildcard support
+- Updated `/api/v1/sites/{site_id}/devices`
+  - Updated `type` parameter to support multiple comma-separated values from: `ap`, `gateway`, `router`, `switch`, `all` (default: `ap`)
+- Added `/api/v1/sites/{site_id}/mapstacks`
+- Updated `/api/v1/sites/{site_id}/setting`
+  - Added `gateway_tunnel_updown_threshold` field (integer) to enable threshold-based gateway tunnel (secure edge tunnels) up-down delivery
+  - Added `allow_mist` field (boolean) to control whether Mist can access this site
+  - Added `ap_synthetic_test.additional_vlan_ids` field (array of integers) for additional VLAN IDs in synthetic tests
+- Updated webhook schemas
+  - Added new webhook topic `minis-reachability` for AP synthetic test reachability events
+  - Updated `webhook_minis_reachability_event` timestamp field to use shared `#/components/schemas/timestamp` reference for consistency
+  - Added webhook sample endpoint for `minis-reachability` topic at `/webhooks/minis_reachability`
+- Updated schema definitions
+  - Added `wlan.disable_message_authenticator_check` field (boolean) to disable Message-Authenticator Check for RADIUS message integrity verification (default: false for better security)
+  - Updated `extra_route` and `extra_route6` schemas to reference shared `next_hop_via` schema for better reusability and support for ECMP (Equal-Cost Multi-Path) load balancing
+  - Replaced `mapstack_id` and `mapstack_floor` with `group_name` and `group_idx` in map schema for maps grouping (group_idx typically used for floor)
+
 ## [2602.1.3] - 2026-02-24
 
 - Updated websocket API examples for clarity and completeness

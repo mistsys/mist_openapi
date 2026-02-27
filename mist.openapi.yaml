@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.3**
+  description: '> Version: **2602.1.4**
 
     >
 
-    > Date: **February 24, 2026**
+    > Date: **February 26, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -1235,6 +1235,10 @@ tags:
 - description: The auto zones service is a map parsing service that uses map image
     data to suggest spaces to designate as location zones.
   name: Sites Maps - Auto-Zone
+- description: Map Stacks are a way to group multiple maps together within a site,
+    typically representing different floors or levels in a building. Map Stacks help
+    organize and manage floorplans for multi-story buildings or complex deployments.
+  name: Sites Map Stacks
 - description: 'MxEdges (Mist Edges) at the site level are deployed to tunnel traffic
     at each site due to network constraints or security concerns.
 
@@ -10590,19 +10594,49 @@ paths:
         name: warranty_type
         schema:
           $ref: '#/components/schemas/jsi_warranty_type'
-      - description: Device EOL duration in days
+      - description: Filter devices with End Of Life date after this date
         in: query
-        name: eol_duration
+        name: eol_after
         schema:
           examples:
-          - 30d
+          - '2024-01-01'
           type: string
-      - description: Device EOS duration in days
+      - description: Filter devices with End Of Life date before this date
         in: query
-        name: eos_duration
+        name: eol_before
         schema:
           examples:
-          - 30d
+          - '2025-12-31'
+          type: string
+      - description: Filter devices with End Of Support date after this date
+        in: query
+        name: eos_after
+        schema:
+          examples:
+          - '2024-01-01'
+          type: string
+      - description: Filter devices with End Of Support date before this date
+        in: query
+        name: eos_before
+        schema:
+          examples:
+          - '2025-12-31'
+          type: string
+      - description: Filter devices with OS Version End Of Support date after this
+          date
+        in: query
+        name: version_eos_after
+        schema:
+          examples:
+          - '2024-01-01'
+          type: string
+      - description: Filter devices with OS Version End Of Support date before this
+          date
+        in: query
+        name: version_eos_before
+        schema:
+          examples:
+          - '2025-12-31'
           type: string
       - description: Indicates if the device is covered under active support contract
         in: query
@@ -10611,7 +10645,21 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Wildcards for `model`, `serial`, `account_id`, `status`, `warranty_type`
+      - description: To get the onboarded devices that are affected by the SIRT ID
+        in: query
+        name: sirt_id
+        schema:
+          examples:
+          - JSA12345
+          type: string
+      - description: To get the onboarded devices that are affected by the PBN ID
+        in: query
+        name: pbn_id
+        schema:
+          examples:
+          - PBN67890
+          type: string
+      - description: Wildcards for `serial`, `model`, `account_id`
         in: query
         name: text
         schema:
@@ -30722,6 +30770,66 @@ paths:
       summary: importSiteWayfindings
       tags:
       - Sites Maps
+  /api/v1/sites/{site_id}/mapstacks:
+    get:
+      description: Get List of Site Map Stacks
+      operationId: listSiteMapStacks
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      - description: Filter by map stack name
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/MapstacksArray'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listSiteMapStacks
+      tags:
+      - Sites Map Stacks
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: Create Site Map Stack
+      operationId: createSiteMapStack
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  name: Board Room
+            schema:
+              $ref: '#/components/schemas/mapstack'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/Mapstack'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: createSiteMapStack
+      tags:
+      - Sites Map Stacks
   /api/v1/sites/{site_id}/mxedges:
     get:
       description: Get List of Site Mist Edges
@@ -40446,6 +40554,46 @@ webhooks:
         '200':
           description: Return a 200 status to indicate that the data was received
             successfully
+  minis_reachability:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  events:
+                  - avg_latency: 12.5
+                    device_mac: 7cb68d8f0440
+                    loss_percentage: 0
+                    max_latency: 15.2
+                    min_latency: 10.1
+                    org_id: 203d3d02-dbc0-4c1b-9f41-76896a3330f4
+                    probe_name: google ping
+                    probe_target: google.com
+                    probe_type: reachability
+                    protocol: icmp
+                    site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+                    test_type: ping
+                    timestamp: 1547235620.89
+                    vlan: 12
+                  topic: minis-reachability
+            schema:
+              $ref: '#/components/schemas/webhook_minis_reachability'
+        description: Webhook sample for `minis-reachability` topic
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
   mxedge_events:
     post:
       parameters:
@@ -43069,6 +43217,8 @@ components:
       - for_org: true
         has_delivery_results: true
         key: device-updowns
+      - for_org: true
+        key: minis-reachability
     CountExample:
       value:
         distinct: string
@@ -47453,8 +47603,16 @@ components:
             position:
               x: 0
               y: 0
-        width: 0
-        width_m: 0
+          width: 0
+          width_m: 0
+    MapstacksArrayExample:
+      value:
+      - created_time: 0
+        id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+        modified_time: 0
+        name: Board Room
+        org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+        site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
     MarvisClientExample:
       value:
         id: 3a14098f-b995-7552-b0a4-b8ee39b337a6
@@ -58098,6 +58256,30 @@ components:
               $ref: '#/components/examples/MapsArrayExample'
           schema:
             $ref: '#/components/schemas/maps'
+      description: OK
+    Mapstack:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/mapstack_response'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/mapstack_response'
+      description: OK
+    MapstacksArray:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MapstacksArrayExample'
+          schema:
+            $ref: '#/components/schemas/mapstacks'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MapstacksArrayExample'
+          schema:
+            $ref: '#/components/schemas/mapstacks'
       description: OK
     MarvisClient:
       content:
@@ -69196,7 +69378,7 @@ components:
           type: string
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
-            `managed` (for adopted device) and `disable_auto_config` for claimed device)
+            `managed` for adopted devices.
           type: boolean
         model:
           description: Device Model
@@ -69591,12 +69773,8 @@ components:
       type: string
     device_type_with_all:
       default: ap
-      description: 'enum: `all`, `ap`, `gateway`, `switch`'
-      enum:
-      - all
-      - ap
-      - gateway
-      - switch
+      description: ap, switch, gateway, router, all, default is ap. Supports comma-separated
+        values for multiple types (e.g., type=switch,gateway)
       type: string
     device_upgrade:
       properties:
@@ -71225,10 +71403,7 @@ components:
           - integer
           - 'null'
         via:
-          description: Next-hop IP Address
-          examples:
-          - 10.2.1.1
-          type: string
+          $ref: '#/components/schemas/next_hop_via'
       type: object
     extra_route6:
       additionalProperties: false
@@ -71265,10 +71440,7 @@ components:
           - integer
           - 'null'
         via:
-          description: Next-hop IP Address
-          examples:
-          - 2a02:1234:200a::100
-          type: string
+          $ref: '#/components/schemas/next_hop_via'
       type: object
     extra_route6_next_qualified_properties:
       additionalProperties: false
@@ -75000,6 +75172,16 @@ components:
           type: boolean
         geofences:
           $ref: '#/components/schemas/map_geofences'
+        group_idx:
+          description: maps grouping, typically used for floor, optional
+          examples:
+          - 1
+          type: integer
+        group_name:
+          description: maps grouping, optional
+          examples:
+          - East Wing
+          type: string
         height:
           description: When type=image, height of the image map
           examples:
@@ -75018,17 +75200,6 @@ components:
           default: false
           description: Whether this map is considered locked down
           type: boolean
-        mapstack_floor:
-          description: maps stack, optional
-          examples:
-          - 1
-          type: integer
-        mapstack_id:
-          description: maps stack, optional
-          examples:
-          - 424ef025-a5c0-9a8f-62a8-e6fcbb6a0fc2
-          format: uuid
-          type: string
         modified_time:
           $ref: '#/components/schemas/modified_time'
         name:
@@ -75513,6 +75684,40 @@ components:
     maps:
       items:
         $ref: '#/components/schemas/map'
+      type: array
+    mapstack:
+      additionalProperties: false
+      description: Map Stack filter or creation payload
+      properties:
+        name:
+          description: The name of the map stack
+          examples:
+          - Board Room
+          type: string
+      type: object
+    mapstack_response:
+      additionalProperties: false
+      description: Map Stack response object
+      properties:
+        created_time:
+          $ref: '#/components/schemas/created_time'
+        id:
+          $ref: '#/components/schemas/id'
+        modified_time:
+          $ref: '#/components/schemas/modified_time'
+        name:
+          description: The name of the map stack
+          examples:
+          - Board Room
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+      type: object
+    mapstacks:
+      items:
+        $ref: '#/components/schemas/mapstack_response'
       type: array
     marvis:
       additionalProperties: false
@@ -78454,6 +78659,19 @@ components:
       items:
         $ref: '#/components/schemas/network'
       type: array
+    next_hop_via:
+      description: Next-hop IP Address. Can be a single IP address or an array of
+        IP addresses for ECMP (Equal-Cost Multi-Path) load balancing across multiple
+        next-hops.
+      examples:
+      - 10.2.1.1
+      - - 10.2.1.1
+        - 10.2.1.2
+      oneOf:
+      - type: string
+      - items:
+          type: string
+        type: array
     note_string:
       properties:
         note:
@@ -78988,6 +79206,10 @@ components:
     org_setting:
       description: Org Settings
       properties:
+        allow_mist:
+          default: false
+          description: whether to allow Mist to look at this org
+          type: boolean
         ap_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for AP devices
@@ -79050,6 +79272,15 @@ components:
           type: boolean
         gateway_mgmt:
           $ref: '#/components/schemas/org_setting_gateway_mgmt'
+        gateway_tunnel_updown_threshold:
+          description: enable threshold-based gateway tunnel (secure edge tunnels)
+            up-down delivery.
+          examples:
+          - null
+          minimum: 0
+          type:
+          - integer
+          - 'null'
         gateway_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for Gateway devices
@@ -88063,12 +88294,18 @@ components:
           $ref: '#/components/schemas/acl_tags'
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+        allow_mist:
+          default: false
+          description: whether to allow Mist to look at this org
+          type: boolean
         analytic:
           $ref: '#/components/schemas/site_setting_analytic'
         ap_matching:
           $ref: '#/components/schemas/site_setting_ap_matching'
         ap_port_config:
           $ref: '#/components/schemas/site_setting_ap_port_config'
+        ap_synthetic_test:
+          $ref: '#/components/schemas/site_setting_ap_synthetic_test'
         ap_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for AP devices
@@ -88157,6 +88394,15 @@ components:
           $ref: '#/components/schemas/additional_config_cmds'
         gateway_mgmt:
           $ref: '#/components/schemas/site_setting_gateway_mgmt'
+        gateway_tunnel_updown_threshold:
+          description: enable threshold-based gateway tunnel (secure edge tunnels)
+            up-down delivery.
+          examples:
+          - null
+          minimum: 0
+          type:
+          - integer
+          - 'null'
         gateway_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for Gateway devices
@@ -88410,6 +88656,13 @@ components:
                 - 10
                 - 50
           type: object
+      type: object
+    site_setting_ap_synthetic_test:
+      additionalProperties: false
+      description: AP Synthetic Test configuration
+      properties:
+        additional_vlan_ids:
+          $ref: '#/components/schemas/additional_vlan_ids'
       type: object
     site_setting_auto_placement:
       additionalProperties: false
@@ -103056,6 +103309,88 @@ components:
       enum:
       - location-unclient
       type: string
+    webhook_minis_reachability:
+      additionalProperties: false
+      description: Sample of the `minis-reachability` webhook payload.
+      properties:
+        events:
+          $ref: '#/components/schemas/webhook_minis_reachability_events'
+        topic:
+          $ref: '#/components/schemas/webhook_minis_reachability_topic'
+      required:
+      - events
+      - topic
+      type: object
+    webhook_minis_reachability_event:
+      additionalProperties: false
+      properties:
+        avg_latency:
+          description: Average latency in milliseconds
+          format: double
+          type: number
+        device_mac:
+          description: MAC address of the device performing the test
+          examples:
+          - 7cb68d8f0440
+          type: string
+        loss_percentage:
+          description: Packet loss percentage
+          format: double
+          type: number
+        max_latency:
+          description: Maximum latency in milliseconds
+          format: double
+          type: number
+        min_latency:
+          description: Minimum latency in milliseconds
+          format: double
+          type: number
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        probe_name:
+          description: Name of the probe
+          examples:
+          - google ping
+          type: string
+        probe_target:
+          description: Target host or IP for the probe
+          examples:
+          - google.com
+          type: string
+        probe_type:
+          description: Type of probe
+          examples:
+          - reachability
+          type: string
+        protocol:
+          description: Protocol used for the test
+          examples:
+          - icmp
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        test_type:
+          description: Type of test performed
+          examples:
+          - ping
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        vlan:
+          description: VLAN ID used for the test
+          examples:
+          - 12
+          type: integer
+      type: object
+    webhook_minis_reachability_events:
+      items:
+        $ref: '#/components/schemas/webhook_minis_reachability_event'
+      type: array
+    webhook_minis_reachability_topic:
+      description: 'enum: `minis-reachability`'
+      enum:
+      - minis-reachability
+      type: string
     webhook_mxedge_event_topic:
       description: 'enum: `mxedge-events`'
       enum:
@@ -104132,6 +104467,12 @@ components:
         disable_ht_vht_rates:
           default: false
           description: To disable ht or vht rates
+          type: boolean
+        disable_message_authenticator_check:
+          default: false
+          description: whether to disable Message-Authenticator Check, which is used
+            to verify the integrity of RADIUS messages, default is false (i.e. for
+            better security)
           type: boolean
         disable_uapsd:
           default: false
