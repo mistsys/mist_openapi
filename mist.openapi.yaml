@@ -67205,8 +67205,8 @@ components:
           $ref: '#/components/schemas/clear_dot1x_session_ports'
       type: object
     clear_dot1x_session_ports:
-      description: List of port IDs where the dot1x session must be cleared. If not
-        provided, the sessions on all the port will be cleared, or `all` for all ports
+      description: List of port IDs where the dot1x session must be cleared. Use `all`
+        to clear sessions on all ports.
       examples:
       - - ge-0/0/0
         - ge-0/0/1
