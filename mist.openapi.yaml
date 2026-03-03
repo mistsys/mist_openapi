@@ -651,7 +651,7 @@ tags:
     (IDPs) to enhance authentication and access control. Admins can configure identity
     providers such as microsoft EntraID, okta workforce identity cloud, and google
     workspace idp.
-  name: Orgs NAC Fingerprints
+  name: Sites NAC Fingerprints
 - description: 'NAC Tags are the building blocks to compose nacrules.
 
     They can either appear in the "matching" / "not_matching" sections of a nacrule,
@@ -29385,7 +29385,7 @@ paths:
   /api/v1/sites/{site_id}/insights/fingerprints/count:
     get:
       description: Count Client Fingerprints
-      operationId: countOrgClientFingerprints
+      operationId: countSiteClientFingerprints
       parameters:
       - in: query
         name: distinct
@@ -29408,15 +29408,15 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: countOrgClientFingerprints
+      summary: countSiteClientFingerprints
       tags:
-      - Orgs NAC Fingerprints
+      - Sites NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/insights/fingerprints/search:
     get:
       description: Search Client Fingerprints
-      operationId: searchOrgClientFingerprints
+      operationId: searchSiteClientFingerprints
       parameters:
       - description: Device Category  of the client device
         example: EX Series Switch
@@ -29480,9 +29480,9 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: searchOrgClientFingerprints
+      summary: searchSiteClientFingerprints
       tags:
-      - Orgs NAC Fingerprints
+      - Sites NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats/{metric}:
