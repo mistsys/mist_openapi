@@ -10146,33 +10146,29 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - description: MAC address
+      - description: MAC address. Partial match allowed with wildcard * (e.g. `*5b35*`
+          will match `5c5b350e0001` and `5c5b35000301`)
         in: query
         name: mac
         schema:
           examples:
           - 5c5b350e0001
           type: string
-      - description: Device model
+      - description: Device model. Partial match allowed with wildcard * (e.g. `AP*`
+          will match `AP43` and `AP41`)
         in: query
         name: model
         schema:
           examples:
           - AP43
           type: string
-      - description: Virtual Chassis MAC Address
+      - description: Device name. Always a partial match (e.g. `london` will match
+          `london-1`, `london-2`, `my-london-device`...)
         in: query
-        name: vc_mac
+        name: name
         schema:
           examples:
-          - 5c5b350e0001
-          type: string
-      - description: Master device mac for virtual mac cluster
-        in: query
-        name: master_mac
-        schema:
-          examples:
-          - 5c5b350e0001
+          - london
           type: string
       - description: Site id if assigned, null if not assigned
         in: query
@@ -10182,7 +10178,8 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Device serial
+      - description: Device serial. Partial match allowed with wildcard * (e.g. `XLH*`
+          will match `FXLH2015150025`)
         in: query
         name: serial
         schema:
@@ -10196,27 +10193,27 @@ paths:
           examples:
           - 'true'
           type: string
-      - description: Device sku
+      - description: Device sku. Partial match allowed with wildcard * (e.g. `*2300*`
+          will match `EX2300-F-12P`)
         in: query
         name: sku
         schema:
           examples:
           - AP43-WW
           type: string
-      - description: Device version
+      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
+          will match `21.2R3-S3.5`)
         in: query
         name: version
         schema:
           examples:
           - 1.0.0
           type: string
-      - description: Device status
+      - description: 'Device status. enum: `connected`, `disconnected`'
         in: query
         name: status
         schema:
-          examples:
-          - connected
-          type: string
+          $ref: '#/components/schemas/device_status_filter'
       - description: Wildcards for name, mac, serial
         in: query
         name: text
@@ -26450,7 +26447,7 @@ paths:
         '200':
           $ref: '#/components/responses/OK'
         '400':
-          description: Port not specified
+          description: Ports not specified
         '401':
           $ref: '#/components/responses/HTTP401'
         '403':
@@ -26475,7 +26472,8 @@ paths:
             examples:
               Example:
                 value:
-                  port_id: ge-0/0/0
+                  ports:
+                  - ge-0/0/0
             schema:
               $ref: '#/components/schemas/clear_dot1x_session'
         description: Request Body
@@ -26601,7 +26599,7 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: Clear application policy hit counts for all the policies
+      description: Clear application policy hit counts for the specified policy.
       operationId: clearSiteDevicePolicyHitCount
       requestBody:
         content:
@@ -69573,6 +69571,12 @@ components:
       description: 'enum: `all`, `connected`, `disconnected`'
       enum:
       - all
+      - connected
+      - disconnected
+      type: string
+    device_status_filter:
+      description: 'Filter devices based on their status. enum: `connected`, `disconnected`'
+      enum:
       - connected
       - disconnected
       type: string
