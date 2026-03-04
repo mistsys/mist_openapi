@@ -4,12 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [2602.1.5] - 2026-03-03
 
-- Fixed `/api/v1/sites/{site_id}/insights/fingerprints/count` and `/api/v1/sites/{site_id}/insights/fingerprints/search`
-  - Fixed operationIds from `countOrgClientFingerprints`/`searchOrgClientFingerprints` to `countSiteClientFingerprints`/`searchSiteClientFingerprints`
-  - Fixed tag from `Orgs NAC Fingerprints` to `Sites NAC Fingerprints`
+- Updated `/api/v1/sites/{site_id}/insights/fingerprints/count` and `/api/v1/sites/{site_id}/insights/fingerprints/search`
+  - Updated operationIds from `countOrgClientFingerprints`/`searchOrgClientFingerprints` to `countSiteClientFingerprints`/`searchSiteClientFingerprints`
+  - Updated tag from `Orgs NAC Fingerprints` to `Sites NAC Fingerprints`
 - Updated `/api/v1/orgs/{org_id}/inventory`
-  - removed `vc_mac` and `master_mac` query parameters 
-  - added `model` and `name` query parameters
+  - Removed `vc_mac` and `master_mac` query parameters 
+  - Added `model` and `name` query parameters
   - Updated `status` parameter to use enum reference (`connected`, `disconnected`)
 - Updated `/api/v1/sites/{site_id}/devices/{device_id}/clear_dot1x_mac_limit`
   - Changed `port_id` to `ports` (array) to support clearing multiple ports
