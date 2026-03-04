@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.4**
+  description: '> Version: **2602.1.5**
 
     >
 
-    > Date: **February 26, 2026**
+    > Date: **March 3, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.3
+  version: 2602.1.5
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -651,7 +651,7 @@ tags:
     (IDPs) to enhance authentication and access control. Admins can configure identity
     providers such as microsoft EntraID, okta workforce identity cloud, and google
     workspace idp.
-  name: Orgs NAC Fingerprints
+  name: Sites NAC Fingerprints
 - description: 'NAC Tags are the building blocks to compose nacrules.
 
     They can either appear in the "matching" / "not_matching" sections of a nacrule,
@@ -10146,26 +10146,29 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - description: MAC address
+      - description: MAC address. Partial match allowed with wildcard * (e.g. `*5b35*`
+          will match `5c5b350e0001` and `5c5b35000301`)
         in: query
         name: mac
         schema:
           examples:
           - 5c5b350e0001
           type: string
-      - description: Virtual Chassis MAC Address
+      - description: Device model. Partial match allowed with wildcard * (e.g. `AP*`
+          will match `AP43` and `AP41`)
         in: query
-        name: vc_mac
+        name: model
         schema:
           examples:
-          - 5c5b350e0001
+          - AP43
           type: string
-      - description: Master device mac for virtual mac cluster
+      - description: Device name. Always a partial match (e.g. `london` will match
+          `london-1`, `london-2`, `my-london-device`...)
         in: query
-        name: master_mac
+        name: name
         schema:
           examples:
-          - 5c5b350e0001
+          - london
           type: string
       - description: Site id if assigned, null if not assigned
         in: query
@@ -10175,7 +10178,8 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Device serial
+      - description: Device serial. Partial match allowed with wildcard * (e.g. `XLH*`
+          will match `FXLH2015150025`)
         in: query
         name: serial
         schema:
@@ -10189,27 +10193,27 @@ paths:
           examples:
           - 'true'
           type: string
-      - description: Device sku
+      - description: Device sku. Partial match allowed with wildcard * (e.g. `*2300*`
+          will match `EX2300-F-12P`)
         in: query
         name: sku
         schema:
           examples:
           - AP43-WW
           type: string
-      - description: Device version
+      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
+          will match `21.2R3-S3.5`)
         in: query
         name: version
         schema:
           examples:
           - 1.0.0
           type: string
-      - description: Device status
+      - description: 'Device status. enum: `connected`, `disconnected`'
         in: query
         name: status
         schema:
-          examples:
-          - connected
-          type: string
+          $ref: '#/components/schemas/device_status_filter'
       - description: Wildcards for name, mac, serial
         in: query
         name: text
@@ -18177,8 +18181,8 @@ paths:
         name: mesh_enabled
         schema:
           type: boolean
-      - description: Site name. Case insensitive. Add a wildcard (`*`) at the end
-          for partial search
+      - description: Site name. Case insensitive. Add a wildcard (`*`) before or after
+          the string for partial match
         in: query
         name: name
         schema:
@@ -26443,7 +26447,7 @@ paths:
         '200':
           $ref: '#/components/responses/OK'
         '400':
-          description: Port not specified
+          description: Ports not specified
         '401':
           $ref: '#/components/responses/HTTP401'
         '403':
@@ -26468,7 +26472,8 @@ paths:
             examples:
               Example:
                 value:
-                  port_id: ge-0/0/0
+                  ports:
+                  - ge-0/0/0
             schema:
               $ref: '#/components/schemas/clear_dot1x_session'
         description: Request Body
@@ -26594,8 +26599,17 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: Clear application policy hit counts for all the policies
+      description: Clear application policy hit counts for the specified policy.
       operationId: clearSiteDevicePolicyHitCount
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  policy_name: http
+            schema:
+              $ref: '#/components/schemas/clear_policy_hit_count'
       responses:
         '200':
           $ref: '#/components/responses/WebsocketSessionWithUrl'
@@ -27569,7 +27583,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: showSiteDeviceArpTable
       tags:
-      - Utilities Common
+      - Utilities LAN
   /api/v1/sites/{site_id}/devices/{device_id}/show_bgp_summary:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -29371,7 +29385,7 @@ paths:
   /api/v1/sites/{site_id}/insights/fingerprints/count:
     get:
       description: Count Client Fingerprints
-      operationId: countOrgClientFingerprints
+      operationId: countSiteClientFingerprints
       parameters:
       - in: query
         name: distinct
@@ -29394,15 +29408,15 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: countOrgClientFingerprints
+      summary: countSiteClientFingerprints
       tags:
-      - Orgs NAC Fingerprints
+      - Sites NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/insights/fingerprints/search:
     get:
       description: Search Client Fingerprints
-      operationId: searchOrgClientFingerprints
+      operationId: searchSiteClientFingerprints
       parameters:
       - description: Device Category  of the client device
         example: EX Series Switch
@@ -29466,9 +29480,9 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: searchOrgClientFingerprints
+      summary: searchSiteClientFingerprints
       tags:
-      - Orgs NAC Fingerprints
+      - Sites NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats/{metric}:
@@ -47603,8 +47617,8 @@ components:
             position:
               x: 0
               y: 0
-          width: 0
-          width_m: 0
+        width: 0
+        width_m: 0
     MapstacksArrayExample:
       value:
       - created_time: 0
@@ -67187,12 +67201,24 @@ components:
       type: string
     clear_dot1x_session:
       properties:
-        port_id:
-          description: ID of the port where the dot1x session must be cleared. If
-            not provided, the sessions on all the port will be cleared.
-          examples:
-          - ge-0/0/0
+        ports:
+          $ref: '#/components/schemas/clear_dot1x_session_ports'
+      type: object
+    clear_dot1x_session_ports:
+      description: List of port IDs where the dot1x session must be cleared. Use `all`
+        to clear sessions on all ports.
+      examples:
+      - - ge-0/0/0
+        - ge-0/0/1
+      items:
+        type: string
+      type: array
+    clear_policy_hit_count:
+      properties:
+        policy_name:
           type: string
+      required:
+      - policy_name
       type: object
     client_cert_serial_numbers:
       examples:
@@ -69545,6 +69571,12 @@ components:
       description: 'enum: `all`, `connected`, `disconnected`'
       enum:
       - all
+      - connected
+      - disconnected
+      type: string
+    device_status_filter:
+      description: 'Filter devices based on their status. enum: `connected`, `disconnected`'
+      enum:
       - connected
       - disconnected
       type: string
@@ -100593,11 +100625,15 @@ components:
       type: string
     utils_clear_bpdu:
       properties:
-        port:
-          description: Port on which to clear the detected BPDU error, or `all` for
-            all ports
-          type: string
+        ports:
+          $ref: '#/components/schemas/utils_clear_bpdu_ports'
       type: object
+    utils_clear_bpdu_ports:
+      description: List of ports on which to clear the detected BPDU error, or `all`
+        for all ports
+      items:
+        type: string
+      type: array
     utils_clear_macs:
       properties:
         ports:
@@ -100738,8 +100774,8 @@ components:
         \  * if network or port_id is specified and macs is empty, it means all clients\
         \ under network or port_id"
       properties:
-        mac:
-          $ref: '#/components/schemas/utils_release_dhcp_leases_mac'
+        macs:
+          $ref: '#/components/schemas/utils_release_dhcp_leases_macs'
         network:
           description: The network for the leases IPs to be released
           examples:
@@ -100757,7 +100793,7 @@ components:
       required:
       - port_id
       type: object
-    utils_release_dhcp_leases_mac:
+    utils_release_dhcp_leases_macs:
       description: A list of client macs to be released
       examples:
       - - 90ec77aabbcc
@@ -100921,6 +100957,9 @@ components:
           examples:
           - 192.168.30.7
           type: string
+        node:
+          $ref: '#/components/schemas/ha_cluster_node_enum'
+          description: HA cluster node to run the command on, required for Gateways
         port_id:
           description: Device Port ID
           examples:

@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.5] - 2026-03-03
+
+- Updated `/api/v1/sites/{site_id}/insights/fingerprints/count` and `/api/v1/sites/{site_id}/insights/fingerprints/search`
+  - Updated operationIds from `countOrgClientFingerprints`/`searchOrgClientFingerprints` to `countSiteClientFingerprints`/`searchSiteClientFingerprints`
+  - Updated tag from `Orgs NAC Fingerprints` to `Sites NAC Fingerprints`
+- Updated `/api/v1/orgs/{org_id}/inventory`
+  - Removed `vc_mac` and `master_mac` query parameters 
+  - Added `model` and `name` query parameters
+  - Updated `status` parameter to use enum reference (`connected`, `disconnected`)
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}/clear_dot1x_mac_limit`
+  - Changed `port_id` to `ports` (array) to support clearing multiple ports
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}/clear_policy_hit_count`
+  - Added `policy_name` request body parameter (required)
+- Updated `/api/v1/sites/{site_id}/devices/{device_id}/show_arp`
+  - Changed tag from `Utilities Common` to `Utilities LAN`
+- Updated schema definitions
+  - `clear_dot1x_session`: changed `port_id` to `ports` (array)
+  - `utils_clear_bpdu`: changed `port` to `ports` (array)
+  - `utils_release_dhcp_leases`: changed `mac` to `macs`
+  - `utils_show_arp`: added `node` field for HA cluster support on Gateways
+
 ## [2602.1.4] - 2026-02-26
 
 - Updated `/api/v1/orgs/{org_id}/inventory`
