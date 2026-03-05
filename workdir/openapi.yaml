@@ -7102,7 +7102,7 @@ paths:
         schema:
           examples:
           - 192.168.1.1
-          format: ipv4
+          - "*168.1.*"
           type: string
       - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
           or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
@@ -8384,11 +8384,6 @@ paths:
       description: Search Org Devices
       operationId: searchOrgDevices
       parameters:
-      - description: power_constrained
-        in: query
-        name: power_constrained
-        schema:
-          type: boolean
       - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
@@ -8417,6 +8412,21 @@ paths:
       - description: When `type`==`ap`, Bandwidth of band_6
         in: query
         name: band_6_bandwidth
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_24
+        in: query
+        name: band_24_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_5
+        in: query
+        name: band_5_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_6
+        in: query
+        name: band_6_power
         schema:
           type: integer
       - description: When `type`==`gateway`, true / false
@@ -8454,14 +8464,14 @@ paths:
           type: string
       - description: Partial / full Device IP Address.  Use `prefix*` for prefix search
           or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-          match `10.100.10.54`). Suffix-only wildcards (e.g. `*everest`) are not supported
+          match `10.100.10.54`). Suffix-only wildcards (e.g. `*100.10.54`) are not supported
         in: query
         name: ip
         required: false
         schema:
           examples:
           - 192.168.1.1
-          format: ipv4
+          - "*168.1.*"
           type: string
       - description: When `type`==`switch` or `type`==`gateway`, last configuration
           status
@@ -8554,6 +8564,11 @@ paths:
         name: node1_mac
         schema:
           type: string
+      - description: When `type`==`ap`, whether the AP is power constrained
+        in: query
+        name: power_constrained
+        schema:
+          type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
           \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
@@ -12809,8 +12824,8 @@ paths:
           $ref: '#/components/schemas/edr_status'
       - description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
           Point"). Use `prefix*` for prefix search or `*substring*` for contains search
-          (e.g. `Surveillance*` and  `*urveillance.*` match `Surveillance Camera`).
-          Suffix-only wildcards (e.g. `*everest`) are not supported
+          (e.g. `Surveillance*` and  `*urveillance*` match `Surveillance Camera`).
+          Suffix-only wildcards (e.g. `*Camera`) are not supported
         in: query
         name: family
         schema:
@@ -21362,7 +21377,7 @@ paths:
         schema:
           examples:
           - 192.168.1.1
-          format: ipv4
+          - "*168.1.*"
           type: string
       - description: IP source
         in: query
@@ -24673,7 +24688,7 @@ paths:
         schema:
           examples:
           - 192.168.1.1
-          format: ipv4
+          - "*168.1.*"
           type: string
       - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
           or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
@@ -25768,11 +25783,6 @@ paths:
       description: Search Device
       operationId: searchSiteDevices
       parameters:
-      - description: power_constrained
-        in: query
-        name: power_constrained
-        schema:
-          type: boolean
       - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
@@ -25801,6 +25811,21 @@ paths:
       - description: When `type`==`ap`, Bandwidth of band_6
         in: query
         name: band_6_bandwidth
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_24
+        in: query
+        name: band_24_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_5
+        in: query
+        name: band_5_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_6
+        in: query
+        name: band_6_power
         schema:
           type: integer
       - description: When `type`==`gateway`, true / false
@@ -25845,7 +25870,7 @@ paths:
         schema:
           examples:
           - 192.168.1.1
-          format: ipv4
+          - "*168.1.*"
           type: string
       - description: When `type`==`switch` or `type`==`gateway`, last configuration
           status
@@ -25937,6 +25962,11 @@ paths:
         name: node1_mac
         schema:
           type: string
+      - description: When `type`==`ap`, whether the AP is power constrained
+        in: query
+        name: power_constrained
+        schema:
+          type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
           \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
@@ -31530,7 +31560,7 @@ paths:
           $ref: '#/components/schemas/edr_status'
       - description: Client family (e.g. "Phone/Tablet/Wearable", "Access Point").
           Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
-          `Surveillance*` and  `*urveillance.*` match `Surveillance Camera`). Suffix-only
+          `Surveillance*` and  `*urveillance*` match `Surveillance Camera`). Suffix-only
           wildcards (e.g. `*Camera`) are not supported
         in: query
         name: family
@@ -37522,7 +37552,7 @@ paths:
         schema:
           examples:
           - 192.168.1.1
-          format: ipv4
+          - "*168.1.*"
           type: string
       - description: IP source
         in: query
@@ -64831,10 +64861,10 @@ components:
       - wlans
       type: object
     ap_search_hostnames:
-      description: Partial / full hostname. Use comma to separate multiple hostnames.
-        Search is case-insensitive and supports wildcard `*` (e.g. `*abc*` will match
-        any hostname that contains `abc`)
-      type: string
+      description: List of hostnames detected for the AP
+      items:
+        type: string
+      type: array
     ap_search_inactive_wired_vlans:
       items:
         type: integer
