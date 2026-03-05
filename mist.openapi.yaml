@@ -8393,7 +8393,7 @@ paths:
         name: power_constrained
         schema:
           type: boolean
-      - description: When `type`==`ap`, Bandwidth of band_24
+      - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
         schema:
@@ -8532,17 +8532,17 @@ paths:
         schema:
           format: uuid
           type: string
-      - description: When `type`==`ap`, list of Mist Edge id, if AP is connecting
-          to a Mist Edge
+      - description: When `type`==`ap`, Comma separated list of Mist Edge id, if AP
+          is connecting to a Mist Edge
         in: query
         name: mxedge_ids
         schema:
-          $ref: '#/components/schemas/uuids'
+          type: string
       - description: When `type`==`ap`, MxTunnel status, up / down.
         in: query
         name: mxtunnel_status
         schema:
-          $ref: '#/components/schemas/search_site_devices_mxtunnel_status'
+          $ref: '#/components/schemas/search_org_devices_mxtunnel_status'
       - description: 'When `type`==`gateway`. enum: `node0`, `node1`'
         in: query
         name: node
@@ -8588,16 +8588,12 @@ paths:
         name: t128agent_version
         schema:
           type: string
-      - in: query
-        name: type
-        schema:
-          $ref: '#/components/schemas/device_type_default_ap'
+      - $ref: '#/components/parameters/device_type'
       - description: Version
         in: query
         name: version
         schema:
           type: string
-      - $ref: '#/components/parameters/device_type'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -25781,7 +25777,7 @@ paths:
         name: power_constrained
         schema:
           type: boolean
-      - description: When `type`==`ap`, Bandwidth of band_24
+      - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
         schema:
@@ -25919,12 +25915,12 @@ paths:
         schema:
           format: uuid
           type: string
-      - description: When `type`==`ap`, list of Mist Edge id, if AP is connecting
-          to a Mist Edge
+      - description: When `type`==`ap`, Comma separated list of Mist Edge id, if AP
+          is connecting to a Mist Edge
         in: query
         name: mxedge_ids
         schema:
-          $ref: '#/components/schemas/uuids'
+          type: string
       - description: When `type`==`ap`, MxTunnel status, up / down.
         in: query
         name: mxtunnel_status
@@ -25968,10 +25964,7 @@ paths:
         name: t128agent_version
         schema:
           type: string
-      - in: query
-        name: type
-        schema:
-          $ref: '#/components/schemas/device_type_default_ap'
+      - $ref: '#/components/parameters/device_type'
       - description: Version
         in: query
         name: version
@@ -31644,8 +31637,7 @@ paths:
       - description: partial / full MAC address, last_username, device_mac, nas_ip.
           Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
           `aabbcc*` and `*bbcc*` match `aabbccddeeff`). Suffix-only wildcards (e.g.
-          `*bccddeeff`) are not supported. This parameter is applied to the client's
-          last known connection. or last_ap
+          `*bccddeeff`) are not supported.
         in: query
         name: text
         schema:
@@ -64846,9 +64838,7 @@ components:
       description: Partial / full hostname. Use comma to separate multiple hostnames.
         Search is case-insensitive and supports wildcard `*` (e.g. `*abc*` will match
         any hostname that contains `abc`)
-      items:
-        type: string
-      type: array
+      type: string
     ap_search_inactive_wired_vlans:
       items:
         type: integer
@@ -95748,6 +95738,10 @@ components:
           type: boolean
         up:
           description: Indicates if interface is up
+          readOnly: true
+          type: boolean
+        uplink:
+          description: Indicates if interface is an uplink port
           readOnly: true
           type: boolean
         xcvr_model:
