@@ -12907,7 +12907,7 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Connection status of client i.e "permitted", "denied, "session_stared",
+      - description: Connection status of client i.e "permitted", "denied, "session_started",
           "session_ended"
         in: query
         name: status
@@ -31628,7 +31628,7 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Connection status of client i.e "permitted", "denied, "session_stared",
+      - description: Connection status of client i.e "permitted", "denied, "session_started",
           "session_ended"
         in: query
         name: status
