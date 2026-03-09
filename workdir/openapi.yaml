@@ -12734,7 +12734,7 @@ paths:
         schema:
           type: string
       - description: Connection status of client i.e "permitted", "denied, "session_started",
-          "session_ended"
+          "session_stopped"
         in: query
         name: status
         schema:
@@ -55008,14 +55008,14 @@ components:
     partial_filter_ext_ip:
       description: Partial / full Device external ip. Use `prefix*` for prefix search
         or `*substring*` for contains search (e.g. `1.2.3.*` and `*.2.3.*` match `1.2.3.4`).
-        Suffix-only wildcards (e.g. `*2300`) are not supported
+        Suffix-only wildcards (e.g. `*.2.3.4`) are not supported
       in: query
       name: ext_ip
       schema:
         examples:
-        - 10.100.10.54
-        - 10.100.10.*
-        - '*100.10.*'
+        - 1.2.3.4
+        - 1.2.3.*
+        - '*2.3.*'
         type: string
     partial_filter_family_client:
       description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
@@ -55127,7 +55127,7 @@ components:
         type: string
     partial_filter_mac_device:
       description: Partial / full Device MAC address. Use `prefix*` for prefix search
-        or `*substring*` for contains search (e.g. `001122*` and `*1122*` match `00:11:22:33:44:55`).
+        or `*substring*` for contains search (e.g. `001122*` and `*1122*` match `001122334455`).
         Suffix-only wildcards (e.g. `*4455`) are not supported
       in: query
       name: mac
@@ -55186,7 +55186,7 @@ components:
     partial_filter_name_site:
       description: Partial / full Site name. Case insensitive. Use `prefix*` for prefix
         search or `*substring*` for contains search (e.g. `my-site*` and `*site*`
-        match `my-site-01`). Suffix-only wildcards (e.g. `*2300`) are not supported
+        match `my-site-01`). Suffix-only wildcards (e.g. `*site-01`) are not supported
       in: query
       name: name
       schema:
@@ -77550,7 +77550,7 @@ components:
       enum:
       - permitted
       - session_started
-      - session_ended
+      - session_stopped
       - denied
       examples:
       - permitted
