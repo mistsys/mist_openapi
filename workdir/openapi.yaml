@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.5**
+  description: '> Version: **2602.1.6**
 
     >
 
-    > Date: **March 3, 2026**
+    > Date: **March 5, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.5
+  version: 2602.1.6
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -6832,20 +6832,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_clients_count_distinct'
-      - description: Partial / full MAC address
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b53010101
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - my-hostname
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: Device type, e.g. Mac, Nvidia, iPhone
         in: query
         name: device
@@ -7061,43 +7049,32 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: Partial / full MAC address
+      - description: AP MAC address where the client has connected to
         in: query
-        name: mac
+        name: ap
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - $ref: '#/components/parameters/ip'
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - my-hostname
-          type: string
-      - description: 'Radio band. enum: `24`, `5`, `6`'
+      - description: 'Comma separated list of Radio band (e.g. `24,5`). enum: `24`,
+          `5`, `6`'
         in: query
         name: band
         schema:
           examples:
           - '5'
           type: string
-      - description: Device type, e.g. Mac, Nvidia, iPhone
+      - description: Comma separated list of Device type (e.g. `Mac,iPhone`). Case
+          sensitive
         in: query
         name: device
         schema:
           examples:
           - iPhone
           type: string
-      - description: Only available for clients running the Marvis Client app, os,
-          e.g. Sierra, Yosemite, Windows 10
-        in: query
-        name: os
-        schema:
-          examples:
-          - Windows 10
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: Only available for clients running the Marvis Client app, model,
           e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
         in: query
@@ -7106,12 +7083,13 @@ paths:
           examples:
           - iPhone 8
           type: string
-      - description: AP mac where the client has connected to
+      - description: Only available for clients running the Marvis Client app, os,
+          e.g. Sierra, Yosemite, Windows 10
         in: query
-        name: ap
+        name: os
         schema:
           examples:
-          - 5c5b53010101
+          - Windows 10
           type: string
       - $ref: '#/components/parameters/psk_id_query'
       - description: Only available for clients using PPSK authentication, the Name
@@ -7122,21 +7100,6 @@ paths:
           examples:
           - MyPPSK
           type: string
-      - description: Only available for clients using 802.1X authentication, partial
-          / full username
-        in: query
-        name: username
-        schema:
-          examples:
-          - john.doe
-          type: string
-      - description: VLAN
-        in: query
-        name: vlan
-        schema:
-          examples:
-          - '10'
-          type: string
       - description: SSID
         in: query
         name: ssid
@@ -7144,12 +7107,23 @@ paths:
           examples:
           - MySSID
           type: string
-      - description: Partial / full MAC address, hostname, username, psk_name or ip
+      - description: Partial / full MAC address, hostname, username, psk_name or ip.
+          Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+          `everest*` and `*rest*` match `my-everest-client`). Suffix-only wildcards
+          (e.g. `*everest`) are not supported
         in: query
         name: text
         schema:
           examples:
           - 5c5b530
+          type: string
+      - $ref: '#/components/parameters/partial_search_username'
+      - description: VLAN
+        in: query
+        name: vlan
+        schema:
+          examples:
+          - '10'
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -8363,113 +8337,74 @@ paths:
       description: Search Org Devices
       operationId: searchOrgDevices
       parameters:
-      - description: If `type`==`ap`, Bandwidth of band_24
-        in: query
-        name: band_24_bandwidth
-        schema:
-          examples:
-          - 20
-          type: integer
-      - description: If `type`==`ap`, Channel of band_24
+      - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
         schema:
-          examples:
-          - 6
           type: integer
-      - description: If `type`==`ap`, Power of band_24
-        in: query
-        name: band_24_power
-        schema:
-          examples:
-          - 8
-          type: integer
-      - description: If `type`==`ap`, Bandwidth of band_5
-        in: query
-        name: band_5_bandwidth
-        schema:
-          examples:
-          - 20
-          type: integer
-      - description: If `type`==`ap`, Channel of band_5
+      - description: When `type`==`ap`, Channel of band_5
         in: query
         name: band_5_channel
         schema:
-          examples:
-          - 50
           type: integer
-      - description: If `type`==`ap`, Power of band_5
-        in: query
-        name: band_5_power
-        schema:
-          examples:
-          - 8
-          type: integer
-      - description: If `type`==`ap`, Bandwidth of band_6
-        in: query
-        name: band_6_bandwidth
-        schema:
-          examples:
-          - 20
-          type: integer
-      - description: If `type`==`ap`, Channel of band_6
+      - description: When `type`==`ap`, Channel of band_6
         in: query
         name: band_6_channel
         schema:
-          examples:
-          - 100
           type: integer
-      - description: If `type`==`ap`, Power of band_6
+      - description: When `type`==`ap`, Bandwidth of band_24
+        in: query
+        name: band_24_bandwidth
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Bandwidth of band_5
+        in: query
+        name: band_5_bandwidth
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Bandwidth of band_6
+        in: query
+        name: band_6_bandwidth
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_24
+        in: query
+        name: band_24_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_5
+        in: query
+        name: band_5_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_6
         in: query
         name: band_6_power
         schema:
-          examples:
-          - 8
           type: integer
-      - description: If `type`==`switch` or `type`==`gateway`, max cpu usage
-        in: query
-        name: cpu
-        schema:
-          examples:
-          - '50'
-          type: string
-      - description: If `type`==`gateway`, true / false
+      - description: When `type`==`gateway`, true / false
         in: query
         name: clustered
         schema:
-          examples:
-          - 'true'
-          type: string
-      - description: If `type`==`ap`, Port speed of eth0
+          type: boolean
+      - description: When `type`==`ap`, Port speed of eth0
         in: query
         name: eth0_port_speed
         schema:
           examples:
+          - 100
           - 1000
           type: integer
-      - description: If `type`==`switch`, EVPN topology id
+      - description: When `type`==`switch`, EVPN topology id
         in: query
         name: evpntopo_id
         schema:
-          examples:
-          - 7dae216d-7c98-a51b-e068-dd7d477b7216
+          format: uuid
           type: string
-      - description: External IP Address
-        in: query
-        name: ext_ip
-        schema:
-          examples:
-          - 83.42.53.1
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - my-hostname
-          type: string
-      - $ref: '#/components/parameters/ip'
-      - description: If `type`==`switch` or `type`==`gateway`, last configuration
+      - $ref: '#/components/parameters/partial_filter_ext_ip'
+      - $ref: '#/components/parameters/partial_filter_hostname_device'
+      - $ref: '#/components/parameters/partial_filter_ip_device'
+      - description: When `type`==`switch` or `type`==`gateway`, last configuration
           status
         in: query
         name: last_config_status
@@ -8477,118 +8412,71 @@ paths:
           examples:
           - success
           type: string
-      - description: If `type`==`switch` or `type`==`gateway`, last hostname
+      - description: Last hostname of the device.
         in: query
         name: last_hostname
         schema:
-          examples:
-          - my-last-hostname
           type: string
-      - description: If `type`==`ap`, LLDP management ip address
+      - description: When `type`==`ap`, LLDP management ip address
         in: query
         name: lldp_mgmt_addr
         schema:
-          examples:
-          - 10.4.2.3
           type: string
-      - description: If `type`==`ap`, LLDP port id
-        in: query
-        name: lldp_port_id
-        schema:
-          examples:
-          - ge-0/0/1
-          type: string
-      - description: If `type`==`ap`, LLDP Allocated Power
-        in: query
-        name: lldp_power_allocated
-        schema:
-          examples:
-          - 15
-          type: integer
-      - description: If `type`==`ap`, LLDP Negotiated Power
-        in: query
-        name: lldp_power_draw
-        schema:
-          examples:
-          - 12
-          type: integer
-      - description: If `type`==`ap`, LLDP system description
-        in: query
-        name: lldp_system_desc
-        schema:
-          examples:
-          - my-lldp-system-description
-          type: string
-      - description: If `type`==`ap`, LLDP system name
-        in: query
-        name: lldp_system_name
-        schema:
-          examples:
-          - my-lldp-system
-          type: string
-      - description: Device mac
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b53010101
-          type: string
-      - description: Device model
-        in: query
-        name: model
-        schema:
-          examples:
-          - AP43
-          type: string
-      - description: If `type`==`ap`, Mist Edge id, if AP is connecting to a Mist
+      - $ref: '#/components/parameters/partial_filter_lldp_port_id'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_desc'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_name'
+      - $ref: '#/components/parameters/partial_filter_mac_device'
+      - $ref: '#/components/parameters/partial_filter_model'
+      - description: When `type`==`ap`, Mist Edge id, if AP is connecting to a Mist
           Edge
         in: query
         name: mxedge_id
         schema:
-          examples:
-          - 7dae216d-7c98-a51b-e068-dd7d477b7216
+          format: uuid
           type: string
-      - description: If `type`==`ap`, Comma separated list of Mist Edge ids, if AP
+      - description: When `type`==`ap`, Comma separated list of Mist Edge id, if AP
           is connecting to a Mist Edge
         in: query
         name: mxedge_ids
         schema:
-          examples:
-          - 7dae216d-7c98-a51b-e068-dd7d477b7216,7dae216d-7c98-a51b-e068-dd7d477b7217
           type: string
-      - description: If `type`==`ap`, MxTunnel status, up / down
+      - description: When `type`==`ap`, MxTunnel status, up / down.
         in: query
         name: mxtunnel_status
         schema:
           $ref: '#/components/schemas/search_org_devices_mxtunnel_status'
-      - description: If `type`==`gateway`, `node0` / `node1`
+      - description: 'When `type`==`gateway`. enum: `node0`, `node1`'
         in: query
         name: node
         schema:
-          examples:
-          - node0
-          type: string
-      - description: If `type`==`gateway`, mac for node0
+          $ref: '#/components/schemas/ha_cluster_node_enum'
+      - description: When `type`==`gateway`, node0 MAC Address
         in: query
         name: node0_mac
         schema:
-          examples:
-          - 5c5b350e0001
           type: string
-      - description: If `type`==`gateway`, mac for node1
+      - description: When `type`==`gateway`, node1 MAC Address
         in: query
         name: node1_mac
         schema:
-          examples:
-          - 5c5b350e0002
           type: string
-      - description: If `type`==`ap`, Power_constrained
+      - description: When `type`==`ap`, whether the AP is power constrained
         in: query
         name: power_constrained
         schema:
-          examples:
-          - true
           type: boolean
+      - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
+          \ where the key\nis the RADIUS server address and the value contains authentication\
+          \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
+          \ server as the key\n  * `auth_accepts` (long): Number of accepted authentication\
+          \ requests\n  * `auth_rejects` (long): Number of rejected authentication\
+          \ requests\n  * `auth_timeouts` (long): Number of authentication timeouts\n\
+          \  * `auth_server_status` (string): Status of the server. Possible values:\
+          \ `up`, `down`, `unreachable`"
+        in: query
+        name: radius_stats
+        schema:
+          type: string
       - description: Site id
         in: query
         name: site_id
@@ -8596,21 +8484,23 @@ paths:
           examples:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           type: string
-      - description: If `type`==`gateway`,version of 128T agent
+      - description: Whether to return device stats
+        in: query
+        name: stats
+        schema:
+          default: false
+          type: boolean
+      - description: When `type`==`gateway` (SSR only), version of 128T agent
         in: query
         name: t128agent_version
         schema:
-          examples:
-          - 1.2.3
           type: string
+      - $ref: '#/components/parameters/device_type'
       - description: Version
         in: query
         name: version
         schema:
-          examples:
-          - 10.0.0
           type: string
-      - $ref: '#/components/parameters/device_type'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -10142,30 +10032,9 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - description: MAC address. Partial match allowed with wildcard * (e.g. `*5b35*`
-          will match `5c5b350e0001` and `5c5b35000301`)
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b350e0001
-          type: string
-      - description: Device model. Partial match allowed with wildcard * (e.g. `AP*`
-          will match `AP43` and `AP41`)
-        in: query
-        name: model
-        schema:
-          examples:
-          - AP43
-          type: string
-      - description: Device name. Always a partial match (e.g. `london` will match
-          `london-1`, `london-2`, `my-london-device`...)
-        in: query
-        name: name
-        schema:
-          examples:
-          - london
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac'
+      - $ref: '#/components/parameters/partial_filter_model'
+      - $ref: '#/components/parameters/partial_filter_name'
       - description: Site id if assigned, null if not assigned
         in: query
         name: site_id
@@ -10174,14 +10043,7 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Device serial. Partial match allowed with wildcard * (e.g. `XLH*`
-          will match `FXLH2015150025`)
-        in: query
-        name: serial
-        schema:
-          examples:
-          - FXLH2015150025
-          type: string
+      - $ref: '#/components/parameters/partial_filter_serial'
       - description: true / false
         in: query
         name: master
@@ -10189,22 +10051,8 @@ paths:
           examples:
           - 'true'
           type: string
-      - description: Device sku. Partial match allowed with wildcard * (e.g. `*2300*`
-          will match `EX2300-F-12P`)
-        in: query
-        name: sku
-        schema:
-          examples:
-          - AP43-WW
-          type: string
-      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
-          will match `21.2R3-S3.5`)
-        in: query
-        name: version
-        schema:
-          examples:
-          - 1.0.0
-          type: string
+      - $ref: '#/components/parameters/partial_filter_sku'
+      - $ref: '#/components/parameters/partial_filter_version'
       - description: 'Device status. enum: `connected`, `disconnected`'
         in: query
         name: status
@@ -11755,14 +11603,10 @@ paths:
       description: Search Org Mist Edges
       operationId: searchOrgMxEdges
       parameters:
+      - $ref: '#/components/parameters/partial_filter_hostname_device'
       - description: Mist edge id
         in: query
         name: mxedge_id
-        schema:
-          type: string
-      - description: Mist edge site id
-        in: query
-        name: site_id
         schema:
           type: string
       - description: Mist edge cluster id
@@ -11770,11 +11614,7 @@ paths:
         name: mxcluster_id
         schema:
           type: string
-      - description: Model name
-        in: query
-        name: model
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_model'
       - description: Debian code name (buster, bullseye)
         in: query
         name: distro
@@ -11783,6 +11623,11 @@ paths:
       - description: tunterm version
         in: query
         name: tunterm_version
+        schema:
+          type: string
+      - description: Mist edge site id
+        in: query
+        name: site_id
         schema:
           type: string
       - description: Whether to return device stats, default is false
@@ -12783,7 +12628,7 @@ paths:
       description: Search Org NAC Clients
       operationId: searchOrgNacClients
       parameters:
-      - description: AP MAC connected to by client
+      - description: MAC Address of the AP the client is/was connected to
         in: query
         name: ap
         schema:
@@ -12818,26 +12663,14 @@ paths:
         name: edr_status
         schema:
           $ref: '#/components/schemas/edr_status'
-      - description: Client family, e.g. "Phone/Tablet/Wearable", "Access Point"
-        in: query
-        name: family
-        schema:
-          type: string
-      - description: Client hostname, e.g. "my-laptop", "my-phone"
-        in: query
-        name: hostname
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_family_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: SSO ID, if present and used
         in: query
         name: idp_id
         schema:
           type: string
-      - description: MAC address
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: MDM compliance of client i.e "compliant", "not compliant"
         in: query
         name: mdm_compliance
@@ -12854,11 +12687,7 @@ paths:
         name: mdm_managed
         schema:
           type: boolean
-      - description: Client manufacturer, e.g. "apple", "cisco", "juniper"
-        in: query
-        name: mfg
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mfg_client'
       - description: Client model, e.g. "iPhone 12", "MX100"
         in: query
         name: model
@@ -12904,8 +12733,8 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Connection status of client i.e "permitted", "denied, "session_stared",
-          "session_ended"
+      - description: Connection status of client i.e "permitted", "denied, "session_started",
+          "session_stopped"
         in: query
         name: status
         schema:
@@ -18177,12 +18006,7 @@ paths:
         name: mesh_enabled
         schema:
           type: boolean
-      - description: Site name. Case insensitive. Add a wildcard (`*`) before or after
-          the string for partial match
-        in: query
-        name: name
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_name_site'
       - description: If Rogue detection is enabled
         in: query
         name: rogue_enabled
@@ -20931,11 +20755,7 @@ paths:
       description: Search Org User MACs
       operationId: searchOrgUserMacs
       parameters:
-      - description: Partial/full MAC address
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_usermac'
       - description: Optional, array of strings of labels
         in: query
         name: labels
@@ -21275,26 +21095,10 @@ paths:
       operationId: searchOrgWanClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
-      - description: Partial / full MAC address
-        in: query
-        name: mac
-        schema:
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Client IP
-        in: query
-        name: ip
-        schema:
-          type: string
-      - description: Manufacture
-        in: query
-        name: mfg
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - $ref: '#/components/parameters/partial_filter_mfg_client'
       - description: nacrule_id
         in: query
         name: nacrule_id
@@ -21337,36 +21141,28 @@ paths:
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
-      - description: Partial / full MAC address
-        in: query
-        name: mac
-        schema:
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Client IP
-        in: query
-        name: ip
-        schema:
-          type: string
-      - description: Network
-        in: query
-        name: network
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
       - description: IP source
         in: query
         name: ip_src
         schema:
+          examples:
+          - dhcp
+          type: string
+      - description: Client MAC Address.
+        in: query
+        name: mac
+        schema:
+          examples:
+          - 5c5b53010101
           type: string
       - description: Manufacture
         in: query
         name: mfg
         schema:
           type: string
+      - $ref: '#/components/parameters/partial_filter_network'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -21734,11 +21530,7 @@ paths:
         name: device_mac
         schema:
           type: string
-      - description: Partial / full MAC address
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: Port id where the client has connected to
         in: query
         name: port_id
@@ -21755,7 +21547,10 @@ paths:
         name: manufacture
         schema:
           type: string
-      - description: Partial / full MAC address, hostname or username
+      - description: Partial / full Client MAC Address, hostname or username. Use
+          `prefix*` for prefix search or `*substring*` for contains search (e.g. `aabbcc*`
+          and `*bbcc*` match `aabbccddeeff`). Suffix-only wildcards (e.g. `*ddeeff`)
+          are not supported
         in: query
         name: text
         schema:
@@ -24601,50 +24396,81 @@ paths:
         \ /clients/search?device=Mac*&hostname=jerry"
       operationId: searchSiteWirelessClients
       parameters:
-      - description: Partial / full MAC address
-        in: query
-        name: mac
-        schema:
-          type: string
-      - $ref: '#/components/parameters/ip'
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Device type, e.g. Mac, Nvidia, iPhone
-        in: query
-        name: device
-        schema:
-          type: string
-      - description: OS, e.g. Sierra, Yosemite, Windows 10
-        in: query
-        name: os
-        schema:
-          type: string
-      - description: model, e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
-        in: query
-        name: model
-        schema:
-          type: string
-      - description: AP mac where the client has connected to
+      - description: AP MAC address of the AP where the client has connected to
         in: query
         name: ap
         schema:
+          examples:
+          - 5c5b53010101
           type: string
-      - in: query
+      - description: 'Comma separated list of Radio band (e.g. `24,5`). enum: `24`,
+          `5`, `6`'
+        in: query
+        name: band
+        schema:
+          examples:
+          - '5'
+          type: string
+      - description: Comma separated list of Device type (e.g. `Mac,iPhone`). Case
+          sensitive
+        in: query
+        name: device
+        schema:
+          examples:
+          - iPhone
+          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - description: Only available for clients running the Marvis Client app, model,
+          e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
+        in: query
+        name: model
+        schema:
+          examples:
+          - iPhone 8
+          type: string
+      - description: Only available for clients running the Marvis Client app, os,
+          e.g. Sierra, Yosemite, Windows 10
+        in: query
+        name: os
+        schema:
+          examples:
+          - Windows 10
+          type: string
+      - $ref: '#/components/parameters/psk_id_query'
+      - description: Only available for clients using PPSK authentication, the Name
+          of the PSK
+        in: query
+        name: psk_name
+        schema:
+          examples:
+          - MyPPSK
+          type: string
+      - description: SSID
+        in: query
         name: ssid
         schema:
+          examples:
+          - MySSID
           type: string
-      - description: Partial / full MAC address, hostname, username, psk_name or ip
+      - description: Partial / full MAC address, hostname, username, psk_name or ip.
+          Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+          `everest*` and `*rest*` match `my-everest-client`). Suffix-only wildcards
+          (e.g. `*client`) are not supported
         in: query
         name: text
         schema:
+          examples:
+          - 5c5b530
           type: string
-      - description: nacrule_id
+      - $ref: '#/components/parameters/partial_search_username'
+      - description: VLAN
         in: query
-        name: nacrule_id
+        name: vlan
         schema:
+          examples:
+          - '10'
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -25671,176 +25497,163 @@ paths:
       description: Search Device
       operationId: searchSiteDevices
       parameters:
-      - description: Partial / full hostname
+      - description: When `type`==`ap`, Channel of band_24
         in: query
-        name: hostname
+        name: band_24_channel
         schema:
-          type: string
-      - in: query
-        name: type
-        schema:
-          $ref: '#/components/schemas/device_type_default_ap'
-      - description: Device model
+          type: integer
+      - description: When `type`==`ap`, Channel of band_5
         in: query
-        name: model
+        name: band_5_channel
         schema:
-          type: string
-      - description: Device MAC
+          type: integer
+      - description: When `type`==`ap`, Channel of band_6
         in: query
-        name: mac
+        name: band_6_channel
         schema:
-          type: string
-      - description: Device external ip
+          type: integer
+      - description: When `type`==`ap`, Bandwidth of band_24
         in: query
-        name: ext_ip
+        name: band_24_bandwidth
         schema:
-          type: string
-      - description: Version
+          type: integer
+      - description: When `type`==`ap`, Bandwidth of band_5
         in: query
-        name: version
+        name: band_5_bandwidth
         schema:
-          type: string
-      - description: power_constrained
+          type: integer
+      - description: When `type`==`ap`, Bandwidth of band_6
         in: query
-        name: power_constrained
+        name: band_6_bandwidth
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_24
+        in: query
+        name: band_24_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_5
+        in: query
+        name: band_5_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_6
+        in: query
+        name: band_6_power
+        schema:
+          type: integer
+      - description: When `type`==`gateway`, true / false
+        in: query
+        name: clustered
         schema:
           type: boolean
-      - $ref: '#/components/parameters/ip'
-      - description: For APs only, MxTunnel status, up / down.
+      - description: When `type`==`ap`, Port speed of eth0
         in: query
-        name: mxtunnel_status
+        name: eth0_port_speed
         schema:
-          $ref: '#/components/schemas/search_site_devices_mxtunnel_status'
-      - description: For APs only, Mist Edge id, if AP is connecting to a Mist Edge
+          examples:
+          - 100
+          - 1000
+          type: integer
+      - description: When `type`==`switch`, EVPN topology id
+        in: query
+        name: evpntopo_id
+        schema:
+          format: uuid
+          type: string
+      - $ref: '#/components/parameters/partial_filter_ext_ip'
+      - $ref: '#/components/parameters/partial_filter_hostname_device'
+      - $ref: '#/components/parameters/partial_filter_ip_device'
+      - description: When `type`==`switch` or `type`==`gateway`, last configuration
+          status
+        in: query
+        name: last_config_status
+        schema:
+          examples:
+          - success
+          type: string
+      - description: Last hostname of the device.
+        in: query
+        name: last_hostname
+        schema:
+          type: string
+      - description: When `type`==`ap`, LLDP management ip address
+        in: query
+        name: lldp_mgmt_addr
+        schema:
+          type: string
+      - $ref: '#/components/parameters/partial_filter_lldp_port_id'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_desc'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_name'
+      - $ref: '#/components/parameters/partial_filter_mac_device'
+      - $ref: '#/components/parameters/partial_filter_model'
+      - description: When `type`==`ap`, Mist Edge id, if AP is connecting to a Mist
+          Edge
         in: query
         name: mxedge_id
         schema:
           format: uuid
           type: string
-      - description: For APs only, list of Mist Edge id, if AP is connecting to a
-          Mist Edge
+      - description: When `type`==`ap`, Comma separated list of Mist Edge id, if AP
+          is connecting to a Mist Edge
         in: query
         name: mxedge_ids
         schema:
-          $ref: '#/components/schemas/uuids'
-      - description: For Switches and Gateways only, last hostname
-        in: query
-        name: last_hostname
-        schema:
           type: string
-      - description: For Switches and Gateways only, last configuration status of
-          the switch/gateway
+      - description: When `type`==`ap`, MxTunnel status, up / down.
         in: query
-        name: last_config_status
+        name: mxtunnel_status
         schema:
-          type: string
-      - description: "For Switches and Gateways only, Key-value pairs where the key\n\
-          is the RADIUS server address and the value contains authentication statistics:\n\
-          \  *  <server_address> (string): IP address of the RADIUS server as the\
-          \ key\n  * `auth_accepts` (long): Number of accepted authentication requests\n\
-          \  * `auth_rejects` (long): Number of rejected authentication requests\n\
-          \  * `auth_timeouts` (long): Number of authentication timeouts\n  * `auth_server_status`\
-          \ (string): Status of the server. Possible values: `up`, `down`, `unreachable`"
-        in: query
-        name: radius_stats
-        schema:
-          type: string
-      - description: For Switches and Gateways only, max cpu usage
-        in: query
-        name: cpu
-        schema:
-          type: string
-      - description: For Gateways only, node0 MAC Address
-        in: query
-        name: node0_mac
-        schema:
-          type: string
-      - description: For Gateways only
-        in: query
-        name: clustered
-        schema:
-          type: boolean
-      - description: For Gateways (SSR) only, version of 128T agent
-        in: query
-        name: t128agent_version
-        schema:
-          type: string
-      - description: For Gateways only, node1 MAC Address
-        in: query
-        name: node1_mac
-        schema:
-          type: string
-      - description: 'For Gateways only. enum: `node0`, `node1`'
+          $ref: '#/components/schemas/search_site_devices_mxtunnel_status'
+      - description: 'When `type`==`gateway`. enum: `node0`, `node1`'
         in: query
         name: node
         schema:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-      - description: For Switches only, EVPN topology id
+      - description: When `type`==`gateway`, node0 MAC Address
         in: query
-        name: evpntopo_id
+        name: node0_mac
         schema:
           type: string
-      - description: For APs only, LLDP system name
+      - description: When `type`==`gateway`, node1 MAC Address
         in: query
-        name: lldp_system_name
+        name: node1_mac
         schema:
           type: string
-      - description: For APs only, LLDP system description
+      - description: When `type`==`ap`, whether the AP is power constrained
         in: query
-        name: lldp_system_desc
+        name: power_constrained
+        schema:
+          type: boolean
+      - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
+          \ where the key\nis the RADIUS server address and the value contains authentication\
+          \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
+          \ server as the key\n  * `auth_accepts` (long): Number of accepted authentication\
+          \ requests\n  * `auth_rejects` (long): Number of rejected authentication\
+          \ requests\n  * `auth_timeouts` (long): Number of authentication timeouts\n\
+          \  * `auth_server_status` (string): Status of the server. Possible values:\
+          \ `up`, `down`, `unreachable`"
+        in: query
+        name: radius_stats
         schema:
           type: string
-      - description: For APs only, LLDP port id
-        in: query
-        name: lldp_port_id
-        schema:
-          type: string
-      - description: For APs only, LLDP management ip address
-        in: query
-        name: lldp_mgmt_addr
-        schema:
-          type: string
-      - description: Channel of band_24
-        in: query
-        name: band_24_channel
-        schema:
-          type: integer
-      - description: Channel of band_5
-        in: query
-        name: band_5_channel
-        schema:
-          type: integer
-      - description: Channel of band_6
-        in: query
-        name: band_6_channel
-        schema:
-          type: integer
-      - description: Bandwidth of band_24
-        in: query
-        name: band_24_bandwidth
-        schema:
-          type: integer
-      - description: Bandwidth of band_5
-        in: query
-        name: band_5_bandwidth
-        schema:
-          type: integer
-      - description: Bandwidth of band_6
-        in: query
-        name: band_6_bandwidth
-        schema:
-          type: integer
-      - description: Port speed of eth0
-        in: query
-        name: eth0_port_speed
-        schema:
-          type: integer
       - description: Whether to return device stats
         in: query
         name: stats
         schema:
           default: false
           type: boolean
+      - description: When `type`==`gateway` (SSR only), version of 128T agent
+        in: query
+        name: t128agent_version
+        schema:
+          type: string
+      - $ref: '#/components/parameters/device_type'
+      - description: Version
+        in: query
+        name: version
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -30790,7 +30603,6 @@ paths:
       - description: Filter by map stack name
         in: query
         name: name
-        required: false
         schema:
           type: string
       responses:
@@ -31321,7 +31133,10 @@ paths:
         name: usermac_label
         schema:
           type: string
-      - description: Partial / full MAC address, username, device_mac or ap
+      - description: Partial / full MAC address, username, device_mac or ap. Use `prefix*`
+          for prefix search or `*substring*` for contains search (e.g. `aabbcc*` and
+          `*bbcc*` match `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`)
+          are not supported
         in: query
         name: text
         schema:
@@ -31365,7 +31180,7 @@ paths:
       description: Search Site NAC Clients
       operationId: searchSiteNacClients
       parameters:
-      - description: AP MAC connected to by client
+      - description: MAC Address of the AP the client is/was connected to
         in: query
         name: ap
         schema:
@@ -31375,6 +31190,15 @@ paths:
         in: query
         name: auth_type
         schema:
+          type: string
+      - description: Filter by certificate expiry within a specific duration from
+          now (e.g., "7d" for 7 days, "1m" for 1 month)
+        in: query
+        name: cert_expiry_duration
+        schema:
+          examples:
+          - 7d
+          - 1m
           type: string
       - description: Filters NAC clients that are integrated with EDR providers
         in: query
@@ -31391,24 +31215,23 @@ paths:
         name: edr_status
         schema:
           $ref: '#/components/schemas/edr_status'
-      - description: Client family, e.g. "Phone/Tablet/Wearable", "Access Point"
-        in: query
-        name: family
-        schema:
-          type: string
-      - description: Client hostname, e.g. "my-laptop", "my-phone"
-        in: query
-        name: hostname
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_family_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: SSO ID, if present and used
         in: query
         name: idp_id
         schema:
           type: string
-      - description: MAC address
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - description: MDM compliance of client i.e "compliant", "not compliant"
         in: query
-        name: mac
+        name: mdm_compliance
+        schema:
+          type: string
+      - description: "MDM provider of client\u2019s organization eg \"intune\", \"\
+          jamf\""
+        in: query
+        name: mdm_provider
         schema:
           type: string
       - description: Filters NAC clients that are managed by MDM providers
@@ -31416,30 +31239,15 @@ paths:
         name: mdm_managed
         schema:
           type: boolean
-      - description: MDM compliance of client i.e "compliant", "not compliant"
-        in: query
-        name: mdm_compliance
-        schema:
-          type: string
-      - description: "MDM provider of client\u2019s organisation eg \"intune\", \"\
-          jamf\""
-        in: query
-        name: mdm_provider
-        schema:
-          type: string
-      - description: Client manufacturer, e.g. "apple", "cisco", "juniper"
-        in: query
-        name: mfg
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mfg_client'
       - description: Client model, e.g. "iPhone 12", "MX100"
         in: query
         name: model
         schema:
           type: string
-      - description: ID of Mist Edge that the client is connected through
+      - description: NAC Policy Rule Name matched
         in: query
-        name: mxedge_id
+        name: nacrule_name
         schema:
           type: string
       - description: NAC Policy Rule ID, if matched
@@ -31452,11 +31260,6 @@ paths:
         name: nacrule_matched
         schema:
           type: boolean
-      - description: NAC Policy Rule Name matched
-        in: query
-        name: nacrule_name
-        schema:
-          type: string
       - description: Vendor of NAS device
         in: query
         name: nas_vendor
@@ -31482,13 +31285,16 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Connection status of client i.e "permitted", "denied, "session_ended"
+      - description: Connection status of client i.e "permitted", "denied, "session_started",
+          "session_stopped"
         in: query
         name: status
         schema:
           $ref: '#/components/schemas/nac_client_last_status'
-      - description: partial / full MAC address, last_username, device_mac, nas_ip
-          or last_ap
+      - description: partial / full MAC address, last_username, device_mac, nas_ip.
+          Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+          `aabbcc*` and `*bbcc*` match `aabbccddeeff`). Suffix-only wildcards (e.g.
+          `*bccddeeff`) are not supported.
         in: query
         name: text
         schema:
@@ -37293,20 +37099,8 @@ paths:
       operationId: searchSiteWanClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
-      - description: Partial / full MAC address
-        in: query
-        name: mac
-        schema:
-          examples:
-          - '0011223'
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - test-hostname
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: Client IP
         in: query
         name: ip
@@ -37357,34 +37151,28 @@ paths:
       description: Search Site WAN Clients
       operationId: searchSiteWanClients
       parameters:
-      - description: Partial / full MAC address
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - description: IP source
+        in: query
+        name: ip_src
+        schema:
+          examples:
+          - dhcp
+          type: string
+      - description: Client MAC Address.
         in: query
         name: mac
         schema:
           examples:
-          - '001122334455'
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - test-hostname
-          type: string
-      - description: Client IP
-        in: query
-        name: ip
-        schema:
-          examples:
-          - 10.2.52.4
+          - 5c5b53010101
           type: string
       - description: Manufacture
         in: query
         name: mfg
         schema:
-          examples:
-          - Cisco
           type: string
+      - $ref: '#/components/parameters/partial_filter_network'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -54943,7 +54731,6 @@ components:
       description: Duration like 7d, 2w
       in: query
       name: duration
-      required: false
       schema:
         default: 1d
         examples:
@@ -54953,7 +54740,6 @@ components:
       description: Duration like 7d, 2w
       in: query
       name: duration
-      required: false
       schema:
         default: 5m
         examples:
@@ -54980,7 +54766,6 @@ components:
         for all of them
       in: query
       name: fields
-      required: false
       schema:
         examples:
         - field1,field2
@@ -55023,7 +54808,6 @@ components:
         1h, 10m) where aggregation function would be applied to.
       in: query
       name: interval
-      required: false
       schema:
         examples:
         - 10m
@@ -55040,7 +54824,6 @@ components:
     ip:
       in: query
       name: ip
-      required: false
       schema:
         examples:
         - 192.168.1.1
@@ -55049,7 +54832,6 @@ components:
     limit:
       in: query
       name: limit
-      required: false
       schema:
         default: 100
         minimum: 0
@@ -55057,7 +54839,6 @@ components:
     limit_10:
       in: query
       name: limit
-      required: false
       schema:
         default: 10
         minimum: 0
@@ -55173,7 +54954,6 @@ components:
     name:
       in: query
       name: name
-      required: false
       schema:
         type: string
     network_id:
@@ -55221,11 +55001,255 @@ components:
     page:
       in: query
       name: page
-      required: false
       schema:
         default: 1
         minimum: 1
         type: integer
+    partial_filter_ext_ip:
+      description: Partial / full Device external ip. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `1.2.3.*` and `*.2.3.*` match `1.2.3.4`).
+        Suffix-only wildcards (e.g. `*.2.3.4`) are not supported
+      in: query
+      name: ext_ip
+      schema:
+        examples:
+        - 1.2.3.4
+        - 1.2.3.*
+        - '*2.3.*'
+        type: string
+    partial_filter_family_client:
+      description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
+        Point"). Use `prefix*` for prefix search or `*substring*` for contains search
+        (e.g. `Surveillance*` and  `*urveillance*` match `Surveillance Camera`). Suffix-only
+        wildcards (e.g. `*Camera`) are not supported
+      in: query
+      name: family
+      schema:
+        examples:
+        - Surveillance Camera
+        - Surveillance*
+        - '*urveillance*'
+        type: string
+    partial_filter_hostname_client:
+      description: Partial / full Client hostname. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `everest*` and `*rest*` match `my-everest-client`).
+        Suffix-only wildcards (e.g. `*everest`) are not supported
+      in: query
+      name: hostname
+      schema:
+        examples:
+        - my-everest-client
+        - my-everest*
+        - '*everest*'
+        type: string
+    partial_filter_hostname_device:
+      description: Partial / full Device hostname. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `my-london*` and `*london*` match
+        `my-london-1`). Suffix-only wildcards (e.g. `*london-1`) are not supported
+      in: query
+      name: hostname
+      schema:
+        examples:
+        - my-london-1
+        - my-london*
+        - '*london*'
+        type: string
+    partial_filter_ip_client:
+      description: Partial / full Client IP Address.  Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
+        match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
+      in: query
+      name: ip
+      schema:
+        examples:
+        - 10.100.10.54
+        - 10.100.10.*
+        - '*100.10.*'
+        type: string
+    partial_filter_ip_device:
+      description: Partial / full Device IP Address.  Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
+        match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
+      in: query
+      name: ip
+      schema:
+        examples:
+        - 10.100.10.54
+        - 10.100.10.*
+        - '*100.10.*'
+        type: string
+    partial_filter_lldp_port_id:
+      description: When `type`==`ap`, LLDP port id. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `ge-0/0/*` and `*-0/0/*` match
+        `ge-0/0/30`). Suffix-only wildcards (e.g. `*switch-01`) are not supported
+      in: query
+      name: lldp_port_id
+      schema:
+        type: string
+    partial_filter_lldp_system_desc:
+      description: When `type`==`ap`, LLDP system description. Use `prefix*` for prefix
+        search or `*substring*` for contains search (e.g. `Juniper Networks*` and
+        `*Networks*` match `Juniper Networks, Inc.`). Suffix-only wildcards (e.g.
+        `*switch-01`) are not supported
+      in: query
+      name: lldp_system_desc
+      schema:
+        type: string
+    partial_filter_lldp_system_name:
+      description: When `type`==`ap`, LLDP system name. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `my-switch*` and `*switch*` match
+        `my-switch-01`). Suffix-only wildcards (e.g. `*switch-01`) are not supported
+      in: query
+      name: lldp_system_name
+      schema:
+        type: string
+    partial_filter_mac:
+      description: MAC address. Partial match allowed with wildcard * (e.g. `*5b35*`
+        will match `5c5b350e0001` and `5c5b35000301`).
+      in: query
+      name: mac
+      schema:
+        examples:
+        - 5c5b350e0001
+        - '*5b35*'
+        type: string
+    partial_filter_mac_client:
+      description: Partial / full Client MAC Address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
+        Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
+      in: query
+      name: mac
+      schema:
+        examples:
+        - aabbccddeeff
+        - aabbcc*
+        - '*bbcc*'
+        type: string
+    partial_filter_mac_device:
+      description: Partial / full Device MAC address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `001122*` and `*1122*` match `001122334455`).
+        Suffix-only wildcards (e.g. `*4455`) are not supported
+      in: query
+      name: mac
+      schema:
+        examples:
+        - aabbccddeeff
+        - aabbcc*
+        - '*bbcc*'
+        type: string
+    partial_filter_mac_usermac:
+      description: Partial / full Client MAC Address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
+        Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
+      in: query
+      name: mac
+      schema:
+        examples:
+        - aabbccddeeff
+        - aabbcc*
+        - '*bbcc*'
+        type: string
+    partial_filter_mfg_client:
+      description: Partial / full Client manufacturer (e.g. "apple", "cisco", "juniper").
+        Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+        `Raspberry Pi*` and `*Pi*` match `Raspberry Pi Trading Ltd`). Suffix-only
+        wildcards (e.g. `*Ltd`) are not supported
+      in: query
+      name: mfg
+      schema:
+        examples:
+        - Raspberry Pi Trading Ltd
+        - Raspberry Pi*
+        - '*Pi*'
+        type: string
+    partial_filter_model:
+      description: Partial / full Device model. Use `prefix*` for prefix search or
+        `*substring*` for contains search (e.g. `AP4*` and `*P4*` match `AP43`). Suffix-only
+        wildcards (e.g. `*43`) are not supported
+      in: query
+      name: model
+      schema:
+        examples:
+        - AP43
+        - AP4*
+        - '*P4*'
+        type: string
+    partial_filter_name:
+      description: Device name. Always a partial match (e.g. `london` will match `london-1`,
+        `london-2`, `my-london-device`...)
+      in: query
+      name: name
+      schema:
+        examples:
+        - london
+        type: string
+    partial_filter_name_site:
+      description: Partial / full Site name. Case insensitive. Use `prefix*` for prefix
+        search or `*substring*` for contains search (e.g. `my-site*` and `*site*`
+        match `my-site-01`). Suffix-only wildcards (e.g. `*site-01`) are not supported
+      in: query
+      name: name
+      schema:
+        examples:
+        - my-site-01
+        - my-site*
+        - '*site*'
+        type: string
+    partial_filter_network:
+      description: Partial / full Name of the network the client is/was connected
+        to. Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+        `my-corp*` and `*corp*` match `my-corp-network`). Suffix-only wildcards (e.g.
+        `*corp`) are not supported
+      in: query
+      name: network
+      schema:
+        examples:
+        - my-corp-network
+        - my-corp*
+        - '*corp*'
+        type: string
+    partial_filter_serial:
+      description: Device serial number. Partial match allowed with wildcard * (e.g.
+        `*123*` will match `AB123CD`, `12345`, `XY123`)
+      in: query
+      name: serial
+      schema:
+        examples:
+        - AB123CD
+        - '*123*'
+        type: string
+    partial_filter_sku:
+      description: Device SKU. Partial match allowed with wildcard * (e.g. `*2300*`
+        will match `EX2300-F-12P`)
+      in: query
+      name: sku
+      schema:
+        examples:
+        - EX2300-F-12P
+        - '*2300*'
+        type: string
+    partial_filter_version:
+      description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
+        will match `21.2R3-S3.5`)
+      in: query
+      name: version
+      schema:
+        examples:
+        - 21.2R3-S3.5
+        - '*2R3*'
+        type: string
+    partial_search_username:
+      description: Partial / full username. Use `prefix*` for prefix search or `*substring*`
+        for contains search (e.g. `johndoe*` and `*mycorp*` match `johndoe@mycorp.com`).
+        Suffix-only wildcards (e.g. `*mycorp.com`) are not supported
+      in: query
+      name: username
+      schema:
+        examples:
+        - johndoe
+        - johnd*
+        - '*ohnd*'
+        type: string
     pcap_id:
       in: path
       name: pcap_id
@@ -55247,7 +55271,6 @@ components:
       description: PSK ID
       in: query
       name: psk_id
-      required: false
       schema:
         examples:
         - 000000ab-00ab-00ab-00ab-0000000000ab
@@ -55422,7 +55445,6 @@ components:
         order
       in: query
       name: sort
-      required: false
       schema:
         default: timestamp
         examples:
@@ -55433,7 +55455,6 @@ components:
         order
       in: query
       name: sort
-      required: false
       schema:
         default: timestamp
         examples:
@@ -55444,7 +55465,6 @@ components:
         order.
       in: query
       name: sort
-      required: false
       schema:
         default: wxid
         examples:
@@ -55559,7 +55579,6 @@ components:
     vpn_type:
       in: query
       name: type
-      required: false
       schema:
         $ref: '#/components/schemas/vpn_type'
     webhook_id:
@@ -64663,7 +64682,7 @@ components:
       - wlans
       type: object
     ap_search_hostnames:
-      description: Partial / full hostname
+      description: List of hostnames detected for the AP
       items:
         type: string
       type: array
@@ -77531,7 +77550,7 @@ components:
       enum:
       - permitted
       - session_started
-      - session_ended
+      - session_stopped
       - denied
       examples:
       - permitted
@@ -95571,6 +95590,10 @@ components:
           type: boolean
         up:
           description: Indicates if interface is up
+          readOnly: true
+          type: boolean
+        uplink:
+          description: Indicates if interface is an uplink port
           readOnly: true
           type: boolean
         xcvr_model:

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.6] - 2026-03-05
+
+- Improve query parameter descriptions when partial search is supported with wildcard (`*`) for better clarity on search behavior
+- Updated schema definitions
+  - Added `uplink` field (boolean) to `stats_switch_port` to indicate if interface is an uplink port
+
 ## [2602.1.5] - 2026-03-03
 
 - Updated `/api/v1/sites/{site_id}/insights/fingerprints/count` and `/api/v1/sites/{site_id}/insights/fingerprints/search`
