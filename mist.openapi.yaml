@@ -6836,20 +6836,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_clients_count_distinct'
-      - description: Partial / full MAC address.
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b53010101
-          type: string
-      - description: Partial / full hostname
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - my-hostname
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: Device type, e.g. Mac, Nvidia, iPhone
         in: query
         name: device
@@ -7088,35 +7076,9 @@ paths:
           examples:
           - iPhone
           type: string
-      - description: Client hostname. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `everest*` and `*rest*` match `my-everest-client`).
-          Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - my-hostname
-          type: string
-      - description: Client IP Address.  Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `10.100.10.*` and  `*100.10.*` match `10.100.10.54`).
-          Suffix-only wildcards (e.g. `*.54`) are not supported
-        in: query
-        name: ip
-        required: false
-        schema:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
-      - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
-          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b53010101
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: Only available for clients running the Marvis Client app, model,
           e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
         in: query
@@ -7159,16 +7121,7 @@ paths:
           examples:
           - 5c5b530
           type: string
-      - description: Only available for clients using 802.1X authentication. Partial
-          / full Username. Use `prefix*` for prefix search or `*substring*` for contains
-          search (e.g. `johndoe*` and `*mycorp*` match `johndoe@mycorp.com`). Suffix-only
-          wildcards (e.g. `*mycorp.com`) are not supported
-        in: query
-        name: username
-        schema:
-          examples:
-          - johndoe*
-          type: string
+      - $ref: '#/components/parameters/partial_search_username'
       - description: VLAN
         in: query
         name: vlan
@@ -8388,11 +8341,6 @@ paths:
       description: Search Org Devices
       operationId: searchOrgDevices
       parameters:
-      - description: power_constrained
-        in: query
-        name: power_constrained
-        schema:
-          type: boolean
       - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
@@ -8423,6 +8371,21 @@ paths:
         name: band_6_bandwidth
         schema:
           type: integer
+      - description: When `type`==`ap`, Power of band_24
+        in: query
+        name: band_24_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_5
+        in: query
+        name: band_5_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_6
+        in: query
+        name: band_6_power
+        schema:
+          type: integer
       - description: When `type`==`gateway`, true / false
         in: query
         name: clustered
@@ -8442,31 +8405,9 @@ paths:
         schema:
           format: uuid
           type: string
-      - description: Partial / full Device external ip. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `1.2.3.*` and `*.2.3.*` match
-          `1.2.3.4`). Suffix-only wildcards (e.g. `*2300`) are not supported
-        in: query
-        name: ext_ip
-        schema:
-          type: string
-      - description: Partial / full Device hostname. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `my-ap*` and `*ap*` match `my-ap-01`).
-          Suffix-only wildcards (e.g. `*ap-01`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Partial / full Device IP Address.  Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-          match `10.100.10.54`). Suffix-only wildcards (e.g. `*everest`) are not supported
-        in: query
-        name: ip
-        required: false
-        schema:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
+      - $ref: '#/components/parameters/partial_filter_ext_ip'
+      - $ref: '#/components/parameters/partial_filter_hostname_device'
+      - $ref: '#/components/parameters/partial_filter_ip_device'
       - description: When `type`==`switch` or `type`==`gateway`, last configuration
           status
         in: query
@@ -8475,9 +8416,7 @@ paths:
           examples:
           - success
           type: string
-      - description: Partial / full Last hostname of the device. Use `prefix*` for
-          prefix search or `*substring*` for contains search (e.g. `my-ap*` and `*ap*`
-          match `my-ap-01`). Suffix-only wildcards (e.g. `*ap-01`) are not supported
+      - description: Last hostname of the device.
         in: query
         name: last_hostname
         schema:
@@ -8487,44 +8426,11 @@ paths:
         name: lldp_mgmt_addr
         schema:
           type: string
-      - description: When `type`==`ap`, Partial / full LLDP port id. Use `prefix*`
-          for prefix search or `*substring*` for contains search (e.g. `ge-0/0/*`
-          and `*-0/0/*` match `ge-0/0/30`). Suffix-only wildcards (e.g. `*switch-01`)
-          are not supported
-        in: query
-        name: lldp_port_id
-        schema:
-          type: string
-      - description: When `type`==`ap`, Partial / full LLDP system description. Use
-          `prefix*` for prefix search or `*substring*` for contains search (e.g. `Juniper
-          Networks*` and `*Networks*` match `Juniper Networks, Inc.`). Suffix-only
-          wildcards (e.g. `*switch-01`) are not supported
-        in: query
-        name: lldp_system_desc
-        schema:
-          type: string
-      - description: When `type`==`ap`, Partial / full LLDP system name. Use `prefix*`
-          for prefix search or `*substring*` for contains search (e.g. `my-switch*`
-          and `*switch*` match `my-switch-01`). Suffix-only wildcards (e.g. `*switch-01`)
-          are not supported
-        in: query
-        name: lldp_system_name
-        schema:
-          type: string
-      - description: Partial / full Device MAC Address. Use `prefix*` for prefix search
-          (e.g. `5c5b*` matches `5c5b350ea3b3`). Suffix-only wildcards (e.g. `*a3b3`)
-          and substring (e.g. `*350e*`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
-      - description: Partial / full Device model. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `ex23*` and `*23*` match `ex2300`).
-          Suffix-only wildcards (e.g. `*2300`) are not supported
-        in: query
-        name: model
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_lldp_port_id'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_desc'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_name'
+      - $ref: '#/components/parameters/partial_filter_mac_device'
+      - $ref: '#/components/parameters/partial_filter_model'
       - description: When `type`==`ap`, Mist Edge id, if AP is connecting to a Mist
           Edge
         in: query
@@ -8558,6 +8464,11 @@ paths:
         name: node1_mac
         schema:
           type: string
+      - description: When `type`==`ap`, whether the AP is power constrained
+        in: query
+        name: power_constrained
+        schema:
+          type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
           \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
@@ -10125,30 +10036,9 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - description: MAC address. Partial match allowed with wildcard * (e.g. `*5b35*`
-          will match `5c5b350e0001` and `5c5b35000301`)
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b350e0001
-          type: string
-      - description: Device model. Partial match allowed with wildcard * (e.g. `AP*`
-          will match `AP43` and `AP41`)
-        in: query
-        name: model
-        schema:
-          examples:
-          - AP43
-          type: string
-      - description: Device name. Always a partial match (e.g. `london` will match
-          `london-1`, `london-2`, `my-london-device`...)
-        in: query
-        name: name
-        schema:
-          examples:
-          - london
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac'
+      - $ref: '#/components/parameters/partial_filter_model'
+      - $ref: '#/components/parameters/partial_filter_name'
       - description: Site id if assigned, null if not assigned
         in: query
         name: site_id
@@ -10157,14 +10047,7 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Device serial. Partial match allowed with wildcard * (e.g. `XLH*`
-          will match `FXLH2015150025`)
-        in: query
-        name: serial
-        schema:
-          examples:
-          - FXLH2015150025
-          type: string
+      - $ref: '#/components/parameters/partial_filter_serial'
       - description: true / false
         in: query
         name: master
@@ -10172,22 +10055,8 @@ paths:
           examples:
           - 'true'
           type: string
-      - description: Device sku. Partial match allowed with wildcard * (e.g. `*2300*`
-          will match `EX2300-F-12P`)
-        in: query
-        name: sku
-        schema:
-          examples:
-          - AP43-WW
-          type: string
-      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
-          will match `21.2R3-S3.5`)
-        in: query
-        name: version
-        schema:
-          examples:
-          - 1.0.0
-          type: string
+      - $ref: '#/components/parameters/partial_filter_sku'
+      - $ref: '#/components/parameters/partial_filter_version'
       - description: 'Device status. enum: `connected`, `disconnected`'
         in: query
         name: status
@@ -11738,13 +11607,7 @@ paths:
       description: Search Org Mist Edges
       operationId: searchOrgMxEdges
       parameters:
-      - description: Partial / full Mist edge hostname. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `mist-edge*` and `*edge*` match
-          `mist-edge-1`). Suffix-only wildcards (e.g. `*everest`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_device'
       - description: Mist edge id
         in: query
         name: mxedge_id
@@ -11755,14 +11618,7 @@ paths:
         name: mxcluster_id
         schema:
           type: string
-      - description: Partial / full Mist edge Model name (e.g. "ME-X1"). Use `prefix*`
-          for prefix search or `*substring*` for contains search (e.g. `ME-X1*` and
-          `*X1*` match `ME-X1M`). Suffix-only wildcards (e.g. `*everest`) are not
-          supported
-        in: query
-        name: model
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_model'
       - description: Debian code name (buster, bullseye)
         in: query
         name: distro
@@ -12811,33 +12667,14 @@ paths:
         name: edr_status
         schema:
           $ref: '#/components/schemas/edr_status'
-      - description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
-          Point"). Use `prefix*` for prefix search or `*substring*` for contains search
-          (e.g. `Surveillance*` and  `*urveillance.*` match `Surveillance Camera`).
-          Suffix-only wildcards (e.g. `*everest`) are not supported
-        in: query
-        name: family
-        schema:
-          type: string
-      - description: Partial / full Client hostname. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
-          `my-everest-client`). Suffix-only wildcards (e.g. `*everest`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_family_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: SSO ID, if present and used
         in: query
         name: idp_id
         schema:
           type: string
-      - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
-          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: MDM compliance of client i.e "compliant", "not compliant"
         in: query
         name: mdm_compliance
@@ -12854,14 +12691,7 @@ paths:
         name: mdm_managed
         schema:
           type: boolean
-      - description: Partial / full Client manufacturer (e.g. "apple", "cisco", "juniper").
-          Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
-          `Raspberry Pi*` and `*Pi*` match `Raspberry Pi Trading Ltd`). Suffix-only
-          wildcards (e.g. `*Ltd`) are not supported
-        in: query
-        name: mfg
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mfg_client'
       - description: Client model, e.g. "iPhone 12", "MX100"
         in: query
         name: model
@@ -18180,14 +18010,7 @@ paths:
         name: mesh_enabled
         schema:
           type: boolean
-      - description: Partial / full Site name. Case insensitive. Use `prefix*` for
-          prefix search or `*substring*` for contains search (e.g. `my-site*` and
-          `*site*` match `my-site-01`). Suffix-only wildcards (e.g. `*2300`) are not
-          supported
-        in: query
-        name: name
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_name_site'
       - description: If Rogue detection is enabled
         in: query
         name: rogue_enabled
@@ -20936,13 +20759,7 @@ paths:
       description: Search Org User MACs
       operationId: searchOrgUserMacs
       parameters:
-      - description: Partial / full MAC address. Use `prefix*` for prefix search or
-          `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
-          Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_usermac'
       - description: Optional, array of strings of labels
         in: query
         name: labels
@@ -21282,32 +21099,10 @@ paths:
       operationId: searchOrgWanClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
-      - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
-          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
-      - description: Partial / full Client hostname. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
-          `my-everest-client`). Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Partial / full Client IP Address.  Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-          match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
-        in: query
-        name: ip
-        schema:
-          type: string
-      - description: Manufacture
-        in: query
-        name: mfg
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - $ref: '#/components/parameters/partial_filter_mfg_client'
       - description: nacrule_id
         in: query
         name: nacrule_id
@@ -21350,24 +21145,8 @@ paths:
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
-      - description: Partial / full Client hostname. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
-          `my-everest-client`). Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Partial / full Client IP Address.  Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-          match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
-        in: query
-        name: ip
-        required: false
-        schema:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
       - description: IP source
         in: query
         name: ip_src
@@ -21387,16 +21166,7 @@ paths:
         name: mfg
         schema:
           type: string
-      - description: Partial / full Name of the network the client is/was connected
-          to. Use `prefix*` for prefix search or `*substring*` for contains search
-          (e.g. `my-corp*` and `*corp*` match `my-corp-network`). Suffix-only wildcards
-          (e.g. `*corp`) are not supported
-        in: query
-        name: network
-        schema:
-          examples:
-          - corp_network
-          type: string
+      - $ref: '#/components/parameters/partial_filter_network'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -21764,13 +21534,7 @@ paths:
         name: device_mac
         schema:
           type: string
-      - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
-          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: Port id where the client has connected to
         in: query
         name: port_id
@@ -24636,7 +24400,7 @@ paths:
         \ /clients/search?device=Mac*&hostname=jerry"
       operationId: searchSiteWirelessClients
       parameters:
-      - description: AP MAC address where the client has connected to
+      - description: AP MAC address of the AP where the client has connected to
         in: query
         name: ap
         schema:
@@ -24659,35 +24423,9 @@ paths:
           examples:
           - iPhone
           type: string
-      - description: Partial / full Client hostname. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
-          `my-everest-client`). Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - my-hostname
-          type: string
-      - description: Partial / full Client IP Address.  Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-          match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
-        in: query
-        name: ip
-        required: false
-        schema:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
-      - description: Partial / full Client MAC Address. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
-          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 5c5b53010101
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: Only available for clients running the Marvis Client app, model,
           e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
         in: query
@@ -24730,16 +24468,7 @@ paths:
           examples:
           - 5c5b530
           type: string
-      - description: Only available for clients using 802.1X authentication. Use `prefix*`
-          for prefix search or `*substring*` for contains search (e.g. `johndoe*`
-          and `*mycorp*` match `johndoe@mycorp.com`). Suffix-only wildcards (e.g.
-          `*mycorp.com`) are not supported
-        in: query
-        name: username
-        schema:
-          examples:
-          - johndoe*
-          type: string
+      - $ref: '#/components/parameters/partial_search_username'
       - description: VLAN
         in: query
         name: vlan
@@ -25772,11 +25501,6 @@ paths:
       description: Search Device
       operationId: searchSiteDevices
       parameters:
-      - description: power_constrained
-        in: query
-        name: power_constrained
-        schema:
-          type: boolean
       - description: When `type`==`ap`, Channel of band_24
         in: query
         name: band_24_channel
@@ -25807,6 +25531,21 @@ paths:
         name: band_6_bandwidth
         schema:
           type: integer
+      - description: When `type`==`ap`, Power of band_24
+        in: query
+        name: band_24_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_5
+        in: query
+        name: band_5_power
+        schema:
+          type: integer
+      - description: When `type`==`ap`, Power of band_6
+        in: query
+        name: band_6_power
+        schema:
+          type: integer
       - description: When `type`==`gateway`, true / false
         in: query
         name: clustered
@@ -25826,31 +25565,9 @@ paths:
         schema:
           format: uuid
           type: string
-      - description: Device external ip. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `1.2.3.*` and `*.2.3.*` match `1.2.3.4`). Suffix-only
-          wildcards (e.g. `*2300`) are not supported
-        in: query
-        name: ext_ip
-        schema:
-          type: string
-      - description: Device hostname. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `my-ap*` and `*ap*` match `my-ap-01`). Suffix-only
-          wildcards (e.g. `*ap-01`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Device IP Address.  Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `10.100.10.*` and  `*100.10.*` match `10.100.10.54`).
-          Suffix-only wildcards (e.g. `*.54`) are not supported
-        in: query
-        name: ip
-        required: false
-        schema:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
+      - $ref: '#/components/parameters/partial_filter_ext_ip'
+      - $ref: '#/components/parameters/partial_filter_hostname_device'
+      - $ref: '#/components/parameters/partial_filter_ip_device'
       - description: When `type`==`switch` or `type`==`gateway`, last configuration
           status
         in: query
@@ -25859,9 +25576,7 @@ paths:
           examples:
           - success
           type: string
-      - description: Last hostname of the device. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `my-ap*` and `*ap*` match `my-ap-01`).
-          Suffix-only wildcards (e.g. `*ap-01`) are not supported
+      - description: Last hostname of the device.
         in: query
         name: last_hostname
         schema:
@@ -25871,43 +25586,11 @@ paths:
         name: lldp_mgmt_addr
         schema:
           type: string
-      - description: When `type`==`ap`, LLDP port id. Use `prefix*` for prefix search
-          or `*substring*` for contains search (e.g. `ge-0/0/*` and `*-0/0/*` match
-          `ge-0/0/30`). Suffix-only wildcards (e.g. `*switch-01`) are not supported
-        in: query
-        name: lldp_port_id
-        schema:
-          type: string
-      - description: When `type`==`ap`, LLDP system description. Use `prefix*` for
-          prefix search or `*substring*` for contains search (e.g. `Juniper Networks*`
-          and `*Networks*` match `Juniper Networks, Inc.`). Suffix-only wildcards
-          (e.g. `*switch-01`) are not supported
-        in: query
-        name: lldp_system_desc
-        schema:
-          type: string
-      - description: When `type`==`ap`, LLDP system name. Use `prefix*` for prefix
-          search or `*substring*` for contains search (e.g. `my-switch*` and `*switch*`
-          match `my-switch-01`). Suffix-only wildcards (e.g. `*switch-01`) are not
-          supported
-        in: query
-        name: lldp_system_name
-        schema:
-          type: string
-      - description: Device MAC Address. Use `prefix*` for prefix search (e.g. `5c5b*`
-          matches `5c5b350ea3b3`). Suffix-only wildcards (e.g. `*a3b3`) and substring
-          (e.g. `*350e*`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
-      - description: Device model. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `ex23*` and `*23*` match `ex2300`). Suffix-only
-          wildcards (e.g. `*2300`) are not supported
-        in: query
-        name: model
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_lldp_port_id'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_desc'
+      - $ref: '#/components/parameters/partial_filter_lldp_system_name'
+      - $ref: '#/components/parameters/partial_filter_mac_device'
+      - $ref: '#/components/parameters/partial_filter_model'
       - description: When `type`==`ap`, Mist Edge id, if AP is connecting to a Mist
           Edge
         in: query
@@ -25941,6 +25624,11 @@ paths:
         name: node1_mac
         schema:
           type: string
+      - description: When `type`==`ap`, whether the AP is power constrained
+        in: query
+        name: power_constrained
+        schema:
+          type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
           \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
@@ -31532,33 +31220,14 @@ paths:
         name: edr_status
         schema:
           $ref: '#/components/schemas/edr_status'
-      - description: Client family (e.g. "Phone/Tablet/Wearable", "Access Point").
-          Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
-          `Surveillance*` and  `*urveillance.*` match `Surveillance Camera`). Suffix-only
-          wildcards (e.g. `*Camera`) are not supported
-        in: query
-        name: family
-        schema:
-          type: string
-      - description: Client hostname. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `everest*` and `*rest*` match `my-everest-client`).
-          Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_family_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: SSO ID, if present and used
         in: query
         name: idp_id
         schema:
           type: string
-      - description: Client MAC Address. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
-          Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
-        in: query
-        name: mac
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
       - description: MDM compliance of client i.e "compliant", "not compliant"
         in: query
         name: mdm_compliance
@@ -31575,14 +31244,7 @@ paths:
         name: mdm_managed
         schema:
           type: boolean
-      - description: Client manufacturer (e.g. "apple", "cisco", "juniper"). Use `prefix*`
-          for prefix search or `*substring*` for contains search (e.g. `Raspberry
-          Pi*` and `*Pi*` match `Raspberry Pi Trading Ltd`). Suffix-only wildcards
-          (e.g. `*Ltd`) are not supported
-        in: query
-        name: mfg
-        schema:
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mfg_client'
       - description: Client model, e.g. "iPhone 12", "MX100"
         in: query
         name: model
@@ -37442,24 +37104,8 @@ paths:
       operationId: searchSiteWanClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
-      - description: Partial / full MAC address. Use `prefix*` for prefix search or
-          `*substring*` for contains search (e.g. `001122*` and `*1122*` match `00:11:22:33:44:55`).
-          Suffix-only wildcards (e.g. `*4455`) are not supported
-        in: query
-        name: mac
-        schema:
-          examples:
-          - '0011223'
-          type: string
-      - description: Partial / full hostname. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `everest*` and `*rest*` match `my-everest-client`).
-          Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          examples:
-          - test-hostname
-          type: string
+      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
       - description: Client IP
         in: query
         name: ip
@@ -37510,24 +37156,8 @@ paths:
       description: Search Site WAN Clients
       operationId: searchSiteWanClients
       parameters:
-      - description: Client hostname. Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `everest*` and `*rest*` match `my-everest-client`).
-          Suffix-only wildcards (e.g. `*client`) are not supported
-        in: query
-        name: hostname
-        schema:
-          type: string
-      - description: Client IP Address.  Use `prefix*` for prefix search or `*substring*`
-          for contains search (e.g. `10.100.10.*` and  `*100.10.*` match `10.100.10.54`).
-          Suffix-only wildcards (e.g. `*.54`) are not supported
-        in: query
-        name: ip
-        required: false
-        schema:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
+      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - $ref: '#/components/parameters/partial_filter_ip_client'
       - description: IP source
         in: query
         name: ip_src
@@ -37547,16 +37177,7 @@ paths:
         name: mfg
         schema:
           type: string
-      - description: Name of the network the client is/was connected to. Use `prefix*`
-          for prefix search or `*substring*` for contains search (e.g. `my-corp*`
-          and `*corp*` match `my-corp-network`). Suffix-only wildcards (e.g. `*corp`)
-          are not supported
-        in: query
-        name: network
-        schema:
-          examples:
-          - corp_network
-          type: string
+      - $ref: '#/components/parameters/partial_filter_network'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -55398,6 +55019,251 @@ components:
         default: 1
         minimum: 1
         type: integer
+    partial_filter_ext_ip:
+      description: Partial / full Device external ip. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `1.2.3.*` and `*.2.3.*` match `1.2.3.4`).
+        Suffix-only wildcards (e.g. `*2300`) are not supported
+      in: query
+      name: ext_ip
+      schema:
+        examples:
+        - 10.100.10.54
+        - 10.100.10.*
+        - '*100.10.*'
+        type: string
+    partial_filter_family_client:
+      description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
+        Point"). Use `prefix*` for prefix search or `*substring*` for contains search
+        (e.g. `Surveillance*` and  `*urveillance*` match `Surveillance Camera`). Suffix-only
+        wildcards (e.g. `*Camera`) are not supported
+      in: query
+      name: family
+      schema:
+        examples:
+        - Surveillance Camera
+        - Surveillance*
+        - '*urveillance*'
+        type: string
+    partial_filter_hostname_client:
+      description: Partial / full Client hostname. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `everest*` and `*rest*` match `my-everest-client`).
+        Suffix-only wildcards (e.g. `*everest`) are not supported
+      in: query
+      name: hostname
+      schema:
+        examples:
+        - my-everest-client
+        - my-everest*
+        - '*everest*'
+        type: string
+    partial_filter_hostname_device:
+      description: Partial / full Device hostname. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `my-london*` and `*london*` match
+        `my-london-1`). Suffix-only wildcards (e.g. `*london-1`) are not supported
+      in: query
+      name: hostname
+      schema:
+        examples:
+        - my-london-1
+        - my-london*
+        - '*london*'
+        type: string
+    partial_filter_ip_client:
+      description: Partial / full Client IP Address.  Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
+        match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
+      in: query
+      name: ip
+      schema:
+        examples:
+        - 10.100.10.54
+        - 10.100.10.*
+        - '*100.10.*'
+        type: string
+    partial_filter_ip_device:
+      description: Partial / full Device IP Address.  Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
+        match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
+      in: query
+      name: ip
+      schema:
+        examples:
+        - 10.100.10.54
+        - 10.100.10.*
+        - '*100.10.*'
+        type: string
+    partial_filter_lldp_port_id:
+      description: When `type`==`ap`, LLDP port id. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `ge-0/0/*` and `*-0/0/*` match
+        `ge-0/0/30`). Suffix-only wildcards (e.g. `*switch-01`) are not supported
+      in: query
+      name: lldp_port_id
+      schema:
+        type: string
+    partial_filter_lldp_system_desc:
+      description: When `type`==`ap`, LLDP system description. Use `prefix*` for prefix
+        search or `*substring*` for contains search (e.g. `Juniper Networks*` and
+        `*Networks*` match `Juniper Networks, Inc.`). Suffix-only wildcards (e.g.
+        `*switch-01`) are not supported
+      in: query
+      name: lldp_system_desc
+      schema:
+        type: string
+    partial_filter_lldp_system_name:
+      description: When `type`==`ap`, LLDP system name. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `my-switch*` and `*switch*` match
+        `my-switch-01`). Suffix-only wildcards (e.g. `*switch-01`) are not supported
+      in: query
+      name: lldp_system_name
+      schema:
+        type: string
+    partial_filter_mac:
+      description: MAC address. Partial match allowed with wildcard * (e.g. `*5b35*`
+        will match `5c5b350e0001` and `5c5b35000301`).
+      in: query
+      name: mac
+      schema:
+        examples:
+        - 5c5b350e0001
+        - '*5b35*'
+        type: string
+    partial_filter_mac_client:
+      description: Partial / full Client MAC Address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
+        Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
+      in: query
+      name: mac
+      schema:
+        examples:
+        - aabbccddeeff
+        - aabbcc*
+        - '*bbcc*'
+        type: string
+    partial_filter_mac_device:
+      description: Partial / full Device MAC address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `001122*` and `*1122*` match `00:11:22:33:44:55`).
+        Suffix-only wildcards (e.g. `*4455`) are not supported
+      in: query
+      name: mac
+      schema:
+        examples:
+        - aabbccddeeff
+        - aabbcc*
+        - '*bbcc*'
+        type: string
+    partial_filter_mac_usermac:
+      description: Partial / full Client MAC Address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
+        Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
+      in: query
+      name: mac
+      schema:
+        examples:
+        - aabbccddeeff
+        - aabbcc*
+        - '*bbcc*'
+        type: string
+    partial_filter_mfg_client:
+      description: Partial / full Client manufacturer (e.g. "apple", "cisco", "juniper").
+        Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+        `Raspberry Pi*` and `*Pi*` match `Raspberry Pi Trading Ltd`). Suffix-only
+        wildcards (e.g. `*Ltd`) are not supported
+      in: query
+      name: mfg
+      schema:
+        examples:
+        - Raspberry Pi Trading Ltd
+        - Raspberry Pi*
+        - '*Pi*'
+        type: string
+    partial_filter_model:
+      description: Partial / full Device model. Use `prefix*` for prefix search or
+        `*substring*` for contains search (e.g. `AP4*` and `*P4*` match `AP43`). Suffix-only
+        wildcards (e.g. `*43`) are not supported
+      in: query
+      name: model
+      schema:
+        examples:
+        - AP43
+        - AP4*
+        - '*P4*'
+        type: string
+    partial_filter_name:
+      description: Device name. Always a partial match (e.g. `london` will match `london-1`,
+        `london-2`, `my-london-device`...)
+      in: query
+      name: name
+      schema:
+        examples:
+        - london
+        type: string
+    partial_filter_name_site:
+      description: Partial / full Site name. Case insensitive. Use `prefix*` for prefix
+        search or `*substring*` for contains search (e.g. `my-site*` and `*site*`
+        match `my-site-01`). Suffix-only wildcards (e.g. `*2300`) are not supported
+      in: query
+      name: name
+      schema:
+        examples:
+        - my-site-01
+        - my-site*
+        - '*site*'
+        type: string
+    partial_filter_network:
+      description: Partial / full Name of the network the client is/was connected
+        to. Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+        `my-corp*` and `*corp*` match `my-corp-network`). Suffix-only wildcards (e.g.
+        `*corp`) are not supported
+      in: query
+      name: network
+      schema:
+        examples:
+        - my-corp-network
+        - my-corp*
+        - '*corp*'
+        type: string
+    partial_filter_serial:
+      description: Device serial number. Partial match allowed with wildcard * (e.g.
+        `*123*` will match `AB123CD`, `12345`, `XY123`)
+      in: query
+      name: serial
+      schema:
+        examples:
+        - AB123CD
+        - '*123*'
+        type: string
+    partial_filter_sku:
+      description: Device SKU. Partial match allowed with wildcard * (e.g. `*2300*`
+        will match `EX2300-F-12P`)
+      in: query
+      name: sku
+      schema:
+        examples:
+        - EX2300-F-12P
+        - '*2300*'
+        type: string
+    partial_filter_version:
+      description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
+        will match `21.2R3-S3.5`)
+      in: query
+      name: version
+      schema:
+        examples:
+        - 21.2R3-S3.5
+        - '*2R3*'
+        type: string
+    partial_search_username:
+      description: Partial / full username. Use `prefix*` for prefix search or `*substring*`
+        for contains search (e.g. `johndoe*` and `*mycorp*` match `johndoe@mycorp.com`).
+        Suffix-only wildcards (e.g. `*mycorp.com`) are not supported
+      in: query
+      name: username
+      schema:
+        examples:
+        - johndoe
+        - johnd*
+        - '*ohnd*'
+        type: string
     pcap_id:
       in: path
       name: pcap_id
@@ -64835,10 +64701,10 @@ components:
       - wlans
       type: object
     ap_search_hostnames:
-      description: Partial / full hostname. Use comma to separate multiple hostnames.
-        Search is case-insensitive and supports wildcard `*` (e.g. `*abc*` will match
-        any hostname that contains `abc`)
-      type: string
+      description: List of hostnames detected for the AP
+      items:
+        type: string
+      type: array
     ap_search_inactive_wired_vlans:
       items:
         type: integer
