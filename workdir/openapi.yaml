@@ -30603,7 +30603,6 @@ paths:
       - description: Filter by map stack name
         in: query
         name: name
-        required: false
         schema:
           type: string
       responses:
@@ -54732,7 +54731,6 @@ components:
       description: Duration like 7d, 2w
       in: query
       name: duration
-      required: false
       schema:
         default: 1d
         examples:
@@ -54742,7 +54740,6 @@ components:
       description: Duration like 7d, 2w
       in: query
       name: duration
-      required: false
       schema:
         default: 5m
         examples:
@@ -54769,7 +54766,6 @@ components:
         for all of them
       in: query
       name: fields
-      required: false
       schema:
         examples:
         - field1,field2
@@ -54812,7 +54808,6 @@ components:
         1h, 10m) where aggregation function would be applied to.
       in: query
       name: interval
-      required: false
       schema:
         examples:
         - 10m
@@ -54829,7 +54824,6 @@ components:
     ip:
       in: query
       name: ip
-      required: false
       schema:
         examples:
         - 192.168.1.1
@@ -54838,7 +54832,6 @@ components:
     limit:
       in: query
       name: limit
-      required: false
       schema:
         default: 100
         minimum: 0
@@ -54846,7 +54839,6 @@ components:
     limit_10:
       in: query
       name: limit
-      required: false
       schema:
         default: 10
         minimum: 0
@@ -54962,7 +54954,6 @@ components:
     name:
       in: query
       name: name
-      required: false
       schema:
         type: string
     network_id:
@@ -55010,7 +55001,6 @@ components:
     page:
       in: query
       name: page
-      required: false
       schema:
         default: 1
         minimum: 1
@@ -55281,7 +55271,6 @@ components:
       description: PSK ID
       in: query
       name: psk_id
-      required: false
       schema:
         examples:
         - 000000ab-00ab-00ab-00ab-0000000000ab
@@ -55456,7 +55445,6 @@ components:
         order
       in: query
       name: sort
-      required: false
       schema:
         default: timestamp
         examples:
@@ -55467,7 +55455,6 @@ components:
         order
       in: query
       name: sort
-      required: false
       schema:
         default: timestamp
         examples:
@@ -55478,7 +55465,6 @@ components:
         order.
       in: query
       name: sort
-      required: false
       schema:
         default: wxid
         examples:
@@ -55593,7 +55579,6 @@ components:
     vpn_type:
       in: query
       name: type
-      required: false
       schema:
         $ref: '#/components/schemas/vpn_type'
     webhook_id:
