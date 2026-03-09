@@ -31286,7 +31286,7 @@ paths:
         schema:
           type: string
       - description: Connection status of client i.e "permitted", "denied, "session_started",
-          "session_ended"
+          "session_stopped"
         in: query
         name: status
         schema:
