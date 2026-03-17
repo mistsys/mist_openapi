@@ -71967,7 +71967,7 @@ components:
             source network/ip is desired
           type: boolean
         vlan_id:
-          type: string
+          $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
       type: object
     gateway_oob_ip_config_node1:
       additionalProperties: false
