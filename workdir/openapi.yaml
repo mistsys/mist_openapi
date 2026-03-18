@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.7**
+  description: '> Version: **2602.1.8**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.7
+  version: 2602.1.8
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -29239,6 +29239,14 @@ paths:
         See metrics possibilities at [List Insight Metrics]($e/Constants%20Definitions/listInsightMetrics)'
       operationId: getSiteInsightMetricsForDevice
       parameters:
+      - description: Port ID of the device, e.g. `ge-0/0/1`. Can be used with metrics
+          related to interfaces, e.g. `rx_bytes`.
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - ge-0/0/1
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29382,6 +29390,14 @@ paths:
           examples:
           - tx_bps,rx_bps
           type: string
+      - description: Port ID of the gateway device, e.g. `ge-0/0/1`
+        in: query
+        name: port_id
+        required: false
+        schema:
+          examples:
+          - ge-0/0/1
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29414,6 +29430,14 @@ paths:
         See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
       operationId: getSiteInsightMetricsForMxEdge
       parameters:
+      - description: Port ID of the MxEdge device, e.g. `port0`. Can be used with
+          metrics related to interfaces, e.g. `rx_bytes`.
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - port0
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29504,6 +29528,14 @@ paths:
         See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
       operationId: getSiteInsightMetricsForSwitch
       parameters:
+      - description: Port ID of the switch device, e.g. `ge-0/0/1`. Can be used with
+          metrics related to interfaces, e.g. `rx_bytes`.
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - ge-0/0/1
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
