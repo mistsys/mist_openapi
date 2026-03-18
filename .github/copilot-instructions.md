@@ -15,7 +15,7 @@
 ### OpenAPI File Changes (`workdir/openapi.yaml`)
 When reviewing changes to `workdir/openapi.yaml`:
 1. ✅ Verify `info.version` field has been updated with new version
-2. ✅ Verify `info.description` field has been updated with new release date and version information
+2. ✅ Verify `info.description` field has been updated with new release date and version information (release date up to one day in the future is acceptable)
 3. ✅ Check that generated files are present and correctly updated
 4. ✅ Confirm `CHANGELOG.md` has an entry for the new OpenAPI version
 5. ✅ Validate OpenAPI schema syntax and structure
@@ -27,6 +27,7 @@ When reviewing changes to `workdir/openapi.yaml`:
 - Only flag generated files if they're missing or incorrectly generated
 
 ### Schema Quality Checks
+- ✅ Validate the OAS format against OpenAPI Specification version 3.1
 - ✅ Endpoint paths follow RESTful conventions
 - ✅ Request/response schemas are well-defined
 - ✅ Required fields are clearly marked

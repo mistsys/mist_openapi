@@ -102145,7 +102145,6 @@ components:
           type: string
         oauth2_username:
           description: Required when `oauth2_grant_type`==`password`
-          format: password
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
