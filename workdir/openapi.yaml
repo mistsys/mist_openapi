@@ -29393,7 +29393,6 @@ paths:
       - description: Port ID of the gateway device, e.g. `ge-0/0/1`
         in: query
         name: port_id
-        required: false
         schema:
           examples:
           - ge-0/0/1
