@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.6**
+  description: '> Version: **2602.1.7**
 
     >
 
-    > Date: **March 5, 2026**
+    > Date: **March 18, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.6
+  version: 2602.1.7
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -18813,12 +18813,6 @@ paths:
     get:
       description: Get Org Stats
       operationId: getOrgStats
-      parameters:
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/page'
       responses:
         '200':
           $ref: '#/components/responses/OrgStats'
@@ -19665,9 +19659,6 @@ paths:
       description: Get List of Org Site Stats
       operationId: listOrgSiteStats
       parameters:
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
       responses:
@@ -29129,13 +29120,97 @@ paths:
       - Sites IDP Profiles
     parameters:
     - $ref: '#/components/parameters/site_id'
-  /api/v1/sites/{site_id}/insights/client/{client_mac}/{metric}:
+  /api/v1/sites/{site_id}/insights:
     get:
-      description: 'Get Client Insight Metrics
-
-        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      description: Get Site Insight Metrics
+      operationId: getSiteInsightMetrics
+      parameters:
+      - description: Comma separated Metric names, e.g. `num_clients,num_aps`. See
+          possible values at [List Insight Metrics](/#operations/listInsightMetrics)
+        in: query
+        name: metrics
+        required: true
+        schema:
+          examples:
+          - num_clients,num_aps
+          type: string
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/InsightMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetrics
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/insights/ap/{device_id}/stats:
+    get:
+      description: Get AP Insight Metrics
+      operationId: getSiteInsightMetricsForAP
+      parameters:
+      - description: Comma separated Metric names, e.g. `num_clients,num_stressed_clients`.
+          See possible values at [List Insight Metrics](/#operations/listInsightMetrics)
+        in: query
+        name: metrics
+        required: true
+        schema:
+          examples:
+          - num_clients,num_stressed_clients
+          type: string
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceMetric'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteInsightMetricsForAP
+      tags:
+      - Sites Insights
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/device_id'
+  /api/v1/sites/{site_id}/insights/client/{client_mac}:
+    get:
+      description: Get Client Insight Metrics
       operationId: getSiteInsightMetricsForClient
       parameters:
+      - description: Comma separated Metric names, e.g. `top-app-by-num_client,top-app-by-bytes`.
+          See possible values at [List Insight Metrics](/#operations/listInsightMetrics)
+        in: query
+        name: metrics
+        required: true
+        schema:
+          examples:
+          - top-app-by-num_client,top-app-by-bytes
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29161,7 +29236,6 @@ paths:
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/client_mac'
-    - $ref: '#/components/parameters/metric'
   /api/v1/sites/{site_id}/insights/device/{device_mac}/{metric}:
     get:
       description: 'Get AP Insight Metrics
@@ -29298,13 +29372,20 @@ paths:
       - Sites NAC Fingerprints
     parameters:
     - $ref: '#/components/parameters/site_id'
-  /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats/{metric}:
+  /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats:
     get:
-      description: 'Get Gateway Insight Metrics
-
-        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
+      description: Get Gateway Insight Metrics
       operationId: getSiteInsightMetricsForGateway
       parameters:
+      - description: Comma separated Metric names, e.g. `tx_bps,rx_bps`. See possible
+          values at [List Insight Metrics](/#operations/listInsightMetrics)
+        in: query
+        name: metrics
+        required: true
+        schema:
+          examples:
+          - tx_bps,rx_bps
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29329,7 +29410,6 @@ paths:
       - Sites Insights
     parameters:
     - $ref: '#/components/parameters/site_id'
-    - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_id'
   /api/v1/sites/{site_id}/insights/mxedge/{device_mac}/{metric}:
     get:
@@ -29454,38 +29534,6 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
-  /api/v1/sites/{site_id}/insights/{metric}:
-    get:
-      description: 'Get Site Insight Metrics
-
-        See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
-      operationId: getSiteInsightMetrics
-      parameters:
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/interval'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/page'
-      responses:
-        '200':
-          $ref: '#/components/responses/InsightMetric'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: getSiteInsightMetrics
-      tags:
-      - Sites Insights
-    parameters:
-    - $ref: '#/components/parameters/site_id'
-    - $ref: '#/components/parameters/metric'
   /api/v1/sites/{site_id}/licenses/usages:
     get:
       description: This shows license usage (i.e. needed) based on the features enabled
@@ -71919,7 +71967,7 @@ components:
             source network/ip is desired
           type: boolean
         vlan_id:
-          type: string
+          $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
       type: object
     gateway_oob_ip_config_node1:
       additionalProperties: false
@@ -71946,7 +71994,7 @@ components:
             if alternative source network/ip is desired
           type: boolean
         vlan_id:
-          type: string
+          $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
       type: object
     gateway_path_preferences:
       additionalProperties: false

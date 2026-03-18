@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.7] - 2026-03-18
+
+- Added `/api/v1/sites/{site_id}/insights/ap/{device_id}/stats`
+  - New endpoint for AP Insight Metrics with required `metrics` query parameter
+- Updated `/api/v1/orgs/{org_id}/stats`
+  - Removed `start`, `end`, `duration`, `limit`, `page` query parameters not applicable to org-level stats endpoint
+- Updated `/api/v1/orgs/{org_id}/stats/sites`
+  - Removed `start`, `end`, `duration` query parameters not applicable to site-level stats endpoint
+- Updated `/api/v1/sites/{site_id}/insights`
+  - Changed path from `/api/v1/sites/{site_id}/insights/{metric}` to use `metrics` query parameter instead of path parameter
+- Updated `/api/v1/sites/{site_id}/insights/client/{client_mac}`
+  - Changed path from `/api/v1/sites/{site_id}/insights/client/{client_mac}/{metric}` to use `metrics` query parameter instead of path parameter
+- Updated `/api/v1/sites/{site_id}/insights/gateway/{device_id}/stats`
+  - Changed path from `/api/v1/sites/{site_id}/insights/gateway/{device_id}/stats/{metric}` to use `metrics` query parameter instead of path parameter
+- Updated schema definitions for `gateway` and `gateway_template`:
+  - `.oob_ip_configs.vlan_id`, `.oob_ip_configs.node1.vlan_id`: Changed type from `string` to `oneOf` with `string` and `integer` to support both string and numeric VLAN IDs
+
 ## [2602.1.6] - 2026-03-05
 
 - Improve query parameter descriptions when partial search is supported with wildcard (`*`) for better clarity on search behavior
