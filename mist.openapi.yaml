@@ -25996,10 +25996,10 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "ARP can be performed on the Device. The output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ AP at the same time and the output all goes through the same websocket stream,\
-        \ session is introduced for demux.\n\n\n#### Subscribe to Device Command outputs\n\
-        `WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same AP at the same time and the output all goes through the same websocket\
+        \ stream, session is introduced for demux.\n\n\n#### Subscribe to Device Command\
+        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n##### Example output from ws stream\n```json\n{ \n \"event\": \"\
         data\", \n \"channel\": \"/sites/4ac1dcf4-9d8b-7211-65c4-057819f0862b/devices/00000000-0000-0000-1000-5c5b350e0060/cmd\"\
         , \n \"data\": { \n   \"session\": \"session_id\", \n   \"raw\": \n   \"Output\"\
