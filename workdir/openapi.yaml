@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.7**
+  description: '> Version: **2602.1.8**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.7
+  version: 2602.1.8
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -459,7 +459,7 @@ tags:
 
     In our implementation, following the steps to deploy EVPN topologies in a Site'
   name: Orgs EVPN Topologies
-- description: The Juniper Integration  can be used to synchronize Juniper Support
+- description: The Juniper Integration can be used to synchronize Juniper Support
     Insights (JSI) information.
   name: Orgs Integration Juniper
 - description: API Call for 3rd party devices
@@ -471,8 +471,8 @@ tags:
     2. Add Partner Administrator Role at https://admin.zscalerbeta.net/#administration/role-management
     - Name: Mist - Access: Full
 
-    3. add Partner Admin at https://admin.zscalerbeta.net/#administration/admin-management  with
-    - Login ID: john - email: john@abc.com
+    3. add Partner Admin at https://admin.zscalerbeta.net/#administration/admin-management
+    with - Login ID: john - email: john@abc.com
 
     4. Find the cloud name for ZIA https://help.zscaler.com/zia/what-my-cloud-name-zia'
   name: Orgs Integration Zscaler
@@ -1040,9 +1040,9 @@ tags:
     Org WxTags are created and managed at the org level and can only be referenced
     and used within the org level configuration.'
   name: Orgs WxTags
-- description: 'A WxLan Tunnel (WxTunnel) are used  to create a secure connection
-    between Juniper Mist Access Points and third-party VPN concentrators using protocols
-    such as L2TPv3 or dmvpn.
+- description: 'A WxLan Tunnel (WxTunnel) are used to create a secure connection between
+    Juniper Mist Access Points and third-party VPN concentrators using protocols such
+    as L2TPv3 or dmvpn.
 
 
     These tunnels allow for the aggregation of ethernet interfaces on access points,
@@ -1457,9 +1457,9 @@ tags:
     Site WxTags are created and managed at the site level and can only be referenced
     and used within that particular site.'
   name: Sites WxTags
-- description: 'A WxLan Tunnel (WxTunnel) are used  to create a secure connection
-    between Juniper Mist Access Points and third-party VPN concentrators using protocols
-    such as L2TPv3 or dmvpn.
+- description: 'A WxLan Tunnel (WxTunnel) are used to create a secure connection between
+    Juniper Mist Access Points and third-party VPN concentrators using protocols such
+    as L2TPv3 or dmvpn.
 
 
     These tunnels allow for the aggregation of ethernet interfaces on access points,
@@ -8467,8 +8467,8 @@ paths:
           type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
-          \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
-          \ server as the key\n  * `auth_accepts` (long): Number of accepted authentication\
+          \ statistics:\n  * <server_address> (string): IP address of the RADIUS server\
+          \ as the key\n  * `auth_accepts` (long): Number of accepted authentication\
           \ requests\n  * `auth_rejects` (long): Number of rejected authentication\
           \ requests\n  * `auth_timeouts` (long): Number of authentication timeouts\n\
           \  * `auth_server_status` (string): Status of the server. Possible values:\
@@ -11084,7 +11084,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: "IDP Credential Validation. The output will be available through\
-        \ websocket. As there can be multiple command issued against the same device\
+        \ websocket. As there can be multiple commands issued against the same device\
         \ at the same time and the output all goes through the same websocket stream,\
         \ `session` is introduced for demux.\n\n#### Subscribe to Device Command outputs\n\
         `WS /api-ws/v1/stream`\n\n``` json\n{\n    \"subscribe\": \"orgs/{org_id}/mist_nac/test_idp\"\
@@ -14513,7 +14513,7 @@ paths:
       - Orgs Devices - Others
   /api/v1/orgs/{org_id}/pcaps:
     get:
-      description: Get List of Org  Packet Captures
+      description: Get List of Org Packet Captures
       operationId: listOrgPacketCaptures
       parameters:
       - $ref: '#/components/parameters/start'
@@ -14584,7 +14584,7 @@ paths:
       description: "Initiate a Packet Capture\n\n**NOTE**: For packet captures of\
         \ org level Mist Edges only. Use [Start Site Packet Capture]($e/Utilities%20PCAPs/startSitePacketCapture)\
         \ for site level Mist Edges. \n\nThe output will be available through websocket.\
-        \ As there can be multiple command issued against the same AP at the same\
+        \ As there can be multiple commands issued against the same AP at the same\
         \ time and the output all goes through the same websocket stream, session\
         \ is introduced for demux.\n\n#### Subscribe to Device Command outputs\n`WS\
         \ /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
@@ -25618,8 +25618,8 @@ paths:
           type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
-          \ statistics:\n  *  <server_address> (string): IP address of the RADIUS\
-          \ server as the key\n  * `auth_accepts` (long): Number of accepted authentication\
+          \ statistics:\n  * <server_address> (string): IP address of the RADIUS server\
+          \ as the key\n  * `auth_accepts` (long): Number of accepted authentication\
           \ requests\n  * `auth_rejects` (long): Number of rejected authentication\
           \ requests\n  * `auth_timeouts` (long): Number of authentication timeouts\n\
           \  * `auth_server_status` (string): Status of the server. Possible values:\
@@ -25992,7 +25992,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "ARP can be performed on the Device. The output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ AP at the same time and the output all goes through the same websocket stream,\
         \ session is introduced for demux.\n\n\n#### Subscribe to Device Command outputs\n\
         `WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -26036,7 +26036,7 @@ paths:
       description: "Port Bounce can be performed from Switch/Gateway.\n\n **Note:**\
         \ Ports starting with vme, ae, irb, and HA control ports (for SSR only) are\
         \ not supported\n\nThe output will be available through websocket. As there\
-        \ can be multiple command issued against the same AP at the same time and\
+        \ can be multiple commands issued against the same AP at the same time and\
         \ the output all goes through the same websocket stream, session is introduced\
         \ for demux.\n\n#### Subscribe to Device Command outputs\n`WS /api-ws/v1/stream`\n\
         \n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -26079,7 +26079,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "TDR can be performed from the Switch. The output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ Switch at the same time and the output all goes through the same websocket\
         \ stream, session is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -26299,7 +26299,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Clear MAC Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -26546,80 +26546,80 @@ paths:
         \ Here\u2019s the recommended cabling.\n\n#### SRX300\n\nFrom ZTP / default\
         \ state, ge-0/0/0 and ge-0/0/7 (SFP) are default WAN ports and will get DHCP\
         \ IP. However, ge-0/0/0 becomes OOB/fxp0 after cluster is enabled (i.e. using\
-        \ it for reach Mist is not recommended)\n\n1.  form cluster in UI\n2.  configure\
-        \ ge-0/0/7,ge-1/0/7 for WAN (reth0)\n3.  configure ge-0/0/2,ge-1/0/2 for ha_data\n\
-        4.  configure ge-0/0/3- for LAN or additional WAN e.g.\n    \n\n``` json\n\
+        \ it for reach Mist is not recommended)\n\n1. form cluster in UI\n2. configure\
+        \ ge-0/0/7,ge-1/0/7 for WAN (reth0)\n3. configure ge-0/0/2,ge-1/0/2 for ha_data\n\
+        4. configure ge-0/0/3- for LAN or additional WAN e.g.\n    \n\n``` json\n\
         {\n    \"port_config\": {\n        \"ge-0/0/2,ge-1/0/2\": {\n            \"\
         usage\": \"ha_data\"\n        },\n        \"ge-0/0/7,ge-1/0/7\": {\n     \
         \       \"usage\": \"wan\",\n            \"redundant\": true,\n          \
         \  \"reth_idx\": 0,\n            \"ip_config\": {\"type\": \"dhcp\"}\n   \
-        \     },\n    }\n}\n\n```\n\n1.  connect ge-0/0/1 back to back for ha_control\n\
-        2.  connect ge-0/0/2 back to back for ha_data\n3.  connect both ge-0/0/7 to\
-        \ uplink switch to WAN and to reach Mist\n4.  power up both devices\n5.  it\
+        \     },\n    }\n}\n\n```\n\n1. connect ge-0/0/1 back to back for ha_control\n\
+        2. connect ge-0/0/2 back to back for ha_data\n3. connect both ge-0/0/7 to\
+        \ uplink switch to WAN and to reach Mist\n4. power up both devices\n5. it\
         \ takes about 30 minutes for the cluster to form\n    \n\n#### SRX320\n\n\
         From ZTP / default state, ge-0/0/0, ge-0/0/7 (SFP) and cl-1/0/0 (LTE) are\
         \ default WAN ports and will get DHCP IP. However, ge-0/0/0 becomes OOB/fxp0\
         \ after cluster is enabled (i.e. using it for reach Mist is not recommended)\n\
         \n##### ZTP via ge-0/0/7\n\nSimilar to SRX300\n\n##### ZTP via cl-1/0/0 (LTE)\n\
-        \n1.  form cluster in UI\n2.  configure cl-1/0/0, cl-3/0/0 as WAN (reth0)\n\
-        3.  configure ge-0/0/2,ge-3/0/2 for ha_data\n4.  same as above\n    \n\n####\
+        \n1. form cluster in UI\n2. configure cl-1/0/0, cl-3/0/0 as WAN (reth0)\n\
+        3. configure ge-0/0/2,ge-3/0/2 for ha_data\n4. same as above\n    \n\n####\
         \ SRX340 / SRX345 / SRX380\n\nSRX340/SRX345 has dedicated OOB/fxp0 ports\n\
-        \n1.  form cluster in UI\n2.  configure ge-0/0/0,ge-5/0/0 for WAN (reth0)\n\
-        3.  configure ge-0/0/2,ge-5/0/2 for ha_data\n4.  configure ge-0/0/3- for LAN\
-        \ or additional WAN\n5.  connect ge-0/0/0 to uplink switch to WAN and to reach\
-        \ Mist\n6.  connect ge-0/0/1 back-to-back for ha_control\n7.  connect ge-0/0/2\
+        \n1. form cluster in UI\n2. configure ge-0/0/0,ge-5/0/0 for WAN (reth0)\n\
+        3. configure ge-0/0/2,ge-5/0/2 for ha_data\n4. configure ge-0/0/3- for LAN\
+        \ or additional WAN\n5. connect ge-0/0/0 to uplink switch to WAN and to reach\
+        \ Mist\n6. connect ge-0/0/1 back-to-back for ha_control\n7. connect ge-0/0/2\
         \ back-to-back for ha_data (fabric); or for SRX380, xe-0/0/16 if 10G SFP+\
-        \ is used\n8.  connect ge-0/0/3- to LAN or additional WANs\n    \n\n#### SRX550\n\
+        \ is used\n8. connect ge-0/0/3- to LAN or additional WANs\n    \n\n#### SRX550\n\
         \nge-0/0/0 becomes OOB/fxp0 after cluster is enabled, make enable oob_ip_config\
-        \ as dhcp to maintain cloud connectivity\n\n1.  connect ge-0/0/0 to reach\
-        \ Mist (after cluster is fully up, this port becomes OOB/fxp0)\n2.  connect\
-        \ ge-0/0/1 back-to-back for ha_control\n3.  connect ge-0/0/2 back-to-back\
-        \ for ha_data (fabric)\n4.  connect ge-0/0/3 to WAN (after cluster is up,\
-        \ intended to be used for reth0)\n5.  connect ge-0/0/4- to LAN or additional\
-        \ WANs\n    \n\n#### SRX1500\n\nSRX1500 has, additionally, dedicated HA Control\
-        \ port\n\n1.  form cluster in UI\n2.  configure ge-0/0/0,ge-5/0/0 for WAN\
-        \ (reth0)\n3.  configure ge-0/0/1,ge-5/0/1 for ha_data\n4.  configure ge-0/0/2-\
-        \ for LAN or additional WAN\n5.  connect dedicated ha_control back-to-back\n\
-        6.  connect ge-0/0/0 to uplink switch to WAN and to reach Mist\n7.  connect\
-        \ ge-0/0/1 back-to-back for ha_data\n8.  connect ge-0/0/2- to LAN or additional\
-        \ WANs\n    \n\n#### SRX4100\n\nSRX4100 has dedicated ha_control and ha_data\
-        \ (fabric) ports\n\n1.  connect dedicated ha_control back-to-back\n2.  connect\
-        \ dedicated ha_data back-to-back\n3.  connect xe-0/0/0 to WAN to reach Mist\n\
-        4.  connect xe-0/0/1- to LAN or additional WANs\n    \n\n#### VSRX\n\nWhen\
-        \ standalone, VSRX has fxp0 as first Network Adapter, then ge-0/0/0-N When\
-        \ clustered, VSRX has fxp0, em0, then ge-0/0/0-N\n\n1.  connect net0 (fxp0)\
-        \ to WAN to reach Mist\n2.  connect net1 back-to-back for ha_control\n3. \
-        \ connect net2 (ge-0/0/0) back-to-back for ha_data (fab0/fab1)\n4.  connect\
-        \ net3 (ge-0/0/1) to WAN, intended to be used for reth0\n5.  connect net4\
-        \ (ge-0/0/2) to LAN\n    \n\nSRX340/SRX345 has dedicated OOB/fxp0 ports VSRX\
-        \ has fxp0 as first Network Adapter, then ge-0/0/0-N\n\n1.  connect ge-0/0/0\
-        \ to WAN to reach Mist\n2.  connect ge-0/0/1 back-to-back for ha_control\n\
-        3.  connect ge-0/0/2 back-to-back for ha_data (fabric); or for SRX380, xe-0/0/16\
-        \ if 10G SFP+ is used\n4.  connect ge-0/0/3- to LAN or additional WANs\n \
-        \   \n\n#### SRX550\n\nge-0/0/0 becomes OOB/fxp0 after cluster is enabled,\
-        \ make enable oob_ip_config as dhcp to maintain cloud connectivity\n\n1. \
-        \ connect ge-0/0/0 to reach Mist (after cluster is fully up, this port becomes\
-        \ OOB/fxp0)\n2.  connect ge-0/0/1 back-to-back for ha_control\n3.  connect\
-        \ ge-0/0/2 back-to-back for ha_data (fabric)\n4.  connect ge-0/0/3 to WAN\
-        \ (after cluster is up, intended to be used for reth0)\n5.  connect ge-0/0/4-\
-        \ to LAN or additional WANs\n    \n\n#### SRX1500\n\nSRX1500 has, additionally,\
-        \ dedicated HA Control port\n\n1. form cluster in UI\n2. configure ge-0/0/0,ge-7/0/0\
-        \ for WAN (reth0)\n3. configure ge-0/0/1,ge-7/0/1 for ha_data\n4. configure\
-        \ ge-0/0/2- for LAN or additional WAN\n5. connect dedicated ha_control back-to-back\n\
-        6. connect ge-0/0/0 to uplink switch to WAN and to reach Mist\n7. connect\
-        \ ge-0/0/1 back-to-back for ha_data\n8. connect ge-0/0/2- to LAN or additional\
-        \ WANs\n\n    \n#### SRX1600\n\nSRX1600 has, additionally, two dedicated HA\
-        \ Control port\n\n1. form cluster in UI\n2. configure ge-0/0/0,ge-7/0/0 for\
-        \ WAN (reth0)\n3. configure ge-0/0/1,ge-7/0/1 for ha_data\n4. configure ge-0/0/2-\
-        \ for LAN or additional WAN\n5. connect dedicated both ha_control back-to-back\n\
-        6. connect ge-0/0/0 to uplink switch to WAN and to reach Mist\n7. connect\
-        \ ge-0/0/1 back-to-back for ha_data\n8. connect ge-0/0/2- to LAN or additional\
-        \ WANs\n\n\n#### SRX4100\n\nSRX4100 has dedicated ha_control and ha_data (fabric)\
-        \ ports\n\n1.  connect dedicated ha_control back-to-back\n2.  connect dedicated\
-        \ ha_data back-to-back\n3.  connect xe-0/0/0 to WAN to reach Mist\n4.  connect\
-        \ xe-0/0/1- to LAN or additional WANs\n\n\n## Replace a Node in a HA Cluster\n\
-        Usually Device Replacement is done by Device Replacement API. For a HA cluster,\
-        \ you can also replace a node by another device in the same site."
+        \ as dhcp to maintain cloud connectivity\n\n1. connect ge-0/0/0 to reach Mist\
+        \ (after cluster is fully up, this port becomes OOB/fxp0)\n2. connect ge-0/0/1\
+        \ back-to-back for ha_control\n3. connect ge-0/0/2 back-to-back for ha_data\
+        \ (fabric)\n4. connect ge-0/0/3 to WAN (after cluster is up, intended to be\
+        \ used for reth0)\n5. connect ge-0/0/4- to LAN or additional WANs\n    \n\n\
+        #### SRX1500\n\nSRX1500 has, additionally, dedicated HA Control port\n\n1.\
+        \ form cluster in UI\n2. configure ge-0/0/0,ge-5/0/0 for WAN (reth0)\n3. configure\
+        \ ge-0/0/1,ge-5/0/1 for ha_data\n4. configure ge-0/0/2- for LAN or additional\
+        \ WAN\n5. connect dedicated ha_control back-to-back\n6. connect ge-0/0/0 to\
+        \ uplink switch to WAN and to reach Mist\n7. connect ge-0/0/1 back-to-back\
+        \ for ha_data\n8. connect ge-0/0/2- to LAN or additional WANs\n    \n\n####\
+        \ SRX4100\n\nSRX4100 has dedicated ha_control and ha_data (fabric) ports\n\
+        \n1. connect dedicated ha_control back-to-back\n2. connect dedicated ha_data\
+        \ back-to-back\n3. connect xe-0/0/0 to WAN to reach Mist\n4. connect xe-0/0/1-\
+        \ to LAN or additional WANs\n    \n\n#### VSRX\n\nWhen standalone, VSRX has\
+        \ fxp0 as first Network Adapter, then ge-0/0/0-N When clustered, VSRX has\
+        \ fxp0, em0, then ge-0/0/0-N\n\n1. connect net0 (fxp0) to WAN to reach Mist\n\
+        2. connect net1 back-to-back for ha_control\n3.  connect net2 (ge-0/0/0) back-to-back\
+        \ for ha_data (fab0/fab1)\n4. connect net3 (ge-0/0/1) to WAN, intended to\
+        \ be used for reth0\n5. connect net4 (ge-0/0/2) to LAN\n    \n\nSRX340/SRX345\
+        \ has dedicated OOB/fxp0 ports VSRX has fxp0 as first Network Adapter, then\
+        \ ge-0/0/0-N\n\n1. connect ge-0/0/0 to WAN to reach Mist\n2. connect ge-0/0/1\
+        \ back-to-back for ha_control\n3. connect ge-0/0/2 back-to-back for ha_data\
+        \ (fabric); or for SRX380, xe-0/0/16 if 10G SFP+ is used\n4. connect ge-0/0/3-\
+        \ to LAN or additional WANs\n    \n\n#### SRX550\n\nge-0/0/0 becomes OOB/fxp0\
+        \ after cluster is enabled, make enable oob_ip_config as dhcp to maintain\
+        \ cloud connectivity\n\n1.  connect ge-0/0/0 to reach Mist (after cluster\
+        \ is fully up, this port becomes OOB/fxp0)\n2. connect ge-0/0/1 back-to-back\
+        \ for ha_control\n3. connect ge-0/0/2 back-to-back for ha_data (fabric)\n\
+        4. connect ge-0/0/3 to WAN (after cluster is up, intended to be used for reth0)\n\
+        5. connect ge-0/0/4- to LAN or additional WANs\n    \n\n#### SRX1500\n\nSRX1500\
+        \ has, additionally, dedicated HA Control port\n\n1. form cluster in UI\n\
+        2. configure ge-0/0/0,ge-7/0/0 for WAN (reth0)\n3. configure ge-0/0/1,ge-7/0/1\
+        \ for ha_data\n4. configure ge-0/0/2- for LAN or additional WAN\n5. connect\
+        \ dedicated ha_control back-to-back\n6. connect ge-0/0/0 to uplink switch\
+        \ to WAN and to reach Mist\n7. connect ge-0/0/1 back-to-back for ha_data\n\
+        8. connect ge-0/0/2- to LAN or additional WANs\n\n    \n#### SRX1600\n\nSRX1600\
+        \ has, additionally, two dedicated HA Control port\n\n1. form cluster in UI\n\
+        2. configure ge-0/0/0,ge-7/0/0 for WAN (reth0)\n3. configure ge-0/0/1,ge-7/0/1\
+        \ for ha_data\n4. configure ge-0/0/2- for LAN or additional WAN\n5. connect\
+        \ dedicated both ha_control back-to-back\n6. connect ge-0/0/0 to uplink switch\
+        \ to WAN and to reach Mist\n7. connect ge-0/0/1 back-to-back for ha_data\n\
+        8. connect ge-0/0/2- to LAN or additional WANs\n\n\n#### SRX4100\n\nSRX4100\
+        \ has dedicated ha_control and ha_data (fabric) ports\n\n1. connect dedicated\
+        \ ha_control back-to-back\n2. connect dedicated ha_data back-to-back\n3. connect\
+        \ xe-0/0/0 to WAN to reach Mist\n4. connect xe-0/0/1- to LAN or additional\
+        \ WANs\n\n\n## Replace a Node in a HA Cluster\nUsually Device Replacement\
+        \ is done by Device Replacement API. For a HA cluster, you can also replace\
+        \ a node by another device in the same site."
       operationId: createSiteDeviceHaCluster
       requestBody:
         content:
@@ -26895,7 +26895,7 @@ paths:
     post:
       description: "Ping from AP, Switch and SSR\n\nPing can be performed from the\
         \ Device. The output will be available through websocket. As there can be\
-        \ multiple command issued against the same AP at the same time and the output\
+        \ multiple commands issued against the same AP at the same time and the output\
         \ all goes through the same websocket stream, session is introduced for demux.\n\
         \n#### Subscribe to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n\
         {\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\
@@ -26989,7 +26989,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Releases an active DHCP lease.\n\n\nThe output will be available\
-        \ through websocket.\n\nAs there can be multiple command issued  against the\
+        \ through websocket.\n\nAs there can be multiple commands issued against the\
         \ same Device at the same\ntime and the output all goes through the same websocket\
         \ stream, session is\nintroduced for demux.\n\n\n\n#### Subscribe to Device\
         \ Command outputs\n\n\n`WS /api-ws/v1/stream`\n\n\n```json\n\n{ \"subscribe\"\
@@ -27124,7 +27124,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "DNS resolutions are performed on the Device.\n\nThe output will\
-        \ be available through websocket. As there can be multiple command issued\
+        \ be available through websocket. As there can be multiple commands issued\
         \ against the same SSR at the same time and the output all goes through the\
         \ same websocket stream, `session` is used for demux.\n \n #### Subscribe\
         \ to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
@@ -27217,7 +27217,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Run top command on switches and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
+        \ through websocket. \n\nAs there can be multiple commands issued against the\
         \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27356,7 +27356,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get ARP Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27390,7 +27390,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get BGP Summary from SSR, SRX and Switch.\n\n\nThe output will\
-        \ be available through websocket. As there can be multiple command issued\
+        \ be available through websocket. As there can be multiple commands issued\
         \ against the same device at the same time and the output all goes through\
         \ the same websocket stream, `session` is introduced for demux.\n\n#### Subscribe\
         \ to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
@@ -27461,7 +27461,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get Dot1X Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27525,7 +27525,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get forwarding table from the Device. The output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27574,7 +27574,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get MAC Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n\n\n#### Subscribe to Device\
         \ Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\"\
@@ -27637,7 +27637,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF Database from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
+        \ through websocket. \n\nAs there can be multiple commands issued against the\
         \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27681,7 +27681,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF interfaces from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
+        \ through websocket. \n\nAs there can be multiple commands issued against the\
         \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27724,7 +27724,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF Neighbors from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
+        \ through websocket. \n\nAs there can be multiple commands issued against the\
         \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27768,7 +27768,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF summary from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
+        \ through websocket. \n\nAs there can be multiple commands issued against the\
         \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -27810,7 +27810,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get routes from SSR, SRX and Switch. \n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -28103,7 +28103,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Traceroute can be performed from the Device.\n\nThe output will\
-        \ be available through websocket. As there can be multiple command issued\
+        \ be available through websocket. As there can be multiple commands issued\
         \ against the same Device at the same time and the output all goes through\
         \ the same websocket stream, session is introduced for demux.\n\n\n#### Subscribe\
         \ to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
@@ -29239,6 +29239,14 @@ paths:
         See metrics possibilities at [List Insight Metrics]($e/Constants%20Definitions/listInsightMetrics)'
       operationId: getSiteInsightMetricsForDevice
       parameters:
+      - description: Port ID of the device, e.g. `ge-0/0/1`. Can be used with metrics
+          related to interfaces, e.g. `rx_bytes`.
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - ge-0/0/1
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29301,7 +29309,7 @@ paths:
       description: Search Client Fingerprints
       operationId: searchSiteClientFingerprints
       parameters:
-      - description: Device Category  of the client device
+      - description: Device Category of the client device
         example: EX Series Switch
         in: query
         name: family
@@ -29382,6 +29390,13 @@ paths:
           examples:
           - tx_bps,rx_bps
           type: string
+      - description: Port ID of the gateway device, e.g. `ge-0/0/1`
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - ge-0/0/1
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29414,6 +29429,14 @@ paths:
         See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
       operationId: getSiteInsightMetricsForMxEdge
       parameters:
+      - description: Port ID of the MxEdge device, e.g. `port0`. Can be used with
+          metrics related to interfaces, e.g. `rx_bytes`.
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - port0
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -29504,6 +29527,14 @@ paths:
         See metrics possibilities at [List Insight Metrics](/#operations/listInsightMetrics)'
       operationId: getSiteInsightMetricsForSwitch
       parameters:
+      - description: Port ID of the switch device, e.g. `ge-0/0/1`. Can be used with
+          metrics related to interfaces, e.g. `rx_bytes`.
+        in: query
+        name: port_id
+        schema:
+          examples:
+          - ge-0/0/1
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -31651,7 +31682,7 @@ paths:
     - $ref: '#/components/parameters/site_id'
     post:
       description: "Initiate a Site Packet Capture\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
+        \ through websocket. As there can be multiple commands issued against the same\
         \ AP at the same time and the output all goes through the same websocket stream,\
         \ session is introduced for demux.\n\n#### Subscribe to Device Command outputs\n\
         `WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
@@ -55041,7 +55072,7 @@ components:
         format: uuid
         type: string
     otherdevice_event_type:
-      description: See  [List Device Events Definitions]($e/Constants%20Events/listOtherDeviceEventsDefinitions)
+      description: See [List Device Events Definitions]($e/Constants%20Events/listOtherDeviceEventsDefinitions)
       in: query
       name: type
       schema:
@@ -55068,7 +55099,7 @@ components:
     partial_filter_family_client:
       description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
         Point"). Use `prefix*` for prefix search or `*substring*` for contains search
-        (e.g. `Surveillance*` and  `*urveillance*` match `Surveillance Camera`). Suffix-only
+        (e.g. `Surveillance*` and `*urveillance*` match `Surveillance Camera`). Suffix-only
         wildcards (e.g. `*Camera`) are not supported
       in: query
       name: family
@@ -55103,9 +55134,9 @@ components:
         - '*london*'
         type: string
     partial_filter_ip_client:
-      description: Partial / full Client IP Address.  Use `prefix*` for prefix search
-        or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-        match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
+      description: Partial / full Client IP Address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*` match
+        `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
       in: query
       name: ip
       schema:
@@ -55115,9 +55146,9 @@ components:
         - '*100.10.*'
         type: string
     partial_filter_ip_device:
-      description: Partial / full Device IP Address.  Use `prefix*` for prefix search
-        or `*substring*` for contains search (e.g. `10.100.10.*` and  `*100.10.*`
-        match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
+      description: Partial / full Device IP Address. Use `prefix*` for prefix search
+        or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*` match
+        `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
       in: query
       name: ip
       schema:
@@ -55550,7 +55581,7 @@ components:
       schema:
         type: string
     system_event_type:
-      description: See  [List Device Events Definitions]($e/Constants%20Events/listDeviceEventsDefinitions)
+      description: See [List Device Events Definitions]($e/Constants%20Events/listDeviceEventsDefinitions)
       in: query
       name: type
       schema:
@@ -77753,7 +77784,7 @@ components:
       readOnly: true
       type: array
     nac_port_id:
-      description: Port-ids the client was connected to  for the specified duration
+      description: Port-ids the client was connected to for the specified duration
       examples:
       - - ge-0/0/17.0
       items:
@@ -78171,7 +78202,7 @@ components:
         $ref: '#/components/schemas/nac_rule'
       type: array
     nac_ssid:
-      description: SSIDs the client was connected to  for the specified duration
+      description: SSIDs the client was connected to for the specified duration
       examples:
       - - MyCorp-NAC
       items:
@@ -79494,7 +79525,7 @@ components:
             if the site exists to auto-create the site, enable this
           type: boolean
         expression:
-          description: "If `src`==`name`, `src`==`lldp_system_name`,  `src`==`dns_suffix`\
+          description: "If `src`==`name`, `src`==`lldp_system_name`, `src`==`dns_suffix`\
             \  \n      \"[0:3]\"            // \"abcdef\" -> \"abc\"  \n      \"split(.)[1]\"\
             \      // \"a.b.c\" -> \"b\"  \n      \"split(-)[1][0:3]\" // \"a1234-b5678-c90\"\
             \ -> \"b56\"'"
@@ -81466,8 +81497,8 @@ components:
           default: '#1074bc'
           type: string
         logo:
-          description: Custom logo with "data:image/png;base64," format.  default
-            null, uses Juniper Mist Logo
+          description: Custom logo with "data:image/png;base64," format. default null,
+            uses Juniper Mist Logo
           type:
           - string
           - 'null'
@@ -81847,7 +81878,7 @@ components:
           maxLength: 64
           type: string
         recaptcha:
-          description: See  https://www.google.com/recaptcha/
+          description: See https://www.google.com/recaptcha/
           type: string
         recaptcha_flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
@@ -86775,7 +86806,7 @@ components:
       type: string
     search_org_sw_or_gw_ports_type:
       default: all
-      description: 'enum: `switch`,  `gateway`, `all`'
+      description: 'enum: `switch`, `gateway`, `all`'
       enum:
       - switch
       - gateway
@@ -96881,7 +96912,7 @@ components:
         fixed_bindings:
           $ref: '#/components/schemas/switch_dhcpd_config_fixed_bindings'
         gateway:
-          description: If `type`==`server`  - optional, `ip` will be used if not provided
+          description: If `type`==`server` - optional, `ip` will be used if not provided
           examples:
           - 192.168.70.1
           type: string
@@ -99150,7 +99181,7 @@ components:
           $ref: '#/components/schemas/tunnel_config_enc_algo'
       type: object
     tunnel_config_ipsec_proposals:
-      description: Only if  `provider`==`custom-ipsec`
+      description: Only if `provider`==`custom-ipsec`
       items:
         $ref: '#/components/schemas/tunnel_config_ipsec_proposal'
       type: array
@@ -99196,7 +99227,7 @@ components:
         type: string
       type: array
     tunnel_config_node_remote_ids:
-      description: Only if  `provider`==`jse-ipsec` or `provider`==`custom-ipsec`
+      description: Only if `provider`==`jse-ipsec` or `provider`==`custom-ipsec`
       items:
         type: string
       type: array
@@ -102088,7 +102119,7 @@ components:
           $ref: '#/components/schemas/org_id'
         secret:
           description: "Only if `type`=`http-post` \n\nwhen `secret` is provided,\
-            \ two  HTTP headers will be added: \n  * X-Mist-Signature-v2: HMAC_SHA256(secret,\
+            \ two HTTP headers will be added: \n  * X-Mist-Signature-v2: HMAC_SHA256(secret,\
             \ body)\n  * X-Mist-Signature: HMAC_SHA1(secret, body)"
           type:
           - string
@@ -104513,7 +104544,7 @@ components:
         auth_servers_retries:
           default: 2
           description: "Radius auth session retries. Following fast timers are set\
-            \ if \"fast_dot1x_timers\" knob is enabled. \u2018retries\u2019  are set\
+            \ if \"fast_dot1x_timers\" knob is enabled. \u2018retries\u2019 are set\
             \ to value of auth_servers_retries. \u2018max-requests\u2019 is also set\
             \ when setting auth_servers_retries and is set to default value to 3."
           examples:
@@ -107424,7 +107455,7 @@ components:
           type: integer
         hostname:
           description: "Optional, overwrite the hostname in SCCRQ control message,\
-            \ default is  or null, %H and %M can be used, which will be replace with\
+            \ default is or null, %H and %M can be used, which will be replace with\
             \ corresponding values:\n  * %H: name of the ap if provided (and will\
             \ be stripped so it can be used for hostname) and fallbacks to MAC\n \
             \ * %M: MAC (e.g. 5c5b350e0060)"
