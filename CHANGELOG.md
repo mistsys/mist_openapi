@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.8] - 2026-03-18
+
+- Updated `/api/v1/sites/{site_id}/insights/ap/{device_id}/stats`
+  - Added optional `port_id` query parameter for interface-specific metrics
+- Updated `/api/v1/sites/{site_id}/insights/gateway/{device_id}/stats`
+  - Added optional `port_id` query parameter for interface-specific metrics
+- Updated `/api/v1/sites/{site_id}/insights/mxedge/{device_mac}/{metric}`
+  - Added optional `port_id` query parameter for interface-specific metrics
+- Updated `/api/v1/sites/{site_id}/insights/switch/{device_id}/{metric}`
+  - Added optional `port_id` query parameter for interface-specific metrics
+
 ## [2602.1.7] - 2026-03-18
 
 - Added `/api/v1/sites/{site_id}/insights/ap/{device_id}/stats`
