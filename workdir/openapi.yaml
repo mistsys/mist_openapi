@@ -61870,6 +61870,7 @@ components:
         password:
           examples:
           - foryoureyesonly
+          format: password
           type: string
         username:
           examples:
@@ -61899,6 +61900,7 @@ components:
           description: Customer account password
           examples:
           - password
+          format: password
           type: string
         username:
           description: Customer account user name
@@ -61928,6 +61930,7 @@ components:
           type: string
         password:
           description: Customer account password instance URL
+          format: password
           type: string
         username:
           description: Customer account username
@@ -62077,6 +62080,7 @@ components:
           type: string
         password:
           description: Customer account password instance URL
+          format: password
           readOnly: true
           type: string
         region:
@@ -62124,11 +62128,13 @@ components:
           description: For VMWare accounts only
           examples:
           - password_1234
+          format: password
           type: string
         webhook_secret:
           description: For Crowdstrike accounts only
           examples:
           - secret-value
+          format: password
           type: string
         webhook_token:
           description: For JAMF and SentinelOne accounts only
@@ -62248,6 +62254,7 @@ components:
         password:
           examples:
           - foryoureyesonly
+          format: password
           type: string
         realm:
           examples:
@@ -62364,6 +62371,7 @@ components:
           description: Customer account password
           examples:
           - password
+          format: password
           type: string
         username:
           description: Customer account user name
@@ -62706,6 +62714,7 @@ components:
         password:
           examples:
           - foryoureyesonly
+          format: password
           type: string
         recaptcha:
           description: reCAPTCHA , see https://www.google.com/recaptcha/
@@ -67764,6 +67773,7 @@ components:
         password:
           examples:
           - Juniper123
+          format: password
           type: string
         role:
           $ref: '#/components/schemas/config_switch_local_accounts_user_role'
@@ -71961,6 +71971,7 @@ components:
           $ref: '#/components/schemas/protect_re'
         root_password:
           description: SRX only
+          format: password
           type: string
         security_log_source_address:
           examples:
@@ -75549,6 +75560,7 @@ components:
           description: Client secret
           examples:
           - /9Nog3yDzcYj0bY91XJZQLCt+m9DXaIVhx+Ghk3ddd
+          format: password
           type: string
         customer_id:
           description: Jibestream customer record id
@@ -76519,6 +76531,7 @@ components:
           type: integer
         secret:
           description: Secret of RADIUS server
+          format: password
           type: string
         ssids:
           $ref: '#/components/schemas/mxcluster_radsec_acct_server_ssids'
@@ -76573,6 +76586,7 @@ components:
           type: integer
         secret:
           description: Secret of RADIUS server
+          format: password
           type: string
         ssids:
           $ref: '#/components/schemas/mxcluster_radsec_auth_server_ssids'
@@ -76806,6 +76820,7 @@ components:
           description: Whether to require Message-Authenticator in requests
           type: boolean
         secret:
+          format: password
           type: string
       type: object
     mxedge_das_coa_servers:
@@ -76914,6 +76929,7 @@ components:
         root_password:
           examples:
           - ROOT_PASSWORD
+          format: password
           type: string
       type: object
     mxedge_mgmt_oob_ip_type:
@@ -81729,6 +81745,7 @@ components:
           description: Secret of RADIUS server
           examples:
           - testing123
+          format: password
           type: string
       required:
       - host
@@ -81777,6 +81794,7 @@ components:
           description: Secret of RADIUS server
           examples:
           - testing123
+          format: password
           type: string
       required:
       - host
@@ -83953,6 +83971,7 @@ components:
         org_id:
           $ref: '#/components/schemas/org_id'
         secret:
+          format: password
           type: string
       required:
       - name
@@ -85659,6 +85678,7 @@ components:
         two_factor_secret:
           examples:
           - NRMTSTRWNBVECY3GJVYEY3DDJFRGSNCZGJUDO4RVN5FDM3DUMJSA
+          format: password
           type: string
       type: object
     response_two_factor_octet:
@@ -86204,6 +86224,7 @@ components:
       additionalProperties: false
       properties:
         root_password:
+          format: password
           minLength: 1
           type: string
       required:
@@ -91281,6 +91302,7 @@ components:
             RSA private key, of the form "-----BEGIN RSA PRIVATE KEY--...."
           examples:
           - akL8Q~5kWFMVFYl4TFZ3fi~7cMdyDONi6cj01cpH
+          format: password
           type: string
         oauth_discovery_url:
           description: If `idp_type`==`oauth`
@@ -91299,6 +91321,7 @@ components:
             can be empty
           examples:
           - blM9R~6kWFMVFYl4TFZ3fi~8cMdyDONi6cj01dqI
+          format: password
           type: string
         oauth_tenant_id:
           description: Required if `idp_type`==`oauth`, oauth_tenant_id
@@ -91337,6 +91360,7 @@ components:
             requests by the IDP
           examples:
           - FBitbKPE1aecSloPGBuqqPxDUrFeZyZk
+          format: password
           type: string
         site_id:
           $ref: '#/components/schemas/site_id'
@@ -91428,6 +91452,7 @@ components:
         secret:
           examples:
           - testing123
+          format: password
           type: string
       type: object
     sso_mxedge_proxy_acct_servers:
@@ -91455,6 +91480,7 @@ components:
         secret:
           examples:
           - testing123
+          format: password
           type: string
         timeout:
           default: 5
@@ -97132,7 +97158,7 @@ components:
       type: array
     switch_mgmt:
       additionalProperties: false
-      description: Switch Managmeent settings
+      description: Switch Management settings
       properties:
         ap_affinity_threshold:
           default: 10
@@ -97185,6 +97211,7 @@ components:
             will be removed.
           type: boolean
         root_password:
+          format: password
           type: string
         tacacs:
           $ref: '#/components/schemas/tacacs'
@@ -98267,6 +98294,7 @@ components:
           description: If `type`==`radius`
           examples:
           - test123
+          format: password
           type: string
         ping_count:
           default: 10
@@ -98402,6 +98430,7 @@ components:
       properties:
         password:
           description: Specify the password associated with the username
+          format: password
           type: string
         profile:
           default: dot1x
@@ -98457,6 +98486,7 @@ components:
         port:
           type: string
         secret:
+          format: password
           type: string
         timeout:
           default: 10
@@ -98474,6 +98504,7 @@ components:
         port:
           type: string
         secret:
+          format: password
           type: string
         timeout:
           default: 10
@@ -98613,6 +98644,7 @@ components:
           description: SMSGlobal api secret
           examples:
           - abcdef
+          format: password
           type: string
         to:
           description: Phone number of the recipient of SMS with country code
@@ -98635,6 +98667,7 @@ components:
           description: Telstra client secret
           examples:
           - abcdef
+          format: password
           type: string
         to:
           description: Phone number of the recipient of SMS with country code
@@ -100646,6 +100679,7 @@ components:
     username_password:
       properties:
         password:
+          format: password
           type: string
         username:
           type: string
@@ -101364,6 +101398,7 @@ components:
       properties:
         password:
           description: FIPS zeroize password
+          format: password
           type: string
       required:
       - password
@@ -101929,6 +101964,7 @@ components:
           type: string
         auth_password:
           description: If `auth_type`==`simple`
+          format: password
           type: string
         auth_type:
           $ref: '#/components/schemas/vrrp_group_auth_type'
@@ -102094,11 +102130,13 @@ components:
           type: string
         oauth2_client_secret:
           description: Required when `oauth2_grant_type`==`client_credentials`
+          format: password
           type: string
         oauth2_grant_type:
           $ref: '#/components/schemas/webhook_oauth2_grant_type'
         oauth2_password:
           description: Required when `oauth2_grant_type`==`password`
+          format: password
           type: string
         oauth2_scopes:
           $ref: '#/components/schemas/webhook_oauth2_scopes'
@@ -102107,6 +102145,7 @@ components:
           type: string
         oauth2_username:
           description: Required when `oauth2_grant_type`==`password`
+          format: password
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
@@ -104915,6 +104954,7 @@ components:
           description: Password
           examples:
           - user1
+          format: password
           type: string
         username:
           default: ''
@@ -105762,6 +105802,7 @@ components:
           description: Required if `sms_provider`==`broadnet`
           examples:
           - password
+          format: password
           type: string
         broadnet_sid:
           description: Required if `sms_provider`==`broadnet`
@@ -105879,6 +105920,7 @@ components:
           - 'null'
         gupshup_password:
           description: Required if `sms_provider`==`gupshup`
+          format: password
           type: string
         gupshup_userid:
           description: Required if `sms_provider`==`gupshup`
@@ -105947,6 +105989,7 @@ components:
           type: boolean
         puzzel_password:
           description: Required if `sms_provider`==`puzzel`
+          format: password
           type: string
         puzzel_service_id:
           description: Required if `sms_provider`==`puzzel`
@@ -105977,6 +106020,7 @@ components:
           type: string
         smsglobal_api_secret:
           description: Required if `sms_provider`==`smsglobal`, Client secret
+          format: password
           type: string
         sponsor_auto_approve:
           default: false
@@ -106048,6 +106092,7 @@ components:
         telstra_client_secret:
           description: Required if `sms_provider`==`telstra`, Client secret provided
             by Telstra
+          format: password
           type: string
         twilio_auth_token:
           description: Required if `sms_provider`==`twilio`, Auth token account with
