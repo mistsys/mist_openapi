@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.8**
+  description: '> Version: **2602.1.9**
 
     >
 
-    > Date: **March 18, 2026**
+    > Date: **March 19, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.8
+  version: 2602.1.9
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -11088,7 +11088,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: "IDP Credential Validation. The output will be available through\
-        \ websocket. As there can be multiple command issued against the same device\
+        \ websocket. As there can be multiple commands issued against the same device\
         \ at the same time and the output all goes through the same websocket stream,\
         \ `session` is introduced for demux.\n\n#### Subscribe to Device Command outputs\n\
         `WS /api-ws/v1/stream`\n\n``` json\n{\n    \"subscribe\": \"orgs/{org_id}/mist_nac/test_idp\"\
@@ -14588,7 +14588,7 @@ paths:
       description: "Initiate a Packet Capture\n\n**NOTE**: For packet captures of\
         \ org level Mist Edges only. Use [Start Site Packet Capture](/#operations/startSitePacketCapture)\
         \ for site level Mist Edges. \n\nThe output will be available through websocket.\
-        \ As there can be multiple command issued against the same AP at the same\
+        \ As there can be multiple commands issued against the same AP at the same\
         \ time and the output all goes through the same websocket stream, session\
         \ is introduced for demux.\n\n#### Subscribe to Device Command outputs\n`WS\
         \ /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
@@ -26040,7 +26040,7 @@ paths:
       description: "Port Bounce can be performed from Switch/Gateway.\n\n **Note:**\
         \ Ports starting with vme, ae, irb, and HA control ports (for SSR only) are\
         \ not supported\n\nThe output will be available through websocket. As there\
-        \ can be multiple command issued against the same AP at the same time and\
+        \ can be multiple commands issued against the same AP at the same time and\
         \ the output all goes through the same websocket stream, session is introduced\
         \ for demux.\n\n#### Subscribe to Device Command outputs\n`WS /api-ws/v1/stream`\n\
         \n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
@@ -26083,8 +26083,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "TDR can be performed from the Switch. The output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ Switch at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same Switch at the same time and the output all goes through the same websocket\
         \ stream, session is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n##### Example output from ws stream\n```json\n{\n    \"event\":\
@@ -26303,8 +26303,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Clear MAC Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n"
@@ -26899,7 +26899,7 @@ paths:
     post:
       description: "Ping from AP, Switch and SSR\n\nPing can be performed from the\
         \ Device. The output will be available through websocket. As there can be\
-        \ multiple command issued against the same AP at the same time and the output\
+        \ multiple commands issued against the same AP at the same time and the output\
         \ all goes through the same websocket stream, session is introduced for demux.\n\
         \n#### Subscribe to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n\
         {\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\
@@ -26993,7 +26993,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Releases an active DHCP lease.\n\n\nThe output will be available\
-        \ through websocket.\n\nAs there can be multiple command issued against the\
+        \ through websocket.\n\nAs there can be multiple commands issued against the\
         \ same Device at the same\ntime and the output all goes through the same websocket\
         \ stream, session is\nintroduced for demux.\n\n\n\n#### Subscribe to Device\
         \ Command outputs\n\n\n`WS /api-ws/v1/stream`\n\n\n```json\n\n{ \"subscribe\"\
@@ -27128,7 +27128,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "DNS resolutions are performed on the Device.\n\nThe output will\
-        \ be available through websocket. As there can be multiple command issued\
+        \ be available through websocket. As there can be multiple commands issued\
         \ against the same SSR at the same time and the output all goes through the\
         \ same websocket stream, `session` is used for demux.\n \n #### Subscribe\
         \ to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
@@ -27221,11 +27221,11 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Run top command on switches and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```"
       operationId: runSiteSrxTopCommand
       responses:
         '200':
@@ -27360,8 +27360,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get ARP Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n"
@@ -27394,7 +27394,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get BGP Summary from SSR, SRX and Switch.\n\n\nThe output will\
-        \ be available through websocket. As there can be multiple command issued\
+        \ be available through websocket. As there can be multiple commands issued\
         \ against the same device at the same time and the output all goes through\
         \ the same websocket stream, `session` is introduced for demux.\n\n#### Subscribe\
         \ to Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
@@ -27465,8 +27465,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get Dot1X Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n"
@@ -27529,8 +27529,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get forwarding table from the Device. The output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n\n##### Example output from ws stream\n```\nMon 2024-05-20 16:47:30\
@@ -27578,8 +27578,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get MAC Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n\n\n#### Subscribe to Device\
         \ Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\"\
         : \"/sites/{site_id}/devices/{device_id}/cmd\"\n```\n\n\n#### Example output\
@@ -27641,21 +27641,22 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF Database from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== ====================\
-        \ ========== ======= ======== ================ =================== =================\n\
-        Vrf   Neighbor Router ID   Priority   State   Uptime   Dead Timer Due   Interface\
-        \ Address   Interface State\n===== ==================== ========== =======\
-        \ ======== ================ =================== =================\n      1.0.0.3\
-        \                     1   Full       852               38   172.16.3.2   \
-        \       Backup\n      1.0.0.4                     1   Full       811     \
-        \          33   172.16.3.2          DROther\n      1.0.0.3               \
-        \      1   Full       852               38   172.16.4.2          Backup\n\
-        \      1.0.0.4                     1   Full       811               34   172.16.4.2\
-        \          DROther\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== ==================== ========== ======= ========\
+        \ ================ =================== =================\nVrf   Neighbor Router\
+        \ ID   Priority   State   Uptime   Dead Timer Due   Interface Address   Interface\
+        \ State\n===== ==================== ========== ======= ======== ================\
+        \ =================== =================\n      1.0.0.3                   \
+        \  1   Full       852               38   172.16.3.2          Backup\n    \
+        \  1.0.0.4                     1   Full       811               33   172.16.3.2\
+        \          DROther\n      1.0.0.3                     1   Full       852 \
+        \              38   172.16.4.2          Backup\n      1.0.0.4            \
+        \         1   Full       811               34   172.16.4.2          DROther\n\
+        ```"
       operationId: showSiteGatewayOspfDatabase
       requestBody:
         content:
@@ -27685,20 +27686,20 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF interfaces from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== ==================\
-        \ =================== ============== =============== =========== =========\
-        \ ===========\nVrf   Device Interface   Network Interface   Interface Up \
-        \  IP Address      OSPF Type   Area ID   Area Type\n===== ==================\
-        \ =================== ============== =============== =========== =========\
-        \ ===========\n      net1               g1                          True \
-        \  172.16.1.2/24   Broadcast   0.0.0.0   default\n      net3             \
-        \  g3                          True   172.16.3.2/24   Broadcast   0.0.0.0\
-        \   default\n      net4               g4                          True   172.16.4.2/24\
-        \   Broadcast   0.0.0.4   default\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== ================== =================== ==============\
+        \ =============== =========== ========= ===========\nVrf   Device Interface\
+        \   Network Interface   Interface Up   IP Address      OSPF Type   Area ID\
+        \   Area Type\n===== ================== =================== ==============\
+        \ =============== =========== ========= ===========\n      net1          \
+        \     g1                          True   172.16.1.2/24   Broadcast   0.0.0.0\
+        \   default\n      net3               g3                          True   172.16.3.2/24\
+        \   Broadcast   0.0.0.0   default\n      net4               g4           \
+        \               True   172.16.4.2/24   Broadcast   0.0.0.4   default\n```"
       operationId: showSiteGatewayOspfInterfaces
       requestBody:
         content:
@@ -27728,21 +27729,22 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF Neighbors from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== ====================\
-        \ ========== ======= ======== ================ =================== =================\n\
-        Vrf   Neighbor Router ID   Priority   State   Uptime   Dead Timer Due   Interface\
-        \ Address   Interface State\n===== ==================== ========== =======\
-        \ ======== ================ =================== =================\n      1.0.0.3\
-        \                     1   Full       852               38   172.16.3.2   \
-        \       Backup\n      1.0.0.4                     1   Full       811     \
-        \          33   172.16.3.2          DROther\n      1.0.0.3               \
-        \      1   Full       852               38   172.16.4.2          Backup\n\
-        \      1.0.0.4                     1   Full       811               34   172.16.4.2\
-        \          DROther\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== ==================== ========== ======= ========\
+        \ ================ =================== =================\nVrf   Neighbor Router\
+        \ ID   Priority   State   Uptime   Dead Timer Due   Interface Address   Interface\
+        \ State\n===== ==================== ========== ======= ======== ================\
+        \ =================== =================\n      1.0.0.3                   \
+        \  1   Full       852               38   172.16.3.2          Backup\n    \
+        \  1.0.0.4                     1   Full       811               33   172.16.3.2\
+        \          DROther\n      1.0.0.3                     1   Full       852 \
+        \              38   172.16.4.2          Backup\n      1.0.0.4            \
+        \         1   Full       811               34   172.16.4.2          DROther\n\
+        ```"
       operationId: showSiteGatewayOspfNeighbors
       requestBody:
         content:
@@ -27772,19 +27774,19 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF summary from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple command issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== =========== ==========\
-        \ ============= ==================== ========= =========== =============\n\
-        Vrf   Router ID   ABR Type   ASBR Router   External LSA Count   Area ID  \
-        \ Area Type   Area Border\n                                              \
-        \                                        Router\n===== =========== ==========\
-        \ ============= ==================== ========= =========== =============\n\
-        \      1.0.0.2     cisco            False                    0   0.0.0.0\n\
-        \      1.0.0.2     cisco            False                    0   0.0.0.4 \
-        \  default\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== =========== ========== ============= ====================\
+        \ ========= =========== =============\nVrf   Router ID   ABR Type   ASBR Router\
+        \   External LSA Count   Area ID   Area Type   Area Border\n             \
+        \                                                                        \
+        \ Router\n===== =========== ========== ============= ====================\
+        \ ========= =========== =============\n      1.0.0.2     cisco           \
+        \ False                    0   0.0.0.0\n      1.0.0.2     cisco          \
+        \  False                    0   0.0.0.4   default\n```"
       operationId: showSiteGatewayOspfSummary
       requestBody:
         content:
@@ -27814,8 +27816,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get routes from SSR, SRX and Switch. \n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n##### Example output from ws stream\n```\nadmin@labsystem1.fiedler#\
@@ -28107,7 +28109,7 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Traceroute can be performed from the Device.\n\nThe output will\
-        \ be available through websocket. As there can be multiple command issued\
+        \ be available through websocket. As there can be multiple commands issued\
         \ against the same Device at the same time and the output all goes through\
         \ the same websocket stream, session is introduced for demux.\n\n\n#### Subscribe\
         \ to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"\
@@ -29397,7 +29399,6 @@ paths:
       - description: Port ID of the gateway device, e.g. `ge-0/0/1`
         in: query
         name: port_id
-        required: false
         schema:
           examples:
           - ge-0/0/1
@@ -31687,10 +31688,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
     post:
       description: "Initiate a Site Packet Capture\n\nThe output will be available\
-        \ through websocket. As there can be multiple command issued against the same\
-        \ AP at the same time and the output all goes through the same websocket stream,\
-        \ session is introduced for demux.\n\n#### Subscribe to Device Command outputs\n\
-        `WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same AP at the same time and the output all goes through the same websocket\
+        \ stream, session is introduced for demux.\n\n#### Subscribe to Device Command\
+        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
         \n}\n```\n#### Response (MxEdge)\n```json\n{\n    \"event\": \"data\"\n  \
         \  \"channel\": \"/sites/{site_id}/pcaps\"\n    \"data\": {\n         \"capture_id\"\
         : \"6b1be4fb-b239-44d9-9d3b-cb1ff3af1721\",\n     \"lost_messages\": 0\n \
@@ -71924,14 +71925,75 @@ components:
       type: object
     gateway_mgmt:
       additionalProperties: false
-      description: Gateway settings
+      description: Gateway Management settings
       properties:
+        admin_sshkeys:
+          $ref: '#/components/schemas/gateway_mgmt_admin_sshkeys'
+        app_probing:
+          $ref: '#/components/schemas/app_probing'
+        app_usage:
+          description: Consumes uplink bandwidth, requires WA license
+          type: boolean
+        auto_signature_update:
+          $ref: '#/components/schemas/gateway_mgmt_auto_signature_update'
         config_revert_timer:
           default: 10
           description: Rollback timer for commit confirmed
           maximum: 30
           minimum: 1
           type: integer
+        disable_console:
+          default: false
+          description: For SSR and SRX, disable console port
+          type: boolean
+        disable_oob:
+          default: false
+          description: For SSR and SRX, disable management interface
+          type: boolean
+        disable_usb:
+          default: false
+          description: For SSR and SRX, disable usb interface
+          type: boolean
+        fips_enabled:
+          default: false
+          type: boolean
+        probe_hosts:
+          $ref: '#/components/schemas/gateway_mgmt_probe_hosts'
+        probe_hostsv6:
+          $ref: '#/components/schemas/gateway_mgmt_probe_hostsv6'
+        protect_re:
+          $ref: '#/components/schemas/protect_re'
+        root_password:
+          description: SRX only
+          type: string
+        security_log_source_address:
+          examples:
+          - 192.168.1.1
+          format: ipv4
+          type: string
+        security_log_source_interface:
+          examples:
+          - ge-0/0/1.0
+          type: string
+      type: object
+    gateway_mgmt_admin_sshkeys:
+      description: For SSR only, as direct root access is not allowed
+      examples:
+      - - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAA...Wxa6p6UW0ZbcP john@host
+      items:
+        type: string
+      type: array
+    gateway_mgmt_auto_signature_update:
+      additionalProperties: false
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/day_of_week'
+        enable:
+          default: true
+          type: boolean
+        time_of_day:
+          description: Optional, Mist will decide the timing
+          type: string
       type: object
     gateway_mgmt_host_out_policy:
       additionalProperties: false
@@ -71970,6 +72032,20 @@ components:
     gateway_mgmt_host_out_policy_syslog_servers:
       items:
         $ref: '#/components/schemas/gateway_mgmt_host_out_policy_syslog_server'
+      type: array
+    gateway_mgmt_probe_hosts:
+      examples:
+      - - 8.8.8.8
+      format: ipv4
+      items:
+        type: string
+      type: array
+    gateway_mgmt_probe_hostsv6:
+      examples:
+      - - 2001:4860:4860::8888
+      format: ipv6
+      items:
+        type: string
       type: array
     gateway_oob_ip_config:
       additionalProperties: false
@@ -72601,6 +72677,8 @@ components:
           $ref: '#/components/schemas/gateway_extra_routes6'
         gateway_matching:
           $ref: '#/components/schemas/gateway_matching'
+        gateway_mgmt:
+          $ref: '#/components/schemas/gateway_mgmt'
         id:
           $ref: '#/components/schemas/id'
         idp_profiles:
@@ -88524,7 +88602,7 @@ components:
         gateway_additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
         gateway_mgmt:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt'
+          $ref: '#/components/schemas/gateway_mgmt'
         gateway_tunnel_updown_threshold:
           description: enable threshold-based gateway tunnel (secure edge tunnels)
             up-down delivery.
@@ -88936,92 +89014,6 @@ components:
         type: string
       description: Name/val pair objects for location engine to use
       type: object
-    site_setting_gateway_mgmt:
-      additionalProperties: false
-      description: Gateway Site settings
-      properties:
-        admin_sshkeys:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_admin_sshkeys'
-        app_probing:
-          $ref: '#/components/schemas/app_probing'
-        app_usage:
-          description: Consumes uplink bandwidth, requires WA license
-          type: boolean
-        auto_signature_update:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_auto_signature_update'
-        config_revert_timer:
-          default: 10
-          description: Rollback timer for commit confirmed
-          maximum: 30
-          minimum: 1
-          type: integer
-        disable_console:
-          default: false
-          description: For SSR and SRX, disable console port
-          type: boolean
-        disable_oob:
-          default: false
-          description: For SSR and SRX, disable management interface
-          type: boolean
-        disable_usb:
-          default: false
-          description: For SSR and SRX, disable usb interface
-          type: boolean
-        fips_enabled:
-          default: false
-          type: boolean
-        probe_hosts:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_probe_hosts'
-        probe_hostsv6:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_probe_hostsv6'
-        protect_re:
-          $ref: '#/components/schemas/protect_re'
-        root_password:
-          description: SRX only
-          type: string
-        security_log_source_address:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
-        security_log_source_interface:
-          examples:
-          - ge-0/0/1.0
-          type: string
-      type: object
-    site_setting_gateway_mgmt_admin_sshkeys:
-      description: For SSR only, as direct root access is not allowed
-      examples:
-      - - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAA...Wxa6p6UW0ZbcP john@host
-      items:
-        type: string
-      type: array
-    site_setting_gateway_mgmt_auto_signature_update:
-      additionalProperties: false
-      properties:
-        day_of_week:
-          $ref: '#/components/schemas/day_of_week'
-        enable:
-          default: true
-          type: boolean
-        time_of_day:
-          description: Optional, Mist will decide the timing
-          type: string
-      type: object
-    site_setting_gateway_mgmt_probe_hosts:
-      examples:
-      - - 8.8.8.8
-      format: ipv4
-      items:
-        type: string
-      type: array
-    site_setting_gateway_mgmt_probe_hostsv6:
-      examples:
-      - - 2001:4860:4860::8888
-      format: ipv6
-      items:
-        type: string
-      type: array
     site_setting_juniper_srx:
       additionalProperties: false
       properties:
@@ -97139,7 +97131,7 @@ components:
       type: array
     switch_mgmt:
       additionalProperties: false
-      description: Switch settings
+      description: Switch Managmeent settings
       properties:
         ap_affinity_threshold:
           default: 10
