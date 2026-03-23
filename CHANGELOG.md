@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.9] - 2026-03-19
+
+- Updated schema definitions for `gateway` and `gateway_template`:
+  - Added `gateway_mgmt` field with sub-properties: `admin_sshkeys`, `app_probing`, `app_usage`, `auto_signature_update`, `config_revert_timer`, `disable_console`, `disable_oob`, `disable_usb`, `fips_enabled`, `probe_hosts`, `probe_hostsv6`, `protect_re`, `root_password`, `security_log_source_address`, `security_log_source_interface`
+- Updated schema definitions for `site_setting`:
+  - Consolidated `gateway_mgmt` to use shared `#/components/schemas/gateway_mgmt` schema
+- Removed deprecated schemas (now consolidated into `gateway_mgmt`):
+  - `site_setting_gateway_mgmt`, `site_setting_gateway_mgmt_admin_sshkeys`, `site_setting_gateway_mgmt_auto_signature_update`, `site_setting_gateway_mgmt_probe_hosts`, `site_setting_gateway_mgmt_probe_hostsv6`
+- Added `format: password` to sensitive credential fields across multiple schemas for improved security handling (passwords, secrets, API keys, auth tokens)
+
 ## [2602.1.8] - 2026-03-18
 
 - Updated `/api/v1/sites/{site_id}/insights/device/{device_mac}/{metric}`

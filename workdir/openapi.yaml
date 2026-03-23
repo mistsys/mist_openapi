@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.8**
+  description: '> Version: **2602.1.9**
 
     >
 
-    > Date: **March 18, 2026**
+    > Date: **March 19, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.8
+  version: 2602.1.9
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -25992,10 +25992,10 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "ARP can be performed on the Device. The output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ AP at the same time and the output all goes through the same websocket stream,\
-        \ session is introduced for demux.\n\n\n#### Subscribe to Device Command outputs\n\
-        `WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same AP at the same time and the output all goes through the same websocket\
+        \ stream, session is introduced for demux.\n\n\n#### Subscribe to Device Command\
+        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n##### Example output from ws stream\n```json\n{ \n \"event\": \"\
         data\", \n \"channel\": \"/sites/4ac1dcf4-9d8b-7211-65c4-057819f0862b/devices/00000000-0000-0000-1000-5c5b350e0060/cmd\"\
         , \n \"data\": { \n   \"session\": \"session_id\", \n   \"raw\": \n   \"Output\"\
@@ -26079,8 +26079,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "TDR can be performed from the Switch. The output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ Switch at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same Switch at the same time and the output all goes through the same websocket\
         \ stream, session is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n##### Example output from ws stream\n```json\n{\n    \"event\":\
@@ -26299,8 +26299,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Clear MAC Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n"
@@ -27217,11 +27217,11 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Run top command on switches and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple commands issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```"
       operationId: runSiteSrxTopCommand
       responses:
         '200':
@@ -27356,8 +27356,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get ARP Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n"
@@ -27461,8 +27461,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get Dot1X Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n"
@@ -27525,8 +27525,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get forwarding table from the Device. The output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n\n##### Example output from ws stream\n```\nMon 2024-05-20 16:47:30\
@@ -27574,8 +27574,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get MAC Table from the Device.\n\nThe output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n\n\n#### Subscribe to Device\
         \ Command outputs\n\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\"\
         : \"/sites/{site_id}/devices/{device_id}/cmd\"\n```\n\n\n#### Example output\
@@ -27637,21 +27637,22 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF Database from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple commands issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== ====================\
-        \ ========== ======= ======== ================ =================== =================\n\
-        Vrf   Neighbor Router ID   Priority   State   Uptime   Dead Timer Due   Interface\
-        \ Address   Interface State\n===== ==================== ========== =======\
-        \ ======== ================ =================== =================\n      1.0.0.3\
-        \                     1   Full       852               38   172.16.3.2   \
-        \       Backup\n      1.0.0.4                     1   Full       811     \
-        \          33   172.16.3.2          DROther\n      1.0.0.3               \
-        \      1   Full       852               38   172.16.4.2          Backup\n\
-        \      1.0.0.4                     1   Full       811               34   172.16.4.2\
-        \          DROther\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== ==================== ========== ======= ========\
+        \ ================ =================== =================\nVrf   Neighbor Router\
+        \ ID   Priority   State   Uptime   Dead Timer Due   Interface Address   Interface\
+        \ State\n===== ==================== ========== ======= ======== ================\
+        \ =================== =================\n      1.0.0.3                   \
+        \  1   Full       852               38   172.16.3.2          Backup\n    \
+        \  1.0.0.4                     1   Full       811               33   172.16.3.2\
+        \          DROther\n      1.0.0.3                     1   Full       852 \
+        \              38   172.16.4.2          Backup\n      1.0.0.4            \
+        \         1   Full       811               34   172.16.4.2          DROther\n\
+        ```"
       operationId: showSiteGatewayOspfDatabase
       requestBody:
         content:
@@ -27681,20 +27682,20 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF interfaces from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple commands issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== ==================\
-        \ =================== ============== =============== =========== =========\
-        \ ===========\nVrf   Device Interface   Network Interface   Interface Up \
-        \  IP Address      OSPF Type   Area ID   Area Type\n===== ==================\
-        \ =================== ============== =============== =========== =========\
-        \ ===========\n      net1               g1                          True \
-        \  172.16.1.2/24   Broadcast   0.0.0.0   default\n      net3             \
-        \  g3                          True   172.16.3.2/24   Broadcast   0.0.0.0\
-        \   default\n      net4               g4                          True   172.16.4.2/24\
-        \   Broadcast   0.0.0.4   default\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== ================== =================== ==============\
+        \ =============== =========== ========= ===========\nVrf   Device Interface\
+        \   Network Interface   Interface Up   IP Address      OSPF Type   Area ID\
+        \   Area Type\n===== ================== =================== ==============\
+        \ =============== =========== ========= ===========\n      net1          \
+        \     g1                          True   172.16.1.2/24   Broadcast   0.0.0.0\
+        \   default\n      net3               g3                          True   172.16.3.2/24\
+        \   Broadcast   0.0.0.0   default\n      net4               g4           \
+        \               True   172.16.4.2/24   Broadcast   0.0.0.4   default\n```"
       operationId: showSiteGatewayOspfInterfaces
       requestBody:
         content:
@@ -27724,21 +27725,22 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF Neighbors from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple commands issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== ====================\
-        \ ========== ======= ======== ================ =================== =================\n\
-        Vrf   Neighbor Router ID   Priority   State   Uptime   Dead Timer Due   Interface\
-        \ Address   Interface State\n===== ==================== ========== =======\
-        \ ======== ================ =================== =================\n      1.0.0.3\
-        \                     1   Full       852               38   172.16.3.2   \
-        \       Backup\n      1.0.0.4                     1   Full       811     \
-        \          33   172.16.3.2          DROther\n      1.0.0.3               \
-        \      1   Full       852               38   172.16.4.2          Backup\n\
-        \      1.0.0.4                     1   Full       811               34   172.16.4.2\
-        \          DROther\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== ==================== ========== ======= ========\
+        \ ================ =================== =================\nVrf   Neighbor Router\
+        \ ID   Priority   State   Uptime   Dead Timer Due   Interface Address   Interface\
+        \ State\n===== ==================== ========== ======= ======== ================\
+        \ =================== =================\n      1.0.0.3                   \
+        \  1   Full       852               38   172.16.3.2          Backup\n    \
+        \  1.0.0.4                     1   Full       811               33   172.16.3.2\
+        \          DROther\n      1.0.0.3                     1   Full       852 \
+        \              38   172.16.4.2          Backup\n      1.0.0.4            \
+        \         1   Full       811               34   172.16.4.2          DROther\n\
+        ```"
       operationId: showSiteGatewayOspfNeighbors
       requestBody:
         content:
@@ -27768,19 +27770,19 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get OSPF summary from SSR and SRX. The output will be available\
-        \ through websocket. \n\nAs there can be multiple commands issued against the\
-        \ same device at the same time and the output all goes through the same websocket\
-        \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
-        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
-        \n}\n```\n\n#### Example output from ws stream\n```\n===== =========== ==========\
-        \ ============= ==================== ========= =========== =============\n\
-        Vrf   Router ID   ABR Type   ASBR Router   External LSA Count   Area ID  \
-        \ Area Type   Area Border\n                                              \
-        \                                        Router\n===== =========== ==========\
-        \ ============= ==================== ========= =========== =============\n\
-        \      1.0.0.2     cisco            False                    0   0.0.0.0\n\
-        \      1.0.0.2     cisco            False                    0   0.0.0.4 \
-        \  default\n```"
+        \ through websocket. \n\nAs there can be multiple commands issued against\
+        \ the same device at the same time and the output all goes through the same\
+        \ websocket stream, `session` is introduced for demux.\n\n#### Subscribe to\
+        \ Device Command outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n  \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
+        \ from ws stream\n```\n===== =========== ========== ============= ====================\
+        \ ========= =========== =============\nVrf   Router ID   ABR Type   ASBR Router\
+        \   External LSA Count   Area ID   Area Type   Area Border\n             \
+        \                                                                        \
+        \ Router\n===== =========== ========== ============= ====================\
+        \ ========= =========== =============\n      1.0.0.2     cisco           \
+        \ False                    0   0.0.0.0\n      1.0.0.2     cisco          \
+        \  False                    0   0.0.0.4   default\n```"
       operationId: showSiteGatewayOspfSummary
       requestBody:
         content:
@@ -27810,8 +27812,8 @@ paths:
     - $ref: '#/components/parameters/device_id'
     post:
       description: "Get routes from SSR, SRX and Switch. \n\nThe output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ device at the same time and the output all goes through the same websocket\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same device at the same time and the output all goes through the same websocket\
         \ stream, `session` is introduced for demux.\n\n#### Subscribe to Device Command\
         \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n##### Example output from ws stream\n```\nadmin@labsystem1.fiedler#\
@@ -31682,10 +31684,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
     post:
       description: "Initiate a Site Packet Capture\n\nThe output will be available\
-        \ through websocket. As there can be multiple commands issued against the same\
-        \ AP at the same time and the output all goes through the same websocket stream,\
-        \ session is introduced for demux.\n\n#### Subscribe to Device Command outputs\n\
-        `WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
+        \ through websocket. As there can be multiple commands issued against the\
+        \ same AP at the same time and the output all goes through the same websocket\
+        \ stream, session is introduced for demux.\n\n#### Subscribe to Device Command\
+        \ outputs\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
         \n}\n```\n#### Response (MxEdge)\n```json\n{\n    \"event\": \"data\"\n  \
         \  \"channel\": \"/sites/{site_id}/pcaps\"\n    \"data\": {\n         \"capture_id\"\
         : \"6b1be4fb-b239-44d9-9d3b-cb1ff3af1721\",\n     \"lost_messages\": 0\n \
@@ -61868,6 +61870,7 @@ components:
         password:
           examples:
           - foryoureyesonly
+          format: password
           type: string
         username:
           examples:
@@ -61897,6 +61900,7 @@ components:
           description: Customer account password
           examples:
           - password
+          format: password
           type: string
         username:
           description: Customer account user name
@@ -61926,6 +61930,7 @@ components:
           type: string
         password:
           description: Customer account password instance URL
+          format: password
           type: string
         username:
           description: Customer account username
@@ -62075,6 +62080,7 @@ components:
           type: string
         password:
           description: Customer account password instance URL
+          format: password
           readOnly: true
           type: string
         region:
@@ -62122,11 +62128,13 @@ components:
           description: For VMWare accounts only
           examples:
           - password_1234
+          format: password
           type: string
         webhook_secret:
           description: For Crowdstrike accounts only
           examples:
           - secret-value
+          format: password
           type: string
         webhook_token:
           description: For JAMF and SentinelOne accounts only
@@ -62246,6 +62254,7 @@ components:
         password:
           examples:
           - foryoureyesonly
+          format: password
           type: string
         realm:
           examples:
@@ -62362,6 +62371,7 @@ components:
           description: Customer account password
           examples:
           - password
+          format: password
           type: string
         username:
           description: Customer account user name
@@ -62704,6 +62714,7 @@ components:
         password:
           examples:
           - foryoureyesonly
+          format: password
           type: string
         recaptcha:
           description: reCAPTCHA , see https://www.google.com/recaptcha/
@@ -67762,6 +67773,7 @@ components:
         password:
           examples:
           - Juniper123
+          format: password
           type: string
         role:
           $ref: '#/components/schemas/config_switch_local_accounts_user_role'
@@ -71919,14 +71931,76 @@ components:
       type: object
     gateway_mgmt:
       additionalProperties: false
-      description: Gateway settings
+      description: Gateway Management settings
       properties:
+        admin_sshkeys:
+          $ref: '#/components/schemas/gateway_mgmt_admin_sshkeys'
+        app_probing:
+          $ref: '#/components/schemas/app_probing'
+        app_usage:
+          description: Consumes uplink bandwidth, requires WA license
+          type: boolean
+        auto_signature_update:
+          $ref: '#/components/schemas/gateway_mgmt_auto_signature_update'
         config_revert_timer:
           default: 10
           description: Rollback timer for commit confirmed
           maximum: 30
           minimum: 1
           type: integer
+        disable_console:
+          default: false
+          description: For SSR and SRX, disable console port
+          type: boolean
+        disable_oob:
+          default: false
+          description: For SSR and SRX, disable management interface
+          type: boolean
+        disable_usb:
+          default: false
+          description: For SSR and SRX, disable usb interface
+          type: boolean
+        fips_enabled:
+          default: false
+          type: boolean
+        probe_hosts:
+          $ref: '#/components/schemas/gateway_mgmt_probe_hosts'
+        probe_hostsv6:
+          $ref: '#/components/schemas/gateway_mgmt_probe_hostsv6'
+        protect_re:
+          $ref: '#/components/schemas/protect_re'
+        root_password:
+          description: SRX only
+          format: password
+          type: string
+        security_log_source_address:
+          examples:
+          - 192.168.1.1
+          format: ipv4
+          type: string
+        security_log_source_interface:
+          examples:
+          - ge-0/0/1.0
+          type: string
+      type: object
+    gateway_mgmt_admin_sshkeys:
+      description: For SSR only, as direct root access is not allowed
+      examples:
+      - - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAA...Wxa6p6UW0ZbcP john@host
+      items:
+        type: string
+      type: array
+    gateway_mgmt_auto_signature_update:
+      additionalProperties: false
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/day_of_week'
+        enable:
+          default: true
+          type: boolean
+        time_of_day:
+          description: Optional, Mist will decide the timing
+          type: string
       type: object
     gateway_mgmt_host_out_policy:
       additionalProperties: false
@@ -71965,6 +72039,20 @@ components:
     gateway_mgmt_host_out_policy_syslog_servers:
       items:
         $ref: '#/components/schemas/gateway_mgmt_host_out_policy_syslog_server'
+      type: array
+    gateway_mgmt_probe_hosts:
+      examples:
+      - - 8.8.8.8
+      format: ipv4
+      items:
+        type: string
+      type: array
+    gateway_mgmt_probe_hostsv6:
+      examples:
+      - - 2001:4860:4860::8888
+      format: ipv6
+      items:
+        type: string
       type: array
     gateway_oob_ip_config:
       additionalProperties: false
@@ -72596,6 +72684,8 @@ components:
           $ref: '#/components/schemas/gateway_extra_routes6'
         gateway_matching:
           $ref: '#/components/schemas/gateway_matching'
+        gateway_mgmt:
+          $ref: '#/components/schemas/gateway_mgmt'
         id:
           $ref: '#/components/schemas/id'
         idp_profiles:
@@ -75470,6 +75560,7 @@ components:
           description: Client secret
           examples:
           - /9Nog3yDzcYj0bY91XJZQLCt+m9DXaIVhx+Ghk3ddd
+          format: password
           type: string
         customer_id:
           description: Jibestream customer record id
@@ -76440,6 +76531,7 @@ components:
           type: integer
         secret:
           description: Secret of RADIUS server
+          format: password
           type: string
         ssids:
           $ref: '#/components/schemas/mxcluster_radsec_acct_server_ssids'
@@ -76494,6 +76586,7 @@ components:
           type: integer
         secret:
           description: Secret of RADIUS server
+          format: password
           type: string
         ssids:
           $ref: '#/components/schemas/mxcluster_radsec_auth_server_ssids'
@@ -76727,6 +76820,7 @@ components:
           description: Whether to require Message-Authenticator in requests
           type: boolean
         secret:
+          format: password
           type: string
       type: object
     mxedge_das_coa_servers:
@@ -76835,6 +76929,7 @@ components:
         root_password:
           examples:
           - ROOT_PASSWORD
+          format: password
           type: string
       type: object
     mxedge_mgmt_oob_ip_type:
@@ -81650,6 +81745,7 @@ components:
           description: Secret of RADIUS server
           examples:
           - testing123
+          format: password
           type: string
       required:
       - host
@@ -81698,6 +81794,7 @@ components:
           description: Secret of RADIUS server
           examples:
           - testing123
+          format: password
           type: string
       required:
       - host
@@ -83874,6 +83971,7 @@ components:
         org_id:
           $ref: '#/components/schemas/org_id'
         secret:
+          format: password
           type: string
       required:
       - name
@@ -85580,6 +85678,7 @@ components:
         two_factor_secret:
           examples:
           - NRMTSTRWNBVECY3GJVYEY3DDJFRGSNCZGJUDO4RVN5FDM3DUMJSA
+          format: password
           type: string
       type: object
     response_two_factor_octet:
@@ -86125,6 +86224,7 @@ components:
       additionalProperties: false
       properties:
         root_password:
+          format: password
           minLength: 1
           type: string
       required:
@@ -88524,7 +88624,7 @@ components:
         gateway_additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
         gateway_mgmt:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt'
+          $ref: '#/components/schemas/gateway_mgmt'
         gateway_tunnel_updown_threshold:
           description: enable threshold-based gateway tunnel (secure edge tunnels)
             up-down delivery.
@@ -88936,92 +89036,6 @@ components:
         type: string
       description: Name/val pair objects for location engine to use
       type: object
-    site_setting_gateway_mgmt:
-      additionalProperties: false
-      description: Gateway Site settings
-      properties:
-        admin_sshkeys:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_admin_sshkeys'
-        app_probing:
-          $ref: '#/components/schemas/app_probing'
-        app_usage:
-          description: Consumes uplink bandwidth, requires WA license
-          type: boolean
-        auto_signature_update:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_auto_signature_update'
-        config_revert_timer:
-          default: 10
-          description: Rollback timer for commit confirmed
-          maximum: 30
-          minimum: 1
-          type: integer
-        disable_console:
-          default: false
-          description: For SSR and SRX, disable console port
-          type: boolean
-        disable_oob:
-          default: false
-          description: For SSR and SRX, disable management interface
-          type: boolean
-        disable_usb:
-          default: false
-          description: For SSR and SRX, disable usb interface
-          type: boolean
-        fips_enabled:
-          default: false
-          type: boolean
-        probe_hosts:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_probe_hosts'
-        probe_hostsv6:
-          $ref: '#/components/schemas/site_setting_gateway_mgmt_probe_hostsv6'
-        protect_re:
-          $ref: '#/components/schemas/protect_re'
-        root_password:
-          description: SRX only
-          type: string
-        security_log_source_address:
-          examples:
-          - 192.168.1.1
-          format: ipv4
-          type: string
-        security_log_source_interface:
-          examples:
-          - ge-0/0/1.0
-          type: string
-      type: object
-    site_setting_gateway_mgmt_admin_sshkeys:
-      description: For SSR only, as direct root access is not allowed
-      examples:
-      - - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAA...Wxa6p6UW0ZbcP john@host
-      items:
-        type: string
-      type: array
-    site_setting_gateway_mgmt_auto_signature_update:
-      additionalProperties: false
-      properties:
-        day_of_week:
-          $ref: '#/components/schemas/day_of_week'
-        enable:
-          default: true
-          type: boolean
-        time_of_day:
-          description: Optional, Mist will decide the timing
-          type: string
-      type: object
-    site_setting_gateway_mgmt_probe_hosts:
-      examples:
-      - - 8.8.8.8
-      format: ipv4
-      items:
-        type: string
-      type: array
-    site_setting_gateway_mgmt_probe_hostsv6:
-      examples:
-      - - 2001:4860:4860::8888
-      format: ipv6
-      items:
-        type: string
-      type: array
     site_setting_juniper_srx:
       additionalProperties: false
       properties:
@@ -91288,6 +91302,7 @@ components:
             RSA private key, of the form "-----BEGIN RSA PRIVATE KEY--...."
           examples:
           - akL8Q~5kWFMVFYl4TFZ3fi~7cMdyDONi6cj01cpH
+          format: password
           type: string
         oauth_discovery_url:
           description: If `idp_type`==`oauth`
@@ -91306,6 +91321,7 @@ components:
             can be empty
           examples:
           - blM9R~6kWFMVFYl4TFZ3fi~8cMdyDONi6cj01dqI
+          format: password
           type: string
         oauth_tenant_id:
           description: Required if `idp_type`==`oauth`, oauth_tenant_id
@@ -91344,6 +91360,7 @@ components:
             requests by the IDP
           examples:
           - FBitbKPE1aecSloPGBuqqPxDUrFeZyZk
+          format: password
           type: string
         site_id:
           $ref: '#/components/schemas/site_id'
@@ -91435,6 +91452,7 @@ components:
         secret:
           examples:
           - testing123
+          format: password
           type: string
       type: object
     sso_mxedge_proxy_acct_servers:
@@ -91462,6 +91480,7 @@ components:
         secret:
           examples:
           - testing123
+          format: password
           type: string
         timeout:
           default: 5
@@ -97139,7 +97158,7 @@ components:
       type: array
     switch_mgmt:
       additionalProperties: false
-      description: Switch settings
+      description: Switch Management settings
       properties:
         ap_affinity_threshold:
           default: 10
@@ -97192,6 +97211,7 @@ components:
             will be removed.
           type: boolean
         root_password:
+          format: password
           type: string
         tacacs:
           $ref: '#/components/schemas/tacacs'
@@ -98274,6 +98294,7 @@ components:
           description: If `type`==`radius`
           examples:
           - test123
+          format: password
           type: string
         ping_count:
           default: 10
@@ -98409,6 +98430,7 @@ components:
       properties:
         password:
           description: Specify the password associated with the username
+          format: password
           type: string
         profile:
           default: dot1x
@@ -98464,6 +98486,7 @@ components:
         port:
           type: string
         secret:
+          format: password
           type: string
         timeout:
           default: 10
@@ -98481,6 +98504,7 @@ components:
         port:
           type: string
         secret:
+          format: password
           type: string
         timeout:
           default: 10
@@ -98620,6 +98644,7 @@ components:
           description: SMSGlobal api secret
           examples:
           - abcdef
+          format: password
           type: string
         to:
           description: Phone number of the recipient of SMS with country code
@@ -98642,6 +98667,7 @@ components:
           description: Telstra client secret
           examples:
           - abcdef
+          format: password
           type: string
         to:
           description: Phone number of the recipient of SMS with country code
@@ -100653,6 +100679,7 @@ components:
     username_password:
       properties:
         password:
+          format: password
           type: string
         username:
           type: string
@@ -101371,6 +101398,7 @@ components:
       properties:
         password:
           description: FIPS zeroize password
+          format: password
           type: string
       required:
       - password
@@ -101936,6 +101964,7 @@ components:
           type: string
         auth_password:
           description: If `auth_type`==`simple`
+          format: password
           type: string
         auth_type:
           $ref: '#/components/schemas/vrrp_group_auth_type'
@@ -102101,11 +102130,13 @@ components:
           type: string
         oauth2_client_secret:
           description: Required when `oauth2_grant_type`==`client_credentials`
+          format: password
           type: string
         oauth2_grant_type:
           $ref: '#/components/schemas/webhook_oauth2_grant_type'
         oauth2_password:
           description: Required when `oauth2_grant_type`==`password`
+          format: password
           type: string
         oauth2_scopes:
           $ref: '#/components/schemas/webhook_oauth2_scopes'
@@ -104922,6 +104953,7 @@ components:
           description: Password
           examples:
           - user1
+          format: password
           type: string
         username:
           default: ''
@@ -105769,6 +105801,7 @@ components:
           description: Required if `sms_provider`==`broadnet`
           examples:
           - password
+          format: password
           type: string
         broadnet_sid:
           description: Required if `sms_provider`==`broadnet`
@@ -105886,6 +105919,7 @@ components:
           - 'null'
         gupshup_password:
           description: Required if `sms_provider`==`gupshup`
+          format: password
           type: string
         gupshup_userid:
           description: Required if `sms_provider`==`gupshup`
@@ -105954,6 +105988,7 @@ components:
           type: boolean
         puzzel_password:
           description: Required if `sms_provider`==`puzzel`
+          format: password
           type: string
         puzzel_service_id:
           description: Required if `sms_provider`==`puzzel`
@@ -105984,6 +106019,7 @@ components:
           type: string
         smsglobal_api_secret:
           description: Required if `sms_provider`==`smsglobal`, Client secret
+          format: password
           type: string
         sponsor_auto_approve:
           default: false
@@ -106055,6 +106091,7 @@ components:
         telstra_client_secret:
           description: Required if `sms_provider`==`telstra`, Client secret provided
             by Telstra
+          format: password
           type: string
         twilio_auth_token:
           description: Required if `sms_provider`==`twilio`, Auth token account with
