@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.10] - 2026-04-08
+
+- Added `minis-application` webhook sample
+
 ## [2602.1.9] - 2026-03-19
 
 - Updated schema definitions for `gateway` and `gateway_template`:

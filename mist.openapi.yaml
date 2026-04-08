@@ -103535,7 +103535,8 @@ components:
       - topic
       type: object
     webhook_minis_application_event:
-      property:
+      additionalProperties: false
+      properties:
         device_mac:
           description: MAC address of the device
           type: string
