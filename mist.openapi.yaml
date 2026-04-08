@@ -103551,7 +103551,7 @@ components:
         probe_name:
           description: Name of the probe
           examples:
-          - google ping
+          - connectivitycheck.gstatic.com
           type: string
         probe_type:
           description: Type of probe
