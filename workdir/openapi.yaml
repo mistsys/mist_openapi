@@ -15778,6 +15778,9 @@ paths:
     get:
       description: Get List of Sec Intel Profiles
       operationId: listOrgSecIntelProfiles
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           $ref: '#/components/responses/SecIntelProfilesArray'
@@ -40429,6 +40432,44 @@ webhooks:
             schema:
               $ref: '#/components/schemas/webhook_location_unclient'
         description: Webhook sample for `location-unclient` topic
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received
+            successfully
+  minis_application:
+    post:
+      parameters:
+      - in: header
+        name: X-Mist-Signature-v2
+        schema:
+          type: string
+      - in: header
+        name: X-Mist-Signature
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  events:
+                  - device_mac: 003e7316fd96,
+                    ip: 172.217.22.195,
+                    latency: 74,
+                    org_id: 8aa21779-1178-4357-b3e0-42c02b93b870,
+                    probe_name: connectivitycheck.gstatic.com,
+                    probe_type: application,
+                    site_id: 2bf12442-1558-41bd-849e-738d6d4aa1a3,
+                    src_ip: 192.168.1.136,
+                    success: false,
+                    test_type: curl,
+                    timestamp: 1775641319644,
+                    vlan: 1
+                  topic: minis-application
+            schema:
+              $ref: '#/components/schemas/webhook_minis_application'
+        description: Webhook sample for `minis-application` topic
       responses:
         '200':
           description: Return a 200 status to indicate that the data was received
@@ -103481,6 +103522,69 @@ components:
       description: 'enum: `location-unclient`'
       enum:
       - location-unclient
+      type: string
+    webhook_minis_application:
+      additionalProperties: false
+      description: Sample of the `minis-application` webhook payload.
+      properties:
+        events:
+          $ref: '#/components/schemas/webhook_minis_application_events'
+        topic:
+          $ref: '#/components/schemas/webhook_minis_application_topic'
+      required:
+      - events
+      - topic
+      type: object
+    webhook_minis_application_event:
+      properties:
+        device_mac:
+          description: MAC address of the device
+          type: string
+        ip:
+          description: IP address test was performed to
+          type: string
+        latency:
+          description: latency in milliseconds
+          type: integer
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        probe_name:
+          description: Name of the probe
+          examples:
+          - google ping
+          type: string
+        probe_type:
+          description: Type of probe
+          examples:
+          - application
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        src_ip:
+          description: Source IP address of the test
+          type: string
+        success:
+          description: Whether the test was successful
+          type: boolean
+        test_type:
+          $ref: '#/components/schemas/synthetictest_config_custom_probe_type'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        vlan:
+          description: VLAN ID used for the test
+          examples:
+          - 12
+          type: integer
+      type: object
+      additionalProperties: false
+    webhook_minis_application_events:
+      items:
+        $ref: '#/components/schemas/webhook_minis_application_event'
+      type: array
+    webhook_minis_application_topic:
+      description: 'enum: `minis-application`'
+      enum:
+      - minis-application
       type: string
     webhook_minis_reachability:
       additionalProperties: false
