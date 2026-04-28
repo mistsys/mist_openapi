@@ -19367,37 +19367,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/mxedges:
     get:
-      description: "Get List of Org MxEdge Stats\n\nResults are available via WebSocket\
-        \ streaming.\n\n#### Subscribe to Org Mist Edge stats\n`WS /api-ws/v1/stream`\n\
-        \n```json\n{\n    \"subscribe\": \"/orgs/:org_id/stats/mxedges\"\n}\n```\n\
-        #### Response (firmware update event)\n```json\n{\n  \"event\": \"data\",\n\
-        \  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/mxedges\",\n\
-        \  \"data\": {\n    \"device_id\": \"00000000-0000-0000-1000-5c5b3524500b\"\
-        ,\n    \"event_type\": \"fwupdate\",\n    \"detail\": {\n      \"timestamp\"\
-        : 1485381027,\n      \"status\": \"inprogress\",\n      \"progress\": 45\n\
-        \    }\n  }\n}\n```\n#### Response (mxagent-stats event)\n```json\n{\n  \"\
-        event\": \"data\",\n  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/stats/mxedges\"\
-        ,\n  \"data\": {\n    \"device_id\": \"00000000-0000-0000-1000-5c5b3524500b\"\
-        ,\n    \"event_type\": \"mxagent-stats\",\n    \"detail\": {\n      \"cpu_stat\"\
-        : { \"usage\": 4, \"interrupt\": 1, \"idle\": 95, \"user\": 2, \"system\"\
-        : 1 },\n      \"memory_stat\": { \"usage\": 22, \"total\": 16660455424, \"\
-        free\": 11258937344 },\n      \"service_stat\": {\n        \"mxagent\": {\
-        \ \"running_state\": \"Running\", \"package_version\": \"4.3.5321-0\", \"\
-        uptime\": 434100 },\n        \"tunterm\": { \"running_state\": \"Running\"\
-        , \"package_version\": \"0.1.2822+deb10\", \"uptime\": 519825 }\n      },\n\
-        \      \"version\": \"4.3.5321-0\",\n      \"uptime\": 434100,\n      \"last_seen\"\
-        : 1768341162,\n      \"hostname\": \"3ME-ALL_X1\",\n      \"ext_ip\": \"162.198.72.145\"\
-        ,\n      \"distro\": \"buster\",\n      \"fips_enabled\": false,\n      \"\
-        hardware_revision\": \"100\",\n      \"serial_no\": \"318R0R3\",\n      \"\
-        virtualization_type\": \"None\",\n      \"config_reverted\": false\n    }\n\
-        \  }\n}\n```\n#### Response (tunterm-stats event)\n```json\n{\n  \"event\"\
-        : \"data\",\n  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/stats/mxedges\"\
-        ,\n  \"data\": {\n    \"device_id\": \"00000000-0000-0000-1000-5c5b3524500b\"\
-        ,\n    \"event_type\": \"tunterm-stats\",\n    \"detail\": {\n      \"version\"\
-        : \"0.1.2822+deb10\",\n      \"uptime\": 519841,\n      \"num_tunnels\": 0,\n\
-        \      \"last_seen\": 1768341178,\n      \"ext_ip\": \"162.198.72.145\",\n\
-        \      \"model\": \"ME-X1\",\n      \"tunnel_capacity\": 0.0\n    }\n  }\n\
-        }\n```"
+      description: Get List of Org MxEdge Stats
       operationId: listOrgMxEdgesStats
       parameters:
       - description: Filter for site level mist edges
@@ -75305,6 +75275,7 @@ components:
         type: string
       type: array
     iotendpoint_stats:
+      additionalProperties: false
       description: IoT endpoint statistics
       properties:
         ap_mac:
@@ -75347,6 +75318,7 @@ components:
           type: string
       type: object
     iotproxy:
+      additionalProperties: false
       description: IoT proxy configuration for the site
       properties:
         enabled:
@@ -75356,6 +75328,7 @@ components:
           $ref: '#/components/schemas/iotproxy_visionline'
       type: object
     iotproxy_visionline:
+      additionalProperties: false
       description: Visionline integration settings for IoT proxy
       properties:
         access_id:
@@ -103194,6 +103167,7 @@ components:
         RADIUS_SECRET: 11s64632d
       type: object
     vars_annotation:
+      additionalProperties: false
       description: Annotation for a single var, helping identify its purpose and enabling
         auto-complete/enumeration in UI
       properties:

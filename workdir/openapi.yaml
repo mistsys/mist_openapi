@@ -19363,7 +19363,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/mxedges:
     get:
-      description: "Get List of Org MxEdge Stats"
+      description: Get List of Org MxEdge Stats
       operationId: listOrgMxEdgesStats
       parameters:
       - description: Filter for site level mist edges
@@ -75271,6 +75271,7 @@ components:
         type: string
       type: array
     iotendpoint_stats:
+      additionalProperties: false
       description: IoT endpoint statistics
       properties:
         ap_mac:
@@ -75312,8 +75313,8 @@ components:
           - zigbee
           type: string
       type: object
-      additionalProperties: false
     iotproxy:
+      additionalProperties: false
       description: IoT proxy configuration for the site
       properties:
         enabled:
@@ -75322,8 +75323,8 @@ components:
         visionline:
           $ref: '#/components/schemas/iotproxy_visionline'
       type: object
-      additionalProperties: false
     iotproxy_visionline:
+      additionalProperties: false
       description: Visionline integration settings for IoT proxy
       properties:
         access_id:
@@ -75353,7 +75354,6 @@ components:
           - card_administrator
           type: string
       type: object
-      additionalProperties: false
     ip_stat:
       additionalProperties: false
       properties:
@@ -103168,6 +103168,7 @@ components:
         RADIUS_SECRET: 11s64632d
       type: object
     vars_annotation:
+      additionalProperties: false
       description: Annotation for a single var, helping identify its purpose and enabling
         auto-complete/enumeration in UI
       properties:
@@ -103183,7 +103184,6 @@ components:
             enum: `generic`, `mxtunnel_id`'
           type: string
       type: object
-      additionalProperties: false
     vars_annotations:
       additionalProperties:
         $ref: '#/components/schemas/vars_annotation'
