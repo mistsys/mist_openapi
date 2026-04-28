@@ -5832,10 +5832,9 @@ paths:
       - Orgs Alarm Templates
   /api/v1/orgs/{org_id}/aos/register_cmd:
     get:
-      description: Generates a registration challenge token 
-        for TPM-based brownfield registration of AOS devices. The returned command
-        string can be copied and pasted directly into an AOS device to register it
-        with Mist.
+      description: Generates a registration challenge token for TPM-based brownfield
+        registration of AOS devices. The returned command string can be copied and
+        pasted directly into an AOS device to register it with Mist.
       operationId: getOrgAosRegisterCmd
       responses:
         '200':
@@ -10720,12 +10719,12 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/jsi/sirt/search:
     get:
-      description: Search and get all the SIRT for the onboarded devices. Search
-        can be done on severity, id, updated_after, updated_before, published_after,
-        published_before, models, versions, and text fields.
+      description: Search and get all the SIRT for the onboarded devices. Search can
+        be done on severity, id, updated_after, updated_before, published_after, published_before,
+        models, versions, and text fields.
       operationId: searchOrgJsiSirt
       parameters:
-      - description: 'Severity of the SIRT (Critical, High, Medium, Low)'
+      - description: Severity of the SIRT (Critical, High, Medium, Low)
         in: query
         name: severity
         schema:
@@ -10896,61 +10895,6 @@ paths:
       - Orgs Licenses
     parameters:
     - $ref: '#/components/parameters/org_id'
-  /api/v1/orgs/{org_id}/logs/search:
-    get:
-      description: Get a list of change logs for the current Org
-      operationId: listOrgAuditLogs
-      parameters:
-      - description: Site id
-        in: query
-        name: site_id
-        schema:
-          examples:
-          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
-          format: uuid
-          type: string
-      - description: Admin name or email
-        in: query
-        name: admin_name
-        schema:
-          examples:
-          - John Doe
-          type: string
-      - description: Message
-        in: query
-        name: message
-        schema:
-          examples:
-          - Created a new site
-          type: string
-      - description: Sort order
-        in: query
-        name: sort
-        schema:
-          $ref: '#/components/schemas/list_org_logs_sort'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/page'
-      responses:
-        '200':
-          $ref: '#/components/responses/LogsSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: listOrgAuditLogs
-      tags:
-      - Orgs Logs
-    parameters:
-    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/logs/count:
     get:
       description: Count by Distinct Attributes of Audit Logs
@@ -11004,6 +10948,61 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: countOrgAuditLogs
+      tags:
+      - Orgs Logs
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/logs/search:
+    get:
+      description: Get a list of change logs for the current Org
+      operationId: listOrgAuditLogs
+      parameters:
+      - description: Site id
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          format: uuid
+          type: string
+      - description: Admin name or email
+        in: query
+        name: admin_name
+        schema:
+          examples:
+          - John Doe
+          type: string
+      - description: Message
+        in: query
+        name: message
+        schema:
+          examples:
+          - Created a new site
+          type: string
+      - description: Sort order
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/list_org_logs_sort'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/LogsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listOrgAuditLogs
       tags:
       - Orgs Logs
     parameters:
@@ -11071,9 +11070,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Create Org Marvis Client Invite. SDK Invites can be generated
-        for (and belongs to) an Org. They can be generated by an Admin of an Org
-        and can be revoked at anytime.'
+      description: Create Org Marvis Client Invite. SDK Invites can be generated for
+        (and belongs to) an Org. They can be generated by an Admin of an Org and can
+        be revoked at anytime.
       operationId: createOrgMarvisClientInvite
       requestBody:
         content:
@@ -11910,8 +11909,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
     put:
-      description: Update Mist Edge Upgrade. Only upgrades in `queued` state can
-        be updated.
+      description: Update Mist Edge Upgrade. Only upgrades in `queued` state can be
+        updated.
       operationId: updateOrgMxEdgeUpgrade
       requestBody:
         content:
@@ -14776,19 +14775,19 @@ paths:
         \    \"pcap_dict\": {\n          \"dst_mac\": \"68:ec:c5:09:2e:87\",\n   \
         \       \"src_mac\": \"8c:3b:ad:e0:47:40\", \n          \"vlan\": 1, \n  \
         \        \"src_ip\": \"34.224.147.117\", \n          \"dst_ip\": \"192.168.1.55\"\
-        ,\n          \"dst_port\": 51635, \n          \"src_port\": 443,\n        \
-        \  \"protocol\": \"TCP\", \n          \"mxedge_id\": \"00000000-0000-0000-1000-001122334455\"\
+        ,\n          \"dst_port\": 51635, \n          \"src_port\": 443,\n       \
+        \   \"protocol\": \"TCP\", \n          \"mxedge_id\": \"00000000-0000-0000-1000-001122334455\"\
         ,\n          \"direction\": \"tx\", \n          \"timestamp\": 1652247615,\
-        \ \n          \"length\": 159.0, \n          \"lost_messages\": 0,\n      \
-        \    \"interface\": \"port0\",\n          \"info\": \"1652247616.007409 IP\
+        \ \n          \"length\": 159.0, \n          \"lost_messages\": 0,\n     \
+        \     \"interface\": \"port0\",\n          \"info\": \"1652247616.007409 IP\
         \ ec2-34-224-147-117.compute-1.amazonaws.com.https > ip-192-168-1-55.ec2.internal.51635:\
         \ Flags [P.], seq \\n                    2192123968:2192124057, ack 4035166782,\
-        \ win 12, options [nop,nop,TS val 597467050 ecr 740580660], length 89\\\\n\"\
-        ,\n          }, \n      \"pcap_raw\": \"1MOyoQIABAAAAAAAAAAAAP//AAABAAAAQEx7YhMzAACfAAAAnwAAAGjsxQkuh4w7reBHQIEAAAEIAEUAAI1bLEAAKAZ/CiLgk3XAqAE3AbvJs4KpKEDwg8I+gBgADFf9AAABAQgKI5yfqiwkXTQXAwMAVKY5JopoKQrVEn0/3ld4YntctGEH/rTZuwtCvzSncFw71QJveJi9uxHs57KC8w9Apph3YvXJrmWg7M37+o+YV0KH/xmr626s5Bkhb3QhKOu+NoNEmA==\"\
-        \n    }\n}\n```\n#### Stop Response\n```json\n{\n  \"event\": \"data\"\n  \"\
-        channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/pcaps\"\n  \"data\"\
-        : {\n      \"capture_id\": \"a2f7374d-6a70-41fd-8a3f-71e42573baaf\",\n    \
-        \  \"pcap_dict\": null\n  }\n}\n```"
+        \ win 12, options [nop,nop,TS val 597467050 ecr 740580660], length 89\\\\\
+        n\",\n          }, \n      \"pcap_raw\": \"1MOyoQIABAAAAAAAAAAAAP//AAABAAAAQEx7YhMzAACfAAAAnwAAAGjsxQkuh4w7reBHQIEAAAEIAEUAAI1bLEAAKAZ/CiLgk3XAqAE3AbvJs4KpKEDwg8I+gBgADFf9AAABAQgKI5yfqiwkXTQXAwMAVKY5JopoKQrVEn0/3ld4YntctGEH/rTZuwtCvzSncFw71QJveJi9uxHs57KC8w9Apph3YvXJrmWg7M37+o+YV0KH/xmr626s5Bkhb3QhKOu+NoNEmA==\"\
+        \n    }\n}\n```\n#### Stop Response\n```json\n{\n  \"event\": \"data\"\n \
+        \ \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/pcaps\"\n  \"\
+        data\": {\n      \"capture_id\": \"a2f7374d-6a70-41fd-8a3f-71e42573baaf\"\
+        ,\n      \"pcap_dict\": null\n  }\n}\n```"
       operationId: startOrgPacketCapture
       requestBody:
         content:
@@ -18706,6 +18705,46 @@ paths:
       summary: updateOrgSso
       tags:
       - Orgs SSO
+  /api/v1/orgs/{org_id}/ssos/{sso_id}/delete_admins:
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - $ref: '#/components/parameters/sso_id'
+    post:
+      description: Delete SSO Admin users by email. This removes SSO-linked admin
+        accounts from the organization.
+      operationId: deleteOrgSsoAdmins
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  emails:
+                  - john@abc.com
+                  - may@abc.com
+            schema:
+              $ref: '#/components/schemas/sso_delete_admins'
+        description: Request Body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sso_delete_admins_response'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteOrgSsoAdmins
+      tags:
+      - Orgs SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}/failures:
     get:
       description: Get List of Org SSO Latest Failures
@@ -18800,46 +18839,6 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sso_id'
-  /api/v1/orgs/{org_id}/ssos/{sso_id}/delete_admins:
-    parameters:
-    - $ref: '#/components/parameters/org_id'
-    - $ref: '#/components/parameters/sso_id'
-    post:
-      description: Delete SSO Admin users by email. This removes SSO-linked admin
-        accounts from the organization.
-      operationId: deleteOrgSsoAdmins
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Example:
-                value:
-                  emails:
-                  - john@abc.com
-                  - may@abc.com
-            schema:
-              $ref: '#/components/schemas/sso_delete_admins'
-        description: Request Body
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/sso_delete_admins_response'
-          description: OK
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: deleteOrgSsoAdmins
-      tags:
-      - Orgs SSO
   /api/v1/orgs/{org_id}/ssr/export_idtokens:
     parameters:
     - $ref: '#/components/parameters/org_id'
@@ -35079,17 +35078,17 @@ paths:
         \        \"by\": \"asset\",\n        \"x\": 51.0,\n        \"y\": 29.0,\n\
         \        \"map_id\": \"63eda950-c6da-11e4-a628-60f81dd250cc\",\n        \"\
         last_seen\": 1480716946,\n        \"ibeacon_uuid\": \"f3f17139-704a-f03a-2786-0400279e37c3\"\
-        ,\n        \"ibeacon_major\": 13,\n        \"ibeacon_minor\": 138,\n      \
-        \  \"eddystone_uid_namespace\": \"2818e3868dec25629ede\",\n        \"eddystone_uid_instance\"\
+        ,\n        \"ibeacon_major\": 13,\n        \"ibeacon_minor\": 138,\n     \
+        \   \"eddystone_uid_namespace\": \"2818e3868dec25629ede\",\n        \"eddystone_uid_instance\"\
         : \"5c5b35000001\",\n        \"eddystone_url\": \"https://www.abc.com\",\n\
         \        \"battery_voltage\": 3370,\n        \"temperature\": 23.5,\n    \
         \    \"manufacture\": \"Asset Manufacturer Name\",\n        \"mfg_company_id\"\
         : 935,\n        \"mfg_data\": \"648520a1020000\",\n        \"device_name\"\
-        : \"BLE Device\",\n        \"service_packets\": [\n            {\n        \
-        \        \"uuid\": \"00003e10-0000-1000-8000-00805f9b34fb\",\n            \
-        \    \"data\": \"001200\",\n                \"rx_cnt\": 213065,\n         \
-        \       \"last_rx_time\": 1645855923\n            }\n        ],\n        \"\
-        rssi\": -45,\n        \"device_id\": \"00000000-0000-0000-1000-5c5b35000001\"\
+        : \"BLE Device\",\n        \"service_packets\": [\n            {\n       \
+        \         \"uuid\": \"00003e10-0000-1000-8000-00805f9b34fb\",\n          \
+        \      \"data\": \"001200\",\n                \"rx_cnt\": 213065,\n      \
+        \          \"last_rx_time\": 1645855923\n            }\n        ],\n     \
+        \   \"rssi\": -45,\n        \"device_id\": \"00000000-0000-0000-1000-5c5b35000001\"\
         ,\n        \"_ttl\": 86400\n    }\n}\n```"
       operationId: listSiteAssetsStats
       parameters:
@@ -36154,7 +36153,7 @@ paths:
     - $ref: '#/components/parameters/map_id'
   /api/v1/sites/{site_id}/stats/mxedges:
     get:
-      description: "Get List of Site MxEdges Stats"
+      description: Get List of Site MxEdges Stats
       operationId: listSiteMxEdgesStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -41522,7 +41521,7 @@ components:
         - id: 480f6eca-6276-4993-bfeb-59cbbbbaaf08
           since: 0
         service_packets:
-        - data: 001200
+        - data: 640
           last_rx_time: 1645855923
           rx_cnt: 213065
           uuid: 00003e10-0000-1000-8000-00805f9b34fb
@@ -41573,7 +41572,7 @@ components:
         - id: 478f6eca-6276-4993-bfeb-5bcbbbbacf08
           since: 0
         service_packets:
-        - data: 001200
+        - data: 640
           last_rx_time: 1645855923
           rx_cnt: 213065
           uuid: 00003e10-0000-1000-8000-00805f9b34fb
@@ -59081,6 +59080,15 @@ components:
           schema:
             $ref: '#/components/schemas/mxtunnels'
       description: OK
+    NacClientCoa:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/nac_client_coa_response'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/nac_client_coa_response'
+      description: Example response
     NacCrlFile:
       content:
         application/json:
@@ -59098,15 +59106,6 @@ components:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/response_nac_crl_files'
-      description: Example response
-    NacClientCoa:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/nac_client_coa_response'
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/nac_client_coa_response'
       description: Example response
     NacPortal:
       content:
@@ -59438,15 +59437,6 @@ components:
           schema:
             $ref: '#/components/schemas/response_org_devices_summary'
       description: OK
-    OrgEventsSearch:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/response_events_orgs_search'
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/response_events_orgs_search'
-      description: Example response
     OrgE911Report:
       content:
         application/json:
@@ -59456,6 +59446,15 @@ components:
           schema:
             $ref: '#/components/schemas/org_e911_report'
       description: OK
+    OrgEventsSearch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/response_events_orgs_search'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/response_events_orgs_search'
+      description: Example response
     OrgInventory:
       content:
         application/json:
@@ -65536,8 +65535,8 @@ components:
           $ref: '#/components/schemas/ap_zigbee_allow_join'
         channel:
           default: 0
-          description: Zigbee channel (2.4 GHz). `0` means auto; valid fixed values
-            are 11–26
+          description: "Zigbee channel (2.4 GHz). `0` means auto; valid fixed values\
+            \ are 11\u201326"
           examples:
           - 0
           maximum: 26
@@ -65551,7 +65550,7 @@ components:
           description: Extended PAN ID in hex string format; only applicable when
             `pan_id` is also specified
           examples:
-          - 0x1234567890abcdef
+          - 1311768467294899695
           type:
           - string
           - 'null'
@@ -72923,9 +72922,9 @@ components:
       anyOf:
       - type: integer
       - type: string
-      description: 'For SRX only and if HA Mode. `-1` means it will be managed by
-        the device. Use `>= 0` values to manage it manually. Ensure no conflicting
-        values are assigned across all ports.'
+      description: For SRX only and if HA Mode. `-1` means it will be managed by the
+        device. Use `>= 0` values to manage it manually. Ensure no conflicting values
+        are assigned across all ports.
     gateway_port_config_wan_networks:
       description: Only if `usage`==`wan`. If some networks are connected to this
         WAN port, it can be added here so policies can be defined
@@ -74226,10 +74225,6 @@ components:
           format: double
           type: number
       type: object
-    installer_devices:
-      items:
-        $ref: '#/components/schemas/installer_device'
-      type: array
     installer_device_ble_stat:
       additionalProperties: false
       description: BLE statistics for the device
@@ -74248,6 +74243,10 @@ components:
           format: uuid
           type: string
       type: object
+    installer_devices:
+      items:
+        $ref: '#/components/schemas/installer_device'
+      type: array
     installer_provision_device:
       description: Provision Device
       properties:
@@ -76473,38 +76472,6 @@ components:
         auto_operations:
           $ref: '#/components/schemas/marvis_auto_operations'
       type: object
-    org_setting_marvis:
-      additionalProperties: false
-      properties:
-        self_driving:
-          $ref: '#/components/schemas/marvis_self_driving'
-      type: object
-    marvis_self_driving:
-      additionalProperties: false
-      description: Self-driving network automation settings per domain
-      properties:
-        wan:
-          additionalProperties: false
-          properties:
-            enabled:
-              default: false
-              type: boolean
-          type: object
-        wired:
-          additionalProperties: false
-          properties:
-            enabled:
-              default: false
-              type: boolean
-          type: object
-        wireless:
-          additionalProperties: false
-          properties:
-            enabled:
-              default: false
-              type: boolean
-          type: object
-      type: object
     marvis_auto_operations:
       additionalProperties: false
       properties:
@@ -76568,8 +76535,8 @@ components:
           type: object
         telemetry:
           additionalProperties: false
-          description: "Note: some stats are not collected when it's not connected\
-            \ to Mist infrastructure"
+          description: 'Note: some stats are not collected when it''s not connected
+            to Mist infrastructure'
           properties:
             enabled:
               type: boolean
@@ -76579,6 +76546,32 @@ components:
       items:
         $ref: '#/components/schemas/marvis_client'
       type: array
+    marvis_self_driving:
+      additionalProperties: false
+      description: Self-driving network automation settings per domain
+      properties:
+        wan:
+          additionalProperties: false
+          properties:
+            enabled:
+              default: false
+              type: boolean
+          type: object
+        wired:
+          additionalProperties: false
+          properties:
+            enabled:
+              default: false
+              type: boolean
+          type: object
+        wireless:
+          additionalProperties: false
+          properties:
+            enabled:
+              default: false
+              type: boolean
+          type: object
+      type: object
     memory_stat:
       additionalProperties: false
       description: Memory usage stat (for virtual chassis, memory usage of master
@@ -79841,8 +79834,8 @@ components:
           - available
           type: string
         url:
-          description: Presigned URL to download the CSV file. Only present when
-            `status` is `available`.
+          description: Presigned URL to download the CSV file. Only present when `status`
+            is `available`.
           type: string
       type: object
     org_event:
@@ -80616,6 +80609,12 @@ components:
       - none
       - viewer
       type: string
+    org_setting_marvis:
+      additionalProperties: false
+      properties:
+        self_driving:
+          $ref: '#/components/schemas/marvis_self_driving'
+      type: object
     org_setting_mgmt:
       additionalProperties: false
       description: management-related properties
@@ -80709,18 +80708,6 @@ components:
           minimum: 0
           type: integer
       type: object
-    org_setting_mist_nac_mdm:
-      additionalProperties: false
-      description: MDM (Mobile Device Management) CoA configuration
-      properties:
-        coa_type:
-          default: reauth
-          description: CoA type to use for MDM
-          enum:
-          - reauth
-          - disconnect
-          type: string
-      type: object
     org_setting_mist_nac_fingerprinting:
       additionalProperties: false
       description: Allows customer to enable client fingerprinting for policy enforcement
@@ -80784,6 +80771,18 @@ components:
       - v4
       - v6
       type: string
+    org_setting_mist_nac_mdm:
+      additionalProperties: false
+      description: MDM (Mobile Device Management) CoA configuration
+      properties:
+        coa_type:
+          default: reauth
+          description: CoA type to use for MDM
+          enum:
+          - reauth
+          - disconnect
+          type: string
+      type: object
     org_setting_mist_nac_server_cert:
       additionalProperties: false
       description: radius server cert to be presented in EAP TLS
@@ -91869,31 +91868,6 @@ components:
       - strong
       - weak
       type: string
-    sso_delete_admins:
-      additionalProperties: false
-      properties:
-        emails:
-          description: List of admin email addresses to delete
-          items:
-            type: string
-          type: array
-      required:
-      - emails
-      type: object
-    sso_delete_admins_response:
-      additionalProperties: false
-      properties:
-        deleted:
-          description: List of email addresses that were successfully deleted
-          items:
-            type: string
-          type: array
-        errors:
-          description: List of error messages for emails that could not be deleted
-          items:
-            type: string
-          type: array
-      type: object
     sso:
       description: SSO
       properties:
@@ -92087,6 +92061,31 @@ components:
           $ref: '#/components/schemas/site_id'
       required:
       - name
+      type: object
+    sso_delete_admins:
+      additionalProperties: false
+      properties:
+        emails:
+          description: List of admin email addresses to delete
+          items:
+            type: string
+          type: array
+      required:
+      - emails
+      type: object
+    sso_delete_admins_response:
+      additionalProperties: false
+      properties:
+        deleted:
+          description: List of email addresses that were successfully deleted
+          items:
+            type: string
+          type: array
+        errors:
+          description: List of error messages for emails that could not be deleted
+          items:
+            type: string
+          type: array
       type: object
     sso_idp_sign_algo:
       description: 'Required if `idp_type`==`saml`, Signing algorithm for SAML Assertion.
@@ -93735,7 +93734,7 @@ components:
         data:
           description: Service data payload (hex encoded)
           examples:
-          - 001200
+          - 640
           type: string
         last_rx_time:
           description: Unix timestamp when this service data was last received
@@ -105930,6 +105929,10 @@ components:
           maximum: 32
           minimum: 16
           type: integer
+        eap_reauth:
+          default: false
+          description: Whether to trigger EAP reauth when the session ends
+          type: boolean
         enable_beacon_protection:
           default: false
           description: Enable Beacon Protection; default is false for better compatibility
@@ -105938,10 +105941,6 @@ components:
           default: false
           description: Enable GCMP-256 encryption suite; default is false for better
             compatibility
-          type: boolean
-        eap_reauth:
-          default: false
-          description: Whether to trigger EAP reauth when the session ends
           type: boolean
         enable_mac_auth:
           default: false

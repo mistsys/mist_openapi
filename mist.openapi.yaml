@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.10**
+  description: '> Version: **2602.1.14**
 
     >
 
-    > Date: **April 8, 2026**
+    > Date: **April 28, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.10
+  version: 2602.1.14
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -5836,10 +5836,9 @@ paths:
       - Orgs Alarm Templates
   /api/v1/orgs/{org_id}/aos/register_cmd:
     get:
-      description: Generates a registration challenge token and AOS-specific CLI commands
-        for TPM-based brownfield registration of AOS devices. The returned command
-        string can be copied and pasted directly into an AOS device to register it
-        with Mist.
+      description: Generates a registration challenge token for TPM-based brownfield
+        registration of AOS devices. The returned command string can be copied and
+        pasted directly into an AOS device to register it with Mist.
       operationId: getOrgAosRegisterCmd
       responses:
         '200':
@@ -8945,6 +8944,67 @@ paths:
       summary: updateOrgEvpnTopology
       tags:
       - Orgs EVPN Topologies
+  /api/v1/orgs/{org_id}/exports/e911_report:
+    delete:
+      description: Disable automatic E911 AP BSSID report generation for the organization.
+      operationId: disableOrgE911Report
+      responses:
+        '200':
+          $ref: '#/components/responses/OrgE911Report'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: disableOrgE911Report
+      tags:
+      - Orgs Reports
+    get:
+      description: Get the status of E911 AP BSSID reports and download URL if available.
+      operationId: getOrgE911Report
+      responses:
+        '200':
+          $ref: '#/components/responses/OrgE911Report'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgE911Report
+      tags:
+      - Orgs Reports
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    post:
+      description: Enable automatic E911 AP BSSID report generation for the organization.
+        Reports will be generated immediately and then every 24 hours.
+      operationId: enableOrgE911Report
+      responses:
+        '200':
+          $ref: '#/components/responses/OrgE911Report'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: enableOrgE911Report
+      tags:
+      - Orgs Reports
   /api/v1/orgs/{org_id}/gatewaytemplates:
     get:
       description: Get List of Org Gateway Templates
@@ -10663,36 +10723,64 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/jsi/sirt/search:
     get:
-      description: Text search for SIRT (Security Incident Response Team) advisories.
-        Search can be done on versions, models, severity, and id fields.
+      description: Search and get all the SIRT for the onboarded devices. Search can
+        be done on severity, id, updated_after, updated_before, published_after, published_before,
+        models, versions, and text fields.
       operationId: searchOrgJsiSirt
       parameters:
-      - description: OS versions to search for
-        in: query
-        name: versions
-        schema:
-          examples:
-          - 20.4R3
-          type: string
-      - description: Device models to search for
-        in: query
-        name: models
-        schema:
-          type: string
-      - description: Severity level to filter by
+      - description: Severity of the SIRT (Critical, High, Medium, Low)
         in: query
         name: severity
         schema:
           type: string
-      - description: SIRT ID to search for
+      - description: JSA number
         in: query
         name: id
         schema:
           examples:
           - JSA100053
           type: string
+      - description: JSA Updated date to be filtered after this date
+        in: query
+        name: updated_after
+        schema:
+          type: string
+      - description: JSA Updated date to be filtered before this date
+        in: query
+        name: updated_before
+        schema:
+          type: string
+      - description: JSA Published date to be filtered after this date
+        in: query
+        name: published_after
+        schema:
+          type: string
+      - description: JSA Published date to be filtered before this date
+        in: query
+        name: published_before
+        schema:
+          type: string
+      - description: Models affected by the SIRT
+        in: query
+        name: models
+        schema:
+          type: string
+      - description: Software version affected by the SIRT
+        in: query
+        name: versions
+        schema:
+          examples:
+          - 20.4R3
+          type: string
+      - description: Wildcards search on os_version_affected, affected_models, severity,
+          jsa_id
+        in: query
+        name: text
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/search_after'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -10811,61 +10899,6 @@ paths:
       - Orgs Licenses
     parameters:
     - $ref: '#/components/parameters/org_id'
-  /api/v1/orgs/{org_id}/logs:
-    get:
-      description: Get List of change logs for the current Org
-      operationId: listOrgAuditLogs
-      parameters:
-      - description: Site id
-        in: query
-        name: site_id
-        schema:
-          examples:
-          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
-          format: uuid
-          type: string
-      - description: Admin name or email
-        in: query
-        name: admin_name
-        schema:
-          examples:
-          - John Doe
-          type: string
-      - description: Message
-        in: query
-        name: message
-        schema:
-          examples:
-          - Created a new site
-          type: string
-      - description: Sort order
-        in: query
-        name: sort
-        schema:
-          $ref: '#/components/schemas/list_org_logs_sort'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/page'
-      responses:
-        '200':
-          $ref: '#/components/responses/LogsSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: listOrgAuditLogs
-      tags:
-      - Orgs Logs
-    parameters:
-    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/logs/count:
     get:
       description: Count by Distinct Attributes of Audit Logs
@@ -10919,6 +10952,61 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: countOrgAuditLogs
+      tags:
+      - Orgs Logs
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/logs/search:
+    get:
+      description: Get a list of change logs for the current Org
+      operationId: listOrgAuditLogs
+      parameters:
+      - description: Site id
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          format: uuid
+          type: string
+      - description: Admin name or email
+        in: query
+        name: admin_name
+        schema:
+          examples:
+          - John Doe
+          type: string
+      - description: Message
+        in: query
+        name: message
+        schema:
+          examples:
+          - Created a new site
+          type: string
+      - description: Sort order
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/list_org_logs_sort'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/LogsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listOrgAuditLogs
       tags:
       - Orgs Logs
     parameters:
@@ -10986,7 +11074,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Marvis Client Invite
+      description: Create Org Marvis Client Invite. SDK Invites can be generated for
+        (and belongs to) an Org. They can be generated by an Admin of an Org and can
+        be revoked at anytime.
       operationId: createOrgMarvisClientInvite
       requestBody:
         content:
@@ -10994,7 +11084,13 @@ paths:
             examples:
               Example:
                 value:
-                  name: string
+                  location:
+                    enabled: true
+                  name: Handhelds
+                  synthetic_test:
+                    enabled: true
+                  telemetry:
+                    enabled: true
             schema:
               $ref: '#/components/schemas/marvis_client'
       responses:
@@ -11064,7 +11160,13 @@ paths:
             examples:
               Example:
                 value:
-                  name: string
+                  location:
+                    enabled: true
+                  name: Handhelds
+                  synthetic_test:
+                    enabled: true
+                  telemetry:
+                    enabled: true
             schema:
               $ref: '#/components/schemas/marvis_client'
       responses:
@@ -11810,6 +11912,56 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
+    put:
+      description: Update Mist Edge Upgrade. Only upgrades in `queued` state can be
+        updated.
+      operationId: updateOrgMxEdgeUpgrade
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mxedge_upgrade_multi'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/MxEdgeUpgrade'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: updateOrgMxEdgeUpgrade
+      tags:
+      - Utilities Upgrade
+  /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}/cancel:
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - $ref: '#/components/parameters/upgrade_id'
+    post:
+      description: Cancel Mist Edge Upgrade. Best effort to cancel an upgrade. Devices
+        which are already upgraded won't be touched.
+      operationId: cancelOrgMxEdgeUpgrade
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: cancelOrgMxEdgeUpgrade
+      tags:
+      - Utilities Upgrade
   /api/v1/orgs/{org_id}/mxedges/versions:
     get:
       description: Get Mist Edge Upgrade Information
@@ -12803,6 +12955,35 @@ paths:
       - Orgs Clients - NAC
     parameters:
     - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/nac_clients/{client_mac}/coa:
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - $ref: '#/components/parameters/client_mac'
+    post:
+      description: Sends CoA (Change of Authorization) command to a NAC client.
+      operationId: sendOrgNacClientCoA
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/nac_client_coa'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/NacClientCoa'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: sendOrgNacClientCoA
+      tags:
+      - Orgs Clients - NAC
   /api/v1/orgs/{org_id}/nacportals:
     get:
       description: List Org NAC Portals
@@ -14591,23 +14772,26 @@ paths:
         \ As there can be multiple commands issued against the same AP at the same\
         \ time and the output all goes through the same websocket stream, session\
         \ is introduced for demux.\n\n#### Subscribe to Device Command outputs\n`WS\
-        \ /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/pcaps\"\
-        \n}\n```\n#### Response (Wireless/RadioTap)\n```json\n{\n  \"event\": \"data\"\
-        \n  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/pcaps\"\n  \"\
-        data\": {\n      \"capture_id\": \"f039b1b4-a23e-48b2-906a-0da40524de73\"\
-        , \n      \"pcap_dict\": {\n          \"dst_mac\": \"68:ec:c5:09:2e:87\",\n\
-        \          \"src_mac\": \"8c:3b:ad:e0:47:40\", \n          \"vlan\": 1, \n\
-        \          \"src_ip\": \"34.224.147.117\", \n          \"dst_ip\": \"192.168.1.55\"\
+        \ /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/orgs/:org_id/pcaps\"\
+        \n}\n```\n#### Response (MxEdge)\n```json\n{\n  \"event\": \"data\"\n  \"\
+        channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/pcaps\"\n  \"data\"\
+        : {\n      \"capture_id\": \"f039b1b4-a23e-48b2-906a-0da40524de73\", \n  \
+        \    \"pcap_dict\": {\n          \"dst_mac\": \"68:ec:c5:09:2e:87\",\n   \
+        \       \"src_mac\": \"8c:3b:ad:e0:47:40\", \n          \"vlan\": 1, \n  \
+        \        \"src_ip\": \"34.224.147.117\", \n          \"dst_ip\": \"192.168.1.55\"\
         ,\n          \"dst_port\": 51635, \n          \"src_port\": 443,\n       \
         \   \"protocol\": \"TCP\", \n          \"mxedge_id\": \"00000000-0000-0000-1000-001122334455\"\
         ,\n          \"direction\": \"tx\", \n          \"timestamp\": 1652247615,\
-        \ \n          \"length\": 159.0, \n          \"interface\": \"port0\",\n \
-        \         \"info\": \"1652247616.007409 IP ec2-34-224-147-117.compute-1.amazonaws.com.https\
-        \ > ip-192-168-1-55.ec2.internal.51635: Flags [P.], seq \n               \
-        \     2192123968:2192124057, ack 4035166782, win 12, options [nop,nop,TS val\
-        \ 597467050 ecr 740580660], length 89\\\\n\",\n          }, \n      \"pcap_raw\"\
-        : \"1MOyoQIABAAAAAAAAAAAAP//AAABAAAAQEx7YhMzAACfAAAAnwAAAGjsxQkuh4w7reBHQIEAAAEIAEUAAI1bLEAAKAZ/CiLgk3XAqAE3AbvJs4KpKEDwg8I+gBgADFf9AAABAQgKI5yfqiwkXTQXAwMAVKY5JopoKQrVEn0/3ld4YntctGEH/rTZuwtCvzSncFw71QJveJi9uxHs57KC8w9Apph3YvXJrmWg7M37+o+YV0KH/xmr626s5Bkhb3QhKOu+NoNEmA==\\\
-        \"\n    }\n}\n```"
+        \ \n          \"length\": 159.0, \n          \"lost_messages\": 0,\n     \
+        \     \"interface\": \"port0\",\n          \"info\": \"1652247616.007409 IP\
+        \ ec2-34-224-147-117.compute-1.amazonaws.com.https > ip-192-168-1-55.ec2.internal.51635:\
+        \ Flags [P.], seq \\n                    2192123968:2192124057, ack 4035166782,\
+        \ win 12, options [nop,nop,TS val 597467050 ecr 740580660], length 89\\\\\
+        n\",\n          }, \n      \"pcap_raw\": \"1MOyoQIABAAAAAAAAAAAAP//AAABAAAAQEx7YhMzAACfAAAAnwAAAGjsxQkuh4w7reBHQIEAAAEIAEUAAI1bLEAAKAZ/CiLgk3XAqAE3AbvJs4KpKEDwg8I+gBgADFf9AAABAQgKI5yfqiwkXTQXAwMAVKY5JopoKQrVEn0/3ld4YntctGEH/rTZuwtCvzSncFw71QJveJi9uxHs57KC8w9Apph3YvXJrmWg7M37+o+YV0KH/xmr626s5Bkhb3QhKOu+NoNEmA==\"\
+        \n    }\n}\n```\n#### Stop Response\n```json\n{\n  \"event\": \"data\"\n \
+        \ \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/pcaps\"\n  \"\
+        data\": {\n      \"capture_id\": \"a2f7374d-6a70-41fd-8a3f-71e42573baaf\"\
+        ,\n      \"pcap_dict\": null\n  }\n}\n```"
       operationId: startOrgPacketCapture
       requestBody:
         content:
@@ -17487,6 +17671,7 @@ paths:
             examples:
               Example:
                 value:
+                  cloud_name: www.amerskyatp.com
                   password: foryoureyesonly
                   realm: mist-team
                   username: john@abc.com
@@ -18524,6 +18709,46 @@ paths:
       summary: updateOrgSso
       tags:
       - Orgs SSO
+  /api/v1/orgs/{org_id}/ssos/{sso_id}/delete_admins:
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - $ref: '#/components/parameters/sso_id'
+    post:
+      description: Delete SSO Admin users by email. This removes SSO-linked admin
+        accounts from the organization.
+      operationId: deleteOrgSsoAdmins
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  emails:
+                  - john@abc.com
+                  - may@abc.com
+            schema:
+              $ref: '#/components/schemas/sso_delete_admins'
+        description: Request Body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sso_delete_admins_response'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteOrgSsoAdmins
+      tags:
+      - Orgs SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}/failures:
     get:
       description: Get List of Org SSO Latest Failures
@@ -19139,7 +19364,37 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/mxedges:
     get:
-      description: Get List of Org MxEdge Stats
+      description: "Get List of Org MxEdge Stats\n\nResults are available via WebSocket\
+        \ streaming.\n\n#### Subscribe to Org Mist Edge stats\n`WS /api-ws/v1/stream`\n\
+        \n```json\n{\n    \"subscribe\": \"/orgs/:org_id/stats/mxedges\"\n}\n```\n\
+        #### Response (firmware update event)\n```json\n{\n  \"event\": \"data\",\n\
+        \  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/mxedges\",\n\
+        \  \"data\": {\n    \"device_id\": \"00000000-0000-0000-1000-5c5b3524500b\"\
+        ,\n    \"event_type\": \"fwupdate\",\n    \"detail\": {\n      \"timestamp\"\
+        : 1485381027,\n      \"status\": \"inprogress\",\n      \"progress\": 45\n\
+        \    }\n  }\n}\n```\n#### Response (mxagent-stats event)\n```json\n{\n  \"\
+        event\": \"data\",\n  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/stats/mxedges\"\
+        ,\n  \"data\": {\n    \"device_id\": \"00000000-0000-0000-1000-5c5b3524500b\"\
+        ,\n    \"event_type\": \"mxagent-stats\",\n    \"detail\": {\n      \"cpu_stat\"\
+        : { \"usage\": 4, \"interrupt\": 1, \"idle\": 95, \"user\": 2, \"system\"\
+        : 1 },\n      \"memory_stat\": { \"usage\": 22, \"total\": 16660455424, \"\
+        free\": 11258937344 },\n      \"service_stat\": {\n        \"mxagent\": {\
+        \ \"running_state\": \"Running\", \"package_version\": \"4.3.5321-0\", \"\
+        uptime\": 434100 },\n        \"tunterm\": { \"running_state\": \"Running\"\
+        , \"package_version\": \"0.1.2822+deb10\", \"uptime\": 519825 }\n      },\n\
+        \      \"version\": \"4.3.5321-0\",\n      \"uptime\": 434100,\n      \"last_seen\"\
+        : 1768341162,\n      \"hostname\": \"3ME-ALL_X1\",\n      \"ext_ip\": \"162.198.72.145\"\
+        ,\n      \"distro\": \"buster\",\n      \"fips_enabled\": false,\n      \"\
+        hardware_revision\": \"100\",\n      \"serial_no\": \"318R0R3\",\n      \"\
+        virtualization_type\": \"None\",\n      \"config_reverted\": false\n    }\n\
+        \  }\n}\n```\n#### Response (tunterm-stats event)\n```json\n{\n  \"event\"\
+        : \"data\",\n  \"channel\": \"/orgs/67970e46-4e12-11e6-9188-0242ac110007/stats/mxedges\"\
+        ,\n  \"data\": {\n    \"device_id\": \"00000000-0000-0000-1000-5c5b3524500b\"\
+        ,\n    \"event_type\": \"tunterm-stats\",\n    \"detail\": {\n      \"version\"\
+        : \"0.1.2822+deb10\",\n      \"uptime\": 519841,\n      \"num_tunnels\": 0,\n\
+        \      \"last_seen\": 1768341178,\n      \"ext_ip\": \"162.198.72.145\",\n\
+        \      \"model\": \"ME-X1\",\n      \"tunnel_capacity\": 0.0\n    }\n  }\n\
+        }\n```"
       operationId: listOrgMxEdgesStats
       parameters:
       - description: Filter for site level mist edges
@@ -34817,7 +35072,28 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/assets:
     get:
-      description: Get List of Site Assets Stats
+      description: "Get List of Site Assets Stats\n\nResults are available via WebSocket\
+        \ streaming.\n\n#### Subscribe to BLE Assets Stream\n`WS /api-ws/v1/stream`\n\
+        \n```json\n{\n    \"subscribe\": \"/sites/:site_id/stats/maps/:map_id/assets\"\
+        \n}\n```\n\n#### Response\n```json\n{\n    \"event\": \"data\",\n    \"channel\"\
+        : \"/sites/4ac1dcf4-9d8b-7211-65c4-057819f0862b/stats/maps/63eda950-c6da-11e4-a628-60f81dd250cc/assets\"\
+        ,\n    \"data\": {\n        \"id\": \"845a23bf-bed9-e43c-4c86-6fa474be7ae5\"\
+        ,\n        \"mac\": \"4a0222000e31\",\n        \"name\": \"Asset Name\",\n\
+        \        \"by\": \"asset\",\n        \"x\": 51.0,\n        \"y\": 29.0,\n\
+        \        \"map_id\": \"63eda950-c6da-11e4-a628-60f81dd250cc\",\n        \"\
+        last_seen\": 1480716946,\n        \"ibeacon_uuid\": \"f3f17139-704a-f03a-2786-0400279e37c3\"\
+        ,\n        \"ibeacon_major\": 13,\n        \"ibeacon_minor\": 138,\n     \
+        \   \"eddystone_uid_namespace\": \"2818e3868dec25629ede\",\n        \"eddystone_uid_instance\"\
+        : \"5c5b35000001\",\n        \"eddystone_url\": \"https://www.abc.com\",\n\
+        \        \"battery_voltage\": 3370,\n        \"temperature\": 23.5,\n    \
+        \    \"manufacture\": \"Asset Manufacturer Name\",\n        \"mfg_company_id\"\
+        : 935,\n        \"mfg_data\": \"648520a1020000\",\n        \"device_name\"\
+        : \"BLE Device\",\n        \"service_packets\": [\n            {\n       \
+        \         \"uuid\": \"00003e10-0000-1000-8000-00805f9b34fb\",\n          \
+        \      \"data\": \"001200\",\n                \"rx_cnt\": 213065,\n      \
+        \          \"last_rx_time\": 1645855923\n            }\n        ],\n     \
+        \   \"rssi\": -45,\n        \"device_id\": \"00000000-0000-0000-1000-5c5b35000001\"\
+        ,\n        \"_ttl\": 86400\n    }\n}\n```"
       operationId: listSiteAssetsStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -41225,22 +41501,37 @@ components:
         rssi: 0
     AssetStatsExample:
       value:
-        battery_voltage: 0
-        eddystone_uid_instance: string
-        eddystone_uid_namespace: string
-        eddystone_url_url: string
-        ibeacon_major: 1
-        ibeacon_minor: 1
-        ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
-        last_seen: 0
-        mac: string
-        map_id: 09d2b626-2e4e-45ef-a3c4-e6aeb6c83db1
-        name: string
+        _ttl: 86400
+        battery_voltage: 3370
+        by: asset
+        device_id: 00000000-0000-0000-1000-5c5b35000001
+        device_name: BLE Device
+        eddystone_uid_instance: 5c5b35000001
+        eddystone_uid_namespace: 2818e3868dec25629ede
+        eddystone_url_url: https://www.abc.com
+        ibeacon_major: 13
+        ibeacon_minor: 138
+        ibeacon_uuid: f3f17139-704a-f03a-2786-0400279e37c3
+        id: 845a23bf-bed9-e43c-4c86-6fa474be7ae5
+        last_seen: 1480716946
+        mac: 4a0222000e31
+        manufacture: Asset Manufacturer Name
+        map_id: 63eda950-c6da-11e4-a628-60f81dd250cc
+        mfg_company_id: 935
+        mfg_data: 648520a1020000
+        name: Asset Name
+        rssi: -45
         rssizones:
         - id: 480f6eca-6276-4993-bfeb-59cbbbbaaf08
           since: 0
-        x: 0
-        y: 0
+        service_packets:
+        - data: 640
+          last_rx_time: 1645855923
+          rx_cnt: 213065
+          uuid: 00003e10-0000-1000-8000-00805f9b34fb
+        temperature: 23.5
+        x: 51.0
+        y: 29.0
         zones:
         - id: 479f6eca-6276-4993-bfeb-5acbbbbabf08
           since: 0
@@ -41261,22 +41552,37 @@ components:
         site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
     AssetsArrayStatsExample:
       value:
-      - battery_voltage: 0
-        eddystone_uid_instance: string
-        eddystone_uid_namespace: string
-        eddystone_url_url: string
-        ibeacon_major: 1
-        ibeacon_minor: 1
-        ibeacon_uuid: 1f89bc00-d0af-481b-82fe-a6629259a39f
-        last_seen: 0
-        mac: string
-        map_id: 09d2b626-2e4e-45ef-a3c4-e6aeb6c83db1
-        name: string
+      - _ttl: 86400
+        battery_voltage: 3370
+        by: asset
+        device_id: 00000000-0000-0000-1000-5c5b35000001
+        device_name: BLE Device
+        eddystone_uid_instance: 5c5b35000001
+        eddystone_uid_namespace: 2818e3868dec25629ede
+        eddystone_url_url: https://www.abc.com
+        ibeacon_major: 13
+        ibeacon_minor: 138
+        ibeacon_uuid: f3f17139-704a-f03a-2786-0400279e37c3
+        id: 845a23bf-bed9-e43c-4c86-6fa474be7ae5
+        last_seen: 1480716946
+        mac: 4a0222000e31
+        manufacture: Asset Manufacturer Name
+        map_id: 63eda950-c6da-11e4-a628-60f81dd250cc
+        mfg_company_id: 935
+        mfg_data: 648520a1020000
+        name: Asset Name
+        rssi: -45
         rssizones:
         - id: 478f6eca-6276-4993-bfeb-5bcbbbbacf08
           since: 0
-        x: 0
-        y: 0
+        service_packets:
+        - data: 640
+          last_rx_time: 1645855923
+          rx_cnt: 213065
+          uuid: 00003e10-0000-1000-8000-00805f9b34fb
+        temperature: 23.5
+        x: 51.0
+        y: 29.0
         zones:
         - id: 477f6eca-6276-4993-bfeb-5ccbbbbadf08
           since: 0
@@ -47539,11 +47845,13 @@ components:
         site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
     MarvisClientExample:
       value:
+        enrollment_url: marvisclient://api.mist.com/path/to/url
         id: 3a14098f-b995-7552-b0a4-b8ee39b337a6
         name: Handhelds
     MarvisClientsArrayExample:
       value:
-      - id: 3a14098f-b995-7552-b0a4-b8ee39b337a6
+      - enrollment_url: marvisclient://api.mist.com/path/to/url
+        id: 3a14098f-b995-7552-b0a4-b8ee39b337a6
         name: Handhelds
     MlExample:
       value:
@@ -49811,6 +50119,27 @@ components:
         - 5c5b350e001b
         started_time: 1435080709
         type: client
+    PcapStatusMxEdgeExample:
+      value:
+        duration: 600
+        enabled: true
+        expiry: 1695838060.309526
+        format: stream
+        id: c5bd6c89-fa52-486f-9fd0-801cfc613328
+        invalid_mxedges: {}
+        max_num_packets: 1024
+        max_pkt_len: 512
+        mxedge_count: 1
+        mxedges:
+          00000000-0000-0000-1000-001122334455:
+            interfaces:
+              port1:
+                tcpdump_expression: udp port 67 or udp port 68
+        org_id: 78c11da8-f984-4425-bedb-a7ddd7d0f6da
+        raw: true
+        site_id: null
+        timestamp: 1695837460.309526
+        type: mxedge
     PcapsSearchExample:
       value:
         end: 1461089816
@@ -49821,6 +50150,19 @@ components:
           - 5c5b35000010
           timestamp: 1461869041
           type: new_assoc
+          url: https://...
+        - duration: 9999.0
+          format: stream
+          id: 80cec4c9-322c-4712-95ce-6ba47fb54fc0
+          last_seen: 1693482149.417
+          mxedges:
+          - 00000000-0000-0000-1000-001122334455
+          org_id: 78c11da8-f984-4425-bedb-a7ddd7d0f6da
+          pcap_url: https://...
+          site_id: null
+          termination_reason: default
+          timestamp: 1693525333.234066
+          type: mxedge
           url: https://...
         start: 1461099816
     PmaDashboardsExample:
@@ -58742,6 +59084,15 @@ components:
           schema:
             $ref: '#/components/schemas/mxtunnels'
       description: OK
+    NacClientCoa:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/nac_client_coa_response'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/nac_client_coa_response'
+      description: Example response
     NacCrlFile:
       content:
         application/json:
@@ -59089,6 +59440,15 @@ components:
               $ref: '#/components/examples/OrgDevicesSummaryExample'
           schema:
             $ref: '#/components/schemas/response_org_devices_summary'
+      description: OK
+    OrgE911Report:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/org_e911_report'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/org_e911_report'
       description: OK
     OrgEventsSearch:
       content:
@@ -62296,6 +62656,16 @@ components:
       type: object
     account_skyatp_config:
       properties:
+        cloud_name:
+          description: Sky ATP cloud name
+          enum:
+          - www.amerskyatp.com
+          - www.apacskyatp.com
+          - www.euroskyatp.com
+          - www.canadaskyatp.com
+          examples:
+          - www.amerskyatp.com
+          type: string
         password:
           examples:
           - foryoureyesonly
@@ -62342,6 +62712,16 @@ components:
     account_skyatp_info:
       additionalProperties: false
       properties:
+        cloud_name:
+          description: Sky ATP cloud name
+          enum:
+          - www.amerskyatp.com
+          - www.apacskyatp.com
+          - www.euroskyatp.com
+          - www.canadaskyatp.com
+          examples:
+          - www.amerskyatp.com
+          type: string
         realm:
           examples:
           - mist-team
@@ -64098,6 +64478,10 @@ components:
           - 'null'
         role:
           $ref: '#/components/schemas/ap_mesh_role'
+        use_wpa3_on_5:
+          default: false
+          description: Whether to use WPA3 on the 5 GHz band for mesh links
+          type: boolean
       type: object
     ap_mesh_bands:
       description: 'List of bands that the mesh should apply to. For relay, the first
@@ -65147,6 +65531,51 @@ components:
       examples:
       - imagotag
       type: string
+    ap_zigbee:
+      additionalProperties: false
+      description: Zigbee AP settings
+      properties:
+        allow_join:
+          $ref: '#/components/schemas/ap_zigbee_allow_join'
+        channel:
+          default: 0
+          description: "Zigbee channel (2.4 GHz). `0` means auto; valid fixed values\
+            \ are 11\u201326"
+          examples:
+          - 0
+          maximum: 26
+          minimum: 0
+          type: integer
+        enabled:
+          default: false
+          description: Whether to enable Zigbee on this AP
+          type: boolean
+        extended_pan_id:
+          description: Extended PAN ID in hex string format; only applicable when
+            `pan_id` is also specified
+          examples:
+          - 1311768467294899695
+          type:
+          - string
+          - 'null'
+        pan_id:
+          description: PAN ID in hex string format; if not specified, assigned automatically
+          examples:
+          - '0x1234'
+          type:
+          - string
+          - 'null'
+      type: object
+    ap_zigbee_allow_join:
+      default: manual
+      description: 'Controls whether new Zigbee devices are allowed to join the network.
+        enum: `always`, `manual`'
+      enum:
+      - always
+      - manual
+      examples:
+      - manual
+      type: string
     api_usage:
       additionalProperties: false
       properties:
@@ -65819,6 +66248,14 @@ components:
           type: integer
         neighbor_as:
           $ref: '#/components/schemas/bgp_as'
+        tunnel_via:
+          default: primary
+          description: 'If `via`==`tunnel`, specifies which tunnel (primary/secondary)
+            this neighbor is associated with. enum: `primary`, `secondary`'
+          enum:
+          - primary
+          - secondary
+          type: string
       required:
       - neighbor_as
       type: object
@@ -66725,35 +67162,46 @@ components:
       - 'null'
     capture_mxedge:
       additionalProperties: false
-      description: Initiate a Wireless Packet Capture
+      description: Initiate a Mist Edge Packet Capture
       properties:
         duration:
           default: 600
           description: Duration of the capture, in seconds
           examples:
           - 600
-          maximum: 86400
+          maximum: 10800
+          minimum: 60
           type: integer
         format:
           $ref: '#/components/schemas/capture_mxedge_format'
         max_pkt_len:
-          default: 128
+          default: 512
           description: Max_len of each packet to capture
           examples:
-          - 68
+          - 512
           maximum: 2048
+          minimum: 64
           type: integer
         mxedges:
           additionalProperties:
             $ref: '#/components/schemas/capture_mxedge_mxedges'
+          description: Dict of Mist Edges to capture on, property key is the Mist
+            Edge ID
           type: object
         num_packets:
           default: 1024
-          description: Number of packets to capture, 0 for unlimited
+          description: Number of packets to capture, minimum 1 or 0 for unlimited
+            (local/remote streaming only)
           examples:
           - 100
           maximum: 10000
+          minimum: 0
           type: integer
+        tcpdump_expression:
+          description: tcpdump expression, applicable across all interfaces if specified
+            at top level. An interface-specific value (under the `interfaces` dict)
+            overrides this top-level value.
+          type: string
         type:
           $ref: '#/components/schemas/capture_mxedge_type'
         tzsp_host:
@@ -69397,6 +69845,8 @@ components:
           - 173.1
           format: double
           type: number
+        zigbee_config:
+          $ref: '#/components/schemas/ap_zigbee'
       required:
       - type
       type: object
@@ -70101,6 +70551,8 @@ components:
           $ref: '#/components/schemas/ap_usb'
         vars:
           $ref: '#/components/schemas/vars'
+        zigbee_config:
+          $ref: '#/components/schemas/ap_zigbee'
       required:
       - type
       type: object
@@ -70731,11 +71183,16 @@ components:
         type: string
       type: array
     dot11_band:
-      description: 'enum: `24`, `5`, `6`'
+      description: 'enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`,
+        `6-selectable`'
       enum:
       - '24'
       - '5'
+      - 5-dedicated
+      - 5-selectable
       - '6'
+      - 6-dedicated
+      - 6-selectable
       type: string
     dot11_bandwidth:
       description: 'channel width for the band.enum: `0`(disabled, response only),
@@ -71201,6 +71658,11 @@ components:
           description: Optional, for ERB or CLOS, you can either use esilag to upstream
             routers or to also be the virtual-gateway. When `routed_at` != `core`,
             whether to do virtual-gateway at core as well
+          type: boolean
+        enable_inband_mgmt:
+          default: false
+          description: Whether to route management traffic inband; routes will be
+            propagated to downstream switches
           type: boolean
         enable_inband_ztp:
           default: false
@@ -72306,6 +72768,10 @@ components:
         poe_disabled:
           default: false
           type: boolean
+        poe_keep_state_when_reboot:
+          default: false
+          description: Whether Perpetual PoE capabilities are enabled for a port
+          type: boolean
         port_network:
           description: Only for SRX and if `usage`==`lan`, the name of the Network
             to be used as the Untagged VLAN
@@ -72460,7 +72926,9 @@ components:
       anyOf:
       - type: integer
       - type: string
-      description: For SRX only and if HA Mode
+      description: For SRX only and if HA Mode. `-1` means it will be managed by the
+        device. Use `>= 0` values to manage it manually. Ensure no conflicting values
+        are assigned across all ports.
     gateway_port_config_wan_networks:
       description: Only if `usage`==`wan`. If some networks are connected to this
         WAN port, it can be added here so policies can be defined
@@ -73682,6 +74150,8 @@ components:
     installer_device:
       additionalProperties: false
       properties:
+        ble_stat:
+          $ref: '#/components/schemas/installer_device_ble_stat'
         connected:
           examples:
           - true
@@ -73758,6 +74228,24 @@ components:
           - 300
           format: double
           type: number
+      type: object
+    installer_device_ble_stat:
+      additionalProperties: false
+      description: BLE statistics for the device
+      properties:
+        major:
+          examples:
+          - 12345
+          type: integer
+        minors:
+          items:
+            type: integer
+          type: array
+        uuid:
+          examples:
+          - ada72f8f-1643-e5c6-94db-f2a5636f1a64
+          format: uuid
+          type: string
       type: object
     installer_devices:
       items:
@@ -76023,25 +76511,70 @@ components:
         disabled:
           default: false
           type: boolean
+        enrollment_url:
+          description: In MDM, add `--enrollment_url <enrollment_url>` to the install
+            command
+          examples:
+          - marvisclient://api.mist.com/path/to/url
+          readOnly: true
+          type: string
         id:
           $ref: '#/components/schemas/id'
+        location:
+          additionalProperties: false
+          properties:
+            enabled:
+              type: boolean
+          type: object
         name:
           examples:
           - Handhelds
           type: string
-        provision_url:
-          description: In MDM, add `--provision_url <provision_url>` to the install
-            command
-          examples:
-          - https://api.mist.com/path/to/url
-          format: url
-          readOnly: true
-          type: string
+        synthetic_test:
+          additionalProperties: false
+          properties:
+            enabled:
+              type: boolean
+          type: object
+        telemetry:
+          additionalProperties: false
+          description: 'Note: some stats are not collected when it''s not connected
+            to Mist infrastructure'
+          properties:
+            enabled:
+              type: boolean
+          type: object
       type: object
     marvis_clients:
       items:
         $ref: '#/components/schemas/marvis_client'
       type: array
+    marvis_self_driving:
+      additionalProperties: false
+      description: Self-driving network automation settings per domain
+      properties:
+        wan:
+          additionalProperties: false
+          properties:
+            enabled:
+              default: false
+              type: boolean
+          type: object
+        wired:
+          additionalProperties: false
+          properties:
+            enabled:
+              default: false
+              type: boolean
+          type: object
+        wireless:
+          additionalProperties: false
+          properties:
+            enabled:
+              default: false
+              type: boolean
+          type: object
+      type: object
     memory_stat:
       additionalProperties: false
       description: Memory usage stat (for virtual chassis, memory usage of master
@@ -77665,6 +78198,31 @@ components:
         type: string
       readOnly: true
       type: array
+    nac_client_coa:
+      additionalProperties: false
+      properties:
+        coa_type:
+          default: reauth
+          description: 'CoA type to send to the client. enum: `reauth`, `disconnect`'
+          enum:
+          - reauth
+          - disconnect
+          type: string
+      type: object
+    nac_client_coa_response:
+      additionalProperties: false
+      properties:
+        device_mac:
+          description: MAC address of the target device (AP or switch MAC)
+          type: string
+        device_type:
+          description: 'Target device type. enum: `ap`, `switch`, `gateway`'
+          enum:
+          - ap
+          - switch
+          - gateway
+          type: string
+      type: object
     nac_client_event:
       additionalProperties: false
       properties:
@@ -79256,6 +79814,30 @@ components:
       - site_id
       - version
       type: string
+    org_e911_report:
+      additionalProperties: false
+      description: E911 AP BSSID report status for the organization
+      properties:
+        detail:
+          description: Human-readable description of the action taken
+          type: string
+        last_generated:
+          description: Unix timestamp of when the report file was last generated.
+            Only present when `status` is `available`.
+          type: integer
+        status:
+          description: 'Current status of E911 report generation. enum: `disabled`,
+            `scheduled`, `available`'
+          enum:
+          - disabled
+          - scheduled
+          - available
+          type: string
+        url:
+          description: Presigned URL to download the CSV file. Only present when `status`
+            is `available`.
+          type: string
+      type: object
     org_event:
       additionalProperties: false
       properties:
@@ -79574,7 +80156,7 @@ components:
         junos_shell_access:
           $ref: '#/components/schemas/org_setting_junos_shell_access'
         marvis:
-          $ref: '#/components/schemas/marvis'
+          $ref: '#/components/schemas/org_setting_marvis'
         mgmt:
           $ref: '#/components/schemas/org_setting_mgmt'
         mist_nac:
@@ -80027,6 +80609,12 @@ components:
       - none
       - viewer
       type: string
+    org_setting_marvis:
+      additionalProperties: false
+      properties:
+        self_driving:
+          $ref: '#/components/schemas/marvis_self_driving'
+      type: object
     org_setting_mgmt:
       additionalProperties: false
       description: management-related properties
@@ -80054,6 +80642,12 @@ components:
     org_setting_mist_nac:
       additionalProperties: false
       properties:
+        allow_teap_machine_auth_only:
+          default: false
+          description: allow clients to connect even when the user cert failed. TEAP
+            authenticates both Machine Cert and User Cert. When enabled, clients who
+            only succeed Machine Cert authentication will be accepted.
+          type: boolean
         cacerts:
           $ref: '#/components/schemas/cacerts'
         default_idp_id:
@@ -80089,6 +80683,8 @@ components:
           $ref: '#/components/schemas/idp_user_cert_lookup_field'
         idps:
           $ref: '#/components/schemas/org_setting_mist_nac_idps'
+        mdm:
+          $ref: '#/components/schemas/org_setting_mist_nac_mdm'
         server_cert:
           $ref: '#/components/schemas/org_setting_mist_nac_server_cert'
         use_ip_version:
@@ -80175,6 +80771,18 @@ components:
       - v4
       - v6
       type: string
+    org_setting_mist_nac_mdm:
+      additionalProperties: false
+      description: MDM (Mobile Device Management) CoA configuration
+      properties:
+        coa_type:
+          default: reauth
+          description: CoA type to use for MDM
+          enum:
+          - reauth
+          - disconnect
+          type: string
+      type: object
     org_setting_mist_nac_server_cert:
       additionalProperties: false
       description: radius server cert to be presented in EAP TLS
@@ -81404,6 +82012,10 @@ components:
           $ref: '#/components/schemas/psk_usage'
         vlan_id:
           $ref: '#/components/schemas/psk_vlan_id'
+        vlan_name:
+          description: VLAN name to be assigned. Optional, `vlan_id` takes precedence
+            if both are provided
+          type: string
       required:
       - name
       - passphrase
@@ -84535,10 +85147,20 @@ components:
           type: string
         id:
           $ref: '#/components/schemas/id'
+        last_seen:
+          description: Last seen timestamp of the capture
+          examples:
+          - 1693482149.417
+          type: number
         max_num_packets:
           examples:
           - 1024
           type: number
+        mxedges:
+          description: List of Mist Edge IDs included in the capture
+          items:
+            type: string
+          type: array
         org_id:
           $ref: '#/components/schemas/org_id'
         pcap_aps:
@@ -84670,6 +85292,13 @@ components:
           examples:
           - 300
           type: integer
+        enabled:
+          type: boolean
+        expiry:
+          description: Expiry time of the capture session, in epoch seconds
+          examples:
+          - 1695838060.309526
+          type: number
         failed:
           $ref: '#/components/schemas/response_pcap_status_failed'
         format:
@@ -84680,6 +85309,10 @@ components:
           $ref: '#/components/schemas/id'
         includes_mcast:
           type: boolean
+        invalid_mxedges:
+          additionalProperties: true
+          description: Map of Mist Edge IDs that could not be configured for capture
+          type: object
         max_num_packets:
           description: Max number of packets configured by user
           examples:
@@ -84687,7 +85320,10 @@ components:
           type: integer
         max_pkt_len:
           examples:
-          - 128
+          - 512
+          type: integer
+        mxedge_count:
+          description: Number of Mist Edges in the capture session
           type: integer
         mxedges:
           $ref: '#/components/schemas/response_pcap_status_mxedges'
@@ -84697,16 +85333,22 @@ components:
           type: integer
         ok:
           $ref: '#/components/schemas/response_pcap_status_ok'
+        org_id:
+          $ref: '#/components/schemas/org_id'
         pcap_aps:
           $ref: '#/components/schemas/response_pcap_status_pcap_aps'
         radiotap_tcpdump_expression:
           description: When `type`==`radiotap`, radiotap_tcpdump_expression expression
             provided by the user
           type: string
+        raw:
+          type: boolean
         scan_tcpdump_expression:
           description: When `type`==`scan`, scan_tcpdump_expression provided by the
             user
           type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
         ssid:
           type:
           - string
@@ -84720,6 +85362,8 @@ components:
         tcpdump_expression:
           description: tcpdump expression provided by the user (common)
           type: string
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
         type:
           $ref: '#/components/schemas/pcap_type'
         tzsp_host:
@@ -84763,11 +85407,21 @@ components:
         type: string
       type: array
     response_pcap_status_mxedges:
-      description: Information on mxedges to capture packets on if a mxedge capture
-        type is specified
-      items:
-        type: string
-      type: array
+      additionalProperties:
+        $ref: '#/components/schemas/response_pcap_status_mxedges_item'
+      description: Dict of Mist Edges to capture on, property key is the Mist Edge
+        ID
+      type: object
+    response_pcap_status_mxedges_item:
+      additionalProperties: false
+      properties:
+        interfaces:
+          additionalProperties:
+            $ref: '#/components/schemas/capture_mxedge_mxedges_interfaces'
+          description: Dict of interfaces to capture on, property key is the port
+            name
+          type: object
+      type: object
     response_pcap_status_ok:
       description: List of target APs successfully configured to capture packets
       items:
@@ -91407,6 +92061,31 @@ components:
       required:
       - name
       type: object
+    sso_delete_admins:
+      additionalProperties: false
+      properties:
+        emails:
+          description: List of admin email addresses to delete
+          items:
+            type: string
+          type: array
+      required:
+      - emails
+      type: object
+    sso_delete_admins_response:
+      additionalProperties: false
+      properties:
+        deleted:
+          description: List of email addresses that were successfully deleted
+          items:
+            type: string
+          type: array
+        errors:
+          description: List of error messages for emails that could not be deleted
+          items:
+            type: string
+          type: array
+      type: object
     sso_idp_sign_algo:
       description: 'Required if `idp_type`==`saml`, Signing algorithm for SAML Assertion.
         enum: `sha1`, `sha256`, `sha384`, `sha512`'
@@ -92933,6 +93612,10 @@ components:
       additionalProperties: false
       description: Asset statistics
       properties:
+        _ttl:
+          description: Time-to-live in seconds; how long this asset data is valid
+            in cache
+          type: integer
         battery_voltage:
           description: Battery voltage, in mV
           examples:
@@ -92942,6 +93625,18 @@ components:
           examples:
           - 6
           type: integer
+        by:
+          description: Source type
+          examples:
+          - asset
+          type: string
+        device_id:
+          description: Device ID of the loudest AP
+          examples:
+          - 00000000-0000-0000-1000-5c5b35000001
+          format: uuid
+          readOnly: true
+          type: string
         device_name:
           examples:
           - a
@@ -92968,6 +93663,8 @@ components:
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
           $ref: '#/components/schemas/ibeacon_uuid'
+        id:
+          $ref: '#/components/schemas/id'
         last_seen:
           $ref: '#/components/schemas/last_seen'
         mac:
@@ -92975,11 +93672,24 @@ components:
           examples:
           - 6fa474be7ae5
           type: string
+        manufacture:
+          description: Manufacturer name resolved from company ID
+          type: string
         map_id:
           description: Map where the device belongs to
           examples:
           - c45be59f-854d-4ef7-b782-dcd6309c84a9
           format: uuid
+          type: string
+        mfg_company_id:
+          description: BLE manufacturer company ID from advertisement
+          examples:
+          - 935
+          type: integer
+        mfg_data:
+          description: Manufacturer-specific data (hex encoded)
+          examples:
+          - 648520a1020000
           type: string
         name:
           description: Name / label of the device
@@ -92987,11 +93697,14 @@ components:
           - 6fa474be7ae5
           type: string
         rssi:
+          description: Signal strength (RSSI) of the loudest AP in dBm
           examples:
           - -60
           type: integer
         rssizones:
           $ref: '#/components/schemas/asset_rssi_zones'
+        service_packets:
+          $ref: '#/components/schemas/stats_asset_service_packets'
         temperature:
           examples:
           - 23
@@ -93013,6 +93726,37 @@ components:
       required:
       - mac
       type: object
+    stats_asset_service_packet:
+      additionalProperties: false
+      description: Service data advertisement from a BLE asset
+      properties:
+        data:
+          description: Service data payload (hex encoded)
+          examples:
+          - 640
+          type: string
+        last_rx_time:
+          description: Unix timestamp when this service data was last received
+          examples:
+          - 1645855923
+          type: integer
+        rx_cnt:
+          description: Total number of times this service data was received
+          examples:
+          - 213065
+          type: integer
+        uuid:
+          description: Service UUID
+          examples:
+          - 00003e10-0000-1000-8000-00805f9b34fb
+          type: string
+      type: object
+    stats_asset_service_packets:
+      description: List of all service data advertisements (maximum length of 10)
+      items:
+        $ref: '#/components/schemas/stats_asset_service_packet'
+      maxItems: 10
+      type: array
     stats_assets:
       items:
         $ref: '#/components/schemas/stats_asset'
@@ -97404,6 +98148,10 @@ components:
         poe_disabled:
           default: false
           description: Whether PoE capabilities are disabled for a port
+          type: boolean
+        poe_keep_state_when_reboot:
+          default: false
+          description: Whether Perpetual PoE is enabled; keeps PoE state across reboots
           type: boolean
         port_network:
           description: Native network/vlan for untagged traffic
@@ -105184,6 +105932,15 @@ components:
           default: false
           description: Whether to trigger EAP reauth when the session ends
           type: boolean
+        enable_beacon_protection:
+          default: false
+          description: Enable Beacon Protection; default is false for better compatibility
+          type: boolean
+        enable_gcmp256:
+          default: false
+          description: Enable GCMP-256 encryption suite; default is false for better
+            compatibility
+          type: boolean
         enable_mac_auth:
           default: false
           description: Whether to enable MAC Auth, uses the same auth_servers
@@ -105302,7 +106059,8 @@ components:
       - '24'
       - '5'
       - '6'
-      description: List of radios that the wlan should apply to.
+      description: 'List of radios that the wlan should apply to. enum: `24`, `5`,
+        `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
       items:
         $ref: '#/components/schemas/dot11_band'
       type: array
