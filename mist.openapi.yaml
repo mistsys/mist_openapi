@@ -35539,28 +35539,7 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/assets:
     get:
-      description: "Get List of Site Assets Stats\n\nResults are available via WebSocket\
-        \ streaming.\n\n#### Subscribe to BLE Assets Stream\n`WS /api-ws/v1/stream`\n\
-        \n```json\n{\n    \"subscribe\": \"/sites/:site_id/stats/maps/:map_id/assets\"\
-        \n}\n```\n\n#### Response\n```json\n{\n    \"event\": \"data\",\n    \"channel\"\
-        : \"/sites/4ac1dcf4-9d8b-7211-65c4-057819f0862b/stats/maps/63eda950-c6da-11e4-a628-60f81dd250cc/assets\"\
-        ,\n    \"data\": {\n        \"id\": \"845a23bf-bed9-e43c-4c86-6fa474be7ae5\"\
-        ,\n        \"mac\": \"4a0222000e31\",\n        \"name\": \"Asset Name\",\n\
-        \        \"by\": \"asset\",\n        \"x\": 51.0,\n        \"y\": 29.0,\n\
-        \        \"map_id\": \"63eda950-c6da-11e4-a628-60f81dd250cc\",\n        \"\
-        last_seen\": 1480716946,\n        \"ibeacon_uuid\": \"f3f17139-704a-f03a-2786-0400279e37c3\"\
-        ,\n        \"ibeacon_major\": 13,\n        \"ibeacon_minor\": 138,\n     \
-        \   \"eddystone_uid_namespace\": \"2818e3868dec25629ede\",\n        \"eddystone_uid_instance\"\
-        : \"5c5b35000001\",\n        \"eddystone_url\": \"https://www.abc.com\",\n\
-        \        \"battery_voltage\": 3370,\n        \"temperature\": 23.5,\n    \
-        \    \"manufacture\": \"Asset Manufacturer Name\",\n        \"mfg_company_id\"\
-        : 935,\n        \"mfg_data\": \"648520a1020000\",\n        \"device_name\"\
-        : \"BLE Device\",\n        \"service_packets\": [\n            {\n       \
-        \         \"uuid\": \"00003e10-0000-1000-8000-00805f9b34fb\",\n          \
-        \      \"data\": \"001200\",\n                \"rx_cnt\": 213065,\n      \
-        \          \"last_rx_time\": 1645855923\n            }\n        ],\n     \
-        \   \"rssi\": -45,\n        \"device_id\": \"00000000-0000-0000-1000-5c5b35000001\"\
-        ,\n        \"_ttl\": 86400\n    }\n}\n```"
+      description: Get List of Site Assets Stats
       operationId: listSiteAssetsStats
       parameters:
       - $ref: '#/components/parameters/start'
