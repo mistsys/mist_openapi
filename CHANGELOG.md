@@ -2,6 +2,128 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2602.1.14] - 2026-04-28
+
+- Updated `evpn_options` schema:
+  - Added `enable_inband_mgmt` (boolean, default: `false`) — whether to route management traffic inband; routes will be propagated to downstream switches
+
+## [2602.1.13] - 2026-04-28
+
+- Updated `switch_port_config_overwrite` schema:
+  - Added `poe_keep_state_when_reboot` (boolean, default: `false`) — whether Perpetual PoE is enabled; keeps PoE state across reboots
+
+## [2602.1.12] - 2026-04-28
+
+- Updated `ap_mesh` schema:
+  - Added `use_wpa3_on_5` (boolean, default: `false`) — whether to use WPA3 on the 5 GHz band for mesh links
+- Added `ap_zigbee` schema with fields: `enabled`, `channel` (0 = auto, 11–26 for fixed), `pan_id`, `extended_pan_id`, `allow_join`
+- Added `ap_zigbee_allow_join` enum schema (`manual` (default), `always`)
+- Added `zigbee_config` field (ref: `ap_zigbee`) to `device_ap` and `deviceprofile_ap` schemas
+
+## [2602.1.11] - 2026-04-28
+
+- Updated `stats_asset` schema (Subscribe to BLE Assets Stream):
+  - Added `_ttl` (integer) — time-to-live in seconds for the asset data in cache
+  - Added `by` (string) — source type (e.g. "asset")
+  - Added `device_id` (string UUID, readOnly) — device ID of the loudest AP
+  - Added `id` (UUID, readOnly) — unique identifier for the asset
+  - Added `manufacture` (string) — manufacturer name resolved from company ID
+  - Added `mfg_company_id` (integer) — BLE manufacturer company ID from advertisement
+  - Added `mfg_data` (string) — manufacturer-specific data (hex encoded)
+  - Added `service_packets` (array, max 10) — list of service data advertisements; each item has `uuid`, `data`, `rx_cnt`, `last_rx_time`
+  - Updated `rssi` description to clarify it is the RSSI of the loudest AP
+- Added `stats_asset_service_packet` schema
+- Added `stats_asset_service_packets` schema
+- Updated `AssetStatsExample` and `AssetsArrayStatsExample` with all new fields
+- Updated `GET /api/v1/sites/{site_id}/stats/assets` description to include WebSocket subscribe info for BLE Assets Stream (`/sites/:site_id/stats/maps/:map_id/assets`)
+
+- Updated `wlan_auth` schema:
+  - Added `enable_gcmp256` (boolean, default: `false`) — enable GCMP-256 encryption suite; default false for better compatibility
+  - Added `enable_beacon_protection` (boolean, default: `false`) — enable Beacon Protection; default false for better compatibility
+
+- Updated `marvis_client` schema and Marvis Client Invite endpoints:
+  - Added `telemetry` object with `enabled` (boolean) — note: some stats not collected when not connected to Mist infrastructure
+  - Added `location` object with `enabled` (boolean)
+  - Added `synthetic_test` object with `enabled` (boolean)
+  - Renamed `provision_url` → `enrollment_url`; updated description to "In MDM, add `--enrollment_url <enrollment_url>` to the install command" and example URL to `marvisclient://` scheme
+  - Updated `createOrgMarvisClientInvite` description to clarify SDK Invites belong to an Org, can be created by an Admin, and can be revoked at anytime
+  - Updated request body examples for `createOrgMarvisClientInvite` and `updateOrgMarvisClientInvite`
+  - Updated `MarvisClientExample` and `MarvisClientsArrayExample` to include `enrollment_url`
+
+- Updated `GET /api/v1/orgs/{org_id}/jsi/sirt/search`:
+  - Updated description to "Search and get all the SIRT for the onboarded devices"
+  - Added `updated_after` (string) — JSA Updated date to be filtered after this date
+  - Added `updated_before` (string) — JSA Updated date to be filtered before this date
+  - Added `published_after` (string) — JSA Published date to be filtered after this date
+  - Added `published_before` (string) — JSA Published date to be filtered before this date
+  - Added `text` (string) — wildcard search on os_version_affected, affected_models, severity, jsa_id
+  - Added `sort` query parameter
+  - Updated `severity` description to list valid values (Critical, High, Medium, Low)
+  - Updated `id` description to "JSA number"
+
+- Updated `/api/v1/orgs/{org_id}/logs`
+  - Renamed path to `/api/v1/orgs/{org_id}/logs/search`
+  - Updated description to "Get a list of change logs for the current Org"
+- Updated `org_setting_mist_nac` schema:
+  - Added `allow_teap_machine_auth_only` (boolean, default: `false`) — allows clients to connect when only Machine Cert succeeds in TEAP authentication
+  - Added `mdm` object with `coa_type` field (`"reauth"` (default) or `"disconnect"`) for MDM CoA configuration
+- Added `org_setting_mist_nac_mdm` schema
+
+- Updated `org_setting_marvis` schema (Org Setting only):
+  - Added `self_driving` object with `wireless`, `wired`, and `wan` sub-objects (each with an `enabled` boolean, default: `false`)
+- Added `org_setting_marvis` and `marvis_self_driving` schemas
+
+- Updated `capture_mxedge` schema (Mist Edge Packet Capture):
+  - Updated description to "Initiate a Mist Edge Packet Capture"
+  - `duration`: added `minimum: 60`, updated `maximum` from `86400` to `10800` (3h)
+  - `max_pkt_len`: updated `default` from `128` to `512`, added `minimum: 64`
+  - `num_packets`: added `minimum: 0`, updated description to clarify 0 is unlimited for streaming only
+  - Added top-level `tcpdump_expression` property (overridden by interface-specific value)
+- Updated `response_pcap_search_item` schema:
+  - Added `last_seen` (number) property
+  - Added `mxedges` (array of strings) property
+- Updated `PcapsSearchExample` to include an mxedge capture result
+- Updated `response_pcap_status` schema:
+  - Added `enabled`, `expiry`, `invalid_mxedges`, `mxedge_count`, `org_id`, `raw`, `site_id`, `timestamp` properties
+  - Fixed `max_pkt_len` example from `128` to `512`
+- Updated `response_pcap_status_mxedges` schema from array to dict keyed by mxedge_id (with `interfaces`)
+- Added `response_pcap_status_mxedges_item` schema
+- Added `PcapStatusMxEdgeExample` example
+- Updated `startOrgPacketCapture` endpoint description:
+  - Fixed WebSocket subscribe channel from `/sites/{site_id}/pcaps` to `/orgs/:org_id/pcaps`
+  - Renamed response section from "Wireless/RadioTap" to "MxEdge"
+  - Added `lost_messages` field to `pcap_dict` in the response example
+  - Added stop response example (when `pcap_dict` is `null`)
+- Updated `listOrgMxEdgesStats` endpoint description:
+- Added `GET /api/v1/orgs/{org_id}/exports/e911_report` — get E911 AP BSSID report status and download URL
+- Added `POST /api/v1/orgs/{org_id}/exports/e911_report` — enable automatic E911 report generation (immediate + every 24h)
+- Added `DELETE /api/v1/orgs/{org_id}/exports/e911_report` — disable automatic E911 report generation
+- Added `org_e911_report` schema and `OrgE911Report` response component
+- Added `POST /api/v1/orgs/{org_id}/nac_clients/{client_mac}/coa`
+  - New endpoint to send a CoA (Change of Authorization) command to a NAC client
+  - Request: `coa_type` (`reauth` (default) or `disconnect`); Response: `device_type` and `device_mac` of the target device
+- Added `nac_client_coa` and `nac_client_coa_response` schemas
+- Added `PUT /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}`
+  - New endpoint to update a Mist Edge upgrade job (only `queued` state upgrades can be updated)
+- Added `POST /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}/cancel`
+  - New endpoint to cancel a Mist Edge upgrade (best effort; already-upgraded devices are unaffected)
+- Added `POST /api/v1/orgs/{org_id}/ssos/{sso_id}/delete_admins`
+  - New endpoint to delete SSO admin users by email address
+  - Request: `emails` array; Response: `deleted` (succeeded) and `errors` (failed) arrays
+- Added `sso_delete_admins` and `sso_delete_admins_response` schemas
+- Updated `psk` schema:
+  - Added `vlan_name` (string, optional) — VLAN name to assign; `vlan_id` takes precedence if both are provided
+- Updated `gateway_port_config` schema:
+  - Added `poe_keep_state_when_reboot` (boolean, default: `false`) — controls whether PoE state is preserved across device reboots
+- Updated `bgp_config_neighbors` schema:
+  - Added `tunnel_via` (enum: `primary` (default), `secondary`) — specifies which tunnel a BGP neighbor is associated with when `via`==`tunnel`
+- Updated `installer_device` schema:
+  - Added `ble_stat` object with `uuid`, `major`, and `minors` fields
+- Added `installer_device_ble_stat` schema
+- Updated `account_skyatp_config` schema and `account_skyatp_info` schema:
+  - Added `cloud_name` field (enum: `www.amerskyatp.com`, `www.apacskyatp.com`, `www.euroskyatp.com`, `www.canadaskyatp.com`)
+- Updated `POST /api/v1/orgs/{org_id}/setting/skyatp/setup` request body example to include `cloud_name`
+
 ## [2602.1.10] - 2026-04-08
 
 - Added `minis-application` webhook sample
