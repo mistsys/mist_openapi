@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.14**
+  description: '> Version: **2602.1.11**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.14
+  version: 2602.1.11
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -1074,6 +1074,7 @@ tags:
     monitoring / routing / policing
   name: Sites Applications
 - name: Sites Anomaly
+- name: Sites Auto Map Assignment
 - description: 'An Asset Filter is a feature that allows users to define specific
     criteria or conditions to filter and display only certain assets based on their
     attributes or properties.
@@ -1522,6 +1523,8 @@ tags:
 - description: API Calls to retrieve statistics about the Discovered Switches at the
     Site level
   name: Sites Stats - Discovered Switches
+- description: API Calls to retrieve IoT Endpoint statistics for the current Site
+  name: Sites Stats - IoT Endpoints
 - description: API Calls to retrieve constant values that can be used in different
     parts of the configuration
   name: Constants Definitions
@@ -23892,6 +23895,45 @@ paths:
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
+  /api/v1/sites/{site_id}/apply_auto_map_assignment:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: Apply (accept) auto map assignment results for a site. Devices
+        are associated with their assigned maps. Omit `map_ids` or provide an empty
+        list to accept all pending assignments; provide specific `map_ids` for a partial
+        accept.
+      operationId: applySiteAutoMapAssignment
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Accept_All:
+                value: {}
+              Accept_Specific_Maps:
+                value:
+                  map_ids:
+                  - d3c42998-9012-4859-9743-6b9bee475309
+                  - f7a21456-7891-4abc-def0-123456789abc
+            schema:
+              $ref: '#/components/schemas/auto_map_assignment_request'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/AutoMapAssignmentApply'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: applySiteAutoMapAssignment
+      tags:
+      - Sites Auto Map Assignment
   /api/v1/sites/{site_id}/apps:
     get:
       description: Get List of Site Applications
@@ -24264,6 +24306,80 @@ paths:
       summary: attachSiteAssetImage
       tags:
       - Sites Assets
+  /api/v1/sites/{site_id}/auto_map_assignment:
+    delete:
+      description: Cancel an in-progress auto map assignment operation for the site.
+        Validates that auto map assignment is currently running, notifies all APs
+        to fetch new configuration, and sends a cancel command to the orchestration
+        service.
+      operationId: cancelSiteAutoMapAssignment
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          description: Auto map assignment not in progress
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: cancelSiteAutoMapAssignment
+      tags:
+      - Sites Auto Map Assignment
+    get:
+      description: Get the current status of auto map assignment for the site.
+      operationId: getSiteAutoMapAssignmentStatus
+      responses:
+        '200':
+          $ref: '#/components/responses/AutoMapAssignmentInfo'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteAutoMapAssignmentStatus
+      tags:
+      - Sites Auto Map Assignment
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: 'Start the auto map assignment process for a site. The service
+        automatically assigns APs to maps based on BLE ranging data and requires at
+        least 3 APs with compatible firmware and model support for BLE.
+
+
+        Repeated POST requests while a site assignment is still running will be rejected.'
+      operationId: startSiteAutoMapAssignment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/auto_map_assignment'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/AutoMapAssignment'
+        '400':
+          description: Auto map assignment already in progress
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteAutoMapAssignment
+      tags:
+      - Sites Auto Map Assignment
   /api/v1/sites/{site_id}/avprofiles/derived:
     get:
       description: Get the list of derived Antivirus Profiles for a site
@@ -24436,6 +24552,45 @@ paths:
       summary: updateSiteBeacon
       tags:
       - Sites Beacons
+  /api/v1/sites/{site_id}/clear_auto_map_assignment:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: Clear (reject) auto map assignment results for a site without applying
+        them. The cached assignment results are cleared. Omit `map_ids` or provide
+        an empty list to reject all pending assignments; provide specific `map_ids`
+        for a partial reject.
+      operationId: clearSiteAutoMapAssignment
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Clear_All:
+                value: {}
+              Clear_Specific_Maps:
+                value:
+                  map_ids:
+                  - d3c42998-9012-4859-9743-6b9bee475309
+                  - f7a21456-7891-4abc-def0-123456789abc
+            schema:
+              $ref: '#/components/schemas/auto_map_assignment_request'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/AutoMapAssignmentClear'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: clearSiteAutoMapAssignment
+      tags:
+      - Sites Auto Map Assignment
   /api/v1/sites/{site_id}/clients/count:
     get:
       description: Count by Distinct Attributes of Clients
@@ -26036,7 +26191,9 @@ paths:
       - Utilities Upgrade
   /api/v1/sites/{site_id}/devices/upgrade/{upgrade_id}:
     get:
-      description: Get Site Device Upgrade
+      description: "Get Site Device Upgrade\n\n#### Subscribe to Site Device Upgrade\
+        \ Events\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/upgrade/{upgrade_id}\"\
+        \n}\n```"
       operationId: getSiteDeviceUpgrade
       responses:
         '200':
@@ -28273,7 +28430,8 @@ paths:
 
         | messages | string | Upload 1 to 10 /var/log/messages* files |
 
-        | core-dumps | string | Upload all core dump files, if any |
+        | core-dumps | string | Upload all core dump files, if any. Uploads for all
+        members of VC on switches.|
 
         | full | string | Upload 1 file with output of request support information,
         1 file that concatenates all /var/log/outbound-ssh.log files, all core dump
@@ -28732,6 +28890,17 @@ paths:
                     - xe-0/1/1
                     vc_role: backup
                   op: preprovision
+              remove-preprovision-members-and-clean-up-inventory:
+                value:
+                  members:
+                  - mac: aff827549235
+                    member_id: 0
+                    vc_role: master
+                  - mac: 8396cd006c8c
+                    member_id: 1
+                    vc_role: linecard
+                  op: preprovision
+                  remove_inventory: true
               removing-two-switches-from-VC:
                 value:
                   members:
@@ -28876,6 +29045,49 @@ paths:
       summary: setSiteVcPort
       tags:
       - Sites Devices - Wired - Virtual Chassis
+  /api/v1/sites/{site_id}/devices/{device_id}/zigbee_join:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/device_id'
+    post:
+      description: "Allow Zigbee end devices to join the network for a configurable\
+        \ duration. After the duration expires, new joins will be blocked (unless\
+        \ `allow_join`==`always` is configured on the device).\n\n#### Subscribe to\
+        \ Zigbee Join Events\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\"\
+        : \"/sites/{site_id}/devices/{device_id}/zigbee_join\"\n}\n```\n##### Example\
+        \ output from ws stream\n```json\n{\n    \"event\": \"data\",\n    \"channel\"\
+        : \"/sites/4ac1dcf4-9d8b-7211-65c4-057819f0862b/devices/00000000-0000-0000-1000-5c5b350e0060/cmd\"\
+        ,\n    \"data\": {\n        \"session\": \"19e73828-937f-05e6-f709-e29efdb0a82b\"\
+        ,\n        \"zigbee_mac\": \"fd05eb86c04ac04a\",\n        \"event_type\":\
+        \ \"associated\",\n        \"detail\": {\n            \"lqi\": 180\n     \
+        \   }\n    }\n}\n```"
+      operationId: enableSiteDeviceZigbeeJoin
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  duration: 600
+            schema:
+              $ref: '#/components/schemas/utils_zigbee_join'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/ZigbeeJoin'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: enableSiteDeviceZigbeeJoin
+      tags:
+      - Sites Devices - Wireless
   /api/v1/sites/{site_id}/events/fast_roam:
     get:
       description: List Roaming Events data
@@ -29825,6 +30037,61 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
+  /api/v1/sites/{site_id}/iotendpoints/search:
+    get:
+      description: Search IoT Endpoints
+      operationId: searchSiteIotEndpoints
+      parameters:
+      - description: AP MAC address
+        in: query
+        name: ap_mac
+        schema:
+          examples:
+          - 5c5b350e0001
+          type: string
+      - description: Device MAC address
+        in: query
+        name: mac
+        schema:
+          examples:
+          - 63f9e299182b63f9
+          type: string
+      - description: 'IoT endpoint type. enum: `zigbee`'
+        in: query
+        name: type
+        schema:
+          examples:
+          - zigbee
+          type: string
+      - description: Manufacturer name
+        in: query
+        name: mfg
+        schema:
+          examples:
+          - Assa Abloy
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/IotEndpointsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteIotEndpoints
+      tags:
+      - Sites Stats - IoT Endpoints
+    parameters:
+    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/licenses/usages:
     get:
       description: This shows license usage (i.e. needed) based on the features enabled
@@ -31117,6 +31384,178 @@ paths:
       - Sites MxEdges
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/mxedges/upgrade:
+    get:
+      description: Get List of Site Mist Edge Upgrades
+      operationId: listSiteMxEdgeUpgrades
+      responses:
+        '200':
+          $ref: '#/components/responses/MxEdgeUpgradesArray'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listSiteMxEdgeUpgrades
+      tags:
+      - Sites MxEdges
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: 'Upgrade Mist Edges in a Site.
+
+
+        See [Org Mist Edges](/#tag/Utilities-Upgrade/operation/upgradeOrgMxEdges)
+        for package upgrades
+
+
+        See [Org Mist Edges Distro](/#tag/Utilities-Upgrade/operation/upgradeOrgMxEdges)
+        for distro upgrades'
+      operationId: upgradeSiteMxEdges
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Upgrade_MxEdge:
+                value:
+                  allow_downgrades:
+                    mxagent: false
+                    tunterm: true
+                  canary_phases:
+                  - 5
+                  - 25
+                  - 50
+                  - 100
+                  channel: stable
+                  max_failure_percentage: 5
+                  max_failures:
+                  - 1
+                  - 1
+                  - 5
+                  - 5
+                  mxedge_ids:
+                  - 387804a7-3474-85ce-15a2-f9a9684c9c90
+                  start_time: 1624399840
+                  strategy: serial
+                  versions:
+                    mxagent: latest
+                    radsecproxy: <version>
+                    tunterm: default
+              Upgrade_MxEdge_Distro:
+                value:
+                  canary_phases:
+                  - 5
+                  - 25
+                  - 50
+                  - 100
+                  distro: buster
+                  max_failure_percentage: 5
+                  max_failures:
+                  - 1
+                  - 1
+                  - 5
+                  - 5
+                  mxedge_ids:
+                  - 387804a7-3474-85ce-15a2-f9a9684c9c90
+                  start_time: 1624399840
+                  strategy: serial
+            schema:
+              $ref: '#/components/schemas/mxedge_upgrade_multi'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: upgradeSiteMxEdges
+      tags:
+      - Sites MxEdges
+  /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}:
+    get:
+      description: Get Mist Edge Upgrade
+      operationId: getSiteMxEdgeUpgrade
+      responses:
+        '200':
+          $ref: '#/components/responses/MxEdgeUpgrade'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteMxEdgeUpgrade
+      tags:
+      - Sites MxEdges
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/upgrade_id'
+    put:
+      description: Update Mist Edge Upgrade. Only upgrades in `queued` state can be
+        updated.
+      operationId: updateSiteMxEdgeUpgrade
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mxedge_upgrade_multi'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/MxEdgeUpgrade'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: updateSiteMxEdgeUpgrade
+      tags:
+      - Sites MxEdges
+  /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}/cancel:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/upgrade_id'
+    post:
+      description: Cancel Mist Edge Upgrade. Best effort to cancel an upgrade. MxEdges
+        which are already upgraded won't be touched.
+      operationId: cancelSiteMxEdgeUpgrade
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: cancelSiteMxEdgeUpgrade
+      tags:
+      - Sites MxEdges
   /api/v1/sites/{site_id}/mxedges/{mxedge_id}:
     delete:
       description: Delete Site Mist Edge
@@ -31691,6 +32130,35 @@ paths:
       - Sites Clients - NAC
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/nac_clients/{client_mac}/coa:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/client_mac'
+    post:
+      description: Sends CoA (Change of Authorization) command to a NAC client.
+      operationId: sendSiteNacClientCoA
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/nac_client_coa'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/NacClientCoa'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: sendSiteNacClientCoA
+      tags:
+      - Sites Clients - NAC
   /api/v1/sites/{site_id}/networks/derived:
     get:
       description: Get the list of derived Networks for a Site
@@ -32722,6 +33190,37 @@ paths:
       summary: deauthSiteWirelessClientsConnectedToARogue
       tags:
       - Utilities Wi-Fi
+  /api/v1/sites/{site_id}/rrm/channel_scores/band/{band}:
+    get:
+      description: Get Site Channel Scores
+      operationId: getSiteChannelScores
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      responses:
+        '200':
+          $ref: '#/components/responses/ChannelScores'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteChannelScores
+      tags:
+      - Sites RRM
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - description: 802.11 Band
+      in: path
+      name: band
+      required: true
+      schema:
+        $ref: '#/components/schemas/dot11_band'
   /api/v1/sites/{site_id}/rrm/current:
     get:
       description: Get Current Channel Planning
@@ -41634,6 +42133,42 @@ components:
         succeed: 2
         timestamp: 1709598053
         total: 2
+    AutoMapAssignmentApplyExample:
+      value:
+        accepted_maps:
+        - d3c42998-9012-4859-9743-6b9bee475309
+        - f7a21456-7891-4abc-def0-123456789abc
+        message: 'Accepted map assignments for map_ids: [''d3c42998-9012-4859-9743-6b9bee475309'',
+          ''f7a21456-7891-4abc-def0-123456789abc'']'
+    AutoMapAssignmentClearExample:
+      value:
+        message: 'Rejected map assignments for map_ids: [''d3c42998-9012-4859-9743-6b9bee475309'',
+          ''f7a21456-7891-4abc-def0-123456789abc'']'
+        rejected_maps:
+        - d3c42998-9012-4859-9743-6b9bee475309
+        - f7a21456-7891-4abc-def0-123456789abc
+    AutoMapAssignmentExample:
+      value:
+        devices:
+          5c5b35000001:
+            reason: Device meets the minimum requirements for auto map assignment
+            valid: true
+          5c5b35000002:
+            reason: Device meets the minimum requirements for auto map assignment
+            valid: true
+          5c5b35000003:
+            reason: Device meets the minimum requirements for auto map assignment
+            valid: true
+        estimated_runtime: 300
+        reason: Started auto map assignment
+        started: true
+        valid: true
+    AutoMapAssignmentInfoExample:
+      value:
+        est_time_left: 280.5
+        start_time: 1678900062
+        status: in_progress
+        time_updated: 1678900100
     AutoOrientationDryrunForMapCompleted:
       value:
         devices:
@@ -42153,6 +42688,17 @@ components:
           MIIowDQYJKoZIhvcNAQELBQE
 
           -----END CERTIFICATE-----'
+    ChannelScoresExample:
+      value:
+        results:
+        - channel: 36
+          util_score: 0.009
+          util_score_noise_floor: 0.001
+          util_score_non_wifi: 0.003
+          util_score_other: 0.002
+          util_score_radar: 0.0
+          util_score_undecodable_wifi: 0.004
+          util_score_unknown_wifi: 0.0
     ClaimLicenseLicensesSuccessfullyClaimedAndApplied:
       value:
         inventory_added:
@@ -47359,6 +47905,20 @@ components:
     InviteVerifyNotFoundInviteCreatedBySelf:
       value:
         detail: invite created by self
+    IotEndpointsSearchExample:
+      value:
+        end: 1531862583.0
+        results:
+        - ap_mac: 5c5b350e0001
+          id: 63f9e299182b63f9
+          lqi: 178
+          mac: 63f9e299182b63f9
+          mfg: Assa Abloy
+          model: Assa Abloy
+          timestamp: 1531782218
+          type: zigbee
+        start: 1531776183.0
+        total: 2
     IssuedClientCertificatesExample:
       value:
         results:
@@ -54864,6 +55424,9 @@ components:
         site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         udp_port: 0
         use_udp: true
+    ZigbeeJoinExample:
+      value:
+        session_id: 19e73828-937f-05e6-f709-e29efdb0a82b
     ZoneExample:
       value:
         created_time: 0
@@ -56503,6 +57066,66 @@ components:
           schema:
             $ref: '#/components/schemas/response_async_license'
       description: OK
+    AutoMapAssignment:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment'
+      description: OK
+    AutoMapAssignmentApply:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentApplyExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment_apply'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentApplyExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment_apply'
+      description: OK
+    AutoMapAssignmentClear:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentClearExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment_clear'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentClearExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment_clear'
+      description: OK
+    AutoMapAssignmentInfo:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentInfoExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment_info'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AutoMapAssignmentInfoExample'
+          schema:
+            $ref: '#/components/schemas/response_auto_map_assignment_info'
+      description: OK
     AutoOrientation:
       content:
         application/json:
@@ -56765,6 +57388,21 @@ components:
               $ref: '#/components/examples/CertificateExample'
           schema:
             $ref: '#/components/schemas/response_certificate'
+      description: OK
+    ChannelScores:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ChannelScoresExample'
+          schema:
+            $ref: '#/components/schemas/response_rrm_channel_scores'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ChannelScoresExample'
+          schema:
+            $ref: '#/components/schemas/response_rrm_channel_scores'
       description: OK
     ClaimLicense:
       content:
@@ -58340,6 +58978,21 @@ components:
           schema:
             $ref: '#/components/schemas/response_detail_string'
       description: Not Found
+    IotEndpointsSearch:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/IotEndpointsSearchExample'
+          schema:
+            $ref: '#/components/schemas/response_iot_endpoints_search'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/IotEndpointsSearchExample'
+          schema:
+            $ref: '#/components/schemas/response_iot_endpoints_search'
+      description: OK
     IssuedClientCertificates:
       content:
         application/json:
@@ -62037,6 +62690,21 @@ components:
               $ref: '#/components/examples/WxtunnelArrayExample'
           schema:
             $ref: '#/components/schemas/wxlan_tunnels'
+      description: OK
+    ZigbeeJoin:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ZigbeeJoinExample'
+          schema:
+            $ref: '#/components/schemas/zigbee_join_response'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ZigbeeJoinExample'
+          schema:
+            $ref: '#/components/schemas/zigbee_join_response'
       description: OK
     Zone:
       content:
@@ -65912,6 +66580,31 @@ components:
       additionalProperties: true
       description: Field values prior to the change
       type: object
+    auto_map_assignment:
+      additionalProperties: false
+      properties:
+        dryrun:
+          default: false
+          description: If `true`, validates the site's APs without starting the map
+            assignment process. Returns device validity and estimated runtime.
+          type: boolean
+        force_collection:
+          default: false
+          description: If `true`, forces data collection via orchestration. If `false`,
+            attempts to use existing BLE data first.
+          type: boolean
+      type: object
+    auto_map_assignment_request:
+      additionalProperties: false
+      properties:
+        map_ids:
+          description: Optional list of specific map IDs to apply/clear. If not provided
+            or empty, all pending map assignments are accepted/rejected.
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
     auto_orient:
       properties:
         dryrun:
@@ -67166,7 +67859,8 @@ components:
       properties:
         duration:
           default: 600
-          description: Duration of the capture, in seconds
+          description: Duration of the capture, in seconds. Default is 600, minimum
+            is 60 and maximum is 10800 (3h)
           examples:
           - 600
           maximum: 10800
@@ -67176,7 +67870,8 @@ components:
           $ref: '#/components/schemas/capture_mxedge_format'
         max_pkt_len:
           default: 512
-          description: Max_len of each packet to capture
+          description: Max_len of each packet to capture. Default is 512, minimum
+            is 64 and maximum is 2048
           examples:
           - 512
           maximum: 2048
@@ -67186,12 +67881,13 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/capture_mxedge_mxedges'
           description: Dict of Mist Edges to capture on, property key is the Mist
-            Edge ID
+            Edge ID. Property value is a dict of interfaces to capture for the given
+            mxedge (e.g. port1, kni0, lacp0, ipsec, drop, oobm)
           type: object
         num_packets:
           default: 1024
-          description: Number of packets to capture, minimum 1 or 0 for unlimited
-            (local/remote streaming only)
+          description: Number of packets to capture. Default is 1024, maximum is 10000,
+            minimum 1, or 0 for unlimited (local/remote streaming only)
           examples:
           - 100
           maximum: 10000
@@ -67206,14 +67902,14 @@ components:
           $ref: '#/components/schemas/capture_mxedge_type'
         tzsp_host:
           description: Required if `format`==`tzsp`. Remote host accessible to mxedges
-            over the network for receiving the captured packets.
+            over the network for receiving the captured packets
           examples:
           - 192.168.1.2
           type: string
         tzsp_port:
           default: 37008
-          description: If `format`==`tzsp`. Port on remote host for receiving the
-            captured packets
+          description: Optional port on remote host for receiving the captured packets.
+            Default is 37008 (TZSP)
           maximum: 65535
           minimum: 1
           type: integer
@@ -74608,6 +75304,87 @@ components:
       items:
         type: string
       type: array
+    iotendpoint_stats:
+      description: IoT endpoint statistics
+      properties:
+        ap_mac:
+          description: MAC address of the AP the endpoint was seen on
+          examples:
+          - 5c5b350e0001
+          type: string
+        id:
+          description: Unique identifier for the IoT endpoint
+          examples:
+          - 63f9e299182b63f9
+          type: string
+        lqi:
+          description: "Link Quality Indicator (0\u2013255)"
+          maximum: 255
+          minimum: 0
+          type: integer
+        mac:
+          description: MAC address of the IoT endpoint
+          examples:
+          - 63f9e299182b63f9
+          type: string
+        mfg:
+          description: Manufacturer name
+          examples:
+          - Assa Abloy
+          type: string
+        model:
+          description: Model name
+          examples:
+          - Assa Abloy
+          type: string
+        timestamp:
+          description: Epoch timestamp of the last observation, in seconds
+          type: number
+        type:
+          description: 'IoT endpoint type. enum: `zigbee`'
+          examples:
+          - zigbee
+          type: string
+      type: object
+    iotproxy:
+      description: IoT proxy configuration for the site
+      properties:
+        enabled:
+          default: false
+          type: boolean
+        visionline:
+          $ref: '#/components/schemas/iotproxy_visionline'
+      type: object
+    iotproxy_visionline:
+      description: Visionline integration settings for IoT proxy
+      properties:
+        access_id:
+          description: Access ID for the Visionline service
+          examples:
+          - 790e6c1790e6c18541d
+          type: string
+        enabled:
+          default: false
+          type: boolean
+        host:
+          description: Hostname or IP of the Visionline collector
+          examples:
+          - visionline_collector1.local
+          type: string
+        password:
+          description: Password for the Visionline service
+          format: password
+          type: string
+        port:
+          default: 443
+          description: TCP port of the Visionline collector
+          type: integer
+        username:
+          description: Username for the Visionline service
+          examples:
+          - card_administrator
+          type: string
+      type: object
     ip_stat:
       additionalProperties: false
       properties:
@@ -83026,6 +83803,106 @@ components:
       - ongoing
       - done
       type: string
+    response_auto_map_assignment:
+      additionalProperties: false
+      properties:
+        devices:
+          $ref: '#/components/schemas/response_auto_map_assignment_devices'
+        estimated_runtime:
+          description: Estimated runtime for the process in seconds
+          type: integer
+        reason:
+          description: Provides the reason for the status
+          type: string
+        started:
+          description: Indicates whether the auto map assignment process has started
+          type: boolean
+        valid:
+          description: Indicates whether the auto map assignment request is valid
+          type: boolean
+      type: object
+    response_auto_map_assignment_apply:
+      additionalProperties: false
+      properties:
+        accepted_maps:
+          description: List of map IDs that were successfully accepted
+          items:
+            format: uuid
+            type: string
+          type: array
+        message:
+          description: Human-readable description of the operation result
+          type: string
+      required:
+      - accepted_maps
+      - message
+      type: object
+    response_auto_map_assignment_clear:
+      additionalProperties: false
+      properties:
+        message:
+          description: Human-readable description of the operation result
+          type: string
+        rejected_maps:
+          description: List of map IDs that were successfully rejected
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - message
+      - rejected_maps
+      type: object
+    response_auto_map_assignment_device:
+      additionalProperties: false
+      properties:
+        reason:
+          description: Provides the reason for the status if the AP is invalid
+          type: string
+        valid:
+          description: Indicates whether the device meets requirements for auto map
+            assignment
+          type: boolean
+      type: object
+    response_auto_map_assignment_devices:
+      additionalProperties:
+        $ref: '#/components/schemas/response_auto_map_assignment_device'
+      description: Contains the validation status of each device. The property key
+        is the device MAC address.
+      type: object
+    response_auto_map_assignment_info:
+      additionalProperties: false
+      properties:
+        est_time_left:
+          description: Only when `status`==`in_progress`, estimated seconds remaining
+          type: number
+        start_time:
+          description: Unix timestamp when auto map assignment was started
+          type: number
+        status:
+          $ref: '#/components/schemas/response_auto_map_assignment_info_status'
+        stop_time:
+          description: Only when `status`==`completed`, Unix timestamp when auto map
+            assignment stopped
+          type: number
+        time_updated:
+          description: Unix timestamp when status was last updated
+          type: number
+      required:
+      - status
+      type: object
+    response_auto_map_assignment_info_status:
+      description: "The status of auto map assignment for a given site. enum:\n  *\
+        \ `not_started`: Auto map assignment has not been requested\n  * `in_progress`:\
+        \ Auto map assignment is currently processing\n  * `completed`: The auto map\
+        \ assignment process has completed\n  * `error`: There was an error in the\
+        \ auto map assignment process"
+      enum:
+      - not_started
+      - in_progress
+      - completed
+      - error
+      type: string
     response_auto_orientation:
       additionalProperties: false
       properties:
@@ -84395,6 +85272,28 @@ components:
       - serial
       - type
       type: object
+    response_iot_endpoints_search:
+      additionalProperties: false
+      properties:
+        end:
+          type: number
+        results:
+          $ref: '#/components/schemas/response_iot_endpoints_search_results'
+        start:
+          type: number
+        total:
+          type: integer
+      required:
+      - start
+      - end
+      - total
+      - results
+      type: object
+    response_iot_endpoints_search_results:
+      items:
+        $ref: '#/components/schemas/iotendpoint_stats'
+      type: array
+      uniqueItems: true
     response_location_coverage:
       additionalProperties: false
       properties:
@@ -85538,6 +86437,19 @@ components:
         router_shell_cmd:
           type: string
       type: object
+    response_rrm_channel_scores:
+      additionalProperties: false
+      properties:
+        results:
+          $ref: '#/components/schemas/response_rrm_channel_scores_results'
+      required:
+      - results
+      type: object
+    response_rrm_channel_scores_results:
+      items:
+        $ref: '#/components/schemas/rrm_channel_score'
+      type: array
+      uniqueItems: true
     response_rrm_consideration:
       additionalProperties: false
       properties:
@@ -87115,6 +88027,49 @@ components:
       description: Property key is the power level, value is number of APs on that
         power level
       type: object
+    rrm_channel_score:
+      additionalProperties: false
+      properties:
+        channel:
+          description: Channel number
+          type: integer
+        util_score:
+          description: Utilization score for the channel, 0-1, lower means cleaner
+            RF
+          type: number
+        util_score_noise_floor:
+          description: Score contribution from noise, 0-1, lower means cleaner RF
+          type: number
+        util_score_non_wifi:
+          description: Score contribution from non-wifi utilization, 0-1, lower means
+            cleaner RF
+          type: number
+        util_score_other:
+          description: Score contribution from RxOtherBss utilization (wifi packets
+            destined for other radios), 0-1, lower means cleaner RF
+          type: number
+        util_score_radar:
+          description: Score contribution from radar detections, 0-1, lower means
+            cleaner RF
+          type: number
+        util_score_undecodable_wifi:
+          description: Score contribution from undecodable wifi utilization (wifi
+            packets which can't be decoded), 0-1, lower means cleaner RF
+          type: number
+        util_score_unknown_wifi:
+          description: Score contribution from unknown wifi utilization (wifi packets
+            of unknown type), 0-1, lower means cleaner RF
+          type: number
+      required:
+      - channel
+      - util_score
+      - util_score_noise_floor
+      - util_score_non_wifi
+      - util_score_other
+      - util_score_radar
+      - util_score_undecodable_wifi
+      - util_score_unknown_wifi
+      type: object
     rrm_consideration:
       additionalProperties: false
       properties:
@@ -87154,8 +88109,10 @@ components:
     rrm_event:
       additionalProperties: false
       properties:
-        ap_id:
-          format: uuid
+        ap:
+          description: AP MAC
+          examples:
+          - 5c5b350e0001
           type: string
         band:
           $ref: '#/components/schemas/dot11_band'
@@ -87184,7 +88141,7 @@ components:
         usage:
           type: string
       required:
-      - ap_id
+      - ap
       - band
       - bandwidth
       - channel
@@ -89342,6 +90299,8 @@ components:
           - 'null'
         id:
           $ref: '#/components/schemas/id'
+        iotproxy:
+          $ref: '#/components/schemas/iotproxy'
         juniper_srx:
           $ref: '#/components/schemas/site_setting_juniper_srx'
         led:
@@ -89463,6 +90422,8 @@ components:
           type: boolean
         vars:
           $ref: '#/components/schemas/vars'
+        vars_annotations:
+          $ref: '#/components/schemas/vars_annotations'
         vna:
           $ref: '#/components/schemas/site_setting_vna'
         vpn_path_updown_threshold:
@@ -98412,6 +99373,11 @@ components:
           description: Only if `mode`!=`dynamic`. Whether PoE capabilities are disabled
             for a port
           type: boolean
+        poe_keep_state_when_reboot:
+          default: false
+          description: Only if `mode`!=`dynamic`. Whether Perpetual PoE is enabled;
+            keeps PoE state across reboots
+          type: boolean
         poe_priority:
           $ref: '#/components/schemas/poe_priority'
         port_auth:
@@ -98640,7 +99606,8 @@ components:
         type: integer
       - type: string
       description: 'Only if `mode`!=`dynamic` and `port_auth`=`dot1x` reauthentication
-        interval range (min: 10, max: 65535, default: 3600)'
+        interval range (min: 10, max: 65535, default: 3600). Set to 0 to disable reauthentication
+        (no-reauthentication).'
     switch_port_usage_speed:
       default: auto
       description: 'Only if `mode`!=`dynamic`, Port speed, default is auto to automatically
@@ -101519,7 +102486,8 @@ components:
     utils_clear_bgp:
       properties:
         neighbor:
-          description: Neighbor ip-address or 'all'
+          default: all
+          description: can be ip, ipv6, all
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
@@ -101651,9 +102619,9 @@ components:
           description: Interface through which packet needs to egress
           type: string
         host:
+          description: can be ip, ipv6, hostname
           examples:
           - 1.1.1.1
-          format: ipv4
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
@@ -101664,6 +102632,7 @@ components:
           type: integer
         use_ipv6:
           default: false
+          description: applicable when host is hostname
           type: boolean
         vrf:
           description: VRF/Routing instance through which the packet needs to be sent
@@ -101814,14 +102783,14 @@ components:
     utils_send_support_logs_info:
       default: full
       description: "Optional, enum: \n    * `code-dumps`: Upload all core dump files,\
-        \ if any found\n    * `full`: Upload 1 file with output of `request support\
-        \ information`, 1 file that concatenates all `/var/log/outbound-ssh.log*`\
-        \ files, all core dump files, the 5 most recent `/var/log/messages*` files,\
-        \ and Mist agent logs\n    * `messages`: Upload 1 to 10 `/var/log/messages*`\
-        \ files\n    * `outbound-ssh`: Upload 1 file that concatenates all `/var/log/outbound-ssh.log*`\
-        \ files\n    * `process`: Upload 1 file with output of show `system processes\
-        \ extensive``\n    * `var-logs`: Upload all non-empty files in the `/var/log/`\
-        \ directory"
+        \ if any found. Uploads for all members of VC on switches.\n    * `full`:\
+        \ Upload 1 file with output of `request support information`, 1 file that\
+        \ concatenates all `/var/log/outbound-ssh.log*` files, all core dump files,\
+        \ the 5 most recent `/var/log/messages*` files, and Mist agent logs\n    *\
+        \ `messages`: Upload 1 to 10 `/var/log/messages*` files\n    * `outbound-ssh`:\
+        \ Upload 1 file that concatenates all `/var/log/outbound-ssh.log*` files\n\
+        \    * `process`: Upload 1 file with output of show `system processes extensive``\n\
+        \    * `var-logs`: Upload all non-empty files in the `/var/log/` directory"
       enum:
       - code-dumps
       - full
@@ -101958,7 +102927,7 @@ components:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
         prefix:
-          description: IP Prefix
+          description: can be ip, ipv6 prefix
           examples:
           - 3.1.1.0/24
           type: string
@@ -102075,17 +103044,18 @@ components:
         node:
           $ref: '#/components/schemas/ha_cluster_node'
         prefix:
-          description: Route prefix
+          description: can be ip, ipv6 prefix
           examples:
           - 192.168.0.5/30
           type: string
         protocol:
           $ref: '#/components/schemas/utils_show_route_protocol'
+          description: (optional) Supported only for bgp
         route:
-          description: "If specified, dump bot received and advertised, if not specified,\
+          description: "if neighbor is specified, received / advertised; if not specified,\
             \ both will be shown\n  * for SSR, show bgp neighbors 10.250.18.202 received-routes/advertised-routes\n\
-            \  * for SRX and Switches, show route receive_protocol/advertise_protocol\
-            \ bgp 192.168.255.12'"
+            \  * for SRX and Switches, show route receive-protocol/advertise-protocol\
+            \ bgp 192.168.255.12"
           examples:
           - advertised
           type: string
@@ -102132,7 +103102,7 @@ components:
     utils_traceroute:
       properties:
         host:
-          description: Host name
+          description: can be ip, ipv6, hostname
           type: string
         network:
           default: internal
@@ -102154,6 +103124,7 @@ components:
           type: integer
         use_ipv6:
           default: false
+          description: applicable when host is hostname
           type: boolean
         vrf:
           description: For SRX, optional, the source to initiate traceroute from.
@@ -102191,6 +103162,17 @@ components:
       required:
       - password
       type: object
+    utils_zigbee_join:
+      additionalProperties: false
+      properties:
+        duration:
+          default: 600
+          description: "Duration in seconds for which new Zigbee end device joins\
+            \ are permitted. Range is 30\u20133600"
+          maximum: 3600
+          minimum: 30
+          type: integer
+      type: object
     uuids:
       items:
         format: uuid
@@ -102210,6 +103192,33 @@ components:
       examples:
       - RADIUS_IP1: 172.31.2.5
         RADIUS_SECRET: 11s64632d
+      type: object
+    vars_annotation:
+      description: Annotation for a single var, helping identify its purpose and enabling
+        auto-complete/enumeration in UI
+      properties:
+        note:
+          description: User-provided note to describe what this var was created for
+          type: string
+        type:
+          default: generic
+          description: 'Used to identify where to enumerate / auto-complete the field
+            from. Default is `generic` (plain string, no special handling).
+
+
+            enum: `generic`, `mxtunnel_id`'
+          type: string
+      type: object
+    vars_annotations:
+      additionalProperties:
+        $ref: '#/components/schemas/vars_annotation'
+      description: Optional annotations for vars defined in this site. Keys match
+        var names; values describe the var purpose and type for UI auto-complete.
+      examples:
+      - MXTUNNEL_GUEST:
+          type: mxtunnel_id
+        RADIUS_IP1:
+          note: RADIUS server IP address for US East Campus
       type: object
     vbeacon:
       description: vBeacon
@@ -102422,6 +103431,13 @@ components:
           type: integer
         op:
           $ref: '#/components/schemas/virtual_chassis_update_op'
+        remove_inventory:
+          default: false
+          description: Only if `op`==`preprovision`. When removing members from a
+            pre-provisioned VC, set to `true` to delete the inventory records for
+            removed members (e.g. for RMA). Members being removed must be in "not-present"
+            state.
+          type: boolean
       type: object
     virtual_chassis_update_members:
       items:
@@ -108521,6 +109537,57 @@ components:
         $ref: '#/components/schemas/wxtag_client'
       type: array
       uniqueItems: true
+    zigbee_join_event:
+      additionalProperties: false
+      description: Zigbee join event data received over the WebSocket stream
+      properties:
+        detail:
+          $ref: '#/components/schemas/zigbee_join_event_detail'
+        event_type:
+          $ref: '#/components/schemas/zigbee_join_event_type'
+        session:
+          description: Session ID returned by the Enable Zigbee Join API call
+          examples:
+          - 19e73828-937f-05e6-f709-e29efdb0a82b
+          format: uuid
+          type: string
+        zigbee_mac:
+          description: MAC address of the Zigbee end device (8 bytes, hex encoded)
+          examples:
+          - fd05eb86c04ac04a
+          type: string
+      type: object
+    zigbee_join_event_detail:
+      additionalProperties: false
+      properties:
+        lqi:
+          description: "Link quality indicator; 0\u2013255, higher is better"
+          examples:
+          - 180
+          maximum: 255
+          minimum: 0
+          type: integer
+      type: object
+    zigbee_join_event_type:
+      description: 'Event type of the Zigbee join process. enum: `associated`, `initiated`,
+        `rejected`'
+      enum:
+      - associated
+      - initiated
+      - rejected
+      examples:
+      - associated
+      type: string
+    zigbee_join_response:
+      additionalProperties: false
+      properties:
+        session_id:
+          description: Session ID for the Zigbee join operation
+          examples:
+          - 19e73828-937f-05e6-f709-e29efdb0a82b
+          format: uuid
+          type: string
+      type: object
     zone:
       description: Zone
       properties:
