@@ -26161,9 +26161,7 @@ paths:
       - Utilities Upgrade
   /api/v1/sites/{site_id}/devices/upgrade/{upgrade_id}:
     get:
-      description: "Get Site Device Upgrade\n\n#### Subscribe to Site Device Upgrade\
-        \ Events\n`WS /api-ws/v1/stream`\n\n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/upgrade/{upgrade_id}\"\
-        \n}\n```"
+      description: Get Site Device Upgrade
       operationId: getSiteDeviceUpgrade
       responses:
         '200':
