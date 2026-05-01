@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2602.1.11**
+  description: '> Version: **2604.1.0**
 
     >
 
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2602.1.11
+  version: 2604.1.0
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -839,6 +839,9 @@ tags:
 
     When a PSK portal is created, an unique URL will be generated (e.g. https://psk.mist.com/xxxxxx)'
   name: Orgs Psk Portals
+- description: API Calls to manage organization-level reports, such as E911 AP BSSID
+    report exports.
+  name: Orgs Reports
 - description: 'Rf Templates are a feature in Juniper Mist wireless assurance that
     allow for uniform radio configurations to be applied across all sites in an organization.
 
@@ -1074,7 +1077,10 @@ tags:
     monitoring / routing / policing
   name: Sites Applications
 - name: Sites Anomaly
-- name: Sites Auto Map Assignment
+- description: Auto Map Assignment allows devices to be automatically assigned to
+    maps based on their location data. These API calls can be used to manage, apply,
+    and clear auto map assignments for devices at the site level.
+  name: Sites Auto Map Assignment
 - description: 'An Asset Filter is a feature that allows users to define specific
     criteria or conditions to filter and display only certain assets based on their
     attributes or properties.
@@ -10900,6 +10906,62 @@ paths:
       summary: getOrgLicensesBySite
       tags:
       - Orgs Licenses
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/logs:
+    get:
+      deprecated: true
+      description: Get List of change logs for the current Org
+      operationId: listOrgAuditLogsLegacy
+      parameters:
+      - description: Site id
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          format: uuid
+          type: string
+      - description: Admin name or email
+        in: query
+        name: admin_name
+        schema:
+          examples:
+          - John Doe
+          type: string
+      - description: Message
+        in: query
+        name: message
+        schema:
+          examples:
+          - Created a new site
+          type: string
+      - description: Sort order
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/list_org_logs_sort'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/LogsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listOrgAuditLogsLegacy
+      tags:
+      - Orgs Logs
     parameters:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/logs/count:
@@ -23413,6 +23475,61 @@ paths:
       summary: updateSiteInfo
       tags:
       - Sites
+  /api/v1/sites/{site_id}//search:
+    get:
+      description: Search IoT Endpoints
+      operationId: searchSiteIotEndpoints
+      parameters:
+      - description: AP MAC address
+        in: query
+        name: ap_mac
+        schema:
+          examples:
+          - 5c5b350e0001
+          type: string
+      - description: Device MAC address
+        in: query
+        name: mac
+        schema:
+          examples:
+          - 63f9e299182b63f9
+          type: string
+      - description: 'IoT endpoint type. enum: `zigbee`'
+        in: query
+        name: type
+        schema:
+          examples:
+          - zigbee
+          type: string
+      - description: Manufacturer name
+        in: query
+        name: mfg
+        schema:
+          examples:
+          - Assa Abloy
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/IotEndpointsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteIotEndpoints
+      tags:
+      - Sites Stats - IoT Endpoints
+    parameters:
+    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/aamwprofiles/derived:
     get:
       description: Get the list of derived Advanced Anti Malware Profile (SkyAtp)
@@ -27120,13 +27237,7 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties:
-                type: integer
-              description: Property key is the IoT port name (e.g. A0)
-              examples:
-              - A1: 1
-                DO: 0
-              type: object
+              $ref: '#/components/schemas/device_iot_config'
         description: Request Body
       responses:
         '200':
@@ -30005,61 +30116,6 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
-  /api/v1/sites/{site_id}/iotendpoints/search:
-    get:
-      description: Search IoT Endpoints
-      operationId: searchSiteIotEndpoints
-      parameters:
-      - description: AP MAC address
-        in: query
-        name: ap_mac
-        schema:
-          examples:
-          - 5c5b350e0001
-          type: string
-      - description: Device MAC address
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 63f9e299182b63f9
-          type: string
-      - description: 'IoT endpoint type. enum: `zigbee`'
-        in: query
-        name: type
-        schema:
-          examples:
-          - zigbee
-          type: string
-      - description: Manufacturer name
-        in: query
-        name: mfg
-        schema:
-          examples:
-          - Assa Abloy
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      responses:
-        '200':
-          $ref: '#/components/responses/IotEndpointsSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: searchSiteIotEndpoints
-      tags:
-      - Sites Stats - IoT Endpoints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/licenses/usages:
     get:
       description: This shows license usage (i.e. needed) based on the features enabled
@@ -31371,7 +31427,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: listSiteMxEdgeUpgrades
       tags:
-      - Sites MxEdges
+      - Utilities Upgrade
     parameters:
     - $ref: '#/components/parameters/site_id'
     post:
@@ -31450,7 +31506,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: upgradeSiteMxEdges
       tags:
-      - Sites MxEdges
+      - Utilities Upgrade
   /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}:
     get:
       description: Get Mist Edge Upgrade
@@ -31470,7 +31526,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: getSiteMxEdgeUpgrade
       tags:
-      - Sites MxEdges
+      - Utilities Upgrade
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/upgrade_id'
@@ -31499,7 +31555,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: updateSiteMxEdgeUpgrade
       tags:
-      - Sites MxEdges
+      - Utilities Upgrade
   /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}/cancel:
     parameters:
     - $ref: '#/components/parameters/site_id'
@@ -31523,7 +31579,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: cancelSiteMxEdgeUpgrade
       tags:
-      - Sites MxEdges
+      - Utilities Upgrade
   /api/v1/sites/{site_id}/mxedges/{mxedge_id}:
     delete:
       description: Delete Site Mist Edge
@@ -41971,7 +42027,7 @@ components:
         - id: 480f6eca-6276-4993-bfeb-59cbbbbaaf08
           since: 0
         service_packets:
-        - data: 640
+        - data: '640'
           last_rx_time: 1645855923
           rx_cnt: 213065
           uuid: 00003e10-0000-1000-8000-00805f9b34fb
@@ -42022,7 +42078,7 @@ components:
         - id: 478f6eca-6276-4993-bfeb-5bcbbbbacf08
           since: 0
         service_packets:
-        - data: 640
+        - data: '640'
           last_rx_time: 1645855923
           rx_cnt: 213065
           uuid: 00003e10-0000-1000-8000-00805f9b34fb
@@ -50626,27 +50682,6 @@ components:
         - 5c5b350e001b
         started_time: 1435080709
         type: client
-    PcapStatusMxEdgeExample:
-      value:
-        duration: 600
-        enabled: true
-        expiry: 1695838060.309526
-        format: stream
-        id: c5bd6c89-fa52-486f-9fd0-801cfc613328
-        invalid_mxedges: {}
-        max_num_packets: 1024
-        max_pkt_len: 512
-        mxedge_count: 1
-        mxedges:
-          00000000-0000-0000-1000-001122334455:
-            interfaces:
-              port1:
-                tcpdump_expression: udp port 67 or udp port 68
-        org_id: 78c11da8-f984-4425-bedb-a7ddd7d0f6da
-        raw: true
-        site_id: null
-        timestamp: 1695837460.309526
-        type: mxedge
     PcapsSearchExample:
       value:
         end: 1461089816
@@ -51050,7 +51085,7 @@ components:
         limit: 100
         next: /api/v1/sites/dca0a44b-324c-11e6-a776-0243ad110007/events/rrm?start=1428939600&end=1428949600&limit=200&token=001a0010000000120010000005005880ec18000004776c616e007fffffeb067ab8e29c1d659b6a7c8cf698bf81490003
         results:
-        - ap_id: 00000000-0000-0000-1000-5c5b359e4fe0
+        - ap: 5c5b359e4fe0
           band: '24'
           bandwidth: 20
           channel: 6
@@ -58036,19 +58071,13 @@ components:
             Example:
               $ref: '#/components/examples/DeviceIotExample'
           schema:
-            additionalProperties:
-              type: integer
-            description: Property key is the IoT port name (e.g. "A1")
-            type: object
+            $ref: '#/components/schemas/device_iot_config'
         application/vnd.api+json:
           examples:
             Example:
               $ref: '#/components/examples/DeviceIotExample'
           schema:
-            additionalProperties:
-              type: integer
-            description: Property key is the IoT port name (e.g. "A1")
-            type: object
+            $ref: '#/components/schemas/device_iot_config'
       description: OK
     DeviceMetric:
       content:
@@ -63269,18 +63298,21 @@ components:
       - instance_url
       - api_token
       type: object
+    account_skyatp_cloud_name:
+      description: 'Sky ATP cloud name. enum: `www.amerskyatp.com`, `www.apacskyatp.com`,
+        `www.euroskyatp.com`, `www.canadaskyatp.com`'
+      enum:
+      - www.amerskyatp.com
+      - www.apacskyatp.com
+      - www.euroskyatp.com
+      - www.canadaskyatp.com
+      examples:
+      - www.amerskyatp.com
+      type: string
     account_skyatp_config:
       properties:
         cloud_name:
-          description: Sky ATP cloud name
-          enum:
-          - www.amerskyatp.com
-          - www.apacskyatp.com
-          - www.euroskyatp.com
-          - www.canadaskyatp.com
-          examples:
-          - www.amerskyatp.com
-          type: string
+          $ref: '#/components/schemas/account_skyatp_cloud_name'
         password:
           examples:
           - foryoureyesonly
@@ -63328,15 +63360,7 @@ components:
       additionalProperties: false
       properties:
         cloud_name:
-          description: Sky ATP cloud name
-          enum:
-          - www.amerskyatp.com
-          - www.apacskyatp.com
-          - www.euroskyatp.com
-          - www.canadaskyatp.com
-          examples:
-          - www.amerskyatp.com
-          type: string
+          $ref: '#/components/schemas/account_skyatp_cloud_name'
         realm:
           examples:
           - mist-team
@@ -66889,16 +66913,18 @@ components:
         neighbor_as:
           $ref: '#/components/schemas/bgp_as'
         tunnel_via:
-          default: primary
-          description: 'If `via`==`tunnel`, specifies which tunnel (primary/secondary)
-            this neighbor is associated with. enum: `primary`, `secondary`'
-          enum:
-          - primary
-          - secondary
-          type: string
+          $ref: '#/components/schemas/bgp_config_neighbors_tunnel_via'
       required:
       - neighbor_as
       type: object
+    bgp_config_neighbors_tunnel_via:
+      default: primary
+      description: 'If `via`==`tunnel`, specifies which tunnel (primary/secondary)
+        this neighbor is associated with. enum: `primary`, `secondary`'
+      enum:
+      - primary
+      - secondary
+      type: string
     bgp_config_networks:
       description: Optional if `via`==`lan`. List of networks where we expect BGP
         neighbor to connect to/from
@@ -70747,6 +70773,15 @@ components:
           type: string
       required:
       - device_id
+      type: object
+    device_iot_config:
+      additionalProperties:
+        type: integer
+      description: Property key is the IoT port name (e.g. "A1"), value is the output
+        state (0 or 1).
+      examples:
+      - A1: 1
+        DO: 0
       type: object
     device_other:
       additionalProperties: false
@@ -77248,29 +77283,35 @@ components:
         id:
           $ref: '#/components/schemas/id'
         location:
-          additionalProperties: false
-          properties:
-            enabled:
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/marvis_client_location'
         name:
           examples:
           - Handhelds
           type: string
         synthetic_test:
-          additionalProperties: false
-          properties:
-            enabled:
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/marvis_client_synthetic_test'
         telemetry:
-          additionalProperties: false
-          description: 'Note: some stats are not collected when it''s not connected
-            to Mist infrastructure'
-          properties:
-            enabled:
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/marvis_client_telemetry'
+      type: object
+    marvis_client_location:
+      additionalProperties: false
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    marvis_client_synthetic_test:
+      additionalProperties: false
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    marvis_client_telemetry:
+      additionalProperties: false
+      description: 'Note: some stats are not collected when it''s not connected to
+        Mist infrastructure'
+      properties:
+        enabled:
+          type: boolean
       type: object
     marvis_clients:
       items:
@@ -77281,26 +77322,18 @@ components:
       description: Self-driving network automation settings per domain
       properties:
         wan:
-          additionalProperties: false
-          properties:
-            enabled:
-              default: false
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/marvis_self_driving_domain'
         wired:
-          additionalProperties: false
-          properties:
-            enabled:
-              default: false
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/marvis_self_driving_domain'
         wireless:
-          additionalProperties: false
-          properties:
-            enabled:
-              default: false
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/marvis_self_driving_domain'
+      type: object
+    marvis_self_driving_domain:
+      additionalProperties: false
+      properties:
+        enabled:
+          default: false
+          type: boolean
       type: object
     memory_stat:
       additionalProperties: false
@@ -78929,12 +78962,7 @@ components:
       additionalProperties: false
       properties:
         coa_type:
-          default: reauth
-          description: 'CoA type to send to the client. enum: `reauth`, `disconnect`'
-          enum:
-          - reauth
-          - disconnect
-          type: string
+          $ref: '#/components/schemas/nac_coa_type'
       type: object
     nac_client_coa_response:
       additionalProperties: false
@@ -78943,12 +78971,7 @@ components:
           description: MAC address of the target device (AP or switch MAC)
           type: string
         device_type:
-          description: 'Target device type. enum: `ap`, `switch`, `gateway`'
-          enum:
-          - ap
-          - switch
-          - gateway
-          type: string
+          $ref: '#/components/schemas/device_type'
       type: object
     nac_client_event:
       additionalProperties: false
@@ -79076,6 +79099,13 @@ components:
         type: string
       readOnly: true
       type: array
+    nac_coa_type:
+      default: reauth
+      description: 'CoA type to send. enum: `reauth`, `disconnect`'
+      enum:
+      - reauth
+      - disconnect
+      type: string
     nac_crl_file:
       additionalProperties: false
       properties:
@@ -80553,18 +80583,20 @@ components:
             Only present when `status` is `available`.
           type: integer
         status:
-          description: 'Current status of E911 report generation. enum: `disabled`,
-            `scheduled`, `available`'
-          enum:
-          - disabled
-          - scheduled
-          - available
-          type: string
+          $ref: '#/components/schemas/org_e911_report_status'
         url:
           description: Presigned URL to download the CSV file. Only present when `status`
             is `available`.
           type: string
       type: object
+    org_e911_report_status:
+      description: 'Current status of E911 report generation. enum: `disabled`, `scheduled`,
+        `available`'
+      enum:
+      - disabled
+      - scheduled
+      - available
+      type: string
     org_event:
       additionalProperties: false
       properties:
@@ -81503,12 +81535,7 @@ components:
       description: MDM (Mobile Device Management) CoA configuration
       properties:
         coa_type:
-          default: reauth
-          description: CoA type to use for MDM
-          enum:
-          - reauth
-          - disconnect
-          type: string
+          $ref: '#/components/schemas/nac_coa_type'
       type: object
     org_setting_mist_nac_server_cert:
       additionalProperties: false
@@ -94644,7 +94671,7 @@ components:
         data:
           description: Service data payload (hex encoded)
           examples:
-          - 640
+          - '640'
           type: string
         last_rx_time:
           description: Unix timestamp when this service data was last received
@@ -95804,7 +95831,7 @@ components:
           description: Peer ip address
           type: string
         priority:
-          $ref: '#/components/schemas/stats_wan_tunnel_priority'
+          $ref: '#/components/schemas/tunnel_priority'
         protocol:
           $ref: '#/components/schemas/wan_tunnel_protocol'
         rx_bytes:
@@ -97600,7 +97627,7 @@ components:
           description: Peer ip address
           type: string
         priority:
-          $ref: '#/components/schemas/stats_wan_tunnel_priority'
+          $ref: '#/components/schemas/tunnel_priority'
         protocol:
           $ref: '#/components/schemas/wan_tunnel_protocol'
         rx_bytes:
@@ -97629,12 +97656,6 @@ components:
       required:
       - peer_ip
       type: object
-    stats_wan_tunnel_priority:
-      description: 'enum: `primary`, `secondary`'
-      enum:
-      - primary
-      - secondary
-      type: string
     stats_wired_client:
       additionalProperties: false
       properties:
@@ -101026,6 +101047,12 @@ components:
       enum:
       - '1'
       - '2'
+      type: string
+    tunnel_priority:
+      description: 'enum: `primary`, `secondary`'
+      enum:
+      - primary
+      - secondary
       type: string
     tunnel_provider_options:
       additionalProperties: false
@@ -109488,47 +109515,6 @@ components:
         $ref: '#/components/schemas/wxtag_client'
       type: array
       uniqueItems: true
-    zigbee_join_event:
-      additionalProperties: false
-      description: Zigbee join event data received over the WebSocket stream
-      properties:
-        detail:
-          $ref: '#/components/schemas/zigbee_join_event_detail'
-        event_type:
-          $ref: '#/components/schemas/zigbee_join_event_type'
-        session:
-          description: Session ID returned by the Enable Zigbee Join API call
-          examples:
-          - 19e73828-937f-05e6-f709-e29efdb0a82b
-          format: uuid
-          type: string
-        zigbee_mac:
-          description: MAC address of the Zigbee end device (8 bytes, hex encoded)
-          examples:
-          - fd05eb86c04ac04a
-          type: string
-      type: object
-    zigbee_join_event_detail:
-      additionalProperties: false
-      properties:
-        lqi:
-          description: "Link quality indicator; 0\u2013255, higher is better"
-          examples:
-          - 180
-          maximum: 255
-          minimum: 0
-          type: integer
-      type: object
-    zigbee_join_event_type:
-      description: 'Event type of the Zigbee join process. enum: `associated`, `initiated`,
-        `rejected`'
-      enum:
-      - associated
-      - initiated
-      - rejected
-      examples:
-      - associated
-      type: string
     zigbee_join_response:
       additionalProperties: false
       properties:
