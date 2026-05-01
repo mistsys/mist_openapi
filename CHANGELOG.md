@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
   Added `POST /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}/cancel`
 - Added `POST /api/v1/orgs/{org_id}/nac_clients/{client_mac}/coa`
 - Added `POST /api/v1/orgs/{org_id}/ssos/{sso_id}/delete_admins`
+- Added `POST /api/v1/msps/{msp_id}/ssos/{sso_id}/delete_admins`
 - Updated `/api/v1/orgs/{org_id}/logs`:
   - Renamed to `/api/v1/orgs/{org_id}/logs/search`
 - Updated `GET /api/v1/orgs/{org_id}/jsi/sirt/search`:
