@@ -76,6 +76,11 @@ All notable changes to this project will be documented in this file.
   - Added `remove_inventory`
 - Updated `wlan_auth` schema:
   - Added `enable_gcmp256` and `enable_beacon_protection`
+- Updated `GET /api/v1/orgs/{org_id}/inventory/count`:
+  - Added `site_id` query parameter
+  - Added `model` query parameter
+  - Added `version` query parameter
+  - Added `status` query parameter
 
 ## [2602.1.10] - 2026-04-08
 
