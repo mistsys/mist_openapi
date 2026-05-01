@@ -4446,6 +4446,46 @@ paths:
       summary: updateMspSso
       tags:
       - MSPs SSO
+  /api/v1/msps/{msp_id}/ssos/{sso_id}/delete_admins:
+    parameters:
+    - $ref: '#/components/parameters/msp_id'
+    - $ref: '#/components/parameters/sso_id'
+    post:
+      description: Delete MSP SSO Admin users by email. This removes SSO-linked admin
+        accounts from the organization.
+      operationId: deleteMspSsoAdmins
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  emails:
+                  - john@abc.com
+                  - may@abc.com
+            schema:
+              $ref: '#/components/schemas/sso_delete_admins'
+        description: Request Body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sso_delete_admins_response'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteMspSsoAdmins
+      tags:
+      - Msps SSO
   /api/v1/msps/{msp_id}/ssos/{sso_id}/failures:
     get:
       description: Get List of MSP SSO Latest Failures
@@ -9945,14 +9985,14 @@ paths:
         name: site_id
         schema:
           type: string
-      - in: query
+      - description: Device model
+        in: query
         name: model
-        description: Device model
         schema:
           type: string
-      - in: query
+      - description: Software version
+        in: query
         name: version
-        description: Software version
         schema:
           type: string
       - in: query
@@ -18829,46 +18869,6 @@ paths:
       summary: deleteOrgSsoAdmins
       tags:
       - Orgs SSO
-  /api/v1/msps/{msp_id}/ssos/{sso_id}/delete_admins:
-    parameters:
-    - $ref: '#/components/parameters/msp_id'
-    - $ref: '#/components/parameters/sso_id'
-    post:
-      description: Delete MSP SSO Admin users by email. This removes SSO-linked admin
-        accounts from the organization.
-      operationId: deleteMspSsoAdmins
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Example:
-                value:
-                  emails:
-                  - john@abc.com
-                  - may@abc.com
-            schema:
-              $ref: '#/components/schemas/sso_delete_admins'
-        description: Request Body
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/sso_delete_admins_response'
-          description: OK
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: deleteMspSsoAdmins
-      tags:
-      - Msps SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}/failures:
     get:
       description: Get List of Org SSO Latest Failures
