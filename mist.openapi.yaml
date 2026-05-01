@@ -23534,61 +23534,6 @@ paths:
       summary: updateSiteInfo
       tags:
       - Sites
-  /api/v1/sites/{site_id}//search:
-    get:
-      description: Search IoT Endpoints
-      operationId: searchSiteIotEndpoints
-      parameters:
-      - description: AP MAC address
-        in: query
-        name: ap_mac
-        schema:
-          examples:
-          - 5c5b350e0001
-          type: string
-      - description: Device MAC address
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 63f9e299182b63f9
-          type: string
-      - description: 'IoT endpoint type. enum: `zigbee`'
-        in: query
-        name: type
-        schema:
-          examples:
-          - zigbee
-          type: string
-      - description: Manufacturer name
-        in: query
-        name: mfg
-        schema:
-          examples:
-          - Assa Abloy
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      responses:
-        '200':
-          $ref: '#/components/responses/IotEndpointsSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: searchSiteIotEndpoints
-      tags:
-      - Sites Stats - IoT Endpoints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/aamwprofiles/derived:
     get:
       description: Get the list of derived Advanced Anti Malware Profile (SkyAtp)
@@ -30175,6 +30120,61 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
+  /api/v1/sites/{site_id}/iotendpoints/search:
+    get:
+      description: Search IoT Endpoints
+      operationId: searchSiteIotEndpoints
+      parameters:
+      - description: AP MAC address
+        in: query
+        name: ap_mac
+        schema:
+          examples:
+          - 5c5b350e0001
+          type: string
+      - description: Device MAC address
+        in: query
+        name: mac
+        schema:
+          examples:
+          - 63f9e299182b63f9
+          type: string
+      - description: 'IoT endpoint type. enum: `zigbee`'
+        in: query
+        name: type
+        schema:
+          examples:
+          - zigbee
+          type: string
+      - description: Manufacturer name
+        in: query
+        name: mfg
+        schema:
+          examples:
+          - Assa Abloy
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/IotEndpointsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteIotEndpoints
+      tags:
+      - Sites Stats - IoT Endpoints
+    parameters:
+    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/licenses/usages:
     get:
       description: This shows license usage (i.e. needed) based on the features enabled
