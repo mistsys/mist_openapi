@@ -4450,6 +4450,46 @@ paths:
       summary: updateMspSso
       tags:
       - MSPs SSO
+  /api/v1/msps/{msp_id}/ssos/{sso_id}/delete_admins:
+    parameters:
+    - $ref: '#/components/parameters/msp_id'
+    - $ref: '#/components/parameters/sso_id'
+    post:
+      description: Delete MSP SSO Admin users by email. This removes SSO-linked admin
+        accounts from the organization.
+      operationId: deleteMspSsoAdmins
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  emails:
+                  - john@abc.com
+                  - may@abc.com
+            schema:
+              $ref: '#/components/schemas/sso_delete_admins'
+        description: Request Body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sso_delete_admins_response'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteMspSsoAdmins
+      tags:
+      - Msps SSO
   /api/v1/msps/{msp_id}/ssos/{sso_id}/failures:
     get:
       description: Get List of MSP SSO Latest Failures
@@ -9937,13 +9977,32 @@ paths:
       operationId: countOrgInventory
       parameters:
       - in: query
-        name: type
-        schema:
-          $ref: '#/components/schemas/device_type_default_ap'
-      - in: query
         name: distinct
         schema:
           $ref: '#/components/schemas/inventory_count_distinct'
+      - in: query
+        name: type
+        schema:
+          $ref: '#/components/schemas/device_type_default_ap'
+      - description: Site ID
+        in: query
+        name: site_id
+        schema:
+          type: string
+      - description: Device model
+        in: query
+        name: model
+        schema:
+          type: string
+      - description: Software version
+        in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          $ref: '#/components/schemas/device_status_filter'
       - $ref: '#/components/parameters/limit'
       responses:
         '200':
@@ -23475,61 +23534,6 @@ paths:
       summary: updateSiteInfo
       tags:
       - Sites
-  /api/v1/sites/{site_id}//search:
-    get:
-      description: Search IoT Endpoints
-      operationId: searchSiteIotEndpoints
-      parameters:
-      - description: AP MAC address
-        in: query
-        name: ap_mac
-        schema:
-          examples:
-          - 5c5b350e0001
-          type: string
-      - description: Device MAC address
-        in: query
-        name: mac
-        schema:
-          examples:
-          - 63f9e299182b63f9
-          type: string
-      - description: 'IoT endpoint type. enum: `zigbee`'
-        in: query
-        name: type
-        schema:
-          examples:
-          - zigbee
-          type: string
-      - description: Manufacturer name
-        in: query
-        name: mfg
-        schema:
-          examples:
-          - Assa Abloy
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      responses:
-        '200':
-          $ref: '#/components/responses/IotEndpointsSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: searchSiteIotEndpoints
-      tags:
-      - Sites Stats - IoT Endpoints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/aamwprofiles/derived:
     get:
       description: Get the list of derived Advanced Anti Malware Profile (SkyAtp)
@@ -30116,6 +30120,61 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
+  /api/v1/sites/{site_id}/iotendpoints/search:
+    get:
+      description: Search IoT Endpoints
+      operationId: searchSiteIotEndpoints
+      parameters:
+      - description: AP MAC address
+        in: query
+        name: ap_mac
+        schema:
+          examples:
+          - 5c5b350e0001
+          type: string
+      - description: Device MAC address
+        in: query
+        name: mac
+        schema:
+          examples:
+          - 63f9e299182b63f9
+          type: string
+      - description: 'IoT endpoint type. enum: `zigbee`'
+        in: query
+        name: type
+        schema:
+          examples:
+          - zigbee
+          type: string
+      - description: Manufacturer name
+        in: query
+        name: mfg
+        schema:
+          examples:
+          - Assa Abloy
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/IotEndpointsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteIotEndpoints
+      tags:
+      - Sites Stats - IoT Endpoints
+    parameters:
+    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/licenses/usages:
     get:
       description: This shows license usage (i.e. needed) based on the features enabled
