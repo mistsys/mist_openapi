@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2602.1.11] - 2026-04-28
+## [2604.1.0] - 2026-05-05
 
 - Added `GET /api/v1/sites/{site_id}/rrm/channel_scores/band/{band}`
 - Added `GET /api/v1/sites/{site_id}/auto_map_assignment`
@@ -30,6 +30,10 @@ All notable changes to this project will be documented in this file.
   - Renamed to `/api/v1/orgs/{org_id}/logs/search`
 - Updated `GET /api/v1/orgs/{org_id}/jsi/sirt/search`:
   - Added `updated_after`, `updated_before`, `published_after`, `published_before`, `text`, `sort` query parameters
+- Updated `evpn_config_role` schema:
+  - Added `border` role
+- Updated `junos_port_config` schema:
+  - Added `ae_lacp_force_up`
 - Updated `account_skyatp_config`
   Updated `account_skyatp_info`:
   - Added `cloud_name`

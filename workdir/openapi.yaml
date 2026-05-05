@@ -72345,8 +72345,8 @@ components:
       readOnly: true
       type: object
     evpn_config_role:
-      description: 'enum: `access`, `border`, `collapsed-core`, `core`, `distribution`, `esilag-access`,
-        `none`'
+      description: 'enum: `access`, `border`, `collapsed-core`, `core`, `distribution`,
+        `esilag-access`, `none`'
       enum:
       - access
       - border
