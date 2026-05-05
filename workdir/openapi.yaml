@@ -72345,10 +72345,11 @@ components:
       readOnly: true
       type: object
     evpn_config_role:
-      description: 'enum: `access`, `collapsed-core`, `core`, `distribution`, `esilag-access`,
+      description: 'enum: `access`, `border`, `collapsed-core`, `core`, `distribution`, `esilag-access`,
         `none`'
       enum:
       - access
+      - border
       - collapsed-core
       - core
       - distribution
@@ -76097,8 +76098,16 @@ components:
         ae_idx:
           description: Users could force to use the designated AE name
           type: integer
+        ae_lacp_force_up:
+          default: false
+          description: 'If `aggregated`==`true`, sets the state of the interface as
+            UP when the peer has limited LACP capability. Use case: When a device
+            connected to this AE port is ZTPing for the first time, it will not have
+            LACP configured on the other end. **Note:** Turning this on will enable
+            force-up on one of the interfaces in the bundle only'
+          type: boolean
         ae_lacp_slow:
-          description: To use fast timeout
+          description: To use slow timeout
           type: boolean
         aggregated:
           default: false
@@ -78127,7 +78136,7 @@ components:
           examples:
           - Guest
           type: string
-        note:
+        notes:
           examples:
           - note for mxedge
           type: string
