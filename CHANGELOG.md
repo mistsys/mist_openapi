@@ -2,6 +2,91 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2604.1.0] - 2026-05-05
+
+- Added `GET /api/v1/sites/{site_id}/rrm/channel_scores/band/{band}`
+- Added `GET /api/v1/sites/{site_id}/auto_map_assignment`
+  Added `POST /api/v1/sites/{site_id}/auto_map_assignment`
+  Added `DELETE /api/v1/sites/{site_id}/auto_map_assignment`
+  Added `POST /api/v1/sites/{site_id}/apply_auto_map_assignment`
+  Added `POST /api/v1/sites/{site_id}/clear_auto_map_assignment`
+- Added `POST /api/v1/sites/{site_id}/mxedges/upgrade`
+  Added `GET /api/v1/sites/{site_id}/mxedges/upgrade`
+  Added `GET /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}`
+  Added `PUT /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}`
+  Added `POST /api/v1/sites/{site_id}/mxedges/upgrade/{upgrade_id}/cancel`
+- Added `POST /api/v1/sites/{site_id}/nac_clients/{client_mac}/coa`
+- Added `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_join`
+- Added `GET /api/v1/sites/{site_id}/iotendpoints/search`
+- Added `GET /api/v1/orgs/{org_id}/exports/e911_report`
+  Added `POST /api/v1/orgs/{org_id}/exports/e911_report`
+  Added `DELETE /api/v1/orgs/{org_id}/exports/e911_report`
+- Added `PUT /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}`
+  Added `POST /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}/cancel`
+- Added `POST /api/v1/orgs/{org_id}/nac_clients/{client_mac}/coa`
+- Added `POST /api/v1/orgs/{org_id}/ssos/{sso_id}/delete_admins`
+- Added `POST /api/v1/msps/{msp_id}/ssos/{sso_id}/delete_admins`
+- Updated `/api/v1/orgs/{org_id}/logs`:
+  - Renamed to `/api/v1/orgs/{org_id}/logs/search`
+- Updated `GET /api/v1/orgs/{org_id}/jsi/sirt/search`:
+  - Added `updated_after`, `updated_before`, `published_after`, `published_before`, `text`, `sort` query parameters
+- Updated `evpn_config_role` schema:
+  - Added `border` role
+- Updated `junos_port_config` schema:
+  - Added `ae_lacp_force_up`
+- Updated `account_skyatp_config`
+  Updated `account_skyatp_info`:
+  - Added `cloud_name`
+- Updated `ap_mesh` schema:
+  - Added `use_wpa3_on_5`
+- Updated `bgp_config_neighbors` schema:
+  - Added `tunnel_via`
+- Updated `capture_mxedge` schema:
+  - Added `tcpdump_expression`
+  - Updated `duration`, `max_pkt_len`, `num_packets` constraints
+- Updated `device_ap`
+  Updated `deviceprofile_ap`:
+  - Added `zigbee_config`
+- Updated `evpn_options` schema:
+  - Added `enable_inband_mgmt`
+- Updated `gateway_port_config` schema:
+  - Added `poe_keep_state_when_reboot`
+- Updated `installer_device` schema:
+  - Added `ble_stat`
+- Updated `marvis_client` schema:
+  - Added `telemetry`, `location`, `synthetic_test`
+  - Renamed `provision_url` → `enrollment_url`
+- Updated `org_setting_marvis` schema:
+  - Added `self_driving`
+- Updated `org_setting_mist_nac` schema:
+  - Added `allow_teap_machine_auth_only` and `mdm`
+- Updated `psk` schema:
+  - Added `vlan_name`
+- Updated `response_pcap_search_item` schema:
+  - Added `last_seen` and `mxedges`
+- Updated `response_pcap_status` schema:
+  - Added `enabled`, `expiry`, `invalid_mxedges`, `mxedge_count`, `org_id`, `raw`, `site_id`, `timestamp`
+  - Updated `mxedges` from array to dict keyed by `mxedge_id`
+- Updated `rrm_event` schema:
+  - Renamed `ap_id` → `ap`
+- Updated `site_setting` schema:
+  - Added `iotproxy` and `vars_annotations`
+- Updated `stats_asset` schema:
+  - Added `_ttl`, `by`, `device_id`, `id`, `manufacture`, `mfg_company_id`, `mfg_data`, `service_packets`
+- Updated `switch_port_config_overwrite`
+  Updated `switch_port_usage`:
+  - Added `poe_keep_state_when_reboot`
+- Updated `utils_clear_bgp`, `utils_ping`, `utils_show_forwarding_table`, `utils_show_route`, `utils_traceroute` descriptions
+- Updated `virtual_chassis_update` schema:
+  - Added `remove_inventory`
+- Updated `wlan_auth` schema:
+  - Added `enable_gcmp256` and `enable_beacon_protection`
+- Updated `GET /api/v1/orgs/{org_id}/inventory/count`:
+  - Added `site_id` query parameter
+  - Added `model` query parameter
+  - Added `version` query parameter
+  - Added `status` query parameter
+
 ## [2602.1.10] - 2026-04-08
 
 - Added `minis-application` webhook sample
