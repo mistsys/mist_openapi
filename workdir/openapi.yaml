@@ -66968,16 +66968,18 @@ components:
         neighbor_as:
           $ref: '#/components/schemas/bgp_as'
         tunnel_via:
-          default: primary
-          description: 'If `via`==`tunnel`, specifies which tunnel (primary/secondary)
-            this neighbor is associated with. enum: `primary`, `secondary`'
-          enum:
-          - primary
-          - secondary
-          type: string
+          $ref: '#/components/schemas/bgp_config_neighbors_tunnel_via'
       required:
       - neighbor_as
       type: object
+    bgp_config_neighbors_tunnel_via:
+      default: primary
+      description: 'If `via`==`tunnel`, specifies which tunnel (primary/secondary)
+        this neighbor is associated with. enum: `primary`, `secondary`'
+      enum:
+      - primary
+      - secondary
+      type: string
     bgp_config_networks:
       description: Optional if `via`==`lan`. List of networks where we expect BGP
         neighbor to connect to/from
