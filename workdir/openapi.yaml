@@ -4485,7 +4485,7 @@ paths:
           $ref: '#/components/responses/HTTP429'
       summary: deleteMspSsoAdmins
       tags:
-      - Msps SSO
+      - MSPs SSO
   /api/v1/msps/{msp_id}/ssos/{sso_id}/failures:
     get:
       description: Get List of MSP SSO Latest Failures
