@@ -66972,10 +66972,13 @@ components:
         neighbor_as:
           $ref: '#/components/schemas/bgp_as'
         tunnel_via:
-          $ref: '#/components/schemas/tunnel_priority'
           default: primary
           description: 'If `via`==`tunnel`, specifies which tunnel (primary/secondary)
             this neighbor is associated with. enum: `primary`, `secondary`'
+          enum:
+          - primary
+          - secondary
+          type: string
       required:
       - neighbor_as
       type: object
@@ -78482,22 +78485,26 @@ components:
       additionalProperties: false
       properties:
         enabled:
+          anyOf:
+          - type: boolean
+          - type: string
           default: false
-          type: boolean
         querier:
           $ref: '#/components/schemas/mxedge_tunterm_igmp_snooping_querier'
         vlan_ids:
           $ref: '#/components/schemas/mxedge_tunterm_igmp_snooping_config_vlan_ids'
       type: object
     mxedge_tunterm_igmp_snooping_config_vlan_ids:
+      anyOf:
+      - items:
+          examples:
+          - 2
+          maximum: 4096
+          minimum: 0
+          type: integer
+        type: array
+      - type: string
       description: List of vlans on which tunterm performs IGMP snooping
-      items:
-        examples:
-        - 2
-        maximum: 4096
-        minimum: 0
-        type: integer
-      type: array
     mxedge_tunterm_igmp_snooping_querier:
       additionalProperties: false
       properties:
