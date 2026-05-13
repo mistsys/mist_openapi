@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2604.1.0**
+  description: '> Version: **2604.1.1**
 
     >
 
-    > Date: **April 28, 2026**
+    > Date: **May 13, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2604.1.0
+  version: 2604.1.1
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -8357,7 +8357,9 @@ paths:
         of the AP can be used as the approximate location of the client.
 
 
-        Each radio MAC can have 16 BSSIDs (enumerate the last octet from 0-F)'
+        Each radio MAC can have up to 16 BSSIDs. These are derived by incrementing
+        the least significant hexadecimal digit (last nibble) of the MAC address from
+        0 to F, while keeping the remaining bits unchanged.'
       operationId: listOrgApsMacs
       parameters:
       - $ref: '#/components/parameters/limit'
