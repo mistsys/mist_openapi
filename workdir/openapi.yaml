@@ -74484,55 +74484,73 @@ components:
       type: string
     fingerprint:
       additionalProperties: false
+      description: Client device fingerprint record returned by NAC fingerprint insights
       properties:
         family:
+          description: Device family or category inferred from client fingerprinting
           readOnly: true
           type: string
         mac:
+          description: Client device MAC address for the fingerprint record
           readOnly: true
           type: string
         mfg:
+          description: Manufacturer name inferred from client fingerprinting
           readOnly: true
           type: string
         model:
+          description: Device model inferred from client fingerprinting
           readOnly: true
           type: string
         org_id:
+          description: Organization that contains the fingerprint record
           $ref: '#/components/schemas/org_id'
         os:
+          description: Operating system name and version inferred from client fingerprinting
           readOnly: true
           type: string
         os_type:
+          description: Operating system family inferred from client fingerprinting
           readOnly: true
           type: string
         random_mac:
+          description: Whether the client device uses a randomized MAC address
           readOnly: true
           type: boolean
         site_id:
+          description: Site associated with the fingerprint record
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the fingerprint record was observed
           $ref: '#/components/schemas/timestamp'
       type: object
     fingerprint_search_result:
       additionalProperties: false
+      description: Search response for client device fingerprint records
       properties:
         end:
+          description: Upper bound of the time range for the fingerprint search
           examples:
           - 1711035686
           type: integer
         limit:
+          description: Maximum number of fingerprint records returned in the response
           examples:
           - 10
           type: integer
         next:
+          description: Pagination URL for the next page of fingerprint search results
           type: string
         results:
+          description: Fingerprint records returned for the search
           $ref: '#/components/schemas/fingerprints'
         start:
+          description: Lower bound of the time range for the fingerprint search
           examples:
           - 1710949286
           type: integer
         total:
+          description: Number of fingerprint records matching the search
           examples:
           - 232
           type: integer
@@ -74544,6 +74562,7 @@ components:
       - results
       type: object
     fingerprints:
+      description: Client device fingerprint records
       items:
         $ref: '#/components/schemas/fingerprint'
       type: array
