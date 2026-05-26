@@ -74750,26 +74750,39 @@ components:
       type: array
     gateway_ip_config_property:
       additionalProperties: false
+      description: Gateway network interface IP configuration
       properties:
         ip:
+          description: Static IPv4 address for the gateway network interface when
+            `type`==`static`
           format: ipv4
           type: string
         ip6:
+          description: Static IPv6 address for the gateway network interface when
+            `type6`==`static`
           format: ipv6
           type: string
         netmask:
+          description: IPv4 netmask or prefix length for the gateway network interface
+            when `type`==`static`
           examples:
           - /24
           type: string
         netmask6:
+          description: IPv6 netmask or prefix length for the gateway network interface
+            when `type6`==`static`
           examples:
           - 2001:db8:abcd:12::1
           type: string
         secondary_ips:
+          description: Additional IPv4 addresses in CIDR notation for this gateway
+            network interface
           $ref: '#/components/schemas/gateway_ip_config_property_second_ips'
         type:
+          description: IPv4 address assignment mode for this gateway network interface
           $ref: '#/components/schemas/ip_type'
         type6:
+          description: IPv6 address assignment mode for this gateway network interface
           $ref: '#/components/schemas/ip_type6'
       type: object
     gateway_ip_config_property_second_ips:
