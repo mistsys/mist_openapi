@@ -75521,8 +75521,10 @@ components:
         type: integer
     gateway_port_vpn_path:
       additionalProperties: false
+      description: VPN path settings for traffic that uses a gateway port
       properties:
         bfd_profile:
+          description: BFD profile used for this VPN path when the VPN `type`==`hub_spoke`
           $ref: '#/components/schemas/gateway_port_vpn_path_bfd_profile'
         bfd_use_tunnel_mode:
           default: false
@@ -75535,8 +75537,10 @@ components:
             is preferred)
           type: integer
         role:
+          description: Gateway role for this VPN path; valid values depend on the VPN `type`
           $ref: '#/components/schemas/gateway_port_vpn_path_role'
         traffic_shaping:
+          description: Traffic shaping settings applied to this VPN path
           $ref: '#/components/schemas/gateway_traffic_shaping'
       type: object
     gateway_port_vpn_path_bfd_profile:
