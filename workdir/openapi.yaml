@@ -76607,56 +76607,81 @@ components:
       type: object
     if_stat_property:
       additionalProperties: false
+      description: Interface statistics and metadata reported by a device
       properties:
         address_mode:
+          description: Address assignment mode reported for the interface
           type: string
         ips:
+          description: Interface IP addresses reported with prefix information
           $ref: '#/components/schemas/strings'
         nat_addresses:
+          description: NAT addresses associated with this interface
           $ref: '#/components/schemas/strings'
         network_name:
+          description: Mist network name associated with this interface
           type: string
         port_id:
+          description: Physical or logical port identifier for this interface
           type: string
         port_usage:
+          description: Configured usage for this interface, such as LAN or WAN
           type: string
         redundancy_state:
+          description: Redundancy state reported for this interface
           type: string
         rx_bytes:
+          description: Received byte counter for this interface
           $ref: '#/components/schemas/rx_bytes'
         rx_pkts:
+          description: Received packet counter for this interface
           $ref: '#/components/schemas/rx_pkts'
         servp_info:
+          description: Service-provider and geolocation details for this interface
           $ref: '#/components/schemas/if_stat_property_servp_info'
         tx_bytes:
+          description: Transmitted byte counter for this interface
           $ref: '#/components/schemas/tx_bytes'
         tx_pkts:
+          description: Transmitted packet counter for this interface
           $ref: '#/components/schemas/tx_pkts'
         up:
+          description: Whether the interface is operationally up
           type: boolean
         vlan:
+          description: Associated VLAN ID for this interface
           type: integer
         wan_name:
+          description: Configured WAN name associated with this interface
           type: string
         wan_type:
+          description: Configured WAN uplink type associated with this interface
           type: string
       type: object
     if_stat_property_servp_info:
       additionalProperties: false
+      description: Service-provider and geolocation details associated with an interface address
       properties:
         asn:
+          description: Autonomous System Number associated with the service provider
           type: string
         city:
+          description: Detected city for the service provider address
           type: string
         country_code:
+          description: ISO country code for the service provider address
           type: string
         latitude:
+          description: Geographic latitude for the service provider address
           type: number
         longitude:
+          description: Geographic longitude for the service provider address
           type: number
         org:
+          description: Service provider organization name
           type: string
         region_code:
+          description: Administrative region code for the service provider address
           type: string
       type: object
     image_import:
