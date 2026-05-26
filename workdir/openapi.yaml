@@ -75832,14 +75832,17 @@ components:
       type: array
     gateway_traffic_shaping:
       additionalProperties: false
+      description: Traffic shaping settings for a gateway interface or VPN path
       properties:
         class_percentages:
+          description: Traffic class bandwidth percentages for high, medium, low, and best-effort queues
           $ref: '#/components/schemas/gateway_traffic_shaping_class_percentages'
         enabled:
           default: false
+          description: Whether traffic shaping is enabled
           type: boolean
         max_tx_kbps:
-          description: Interface Transmit Cap in kbps
+          description: Maximum transmit bandwidth for the interface, in Kbps
           type: integer
       type: object
     gateway_traffic_shaping_class_percentages:
@@ -75850,18 +75853,20 @@ components:
       type: array
     gateway_vrf_instance:
       additionalProperties: false
+      description: Gateway VRF instance and its member networks
       examples:
       - networks:
         - CORP_NET
         - MGMT_NET
       properties:
         networks:
+          description: Network names included in this gateway VRF instance
           $ref: '#/components/schemas/strings'
       type: object
     gateway_vrf_instances:
       additionalProperties:
         $ref: '#/components/schemas/gateway_vrf_instance'
-      description: Property key is the network name
+      description: Property key is the VRF instance name
       examples:
       - CORP_VRF:
           networks:
@@ -75878,13 +75883,16 @@ components:
       type: string
     gateway_wan_probe_override:
       additionalProperties: false
-      description: Only if `usage`==`wan`
+      description: Only if `usage`==`wan`. WAN health probe override for this gateway port
       properties:
         ip6s:
+          description: List of IPv6 probe host addresses used by this WAN override
           $ref: '#/components/schemas/strings'
         ips:
+          description: List of IPv4 probe host addresses used by this WAN override
           $ref: '#/components/schemas/strings'
         probe_profile:
+          description: WAN probe profile used for health checks on this port
           $ref: '#/components/schemas/gateway_wan_probe_override_probe_profile'
       type: object
     gateway_wan_probe_override_probe_profile:
