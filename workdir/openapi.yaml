@@ -67099,16 +67099,17 @@ components:
       type: array
     auto_preemption:
       additionalProperties: false
-      description: "Schedule to preempt ap\u2019s which are not connected to preferred\
-        \ peer"
+      description: Schedule to preempt AP tunnels that are not connected to their preferred peer
       properties:
         day_of_week:
+          description: Scheduled weekday for auto preemption
           $ref: '#/components/schemas/day_of_week'
         enabled:
           default: false
-          description: Whether auto preemption should happen
+          description: Whether auto preemption is enabled
           type: boolean
         time_of_day:
+          description: Scheduled time of day for auto preemption
           $ref: '#/components/schemas/time_of_day'
       type: object
     avprofile:
