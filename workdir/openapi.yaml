@@ -64157,6 +64157,7 @@ components:
     alarm_ack:
       properties:
         alarm_ids:
+          description: Alarm identifiers to acknowledge or unacknowledge
           $ref: '#/components/schemas/alarm_ack_alarm_ids'
         note:
           description: Some text note describing the intent
@@ -64355,6 +64356,7 @@ components:
     alarms:
       properties:
         alarm_ids:
+          description: Alarm identifiers to acknowledge or unacknowledge
           $ref: '#/components/schemas/alarm_ids'
         note:
           description: Some text note describing the intent
@@ -66552,7 +66554,7 @@ components:
       properties:
         file:
           contentMediaType: application/octet-stream
-          description: CSV file
+          description: CSV file containing asset records to import
           type: string
       type: object
     assets_import_json:
@@ -68525,6 +68527,7 @@ components:
     clear_dot1x_session:
       properties:
         ports:
+          description: Port IDs whose dot1x sessions should be cleared
           $ref: '#/components/schemas/clear_dot1x_session_ports'
       type: object
     clear_dot1x_session_ports:
