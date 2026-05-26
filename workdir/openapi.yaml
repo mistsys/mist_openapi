@@ -64439,7 +64439,7 @@ components:
             received and sent to AES server for location calculation
           type: boolean
         port:
-          description: Required if enabled, Aeroscout server port
+          description: Optional if enabled, Aeroscout server port. Defaults to 1144
           default: 1144
           type:
           - integer
@@ -64461,7 +64461,7 @@ components:
           - string
           - 'null'
         port:
-          description: Required if enabled, Airista server port
+          description: Optional if enabled, Airista server port. Defaults to 1144
           default: 1144
           type:
           - integer
@@ -67848,6 +67848,7 @@ components:
       additionalProperties: false
       properties:
         ports:
+          description: Gateway ports to include in the capture, keyed by port ID
           $ref: '#/components/schemas/capture_gateway_gateways_ports'
       type: object
     capture_gateway_gateways_port:
@@ -67956,6 +67957,7 @@ components:
         per org capture session
       properties:
         interfaces:
+          description: Mx Edge interfaces to include in the capture, keyed by interface name
           additionalProperties:
             $ref: '#/components/schemas/capture_mxedge_mxedges_interfaces'
       type: object
@@ -68243,6 +68245,7 @@ components:
         parent parameters will be used if not defined
       properties:
         band:
+          description: Radio band on which to start the scan capture
           $ref: '#/components/schemas/capture_scan_aps_band'
         channel:
           description: Specify the channel value where scan PCAP has to be started
@@ -68375,6 +68378,7 @@ components:
       additionalProperties: false
       properties:
         ports:
+          description: Switch ports to include in the capture, keyed by port ID
           $ref: '#/components/schemas/capture_switch_ports'
       type: object
     capture_switch_type:
