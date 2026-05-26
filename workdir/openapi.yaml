@@ -71103,68 +71103,88 @@ components:
       type: array
     const_nac_event:
       additionalProperties: false
+      description: NAC event example payload returned by the constants API
       properties:
         ap:
+          description: Access point MAC address associated with the NAC event
           examples:
           - 5c5b355008c0
           type: string
         bssid:
+          description: Wireless BSSID associated with the NAC event
           examples:
           - 5c5b35548892
           type: string
         cert_cn:
+          description: Certificate common name presented during NAC authentication
           examples:
           - suriyas
           type: string
         cert_expiry:
+          description: Certificate expiration timestamp presented during NAC authentication
           examples:
           - 1711557441
           type: integer
         cert_issuer:
+          description: Certificate issuer presented during NAC authentication
           examples:
           - /DC=net/DC=jnpr/CN=Juniper Networks Issuing AWS1 CA
           type: string
         cert_san_upn:
+          description: Certificate SAN UPN values presented during NAC authentication
           $ref: '#/components/schemas/const_nac_events_cert_san_upn'
         cert_serial:
+          description: Certificate serial number presented during NAC authentication
           examples:
           - 1300103d29e56ef083797bedc2000100103d29
           type: string
         cert_subject:
+          description: Certificate subject presented during NAC authentication
           examples:
           - /CN=suriyas/emailAddress=suriyas@juniper.net
           type: string
         eap_type:
+          description: EAP method used for the NAC authentication
           examples:
           - EAP-TLS
           type: string
         nas_vendor:
+          description: Network access server vendor reported for the NAC event
           examples:
           - Mist
           type: string
         org_id:
+          description: Organization identifier associated with the NAC event
           $ref: '#/components/schemas/org_id'
         random_mac:
+          description: Whether the client used a randomized MAC address in the NAC
+            event
           examples:
           - true
           type: boolean
         site_id:
+          description: Site identifier associated with the NAC event
           $ref: '#/components/schemas/site_id'
         ssid:
+          description: Wireless SSID associated with the NAC event
           examples:
           - Test_Suriya-SSID
           type: string
         timestamp:
+          description: Time when the NAC event occurred
           $ref: '#/components/schemas/timestamp'
         type:
+          description: NAC event type key
           examples:
           - NAC_CLIENT_CERT_CHECK_SUCCESS
           type: string
         username:
+          description: User identity associated with the NAC event
           examples:
           - suriyas@juniper.net
           type: string
         wcid:
+          description: Wireless client identifier associated with the NAC event
           examples:
           - b43637b0-f0d9-0a1d-1ec2-73c394a9f679
           format: uuid
@@ -71175,6 +71195,7 @@ components:
         $ref: '#/components/schemas/const_nac_event'
       type: array
     const_nac_events_cert_san_upn:
+      description: Certificate Subject Alternative Name UPN values
       examples:
       - - suriyas@juniper.net
       items:
