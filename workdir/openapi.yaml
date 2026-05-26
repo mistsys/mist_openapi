@@ -69703,7 +69703,7 @@ components:
       type: array
     coa_server:
       additionalProperties: false
-      description: CoA Server
+      description: RADIUS Change of Authorization (CoA) server settings
       properties:
         disable_event_timestamp_check:
           default: false
@@ -69711,15 +69711,19 @@ components:
           type: boolean
         enabled:
           default: false
+          description: Whether this RADIUS CoA server is enabled
           type: boolean
         ip:
+          description: Server IPv4 address for RADIUS CoA messages
           examples:
           - 1.2.3.4
           format: ipv4
           type: string
         port:
+          description: UDP port used to send RADIUS CoA messages to the server
           $ref: '#/components/schemas/radius_coa_port'
         secret:
+          description: Shared secret used to authenticate RADIUS CoA messages
           examples:
           - testing456
           type: string
