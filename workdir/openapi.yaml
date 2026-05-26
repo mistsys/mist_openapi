@@ -70741,17 +70741,23 @@ components:
       type: string
     const_event:
       additionalProperties: false
+      description: Device event definition returned by the constants API
       properties:
         description:
+          description: Narrative description of the device event type
           type: string
         display:
+          description: Human-readable label for the device event type
           type: string
         example:
           additionalProperties: true
+          description: Sample device event payload for this event type
           type: object
         group:
+          description: Device event group for this definition
           type: string
         key:
+          description: Machine-readable device event key
           type: string
       required:
       - key
@@ -70763,32 +70769,42 @@ components:
       type: array
     const_fingerprint_types:
       additionalProperties: false
+      description: Supported client fingerprint values for NAC matching
       properties:
         family:
+          description: Device family values available for client fingerprint matching
           $ref: '#/components/schemas/strings'
         mfg:
+          description: Manufacturer values available for client fingerprint matching
           $ref: '#/components/schemas/strings'
         model:
+          description: Device model values available for client fingerprint matching
           $ref: '#/components/schemas/strings'
         os:
+          description: Operating system values available for client fingerprint matching
           $ref: '#/components/schemas/strings'
       type: object
     const_gateway_applications_definition:
       additionalProperties: false
+      description: Gateway application definition returned by the constants API
       properties:
         app_id:
+          description: Whether an AppID is defined for this gateway application
           examples:
           - true
           type: boolean
         key:
+          description: Machine-readable key that identifies the gateway application
           examples:
           - 4shared
           type: string
         name:
+          description: Display name of the gateway application
           examples:
           - 4shared
           type: string
         ssr_app_id:
+          description: Whether an SSR AppID is defined for this gateway application
           examples:
           - true
           type: boolean
