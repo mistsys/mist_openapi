@@ -69260,98 +69260,150 @@ components:
       type: string
     client_nac:
       additionalProperties: false
+      description: NAC client authentication and access state
       properties:
         ap:
+          description: Observed AP MAC addresses for the NAC client during the query
+            duration
           $ref: '#/components/schemas/nac_client_ap'
         auth_type:
+          description: Authentication method used by the NAC client
           $ref: '#/components/schemas/nac_auth_type'
         cert_cn:
+          description: Certificate common names observed for the client during the
+            query duration
           $ref: '#/components/schemas/nac_cert_cn'
         cert_issuer:
+          description: Certificate issuers observed for the client during the query
+            duration
           $ref: '#/components/schemas/nac_cert_issuer'
         cert_serial:
+          description: Certificate serial numbers observed for the client during the
+            query duration
           $ref: '#/components/schemas/nac_cert_serial'
         cert_subject:
+          description: Certificate subjects observed for the client during the query
+            duration
           $ref: '#/components/schemas/nac_cert_subject'
         client_ip:
+          description: Client IP addresses observed during the query duration
           $ref: '#/components/schemas/nac_client_ip'
         device_mac:
+          description: MAC address of the AP or switch handling the NAC client session
           $ref: '#/components/schemas/nac_device_mac'
         edr_managed:
+          description: Whether the NAC client is managed by an EDR provider
           type: boolean
         edr_provider:
+          description: EDR provider associated with the NAC client
           $ref: '#/components/schemas/edr_provider'
         edr_status:
+          description: EDR health status reported for the NAC client
           $ref: '#/components/schemas/edr_status'
         group:
+          description: User group associated with the NAC client
           type: string
         idp_id:
+          description: Identity Provider identifier used during NAC authentication
           type: string
         idp_role:
+          description: Identity Provider roles or groups returned for the NAC client
           $ref: '#/components/schemas/strings'
         last_ap:
+          description: Most recent AP MAC address used by the NAC client
           $ref: '#/components/schemas/last_ap'
         last_cert_cn:
+          description: Most recent certificate common name used by the NAC client
           $ref: '#/components/schemas/last_cert_cn'
         last_cert_expiry:
+          description: Most recent certificate expiration timestamp for the NAC client
           $ref: '#/components/schemas/last_cert_expiry'
         last_cert_issuer:
+          description: Most recent certificate issuer used by the NAC client
           $ref: '#/components/schemas/last_cert_issuer'
         last_cert_serial:
+          description: Most recent certificate serial number used by the NAC client
           $ref: '#/components/schemas/last_cert_serial'
         last_cert_subject:
+          description: Most recent certificate subject used by the NAC client
           $ref: '#/components/schemas/last_cert_subject'
         last_client_ip:
+          description: Most recent client IP address observed for the NAC client
           $ref: '#/components/schemas/last_client_ip'
         last_nacrule_id:
+          description: Most recent NAC policy rule identifier used for authentication
           $ref: '#/components/schemas/last_nacrule_id'
         last_nacrule_name:
+          description: Most recent NAC policy rule name used for authentication
           $ref: '#/components/schemas/last_nacrule_name'
         last_nas_vendor:
+          description: Most recent NAS vendor reported for the NAC client
           $ref: '#/components/schemas/last_nas_vendor'
         last_port_id:
+          description: Most recent port identifier used by the NAC client
           $ref: '#/components/schemas/last_port_id'
         last_ssid:
+          description: Most recent SSID used by the NAC client
           $ref: '#/components/schemas/last_ssid'
         last_status:
+          description: Most recent NAC authentication status for the client
           $ref: '#/components/schemas/nac_client_last_status'
         last_username:
+          description: Most recent username presented by the NAC client
           $ref: '#/components/schemas/last_username'
         last_vlan:
+          description: Most recent VLAN associated with the NAC client
           $ref: '#/components/schemas/last_vlan'
         mac:
+          description: Client MAC address for the NAC record
           $ref: '#/components/schemas/nac_client_mac'
         nacrule_id:
+          description: NAC policy rule identifiers used during the query duration
           $ref: '#/components/schemas/nac_nacrule_id'
         nacrule_matched:
+          description: Whether a NAC policy rule matched the client
           type: boolean
         nacrule_name:
+          description: NAC policy rule names used during the query duration
           $ref: '#/components/schemas/nac_nacrule_name'
         nas_ip:
+          description: IP address of the NAS device used for authentication
           type: string
         nas_vendor:
+          description: NAS vendors observed for the client during the query duration
           $ref: '#/components/schemas/nac_nas_vendor'
         org_id:
+          description: Owning organization identifier for the NAC client
           $ref: '#/components/schemas/org_id'
         port_id:
+          description: Port identifiers used by the NAC client during the query duration
           $ref: '#/components/schemas/nac_port_id'
         random_mac:
+          description: Whether the NAC client used a randomized MAC address
           $ref: '#/components/schemas/random_mac'
         resp_attrs:
+          description: RADIUS response attributes returned for the NAC client
           $ref: '#/components/schemas/resp_attrs'
         site_id:
+          description: Site identifier associated with the NAC client
           $ref: '#/components/schemas/site_id'
         ssid:
+          description: Wireless SSIDs used by the NAC client during the query duration
           $ref: '#/components/schemas/nac_ssid'
         timestamp:
+          description: Time when the NAC client record was observed
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Network access type for the NAC client
           $ref: '#/components/schemas/nac_access_type'
         usermac_label:
+          description: User MAC labels associated with the NAC client
           $ref: '#/components/schemas/strings'
         username:
+          description: User identities associated with the NAC client authentication
           $ref: '#/components/schemas/nac_client_username'
         vlan:
+          description: Network VLANs associated with the NAC client during authentication
           $ref: '#/components/schemas/nac_client_vlan'
       type: object
     client_wireless:
