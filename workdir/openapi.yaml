@@ -73441,6 +73441,7 @@ components:
           type: boolean
         aggregated:
           default: false
+          description: Whether the port participates in an aggregated Ethernet interface
           type: boolean
         critical:
           default: false
@@ -73451,12 +73452,14 @@ components:
           type: string
         disable_autoneg:
           default: false
+          description: Whether Ethernet autonegotiation is disabled on the port
           type: boolean
         disabled:
           default: false
           description: Port admin up (true) / down (false)
           type: boolean
         dsl_type:
+          description: If `wan_type`==`dsl`. DSL technology used by the WAN port
           $ref: '#/components/schemas/gateway_port_dsl_type'
         dsl_vci:
           default: 35
@@ -73467,34 +73470,41 @@ components:
           description: If `wan_type`==`dsl`, 8 bit int
           type: integer
         duplex:
+          description: Ethernet duplex mode configured on the port
           $ref: '#/components/schemas/gateway_port_duplex'
         ip_config:
+          description: Layer 3 IP configuration for the port
           $ref: '#/components/schemas/gateway_port_config_ip_config'
         lte_apn:
-          description: If `wan_type`==`lte`
+          description: If `wan_type`==`lte`. APN used by the LTE uplink
           type: string
         lte_auth:
+          description: If `wan_type`==`lte`. Authentication method used by the LTE uplink
           $ref: '#/components/schemas/gateway_port_lte_auth'
         lte_backup:
+          description: Whether the LTE uplink is used as a backup WAN connection
           type: boolean
         lte_password:
-          description: If `wan_type`==`lte`
+          description: If `wan_type`==`lte`. Password used for LTE uplink authentication
           type: string
         lte_username:
-          description: If `wan_type`==`lte`
+          description: If `wan_type`==`lte`. Username used for LTE uplink authentication
           type: string
         mtu:
+          description: Layer 3 MTU configured on the port
           type: integer
         name:
-          description: Name that we'll use to derive config
+          description: Interface name used to derive device configuration
           type: string
         networks:
+          description: If `usage`==`lan`. Networks attached to the interface
           $ref: '#/components/schemas/gateway_port_networks'
         outer_vlan_id:
-          description: For Q-in-Q
+          description: For Q-in-Q. Outer VLAN ID used for QinQ encapsulation
           type: integer
         poe_disabled:
           default: false
+          description: Whether PoE output is disabled on the port
           type: boolean
         poe_keep_state_when_reboot:
           default: false
@@ -73509,7 +73519,7 @@ components:
           description: Whether to preserve dscp when sending traffic over VPN (SSR-only)
           type: boolean
         redundant:
-          description: If HA mode
+          description: If HA mode. Whether the port participates in the redundant Ethernet configuration
           type: boolean
         redundant_group:
           description: If HA mode, SRX Only - support redundancy-group. 1-128 for
@@ -73518,14 +73528,17 @@ components:
           minimum: 1
           type: integer
         reth_idx:
+          description: If HA mode and for SRX only. Redundant Ethernet interface index assigned to the port
           $ref: '#/components/schemas/gateway_port_config_reth_idx'
         reth_node:
-          description: If HA mode
+          description: If HA mode. Node associated with the redundant Ethernet interface
           type: string
         reth_nodes:
+          description: If HA mode and for SSR only. Per-network node assignment used for VLAN-based redundancy
           $ref: '#/components/schemas/gateway_port_reth_nodes'
         speed:
           default: auto
+          description: Link speed configured on the port
           examples:
           - 1g
           type: string
@@ -73536,19 +73549,24 @@ components:
           type: boolean
         svr_port_range:
           default: none
-          description: For SSR only
+          description: For SSR only. Port range configured on the interface
           examples:
           - 60000-60005
           type: string
         traffic_shaping:
+          description: Traffic shaping settings applied to the port
           $ref: '#/components/schemas/gateway_traffic_shaping'
         usage:
+          description: Logical usage assigned to the port
           $ref: '#/components/schemas/gateway_port_usage'
         vlan_id:
+          description: VLAN ID or variable used when the WAN interface is carried on a VLAN
           $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
         vpn_paths:
+          description: Per-VPN path settings for traffic that uses this port
           $ref: '#/components/schemas/gateway_port_vpn_paths'
         wan_arp_policer:
+          description: Only when `wan_type`==`broadband`. ARP policer profile applied to the WAN port
           $ref: '#/components/schemas/gateway_port_wan_arp_policer'
         wan_ext_ip:
           description: Only if `usage`==`wan`, optional. If spoke should reach this
@@ -73575,14 +73593,19 @@ components:
             (e.g. "2a02:1234:420a:10c9::/64")
           type: object
         wan_networks:
+          description: Only if `usage`==`wan`. Networks reachable through this WAN port for policy definition
           $ref: '#/components/schemas/gateway_port_config_wan_networks'
         wan_probe_override:
+          description: Optional WAN health probe override settings for this port
           $ref: '#/components/schemas/gateway_wan_probe_override'
         wan_source_nat:
+          description: Source NAT settings applied to traffic leaving this WAN port
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
         wan_speedtest_mode:
+          description: Controls whether Marvis or the scheduler can run speed tests on this WAN port
           $ref: '#/components/schemas/gateway_port_config_wan_speedtest_mode'
         wan_type:
+          description: Only if `usage`==`wan`. WAN uplink type configured on the port
           $ref: '#/components/schemas/gateway_port_wan_type'
       required:
       - usage
