@@ -70579,92 +70579,118 @@ components:
       type: array
     const_device_switch:
       additionalProperties: false
+      description: Switch model capability definition returned by the constants API
       properties:
         alias:
+          description: Alternate model identifier for chassis-based switch definitions
           examples:
           - EX4100-48P-CHAS
           type: string
         defaults:
+          description: Default port mappings for this switch model
           $ref: '#/components/schemas/const_device_switch_default'
         description:
+          description: Product description for the switch model
           examples:
           - Juniper EX4100 Series
           type: string
         display:
+          description: User-facing model name shown for the switch
           examples:
           - EX4100-48P
           type: string
         evolved_os:
           default: false
+          description: Whether the switch model runs Junos Evolved
           type: boolean
         evpn_ri_type:
+          description: EVPN routing-instance type used by this switch model
           examples:
           - mac-vrf
           type: string
         experimental:
           default: false
+          description: Whether this switch model is marked experimental in the constants
+            catalog
           type: boolean
         fans_pluggable:
           default: false
+          description: Whether the switch model has field-replaceable fans
           examples:
           - true
           type: boolean
         has_bgp:
           default: false
+          description: Whether the switch model supports BGP
           examples:
           - true
           type: boolean
         has_ets:
           default: false
+          description: Whether the switch model supports Enhanced Transmission Selection
+            (ETS)
           type: boolean
         has_evpn:
           default: false
+          description: Whether the switch model supports EVPN
           examples:
           - true
           type: boolean
         has_irb:
           default: false
+          description: Whether the switch model supports IRB interfaces
           examples:
           - true
           type: boolean
         has_poe_out:
           default: false
+          description: Whether the switch model supports PoE output
           examples:
           - true
           type: boolean
         has_snapshot:
           default: true
+          description: Whether the switch model supports configuration snapshots
           type: boolean
         has_vc:
           default: true
+          description: Whether the switch model supports Virtual Chassis
           examples:
           - true
           type: boolean
         model:
+          description: Switch model identifier for this capability definition
           examples:
           - EX4100-48P
           type: string
         modular:
           default: false
+          description: Whether the switch model has modular hardware
           type: boolean
         no_shaping_rate:
           default: false
+          description: Whether the switch model omits shaping-rate support
           type: boolean
         number_fans:
+          description: Number of fans in the switch model
           examples:
           - 2
           type: integer
         oc_device:
           default: false
+          description: Whether this switch model is identified as an OpenConfig-managed
+            device
           examples:
           - true
           type: boolean
         oob_interface:
+          description: Out-of-band management interface names for this switch model
           examples:
           - re0:mgmt-0, re1:mgmt-0
           type: string
         packet_action_drop_only:
           default: false
+          description: Whether packet action support is limited to drop-only behavior
           type: boolean
         pic:
           additionalProperties:
@@ -70677,16 +70703,20 @@ components:
             '2': sfp+*4 (uplink)
           type: object
         sub_required:
+          description: Subscription type required for this switch model
           type: string
         type:
+          description: Device type for this switch model definition
           $ref: '#/components/schemas/const_device_type_switch'
       required:
       - type
       type: object
     const_device_switch_default:
       additionalProperties: false
+      description: Default switch port ranges for a model
       properties:
         _ports:
+          description: Default switch port range list for this model
           examples:
           - ge-0/0/0-47, et-0/1/0-3, xe-0/2/0-3, ge-0/2/0-3
           type: string
