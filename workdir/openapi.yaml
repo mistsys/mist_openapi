@@ -66961,27 +66961,38 @@ components:
       type: array
     audit_log:
       additionalProperties: false
+      description: Administrative audit log entry
       properties:
         admin_id:
+          description: Identifier of the administrator associated with the audited action
           $ref: '#/components/schemas/admin_id'
         admin_name:
+          description: Name or email of the administrator associated with the audited action
           type: string
         after:
+          description: Field values after the audited change
           $ref: '#/components/schemas/audit_log_after'
         before:
+          description: Field values before the audited change
           $ref: '#/components/schemas/audit_log_before'
         for_site:
+          description: Whether this audit log entry is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the audit log entry
           $ref: '#/components/schemas/id'
         message:
+          description: Human-readable audit message describing the action
           type: string
         org_id:
+          description: Owning organization identifier for this audit log entry
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Associated site identifier for this audit log entry
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the audited action occurred
           $ref: '#/components/schemas/timestamp'
       required:
       - admin_id
