@@ -100073,39 +100073,39 @@ components:
     synthetictest_device:
       properties:
         host:
-          description: If `type`==`lan_connectivity`
+          description: If `type`==`lan_connectivity`. Hostname or IP address to probe for LAN connectivity testing
           examples:
           - www.example.com
           type: string
         hostname:
-          description: If `type`==`dns`
+          description: If `type`==`dns`. Hostname to resolve during the DNS synthetic test
           examples:
           - google.com"
           type: string
         ip:
-          description: If `type`==`arp`
+          description: If `type`==`arp`. IP address to resolve through ARP during the synthetic test
           examples:
           - 192.168.3.5
           type: string
         password:
-          description: If `type`==`radius`
+          description: If `type`==`radius`. Password used for RADIUS authentication testing
           examples:
           - test123
           format: password
           type: string
         ping_count:
           default: 10
-          description: If `type`==`lan_connectivity`
+          description: If `type`==`lan_connectivity`. Number of ping probes to send during the LAN connectivity test
           maximum: 60
           minimum: 10
           type: integer
         ping_details:
           default: false
-          description: If `type`==`lan_connectivity`
+          description: If `type`==`lan_connectivity`. Whether to include per-ping results in the LAN connectivity test output
           type: boolean
         ping_size:
           default: 56
-          description: If `type`==`lan_connectivity`
+          description: If `type`==`lan_connectivity`. Payload size, in bytes, for each ping probe
           maximum: 65535
           minimum: 56
           type: integer
@@ -100115,6 +100115,7 @@ components:
           - wan0
           type: string
         protocol:
+          description: If `type`==`lan_connectivity`. Protocol or protocol combination used for the connectivity test
           $ref: '#/components/schemas/synthetictest_device_protocol'
         tenant:
           description: If `type`==`curl` or `type`==`lan_connectivity`
@@ -100123,7 +100124,7 @@ components:
           type: string
         timeout:
           default: 60
-          description: If `type`==`curl`
+          description: If `type`==`curl`. Timeout, in seconds, for the HTTP request
           examples:
           - 60
           maximum: 120
@@ -100136,32 +100137,34 @@ components:
           minimum: 0
           type: integer
         type:
+          description: Synthetic test type to run against the target
           $ref: '#/components/schemas/synthetictest_type'
         url:
-          description: If `type`==`curl`
+          description: If `type`==`curl`. URL requested during the HTTP synthetic test
           examples:
           - https://www.example.com
           type: string
         username:
-          description: If `type`==`radius`
+          description: If `type`==`radius`. Username used for RADIUS authentication testing
           examples:
           - user
           type: string
         vlan_id:
+          description: Required for AP. VLAN ID used by the synthetic test when the target device is an AP
           $ref: '#/components/schemas/synthetictest_device_vlan_id'
       required:
       - type
       type: object
     synthetictest_device_protocol:
       default: ping+traceroute
-      description: 'if `type`==`lan_connectivity`. enum: `ping`, `traceroute`, `ping+traceroute`'
+      description: 'If `type`==`lan_connectivity`. Protocol or protocol combination used by the LAN connectivity test. enum: `ping`, `traceroute`, `ping+traceroute`'
       enum:
       - ping
       - ping+traceroute
       - traceroute
       type: string
     synthetictest_device_vlan_id:
-      description: Required for AP
+      description: Required for AP. VLAN ID used by the synthetic test when the target device is an AP
       oneOf:
       - type: string
       - maximum: 4094
