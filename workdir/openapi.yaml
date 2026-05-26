@@ -63408,17 +63408,21 @@ components:
     account_skyatp_config:
       properties:
         cloud_name:
+          description: Sky ATP cloud endpoint used for the integration
           $ref: '#/components/schemas/account_skyatp_cloud_name'
         password:
+          description: Credential password for the Sky ATP realm user
           examples:
           - foryoureyesonly
           format: password
           type: string
         realm:
+          description: Sky ATP realm to create or link with this Mist organization
           examples:
           - mist-team
           type: string
         username:
+          description: Sky ATP username used to create or access the realm
           examples:
           - john@abc.com
           type: string
@@ -63430,13 +63434,16 @@ components:
     account_skyatp_data:
       properties:
         secintel:
+          description: Security Intelligence feed configuration provided by Sky ATP
           $ref: '#/components/schemas/account_skyatp_data_secintel'
         secintel_allowlist_url:
+          description: URL for the Sky ATP Security Intelligence allowlist
           examples:
           - https://papi.s3.amazonaws.com/secintel_allowlist/xxx...
           readOnly: true
           type: string
         secintel_blocklist_url:
+          description: URL for the Sky ATP Security Intelligence blocklist
           examples:
           - https://papi.s3.amazonaws.com/secintel_blocklist/xxx...
           readOnly: true
@@ -63450,18 +63457,22 @@ components:
         \ url-based: threatfox_url, urlhaus, open_phish\n  * domain-based: threatfox_domains"
       properties:
         third_party_threat_feeds:
+          description: Third-party threat feed names enabled for Security Intelligence
           $ref: '#/components/schemas/strings'
       type: object
     account_skyatp_info:
       additionalProperties: false
       properties:
         cloud_name:
+          description: Sky ATP cloud endpoint configured for the integration
           $ref: '#/components/schemas/account_skyatp_cloud_name'
         realm:
+          description: Sky ATP realm linked with this Mist organization
           examples:
           - mist-team
           type: string
         username:
+          description: Sky ATP username configured for the linked realm
           examples:
           - john@abc.com
           type: string
