@@ -101753,132 +101753,170 @@ components:
       type: number
     troubleshoot_call_item:
       additionalProperties: false
+      description: Per-sample call troubleshooting metrics
       properties:
         ap_num_clients:
+          description: Troubleshooting metric value for AP client count
           examples:
           - -0.08802365511655807
           type: number
         ap_rtt:
+          description: Troubleshooting metric value for AP round-trip time
           examples:
           - 0.09924473613500595
           type: number
         audio_in:
+          description: Troubleshooting metrics for the inbound audio stream
           $ref: '#/components/schemas/call_troubleshoot_data'
         audio_out:
+          description: Troubleshooting metrics for the outbound audio stream
           $ref: '#/components/schemas/call_troubleshoot_data'
         client_cpu:
+          description: Troubleshooting metric value for client CPU load
           examples:
           - 0.00834270566701889
           type: number
         client_n_streams:
+          description: Troubleshooting metric value for the number of client spatial
+            streams
           examples:
           - 0.00734270566701889
           type: number
         client_radio_band:
+          description: Troubleshooting metric value for the client radio band
           examples:
           - 0.5841414928436279
           type: number
         client_rssi:
+          description: Troubleshooting metric value for client RSSI
           examples:
           - 0.7594696879386902
           type: number
         client_rx_bytes:
+          description: Troubleshooting metric value for bytes received by the client
           examples:
           - 2.365511655807e-05
           type: number
         client_rx_rates:
+          description: Troubleshooting metric value for client receive data rates
           examples:
           - 0.02441493794322014
           type: number
         client_rx_retries:
+          description: Troubleshooting metric value for client receive retries
           examples:
           - -0.14325742423534393
           type: number
         client_tx_bytes:
+          description: Troubleshooting metric value for bytes transmitted by the client
           examples:
           - 0.00102365511655807
           type: number
         client_tx_rates:
+          description: Troubleshooting metric value for client transmit data rates
           examples:
           - 0.22236637771129608
           type: number
         client_tx_retries:
+          description: Troubleshooting metric value for client transmit retries
           examples:
           - 0.3308201730251312
           type: number
         client_vpn_distance:
+          description: Troubleshooting metric value for client VPN distance
           examples:
           - -0.0001660545531194657
           type: number
         client_wifi_version:
+          description: Troubleshooting metric value for the client Wi-Fi version
           examples:
           - 7.0566701889e-07
           type: number
         expected:
+          description: Model baseline value expected for this call sample
           examples:
           - -2.8630001056670187
           type: number
         radio_ap_change:
+          description: Troubleshooting metric value for AP changes on the radio path
           examples:
           - 0.01850946433842182
           type: number
         radio_bandwidth:
+          description: Troubleshooting metric value for radio channel bandwidth
           examples:
           - -0.021175479516386986
           type: number
         radio_channel:
+          description: Troubleshooting metric value for the radio channel
           examples:
           - 0.11686426401138306
           type: number
         radio_rx_failed:
+          description: Troubleshooting metric value for failed radio receive attempts
           examples:
           - 1.1782013177871704
           type: number
         radio_tx_power:
+          description: Troubleshooting metric value for radio transmit power
           examples:
           - 0.121039018034935
           type: number
         radio_util:
+          description: Troubleshooting metric value for radio utilization
           examples:
           - 0.2452986091375351
           type: number
         radio_util_interference:
+          description: Troubleshooting metric value for radio interference utilization
           examples:
           - 3.4367904663085938
           type: number
         site_num_clients:
+          description: Troubleshooting metric value for the number of clients at the
+            site
           examples:
           - 0.055026158690452576
           type: number
         site_wan_avg_download_mbps:
+          description: Troubleshooting metric value for site WAN average download
+            throughput
           examples:
           - 3.0566701889e-07
           type: number
         site_wan_avg_upload_mbps:
+          description: Troubleshooting metric value for site WAN average upload throughput
           examples:
           - 5.566701889e-08
           type: number
         site_wan_download_mbps:
+          description: Troubleshooting metric value for site WAN download throughput
           examples:
           - 8.0566701889e-07
           type: number
         site_wan_jitter:
+          description: Troubleshooting metric value for site WAN jitter
           examples:
           - 1.00566701889e-06
           type: number
         site_wan_rtt:
+          description: Troubleshooting metric value for site WAN round-trip time
           examples:
           - 4.0566701889e-07
           type: number
         site_wan_upload_mbps:
+          description: Troubleshooting metric value for site WAN upload throughput
           examples:
           - 2.0566701889e-07
           type: number
         timestamp:
+          description: Time when this call troubleshooting sample was recorded
           $ref: '#/components/schemas/timestamp'
         video_in:
+          description: Troubleshooting metrics for the inbound video stream
           $ref: '#/components/schemas/call_troubleshoot_data'
         video_out:
+          description: Troubleshooting metrics for the outbound video stream
           $ref: '#/components/schemas/call_troubleshoot_data'
       type: object
     troubleshoot_type:
