@@ -66763,13 +66763,16 @@ components:
       - mac
       type: object
     asset_filter:
-      description: Asset Filter
+      description: BLE asset filter definition; all specified criteria must match
       properties:
         ap_mac:
+          description: Access point MAC address that must observe the BLE asset
           type: string
         beam:
+          description: BLE beam number used to filter asset observations
           type: integer
         created_time:
+          description: Time when this asset filter was created
           $ref: '#/components/schemas/created_time'
         disabled:
           default: false
@@ -66786,13 +66789,17 @@ components:
           - https://www.abc.com
           type: string
         for_site:
+          description: Whether this asset filter is scoped directly to a site
           readOnly: true
           type: boolean
         ibeacon_major:
+          description: Major value from the iBeacon advertisement that assets must match
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_uuid:
+          description: UUID from the iBeacon advertisement that assets must match
           $ref: '#/components/schemas/ibeacon_uuid'
         id:
+          description: Unique identifier of the asset filter
           $ref: '#/components/schemas/id'
         mfg_company_id:
           description: BLE manufacturing-specific company-id used to filter assets
@@ -66800,14 +66807,18 @@ components:
           - 935
           type: integer
         modified_time:
+          description: Time when this asset filter was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name for this BLE asset filter
           examples:
           - Visitor Tags
           type: string
         org_id:
+          description: Owning organization identifier for this asset filter
           $ref: '#/components/schemas/org_id'
         rssi:
+          description: Signal strength threshold used to filter BLE asset observations
           type: integer
         service_uuid:
           description: BLE service data uuid used to filter assets
@@ -66816,6 +66827,7 @@ components:
           format: uuid
           type: string
         site_id:
+          description: Containing site identifier for this asset filter, when site-scoped
           $ref: '#/components/schemas/site_id'
       required:
       - name
