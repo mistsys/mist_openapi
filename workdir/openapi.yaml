@@ -65037,6 +65037,8 @@ components:
       additionalProperties: false
       properties:
         auth:
+          description: Credentials and security mode used when the AP connects as
+            a wireless client bridge
           $ref: '#/components/schemas/ap_client_bridge_auth'
         enabled:
           default: false
@@ -65044,6 +65046,7 @@ components:
             \  * will not serve as AP on any radios"
           type: boolean
         ssid:
+          description: Uplink SSID used by the AP when client bridge mode is enabled
           examples:
           - Uplink-SSID
           minLength: 1
@@ -65053,12 +65056,14 @@ components:
       additionalProperties: false
       properties:
         psk:
+          description: Pre-shared key used when `type`==`psk` for client bridge authentication
           examples:
           - foryoureyesonly
           maxLength: 63
           minLength: 8
           type: string
         type:
+          description: Authentication mode for the client bridge connection
           $ref: '#/components/schemas/ap_client_bridge_auth_type'
       type: object
     ap_client_bridge_auth_type:
