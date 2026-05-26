@@ -76686,12 +76686,14 @@ components:
       type: object
     image_import:
       additionalProperties: false
+      description: Multipart image upload payload
       properties:
         file:
           contentMediaType: application/octet-stream
-          description: Binary file
+          description: Image file content uploaded as multipart form data
           type: string
         json:
+          description: Optional JSON metadata submitted with the image upload
           type: string
       required:
       - file
@@ -76705,16 +76707,22 @@ components:
       type: string
     insight_metrics:
       additionalProperties: false
+      description: Insight metric response for a requested time range and aggregation interval
       properties:
         end:
+          description: Window end timestamp for the returned insight metrics
           type: integer
         interval:
+          description: Aggregation interval used for the metric results
           type: integer
         limit:
+          description: Maximum number of insight metric result items returned
           type: integer
         results:
+          description: Metric result values for the requested insight metric
           $ref: '#/components/schemas/insight_metrics_results'
         start:
+          description: Window start timestamp for the returned insight metrics
           type: integer
       required:
       - end
@@ -76735,19 +76743,19 @@ components:
         type: object
     insight_rogue_ap:
       additionalProperties: false
+      description: Rogue or neighbor AP observation returned by site insights
       properties:
         ap_mac:
-          description: MAC of the device that had strongest signal strength for ssid/bssid
-            pair
+          description: Reporting AP MAC address with the strongest signal for the SSID/BSSID pair
           type: string
         avg_rssi:
-          description: Average signal strength of ap_mac for ssid/bssid pair
+          description: Average RSSI for the SSID/BSSID pair as heard by the reporting AP
           type: number
         bssid:
-          description: BSSID of the network detected as threat
+          description: Rogue or neighbor BSSID detected as a threat
           type: string
         channel:
-          description: Channel over which ap_mac heard ssid/bssid pair
+          description: Radio channel where the reporting AP heard the SSID/BSSID pair
           type: string
         delta_x:
           description: X position relative to the reporting AP (`ap_mac`)
@@ -76756,14 +76764,13 @@ components:
           description: Y position relative to the reporting AP (`ap_mac`)
           type: number
         num_aps:
-          description: Num of aps that heard the ssid/bssid pair
+          description: Number of APs that heard the SSID/BSSID pair
           type: integer
         seen_on_lan:
-          description: Whether the reporting AP see a wireless client (on LAN) connecting
-            to it
+          description: Whether the reporting AP sees a LAN-side client associated with the BSSID
           type: boolean
         ssid:
-          description: SSID of the network detected as threat
+          description: Wireless SSID detected for the rogue or neighbor BSSID
           type: string
         times_heard:
           description: Represents number of times the pair was heard in the interval.
@@ -76778,20 +76785,28 @@ components:
       type: object
     insight_rogue_client:
       additionalProperties: false
+      description: Rogue client observation returned by site insights
       properties:
         annotation:
+          description: Rogue client annotation or classification
           type: string
         ap_mac:
+          description: Reporting AP MAC address that observed the rogue client
           type: string
         avg_rssi:
+          description: Average RSSI for the rogue client as heard by reporting APs
           type: number
         band:
+          description: Radio band on which the rogue client was observed
           type: string
         bssid:
+          description: Rogue BSSID associated with the client
           type: string
         client_mac:
+          description: Observed client MAC address on the rogue BSSID
           type: string
         num_aps:
+          description: Number of APs that observed the rogue client
           type: integer
       required:
       - bssid
