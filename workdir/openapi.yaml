@@ -74851,16 +74851,19 @@ components:
       type: object
     gateway_mgmt:
       additionalProperties: false
-      description: Gateway Management settings
+      description: Gateway management settings
       properties:
         admin_sshkeys:
+          description: SSR-only SSH public keys for administrative access
           $ref: '#/components/schemas/gateway_mgmt_admin_sshkeys'
         app_probing:
+          description: Application probing configuration for gateway monitoring
           $ref: '#/components/schemas/app_probing'
         app_usage:
           description: Consumes uplink bandwidth, requires WA license
           type: boolean
         auto_signature_update:
+          description: Schedule for automatic security signature updates
           $ref: '#/components/schemas/gateway_mgmt_auto_signature_update'
         config_revert_timer:
           default: 10
@@ -74882,23 +74885,29 @@ components:
           type: boolean
         fips_enabled:
           default: false
+          description: Whether FIPS mode is enabled on the gateway
           type: boolean
         probe_hosts:
+          description: IPv4 probe targets used for gateway connectivity checks
           $ref: '#/components/schemas/gateway_mgmt_probe_hosts'
         probe_hostsv6:
+          description: IPv6 probe targets used for gateway connectivity checks
           $ref: '#/components/schemas/gateway_mgmt_probe_hostsv6'
         protect_re:
+          description: Control-plane protection settings for the gateway
           $ref: '#/components/schemas/protect_re'
         root_password:
-          description: SRX only
+          description: SRX only. Root password for local gateway access
           format: password
           type: string
         security_log_source_address:
+          description: IPv4 source address used for gateway security log traffic
           examples:
           - 192.168.1.1
           format: ipv4
           type: string
         security_log_source_interface:
+          description: Source interface used for gateway security log traffic
           examples:
           - ge-0/0/1.0
           type: string
@@ -74912,11 +74921,14 @@ components:
       type: array
     gateway_mgmt_auto_signature_update:
       additionalProperties: false
+      description: Automatic security signature update schedule
       properties:
         day_of_week:
+          description: Scheduled weekday for automatic signature updates
           $ref: '#/components/schemas/day_of_week'
         enable:
           default: true
+          description: Whether automatic security signature updates are enabled
           type: boolean
         time_of_day:
           description: Optional, Mist will decide the timing
@@ -74961,6 +74973,7 @@ components:
         $ref: '#/components/schemas/gateway_mgmt_host_out_policy_syslog_server'
       type: array
     gateway_mgmt_probe_hosts:
+      description: IPv4 probe hosts used for gateway connectivity checks
       examples:
       - - 8.8.8.8
       format: ipv4
@@ -74968,6 +74981,7 @@ components:
         type: string
       type: array
     gateway_mgmt_probe_hostsv6:
+      description: IPv6 probe hosts used for gateway connectivity checks
       examples:
       - - 2001:4860:4860::8888
       format: ipv6
