@@ -68654,30 +68654,40 @@ components:
       description: Initiate a Radiotap Packet Capture
       properties:
         ap_mac:
+          description: AP MAC address used to target the radiotap packet capture
           examples:
           - a83a79a947ee
           type: string
         band:
+          description: Radio band to capture for radiotap packets
           $ref: '#/components/schemas/capture_radiotap_band'
         client_mac:
+          description: Client MAC address used to filter the radiotap packet capture
           examples:
           - 38f9d3972ff1
           type: string
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the radiotap packet capture
           $ref: '#/components/schemas/capture_radiotap_format'
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         ssid:
+          description: Wireless network SSID used to filter the radiotap packet capture
           examples:
           - test
           type: string
         tcpdump_expression:
+          description: Filter expression applied to the radiotap packet capture
           $ref: '#/components/schemas/capture_tcpdump_expression'
         type:
+          description: Packet capture type discriminator for radiotap captures
           $ref: '#/components/schemas/capture_radiotap_type'
         wlan_id:
           description: WLAN id associated with the respective ssid.
@@ -68720,26 +68730,34 @@ components:
       description: Initiate a Radiotap Packet Capture and Wired Packet Capture
       properties:
         ap_mac:
+          description: AP MAC address used to target the combined radiotap and wired
+            packet capture
           examples:
           - null
           type:
           - string
           - 'null'
         band:
+          description: Radio band to capture for the radiotap portion
           $ref: '#/components/schemas/capture_radiotapwired_band'
         client_mac:
+          description: Client MAC address used to filter the combined packet capture
           examples:
           - 38f9d3972ff1
           type:
           - string
           - 'null'
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the combined packet capture
           $ref: '#/components/schemas/capture_radiotapwired_format'
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         radiotap_tcpdump_expression:
           description: tcpdump expression for radiotap interface (802.11 + radio headers)
@@ -68747,16 +68765,21 @@ components:
           - type
           type: string
         ssid:
+          description: Wireless network SSID used to filter the radiotap portion
           examples:
           - test
           type:
           - string
           - 'null'
         tcpdump_expression:
+          description: Filter expression applied across the combined packet capture
           $ref: '#/components/schemas/capture_tcpdump_expression'
         type:
+          description: Packet capture type discriminator for combined radiotap and
+            wired captures
           $ref: '#/components/schemas/capture_radiotapwired_type'
         wired_tcpdump_expression:
+          description: Filter expression applied to the wired portion of the capture
           $ref: '#/components/schemas/capture_tcpdump_expression'
         wireless_tcpdump_expression:
           description: tcpdump expression for radiotap interface (802.11)
@@ -69019,22 +69042,29 @@ components:
       description: Initiate a Wired Packet Capture
       properties:
         ap_mac:
+          description: AP MAC address used to target the wired packet capture
           examples:
           - null
           type:
           - string
           - 'null'
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the wired packet capture
           $ref: '#/components/schemas/capture_wired_format'
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         tcpdump_expression:
+          description: Filter expression applied to the wired packet capture
           $ref: '#/components/schemas/capture_tcpdump_expression'
         type:
+          description: Packet capture type discriminator for wired captures
           $ref: '#/components/schemas/capture_wired_type'
       required:
       - type
