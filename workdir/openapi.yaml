@@ -75585,7 +75585,7 @@ components:
           description: Name of the device
           type: string
         eol_psn:
-          description: EOL PSN
+          description: Product support notice associated with the device end-of-life milestone
           examples:
           - TSB18097
           type: string
@@ -75602,29 +75602,31 @@ components:
           description: Indicates whether it is Master
           type: boolean
         model:
-          description: Model of the install base inventory
+          description: Hardware model recorded in the install base inventory
           type: string
         org_id:
+          description: Organization identifier that has claimed the device, when applicable
           $ref: '#/components/schemas/org_id'
         serial:
-          description: Serial Number of the inventory
+          description: Device serial number recorded in the install base inventory
           type: string
         sku:
-          description: Serviceable device stock
+          description: Serviceable SKU associated with the device
           type: string
         status:
-          description: Status of the connected device
+          description: Current inventory status reported for the device
           type: string
         suggested_version:
-          description: Suggested SW version
+          description: Recommended software version for the device
           type: string
         type:
+          description: Device category for the inventory item
           $ref: '#/components/schemas/device_type'
         version:
-          description: SW version running
+          description: Software version currently running on the device
           type: string
         version_description:
-          description: Version description
+          description: Release description associated with the reported software version
           type: string
         version_eos_time:
           description: End of Service of version
@@ -75633,12 +75635,13 @@ components:
           description: FRS date of the version
           type: integer
         warranty:
-          description: warranty description
+          description: Coverage details associated with the device warranty
           type: string
         warranty_time:
           description: Time when warranty needs to be renewed
           type: integer
         warranty_type:
+          description: Warranty category reported for the device
           $ref: '#/components/schemas/jsi_warranty_type'
       type: object
     js_inventory_search:
