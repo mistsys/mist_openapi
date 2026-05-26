@@ -64183,8 +64183,10 @@ components:
           readOnly: true
           type: integer
         aps:
+          description: Access point MAC addresses related to this alarm
           $ref: '#/components/schemas/alarm_aps'
         bssids:
+          description: Wireless BSSIDs related to this alarm
           $ref: '#/components/schemas/alarm_bssids'
         count:
           description: Number of incident within an alarm window
@@ -64193,15 +64195,19 @@ components:
           readOnly: true
           type: integer
         gateways:
+          description: Gateway MAC addresses related to this alarm
           $ref: '#/components/schemas/alarm_gateways'
         group:
-          description: Group of the alarm
+          description: Category group for this alarm, such as infrastructure, marvis,
+            or security
           examples:
           - security
           type: string
         hostnames:
+          description: Device hostnames related to this alarm
           $ref: '#/components/schemas/alarm_hostnames'
         id:
+          description: Unique identifier of the alarm
           $ref: '#/components/schemas/id'
         last_seen:
           description: Epoch (seconds) of the last incident/alarm within an alarm
@@ -64215,24 +64221,31 @@ components:
           description: Text describing the alarm
           type: string
         org_id:
+          description: Organization associated with this alarm
           $ref: '#/components/schemas/org_id'
         resolved_time:
           description: Epoch (seconds) of the resolved_time for the alarm
           type: integer
         severity:
-          description: Severity of the alarm
+          description: Impact level assigned to this alarm, such as critical, warn,
+            or info
           examples:
           - critical
           type: string
         site_id:
+          description: Site associated with this alarm
           $ref: '#/components/schemas/site_id'
         ssids:
+          description: Wireless SSIDs related to this alarm
           $ref: '#/components/schemas/alarm_ssids'
         status:
+          description: Current lifecycle status of this alarm
           $ref: '#/components/schemas/alarm_status'
         switches:
+          description: Switch MAC addresses related to this alarm
           $ref: '#/components/schemas/alarm_switches'
         timestamp:
+          description: Time when the alarm was raised, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
           description: Key-name of the alarm type
@@ -64326,31 +64339,38 @@ components:
       additionalProperties: false
       properties:
         component:
-          description: Component of the alarm
+          description: Alarm component matched by the search result
           type: string
         end:
+          description: Upper bound of the alarm search window, in epoch seconds
           examples:
           - 1711035686
           type: integer
         limit:
+          description: Maximum number of alarm results returned
           examples:
           - 10
           type: integer
         next:
+          description: URL for the next page of alarm search results
           examples:
           - /api/v1/orgs/b3b9f5e6-67b1-4112-9b4c-6824c565eaeb/alarms/search?end=1711035686&limit=10&search_after=%5B1711031354000%2C+%2256bfa7af-b2db-43ee-a4c8-9b820bbba0e1%22%5D&start=1710949286
           type: string
         page:
+          description: Current page number for paginated alarm search results
           examples:
           - 1
           type: integer
         results:
+          description: Alarm records returned for this search
           $ref: '#/components/schemas/alarm_search_results'
         start:
+          description: Lower bound of the alarm search window, in epoch seconds
           examples:
           - 1710949286
           type: integer
         total:
+          description: Number of alarm records matching the search
           examples:
           - 232
           type: integer
