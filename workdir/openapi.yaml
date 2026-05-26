@@ -73487,6 +73487,7 @@ components:
         lte_password:
           description: If `wan_type`==`lte`. Password used for LTE uplink authentication
           type: string
+          format: password
         lte_username:
           description: If `wan_type`==`lte`. Username used for LTE uplink authentication
           type: string
@@ -95588,12 +95589,14 @@ components:
           readOnly: true
           type: boolean
         auth_state:
+          description: Authentication state of the port
           $ref: '#/components/schemas/port_auth_state'
         disabled:
           description: Indicates if interface is disabled
           readOnly: true
           type: boolean
         for_site:
+          description: Whether the reporting device is scoped to a specific site
           readOnly: true
           type: boolean
         full_duplex:
@@ -95661,23 +95664,26 @@ components:
           readOnly: true
           type: boolean
         poe_mode:
+          description: PoE mode reported for the port
           $ref: '#/components/schemas/stats_switch_port_poe_mode'
         poe_on:
           description: Is the device attached to POE
           readOnly: true
           type: boolean
         port_id:
+          description: Identifier of the port reporting these statistics
           examples:
           - ge-0/0/0
           readOnly: true
           type: string
         port_mac:
-          description: Interface mac address
+          description: MAC address assigned to the interface
           examples:
           - 5c4527a96580
           readOnly: true
           type: string
         port_usage:
+          description: Logical usage assigned to the port
           examples:
           - lan
           type: string
@@ -95687,52 +95693,61 @@ components:
           readOnly: true
           type: number
         rx_bcast_pkts:
-          description: Broadcast input packets
+          description: Number of broadcast packets received on the interface
           readOnly: true
           type: integer
         rx_bps:
+          description: Receive throughput of the port, in bits per second
           $ref: '#/components/schemas/rx_bps'
         rx_bytes:
+          description: Total bytes received on the port
           $ref: '#/components/schemas/rx_bytes'
         rx_errors:
-          description: Input errors
+          description: Number of receive errors observed on the interface
           readOnly: true
           type: integer
         rx_mcast_pkts:
-          description: Multicast input packets
+          description: Number of multicast packets received on the interface
           readOnly: true
           type: integer
         rx_pkts:
+          description: Total packets received on the port
           $ref: '#/components/schemas/rx_pkts'
         speed:
-          description: Port speed
+          description: Current link speed of the port, in Mbps
           examples:
           - 1000
           readOnly: true
           type: integer
         stp_role:
+          description: Current spanning tree role of the port
           $ref: '#/components/schemas/port_stp_role'
         stp_state:
+          description: Current spanning tree state of the port
           $ref: '#/components/schemas/port_stp_state'
         tx_bcast_pkts:
-          description: Broadcast output packets
+          description: Number of broadcast packets transmitted on the interface
           readOnly: true
           type: integer
         tx_bps:
+          description: Transmit throughput of the port, in bits per second
           $ref: '#/components/schemas/tx_bps'
         tx_bytes:
+          description: Total bytes transmitted on the port
           $ref: '#/components/schemas/tx_bytes'
         tx_errors:
-          description: Output errors
+          description: Number of transmit errors observed on the interface
           readOnly: true
           type: integer
         tx_mcast_pkts:
-          description: Multicast output packets
+          description: Number of multicast packets transmitted on the interface
           readOnly: true
           type: integer
         tx_pkts:
+          description: Total packets transmitted on the port
           $ref: '#/components/schemas/tx_pkts'
         type:
+          description: Detected device category connected to the port, when available
           $ref: '#/components/schemas/stats_switch_port_type'
         unconfigured:
           description: Indicates if interface is unconfigured
@@ -97336,12 +97351,14 @@ components:
           readOnly: true
           type: boolean
         auth_state:
+          description: Authentication state of the port
           $ref: '#/components/schemas/port_auth_state'
         disabled:
           description: Indicates if interface is disabled
           readOnly: true
           type: boolean
         for_site:
+          description: Whether the reporting device is scoped to a specific site
           readOnly: true
           type: boolean
         full_duplex:
@@ -97382,6 +97399,7 @@ components:
           - string
           - 'null'
         mac:
+          description: Switch MAC address that reported these port statistics
           examples:
           - 5c4527a96580
           readOnly: true
@@ -97415,31 +97433,36 @@ components:
           readOnly: true
           type: string
         org_id:
+          description: Organization identifier of the reporting switch
           $ref: '#/components/schemas/org_id'
         poe_disabled:
           description: Is the POE disabled
           readOnly: true
           type: boolean
         poe_mode:
+          description: PoE mode reported for the port
           $ref: '#/components/schemas/stats_switch_port_poe_mode'
         poe_on:
           description: Is the device attached to POE
           readOnly: true
           type: boolean
         poe_priority:
+          description: PoE priority configured for the port
           $ref: '#/components/schemas/poe_priority'
         port_id:
+          description: Identifier of the port reporting these statistics
           examples:
           - ge-0/0/0
           readOnly: true
           type: string
         port_mac:
-          description: Interface MAC address
+          description: MAC address assigned to the interface
           examples:
           - 5c4527a96580
           readOnly: true
           type: string
         port_usage:
+          description: Logical usage assigned to the port
           examples:
           - lan
           type: string
@@ -97449,54 +97472,64 @@ components:
           readOnly: true
           type: number
         rx_bcast_pkts:
-          description: Broadcast input packets
+          description: Number of broadcast packets received on the interface
           readOnly: true
           type: integer
         rx_bps:
+          description: Receive throughput of the port, in bits per second
           $ref: '#/components/schemas/rx_bps'
         rx_bytes:
+          description: Total bytes received on the port
           $ref: '#/components/schemas/rx_bytes'
         rx_errors:
-          description: Input errors
+          description: Number of receive errors observed on the interface
           readOnly: true
           type: integer
         rx_mcast_pkts:
-          description: Multicast input packets
+          description: Number of multicast packets received on the interface
           readOnly: true
           type: integer
         rx_pkts:
+          description: Total packets received on the port
           $ref: '#/components/schemas/rx_pkts'
         site_id:
+          description: Site identifier of the reporting switch
           $ref: '#/components/schemas/site_id'
         speed:
-          description: Port speed
+          description: Current link speed of the port, in Mbps
           examples:
           - 1000
           readOnly: true
           type: integer
         stp_role:
+          description: Current spanning tree role of the port
           $ref: '#/components/schemas/port_stp_role'
         stp_state:
+          description: Current spanning tree state of the port
           $ref: '#/components/schemas/port_stp_state'
         tx_bcast_pkts:
-          description: Broadcast output packets
+          description: Number of broadcast packets transmitted on the interface
           readOnly: true
           type: integer
         tx_bps:
+          description: Transmit throughput of the port, in bits per second
           $ref: '#/components/schemas/tx_bps'
         tx_bytes:
+          description: Total bytes transmitted on the port
           $ref: '#/components/schemas/tx_bytes'
         tx_errors:
-          description: Output errors
+          description: Number of transmit errors observed on the interface
           readOnly: true
           type: integer
         tx_mcast_pkts:
-          description: Multicast output packets
+          description: Number of multicast packets transmitted on the interface
           readOnly: true
           type: integer
         tx_pkts:
+          description: Total packets transmitted on the port
           $ref: '#/components/schemas/tx_pkts'
         type:
+          description: Detected device category connected to the port, when available
           $ref: '#/components/schemas/stats_switch_port_type'
         unconfigured:
           description: Indicates if interface is unconfigured
