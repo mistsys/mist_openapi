@@ -108203,7 +108203,7 @@ components:
       type: object
     wlan_portal_template_setting:
       additionalProperties: false
-      description: Portal template wlan settings
+      description: Portal template settings for the WLAN guest portal
       properties:
         accessCodeAlternateEmail:
           default: Use alternate email address
@@ -108276,7 +108276,7 @@ components:
           type: string
         companyLabel:
           default: Company
-          description: Label of company field
+          description: Label displayed for the company input field
           type: string
         cs-CZ:
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
@@ -108326,7 +108326,7 @@ components:
           type: string
         emailLabel:
           default: Email
-          description: Label of email field
+          description: Label displayed for the email input field
           type: string
         emailMessage:
           default: We will email you an authentication code which you can use to connect
@@ -108361,7 +108361,7 @@ components:
           description: Label of field1
           type: string
         field1Required:
-          description: Whether field1 is required field
+          description: Whether custom field 1 must be provided when the field is shown
           type: boolean
         field2:
           default: false
@@ -108376,7 +108376,7 @@ components:
           description: Label of field2
           type: string
         field2Required:
-          description: Whether field2 is required field
+          description: Whether custom field 2 must be provided when the field is shown
           type: boolean
         field3:
           default: false
@@ -108391,7 +108391,7 @@ components:
           description: Label of field3
           type: string
         field3Required:
-          description: Whether field3 is required field
+          description: Whether custom field 3 must be provided when the field is shown
           type: boolean
         field4:
           default: false
@@ -108406,7 +108406,7 @@ components:
           description: Label of field4
           type: string
         field4Required:
-          description: Whether field4 is required field
+          description: Whether custom field 4 must be provided when the field is shown
           type: boolean
         fr-FR:
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
@@ -108484,7 +108484,7 @@ components:
           type: string
         nameLabel:
           default: Name
-          description: Label of name field
+          description: Label displayed for the name input field
           type: string
         nb-NO:
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
@@ -108560,7 +108560,7 @@ components:
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         requiredFieldLabel:
           default: required
-          description: Label to denote required field
+          description: Text used to mark a form field as required
           type: string
         responsiveLayout:
           default: true
@@ -108769,6 +108769,7 @@ components:
       type: object
     wlan_portal_template_setting_locale:
       additionalProperties: false
+      description: Localized portal template strings for a specific language
       properties:
         authButtonAmazon:
           description: Label for Amazon auth button
@@ -108806,7 +108807,7 @@ components:
           description: Error message when company not provided
           type: string
         companyLabel:
-          description: Label of company field
+          description: Localized label displayed for the company input field
           type: string
         emailAccessDomainError:
           description: Error message when a user has valid social login but doesn't
@@ -108833,7 +108834,7 @@ components:
         emailFieldLabel:
           type: string
         emailLabel:
-          description: Label of email field
+          description: Localized label displayed for the email input field
           type: string
         emailMessage:
           type: string
@@ -108885,7 +108886,7 @@ components:
           description: Error message when name not provided
           type: string
         nameLabel:
-          description: Label of name field
+          description: Localized label displayed for the name input field
           type: string
         optoutLabel:
           description: Label for Do Not Store My Personal Information
@@ -108922,7 +108923,7 @@ components:
           description: Text of the Privacy Policy
           type: string
         requiredFieldLabel:
-          description: Label to denote required field
+          description: Localized text used to mark a form field as required
           type: string
         signInLabel:
           description: Label of the button to signin
