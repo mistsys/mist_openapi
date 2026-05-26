@@ -62991,15 +62991,19 @@ components:
     account_jse_config:
       properties:
         cloud_name:
+          description: JSE cloud hostname used for the integration
           examples:
           - devcentral.juniperclouds.net
           type: string
         password:
+          description: Credential password for the JSE integration user
           examples:
           - foryoureyesonly
           format: password
           type: string
         username:
+          description: JSE integration username with access to service location,
+            site, and IPsec profile APIs
           examples:
           - john@abc.com
           type: string
@@ -63011,12 +63015,15 @@ components:
       additionalProperties: false
       properties:
         cloud_name:
+          description: JSE cloud hostname configured for the integration
           examples:
           - devcentral.juniperclouds.net
           type: string
         org_names:
+          description: JSE organization names associated with the linked account
           $ref: '#/components/schemas/strings'
         username:
+          description: JSE integration username configured for the linked account
           examples:
           - john@abc.com
           type: string
