@@ -70820,34 +70820,49 @@ components:
       type: object
     const_insight_metrics_property:
       additionalProperties: false
+      description: Definition of an insight metric returned by the constants API
       properties:
         ctype:
+          description: Metric classification type labels for this insight metric
           $ref: '#/components/schemas/strings'
         description:
+          description: Human-readable description of the insight metric
           type: string
         example:
+          description: Sample values returned for this insight metric
           $ref: '#/components/schemas/const_insight_metrics_property_example_any_of'
         intervals:
+          description: Supported time intervals and retention windows for this metric
           $ref: '#/components/schemas/const_insight_metrics_property_intervals'
         keys:
+          description: Additional key metadata for this insight metric
           $ref: '#/components/schemas/const_insight_metrics_property_keys'
         params:
+          description: Parameters supported when querying this insight metric
           $ref: '#/components/schemas/const_insight_metrics_property_params'
         report_durations:
+          description: Supported reporting durations for this insight metric
           $ref: '#/components/schemas/const_insight_metrics_property_report_durations'
         report_scopes:
+          description: Entity scopes supported when reporting this insight metric
           $ref: '#/components/schemas/strings'
         scopes:
+          description: Entity scopes that can be queried for this insight metric
           $ref: '#/components/schemas/const_insight_metrics_property_scopes'
         sle_baselined:
+          description: Whether the insight metric uses an SLE baseline
           type: boolean
         sle_classifiers:
+          description: SLE classifiers associated with this insight metric
           $ref: '#/components/schemas/strings'
         type:
+          description: Metric data type, such as timeseries
           type: string
         unit:
+          description: Measurement unit for values returned by this metric
           type: string
         values:
+          description: Enumerated or structured value metadata for this insight metric
           $ref: '#/components/schemas/const_insight_metrics_property_values'
       type: object
     const_insight_metrics_property_example:
@@ -70874,10 +70889,13 @@ components:
       type: object
     const_insight_metrics_property_interval:
       additionalProperties: false
+      description: Interval definition for an insight metric
       properties:
         interval:
+          description: Sampling interval length, in seconds
           type: integer
         max_age:
+          description: Maximum lookback age for this interval, in seconds
           type: integer
       type: object
     const_insight_metrics_property_intervals:
@@ -70890,8 +70908,10 @@ components:
       type: object
     const_insight_metrics_property_param:
       additionalProperties: false
+      description: Query parameter definition for an insight metric
       properties:
         required:
+          description: Whether this query parameter is required
           type: boolean
       type: object
     const_insight_metrics_property_params:
@@ -70901,10 +70921,13 @@ components:
       type: object
     const_insight_metrics_property_report_duration:
       additionalProperties: false
+      description: Report duration definition for an insight metric
       properties:
         duration:
+          description: Report duration length, in seconds
           type: integer
         interval:
+          description: Sampling interval used for this report duration, in seconds
           type: integer
       type: object
     const_insight_metrics_property_report_durations:
