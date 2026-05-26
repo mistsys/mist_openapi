@@ -65603,21 +65603,25 @@ components:
       type: string
     ap_radio_band24:
       additionalProperties: false
-      description: Radio Band AP settings
+      description: 2.4 GHz radio settings for an access point
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM may disable the 2.4 GHz radio when optimizing RF settings
           type: boolean
         ant_gain:
           default: 0
+          description: External antenna gain for the 2.4 GHz radio
           maximum: 10
           minimum: 0
           type:
           - integer
           - 'null'
         antenna_mode:
+          description: Radio chain mode for the 2.4 GHz radio
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
+          description: Channel width configured for the 2.4 GHz radio
           $ref: '#/components/schemas/dot11_bandwidth24'
         channel:
           default: null
@@ -65631,6 +65635,7 @@ components:
           - integer
           - 'null'
         channels:
+          description: Allowed channel list for the 2.4 GHz radio; null or an empty array uses automatic selection
           $ref: '#/components/schemas/radio_band_channels'
         disabled:
           default: false
@@ -65666,27 +65671,33 @@ components:
           - integer
           - 'null'
         preamble:
+          description: 802.11 preamble mode used by the 2.4 GHz radio
           $ref: '#/components/schemas/radio_band_preamble'
       type: object
     ap_radio_band5:
       additionalProperties: false
-      description: Radio Band AP settings
+      description: 5 GHz radio settings for an access point
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM may disable the 5 GHz radio when optimizing RF settings
           type: boolean
         ant_gain:
           default: 0
+          description: External antenna gain for the 5 GHz radio
           maximum: 10
           minimum: 0
           type:
           - integer
           - 'null'
         antenna_beam_pattern:
+          description: Beam pattern used by the 5 GHz radio antenna
           $ref: '#/components/schemas/radio_band_antenna_beam_pattern'
         antenna_mode:
+          description: Radio chain mode for the 5 GHz radio
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
+          description: Channel width configured for the 5 GHz radio
           $ref: '#/components/schemas/dot11_bandwidth5'
         channel:
           default: null
@@ -65698,6 +65709,7 @@ components:
           - integer
           - 'null'
         channels:
+          description: Allowed channel list for the 5 GHz radio; null or an empty array uses automatic selection
           $ref: '#/components/schemas/radio_band_channels'
         disabled:
           default: false
@@ -65733,27 +65745,33 @@ components:
           - integer
           - 'null'
         preamble:
+          description: 802.11 preamble mode used by the 5 GHz radio
           $ref: '#/components/schemas/radio_band_preamble'
       type: object
     ap_radio_band6:
       additionalProperties: false
-      description: Radio Band AP settings
+      description: 6 GHz radio settings for an access point
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM may disable the 6 GHz radio when optimizing RF settings
           type: boolean
         ant_gain:
           default: 0
+          description: External antenna gain for the 6 GHz radio
           maximum: 10
           minimum: 0
           type:
           - integer
           - 'null'
         antenna_beam_pattern:
+          description: Beam pattern used by the 6 GHz radio antenna
           $ref: '#/components/schemas/radio_band_antenna_beam_pattern'
         antenna_mode:
+          description: Radio chain mode for the 6 GHz radio
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
+          description: Channel width configured for the 6 GHz radio
           $ref: '#/components/schemas/dot11_bandwidth6'
         channel:
           default: null
@@ -65765,6 +65783,7 @@ components:
           - integer
           - 'null'
         channels:
+          description: Allowed channel list for the 6 GHz radio; null or an empty array uses automatic selection
           $ref: '#/components/schemas/radio_band_channels'
         disabled:
           default: false
@@ -65800,6 +65819,7 @@ components:
           - integer
           - 'null'
         preamble:
+          description: 802.11 preamble mode used by the 6 GHz radio
           $ref: '#/components/schemas/radio_band_preamble'
         standard_power:
           default: false
