@@ -66084,21 +66084,30 @@ components:
     ap_template:
       properties:
         ap_matching:
+          description: Rules used to select access points for this AP template
           $ref: '#/components/schemas/ap_template_matching'
         created_time:
+          description: Time when the AP template was created
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether the AP template is scoped to a site rather than the
+            organization
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the AP template
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the AP template was last modified
           $ref: '#/components/schemas/modified_time'
         org_id:
+          description: Organization that owns this AP template
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site that owns this site-level AP template
           $ref: '#/components/schemas/site_id'
         wifi:
+          description: Wi-Fi and mesh settings applied by this AP template
           $ref: '#/components/schemas/ap_template_wifi'
       required:
       - ap_matching
@@ -66107,17 +66116,22 @@ components:
       additionalProperties: false
       properties:
         enabled:
+          description: Whether AP matching is enabled for this AP template
           type: boolean
         rules:
+          description: AP matching entries that select access points and apply AP
+            port configuration
           $ref: '#/components/schemas/ap_template_matching_rules'
       type: object
     ap_template_matching_rule:
       additionalProperties: false
       properties:
         match_model:
+          description: Access point model matched by this AP template rule
           minLength: 1
           type: string
         name:
+          description: Display label for this AP template matching rule
           minLength: 1
           type: string
         port_config:
@@ -66135,35 +66149,48 @@ components:
       additionalProperties: false
       properties:
         cisco_enabled:
+          description: Whether Cisco-specific Wi-Fi compatibility behavior is enabled
           type: boolean
         disable_11k:
           default: false
+          description: Whether 802.11k neighbor reports are disabled
           type: boolean
         disable_radios_when_power_constrained:
+          description: Whether AP radios are disabled when power is constrained
           type: boolean
         enable_arp_spoof:
+          description: Whether ARP spoofing checks are enabled when proxy ARP is used
           type: boolean
         enable_shared_radio_scanning:
           default: false
+          description: Whether shared radio scanning is enabled for AP radio scanning
           type: boolean
         enabled:
           default: true
+          description: Whether Wi-Fi settings in this AP template are enabled
           type: boolean
         locate_connected:
           default: false
+          description: Whether location tracking is enabled for connected clients
           type: boolean
         locate_unconnected:
           default: false
+          description: Whether location tracking is enabled for unconnected clients
           type: boolean
         mesh_allow_dfs:
           default: false
+          description: Whether mesh links may use DFS channels, which can add CAC
+            delays during scanning
           type: boolean
         mesh_enable_crm:
+          description: Whether CRM is enabled for mesh networking in this AP template
           type: boolean
         mesh_enabled:
+          description: Whether mesh networking is enabled by this AP template
           type: boolean
         proxy_arp:
           default: false
+          description: Whether proxy ARP is enabled for Wi-Fi clients
           type: boolean
       type: object
     ap_templates:
