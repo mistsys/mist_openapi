@@ -65802,25 +65802,25 @@ components:
       additionalProperties: false
       properties:
         band_24_bandwidth:
-          description: Bandwidth of band_24
+          description: Channel bandwidth configured on the AP 2.4 GHz radio
           type: string
         band_24_channel:
-          description: Channel of band_24
+          description: Channel configured on the AP 2.4 GHz radio
           type: integer
         band_24_power:
           type: integer
         band_5_bandwidth:
-          description: Bandwidth of band_5
+          description: Channel bandwidth configured on the AP 5 GHz radio
           type: string
         band_5_channel:
-          description: Channel of band_5
+          description: Channel configured on the AP 5 GHz radio
           type: integer
         band_5_power:
           type: integer
         band_6_bandwidth:
           type: string
         band_6_channel:
-          description: Channel of band_6
+          description: Channel configured on the AP 6 GHz radio
           type: integer
         band_6_power:
           type: integer
@@ -65834,30 +65834,30 @@ components:
         inactive_wired_vlans:
           $ref: '#/components/schemas/ap_search_inactive_wired_vlans'
         ip:
-          description: IP Address
+          description: Management IP address currently assigned to the AP
           type: string
         last_hostname:
           type: string
         lldp_mgmt_addr:
-          description: LLDP management ip address
+          description: LLDP management IP address advertised by the upstream neighbor
           type: string
         lldp_port_desc:
           type: string
         lldp_port_id:
-          description: LLDP port id
+          description: LLDP port identifier advertised by the upstream neighbor
           type: string
         lldp_power_allocated:
           type: integer
         lldp_power_draw:
           type: integer
         lldp_system_desc:
-          description: LLDP system description
+          description: LLDP system description advertised by the upstream neighbor
           type: string
         lldp_system_name:
-          description: LLDP system name
+          description: LLDP system name advertised by the upstream neighbor
           type: string
         mac:
-          description: Device model
+          description: AP MAC address
           type: string
         model:
           type: string
@@ -65869,7 +65869,7 @@ components:
             to a Mist Edge
           type: string
         mxtunnel_status:
-          description: MxTunnel status
+          description: Current MxTunnel connection status of the AP
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
@@ -65886,7 +65886,7 @@ components:
         uptime:
           type: integer
         version:
-          description: Version
+          description: Software version currently running on the AP
           type: string
         wlans:
           $ref: '#/components/schemas/ap_search_wlans'
@@ -74186,7 +74186,7 @@ components:
           type: string
       type: object
     guest_org:
-      description: Guest
+      description: Guest authorization record at organization scope
       properties:
         access_code_email:
           description: If `auth_method`==`email`, the email address where the authorization
@@ -74242,16 +74242,19 @@ components:
           format: email
           type: string
         field1:
-          description: Optional, the info provided by user
+          description: Optional custom field 1 value provided by the user during registration
           type: string
         field2:
+          description: Optional custom field 2 value provided by the user during registration
           type: string
         field3:
+          description: Optional custom field 3 value provided by the user during registration
           type: string
         field4:
+          description: Optional custom field 4 value provided by the user during registration
           type: string
         mac:
-          description: MAC
+          description: MAC address used by the guest device during registration
           type: string
         minutes:
           default: 1440
@@ -79040,14 +79043,14 @@ components:
       additionalProperties: false
       properties:
         ap:
-          description: AP mac
+          description: AP MAC address for the client session
           examples:
           - 5c5b35513227
           type: string
         auth_type:
           $ref: '#/components/schemas/nac_auth_type'
         bssid:
-          description: BSSID
+          description: BSSID used for the client session
           examples:
           - 5c5b355fafcc
           type: string
@@ -79101,7 +79104,7 @@ components:
         vlan:
           $ref: '#/components/schemas/nac_event_vlan'
         vlan_source:
-          description: Vlan source, e.g. "nactag", "usermac"
+          description: Source of the assigned VLAN, for example `nactag` or `usermac`
           examples:
           - nactag
           type: string
@@ -92873,7 +92876,7 @@ components:
       - weak
       type: string
     sso:
-      description: SSO
+      description: Single sign-on identity provider configuration
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
@@ -92987,7 +92990,7 @@ components:
         mxedge_proxy:
           $ref: '#/components/schemas/sso_mxedge_proxy'
         name:
-          description: Name
+          description: Display name of the SSO configuration
           type: string
         nameid_format:
           $ref: '#/components/schemas/sso_nameid_format'
@@ -94234,7 +94237,7 @@ components:
         state:
           $ref: '#/components/schemas/l2tp_state'
         uptime:
-          description: Uptime
+          description: Tunnel uptime, in seconds
           examples:
           - 135
           readOnly: true
@@ -94242,7 +94245,7 @@ components:
           - integer
           - 'null'
         wxtunnel_id:
-          description: WxlanTunnel ID
+          description: Identifier of the associated WxLAN tunnel
           examples:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
@@ -104834,72 +104837,72 @@ components:
       additionalProperties: false
       properties:
         ap:
-          description: mac address of the AP the guest is connected to
+          description: MAC address of the AP handling the guest authorization
           examples:
           - 5c5b350e55c8
           type: string
         auth_method:
-          description: authentication method used
+          description: Guest portal authentication method used for this authorization event
           examples:
           - passphrase
           type: string
         authorized_expiring_time:
-          description: expiry time for guest
+          description: Unix timestamp when the guest authorization expires
           examples:
           - 1677076639
           type: integer
         authorized_time:
-          description: time of authorization of guest
+          description: Unix timestamp when the guest authorization was granted
           examples:
           - 1677076519
           type: integer
         carrier:
-          description: carrier used when authentication by free cell provider
+          description: Mobile carrier used when authentication relies on a cellular provider
           examples:
           - docomo
           type: string
         client:
-          description: client mac
+          description: MAC address of the guest client device
           examples:
           - ac2316eca70a
           type: string
         company:
-          description: guest company
+          description: Company name provided by the guest during registration
           examples:
           - MIST
           type: string
         email:
-          description: guest email
+          description: Email address provided by the guest during registration
           examples:
           - abcd@abcd.com
           type: string
         field1:
-          description: field1 value
+          description: Value submitted for custom guest field 1
           examples:
           - field1 value
           type: string
         field2:
-          description: field2 value
+          description: Value submitted for custom guest field 2
           examples:
           - field2 value
           type: string
         field3:
-          description: field3 value
+          description: Value submitted for custom guest field 3
           examples:
           - field3 value
           type: string
         field4:
-          description: field4 value
+          description: Value submitted for custom guest field 4
           examples:
           - field4 value
           type: string
         mobile:
-          description: guest mobile number
+          description: Mobile phone number provided by the guest during registration
           examples:
           - +0123456789
           type: string
         name:
-          description: guest name
+          description: Full name provided by the guest during registration
           examples:
           - Dr Strange
           type: string
@@ -104908,22 +104911,22 @@ components:
         site_id:
           $ref: '#/components/schemas/site_id'
         sms_gateway:
-          description: sms gateway used via text auth paid service
+          description: SMS provider used for text-message authentication
           examples:
           - Telstra
           type: string
         sponsor_email:
-          description: guest sponsor email
+          description: Sponsor email address associated with the guest authorization
           examples:
           - sponsor@gmail.com
           type: string
         ssid:
-          description: ssid
+          description: SSID on which the guest was authorized
           examples:
           - Portal Auth
           type: string
         wlan_id:
-          description: wlan id
+          description: WLAN identifier on which the guest was authorized
           examples:
           - 7681be9a-044a-4622-90cf-3accde5ad853
           type: string
@@ -106851,33 +106854,34 @@ components:
       type: array
     wlan_airwatch:
       additionalProperties: false
-      description: Airwatch wlan settings
+      description: AirWatch integration settings for the WLAN
       properties:
         api_key:
           default: ''
-          description: API Key
+          description: API key used to authenticate to the AirWatch service
           examples:
           - aHhlbGxvYXNkZmFzZGZhc2Rmc2RmCg=="
           type: string
         console_url:
           default: ''
-          description: Console URL
+          description: Base console URL of the AirWatch deployment
           examples:
           - https://hs1.airwatchportals.com
           type: string
         enabled:
           default: false
+          description: Whether AirWatch integration is enabled for the WLAN
           type: boolean
         password:
           default: ''
-          description: Password
+          description: Password for the AirWatch integration account
           examples:
           - user1
           format: password
           type: string
         username:
           default: ''
-          description: Username
+          description: Username for the AirWatch integration account
           examples:
           - test123
           type: string
