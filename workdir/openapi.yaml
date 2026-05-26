@@ -70155,26 +70155,37 @@ components:
       type: object
     const_device_ap:
       additionalProperties: false
+      description: AP model capability definition returned by the constants API
       properties:
         ap_type:
+          description: Internal AP platform type identifier
           examples:
           - jewel
           type: string
         band24:
+          description: 2.4 GHz radio capability limits for this AP model
           $ref: '#/components/schemas/const_device_ap_band24'
         band5:
+          description: 5 GHz radio capability limits for this AP model
           $ref: '#/components/schemas/const_device_ap_band5'
         band6:
+          description: 6 GHz radio capability limits for this AP model
           $ref: '#/components/schemas/const_device_ap_band6'
         band_24_usages:
+          description: Supported RF band usages for the 2.4 GHz radio on this AP
+            model
           $ref: '#/components/schemas/const_device_ap_band_24_usages'
         ce_dfs_ok:
+          description: Whether DFS operation is allowed for this AP model under CE
+            rules
           examples:
           - true
           type: boolean
         cisco_pace:
+          description: Whether the AP model supports Cisco PACE interoperability
           type: boolean
         description:
+          description: Product description for the AP model
           examples:
           - AP-45
           type: string
@@ -70187,6 +70198,7 @@ components:
           description: Property key is a list of country codes (e.g. "GB, DE")
           type: object
         display:
+          description: User-facing model name shown for the AP
           examples:
           - AP45
           type: string
@@ -70196,72 +70208,95 @@ components:
           description: Property key is the GPIO port name (e.g. "D0", "A1")
           type: object
         fcc_dfs_ok:
+          description: Whether DFS operation is allowed for this AP model under FCC
+            rules
           examples:
           - true
           type: boolean
         has_11ax:
+          description: Whether the AP model supports 802.11ax
           type: boolean
         has_compass:
+          description: Whether the AP model includes a compass sensor
           examples:
           - false
           type: boolean
         has_ext_ant:
+          description: Whether the AP model supports external antennas
           type: boolean
         has_extio:
+          description: Whether the AP model exposes external I/O ports
           examples:
           - false
           type: boolean
         has_height:
+          description: Whether mounting height can be configured for this AP model
           examples:
           - false
           type: boolean
         has_module_port:
+          description: Whether the AP model includes a module port
           type: boolean
         has_poe_out:
+          description: Whether the AP model supports PoE output
           examples:
           - true
           type: boolean
         has_scanning_radio:
+          description: Whether the AP model has scanning-radio capability
           examples:
           - true
           type: boolean
         has_selectable_radio:
+          description: Whether the AP model has selectable radio modes
           examples:
           - true
           type: boolean
         has_usb:
+          description: Whether the AP model includes a USB port
           type: boolean
         has_vble:
+          description: Whether the AP model supports virtual BLE (vBLE)
           examples:
           - true
           type: boolean
         has_wifi_band24:
+          description: Whether the AP model supports 2.4 GHz Wi-Fi
           examples:
           - true
           type: boolean
         has_wifi_band5:
+          description: Whether the AP model supports 5 GHz Wi-Fi
           examples:
           - true
           type: boolean
         has_wifi_band6:
+          description: Whether the AP model supports 6 GHz Wi-Fi
           examples:
           - true
           type: boolean
         max_poe_out:
+          description: Maximum PoE-out power budget supported by the AP model, in
+            milliwatts
           examples:
           - 15400
           type: integer
         max_wlans:
+          description: Maximum number of WLANs supported by this AP model
           type: integer
         model:
+          description: AP model identifier for this capability definition
           examples:
           - AP45
           type: string
         other_dfs_ok:
+          description: Whether DFS operation is allowed for this AP model in other
+            regulatory domains
           examples:
           - true
           type: boolean
         outdoor:
+          description: Whether the AP model is rated for outdoor deployment
           type: boolean
         radios:
           additionalProperties:
@@ -70274,12 +70309,18 @@ components:
             r2: '24'
           type: object
         shared_scanning_radio:
+          description: Whether scanning-radio capability shares a radio with client
+            service
           type: boolean
         type:
+          description: Device type for this AP model definition
           $ref: '#/components/schemas/const_device_type_ap'
         unmanaged:
+          description: Whether this AP model is listed as unmanaged in the constants
+            catalog
           type: boolean
         vble:
+          description: Virtual BLE (vBLE) capability settings for this AP model
           $ref: '#/components/schemas/const_device_ap_vble'
       required:
       - ap_type
@@ -70287,52 +70328,65 @@ components:
       type: object
     const_device_ap_band24:
       additionalProperties: false
+      description: 2.4 GHz radio capability limits for an AP model
       properties:
         band5_channels_op:
+          description: 5 GHz channel set used when this radio operates on 5 GHz
           examples:
           - low
           type: string
         max_clients:
+          description: Maximum client count supported on the 2.4 GHz radio
           examples:
           - 128
           type: integer
         max_power:
+          description: Maximum transmit power for the 2.4 GHz radio, in dBm
           examples:
           - 19
           type: integer
         min_power:
+          description: Minimum transmit power for the 2.4 GHz radio, in dBm
           examples:
           - 8
           type: integer
       type: object
     const_device_ap_band5:
       additionalProperties: false
+      description: 5 GHz radio capability limits for an AP model
       properties:
         max_clients:
+          description: Maximum client count supported on the 5 GHz radio
           examples:
           - 128
           type: integer
         max_power:
+          description: Maximum transmit power for the 5 GHz radio, in dBm
           examples:
           - 17
           type: integer
         min_power:
+          description: Minimum transmit power for the 5 GHz radio, in dBm
           examples:
           - 8
           type: integer
       type: object
     const_device_ap_band6:
       additionalProperties: false
+      description: 6 GHz radio capability limits for an AP model
       properties:
         max_clients:
+          description: Maximum client count supported on the 6 GHz radio
           examples:
           - 128
           type: integer
         max_power:
+          description: Maximum transmit power for the 6 GHz radio, in dBm
           examples:
           - 17
           type: integer
         min_power:
+          description: Minimum transmit power for the 6 GHz radio, in dBm
           examples:
           - 8
           type: integer
@@ -70354,12 +70408,16 @@ components:
       type: array
     const_device_ap_extios:
       additionalProperties: false
+      description: External I/O port capabilities for an AP model
       properties:
         default_dir:
+          description: Default direction for this external I/O port
           $ref: '#/components/schemas/const_device_ap_extios_default_dir'
         input:
+          description: Whether this external I/O port supports input mode
           type: boolean
         output:
+          description: Whether this external I/O port supports output mode
           type: boolean
       type: object
     const_device_ap_extios_default_dir:
@@ -70370,16 +70428,20 @@ components:
       type: string
     const_device_ap_vble:
       additionalProperties: false
+      description: Virtual BLE (vBLE) capability settings for an AP model
       properties:
         beacon_rate:
+          description: Advertisement rate for the virtual BLE beacon
           examples:
           - 4
           type: integer
         beams:
+          description: Number of virtual BLE beams supported by the AP model
           examples:
           - 9
           type: integer
         power:
+          description: Transmit power for virtual BLE beacons, in dBm
           examples:
           - 8
           type: integer
