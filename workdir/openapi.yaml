@@ -75602,63 +75602,90 @@ components:
       type: string
     gateway_search:
       additionalProperties: false
+      description: Gateway record returned by device search endpoints
       properties:
         clustered:
+          description: Whether the gateway is part of a gateway cluster
           type: boolean
         evpn_missing_links:
+          description: Whether EVPN topology links are missing for this gateway
           type: boolean
         evpntopo_id:
+          description: EVPN topology ID associated with this gateway
           type: string
         ext_ip:
+          description: External IP address observed for gateway management traffic
           type: string
         hostname:
+          description: Observed hostnames detected for the gateway in search results
           $ref: '#/components/schemas/strings'
         ip:
+          description: Management IP address currently reported for the gateway
           type: string
         last_config_status:
+          description: Most recent configuration status reported for the gateway
           type: string
         last_hostname:
+          description: Most recent hostname detected for the gateway
           type: string
         last_trouble_code:
+          description: Most recent trouble code reported for the gateway
           type: string
         last_trouble_timestamp:
+          description: Time when the most recent gateway trouble code was reported
           type: integer
         mac:
+          description: Gateway MAC address reported in search results
           type: string
         managed:
           deprecated: true
+          description: Whether the gateway is managed by Mist. Deprecated in favor of `mist_configured`
           type: boolean
         mist_configured:
-          description: whether the device can be configured by Mist or not. This deprecates
-            `managed` (for adopted device) and `disable_auto_config` for claimed device)
+          description: Whether the gateway can be configured by Mist. Replaces `managed`
+            for adopted devices and `disable_auto_config` for claimed devices
           type: boolean
         model:
+          description: Gateway model reported for this search result
           type: string
         node:
+          description: Gateway cluster node associated with this search result
           type: string
         node0_mac:
+          description: Cluster node0 MAC address reported for an HA gateway
           type: string
         node1_mac:
+          description: Cluster node1 MAC address reported for an HA gateway
           type: string
         num_members:
+          description: Number of members in the gateway cluster
           type: integer
         org_id:
+          description: Organization that owns this gateway search result
           $ref: '#/components/schemas/org_id'
         role:
+          description: Gateway cluster role reported for this search result
           type: string
         site_id:
+          description: Site that contains this gateway search result
           $ref: '#/components/schemas/site_id'
         t128agent_version:
+          description: Session Smart Router agent version reported by the gateway
           type: string
         time_drifted:
+          description: Whether the gateway clock has drifted from the expected time
           type: boolean
         timestamp:
+          description: Time associated with this gateway search result
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Device type for this gateway search result
           $ref: '#/components/schemas/device_type_gateway'
         uptime:
+          description: Device uptime for the gateway, in seconds
           type: integer
         version:
+          description: Software version currently running on the gateway
           type: string
       required:
       - type
