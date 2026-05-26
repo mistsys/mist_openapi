@@ -70448,62 +70448,89 @@ components:
       type: object
     const_device_gateway:
       additionalProperties: false
+      description: Gateway model capability definition returned by the constants
+        API
       properties:
         defaults:
+          description: Default interface group mappings for this gateway model
           $ref: '#/components/schemas/const_device_gateway_defaults'
         description:
+          description: Product description for the gateway model
           type: string
         experimental:
           default: false
+          description: Whether this gateway model is marked experimental in the constants
+            catalog
           type: boolean
         fans_pluggable:
           default: true
+          description: Whether the gateway model has field-replaceable fans
           type: boolean
         ha_node0_fpc:
+          description: FPC number used for node0 in HA deployments
           type: integer
         ha_node1_fpc:
+          description: FPC number used for node1 in HA deployments
           type: integer
         has_bgp:
           default: false
+          description: Whether the gateway model supports BGP
           type: boolean
         has_fxp0:
           default: true
+          description: Whether the gateway model includes an fxp0 management interface
           type: boolean
         has_ha_control:
           default: false
+          description: Whether the gateway model has a dedicated HA control port
           type: boolean
         has_ha_data:
           default: false
+          description: Whether the gateway model has dedicated HA data ports
           type: boolean
         has_irb:
           default: false
+          description: Whether the gateway model supports IRB interfaces
           type: boolean
         has_poe_out:
           default: true
+          description: Whether the gateway model supports PoE output
           type: boolean
         has_snapshot:
           default: true
+          description: Whether the gateway model supports configuration snapshots
           type: boolean
         irb_disabled_by_default:
           default: false
+          description: Whether IRB interfaces are disabled by default on this gateway
+            model
           type: boolean
         model:
+          description: Gateway model identifier for this capability definition
           type: string
         number_fans:
+          description: Number of fans in the gateway model
           type: integer
         oc_device:
           default: false
+          description: Whether this gateway model is identified as an OpenConfig-managed
+            device
           type: boolean
         pic:
+          description: Physical Interface Card port layout for this gateway model
           $ref: '#/components/schemas/const_device_gateway_pic'
         ports:
+          description: Per-interface metadata for this gateway model
           $ref: '#/components/schemas/const_device_gateway_ports'
         sub_required:
+          description: Subscription type required for this gateway model
           type: string
         t128_device:
           default: false
+          description: Whether this gateway model is a 128 Technology or SSR device
           type: boolean
         type:
+          description: Device type for this gateway model definition
           $ref: '#/components/schemas/const_device_type_gateway'
       required:
       - type
@@ -70526,10 +70553,13 @@ components:
       description: Object Key is the interface name (e.g. "ge-0/0/1", ...)
       properties:
         display:
+          description: User-facing interface name for the gateway port
           type: string
         pci_address:
+          description: PCI address for the gateway port
           type: string
         speed:
+          description: Port speed for the gateway interface, in Mbps
           type: integer
       type: object
     const_device_model:
