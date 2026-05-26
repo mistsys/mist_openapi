@@ -66764,7 +66764,7 @@ components:
         $ref: '#/components/schemas/avprofile'
       type: array
     beacon:
-      description: Beacon
+      description: Beacon configuration and placement data
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
@@ -66775,7 +66775,7 @@ components:
           description: Eddystone-UID namespace (10 bytes) in hexstring format
           type: string
         eddystone_url:
-          description: Eddystone-URL url
+          description: Eddystone-URL value broadcast by the beacon
           type: string
         for_site:
           readOnly: true
@@ -66799,13 +66799,13 @@ components:
         modified_time:
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Name / label of the device
+          description: Display name of the beacon
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
         power:
           default: -12
-          description: In dBm
+          description: Beacon transmit power, in dBm
           maximum: 100
           minimum: -12
           type: integer
@@ -66814,11 +66814,11 @@ components:
         type:
           $ref: '#/components/schemas/beacon_type'
         x:
-          description: X in pixel
+          description: Horizontal map position of the beacon, in pixels
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical map position of the beacon, in pixels
           format: double
           type: number
       type: object
@@ -70404,7 +70404,7 @@ components:
       type: array
     device_ap:
       additionalProperties: false
-      description: AP
+      description: Access point configuration and placement data
       properties:
         aeroscout:
           $ref: '#/components/schemas/ap_aeroscout'
@@ -70452,7 +70452,7 @@ components:
           readOnly: true
           type: boolean
         height:
-          description: Height, in meters, optional
+          description: Installation height of the AP, in meters
           examples:
           - 2.75
           format: double
@@ -70483,7 +70483,7 @@ components:
           description: Whether this map is considered locked down
           type: boolean
         mac:
-          description: Device MAC address
+          description: AP MAC address
           readOnly: true
           type: string
         map_id:
@@ -70495,7 +70495,7 @@ components:
         mesh:
           $ref: '#/components/schemas/ap_mesh'
         model:
-          description: Device Model
+          description: AP model name
           readOnly: true
           type: string
         modified_time:
@@ -70514,7 +70514,7 @@ components:
         org_id:
           $ref: '#/components/schemas/org_id'
         orientation:
-          description: Orientation, 0-359, in degrees, up is 0, right is 90.
+          description: AP orientation in degrees from 0 to 359, where 0 is up and 90 is right
           examples:
           - 45
           maximum: 359
@@ -70538,7 +70538,7 @@ components:
         radio_config:
           $ref: '#/components/schemas/ap_radio'
         serial:
-          description: Device Serial
+          description: AP serial number
           readOnly: true
           type: string
         site_id:
@@ -70552,13 +70552,13 @@ components:
         vars:
           $ref: '#/components/schemas/vars'
         x:
-          description: X in pixel
+          description: Horizontal map position of the AP, in pixels
           examples:
           - 53.5
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical map position of the AP, in pixels
           examples:
           - 173.1
           format: double
@@ -70659,7 +70659,7 @@ components:
       uniqueItems: true
     device_gateway:
       additionalProperties: false
-      description: Device gateway
+      description: Gateway configuration and placement data
       properties:
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
@@ -70707,7 +70707,7 @@ components:
         ip_configs:
           $ref: '#/components/schemas/gateway_ip_configs'
         mac:
-          description: Device MAC address
+          description: Gateway MAC address
           readOnly: true
           type: string
         managed:
@@ -70726,7 +70726,7 @@ components:
             `managed` for adopted devices.
           type: boolean
         model:
-          description: Device Model
+          description: Gateway model name
           readOnly: true
           type: string
         modified_time:
@@ -70765,7 +70765,7 @@ components:
         routing_policies:
           $ref: '#/components/schemas/gw_routing_policies'
         serial:
-          description: Device Serial
+          description: Gateway serial number
           readOnly: true
           type: string
         service_policies:
@@ -70795,13 +70795,13 @@ components:
         vrf_instances:
           $ref: '#/components/schemas/gateway_vrf_instances'
         x:
-          description: X in pixel
+          description: Horizontal map position of the gateway, in pixels
           examples:
           - 53.5
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical map position of the gateway, in pixels
           examples:
           - 173.1
           format: double
@@ -70985,7 +70985,7 @@ components:
         local_port_config:
           $ref: '#/components/schemas/local_port_config'
         mac:
-          description: Device MAC address
+          description: Switch MAC address
           readOnly: true
           type: string
         managed:
@@ -71010,7 +71010,7 @@ components:
         mist_nac:
           $ref: '#/components/schemas/switch_mist_nac'
         model:
-          description: Device Model
+          description: Switch model name
           readOnly: true
           type: string
         modified_time:
@@ -71059,7 +71059,7 @@ components:
         routing_policies:
           $ref: '#/components/schemas/sw_routing_policies'
         serial:
-          description: Device Serial
+          description: Switch serial number
           readOnly: true
           type: string
         site_id:
@@ -71087,13 +71087,13 @@ components:
         vrrp_config:
           $ref: '#/components/schemas/vrrp_config'
         x:
-          description: X in pixel
+          description: Horizontal map position of the switch, in pixels
           examples:
           - 53.5
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical map position of the switch, in pixels
           examples:
           - 173.1
           format: double
