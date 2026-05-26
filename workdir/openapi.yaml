@@ -73427,29 +73427,38 @@ components:
       description: DSCP value range between 0 and 63
     dswitches_compliance_major_version:
       additionalProperties: false
+      description: Version-compliance grouping for one discovered switch model
       properties:
         major_count:
+          description: Number of major software versions observed for this switch model
           type: number
         model:
+          description: Switch model represented by this version-compliance grouping
           type: string
         system_names:
+          description: Discovered switch system names included in this version-compliance
+            grouping
           $ref: '#/components/schemas/strings'
       required:
       - model
       - major_count
       type: object
     dswitches_compliance_major_versions:
+      description: Version-compliance groupings by discovered switch model
       items:
         $ref: '#/components/schemas/dswitches_compliance_major_version'
       type: array
       uniqueItems: true
     dswitches_metrics_inactive_wired_vlans:
       additionalProperties: false
+      description: Inactive wired VLAN metric for APs connected to discovered switches
       properties:
         details:
+          description: Metric-specific details for inactive wired VLAN findings
           additionalProperties: true
           type: object
         score:
+          description: Compliance score for the inactive wired VLAN metric
           type: number
       required:
       - score
@@ -73457,10 +73466,14 @@ components:
       type: object
     dswitches_metrics_poe_compliance:
       additionalProperties: false
+      description: PoE compliance metric for APs connected to discovered switches
       properties:
         details:
+          description: Counts and power totals used to calculate the PoE compliance
+            score
           $ref: '#/components/schemas/dswitches_metrics_poe_compliance_details'
         score:
+          description: Compliance score for the PoE compliance metric
           type: number
       required:
       - score
@@ -73468,10 +73481,13 @@ components:
       type: object
     dswitches_metrics_poe_compliance_details:
       additionalProperties: false
+      description: Detail values used by the discovered-switch PoE compliance metric
       properties:
         total_aps:
+          description: Number of APs evaluated for PoE compliance
           type: integer
         total_power:
+          description: Aggregate AP PoE power demand across evaluated APs, in mW
           type: number
       required:
       - total_power
@@ -73479,10 +73495,13 @@ components:
       type: object
     dswitches_metrics_switch_ap_affinity:
       additionalProperties: false
+      description: Switch/AP affinity metric for discovered switches
       properties:
         details:
+          description: Switch names and threshold used to calculate the affinity score
           $ref: '#/components/schemas/dswitches_metrics_switch_ap_affinity_details'
         score:
+          description: Compliance score for the switch/AP affinity metric
           type: number
       required:
       - score
@@ -73490,10 +73509,13 @@ components:
       type: object
     dswitches_metrics_switch_ap_affinity_details:
       additionalProperties: false
+      description: Detail values used by the switch/AP affinity metric
       properties:
         system_name:
+          description: Discovered switch system names reported for the affinity metric
           $ref: '#/components/schemas/strings'
         threshold:
+          description: APs-per-switch threshold used for the affinity metric
           type: number
       required:
       - threshold
@@ -73501,10 +73523,13 @@ components:
       type: object
     dswitches_metrics_version_compliance:
       additionalProperties: false
+      description: Version compliance metric for discovered switches
       properties:
         details:
+          description: Version grouping details used to calculate the compliance score
           $ref: '#/components/schemas/dswitches_metrics_version_compliance_details'
         score:
+          description: Compliance score for the discovered-switch version metric
           type: number
       required:
       - score
@@ -73512,10 +73537,14 @@ components:
       type: object
     dswitches_metrics_version_compliance_details:
       additionalProperties: false
+      description: Detail values used by the discovered-switch version compliance
+        metric
       properties:
         major_versions:
+          description: Per-model major version groupings used for version compliance
           $ref: '#/components/schemas/dswitches_compliance_major_versions'
         total_switch_count:
+          description: Number of discovered switches evaluated for version compliance
           type: integer
       required:
       - major_versions
@@ -86358,14 +86387,20 @@ components:
       uniqueItems: true
     response_dswitches_metrics:
       additionalProperties: false
+      description: Metrics summary returned for discovered switch compliance checks
       properties:
         inactive_wired_vlans:
+          description: Metric for inactive wired VLANs on discovered switches
           $ref: '#/components/schemas/dswitches_metrics_inactive_wired_vlans'
         poe_compliance:
+          description: Metric for PoE compliance across APs connected to discovered
+            switches
           $ref: '#/components/schemas/dswitches_metrics_poe_compliance'
         switch_ap_affinity:
+          description: Metric comparing AP counts against the switch affinity threshold
           $ref: '#/components/schemas/dswitches_metrics_switch_ap_affinity'
         version_compliance:
+          description: Metric for discovered switch software version compliance
           $ref: '#/components/schemas/dswitches_metrics_version_compliance'
       required:
       - version_compliance
