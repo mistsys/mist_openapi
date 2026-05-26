@@ -74584,8 +74584,10 @@ components:
       type: string
     fwupdate_stat:
       additionalProperties: false
+      description: Firmware update status for a device
       properties:
         progress:
+          description: Firmware update progress percentage, or null when unavailable
           examples:
           - 10
           maximum: 100
@@ -74595,8 +74597,10 @@ components:
           - integer
           - 'null'
         status:
+          description: Current firmware update status
           $ref: '#/components/schemas/fwupdate_stat_status'
         status_id:
+          description: Numeric firmware update status identifier
           examples:
           - 5
           readOnly: true
@@ -74604,8 +74608,11 @@ components:
           - integer
           - 'null'
         timestamp:
+          description: Time when the firmware update status was last updated
           $ref: '#/components/schemas/timestamp'
         will_retry:
+          description: Whether the firmware update process will retry after the current
+            status
           examples:
           - false
           readOnly: true
@@ -74628,8 +74635,10 @@ components:
       - string
       - 'null'
     gateway_cluster:
+      description: Gateway HA cluster request or response body
       properties:
         nodes:
+          description: Gateway nodes that form the HA cluster
           $ref: '#/components/schemas/gateway_cluster_nodes'
       required:
       - nodes
@@ -74638,14 +74647,15 @@ components:
       additionalProperties: false
       properties:
         mac:
-          description: Gateway MAC Address. Format is `[0-9a-f]{12}` (e.g. "5684dae9ac8b")
+          description: Gateway device MAC address. Format is `[0-9a-f]{12}` (e.g.
+            "5684dae9ac8b")
           type: string
       required:
       - mac
       type: object
     gateway_cluster_nodes:
-      description: When replacing a node, either mac has to remain the same as existing
-        cluster
+      description: Gateway cluster nodes. When replacing a node, one node MAC address
+        must remain the same as the existing cluster
       items:
         $ref: '#/components/schemas/gateway_cluster_node'
       maxItems: 2
