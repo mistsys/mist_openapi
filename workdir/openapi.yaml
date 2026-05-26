@@ -63589,20 +63589,27 @@ components:
         \ to"
       properties:
         actions:
+          description: Destination tag actions evaluated for sources matching this
+            ACL policy
           $ref: '#/components/schemas/acl_policy_actions'
         name:
+          description: Display name of the ACL policy
           examples:
           - guest access
           type: string
         src_tags:
+          description: Source ACL tags that select traffic for this ACL policy
           $ref: '#/components/schemas/acl_policy_src_tags'
       type: object
     acl_policy_action:
       additionalProperties: false
       properties:
         action:
+          description: Allow or deny decision applied to traffic matching the destination
+            tag
           $ref: '#/components/schemas/allow_deny'
         dst_tag:
+          description: Destination ACL tag matched by this policy action
           examples:
           - corp
           type: string
@@ -63633,6 +63640,7 @@ components:
         only be used in `dst_tags`
       properties:
         ether_types:
+          description: Layer 2 EtherTypes matched by this ACL tag; defaults to `any`
           $ref: '#/components/schemas/acl_tag_ether_types'
         gbp_tag:
           description: "Required if\n  - `type`==`dynamic_gbp` (gbp_tag received from\
@@ -63640,6 +63648,7 @@ components:
             \ gbp tag against matching conditions)"
           type: integer
         macs:
+          description: Client or resource MAC addresses matched by this ACL tag
           $ref: '#/components/schemas/acl_tag_macs'
         network:
           description: "If:\n  * `type`==`mac` (optional. default is `any`)\n  * `type`==`subnet`\
@@ -63648,17 +63657,22 @@ components:
             \ network (vlan)"
           type: string
         port_usage:
-          description: Required if `type`==`port_usage`
+          description: Required if `type`==`port_usage`. Switch port usage name matched
+            by this ACL tag
           type: string
         radius_group:
           description: "Required if:\n  * `type`==`radius_group`\n  * `type`==`static_gbp`\n\
             if from matching radius_group"
           type: string
         specs:
+          description: Layer 4 protocol and destination-port constraints for this
+            ACL tag
           $ref: '#/components/schemas/acl_tag_specs'
         subnets:
+          description: IP subnets matched by this ACL tag
           $ref: '#/components/schemas/acl_tag_subnets'
         type:
+          description: Classifier type that determines which ACL tag fields are evaluated
           $ref: '#/components/schemas/acl_tag_type'
       required:
       - type
