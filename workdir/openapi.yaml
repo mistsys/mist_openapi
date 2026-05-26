@@ -76387,22 +76387,28 @@ components:
       type: string
     hours:
       additionalProperties: false
-      description: Days/Hours of operation filter, the available days (mon, tue, wed,
-        thu, fri, sat, sun)
+      description: Day-of-week operating hour filters using hour ranges such as 09:00-17:00
       properties:
         fri:
+          description: Operating hour range for Friday
           $ref: '#/components/schemas/hour'
         mon:
+          description: Operating hour range for Monday
           $ref: '#/components/schemas/hour'
         sat:
+          description: Operating hour range for Saturday
           $ref: '#/components/schemas/hour'
         sun:
+          description: Operating hour range for Sunday
           $ref: '#/components/schemas/hour'
         thu:
+          description: Operating hour range for Thursday
           $ref: '#/components/schemas/hour'
         tue:
+          description: Operating hour range for Tuesday
           $ref: '#/components/schemas/hour'
         wed:
+          description: Operating hour range for Wednesday
           $ref: '#/components/schemas/hour'
       type: object
     ibeacon_major:
