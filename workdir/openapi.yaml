@@ -76130,95 +76130,121 @@ components:
       type: object
     gw_routing_policy:
       additionalProperties: false
+      description: Gateway routing policy made of ordered match-action terms
       properties:
         terms:
+          description: Ordered terms evaluated by this gateway routing policy
           $ref: '#/components/schemas/gw_routing_policy_terms'
       type: object
     gw_routing_policy_term:
       additionalProperties: false
+      description: Gateway routing policy term with match criteria and actions
       properties:
         actions:
+          description: Policy actions applied when this routing policy term matches
           $ref: '#/components/schemas/gw_routing_policy_term_action'
         matching:
+          description: Route match criteria that must be satisfied before actions are applied
           $ref: '#/components/schemas/gw_routing_policy_term_matching'
       type: object
     gw_routing_policy_term_action:
       additionalProperties: false
-      description: When used as import policy
+      description: Actions applied to routes matched by a gateway routing policy term
       properties:
         accept:
+          description: Whether to accept routes that match this term
           type: boolean
         add_community:
+          description: BGP communities to add to routes that match this term
           $ref: '#/components/schemas/gw_routing_policy_term_action_add_community'
         add_target_vrfs:
+          description: SSR target VRFs to add when leaking routes from hub to spoke
           $ref: '#/components/schemas/gw_routing_policy_term_action_add_target_vrfs'
         community:
+          description: BGP communities to set when this term is used as an export policy
           $ref: '#/components/schemas/routing_policy_term_action_community'
         exclude_as_path:
+          description: AS path values to exclude when this term is used as an export policy
           $ref: '#/components/schemas/gw_routing_policy_term_action_exclude_as_path'
         exclude_community:
+          description: BGP communities to exclude from routes that match this term
           $ref: '#/components/schemas/gw_routing_policy_term_action_exclude_community'
         export_communities:
+          description: BGP communities allowed for export when this term is used as an export policy
           $ref: '#/components/schemas/gw_routing_policy_term_action_export_communities'
         local_preference:
+          description: Preference value to set when this term is used as an import policy
           $ref: '#/components/schemas/routing_policy_local_preference'
         prepend_as_path:
+          description: AS path values to prepend when this term is used as an export policy
           $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
       type: object
     gw_routing_policy_term_action_add_community:
+      description: BGP communities added to routes matched by a gateway routing policy term
       items:
         examples:
         - '3900190'
         type: string
       type: array
     gw_routing_policy_term_action_add_target_vrfs:
-      description: For SSR, hub decides how VRF routes are leaked on spoke
+      description: For SSR, target VRFs used by a hub when leaking VRF routes to spokes
       items:
         type: string
       type: array
     gw_routing_policy_term_action_exclude_as_path:
-      description: When used as export policy, optional. To exclude certain AS
+      description: Optional when used as an export policy. AS path values to exclude
       items:
         examples:
         - '65002'
         type: string
       type: array
     gw_routing_policy_term_action_exclude_community:
+      description: BGP communities excluded by a gateway routing policy term
       items:
         examples:
         - '3900190'
         type: string
       type: array
     gw_routing_policy_term_action_export_communities:
-      description: When used as export policy, optional
+      description: Optional when used as an export policy. BGP communities that may be exported
       items:
         type: string
       type: array
     gw_routing_policy_term_matching:
       additionalProperties: false
-      description: zero or more criteria/filter can be specified to match the term,
-        all criteria have to be met
+      description: Route match criteria for a gateway routing policy term; all specified
+        criteria must match
       properties:
         as_path:
+          description: AS path values that routes must match
           $ref: '#/components/schemas/routing_policy_term_matching_as_path'
         community:
+          description: BGP communities that routes must match
           $ref: '#/components/schemas/routing_policy_term_matching_community'
         network:
+          description: Configured network names that routes must match
           $ref: '#/components/schemas/strings'
         prefix:
+          description: Route prefixes that routes must match
           $ref: '#/components/schemas/routing_policy_term_matching_prefix'
         protocol:
+          description: Routing protocols that routes must match
           $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol'
         route_exists:
+          description: Existing route condition that must be satisfied before this term matches
           $ref: '#/components/schemas/gw_routing_policy_term_matching_route_exists'
         vpn_neighbor_mac:
+          description: Overlay neighbor MAC addresses used as match criteria for BGP sessions with `via`==`vpn`
           $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_neighbor_mac'
         vpn_path:
+          description: Overlay path names used as match criteria for BGP sessions with `via`==`vpn`
           $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path'
         vpn_path_sla:
+          description: SLA thresholds used when matching a VPN path
           $ref: '#/components/schemas/gw_routing_policy_term_matching_vpn_path_sla'
       type: object
     gw_routing_policy_term_matching_protocol:
+      description: Routing protocols that can match a gateway routing policy term
       items:
         $ref: '#/components/schemas/gw_routing_policy_term_matching_protocol_enum'
       type: array
@@ -76233,41 +76259,47 @@ components:
       type: string
     gw_routing_policy_term_matching_route_exists:
       additionalProperties: false
+      description: Route-existence match condition for a gateway routing policy term
       properties:
         route:
+          description: Prefix that must exist for this condition to match
           examples:
           - 192.168.0.0/24
           type: string
         vrf_name:
           default: default
-          description: Name of the vrf instance, it can also be the name of the VPN
-            or wan if they
+          description: Name of the VRF instance where the route is checked; can also
+            be a VPN or WAN name when applicable
           type: string
       type: object
     gw_routing_policy_term_matching_vpn_neighbor_mac:
-      description: overlay-facing criteria (used for bgp_config where via=vpn)
+      description: Overlay neighbor MAC addresses used for bgp_config where `via`==`vpn`
       items:
         type: string
       type: array
     gw_routing_policy_term_matching_vpn_path:
-      description: overlay-facing criteria (used for bgp_config where via=vpn). ordered-
+      description: Overlay path names used for bgp_config where `via`==`vpn`; order is significant
       items:
         type: string
       type: array
     gw_routing_policy_term_matching_vpn_path_sla:
       additionalProperties: false
+      description: SLA thresholds used when matching VPN paths
       properties:
         max_jitter:
+          description: Maximum jitter threshold allowed for the VPN path
           type:
           - integer
           - 'null'
         max_latency:
+          description: Maximum latency threshold allowed for the VPN path
           examples:
           - 1500
           type:
           - integer
           - 'null'
         max_loss:
+          description: Maximum packet-loss threshold allowed for the VPN path
           examples:
           - 30
           type:
