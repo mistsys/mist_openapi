@@ -71203,16 +71203,22 @@ components:
       type: array
     const_other_device_model:
       additionalProperties: false
+      description: Other-device model definition returned by the constants API
       properties:
         _vendor_model_id:
+          description: Vendor-specific model identifier for this other-device model
           type: string
         display:
+          description: User-facing model name shown for the other-device model
           type: string
         model:
+          description: Device model identifier for this other-device definition
           type: string
         type:
+          description: Device category for this other-device model
           type: string
         vendor:
+          description: Manufacturer name for this other-device model
           type: string
       type: object
     const_other_device_models:
@@ -71221,12 +71227,15 @@ components:
       type: array
     const_state:
       additionalProperties: false
+      description: State or territory definition returned by the constants API
       properties:
         iso_code:
+          description: ISO subdivision code for the state or territory
           examples:
           - AK
           type: string
         name:
+          description: State or territory display name
           examples:
           - Alaska
           type: string
@@ -71237,36 +71246,46 @@ components:
       type: array
     const_traffic_type:
       additionalProperties: false
+      description: Traffic type definition returned by the constants API
       properties:
         display:
+          description: Human-readable traffic type label
           examples:
           - VoIP Video
           type: string
         dscp:
+          description: Differentiated Services Code Point value used for this traffic
+            type
           examples:
           - 32
           type: integer
         failover_policy:
+          description: Failover behavior associated with this traffic type
           examples:
           - non_revertible
           type: string
         max_jitter:
+          description: Maximum jitter threshold for this traffic type, in milliseconds
           examples:
           - 250
           type: integer
         max_latency:
+          description: Maximum latency threshold for this traffic type, in milliseconds
           examples:
           - 1500
           type: integer
         max_loss:
+          description: Maximum packet loss threshold for this traffic type, in percent
           examples:
           - 35
           type: integer
         name:
+          description: Machine-readable traffic type name
           examples:
           - voip_video
           type: string
         traffic_class:
+          description: Traffic class associated with this traffic type
           examples:
           - medium
           type: string
