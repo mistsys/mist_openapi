@@ -69995,6 +69995,7 @@ components:
       type: array
     const_app_category_definition:
       additionalProperties: false
+      description: Application category definition returned by the constants API
       properties:
         display:
           description: Description of the app category
@@ -70002,11 +70003,14 @@ components:
           - Images
           type: string
         filters:
+          description: Platform-specific application signatures included in this
+            category
           $ref: '#/components/schemas/const_app_category_definition_filters'
         includes:
+          description: Application categories included by this aggregate category
           $ref: '#/components/schemas/const_app_category_definition_includes'
         key:
-          description: Key name of the app category
+          description: Machine-readable application category key
           examples:
           - Images
           type: string
@@ -70016,6 +70020,7 @@ components:
       type: object
     const_app_category_definition_filters:
       additionalProperties: false
+      description: Platform-specific application category filters
       examples:
       - srx:
         - Enhanced_Images_Media
@@ -70023,8 +70028,12 @@ components:
         - Enhanced_Image_Servers
       properties:
         srx:
+          description: Application signature names for SRX platforms included in
+            this category
           $ref: '#/components/schemas/strings'
         ssr:
+          description: Application identifiers for SSR platforms included in this
+            category
           $ref: '#/components/schemas/strings'
       type: object
     const_app_category_definition_includes:
@@ -70038,6 +70047,7 @@ components:
       type: array
     const_app_subcategory_definition:
       additionalProperties: false
+      description: Application subcategory definition returned by the constants API
       properties:
         display:
           description: Description of the app subcategory
@@ -70045,7 +70055,7 @@ components:
           - Office Document
           type: string
         key:
-          description: Key name of the app subcategory
+          description: Machine-readable application subcategory key
           examples:
           - Office_Documents
           type: string
@@ -70065,34 +70075,44 @@ components:
       type: array
     const_application_definition:
       additionalProperties: false
+      description: Application definition recognized by Juniper Mist APs
       properties:
         app_id:
+          description: Whether an AppID is defined for this application
           type: boolean
         app_image_url:
+          description: URL of the application icon image, when one is available
           examples:
           - '""'
           type: string
         app_probe:
+          description: Whether an application probe is available for this application
           type: boolean
         category:
+          description: Application category key associated with this application
           examples:
           - FileSharing
           type: string
         group:
+          description: Application group display name for this application
           examples:
           - File Sharing
           type: string
         key:
+          description: Machine-readable key that identifies the application
           examples:
           - dropbox
           type: string
         name:
+          description: Display name of the application
           examples:
           - Dropbox
           type: string
         signature_based:
+          description: Whether this application is detected using signatures
           type: boolean
         ssr_app_id:
+          description: Whether an SSR AppID is defined for this application
           type: boolean
       type: object
     const_application_definitions:
@@ -70105,6 +70125,7 @@ components:
       type: array
     const_country:
       additionalProperties: false
+      description: Country definition returned by the constants API
       properties:
         alpha2:
           description: Country code, in two-character
@@ -70112,10 +70133,12 @@ components:
           - FR
           type: string
         certified:
+          description: Whether this country is certified for use in Mist configuration
           examples:
           - true
           type: boolean
         name:
+          description: Human-readable country name for display
           examples:
           - France
           type: string
