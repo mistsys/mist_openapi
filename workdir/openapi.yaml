@@ -66713,10 +66713,13 @@ components:
       type: array
     arp_table_stats:
       additionalProperties: false
+      description: ARP table usage and capacity statistics
       properties:
         arp_table_count:
+          description: Number of ARP table entries currently present on the device
           type: integer
         max_entries_supported:
+          description: Supported ARP table capacity for the device
           type: integer
       type: object
     asset:
