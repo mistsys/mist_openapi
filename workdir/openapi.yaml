@@ -87996,31 +87996,45 @@ components:
       description: RF Template
       properties:
         ant_gain_24:
+          description: External antenna gain for the 2.4 GHz radio
           type: integer
         ant_gain_5:
+          description: External antenna gain for the 5 GHz radio
           type: integer
         ant_gain_6:
+          description: External antenna gain for the 6 GHz radio
           type: integer
         band_24:
+          description: 2.4 GHz radio settings in this RF template
           $ref: '#/components/schemas/rftemplate_radio_band24'
         band_24_usage:
+          description: Radio usage mode for the 2.4 GHz-capable radio in this RF
+            template
           $ref: '#/components/schemas/radio_band_24_usage'
         band_5:
+          description: 5 GHz radio settings in this RF template
           $ref: '#/components/schemas/rftemplate_radio_band5'
         band_5_on_24_radio:
+          description: 5 GHz settings used when the 2.4 GHz radio operates in 5 GHz
+            mode
           $ref: '#/components/schemas/rftemplate_radio_band5'
         band_6:
+          description: 6 GHz radio settings in this RF template
           $ref: '#/components/schemas/rftemplate_radio_band6'
         country_code:
           description: Optional, country code to use. If specified, this gets applied
             to all sites using the RF Template
           type: string
         created_time:
+          description: Time when the RF template was created
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether the RF template is scoped to a site rather than the
+            organization
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the RF template
           $ref: '#/components/schemas/id'
         model_specific:
           additionalProperties:
@@ -88029,11 +88043,13 @@ components:
             will shadow the default. Property key is the model name (e.g. "AP63")
           type: object
         modified_time:
+          description: Time when the RF template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: The name of the RF template
           type: string
         org_id:
+          description: Organization that owns this RF template
           $ref: '#/components/schemas/org_id'
         scanning_enabled:
           description: Whether scanning radio is enabled
@@ -88046,22 +88062,34 @@ components:
       properties:
         ant_gain_24:
           default: 0
+          description: Model-specific external antenna gain for the 2.4 GHz radio
           type: integer
         ant_gain_5:
           default: 0
+          description: Model-specific external antenna gain for the 5 GHz radio
           type: integer
         ant_gain_6:
           default: 0
+          description: Model-specific external antenna gain for the 6 GHz radio
           type: integer
         band_24:
+          description: Model-specific 2.4 GHz radio settings that override RF template
+            defaults
           $ref: '#/components/schemas/rftemplate_radio_band24'
         band_24_usage:
+          description: Model-specific radio usage mode for the 2.4 GHz-capable radio
           $ref: '#/components/schemas/radio_band_24_usage'
         band_5:
+          description: Model-specific 5 GHz radio settings that override RF template
+            defaults
           $ref: '#/components/schemas/rftemplate_radio_band5'
         band_5_on_24_radio:
+          description: Model-specific 5 GHz settings used when the 2.4 GHz radio
+            operates in 5 GHz mode
           $ref: '#/components/schemas/rftemplate_radio_band5'
         band_6:
+          description: Model-specific 6 GHz radio settings that override RF template
+            defaults
           $ref: '#/components/schemas/rftemplate_radio_band6'
       type: object
     rf_templates:
@@ -88074,19 +88102,26 @@ components:
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM may disable the 2.4 GHz radio when optimizing RF
+            settings
           type: boolean
         ant_gain:
           default: 0
+          description: External antenna gain for the 2.4 GHz radio
           maximum: 10
           minimum: 0
           type:
           - integer
           - 'null'
         antenna_mode:
+          description: Radio chain mode for the 2.4 GHz radio
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
+          description: Channel width configured for the 2.4 GHz radio
           $ref: '#/components/schemas/dot11_bandwidth24'
         channels:
+          description: Allowed channel list for the 2.4 GHz radio; null or an empty
+            array uses automatic selection
           $ref: '#/components/schemas/radio_band_channels'
         disabled:
           default: false
@@ -88122,6 +88157,7 @@ components:
           - integer
           - 'null'
         preamble:
+          description: 802.11 preamble mode used by the 2.4 GHz radio
           $ref: '#/components/schemas/radio_band_preamble'
       type: object
     rftemplate_radio_band5:
@@ -88130,19 +88166,26 @@ components:
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM may disable the 5 GHz radio when optimizing RF
+            settings
           type: boolean
         ant_gain:
           default: 0
+          description: External antenna gain for the 5 GHz radio
           maximum: 10
           minimum: 0
           type:
           - integer
           - 'null'
         antenna_mode:
+          description: Radio chain mode for the 5 GHz radio
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
+          description: Channel width configured for the 5 GHz radio
           $ref: '#/components/schemas/dot11_bandwidth5'
         channels:
+          description: Allowed channel list for the 5 GHz radio; null or an empty
+            array uses automatic selection
           $ref: '#/components/schemas/radio_band_channels'
         disabled:
           default: false
@@ -88178,6 +88221,7 @@ components:
           - integer
           - 'null'
         preamble:
+          description: 802.11 preamble mode used by the 5 GHz radio
           $ref: '#/components/schemas/radio_band_preamble'
       type: object
     rftemplate_radio_band6:
@@ -88186,19 +88230,26 @@ components:
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM may disable the 6 GHz radio when optimizing RF
+            settings
           type: boolean
         ant_gain:
           default: 0
+          description: External antenna gain for the 6 GHz radio
           maximum: 10
           minimum: 0
           type:
           - integer
           - 'null'
         antenna_mode:
+          description: Radio chain mode for the 6 GHz radio
           $ref: '#/components/schemas/radio_band_antenna_mode'
         bandwidth:
+          description: Channel width configured for the 6 GHz radio
           $ref: '#/components/schemas/dot11_bandwidth6'
         channels:
+          description: Allowed channel list for the 6 GHz radio; null or an empty
+            array uses automatic selection
           $ref: '#/components/schemas/radio_band_channels'
         disabled:
           default: false
@@ -88234,6 +88285,7 @@ components:
           - integer
           - 'null'
         preamble:
+          description: 802.11 preamble mode used by the 6 GHz radio
           $ref: '#/components/schemas/radio_band_preamble'
         standard_power:
           default: false
