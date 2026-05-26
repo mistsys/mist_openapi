@@ -70966,16 +70966,20 @@ components:
       type: object
     const_language:
       additionalProperties: false
+      description: Language option returned by the constants API
       properties:
         display:
+          description: Localized language display name in the API default locale
           examples:
           - English (US)
           type: string
         display_native:
+          description: Language display name in its native locale
           examples:
           - English (US)
           type: string
         key:
+          description: Locale key used to select this language
           examples:
           - en-US
           type: string
@@ -70990,18 +70994,23 @@ components:
       type: array
     const_license_type:
       additionalProperties: false
+      description: License type definition returned by the constants API
       properties:
         description:
+          description: Human-readable description of the license type
           examples:
           - Wired Assurance 12
           type: string
         includes:
+          description: License SKU components included by this license type
           $ref: '#/components/schemas/const_license_type_includes'
         key:
+          description: Machine-readable license type key
           examples:
           - sub_ex12
           type: string
         name:
+          description: Display name of the license type
           examples:
           - SUB-EX12
           type: string
@@ -71019,25 +71028,28 @@ components:
       type: array
     const_marvis_client_version:
       additionalProperties: false
+      description: Marvis Client version download entry
       properties:
         label:
+          description: Release label for this Marvis Client version
           examples:
           - default
           type: string
         notes:
+          description: Release notes or extra text for this Marvis Client version
           type: string
         os:
-          description: Client OS
+          description: Operating system supported by this Marvis Client installer
           examples:
           - windows
           type: string
         url:
-          description: Client download url
+          description: Download URL for this Marvis Client installer
           examples:
           - https://mobile.mist.com/installers/marvisclient/...
           type: string
         version:
-          description: Client version
+          description: Marvis Client software version for this installer
           examples:
           - 0.100.29
           type: string
@@ -71048,30 +71060,39 @@ components:
       type: array
     const_mxedge_model:
       additionalProperties: false
+      description: Mist Edge model definition returned by the constants API
       properties:
         custom_ports:
+          description: Whether this Mist Edge model supports custom port definitions
           type: boolean
         display:
+          description: User-facing model name shown for the Mist Edge
           examples:
           - X10
           type: string
         model:
+          description: Mist Edge model identifier
           examples:
           - ME-X10
           type: string
         ports:
           additionalProperties:
             $ref: '#/components/schemas/const_mxedge_model_port'
+          description: Port metadata keyed by interface number for this Mist Edge
+            model
           type: object
       type: object
     const_mxedge_model_port:
       additionalProperties: false
+      description: Mist Edge model port metadata
       properties:
         display:
+          description: User-facing interface name for this Mist Edge port
           examples:
           - xe0
           type: string
         speed:
+          description: Port speed for the Mist Edge interface, in Mbps
           examples:
           - 10000
           type: integer
