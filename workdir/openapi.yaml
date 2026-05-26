@@ -66316,32 +66316,43 @@ components:
     ap_switch:
       additionalProperties: false
       deprecated: true
-      description: For people who want to fully control the vlans (advanced)
+      description: Deprecated AP switch VLAN control settings for advanced per-port configuration
       properties:
         enabled:
           default: false
+          description: Whether deprecated AP switch VLAN control is enabled
           type: boolean
         eth0:
+          description: VLAN settings for AP eth0
           $ref: '#/components/schemas/ap_switch_setting'
         eth1:
+          description: VLAN settings for AP eth1
           $ref: '#/components/schemas/ap_switch_setting'
         eth2:
+          description: VLAN settings for AP eth2
           $ref: '#/components/schemas/ap_switch_setting'
         eth3:
+          description: VLAN settings for AP eth3
           $ref: '#/components/schemas/ap_switch_setting'
         module:
+          description: VLAN settings for the AP module port
           $ref: '#/components/schemas/ap_switch_setting'
         wds:
+          description: VLAN settings for WDS traffic on the AP
           $ref: '#/components/schemas/ap_switch_setting'
       type: object
     ap_switch_setting:
       additionalProperties: false
+      description: VLAN settings for one deprecated AP switch-config port
       properties:
         enable_vlan:
+          description: Whether VLAN tagging is enabled for this AP switch-config port
           type: boolean
         port_vlan_id:
+          description: Native VLAN ID for this AP switch-config port
           $ref: '#/components/schemas/ap_switch_setting_port_vlan_id'
         vlan_ids:
+          description: Allowed VLAN IDs for this AP switch-config port
           $ref: '#/components/schemas/ap_switch_setting_vlan_ids'
       type: object
     ap_switch_setting_port_vlan_id:
