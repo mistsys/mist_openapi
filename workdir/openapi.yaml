@@ -71368,12 +71368,16 @@ components:
       description: Device Profile
       properties:
         aeroscout:
+          description: Location integration defaults for AeroScout in this AP profile
           $ref: '#/components/schemas/ap_aeroscout'
         airista:
+          description: Location integration defaults for Airista in this AP profile
           $ref: '#/components/schemas/ap_airista'
         ble_config:
+          description: Bluetooth Low Energy beacon and asset defaults in this AP profile
           $ref: '#/components/schemas/ble_config'
         created_time:
+          description: Time when the AP device profile was created
           $ref: '#/components/schemas/created_time'
         disable_eth1:
           default: false
@@ -71392,31 +71396,43 @@ components:
           description: Whether to disable module port
           type: boolean
         esl_config:
+          description: Electronic shelf label integration defaults in this AP profile
           $ref: '#/components/schemas/ap_esl_config'
         for_site:
+          description: Whether this AP profile is scoped directly to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the AP device profile
           $ref: '#/components/schemas/id'
         iot_config:
+          description: Digital and analog IoT pin defaults in this AP profile
           $ref: '#/components/schemas/ap_iot'
         ip_config:
+          description: Management IP addressing defaults in this AP profile
           $ref: '#/components/schemas/ap_ip_config'
         lacp_config:
+          description: Link aggregation defaults for supported AP Ethernet uplinks
           $ref: '#/components/schemas/device_ap_lacp_config'
         led:
+          description: Indicator light behavior defaults in this AP profile
           $ref: '#/components/schemas/ap_led'
         mesh:
+          description: Wireless mesh role and band defaults in this AP profile
           $ref: '#/components/schemas/ap_mesh'
         modified_time:
+          description: Time when the AP device profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the AP device profile
           type:
           - string
           - 'null'
         ntp_servers:
+          description: NTP servers configured by this AP profile
           $ref: '#/components/schemas/strings'
         org_id:
+          description: Organization that owns this AP device profile
           $ref: '#/components/schemas/org_id'
         poe_passthrough:
           default: false
@@ -71431,22 +71447,32 @@ components:
             over switch_config (deprecated)
           type: object
         pwr_config:
+          description: Power negotiation and peripheral power defaults in this AP profile
           $ref: '#/components/schemas/ap_pwr_config'
         radio_config:
+          description: Radio configuration defaults in this AP profile
           $ref: '#/components/schemas/ap_radio'
         site_id:
+          description: Site where this AP device profile is defined, when scoped to
+            a site
           $ref: '#/components/schemas/site_id'
         switch_config:
+          description: Deprecated AP switch configuration defaults in this profile
           $ref: '#/components/schemas/ap_switch'
         type:
+          description: Device type discriminator for AP device profiles
           $ref: '#/components/schemas/device_type_ap'
         uplink_port_config:
+          description: Authentication and failover defaults for AP uplink ports
           $ref: '#/components/schemas/ap_uplink_port_config'
         usb_config:
+          description: Legacy USB integration defaults in this AP profile
           $ref: '#/components/schemas/ap_usb'
         vars:
+          description: Variable values provided by this AP device profile
           $ref: '#/components/schemas/vars'
         zigbee_config:
+          description: Zigbee radio and network defaults in this AP profile
           $ref: '#/components/schemas/ap_zigbee'
       required:
       - type
