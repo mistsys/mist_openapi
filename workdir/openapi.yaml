@@ -75061,16 +75061,21 @@ components:
       type: object
     gateway_path_preferences:
       additionalProperties: false
+      description: Gateway path preference that selects among one or more local, WAN, VPN, or tunnel paths
       properties:
         paths:
+          description: Candidate paths evaluated for this gateway path preference
           $ref: '#/components/schemas/gateway_path_preferences_paths'
         strategy:
+          description: Selection strategy used to evaluate the candidate paths
           $ref: '#/components/schemas/gateway_path_strategy'
       type: object
     gateway_path_preferences_path:
       additionalProperties: false
+      description: Candidate path within a gateway path preference
       properties:
         cost:
+          description: Relative cost assigned to this path for gateway path selection
           type: integer
         disabled:
           description: For SSR Only. `true`, if this specific path is undesired
@@ -75086,13 +75091,16 @@ components:
             \ to use \n  * `type`==`wan`: the name of the WAN interface to use"
           type: string
         networks:
+          description: List of network names used when `type`==`local`
           $ref: '#/components/schemas/gateway_path_preferences_path_networks'
         target_ips:
+          description: List of destination IP addresses to replace when `type`==`local`
           $ref: '#/components/schemas/gateway_path_preferences_path_target_ips'
         type:
+          description: Gateway path source type, such as local network, WAN interface, VPN path, or tunnel
           $ref: '#/components/schemas/gateway_path_type'
         wan_name:
-          description: Optional if `type`==`vpn`
+          description: Optional if `type`==`vpn`; WAN interface name associated with the VPN path
           examples:
           - wan0
           type: string
@@ -75100,16 +75108,17 @@ components:
       - type
       type: object
     gateway_path_preferences_path_networks:
-      description: Required when `type`==`local`
+      description: Network names used by a local path; required when `type`==`local`
       items:
         type: string
       type: array
     gateway_path_preferences_path_target_ips:
-      description: If `type`==`local`, if destination IP is to be replaced
+      description: Destination IP addresses to replace when `type`==`local`
       items:
         type: string
       type: array
     gateway_path_preferences_paths:
+      description: Candidate paths evaluated by a gateway path preference
       items:
         $ref: '#/components/schemas/gateway_path_preferences_path'
       type: array
