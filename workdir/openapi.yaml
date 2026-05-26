@@ -74115,31 +74115,42 @@ components:
       type: object
     evpn_topology_switch:
       additionalProperties: false
+      description: Switch member of an EVPN topology, including role and link relationships
       properties:
         config:
+          description: Per-switch configuration supplied for this topology member
           $ref: '#/components/schemas/evpn_topology_switch_config'
         deviceprofile_id:
+          description: Associated device profile identifier for the switch
           examples:
           - 6a1deab1-96df-4fa2-8455-d5253f943d06
           format: uuid
           readOnly: true
           type: string
         downlink_ips:
+          description: IP addresses used by this switch for EVPN downlinks
           $ref: '#/components/schemas/evpn_topology_switch_downlink_ips'
         downlinks:
+          description: Switch MAC addresses connected as downlinks from this topology
+            member
           $ref: '#/components/schemas/evpn_topology_switch_downlinks'
         esilaglinks:
+          description: Switch MAC addresses connected through ESI-LAG from this topology
+            member
           $ref: '#/components/schemas/evpn_topology_switch_esilaglinks'
         evpn_id:
+          description: Topology identifier number for this EVPN switch member
           minimum: 1
           readOnly: true
           type: integer
         mac:
+          description: Switch MAC address used to identify the topology member
           examples:
           - 5c5b35000003
           minLength: 1
           type: string
         model:
+          description: Switch model for this topology member
           examples:
           - QFX10002-36Q
           readOnly: true
@@ -74154,23 +74165,32 @@ components:
           minimum: 1
           type: integer
         pods:
+          description: List of pod numbers this switch participates in
           $ref: '#/components/schemas/evpn_topology_switch_pods'
         role:
+          description: EVPN topology role for this switch
           $ref: '#/components/schemas/evpn_topology_switch_role'
         router_id:
+          description: Routing identifier used by this switch for EVPN routing
           examples:
           - 172.16.254.4
           readOnly: true
           type: string
         site_id:
+          description: Associated site for this EVPN topology switch
           $ref: '#/components/schemas/site_id'
         suggested_downlinks:
+          description: Builder-suggested downlink switch MAC addresses
           $ref: '#/components/schemas/evpn_topology_switch_suggested_downlinks'
         suggested_esilaglinks:
+          description: Builder-suggested ESI-LAG switch MAC addresses
           $ref: '#/components/schemas/evpn_topology_switch_suggested_esilaglinks'
         suggested_uplinks:
+          description: Builder-suggested uplink switch MAC addresses
           $ref: '#/components/schemas/evpn_topology_switch_suggested_uplinks'
         uplinks:
+          description: Switch MAC addresses connected as uplinks from this topology
+            member
           $ref: '#/components/schemas/evpn_topology_switch_uplinks'
       required:
       - mac
@@ -74178,16 +74198,22 @@ components:
       type: object
     evpn_topology_switch_config:
       additionalProperties: false
+      description: Per-switch configuration used by an EVPN topology member
       properties:
         dhcpd_config:
+          description: Switch DHCP server configuration for the topology member
           $ref: '#/components/schemas/evpn_topology_switch_config_dhcpd_config'
         networks:
+          description: EVPN network definitions for the topology member
           $ref: '#/components/schemas/switch_networks'
         other_ip_configs:
+          description: Additional interface IP configurations for the topology member
           $ref: '#/components/schemas/evpn_topology_switch_config_other_ip_configs'
         port_config:
+          description: Switch port configuration for the topology member
           $ref: '#/components/schemas/wired_port_config'
         port_usages:
+          description: Switch port usage definitions for the topology member
           $ref: '#/components/schemas/switch_port_usages'
         router_id:
           description: Used for OSPF / BGP / EVPN
@@ -74195,6 +74221,7 @@ components:
           - 10.2.1.10
           type: string
         vrf_config:
+          description: Routing instance and VRF settings for the topology member
           $ref: '#/components/schemas/evpn_topology_switch_config_vrf_config'
       type: object
     evpn_topology_switch_config_dhcpd_config:
@@ -74220,15 +74247,17 @@ components:
     evpn_topology_switch_configs:
       additionalProperties:
         $ref: '#/components/schemas/evpn_topology_switch_config'
-      description: Property key is the switch mac
+      description: Property key is the switch MAC address
       type: object
     evpn_topology_switch_downlink_ips:
+      description: Downlink IP addresses used by an EVPN topology switch
       items:
         readOnly: true
         type: string
       readOnly: true
       type: array
     evpn_topology_switch_downlinks:
+      description: Downlink switch MAC addresses for an EVPN topology switch
       examples:
       - - 5c5b35000005
         - 5c5b35000006
@@ -74236,6 +74265,7 @@ components:
         type: string
       type: array
     evpn_topology_switch_esilaglinks:
+      description: ESI-LAG switch MAC addresses for an EVPN topology switch
       examples:
       - - 5c5b35000005
         - 5c5b35000006
@@ -74261,6 +74291,8 @@ components:
       minLength: 1
       type: string
     evpn_topology_switch_suggested_downlinks:
+      description: Builder-suggested downlink switch MAC addresses for an EVPN topology
+        switch
       examples:
       - - 5c5b35000005
         - 5c5b35000006
@@ -74270,6 +74302,8 @@ components:
       readOnly: true
       type: array
     evpn_topology_switch_suggested_esilaglinks:
+      description: Builder-suggested ESI-LAG switch MAC addresses for an EVPN topology
+        switch
       examples:
       - - 5c5b35000005
         - 5c5b35000006
@@ -74279,6 +74313,8 @@ components:
       readOnly: true
       type: array
     evpn_topology_switch_suggested_uplinks:
+      description: Builder-suggested uplink switch MAC addresses for an EVPN topology
+        switch
       examples:
       - - 5c5b35000005
         - 5c5b35000006
@@ -74288,6 +74324,7 @@ components:
       readOnly: true
       type: array
     evpn_topology_switch_uplinks:
+      description: Uplink switch MAC addresses for an EVPN topology switch
       examples:
       - - 5c5b35000005
         - 5c5b35000006
@@ -74295,6 +74332,7 @@ components:
         type: string
       type: array
     evpn_topology_switches:
+      description: Switch members included in an EVPN topology
       items:
         $ref: '#/components/schemas/evpn_topology_switch'
       type: array
