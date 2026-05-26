@@ -66854,45 +66854,61 @@ components:
       type: object
     asset_of_interest:
       additionalProperties: false
+      description: BLE beacon that matched a named asset or asset filter
       properties:
         ap_mac:
+          description: Access point MAC address that heard this BLE beacon
           minLength: 1
           type: string
         beam:
+          description: BLE beam number that detected this beacon
           type: number
         by:
+          description: Match source for this BLE beacon, such as asset or asset filter
           minLength: 1
           type: string
         curr_site:
+          description: Site currently associated with this BLE beacon
           minLength: 1
           type: string
         device_name:
+          description: AP name reported for the device that heard this BLE beacon
           type: string
         id:
+          description: Unique identifier of the matched asset or filter entry
           $ref: '#/components/schemas/id'
         last_seen:
+          description: Time when this BLE beacon was last observed
           $ref: '#/components/schemas/last_seen'
         mac:
+          description: Bluetooth MAC address of this BLE beacon
           minLength: 1
           type: string
         manufacture:
+          description: BLE manufacturer name resolved for this beacon
           minLength: 1
           type: string
         map_id:
+          description: Identifier of the map associated with this BLE beacon observation
           minLength: 1
           type: string
         name:
+          description: Display name of the matched asset or filter
           minLength: 1
           type: string
         rssi:
+          description: Signal strength of this BLE beacon, in dBm
           type: number
       type: object
     asset_rssi_zone:
       additionalProperties: false
+      description: RSSI zone membership for an individual asset statistic
       properties:
         id:
+          description: Unique identifier of the RSSI zone
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the asset entered this RSSI zone
           type: number
       type: object
     asset_rssi_zones:
@@ -66902,10 +66918,13 @@ components:
       type: array
     asset_zone:
       additionalProperties: false
+      description: Map zone membership for an individual asset statistic
       properties:
         id:
+          description: Unique identifier of the zone
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the asset entered this zone
           type: number
       type: object
     asset_zones:
