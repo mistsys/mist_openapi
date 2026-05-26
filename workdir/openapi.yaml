@@ -68419,8 +68419,10 @@ components:
       description: Initiate a Gateway (SSR/SRX) Packet Capture
       properties:
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the gateway packet capture
           $ref: '#/components/schemas/capture_gateway_format'
         gateways:
           additionalProperties:
@@ -68439,10 +68441,13 @@ components:
           - integer
           - 'null'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         ports:
+          description: Gateway ports to include in the packet capture
           $ref: '#/components/schemas/capture_gateway_gateways_ports'
         type:
+          description: Packet capture type discriminator for gateway captures
           $ref: '#/components/schemas/capture_gateway_type'
       required:
       - type
@@ -68497,7 +68502,7 @@ components:
       properties:
         duration:
           default: 600
-          description: Duration of the capture, in seconds. Default is 600, minimum
+          description: Packet capture duration, in seconds. Default is 600, minimum
             is 60 and maximum is 10800 (3h)
           examples:
           - 600
@@ -68505,6 +68510,7 @@ components:
           minimum: 60
           type: integer
         format:
+          description: Output format for the Mist Edge packet capture
           $ref: '#/components/schemas/capture_mxedge_format'
         max_pkt_len:
           default: 512
@@ -68537,6 +68543,7 @@ components:
             overrides this top-level value.
           type: string
         type:
+          description: Packet capture type discriminator for Mist Edge captures
           $ref: '#/components/schemas/capture_mxedge_type'
         tzsp_host:
           description: Required if `format`==`tzsp`. Remote host accessible to mxedges
@@ -68826,7 +68833,7 @@ components:
       description: Initiate a Scan Radio Packet Capture
       properties:
         ap_mac:
-          description: Filter by ap_mac
+          description: AP MAC address used to filter the scan radio packet capture
           examples:
           - null
           type:
@@ -68841,8 +68848,10 @@ components:
             use default value
           type: object
         band:
+          description: Radio band to capture for scan radio packets
           $ref: '#/components/schemas/capture_scan_band'
         bandwidth:
+          description: Channel bandwidth to use for the scan radio packet capture
           $ref: '#/components/schemas/dot11_bandwidth'
         channel:
           default: 1
@@ -68852,19 +68861,23 @@ components:
           - 1
           type: integer
         client_mac:
-          description: Filter by client mac
+          description: Client MAC address used to filter the scan radio packet capture
           examples:
           - 38f9d3972ff1
           type:
           - string
           - 'null'
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the scan radio packet capture
           $ref: '#/components/schemas/capture_scan_format'
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         tcpdump_expression:
           description: tcpdump expression, port specific if specified under ports
@@ -68874,6 +68887,7 @@ components:
           - tcp port 80
           type: string
         type:
+          description: Packet capture type discriminator for scan radio captures
           $ref: '#/components/schemas/capture_scan_type'
         width:
           description: Specify the bandwidth value with respect to the channel.
@@ -68966,19 +68980,24 @@ components:
       description: Initiate a Switch (Junos) Packet Capture
       properties:
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the switch packet capture
           $ref: '#/components/schemas/capture_switch_format'
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         ports:
+          description: Switch ports to include in the packet capture
           $ref: '#/components/schemas/capture_switch_ports'
         switches:
           additionalProperties:
             $ref: '#/components/schemas/capture_switch_switches'
-          description: Property key is the switch mac
+          description: Property key is the switch MAC address
           type: object
         tcpdump_expression:
           description: tcpdump expression, port specific if specified under ports
@@ -68988,6 +69007,7 @@ components:
           - port 443
           type: string
         type:
+          description: Packet capture type discriminator for switch captures
           $ref: '#/components/schemas/capture_switch_type'
       required:
       - type
