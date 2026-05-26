@@ -67638,7 +67638,8 @@ components:
       type: object
     ble_config:
       additionalProperties: false
-      description: BLE AP settings
+      description: Bluetooth Low Energy beacon and asset advertising settings for
+        an AP
       properties:
         beacon_enabled:
           default: true
@@ -67650,8 +67651,10 @@ components:
           - 3
           type: integer
         beacon_rate_mode:
+          description: Beacon rate mode for Mist BLE beacons; use custom to set beacon_rate
           $ref: '#/components/schemas/ble_config_beacon_rate_mode'
         beam_disabled:
+          description: AP BLE beam numbers disabled for location advertisements
           $ref: '#/components/schemas/ble_config_beam_disabled'
         custom_ble_packet_enabled:
           default: false
@@ -67683,6 +67686,8 @@ components:
           type: integer
         eddystone_uid_beams:
           default: ''
+          description: BLE beams used to transmit Eddystone-UID advertisements, expressed
+            as ranges such as `2-4,7`
           examples:
           - 2-4,7
           type: string
@@ -67705,7 +67710,8 @@ components:
           type: string
         eddystone_uid_namespace:
           default: ''
-          description: Eddystone-UID namespace
+          description: Eddystone-UID namespace broadcast by the AP, as a 10-byte hex
+            string
           examples:
           - 2818e3868dec25629ede
           type: string
@@ -67720,6 +67726,8 @@ components:
           type: integer
         eddystone_url_beams:
           default: ''
+          description: BLE beams used to transmit Eddystone-URL advertisements, expressed
+            as ranges such as `2-4,7`
           examples:
           - 2-4,7
           type: string
@@ -67730,7 +67738,7 @@ components:
           type: boolean
         eddystone_url_freq_msec:
           default: 0
-          description: Frequency (msec) of data emit by Eddystone-UID beacon
+          description: Frequency (msec) of data emitted by Eddystone-URL beacon
           examples:
           - 1000
           type: integer
@@ -67751,6 +67759,8 @@ components:
           type: integer
         ibeacon_beams:
           default: ''
+          description: BLE beams used to transmit iBeacon advertisements, expressed
+            as ranges such as `2-4,7`
           examples:
           - 2-4,7
           type: string
@@ -67764,8 +67774,10 @@ components:
           description: Frequency (msec) of data emit for iBeacon
           type: integer
         ibeacon_major:
+          description: iBeacon major value broadcast by the AP
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
+          description: iBeacon minor value broadcast by the AP
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
           default: ''
@@ -67785,6 +67797,7 @@ components:
           minimum: 1
           type: integer
         power_mode:
+          description: Transmit power mode for BLE beacons; use custom to set `power`
           $ref: '#/components/schemas/ble_config_power_mode'
       type: object
     ble_config_beacon_rate_mode:
