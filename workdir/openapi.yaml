@@ -64301,12 +64301,16 @@ components:
       description: Alarm Template
       properties:
         created_time:
+          description: Time when the alarm template was created
           $ref: '#/components/schemas/created_time'
         delivery:
+          description: Default alarm delivery settings for rules in this template
           $ref: '#/components/schemas/delivery'
         id:
+          description: Unique identifier of the alarm template
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the alarm template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Some string to name the alarm template
@@ -64314,6 +64318,7 @@ components:
           - default
           type: string
         org_id:
+          description: Organization that owns this alarm template
           $ref: '#/components/schemas/org_id'
         rules:
           additionalProperties:
@@ -64346,8 +64351,11 @@ components:
       additionalProperties: false
       properties:
         delivery:
+          description: Overrides for the alarm template delivery defaults for this
+            alarm rule
           $ref: '#/components/schemas/delivery'
         enabled:
+          description: Whether this alarm rule is enabled in the template
           type: boolean
       type: object
     alarm_templates:
