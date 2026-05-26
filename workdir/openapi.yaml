@@ -70931,32 +70931,49 @@ components:
       type: object
     device_other:
       additionalProperties: false
+      description: Third-party device discovered or managed through an external vendor
+        integration
       properties:
         created_time:
+          description: Time when the third-party device record was created
           $ref: '#/components/schemas/created_time'
         device_mac:
+          description: MAC address of the Mist device this third-party device is attached
+            to
           type: string
         id:
+          description: Unique identifier of the third-party device record
           $ref: '#/components/schemas/id'
         mac:
+          description: Third-party device MAC address
           type: string
         model:
+          description: Third-party device model reported by the vendor integration
           type: string
         modified_time:
+          description: Time when the third-party device record was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name reported or configured for the third-party device
           type: string
         org_id:
+          description: Organization that owns this third-party device record
           $ref: '#/components/schemas/org_id'
         serial:
+          description: Manufacturer serial number reported for the third-party device
           type: string
         site_id:
+          description: Site where the third-party device is assigned
           $ref: '#/components/schemas/site_id'
         state:
+          description: Operational state reported for the third-party device
           type: string
         vendor:
+          description: External vendor integration that reported the third-party device
           type: string
         vendor_api_id:
+          description: Identifier assigned by the vendor API for this third-party
+            device
           type: string
       type: object
     device_others:
