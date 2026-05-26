@@ -66621,16 +66621,20 @@ components:
       type: object
     app_probing:
       additionalProperties: false
+      description: Application reachability probing settings for gateway management
       properties:
         apps:
+          description: Predefined application keys to probe
           $ref: '#/components/schemas/app_probing_apps'
         custom_apps:
+          description: User-defined application probe definitions
           $ref: '#/components/schemas/app_probing_custom_apps'
         enabled:
+          description: Whether gateway application probing is enabled
           type: boolean
       type: object
     app_probing_apps:
-      description: APp-keys from [List Applications]($e/Constants%20Definitions/listApplications)
+      description: Application keys from [List Applications]($e/Constants%20Definitions/listApplications)
       examples:
       - - facebook
       items:
@@ -66638,45 +66642,58 @@ components:
       type: array
     app_probing_custom_app:
       additionalProperties: false
+      description: User-defined application probe definition
       properties:
         address:
-          description: Required if `protocol`==`icmp`
+          description: Required if `protocol`==`icmp`. IP address probed by the ICMP
+            custom app
           examples:
           - 192.168.1.1
           type: string
         app_type:
+          description: Category label used for this custom application probe
           type: string
         hostnames:
+          description: If `protocol`==`http`. Hostnames or URLs probed by this custom
+            app
           $ref: '#/components/schemas/app_probing_custom_app_hostname'
         key:
+          description: Stable key used to identify this custom application probe
           type: string
         name:
+          description: Display name for this custom application probe
           examples:
           - pos_app
           type: string
         network:
+          description: Gateway network used as the source context for this probe
           examples:
           - lan
           type: string
         packetSize:
-          description: If `protocol`==`icmp`
+          description: If `protocol`==`icmp`. ICMP packet size used by this custom
+            app probe
           maximum: 65400
           minimum: 0
           type: integer
         protocol:
+          description: Probe protocol used by this custom application definition
           $ref: '#/components/schemas/app_probing_custom_app_protocol'
         url:
-          description: If `protocol`==`http`
+          description: If `protocol`==`http`. HTTP URL or hostname probed by this custom
+            app
           examples:
           - www.abc.com
           type: string
         vrf:
+          description: Gateway VRF used as the source context for this probe
           examples:
           - lan
           type: string
       type: object
     app_probing_custom_app_hostname:
-      description: If `protocol`==`http`
+      description: If `protocol`==`http`. HTTP hostnames or URLs probed by the custom
+        app
       examples:
       - - https://www.abc.com
       items:
@@ -66684,12 +66701,13 @@ components:
       type: array
     app_probing_custom_app_protocol:
       default: http
-      description: 'enum: `http`, `icmp`'
+      description: 'Probe protocol for a custom application. enum: `http`, `icmp`'
       enum:
       - http
       - icmp
       type: string
     app_probing_custom_apps:
+      description: User-defined application probe definitions
       items:
         $ref: '#/components/schemas/app_probing_custom_app'
       type: array
