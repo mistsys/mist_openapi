@@ -75452,11 +75452,14 @@ components:
       type: string
     gateway_port_mirroring:
       additionalProperties: false
+      description: Port mirroring settings for a gateway interface
       properties:
         port_mirror:
+          description: Mirroring rule that copies ingress traffic from source ports to an output port
           $ref: '#/components/schemas/gateway_port_mirroring_port_mirror'
       type: object
     gateway_port_mirroring_ingress_port_ids:
+      description: Gateway port IDs used as ingress sources for mirrored traffic
       items:
         examples:
         - ge-0/0/3
@@ -75464,18 +75467,24 @@ components:
       type: array
     gateway_port_mirroring_port_mirror:
       additionalProperties: false
+      description: Gateway port mirroring rule
       properties:
         family_type:
+          description: Packet family used for this port mirroring rule
           type: string
         ingress_port_ids:
+          description: Source gateway port IDs whose ingress traffic is mirrored
           $ref: '#/components/schemas/gateway_port_mirroring_ingress_port_ids'
         output_port_id:
+          description: Destination gateway port ID that receives mirrored traffic
           examples:
           - ge-0/0/5
           type: string
         rate:
+          description: Sampling rate applied to mirrored traffic
           type: integer
         run_length:
+          description: Number of bytes copied from each mirrored packet
           minimum: 0
           type: integer
       type: object
