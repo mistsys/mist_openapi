@@ -68549,6 +68549,7 @@ components:
     clear_policy_hit_count:
       properties:
         policy_name:
+          description: Application policy name whose hit counters should be cleared
           type: string
       required:
       - policy_name
@@ -68559,6 +68560,7 @@ components:
         - 13 00 13 03 23 EE D5 84 01
       properties:
         serial_numbers:
+          description: Certificate serial numbers to revoke
           $ref: '#/components/schemas/strings'
       type: object
     client_info_source:
@@ -68971,6 +68973,7 @@ components:
     code_string:
       properties:
         code:
+          description: Request-supplied authorization or claim code value
           type: string
       required:
       - code
@@ -70835,6 +70838,7 @@ components:
     device_id_string:
       properties:
         device_id:
+          description: Device identifier supplied by the request
           format: uuid
           type: string
       required:
@@ -71506,6 +71510,7 @@ components:
     devices_ids:
       properties:
         device_ids:
+          description: Device identifiers to operate on in the request
           items:
             format: uuid
             type: string
@@ -72132,6 +72137,7 @@ components:
     email_string:
       properties:
         email:
+          description: Request email address provided in the payload
           format: email
           type: string
       required:
