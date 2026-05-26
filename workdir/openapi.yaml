@@ -74665,43 +74665,56 @@ components:
     gateway_compliance_major_version:
       additionalProperties:
         $ref: '#/components/schemas/gateway_compliance_major_version_properties'
+      description: Gateway version-compliance entries keyed by gateway model
       type: object
     gateway_compliance_major_version_properties:
       additionalProperties: false
+      description: Version-compliance details for one gateway model
       properties:
         major_count:
+          description: Number of gateways counted in this major-version compliance
+            entry
           type: integer
         major_version:
+          description: Gateway software major version represented by this compliance
+            entry
           examples:
           - 19.4R2-S1.2
           type: string
       type: object
     gateway_compliance_version:
       additionalProperties: false
-      description: Version compliance score, major version for gateway, type
+      description: Version compliance metric for gateway devices
       properties:
         major_version:
+          description: Per-model gateway major-version compliance details
           $ref: '#/components/schemas/gateway_compliance_major_version'
         score:
+          description: Gateway software version compliance score
           examples:
           - 99.9
           type: number
         type:
+          description: Device type represented by the gateway compliance metric
           examples:
           - gateway
           type: string
       type: object
     gateway_extra_route:
       additionalProperties: false
+      description: Gateway IPv4 extra route next-hop settings
       properties:
         via:
+          description: Next-hop IPv4 address for the gateway extra route
           format: ipv4
           type: string
       type: object
     gateway_extra_route6:
       additionalProperties: false
+      description: Gateway IPv6 extra route next-hop settings
       properties:
         via:
+          description: Next-hop IPv6 address for the gateway extra route
           format: ipv6
           type: string
       type: object
@@ -74804,13 +74817,15 @@ components:
       uniqueItems: true
     gateway_metrics:
       additionalProperties: false
+      description: Gateway metric scores returned by the site gateway metrics API
       properties:
         config_success:
-          description: Config success score
+          description: Gateway configuration success score
           examples:
           - 99.9
           type: number
         version_compliance:
+          description: Gateway software version compliance metric
           $ref: '#/components/schemas/gateway_compliance_version'
       type: object
     gateway_mgmt:
