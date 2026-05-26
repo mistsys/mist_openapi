@@ -63003,7 +63003,7 @@ components:
     account_juniper_config:
       properties:
         password:
-          description: Customer account password
+          description: Authentication password for the Juniper account
           examples:
           - password
           format: password
@@ -63020,6 +63020,7 @@ components:
     account_juniper_info:
       properties:
         accounts:
+          description: List of linked Juniper account records
           $ref: '#/components/schemas/juniper_accounts'
       type: object
     account_mobicontrol_config:
@@ -63039,7 +63040,7 @@ components:
           format: password
           type: string
         username:
-          description: Customer account username
+          description: Login username used to authenticate to the MobiControl account
           type: string
       required:
       - instance_url
@@ -63346,7 +63347,7 @@ components:
       description: OAuth linked CrowdStrike apps account details
       properties:
         api_token:
-          description: Customer account api_token
+          description: Access token used to authenticate to the SentinelOne account
           type: string
         instance_url:
           description: Customer account SentinelOne instance URL
@@ -63468,7 +63469,7 @@ components:
           - K35vrZcK3JvrZcjjswpp2eii1oo100
           type: string
         zdx_org_id:
-          description: ZDX organization id
+          description: Organization identifier assigned to the ZDX account
           examples:
           - '123456'
           type: string
