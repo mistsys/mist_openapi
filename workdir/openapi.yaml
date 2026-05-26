@@ -70293,7 +70293,7 @@ components:
         type: string
       properties:
         count:
-          description: Number of matching items for this count bucket
+          description: Number of matching items for the distinct value or values in this result
           type: integer
       required:
       - count
