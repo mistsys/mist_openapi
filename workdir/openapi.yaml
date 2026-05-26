@@ -74339,12 +74339,15 @@ components:
       uniqueItems: true
     extra_route:
       additionalProperties: false
+      description: IPv4 static route settings for a destination prefix
       properties:
         discard:
           default: false
-          description: This takes precedence
+          description: Whether to install a discard route; this takes precedence over
+            next-hop settings
           type: boolean
         metric:
+          description: Route metric for the IPv4 static route
           examples:
           - null
           maximum: 2147483647
@@ -74353,6 +74356,7 @@ components:
           - integer
           - 'null'
         next_qualified:
+          description: Qualified next-hop settings keyed by IPv4 next-hop address
           additionalProperties:
             $ref: '#/components/schemas/extra_route_next_qualified_properties'
           examples:
@@ -74362,8 +74366,11 @@ components:
           type: object
         no_resolve:
           default: false
+          description: Whether to prevent recursive next-hop resolution for the IPv4
+            static route
           type: boolean
         preference:
+          description: Route preference for the IPv4 static route
           examples:
           - 30
           maximum: 2147483647
@@ -74372,16 +74379,21 @@ components:
           - integer
           - 'null'
         via:
+          description: Next-hop IPv4 address or ECMP next-hop IPv4 addresses for the
+            route
           $ref: '#/components/schemas/next_hop_via'
       type: object
     extra_route6:
       additionalProperties: false
+      description: IPv6 static route settings for a destination prefix
       properties:
         discard:
           default: false
-          description: This takes precedence
+          description: Whether to install a discard route; this takes precedence over
+            next-hop settings
           type: boolean
         metric:
+          description: Route metric for the IPv6 static route
           examples:
           - null
           maximum: 2147483647
@@ -74390,6 +74402,7 @@ components:
           - integer
           - 'null'
         next_qualified:
+          description: Qualified next-hop settings keyed by IPv6 next-hop address
           additionalProperties:
             $ref: '#/components/schemas/extra_route6_next_qualified_properties'
           examples:
@@ -74399,8 +74412,11 @@ components:
           type: object
         no_resolve:
           default: false
+          description: Whether to prevent recursive next-hop resolution for the IPv6
+            static route
           type: boolean
         preference:
+          description: Route preference for the IPv6 static route
           examples:
           - 30
           maximum: 2147483647
@@ -74409,28 +74425,36 @@ components:
           - integer
           - 'null'
         via:
+          description: Next-hop IPv6 address or ECMP next-hop IPv6 addresses for the
+            route
           $ref: '#/components/schemas/next_hop_via'
       type: object
     extra_route6_next_qualified_properties:
       additionalProperties: false
+      description: Qualified next-hop attributes for an IPv6 static route
       properties:
         metric:
+          description: Route metric for this qualified IPv6 next hop
           type:
           - integer
           - 'null'
         preference:
+          description: Route preference for this qualified IPv6 next hop
           type:
           - integer
           - 'null'
       type: object
     extra_route_next_qualified_properties:
       additionalProperties: false
+      description: Qualified next-hop attributes for an IPv4 static route
       properties:
         metric:
+          description: Route metric for this qualified IPv4 next hop
           type:
           - integer
           - 'null'
         preference:
+          description: Route preference for this qualified IPv4 next hop
           type:
           - integer
           - 'null'
