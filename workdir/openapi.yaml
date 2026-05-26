@@ -70388,7 +70388,7 @@ components:
     days_number:
       properties:
         days:
-          description: Number of recent days to include when truncating the CRL
+          description: Number of most recent days of CRL entries to retain after truncation
           default: 30
           type: integer
       type: object
