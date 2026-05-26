@@ -71019,20 +71019,28 @@ components:
         some attributes of the port_usage without having to create a new port_usage.'
       properties:
         acl_policies:
+          description: ACL policies applied to traffic handled by this switch
           $ref: '#/components/schemas/acl_policies'
         acl_tags:
+          description: ACL tags used by switch access policies
           $ref: '#/components/schemas/acl_tags'
         additional_config_cmds:
+          description: Additional CLI configuration commands to apply to this switch
           $ref: '#/components/schemas/additional_config_cmds'
         aggregate_routes:
+          description: Additional IPv4 aggregate routes configured on this switch
           $ref: '#/components/schemas/aggregate_routes'
         aggregate_routes6:
+          description: Additional IPv6 aggregate routes configured on this switch
           $ref: '#/components/schemas/aggregate_routes6'
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/switch_bgp_config'
+          description: BGP routing configuration for this switch. Property key is
+            the BGP session name
           type: object
         created_time:
+          description: Time when the switch object was created
           $ref: '#/components/schemas/created_time'
         default_port_usage:
           default: default
@@ -71040,12 +71048,15 @@ components:
             assigned. Default: `default` to preserve default behavior'
           type: string
         deviceprofile_id:
+          description: Device profile associated with this switch
           format: uuid
           readOnly: true
           type: string
         dhcp_snooping:
+          description: DHCP snooping configuration for this switch
           $ref: '#/components/schemas/dhcp_snooping'
         dhcpd_config:
+          description: DHCP server configuration served by this switch
           $ref: '#/components/schemas/switch_dhcpd_config'
         disable_auto_config:
           default: false
@@ -71054,37 +71065,49 @@ components:
             to disable the default behavior and do not want the device to be Mist-managed.
           type: boolean
         dns_servers:
+          description: DNS servers configured for this switch
           $ref: '#/components/schemas/dns_servers'
         dns_suffix:
+          description: DNS search suffixes configured for this switch
           $ref: '#/components/schemas/dns_suffix'
         evpn_config:
+          description: EVPN configuration applied to this switch
           $ref: '#/components/schemas/evpn_config'
         extra_routes:
+          description: Additional IPv4 routes configured on this switch
           $ref: '#/components/schemas/extra_routes'
         extra_routes6:
+          description: Additional IPv6 routes configured on this switch
           $ref: '#/components/schemas/extra_routes6'
         id:
+          description: Unique identifier of the switch object
           $ref: '#/components/schemas/id'
         image1_url:
+          description: First custom image URL associated with the switch
           type:
           - string
           - 'null'
         image2_url:
+          description: Second custom image URL associated with the switch
           type:
           - string
           - 'null'
         image3_url:
+          description: Third custom image URL associated with the switch
           type:
           - string
           - 'null'
         iot_config:
+          description: IoT port settings for this switch
           $ref: '#/components/schemas/switch_iot_config'
         ip_config:
+          description: Management IP addressing settings for this switch
           $ref: '#/components/schemas/junos_ip_config'
         local_port_config:
+          description: Local port configuration settings for this switch
           $ref: '#/components/schemas/local_port_config'
         mac:
-          description: Switch MAC address
+          description: Switch MAC address used to identify the device
           readOnly: true
           type: string
         managed:
@@ -71107,28 +71130,38 @@ components:
             `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         mist_nac:
+          description: Mist NAC settings applied to this switch
           $ref: '#/components/schemas/switch_mist_nac'
         model:
-          description: Switch model name
+          description: Switch model reported for the device
           readOnly: true
           type: string
         modified_time:
+          description: Time when the switch object was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Friendly display name assigned to the switch
           type: string
         networks:
+          description: Layer 3 networks configured for use by this switch
           $ref: '#/components/schemas/switch_networks'
         notes:
+          description: Free-form administrative notes for this switch
           type: string
         ntp_servers:
+          description: NTP servers used by this switch
           $ref: '#/components/schemas/ntp_servers'
         oob_ip_config:
+          description: Out-of-band management IP configuration for this switch
           $ref: '#/components/schemas/switch_oob_ip_config'
         org_id:
+          description: Organization that owns this switch
           $ref: '#/components/schemas/org_id'
         ospf_areas:
+          description: OSPF area configuration for this switch
           $ref: '#/components/schemas/ospf_areas'
         ospf_config:
+          description: OSPF routing configuration for this switch
           $ref: '#/components/schemas/switch_ospf_config'
         other_ip_configs:
           additionalProperties:
@@ -71137,18 +71170,25 @@ components:
             Addresses configured on the device.
           type: object
         port_config:
+          description: Per-port wired configuration for this switch
           $ref: '#/components/schemas/wired_port_config'
         port_config_overwrite:
+          description: Per-port overrides for switch port usage attributes
           $ref: '#/components/schemas/switch_port_config_overwrites'
         port_mirroring:
+          description: Port mirroring configuration for this switch
           $ref: '#/components/schemas/switch_port_mirroring'
         port_usages:
+          description: Reusable switch port usage profiles available on this switch
           $ref: '#/components/schemas/switch_port_usages'
         radius_config:
+          description: RADIUS authentication and accounting settings for this switch
           $ref: '#/components/schemas/switch_radius_config'
         remote_syslog:
+          description: Remote syslog settings for this switch
           $ref: '#/components/schemas/remote_syslog'
         role:
+          description: Deployment role label for this switch
           type: string
         router_id:
           description: Used for OSPF / BGP / EVPN
@@ -71156,34 +71196,46 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
+          description: Routing policies applied by this switch
           $ref: '#/components/schemas/sw_routing_policies'
         serial:
-          description: Switch serial number
+          description: Manufacturer serial number for the switch
           readOnly: true
           type: string
         site_id:
+          description: Site where this switch is assigned
           $ref: '#/components/schemas/site_id'
         snmp_config:
+          description: SNMP configuration for this switch
           $ref: '#/components/schemas/snmp_config'
         stp_config:
+          description: Spanning Tree Protocol configuration for this switch
           $ref: '#/components/schemas/switch_stp_config'
         switch_mgmt:
+          description: Management-plane settings for this switch
           $ref: '#/components/schemas/switch_mgmt'
         type:
+          description: Device type discriminator for switch records
           $ref: '#/components/schemas/const_device_type_switch'
         use_router_id_as_source_ip:
           default: false
           description: Whether to use it for snmp / syslog / tacplus / radius
           type: boolean
         vars:
+          description: Variable values that override site variables for this switch
           $ref: '#/components/schemas/vars'
         virtual_chassis:
+          description: Virtual Chassis membership and provisioning settings for this
+            switch
           $ref: '#/components/schemas/switch_virtual_chassis'
         vrf_config:
+          description: VRF configuration applied to this switch
           $ref: '#/components/schemas/vrf_config'
         vrf_instances:
+          description: VRF instances configured on this switch
           $ref: '#/components/schemas/switch_vrf_instances'
         vrrp_config:
+          description: VRRP configuration applied to this switch
           $ref: '#/components/schemas/vrrp_config'
         x:
           description: Horizontal map position of the switch, in pixels
