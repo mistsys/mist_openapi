@@ -69802,6 +69802,7 @@ components:
       type: object
     const_alarm_definition:
       additionalProperties: false
+      description: Alarm type definition returned by the constants API
       properties:
         display:
           description: Description of the alarm type
@@ -69810,6 +69811,7 @@ components:
           type: string
         example:
           additionalProperties: true
+          description: Sample alarm payload returned for this alarm type
           examples:
           - aps:
             - d420b02000fa
@@ -69826,14 +69828,15 @@ components:
             type: device_down
           type: object
         fields:
+          description: Alarm payload fields available for this alarm type
           $ref: '#/components/schemas/const_alarm_definition_fields'
         group:
-          description: Group to which the alarm belongs
+          description: Alarm group to which this definition belongs
           examples:
           - infrastructure
           type: string
         key:
-          description: Key name of the alarm type
+          description: Alarm type key used in event and alarm payloads
           examples:
           - device_down
           type: string
@@ -69841,7 +69844,7 @@ components:
           description: Marvis defined category to which the alarm belongs
           type: string
         severity:
-          description: Severity of the alarm
+          description: Alarm severity level for this definition
           examples:
           - warn
           type: string
@@ -69867,30 +69870,43 @@ components:
       type: array
     const_ap_channel:
       additionalProperties: false
+      description: Country and regulatory-domain channel capabilities for AP radios
       properties:
         band24_40mhz_allowed:
+          description: Whether 40 MHz channels are allowed on the 2.4 GHz band
           examples:
           - true
           type: boolean
         band24_channels:
+          description: Allowed 2.4 GHz channels for this country or regulatory domain
           $ref: '#/components/schemas/ap_channel_band24_channels'
         band24_enabled:
+          description: Whether the 2.4 GHz band is enabled for this country or regulatory
+            domain
           examples:
           - true
           type: boolean
         band5_channels:
+          description: Allowed 5 GHz channels for this country or regulatory domain
           $ref: '#/components/schemas/ap_channel_band5_channels'
         band5_enabled:
+          description: Whether the 5 GHz band is enabled for this country or regulatory
+            domain
           examples:
           - true
           type: boolean
         band6_channels:
+          description: Allowed 6 GHz channels for this country or regulatory domain
           $ref: '#/components/schemas/ap_channel_band6_channels'
         band6_enabled:
+          description: Whether the 6 GHz band is enabled for this country or regulatory
+            domain
           examples:
           - true
           type: boolean
         certified:
+          description: Whether AP operation is certified for this country or regulatory
+            domain
           examples:
           - true
           type: boolean
@@ -69900,6 +69916,8 @@ components:
           - 840
           type: integer
         dfs_ok:
+          description: Whether DFS channels are allowed in this country or regulatory
+            domain
           examples:
           - true
           type: boolean
@@ -69909,23 +69927,29 @@ components:
           - US
           type: string
         name:
+          description: Country or regulatory-domain display name
           examples:
           - United States
           type: string
         uses:
+          description: Regulatory ruleset used for AP channel validation
           examples:
           - US_FCC
           type: string
       type: object
     const_ap_esl_version:
       additionalProperties: false
+      description: Supported Electronic Shelf Label (ESL) version for an AP model
       properties:
         esl_version:
+          description: Electronic Shelf Label (ESL) package version supported by
+            the AP model
           examples:
           - 2.5.1
           readOnly: true
           type: string
         model:
+          description: AP model that supports the listed ESL version
           examples:
           - AP34
           readOnly: true
@@ -69937,20 +69961,25 @@ components:
       type: array
     const_ap_led:
       additionalProperties: false
+      description: AP LED status definition returned by the constants API
       properties:
         code:
+          description: Numeric LED status code reported by the AP
           examples:
           - '01'
           type: string
         description:
+          description: Human-readable explanation of the LED status
           examples:
           - LED not working
           type: string
         key:
+          description: Machine-readable LED status key
           examples:
           - LED_FAILURE
           type: string
         name:
+          description: Display name for the LED status
           examples:
           - LED Failure
           type: string
