@@ -65524,10 +65524,11 @@ components:
       type: object
     ap_radio:
       additionalProperties: false
-      description: Radio AP settings
+      description: Radio configuration settings for an access point
       properties:
         allow_rrm_disable:
           default: false
+          description: Whether RRM can be disabled for individual radio-band settings
           type: boolean
         ant_gain_24:
           description: Antenna gain for 2.4G - for models with external antenna only
@@ -65548,18 +65549,25 @@ components:
           minimum: 0
           type: integer
         antenna_mode:
+          description: Selected radio chain mode for AP models that support antenna mode control
           $ref: '#/components/schemas/ap_radio_antenna_mode'
         antenna_select:
+          description: Internal or external antenna selection for AP models with selectable antennas
           $ref: '#/components/schemas/antenna_select'
         band_24:
+          description: 2.4 GHz radio settings for this access point
           $ref: '#/components/schemas/ap_radio_band24'
         band_24_usage:
+          description: Radio usage mode for the 2.4 GHz-capable radio
           $ref: '#/components/schemas/radio_band_24_usage'
         band_5:
+          description: 5 GHz radio settings for this access point
           $ref: '#/components/schemas/ap_radio_band5'
         band_5_on_24_radio:
+          description: 5 GHz settings used when the 2.4 GHz radio operates in 5 GHz mode
           $ref: '#/components/schemas/ap_radio_band5'
         band_6:
+          description: 6 GHz radio settings for this access point
           $ref: '#/components/schemas/ap_radio_band6'
         full_automatic_rrm:
           default: false
