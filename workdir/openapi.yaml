@@ -66021,6 +66021,7 @@ components:
       type: object
     ap_search:
       additionalProperties: false
+      description: Access point record returned by device search endpoints
       properties:
         band_24_bandwidth:
           description: Channel bandwidth configured on the AP 2.4 GHz radio
@@ -66029,6 +66030,7 @@ components:
           description: Channel configured on the AP 2.4 GHz radio
           type: integer
         band_24_power:
+          description: Transmit power configured on the AP 2.4 GHz radio
           type: integer
         band_5_bandwidth:
           description: Channel bandwidth configured on the AP 5 GHz radio
@@ -66037,39 +66039,49 @@ components:
           description: Channel configured on the AP 5 GHz radio
           type: integer
         band_5_power:
+          description: Transmit power configured on the AP 5 GHz radio
           type: integer
         band_6_bandwidth:
+          description: Channel bandwidth configured on the AP 6 GHz radio
           type: string
         band_6_channel:
           description: Channel configured on the AP 6 GHz radio
           type: integer
         band_6_power:
+          description: Transmit power configured on the AP 6 GHz radio
           type: integer
         eth0_port_speed:
           description: Port speed of eth0
           type: integer
         ext_ip:
+          description: External IP address observed for AP management traffic
           type: string
         hostname:
+          description: Observed hostnames detected for the AP in search results
           $ref: '#/components/schemas/ap_search_hostnames'
         inactive_wired_vlans:
+          description: Inactive wired VLAN IDs reported for this AP
           $ref: '#/components/schemas/ap_search_inactive_wired_vlans'
         ip:
           description: Management IP address currently assigned to the AP
           type: string
         last_hostname:
+          description: Most recent hostname detected for the AP
           type: string
         lldp_mgmt_addr:
           description: LLDP management IP address advertised by the upstream neighbor
           type: string
         lldp_port_desc:
+          description: LLDP port description advertised by the upstream neighbor
           type: string
         lldp_port_id:
           description: LLDP port identifier advertised by the upstream neighbor
           type: string
         lldp_power_allocated:
+          description: Power allocated to the AP by LLDP, in mW
           type: integer
         lldp_power_draw:
+          description: Power drawn by the AP as reported through LLDP, in mW
           type: integer
         lldp_system_desc:
           description: LLDP system description advertised by the upstream neighbor
@@ -66078,9 +66090,10 @@ components:
           description: LLDP system name advertised by the upstream neighbor
           type: string
         mac:
-          description: AP MAC address
+          description: Access point MAC address used to identify the AP in search results
           type: string
         model:
+          description: AP hardware model for this search result
           type: string
         mxedge_id:
           description: Mist Edge id, if AP is connecting to a Mist Edge
@@ -66093,23 +66106,31 @@ components:
           description: Current MxTunnel connection status of the AP
           type: string
         org_id:
+          description: Organization that owns this AP search result
           $ref: '#/components/schemas/org_id'
         power_constrained:
+          description: Whether the AP is operating with insufficient power
           type: boolean
         power_opmode:
+          description: Operating mode reported when AP power is constrained
           type: string
         site_id:
+          description: Site that contains this AP search result
           $ref: '#/components/schemas/site_id'
         sku:
+          description: Hardware SKU for the AP model
           type: string
         timestamp:
+          description: Time associated with this AP search result
           $ref: '#/components/schemas/timestamp'
         uptime:
+          description: Device uptime for the AP, in seconds
           type: integer
         version:
           description: Software version currently running on the AP
           type: string
         wlans:
+          description: Wireless LAN summaries applied to the AP in this search result
           $ref: '#/components/schemas/ap_search_wlans'
       required:
       - power_constrained
@@ -66123,19 +66144,24 @@ components:
         type: string
       type: array
     ap_search_inactive_wired_vlans:
+      description: Inactive wired VLAN IDs reported for an AP
       items:
         type: integer
       type: array
     ap_search_wlan:
       additionalProperties: false
+      description: WLAN summary included in an AP search result
       properties:
         id:
+          description: WLAN identifier included in the AP search result
           format: uuid
           type: string
         ssid:
+          description: Wireless network SSID shown for this WLAN
           type: string
       type: object
     ap_search_wlans:
+      description: WLAN summaries included in an AP search result
       items:
         $ref: '#/components/schemas/ap_search_wlan'
       type: array
