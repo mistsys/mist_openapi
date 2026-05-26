@@ -68357,35 +68357,42 @@ components:
       description: Initiate a Client Packet Capture
       properties:
         ap_mac:
+          description: AP MAC address used to target the client packet capture
           examples:
           - null
           type:
           - string
           - 'null'
         client_mac:
-          description: Client mac, required if `type`==`client`; optional otherwise
+          description: Client MAC address, required if `type`==`client`; optional
+            otherwise
           examples:
           - 60a10a773412
           type:
           - string
           - 'null'
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         includes_mcast:
           default: false
+          description: Whether to include multicast traffic in the packet capture
           type: boolean
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         ssid:
-          description: Optional filter by ssid
+          description: Optional SSID filter for the packet capture
           examples:
           - null
           type:
           - string
           - 'null'
         type:
+          description: Packet capture type discriminator for client captures
           $ref: '#/components/schemas/capture_client_type'
       required:
       - type
@@ -68587,29 +68594,36 @@ components:
       description: Initiate a packet Capture for New Wireless Client Associations
       properties:
         ap_mac:
+          description: AP MAC address used to target new association capture
           examples:
           - a83a79a947ee
           type: string
         client_mac:
-          description: Client mac, required if `type`==`client`; optional otherwise
+          description: Client MAC address, required if `type`==`client`; optional
+            otherwise
           examples:
           - 60a10a773412
           type: string
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         includes_mcast:
           default: false
+          description: Whether to include multicast traffic in the packet capture
           type: boolean
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         ssid:
-          description: Optional filter by ssid
+          description: Optional SSID filter for new association capture
           examples:
           - null
           type: string
         type:
+          description: Packet capture type discriminator for new association captures
           $ref: '#/components/schemas/capture_new_assoc_type'
       required:
       - type
@@ -69044,27 +69058,35 @@ components:
       description: Initiate a Wireless Packet Capture
       properties:
         ap_mac:
+          description: AP MAC address used to target the wireless packet capture
           examples:
           - null
           type:
           - string
           - 'null'
         band:
+          description: Radio band to capture for wireless packets
           $ref: '#/components/schemas/capture_wireless_band'
         duration:
+          description: Packet capture duration, in seconds
           $ref: '#/components/schemas/capture_duration'
         format:
+          description: Output format for the wireless packet capture
           $ref: '#/components/schemas/capture_wireless_format'
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           $ref: '#/components/schemas/capture_max_pkt_length'
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           $ref: '#/components/schemas/capture_num_packets'
         ssid:
+          description: Wireless network SSID used to filter the packet capture
           type: string
         type:
+          description: Packet capture type discriminator for wireless captures
           $ref: '#/components/schemas/capture_wireless_type'
         wlan_id:
-          description: WLAN ID
+          description: WLAN identifier used to filter the wireless packet capture
           format: uuid
           type: string
       required:
