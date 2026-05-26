@@ -64975,6 +64975,7 @@ components:
           - 0
           type: integer
         type:
+          description: ESL integration type to enable on the AP
           $ref: '#/components/schemas/ap_esl_type'
         verify_cert:
           description: Only if `type`==`imagotag` or `type`==`native`
@@ -65034,6 +65035,7 @@ components:
           - motion
           type: string
         pullup:
+          description: Selects the pull-up resistor mode applied to the input pin
           $ref: '#/components/schemas/ap_iot_pullup'
       type: object
     ap_iot_output:
@@ -65056,6 +65058,7 @@ components:
           - true
           type: boolean
         pullup:
+          description: Selects the pull-up resistor mode applied to the output pin
           $ref: '#/components/schemas/ap_iot_pullup'
         value:
           description: Output pin signal level, default 0
@@ -66237,6 +66240,7 @@ components:
       description: Zigbee AP settings
       properties:
         allow_join:
+          description: Join policy for new Zigbee devices on this AP
           $ref: '#/components/schemas/ap_zigbee_allow_join'
         channel:
           default: 0
