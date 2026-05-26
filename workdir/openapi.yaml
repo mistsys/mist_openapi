@@ -67275,8 +67275,8 @@ components:
       - 65000
     bgp_config:
       additionalProperties: false
-      description: BFD is enabled when either bfd_minimum_interval or bfd_multiplier
-        is configured
+      description: BGP session configuration. BFD is enabled when either bfd_minimum_interval
+        or bfd_multiplier is configured
       properties:
         auth_key:
           description: Optional if `via`==`lan`, `via`==`tunnel` or `via`==`wan`
@@ -67306,6 +67306,7 @@ components:
             BFD provides faster path failure detection and is enabled by default
           type: boolean
         export:
+          description: Routing policy applied to routes exported by this BGP session
           type: string
         export_policy:
           description: Default export policies if no per-neighbor policies defined
@@ -67331,14 +67332,19 @@ components:
           minimum: 0
           type: integer
         import:
+          description: Routing policy applied to routes imported by this BGP session
           type: string
         import_policy:
           description: Optional if `via`==`lan`, `via`==`tunnel` or `via`==`wan`.
             Default import policies if no per-neighbor policies defined
           type: string
         local_as:
+          description: Required if `via`==`lan`, `via`==`tunnel` or `via`==`wan`;
+            local BGP Autonomous System (AS) number
           $ref: '#/components/schemas/bgp_local_as'
         neighbor_as:
+          description: Default BGP neighbor Autonomous System (AS) number for this
+            session
           $ref: '#/components/schemas/bgp_as'
         neighbors:
           additionalProperties:
@@ -67347,6 +67353,8 @@ components:
             If per-neighbor as is desired. Property key is the neighbor address
           type: object
         networks:
+          description: Optional if `via`==`lan`; networks where BGP neighbors can
+            connect to or from
           $ref: '#/components/schemas/bgp_config_networks'
         no_private_as:
           default: false
@@ -67359,23 +67367,30 @@ components:
             By default, we'll re-advertise all learned BGP routers toward overlay
           type: boolean
         tunnel_name:
-          description: Optional if `via`==`tunnel`
+          description: Optional if `via`==`tunnel`; tunnel name used for this BGP
+            session
           type: string
         type:
+          description: Required if `via`==`lan`, `via`==`tunnel` or `via`==`wan`;
+            BGP session type, internal or external
           $ref: '#/components/schemas/bgp_config_type'
         via:
+          description: Transport used for this BGP session, such as LAN, tunnel, VPN,
+            or WAN
           $ref: '#/components/schemas/bgp_config_via'
         vpn_name:
-          description: Optional if `via`==`vpn`
+          description: Optional if `via`==`vpn`; VPN name used for this BGP session
           type: string
         wan_name:
-          description: Optional if `via`==`wan`
+          description: Optional if `via`==`wan`; WAN interface name used for this BGP
+            session
           type: string
       required:
       - via
       type: object
     bgp_config_neighbors:
       additionalProperties: false
+      description: Per-neighbor BGP session settings
       properties:
         disabled:
           default: false
@@ -67383,13 +67398,16 @@ components:
             disabled/shutdown
           type: boolean
         export_policy:
+          description: Export policy applied only to this BGP neighbor
           type: string
         hold_time:
           default: 90
+          description: BGP hold time for this neighbor, in seconds
           maximum: 65535
           minimum: 0
           type: integer
         import_policy:
+          description: Import policy applied only to this BGP neighbor
           type: string
         multihop_ttl:
           description: Assuming BGP neighbor is directly connected
@@ -67397,8 +67415,11 @@ components:
           minimum: 0
           type: integer
         neighbor_as:
+          description: Autonomous System (AS) number of this BGP neighbor
           $ref: '#/components/schemas/bgp_as'
         tunnel_via:
+          description: If `via`==`tunnel`, primary or secondary tunnel associated
+            with this BGP neighbor
           $ref: '#/components/schemas/tunnel_via'
       required:
       - neighbor_as
@@ -67447,24 +67468,29 @@ components:
           description: If this is created for overlay
           type: boolean
         local_as:
+          description: Local Autonomous System (AS) number used by this BGP session
           $ref: '#/components/schemas/bgp_as'
         neighbor:
+          description: IP address of the BGP neighbor
           examples:
           - 15.8.3.5
           type: string
         neighbor_as:
+          description: Autonomous System (AS) number of the BGP neighbor
           $ref: '#/components/schemas/bgp_as'
         neighbor_mac:
-          description: If it's another device in the same org
+          description: MAC address of the BGP neighbor when it is another device in
+            the same organization
           examples:
           - 020001c04600
           type: string
         node:
-          description: Node0/node1
+          description: HA node reporting this BGP peer, such as node0 or node1
           examples:
           - node0
           type: string
         rx_pkts:
+          description: Packets received from this BGP neighbor
           $ref: '#/components/schemas/rx_pkts'
         rx_routes:
           description: Number of received routes
@@ -67472,22 +67498,29 @@ components:
           - 60
           type: integer
         state:
+          description: Current state of the BGP session
           $ref: '#/components/schemas/bgp_stats_state'
         timestamp:
+          description: Time when these BGP peer stats were sampled
           $ref: '#/components/schemas/timestamp'
         tx_pkts:
+          description: Packets sent to this BGP neighbor
           $ref: '#/components/schemas/tx_pkts'
         tx_routes:
+          description: Number of routes advertised to this BGP neighbor
           examples:
           - 60
           type: integer
         up:
+          description: Whether the BGP session is currently up
           type: boolean
         uptime:
+          description: Number of seconds the BGP session has been up
           examples:
           - 31355
           type: integer
         vrf_name:
+          description: VRF name associated with this BGP session
           examples:
           - default
           type: string
@@ -67509,33 +67542,40 @@ components:
           description: If this is created for overlay
           type: boolean
         local_as:
+          description: Local Autonomous System (AS) number used by this BGP session
           $ref: '#/components/schemas/bgp_as'
         mac:
-          description: Router mac address
+          description: Router MAC address for the device reporting this BGP peer
           examples:
           - 020001c04668
           type: string
         model:
+          description: Device model reporting this BGP peer statistic
           type: string
         neighbor:
+          description: IP address of the BGP neighbor
           examples:
           - 15.8.3.5
           type: string
         neighbor_as:
+          description: Autonomous System (AS) number of the BGP neighbor
           $ref: '#/components/schemas/bgp_as'
         neighbor_mac:
-          description: If it's another device in the same org
+          description: MAC address of the BGP neighbor when it is another device in
+            the same organization
           examples:
           - 020001c04600
           type: string
         node:
-          description: Node0/node1
+          description: HA node reporting this BGP peer, such as node0 or node1
           examples:
           - node0
           type: string
         org_id:
+          description: Owning organization identifier for this BGP peer statistic
           $ref: '#/components/schemas/org_id'
         rx_pkts:
+          description: Packets received from this BGP neighbor
           $ref: '#/components/schemas/rx_pkts'
         rx_routes:
           description: Number of received routes
@@ -67543,24 +67583,32 @@ components:
           - 60
           type: integer
         site_id:
+          description: Site identifier associated with this BGP peer statistic
           $ref: '#/components/schemas/site_id'
         state:
+          description: Current state of the BGP session
           $ref: '#/components/schemas/bgp_stats_state'
         timestamp:
+          description: Time when these BGP peer stats were sampled
           $ref: '#/components/schemas/timestamp'
         tx_pkts:
+          description: Packets sent to this BGP neighbor
           $ref: '#/components/schemas/tx_pkts'
         tx_routes:
+          description: Number of routes advertised to this BGP neighbor
           examples:
           - 60
           type: integer
         up:
+          description: Whether the BGP session is currently up
           type: boolean
         uptime:
+          description: Number of seconds the BGP session has been up
           examples:
           - 31355
           type: integer
         vrf_name:
+          description: VRF name associated with this BGP session
           examples:
           - default
           type: string
