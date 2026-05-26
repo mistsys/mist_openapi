@@ -91456,22 +91456,31 @@ components:
     site_template:
       properties:
         auto_upgrade:
+          description: Automatic upgrade settings applied by this site template
           $ref: '#/components/schemas/site_template_auto_upgrade'
         name:
+          description: Display name of the site template
           type: string
         vars:
+          description: Template variables available to WLAN configuration in this site
+            template
           $ref: '#/components/schemas/vars'
       type: object
     site_template_auto_upgrade:
       additionalProperties: false
       properties:
         day_of_week:
+          description: Day of week when the automatic upgrade window runs
           $ref: '#/components/schemas/day_of_week'
         enabled:
+          description: Whether automatic upgrades are enabled for sites using this
+            site template
           type: boolean
         time_of_day:
+          description: Local time of day when the automatic upgrade window starts
           type: string
         version:
+          description: Target firmware version installed during automatic upgrades
           type: string
       type: object
     site_templates:
@@ -100735,23 +100744,34 @@ components:
       description: Template
       properties:
         applies:
+          description: Organizations, sites, or site groups targeted by this WLAN
+            template
           $ref: '#/components/schemas/template_applies'
         created_time:
+          description: Time when the WLAN template was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_ids:
+          description: Device profile IDs that further limit where this WLAN template
+            applies
           $ref: '#/components/schemas/template_deviceprofile_ids'
         exceptions:
+          description: Sites or site groups excluded from this WLAN template even
+            when included by the application scope
           $ref: '#/components/schemas/template_exceptions'
         filter_by_deviceprofile:
           description: Whether to further filter by Device Profile
           type: boolean
         id:
+          description: Unique identifier of the WLAN template
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the WLAN template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the WLAN template
           type: string
         org_id:
+          description: Organization that owns this WLAN template
           $ref: '#/components/schemas/org_id'
       required:
       - name
@@ -100762,10 +100782,13 @@ components:
         sitegroup_ids
       properties:
         org_id:
+          description: Organization included in the WLAN template application scope
           $ref: '#/components/schemas/template_applies_org_id'
         site_ids:
+          description: Sites included in the WLAN template application scope
           $ref: '#/components/schemas/template_applies_site_ids'
         sitegroup_ids:
+          description: Site groups included in the WLAN template application scope
           $ref: '#/components/schemas/template_applies_sitegroup_ids'
       type: object
     template_applies_org_id:
@@ -100797,8 +100820,10 @@ components:
       description: Where this template should not be applied to (takes precedence)
       properties:
         site_ids:
+          description: Sites excluded from the WLAN template application scope
           $ref: '#/components/schemas/template_exceptions_site_ids'
         sitegroup_ids:
+          description: Site groups excluded from the WLAN template application scope
           $ref: '#/components/schemas/template_exceptions_sitegroup_ids'
       type: object
     template_exceptions_site_ids:
