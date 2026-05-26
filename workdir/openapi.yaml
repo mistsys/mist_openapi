@@ -69766,13 +69766,16 @@ components:
       type: object
     config_switch_local_accounts_user:
       additionalProperties: false
+      description: Local switch user account credentials and access role
       properties:
         password:
+          description: Local password for the switch user account
           examples:
           - Juniper123
           format: password
           type: string
         role:
+          description: Access role granted to the local switch user account
           $ref: '#/components/schemas/config_switch_local_accounts_user_role'
       type: object
     config_switch_local_accounts_user_role:
@@ -69786,10 +69789,13 @@ components:
       type: string
     config_vc_port_member:
       additionalProperties: false
+      description: Virtual Chassis member and port list for a VC port operation
       properties:
         member:
+          description: Virtual Chassis member ID whose VC ports are being configured
           type: number
         vc_ports:
+          description: Port names to configure as Virtual Chassis ports on the member
           $ref: '#/components/schemas/strings'
       required:
       - member
