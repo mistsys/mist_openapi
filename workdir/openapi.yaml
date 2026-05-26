@@ -74026,26 +74026,35 @@ components:
           - iot-lan
       type: object
     evpn_topologies_response:
+      description: EVPN topology records returned by list APIs
       items:
         $ref: '#/components/schemas/evpn_topology_response'
       type: array
     evpn_topology:
+      description: EVPN topology create or update payload
       properties:
         created_time:
+          description: Time when the EVPN topology was created
           $ref: '#/components/schemas/created_time'
         evpn_options:
+          description: Generation options applied to the EVPN topology
           $ref: '#/components/schemas/evpn_options'
         id:
+          description: Unique identifier of the EVPN topology
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the EVPN topology was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name for the EVPN topology
           examples:
           - CC
           type: string
         org_id:
+          description: Organization that owns the EVPN topology
           $ref: '#/components/schemas/org_id'
         overwrite:
+          description: Whether to apply generated EVPN configuration changes automatically
           type: boolean
         pod_names:
           additionalProperties:
@@ -74053,34 +74062,47 @@ components:
           description: Property key is the pod number
           type: object
         site_id:
+          description: Site associated with the EVPN topology
           $ref: '#/components/schemas/site_id'
         switch_configs:
+          description: Per-switch configuration overrides included in the EVPN topology
           $ref: '#/components/schemas/evpn_topology_switch_configs'
         switches:
+          description: Topology member switches, roles, and links
           $ref: '#/components/schemas/evpn_topology_switches'
       required:
       - switches
       type: object
     evpn_topology_response:
       additionalProperties: false
+      description: EVPN topology metadata returned by EVPN topology APIs
       properties:
         created_time:
+          description: Time when the EVPN topology was created
           $ref: '#/components/schemas/created_time'
         evpn_options:
+          description: Generation options applied to the EVPN topology
           $ref: '#/components/schemas/evpn_options'
         for_site:
+          description: Whether the EVPN topology is scoped to a site rather than the
+            organization
           type: boolean
         id:
+          description: Unique identifier of the EVPN topology
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the EVPN topology was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name for the EVPN topology
           examples:
           - CC
           type: string
         org_id:
+          description: Organization that owns the EVPN topology
           $ref: '#/components/schemas/org_id'
         overwrite:
+          description: Whether generated EVPN configuration changes are applied automatically
           type: boolean
         pod_names:
           additionalProperties:
@@ -74088,6 +74110,7 @@ components:
           description: Property key is the pod number
           type: object
         site_id:
+          description: Site associated with the EVPN topology
           $ref: '#/components/schemas/site_id'
       type: object
     evpn_topology_switch:
