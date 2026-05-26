@@ -72816,10 +72816,13 @@ components:
         $ref: '#/components/schemas/deviceprofile'
       type: array
     devices_gbp_tag:
+      description: Request body for assigning a GBP tag to multiple devices
       properties:
         gbp_tag:
+          description: Group-Based Policy tag value to apply to the devices
           type: integer
         macs:
+          description: Device MAC addresses that receive the GBP tag
           $ref: '#/components/schemas/mac_addresses_macs'
       required:
       - macs
