@@ -67113,44 +67113,57 @@ components:
           $ref: '#/components/schemas/time_of_day'
       type: object
     avprofile:
+      description: Antivirus scanning profile
       properties:
         created_time:
+          description: Time when this antivirus profile was created
           $ref: '#/components/schemas/created_time'
         fallback_action:
+          description: Action to take when antivirus scanning cannot complete
           $ref: '#/components/schemas/avprofile_fallback_action'
         id:
+          description: Unique identifier of the antivirus profile
           $ref: '#/components/schemas/id'
         max_filesize:
           default: 10000
-          description: In KB
+          description: Maximum file size scanned by this antivirus profile, in KB
           maximum: 40000
           minimum: 20
           type: integer
         mime_whitelist:
+          description: Content MIME types exempted from antivirus scanning
           $ref: '#/components/schemas/strings'
         modified_time:
+          description: Time when this antivirus profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the antivirus profile
           type: string
         org_id:
+          description: Owning organization identifier for this antivirus profile
           $ref: '#/components/schemas/org_id'
         protocols:
+          description: Network protocols inspected by this antivirus profile
           $ref: '#/components/schemas/avprofile_protocols'
         site_id:
+          description: Associated site identifier for this antivirus profile, when site-scoped
           $ref: '#/components/schemas/site_id'
         url_whitelist:
+          description: Allowed URL entries exempted from antivirus scanning
           $ref: '#/components/schemas/strings'
       required:
       - name
       type: object
     avprofile_fallback_action:
-      description: 'enum: `block`, `log-and-permit`, `permit`'
+      description: 'Action applied when antivirus scanning cannot complete. enum:
+        `block`, `log-and-permit`, `permit`'
       enum:
       - block
       - log-and-permit
       - permit
       type: string
     avprofile_protocol:
+      description: Protocol that can be inspected by an antivirus profile
       enum:
       - ftp
       - http
@@ -67159,8 +67172,8 @@ components:
       - smtp
       type: string
     avprofile_protocols:
-      description: 'List of protocols to monitor. enum: `ftp`, `http`, `imap`, `pop3`,
-        `smtp`'
+      description: 'Network protocols monitored by the antivirus profile. enum: `ftp`,
+        `http`, `imap`, `pop3`, `smtp`'
       items:
         $ref: '#/components/schemas/avprofile_protocol'
       minItems: 1
