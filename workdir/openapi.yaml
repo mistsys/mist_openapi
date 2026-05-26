@@ -62920,22 +62920,28 @@ components:
     account_cradlepoint_config:
       properties:
         cp_api_id:
+          description: Cradlepoint API ID used by Mist for the integration
           examples:
           - 84446d61-2206-4ea5-855a-0043f980be54
           type: string
         cp_api_key:
+          description: Cradlepoint API key paired with the Cradlepoint API ID
           examples:
           - 79c329da9893e34099c7d8ad5cb9c941
           type: string
         ecm_api_id:
+          description: Cradlepoint ECM API ID used by Mist for the integration
           examples:
           - 73446d61-2206-4ea5-855a-0043f980be62
           type: string
         ecm_api_key:
+          description: Cradlepoint ECM API key paired with the ECM API ID
           examples:
           - 68b329da9893e34099c7d8ad5cb9c9405
           type: string
         enable_lldp:
+          description: Whether Mist uses Cradlepoint LLDP data to link routers to
+            Mist sites and devices
           type: boolean
       type: object
     account_crowdstrike_config:
