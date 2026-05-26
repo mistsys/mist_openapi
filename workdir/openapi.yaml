@@ -71688,75 +71688,97 @@ components:
       type: object
     device_event:
       additionalProperties: false
+      description: Device event payload returned by search and webhook APIs
       properties:
         ap:
-          description: (will be deprecated soon; please use mac instead) ap mac
+          description: Deprecated AP MAC address field; use `mac` instead
           type: string
         ap_name:
-          description: (will be deprecated soon; please use device_name instead) ap
-            name
+          description: Deprecated AP name field; use `device_name` instead
           type: string
         apfw:
+          description: AP firmware version associated with the device event
           type: string
         audit_id:
+          description: Audit log identifier associated with the device event
           $ref: '#/components/schemas/id'
         bandwidth:
+          description: Channel bandwidth associated with a radio event, in MHz
           type: integer
         channel:
+          description: RF channel associated with the device event
           type: integer
         chassis_mac:
+          description: Chassis MAC address associated with the device event
           type: string
         count:
+          description: Event count reported in the device event payload
           type: integer
         device_name:
-          description: Device name
+          description: Name of the device associated with the event
           type: string
         device_type:
+          description: Device type associated with the event
           $ref: '#/components/schemas/device_type'
         ev_type:
+          description: Advisory severity for the device event
           $ref: '#/components/schemas/webhook_device_events_event_ev_type'
         ext_ip:
+          description: External IP address reported for the device event
           type: string
         mac:
-          description: Device mac
+          description: Device MAC address associated with the event
           type: string
         model:
+          description: Device model associated with the event
           type: string
         node:
+          description: Cluster node identifier associated with the device event
           type: string
         org_id:
+          description: Organization identifier associated with the device event
           $ref: '#/components/schemas/org_id'
         port_id:
+          description: Port identifier associated with the device event
           type: string
         power:
+          description: Transmit power associated with a radio event
           type: integer
         pre_bandwidth:
+          description: Previous channel bandwidth before an RRM change, in MHz
           type: integer
         pre_channel:
+          description: Previous RF channel before an RRM change
           type: integer
         pre_power:
+          description: Previous transmit power before an RRM change
           type: integer
         pre_usage:
+          description: Previous radio usage band before an RRM change
           type: integer
         reason:
-          description: (optional) event reason
+          description: Optional reason text reported for the device event
           type: string
         site_id:
+          description: Site identifier associated with the device event
           $ref: '#/components/schemas/site_id'
         site_name:
-          description: Site name
+          description: Name of the site associated with the event
           type: string
         text:
-          description: (optional) event description
+          description: Optional human-readable text for the device event
           type: string
         timestamp:
+          description: Time when the device event occurred
           $ref: '#/components/schemas/timestamp'
         type:
-          description: Event type
+          description: Device event type key
           type: string
         usage:
+          description: Current radio usage band for an RRM event
           type: integer
         version:
+          description: Firmware or software version associated with the device event
           type: string
       required:
       - org_id
