@@ -64118,14 +64118,17 @@ components:
       properties:
         discard:
           default: false
+          description: Whether to install the aggregate route as a discard route
           type: boolean
         metric:
+          description: Routing metric assigned to the aggregate route
           maximum: 4294967295
           minimum: 0
           type:
           - integer
           - 'null'
         preference:
+          description: Route preference assigned to the aggregate route
           maximum: 4294967295
           minimum: 0
           type:
