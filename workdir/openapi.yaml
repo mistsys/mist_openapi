@@ -95915,55 +95915,62 @@ components:
       additionalProperties: false
       properties:
         auth_algo:
-          description: Authentication algorithm
+          description: Authentication algorithm negotiated for the tunnel
           type: string
         encrypt_algo:
-          description: Encryption algorithm
+          description: Encryption algorithm negotiated for the tunnel
           type: string
         ike_version:
-          description: IKE version
+          description: IKE version used to establish the tunnel
           type: string
         ip:
-          description: IP Address
+          description: Local IP address used by the tunnel
           type: string
         last_event:
-          description: Reason of why the tunnel is down
+          description: Most recent reason the tunnel went down
           type: string
         last_flapped:
-          description: Indicates when the port was last flapped
+          description: Indicates when the tunnel last flapped
           format: double
           type: number
         node:
-          description: Node0/node1
+          description: HA node handling the tunnel, such as node0 or node1
           type: string
         peer_host:
-          description: Peer host
+          description: Hostname or configured peer host of the remote tunnel endpoint
           type: string
         peer_ip:
-          description: Peer ip address
+          description: IP address of the remote tunnel endpoint
           type: string
         priority:
+          description: Relative preference assigned to the tunnel
           $ref: '#/components/schemas/tunnel_priority'
         protocol:
+          description: Tunnel protocol used for the connection
           $ref: '#/components/schemas/wan_tunnel_protocol'
         rx_bytes:
+          description: Total bytes received on the tunnel
           $ref: '#/components/schemas/rx_bytes'
         rx_pkts:
+          description: Total packets received on the tunnel
           $ref: '#/components/schemas/rx_pkts'
         tunnel_name:
-          description: Mist Tunnel Name
+          description: Name of the Mist-managed WAN tunnel
           type: string
         tx_bytes:
+          description: Total bytes transmitted on the tunnel
           $ref: '#/components/schemas/tx_bytes'
         tx_pkts:
+          description: Total packets transmitted on the tunnel
           $ref: '#/components/schemas/tx_pkts'
         up:
+          description: Indicates whether the tunnel is currently up
           type: boolean
         uptime:
-          description: Duration from first (or last) SA was established
+          description: Duration since the tunnel security association was established
           type: integer
         wan_name:
-          description: WAN interface name
+          description: Name of the WAN interface carrying the tunnel
           examples:
           - wan
           type: string
@@ -97728,58 +97735,67 @@ components:
       additionalProperties: false
       properties:
         auth_algo:
-          description: Authentication algorithm
+          description: Authentication algorithm negotiated for the tunnel
           type: string
         encrypt_algo:
-          description: Encryption algorithm
+          description: Encryption algorithm negotiated for the tunnel
           type: string
         ike_version:
-          description: IKE version
+          description: IKE version used to establish the tunnel
           type: string
         ip:
-          description: IP Address
+          description: Local IP address used by the tunnel
           type: string
         last_event:
-          description: Reason of why the tunnel is down
+          description: Most recent reason the tunnel went down
           type: string
         mac:
-          description: Router mac address
+          description: Router MAC address reporting the tunnel statistics
           type: string
         node:
-          description: Node0/node1
+          description: HA node handling the tunnel, such as node0 or node1
           type: string
         org_id:
+          description: Organization identifier of the router reporting the tunnel statistics
           $ref: '#/components/schemas/org_id'
         peer_host:
-          description: Peer host
+          description: Hostname or configured peer host of the remote tunnel endpoint
           type: string
         peer_ip:
-          description: Peer ip address
+          description: IP address of the remote tunnel endpoint
           type: string
         priority:
+          description: Relative preference assigned to the tunnel
           $ref: '#/components/schemas/tunnel_priority'
         protocol:
+          description: Tunnel protocol used for the connection
           $ref: '#/components/schemas/wan_tunnel_protocol'
         rx_bytes:
+          description: Total bytes received on the tunnel
           $ref: '#/components/schemas/rx_bytes'
         rx_pkts:
+          description: Total packets received on the tunnel
           $ref: '#/components/schemas/rx_pkts'
         site_id:
+          description: Site identifier of the router reporting the tunnel statistics
           $ref: '#/components/schemas/site_id'
         tunnel_name:
-          description: Mist Tunnel Name
+          description: Name of the Mist-managed WAN tunnel
           type: string
         tx_bytes:
+          description: Total bytes transmitted on the tunnel
           $ref: '#/components/schemas/tx_bytes'
         tx_pkts:
+          description: Total packets transmitted on the tunnel
           $ref: '#/components/schemas/tx_pkts'
         up:
+          description: Indicates whether the tunnel is currently up
           type: boolean
         uptime:
-          description: Duration from first (or last) SA was established
+          description: Duration since the tunnel security association was established
           type: integer
         wan_name:
-          description: WAN interface name
+          description: Name of the WAN interface carrying the tunnel
           examples:
           - wan
           type: string
