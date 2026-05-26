@@ -71482,50 +71482,74 @@ components:
       description: Gateway Template is applied to a site for gateway(s) in a site.
       properties:
         additional_config_cmds:
+          description: Additional CLI configuration commands provided by this gateway
+            profile
           $ref: '#/components/schemas/additional_config_cmds'
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/bgp_config'
+          description: BGP routing defaults for this gateway profile. Property key
+            is the BGP session name
           type: object
         created_time:
+          description: Time when the gateway profile was created
           $ref: '#/components/schemas/created_time'
         dhcpd_config:
+          description: DHCP server defaults provided by this gateway profile
           $ref: '#/components/schemas/dhcpd_config'
         dnsOverride:
           default: false
+          description: Whether DNS server and suffix settings in this profile override
+            inherited values
           type: boolean
         dns_servers:
+          description: DNS servers provided by this gateway profile
           $ref: '#/components/schemas/dns_servers'
         dns_suffix:
+          description: DNS search suffixes provided by this gateway profile
           $ref: '#/components/schemas/dns_suffix'
         extra_routes:
+          description: Additional IPv4 route defaults in this gateway profile
           $ref: '#/components/schemas/gateway_extra_routes'
         extra_routes6:
+          description: Additional IPv6 route defaults in this gateway profile
           $ref: '#/components/schemas/gateway_extra_routes6'
         gateway_matching:
+          description: Matching rules that select gateways for this profile
           $ref: '#/components/schemas/gateway_matching'
         id:
+          description: Unique identifier of the gateway profile
           $ref: '#/components/schemas/id'
         idp_profiles:
+          description: Intrusion detection and prevention profile defaults in this
+            gateway profile
           $ref: '#/components/schemas/gateway_idp_profiles'
         ip_configs:
+          description: Gateway interface IP configuration defaults by network name
           $ref: '#/components/schemas/gateway_ip_configs'
         modified_time:
+          description: Time when the gateway profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the gateway profile
           examples:
           - gw_template
           type: string
         networks:
+          description: Layer 3 networks configured by this gateway profile
           $ref: '#/components/schemas/networks'
         ntpOverride:
           default: false
+          description: Whether NTP servers in this profile override inherited values
           type: boolean
         ntp_servers:
+          description: NTP servers provided by this gateway profile
           $ref: '#/components/schemas/ntp_servers'
         oob_ip_config:
+          description: Out-of-band management IP defaults in this gateway profile
           $ref: '#/components/schemas/gateway_oob_ip_config'
         org_id:
+          description: Organization that owns this gateway profile
           $ref: '#/components/schemas/org_id'
         path_preferences:
           additionalProperties:
@@ -71543,8 +71567,10 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
+          description: Routing policy defaults applied by this gateway profile
           $ref: '#/components/schemas/gw_routing_policies'
         service_policies:
+          description: Traffic service policy defaults enforced by this gateway profile
           $ref: '#/components/schemas/service_policies'
         tunnel_configs:
           additionalProperties:
@@ -71552,8 +71578,10 @@ components:
           description: Property key is the tunnel name
           type: object
         tunnel_provider_options:
+          description: Provider-specific tunnel options defined by this gateway profile
           $ref: '#/components/schemas/tunnel_provider_options'
         type:
+          description: Device type discriminator for gateway profiles
           $ref: '#/components/schemas/device_type_gateway'
         url_filtering_deny_msg:
           default: Access to this URL Category has been blocked
@@ -71563,8 +71591,10 @@ components:
           - Access to this URL Category has been blocked
           type: string
         vrf_config:
+          description: VRF defaults applied by this gateway profile
           $ref: '#/components/schemas/vrf_config'
         vrf_instances:
+          description: VRF instances configured by this gateway profile
           $ref: '#/components/schemas/gateway_vrf_instances'
       required:
       - name
