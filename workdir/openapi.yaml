@@ -65355,16 +65355,21 @@ components:
       type: string
     ap_port_config:
       additionalProperties: false
+      description: Ethernet port behavior settings for an access point
       properties:
         disabled:
           default: false
+          description: Whether this AP Ethernet port is disabled
           type: boolean
         dynamic_vlan:
+          description: RADIUS-assigned VLAN settings for AP port authentication
           $ref: '#/components/schemas/ap_port_config_dynamic_vlan'
         enable_mac_auth:
           default: false
+          description: Whether MAC authentication is enabled on this AP port
           type: boolean
         forwarding:
+          description: Traffic forwarding mode for this AP Ethernet port
           $ref: '#/components/schemas/ap_port_config_forwarding'
         mac_auth_preferred:
           default: false
@@ -65372,8 +65377,10 @@ components:
             mac_auth
           type: boolean
         mac_auth_protocol:
+          description: Protocol used for MAC authentication when `enable_mac_auth` is `true`
           $ref: '#/components/schemas/ap_port_config_mac_auth_protocol'
         mist_nac:
+          description: Juniper Mist NAC settings used by AP port authentication
           $ref: '#/components/schemas/wlan_mist_nac'
         mx_tunnel_id:
           default: ''
@@ -65388,17 +65395,20 @@ components:
             (`mxtunnels` under site setting)
           type: string
         port_auth:
+          description: Authentication mode for this AP Ethernet port
           $ref: '#/components/schemas/ap_port_config_port_auth'
         port_vlan_id:
-          description: If `forwarding`==`limited`
+          description: If `forwarding`==`limited`. VLAN ID allowed on this AP Ethernet port
           examples:
           - 1
           maximum: 4094
           minimum: 1
           type: integer
         radius_config:
+          description: RADIUS authentication and accounting settings for this AP port
           $ref: '#/components/schemas/radius_config'
         radsec:
+          description: TLS-secured RADIUS settings for this AP port
           $ref: '#/components/schemas/radsec'
         vlan_id:
           description: "Optional to specify the vlan id for a tunnel if forwarding\
@@ -65435,23 +65445,27 @@ components:
       type: object
     ap_port_config_dynamic_vlan:
       additionalProperties: false
-      description: Optional dynamic vlan
+      description: Dynamic VLAN assignment settings for AP port authentication
       properties:
         default_vlan_id:
+          description: Fallback VLAN ID used when RADIUS does not return a dynamic VLAN match
           examples:
           - 999
           maximum: 4094
           minimum: 1
           type: integer
         enabled:
+          description: Whether dynamic VLAN assignment is enabled for this AP port
           type: boolean
         type:
+          description: Mapping mode for interpreting dynamic VLAN attributes returned by RADIUS
           type: string
         vlans:
           additionalProperties:
             type:
             - string
             - 'null'
+          description: Mapping entries for RADIUS-assigned VLAN values on this AP port
           examples:
           - 1-10: null
             user: null
