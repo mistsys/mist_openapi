@@ -75335,11 +75335,13 @@ components:
       type: object
     gateway_port_config_ip_config:
       additionalProperties: false
-      description: Junos IP Config
+      description: Junos IP configuration for a gateway port interface
       properties:
         dns:
+          description: Resolver server IP addresses used by this interface, except on out-of-band interfaces such as vme, em0, or fxp0
           $ref: '#/components/schemas/gateway_ip_config_dns_servers'
         dns_suffix:
+          description: DNS search suffixes used by this interface, except on out-of-band interfaces such as vme, em0, or fxp0
           $ref: '#/components/schemas/gateway_ip_config_dns_suffix'
         gateway:
           description: Except for out-of_band interface (vme/em0/fxp0). Interface
@@ -75384,16 +75386,19 @@ components:
           description: Optional, the network to be used for mgmt
           type: string
         poser_password:
-          description: If `type`==`pppoe`
+          description: Password used for PPPoE when `type`==`pppoe`
           type: string
         pppoe_auth:
+          description: Authentication protocol used for PPPoE when `type`==`pppoe`
           $ref: '#/components/schemas/gateway_wan_ppoe_auth'
         pppoe_username:
-          description: If `type`==`pppoe`
+          description: Username used for PPPoE when `type`==`pppoe`
           type: string
         type:
+          description: IPv4 assignment mode for this gateway port interface
           $ref: '#/components/schemas/gateway_wan_type'
         type6:
+          description: IPv6 assignment mode for this gateway port interface
           $ref: '#/components/schemas/gateway_wan_type6'
       type: object
     gateway_port_config_reth_idx:
