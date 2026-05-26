@@ -63111,11 +63111,14 @@ components:
       additionalProperties: false
       properties:
         accounts:
+          description: Linked third-party application accounts for this OAuth application
           $ref: '#/components/schemas/account_oauth_info_accounts'
         authorization_url:
+          description: OAuth authorization URL to open when linking an account
           readOnly: true
           type: string
         linked:
+          description: Whether at least one account is linked for this OAuth application
           readOnly: true
           type: boolean
       required:
@@ -63167,6 +63170,8 @@ components:
           readOnly: true
           type: string
         errors:
+          description: Problems reported during OAuth token refresh or account data
+            sync
           $ref: '#/components/schemas/oauth_account_errors'
         instance_url:
           description: Customer account instance URL
@@ -63197,6 +63202,7 @@ components:
           readOnly: true
           type: string
         linked_timestamp:
+          description: Timestamp when this third-party account was linked
           examples:
           - 1665465339000
           readOnly: true
@@ -63208,7 +63214,7 @@ components:
           readOnly: true
           type: integer
         name:
-          description: Name of the company whose account mist has subscribed to
+          description: Display name of the linked third-party account or company
           examples:
           - Test Compay1 Ltd
           readOnly: true
@@ -63225,6 +63231,8 @@ components:
           readOnly: true
           type: string
         regions:
+          description: Prisma Access regions with allocated bandwidth for this linked
+            account
           $ref: '#/components/schemas/account_oauth_info_account_regions'
         service_account_name:
           description: For Prisma accounts only
@@ -63233,6 +63241,8 @@ components:
           readOnly: true
           type: string
         service_connections:
+          description: Prisma Access service connections configured for this linked
+            account
           $ref: '#/components/schemas/account_oauth_info_account_service_connections'
         smartgroup_name:
           description: Smart group membership for determining compliance status
@@ -63247,7 +63257,7 @@ components:
           readOnly: true
           type: string
         username:
-          description: Customer account username
+          description: Login name configured for the linked third-party account
           readOnly: true
           type: string
         webhook_auth_type:
@@ -63325,7 +63335,7 @@ components:
       additionalProperties: false
       properties:
         region:
-          description: Region of the service connection
+          description: Prisma Access region where this service connection is provisioned
           examples:
           - us-southwest
           type: string
