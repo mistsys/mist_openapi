@@ -70596,6 +70596,7 @@ components:
       properties:
         enabled:
           default: false
+          description: Whether to enable LACP on supported AP Ethernet uplinks
           type: boolean
       type: object
     device_event:
@@ -70908,6 +70909,8 @@ components:
           description: Number of rejected authentication requests
           type: integer
         auth_server_status:
+          description: RADIUS authentication server status for this server in device
+            search results
           $ref: '#/components/schemas/device_search_radius_filter_status'
         auth_timeouts:
           description: Number of authentication timeouts
@@ -71202,7 +71205,7 @@ components:
             which is likely a dev build
           type: string
         version:
-          description: Firmware version
+          description: Available firmware version for this device model
           type: string
       required:
       - model
