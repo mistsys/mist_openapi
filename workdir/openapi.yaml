@@ -69165,17 +69165,20 @@ components:
       - wireless
       type: string
     claim_activation:
+      description: Request to claim organization licenses or activation codes
       properties:
         async:
           default: false
-          description: Whether to do a async claim process
+          description: Whether to run the claim process asynchronously
           type: boolean
         code:
-          description: Activation code
+          description: Activation or license claim code to redeem
           type: string
         device_type:
+          description: Device category associated with the activation code
           $ref: '#/components/schemas/device_type_default_ap'
         type:
+          description: Claim scope, such as all, inventory, or license
           $ref: '#/components/schemas/claim_type'
       required:
       - code
