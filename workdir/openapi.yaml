@@ -76445,11 +76445,14 @@ components:
       type: string
     idp_config:
       additionalProperties: false
+      description: Intrusion detection and prevention settings for a service policy
       properties:
         alert_only:
+          description: Whether to alert without enforcing IDP prevention actions
           type: boolean
         enabled:
           default: false
+          description: Whether IDP inspection is enabled for the policy
           type: boolean
         idpprofile_id:
           description: org_level IDP Profile can be used, this takes precedence over
@@ -76474,22 +76477,30 @@ components:
       - dns
       type: string
     idp_profile:
+      description: Organization IDP profile with a base profile and targeted overwrite rules
       properties:
         base_profile:
+          description: Built-in IDP baseline profile inherited before applying overwrites
           $ref: '#/components/schemas/idp_profile_base_profile'
         created_time:
+          description: Time when the IDP profile was created
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier of the IDP profile
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the IDP profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the IDP profile
           examples:
           - relaxed
           type: string
         org_id:
+          description: Owning organization for the IDP profile
           $ref: '#/components/schemas/org_id'
         overwrites:
+          description: IDP signature override rules applied on top of the base profile
           $ref: '#/components/schemas/idp_profile_overwrites'
       type: object
     idp_profile_action:
@@ -76514,27 +76525,34 @@ components:
       type: string
     idp_profile_matching:
       additionalProperties: false
+      description: Criteria that select IDP signatures for an overwrite rule
       properties:
         attack_name:
+          description: Signature names matched by the IDP profile overwrite
           $ref: '#/components/schemas/idp_profile_matching_attack_name'
         dst_subnet:
+          description: Destination subnets matched by the IDP profile overwrite
           $ref: '#/components/schemas/idp_profile_matching_dst_subnet'
         severity:
+          description: Threat levels matched by the IDP profile overwrite
           $ref: '#/components/schemas/idp_profile_matching_severity'
       type: object
     idp_profile_matching_attack_name:
+      description: IDP attack signature names matched by an overwrite rule
       items:
         examples:
         - HTTP:INVALID:HDR-FIELD
         type: string
       type: array
     idp_profile_matching_dst_subnet:
+      description: Destination CIDR subnets matched by an IDP profile overwrite
       items:
         examples:
         - 63.1.2.0/24
         type: string
       type: array
     idp_profile_matching_severity:
+      description: Severity levels matched by an IDP profile overwrite
       items:
         $ref: '#/components/schemas/idp_profile_matching_severity_value'
       type: array
@@ -76550,19 +76568,25 @@ components:
       type: string
     idp_profile_overwrite:
       additionalProperties: false
+      description: Override rule that changes the IDP action for matching signatures
       properties:
         action:
+          description: Enforcement action applied when this overwrite rule matches
           $ref: '#/components/schemas/idp_profile_action'
         matching:
+          description: Criteria that select signatures for this overwrite rule
           $ref: '#/components/schemas/idp_profile_matching'
         name:
+          description: Display name for this IDP profile overwrite rule
           type: string
       type: object
     idp_profile_overwrites:
+      description: IDP profile overwrite rules applied to the base profile
       items:
         $ref: '#/components/schemas/idp_profile_overwrite'
       type: array
     idp_profiles:
+      description: Organization IDP profiles
       items:
         $ref: '#/components/schemas/idp_profile'
       type: array
