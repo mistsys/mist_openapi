@@ -76314,6 +76314,7 @@ components:
       type: array
       uniqueItems: true
     ha_cluster_config:
+      description: Request to create an HA cluster from unassigned gateway inventory nodes
       properties:
         disable_auto_config:
           deprecated: true
@@ -76332,8 +76333,10 @@ components:
             `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         nodes:
+          description: Gateway nodes to include in the HA cluster; each node must be currently unassigned in inventory
           $ref: '#/components/schemas/ha_cluster_config_nodes'
         site_id:
+          description: Site where the HA cluster should be created
           examples:
           - 43e9c864-a7e4-4310-8031-d9817d2c5a43
           format: uuid
@@ -76344,30 +76347,33 @@ components:
       maxProperties: 2
       properties:
         mac:
-          description: Node mac, should be unassigned
+          description: Gateway node MAC address for an inventory node that is currently unassigned
           examples:
           - aff827549235
           type: string
       type: object
     ha_cluster_config_nodes:
+      description: Gateway inventory nodes used to create an HA cluster
       items:
         $ref: '#/components/schemas/ha_cluster_config_node'
       type: array
     ha_cluster_delete:
       properties:
         mac:
-          description: Node0 mac address
+          description: Node0 MAC address identifying the HA cluster to delete
           examples:
           - aff827549235
           type: string
       type: object
     ha_cluster_node:
+      description: HA cluster node selector for device operations
       properties:
         node:
+          description: HA cluster node on which to run the device operation
           $ref: '#/components/schemas/ha_cluster_node_enum'
       type: object
     ha_cluster_node_enum:
-      description: 'only for HA. enum: `node0`, `node1`'
+      description: 'HA cluster node selector. enum: `node0`, `node1`'
       enum:
       - node0
       - node1
