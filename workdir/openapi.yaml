@@ -65983,26 +65983,33 @@ components:
       type: object
     ap_redundancy:
       additionalProperties: false
+      description: AP switch redundancy coverage summary
       properties:
         modules:
+          description: Per-module AP redundancy counts keyed by switch node ID
           $ref: '#/components/schemas/ap_redundancy_modules'
         num_aps:
+          description: Total number of APs considered for switch redundancy
           examples:
           - 15
           type: integer
         num_aps_with_switch_redundancy:
+          description: Number of APs that have switch redundancy coverage
           examples:
           - 8
           type: integer
       type: object
     ap_redundancy_module:
       additionalProperties: false
+      description: AP switch redundancy counts for one switch module
       properties:
         num_aps:
+          description: Total number of APs connected through this switch module
           examples:
           - 15
           type: integer
         num_aps_with_switch_redundancy:
+          description: Number of APs on this module with switch redundancy coverage
           examples:
           - 8
           type: integer
