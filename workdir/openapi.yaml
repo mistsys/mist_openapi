@@ -70722,52 +70722,71 @@ components:
       description: Gateway configuration and placement data
       properties:
         additional_config_cmds:
+          description: Additional CLI configuration commands to apply to this gateway
           $ref: '#/components/schemas/additional_config_cmds'
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/bgp_config'
+          description: BGP routing configuration for this gateway. Property key is
+            the BGP session name
           type: object
         created_time:
+          description: Time when the gateway object was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
+          description: Device profile associated with this gateway
           format: uuid
           readOnly: true
           type: string
         dhcpd_config:
+          description: DHCP server configuration served by this gateway
           $ref: '#/components/schemas/dhcpd_config'
         dns_servers:
+          description: DNS servers configured for this gateway
           $ref: '#/components/schemas/dns_servers'
         dns_suffix:
+          description: DNS search suffixes configured for this gateway
           $ref: '#/components/schemas/dns_suffix'
         extra_routes:
+          description: Additional IPv4 routes configured on this gateway
           $ref: '#/components/schemas/gateway_extra_routes'
         extra_routes6:
+          description: Additional IPv6 routes configured on this gateway
           $ref: '#/components/schemas/gateway_extra_routes6'
         for_site:
+          description: Whether the gateway configuration is scoped directly to a site
           readOnly: true
           type: boolean
         gateway_mgmt:
+          description: Management-plane settings for this gateway
           $ref: '#/components/schemas/gateway_mgmt'
         id:
+          description: Unique identifier of the gateway object
           $ref: '#/components/schemas/id'
         idp_profiles:
+          description: Intrusion detection and prevention profiles configured for
+            this gateway
           $ref: '#/components/schemas/gateway_idp_profiles'
         image1_url:
+          description: First custom image URL associated with the gateway
           type:
           - string
           - 'null'
         image2_url:
+          description: Second custom image URL associated with the gateway
           type:
           - string
           - 'null'
         image3_url:
+          description: Third custom image URL associated with the gateway
           type:
           - string
           - 'null'
         ip_configs:
+          description: Gateway interface IP configurations by network name
           $ref: '#/components/schemas/gateway_ip_configs'
         mac:
-          description: Gateway MAC address
+          description: Gateway MAC address used to identify the device
           readOnly: true
           type: string
         managed:
@@ -70786,24 +70805,32 @@ components:
             `managed` for adopted devices.
           type: boolean
         model:
-          description: Gateway model name
+          description: Gateway model reported for the device
           readOnly: true
           type: string
         modified_time:
+          description: Time when the gateway object was last modified
           $ref: '#/components/schemas/modified_time'
         msp_id:
+          description: MSP that manages this gateway, when applicable
           $ref: '#/components/schemas/msp_id'
         name:
+          description: Friendly display name assigned to the gateway
           type: string
         networks:
+          description: Layer 3 networks configured for use by this gateway
           $ref: '#/components/schemas/networks'
         notes:
+          description: Free-form administrative notes for this gateway
           type: string
         ntp_servers:
+          description: NTP servers used by this gateway
           $ref: '#/components/schemas/strings'
         oob_ip_config:
+          description: Out-of-band management IP configuration for this gateway
           $ref: '#/components/schemas/gateway_oob_ip_config'
         org_id:
+          description: Organization that owns this gateway
           $ref: '#/components/schemas/org_id'
         path_preferences:
           additionalProperties:
@@ -70816,6 +70843,7 @@ components:
           description: Property key is the port name or range (e.g. "ge-0/0/0-10")
           type: object
         port_mirroring:
+          description: Port mirroring configuration for this gateway
           $ref: '#/components/schemas/gateway_port_mirroring'
         router_id:
           description: Auto assigned if not set
@@ -70823,14 +70851,17 @@ components:
           - 10.2.1.10
           type: string
         routing_policies:
+          description: Routing policies applied by this gateway
           $ref: '#/components/schemas/gw_routing_policies'
         serial:
-          description: Gateway serial number
+          description: Manufacturer serial number for the gateway
           readOnly: true
           type: string
         service_policies:
+          description: Traffic service policies enforced by this gateway
           $ref: '#/components/schemas/service_policies'
         site_id:
+          description: Site where this gateway is assigned
           $ref: '#/components/schemas/site_id'
         tunnel_configs:
           additionalProperties:
@@ -70838,8 +70869,10 @@ components:
           description: Property key is the tunnel name
           type: object
         tunnel_provider_options:
+          description: Provider-specific options for tunnels terminated by this gateway
           $ref: '#/components/schemas/tunnel_provider_options'
         type:
+          description: Device type discriminator for gateway records
           $ref: '#/components/schemas/const_device_type_gateway'
         url_filtering_deny_msg:
           default: Access to this URL Category has been blocked
@@ -70849,10 +70882,13 @@ components:
           - Access to this URL Category has been blocked
           type: string
         vars:
+          description: Variable values that override site variables for this gateway
           $ref: '#/components/schemas/vars'
         vrf_config:
+          description: VRF configuration applied to this gateway
           $ref: '#/components/schemas/vrf_config'
         vrf_instances:
+          description: VRF instances configured on this gateway
           $ref: '#/components/schemas/gateway_vrf_instances'
         x:
           description: Horizontal map position of the gateway, in pixels
