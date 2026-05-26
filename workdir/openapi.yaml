@@ -67186,6 +67186,7 @@ components:
       description: Beacon configuration and placement data
       properties:
         created_time:
+          description: Time when this beacon configuration was created
           $ref: '#/components/schemas/created_time'
         eddystone_instance:
           description: Eddystone-UID instance (6 bytes) in hexstring format
@@ -67197,30 +67198,37 @@ components:
           description: Eddystone-URL value broadcast by the beacon
           type: string
         for_site:
+          description: Whether this beacon is scoped directly to a site
           readOnly: true
           type: boolean
         ibeacon_major:
+          description: iBeacon major value advertised by this beacon
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
+          description: iBeacon minor value advertised by this beacon
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
+          description: iBeacon UUID advertised by this beacon
           $ref: '#/components/schemas/ibeacon_uuid'
         id:
+          description: Unique identifier of the beacon configuration
           $ref: '#/components/schemas/id'
         mac:
-          description: Optional, MAC of the beacon, currently used only to identify
-            battery voltage
+          description: Optional beacon MAC address, currently used only to identify battery
+            voltage
           type: string
         map_id:
-          description: Map where the device belongs to
+          description: Map where the beacon is placed
           format: uuid
           type: string
         modified_time:
+          description: Time when this beacon configuration was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the beacon
           type: string
         org_id:
+          description: Owning organization identifier for this beacon
           $ref: '#/components/schemas/org_id'
         power:
           default: -12
@@ -67229,8 +67237,10 @@ components:
           minimum: -12
           type: integer
         site_id:
+          description: Site identifier associated with this beacon
           $ref: '#/components/schemas/site_id'
         type:
+          description: Beacon advertisement format used by this beacon
           $ref: '#/components/schemas/beacon_type'
         x:
           description: Horizontal map position of the beacon, in pixels
