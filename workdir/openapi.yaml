@@ -70293,6 +70293,7 @@ components:
         type: string
       properties:
         count:
+          description: Number of matching items for this count bucket
           type: integer
       required:
       - count
@@ -70387,6 +70388,7 @@ components:
     days_number:
       properties:
         days:
+          description: Number of recent days to include when truncating the CRL
           default: 30
           type: integer
       type: object
@@ -70395,6 +70397,7 @@ components:
       description: Delivery object to configure the alarm delivery
       properties:
         additional_emails:
+          description: Additional email recipients for alarm delivery
           $ref: '#/components/schemas/delivery_additional_emails'
         enabled:
           description: Whether to enable the alarm delivery via emails or not
@@ -75592,6 +75595,7 @@ components:
       additionalProperties: false
       properties:
         results:
+          description: List of issued client certificates returned by the query
           $ref: '#/components/schemas/issued_client_certificates'
       type: object
     js_inventory:
