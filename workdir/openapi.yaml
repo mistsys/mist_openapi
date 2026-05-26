@@ -74998,20 +74998,22 @@ components:
       type: array
     gateway_oob_ip_config:
       additionalProperties: false
-      description: Out-of-band (vme/em0/fxp0) IP config
+      description: Out-of-band management IP configuration for gateway interfaces such as vme, em0, or fxp0
       properties:
         gateway:
-          description: If `type`==`static`
+          description: Default gateway for the out-of-band management interface when `type`==`static`
           type: string
         ip:
-          description: If `type`==`static`
+          description: Static IPv4 address for the out-of-band management interface when `type`==`static`
           type: string
         netmask:
-          description: If `type`==`static`
+          description: IPv4 netmask or prefix length for the out-of-band management interface when `type`==`static`
           type: string
         node1:
+          description: Out-of-band management IP configuration override for node1 in an HA cluster
           $ref: '#/components/schemas/gateway_oob_ip_config_node1'
         type:
+          description: IP assignment mode for the out-of-band management interface
           $ref: '#/components/schemas/ip_type'
         use_mgmt_vrf:
           default: false
@@ -75024,21 +75026,24 @@ components:
             source network/ip is desired
           type: boolean
         vlan_id:
+          description: VLAN ID used for out-of-band management traffic
           $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
       type: object
     gateway_oob_ip_config_node1:
       additionalProperties: false
-      description: For HA Cluster, node1 can have different IP Config
+      description: Node1-specific out-of-band management IP configuration for HA clusters
       properties:
         gateway:
-          description: If `type`==`static`
+          description: Default gateway for the node1 out-of-band management interface when `type`==`static`
           type: string
         ip:
+          description: Static IPv4 address for the node1 out-of-band management interface when `type`==`static`
           type: string
         netmask:
-          description: Used only if `subnet` is not specified in `networks`
+          description: IPv4 netmask or prefix length for the node1 out-of-band management interface when `type`==`static`; used only if `subnet` is not specified in `networks`
           type: string
         type:
+          description: IP assignment mode for the node1 out-of-band management interface
           $ref: '#/components/schemas/ip_type'
         use_mgmt_vrf:
           default: false
@@ -75051,6 +75056,7 @@ components:
             if alternative source network/ip is desired
           type: boolean
         vlan_id:
+          description: VLAN ID used for node1 out-of-band management traffic
           $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
       type: object
     gateway_path_preferences:
