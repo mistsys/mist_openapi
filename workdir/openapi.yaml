@@ -64498,17 +64498,22 @@ components:
       description: Anomaly
       properties:
         events:
+          description: Event names contributing to this anomaly
           $ref: '#/components/schemas/anomaly_events'
         since:
+          description: Time when the anomalous period began
           readOnly: true
           type: number
         sle_baseline:
+          description: Expected SLE value used as the anomaly baseline
           readOnly: true
           type: number
         sle_deviation:
+          description: Difference between the observed SLE value and the baseline
           readOnly: true
           type: number
         timestamp:
+          description: Time when this anomaly data point was recorded, in epoch seconds
           $ref: '#/components/schemas/timestamp'
       required:
       - timestamp
