@@ -68004,262 +68004,346 @@ components:
       type: array
     call_troubleshoot_summary:
       additionalProperties: false
+      description: Summary row for call troubleshooting metrics
       properties:
         ap_num_clients:
+          description: Summary troubleshooting metric value for AP client count
           examples:
           - -0.08802365511655807
           type: number
         ap_rtt:
+          description: Summary troubleshooting metric value for AP round-trip time
           examples:
           - 0.09924473613500595
           type: number
         audio_in:
+          description: Troubleshooting metrics for the inbound audio stream
           $ref: '#/components/schemas/call_troubleshoot_summary_data'
         audio_out:
+          description: Troubleshooting metrics for the outbound audio stream
           $ref: '#/components/schemas/call_troubleshoot_summary_data'
         client_cpu:
+          description: Summary troubleshooting metric value for client CPU load
           examples:
           - 0.00834270566701889
           type: number
         client_n_streams:
+          description: Summary troubleshooting metric value for the number of client
+            spatial streams
           examples:
           - 0.00734270566701889
           type: number
         client_radio_band:
+          description: Summary troubleshooting metric value for the client radio band
           examples:
           - 0.5841414928436279
           type: number
         client_rssi:
+          description: Summary troubleshooting metric value for client RSSI
           examples:
           - 0.7594696879386902
           type: number
         client_rx_bytes:
+          description: Summary troubleshooting metric value for bytes received by
+            the client
           examples:
           - 2.365511655807e-05
           type: number
         client_rx_rates:
+          description: Summary troubleshooting metric value for client receive data
+            rates
           examples:
           - 0.02441493794322014
           type: number
         client_rx_retries:
+          description: Summary troubleshooting metric value for client receive retries
           examples:
           - -0.14325742423534393
           type: number
         client_tx_bytes:
+          description: Summary troubleshooting metric value for bytes transmitted
+            by the client
           examples:
           - 0.00102365511655807
           type: number
         client_tx_rates:
+          description: Summary troubleshooting metric value for client transmit data
+            rates
           examples:
           - 0.22236637771129608
           type: number
         client_tx_retries:
+          description: Summary troubleshooting metric value for client transmit retries
           examples:
           - 0.3308201730251312
           type: number
         client_vpn_distance:
+          description: Summary troubleshooting metric value for client VPN distance
           examples:
           - -0.0001660545531194657
           type: number
         client_wifi_version:
+          description: Summary troubleshooting metric value for the client Wi-Fi version
           examples:
           - 7.0566701889e-07
           type: number
         expected:
+          description: Model baseline value expected for this call sample
           examples:
           - -2.8630001056670187
           type: number
         radio_ap_change:
+          description: Summary troubleshooting metric value for AP changes on the
+            radio path
           examples:
           - 0.01850946433842182
           type: number
         radio_bandwidth:
+          description: Summary troubleshooting metric value for radio channel bandwidth
           examples:
           - -0.021175479516386986
           type: number
         radio_channel:
+          description: Summary troubleshooting metric value for the radio channel
           examples:
           - 0.11686426401138306
           type: number
         radio_rx_failed:
+          description: Summary troubleshooting metric value for failed radio receive
+            attempts
           examples:
           - 1.1782013177871704
           type: number
         radio_tx_power:
+          description: Summary troubleshooting metric value for radio transmit power
           examples:
           - 0.121039018034935
           type: number
         radio_util:
+          description: Summary troubleshooting metric value for radio utilization
           examples:
           - 0.2452986091375351
           type: number
         radio_util_interference:
+          description: Summary troubleshooting metric value for radio interference
+            utilization
           examples:
           - 3.4367904663085938
           type: number
         site_num_clients:
+          description: Summary troubleshooting metric value for the number of clients
+            at the site
           examples:
           - 0.055026158690452576
           type: number
         site_wan_avg_download_mbps:
+          description: Summary troubleshooting metric value for site WAN average download
+            throughput
           examples:
           - 3.0566701889e-07
           type: number
         site_wan_avg_upload_mbps:
+          description: Summary troubleshooting metric value for site WAN average upload
+            throughput
           examples:
           - 5.566701889e-08
           type: number
         site_wan_download_mbps:
+          description: Summary troubleshooting metric value for site WAN download
+            throughput
           examples:
           - 8.0566701889e-07
           type: number
         site_wan_jitter:
+          description: Summary troubleshooting metric value for site WAN jitter
           examples:
           - 0.7875519659784105
           type: number
         site_wan_rtt:
+          description: Summary troubleshooting metric value for site WAN round-trip
+            time
           examples:
           - 15.094849904378256
           type: number
         site_wan_upload_mbps:
+          description: Summary troubleshooting metric value for site WAN upload throughput
           examples:
           - 2.0566701889e-07
           type: number
         timestamp:
+          description: Time when this call troubleshooting sample was recorded
           $ref: '#/components/schemas/timestamp'
         video_in:
+          description: Troubleshooting metrics for the inbound video stream
           $ref: '#/components/schemas/call_troubleshoot_summary_data'
         video_out:
+          description: Troubleshooting metrics for the outbound video stream
           $ref: '#/components/schemas/call_troubleshoot_summary_data'
       type: object
     call_troubleshoot_summary_data:
       additionalProperties: false
+      description: Media-direction call troubleshooting metrics in a summary response
       properties:
         ap_num_clients:
+          description: Media-direction metric value for AP client count
           examples:
           - -0.6565111
           type: number
         ap_rtt:
+          description: Media-direction metric value for AP round-trip time
           examples:
           - 0.16559607
           type: number
         client_cpu:
+          description: Media-direction metric value for client CPU load
           examples:
           - 3.7028809
           type: number
         client_n_streams:
+          description: Media-direction metric value for the number of client spatial
+            streams
           examples:
           - 0.15803306
           type: number
         client_radio_band:
+          description: Media-direction metric value for the client radio band
           examples:
           - 0.5576923
           type: number
         client_rssi:
+          description: Media-direction metric value for client RSSI
           examples:
           - -1.0839354
           type: number
         client_rx_bytes:
+          description: Media-direction metric value for bytes received by the client
           examples:
           - 2.2622051
           type: number
         client_rx_rates:
+          description: Media-direction metric value for client receive data rates
           examples:
           - 0.26726437
           type: number
         client_tx_bytes:
+          description: Media-direction metric value for bytes transmitted by the client
           examples:
           - 6.6164713
           type: number
         client_tx_rates:
+          description: Media-direction metric value for client transmit data rates
           examples:
           - 0.62357205
           type: number
         client_tx_retries:
+          description: Media-direction metric value for client transmit retries
           examples:
           - 1.702031
           type: number
         client_vpn_distance:
+          description: Media-direction metric value for client VPN distance
           examples:
           - 1.6474955
           type: number
         client_wifi_version:
+          description: Media-direction metric value for the client Wi-Fi version
           examples:
           - 0.18267937
           type: number
         expected:
+          description: Model baseline value expected for this media direction
           examples:
           - 30.941595
           type: number
         radio_bandwidth:
+          description: Media-direction metric value for radio channel bandwidth
           examples:
           - -0.06538621
           type: number
         radio_channel:
+          description: Media-direction metric value for the radio channel
           examples:
           - -0.73391086
           type: number
         radio_tx_power:
+          description: Media-direction metric value for radio transmit power
           examples:
           - 0.10027129
           type: number
         radio_util:
+          description: Media-direction metric value for radio utilization
           examples:
           - 12.770318
           type: number
         radio_util_interference:
+          description: Media-direction metric value for radio interference utilization
           examples:
           - -3.079999
           type: number
         site_num_clients:
+          description: Media-direction metric value for the number of clients at the
+            site
           examples:
           - 0.017364305
           type: number
         site_wan_avg_download_mbps:
+          description: Media-direction metric value for site WAN average download
+            throughput
           examples:
           - 3.0566701889e-07
           type: number
         site_wan_avg_upload_mbps:
+          description: Media-direction metric value for site WAN average upload throughput
           examples:
           - 5.566701889e-08
           type: number
         site_wan_download_mbps:
+          description: Media-direction metric value for site WAN download throughput
           examples:
           - 8.0566701889e-07
           type: number
         site_wan_jitter:
+          description: Media-direction metric value for site WAN jitter
           examples:
           - 0.7875519659784105
           type: number
         site_wan_rtt:
+          description: Media-direction metric value for site WAN round-trip time
           examples:
           - 15.094849904378256
           type: number
         site_wan_upload_mbps:
+          description: Media-direction metric value for site WAN upload throughput
           examples:
           - 2.0566701889e-07
           type: number
         wan_avg_download_mbps:
+          description: Media-direction metric value for average WAN download throughput
           examples:
           - 1.4803165
           type: number
         wan_avg_upload_mbps:
+          description: Media-direction metric value for average WAN upload throughput
           examples:
           - -0.038184267
           type: number
         wan_jitter:
+          description: Media-direction metric value for WAN jitter
           examples:
           - 5.9680853
           type: number
         wan_max_download_mbps:
+          description: Media-direction metric value for maximum WAN download throughput
           examples:
           - 1.4803165
           type: number
         wan_max_upload_mbps:
+          description: Media-direction metric value for maximum WAN upload throughput
           examples:
           - -0.038184267
           type: number
         wan_rtt:
+          description: Media-direction metric value for WAN round-trip time
           examples:
           - 46.77899
           type: number
