@@ -73743,29 +73743,38 @@ components:
       type: object
     events_client_wan:
       additionalProperties: false
+      description: WAN client event returned by WAN client event search APIs
       properties:
         When:
+          description: Event timestamp string reported by the WAN client event source
           examples:
           - 2022-12-31 23:59:59.293000+00:00
           type: string
         ev_type:
+          description: WAN client event type identifier
           examples:
           - CLIENT_IP_ASSIGNED
           type: string
         metadata:
+          description: Additional attributes provided with the WAN client event
           additionalProperties: true
           type: object
         org_id:
+          description: Organization that contains the WAN client event
           $ref: '#/components/schemas/org_id'
         random_mac:
+          description: Whether the WAN client used a randomized MAC address
           type: boolean
         site_id:
+          description: Site where the WAN client event occurred
           $ref: '#/components/schemas/site_id'
         text:
+          description: Human-readable message for the WAN client event
           examples:
           - DHCP Ack IP 192.168.88.216
           type: string
         wcid:
+          description: WAN client identifier associated with the event
           examples:
           - 62bbfb75-10d8-49d1-dec7-d2df91624287
           format: uuid
@@ -73773,19 +73782,25 @@ components:
       type: object
     events_rogue:
       additionalProperties: false
-      description: Rogue events
+      description: Rogue wireless network event detected by a site AP
       properties:
         ap:
+          description: Access point MAC address that detected the rogue BSSID
           type: string
         bssid:
+          description: Rogue BSSID observed by the AP
           type: string
         channel:
+          description: Radio channel where the rogue BSSID was observed
           type: integer
         rssi:
+          description: Received signal strength of the rogue BSSID, in dBm
           type: integer
         ssid:
+          description: Wireless network SSID advertised by the rogue BSSID
           type: string
         timestamp:
+          description: Time when the rogue event was observed
           $ref: '#/components/schemas/timestamp'
       required:
       - ssid
@@ -73797,30 +73812,40 @@ components:
       type: object
     events_skyatp:
       additionalProperties: false
-      description: SkyATP events
+      description: SkyATP threat event returned by SkyATP event search APIs
       properties:
         device_mac:
+          description: Network device MAC address that reported the SkyATP event
           readOnly: true
           type: string
         for_site:
+          description: Whether the SkyATP event is scoped to a site rather than only
+            the organization
           readOnly: true
           type: boolean
         ip:
+          description: Client IP address associated with the SkyATP event
           readOnly: true
           type: string
         mac:
+          description: Client MAC address associated with the SkyATP event
           readOnly: true
           type: string
         org_id:
+          description: Organization that contains the SkyATP event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site where the SkyATP event occurred
           $ref: '#/components/schemas/site_id'
         threat_level:
+          description: Numeric SkyATP threat level reported for the event
           readOnly: true
           type: integer
         timestamp:
+          description: Time when the SkyATP event occurred
           $ref: '#/components/schemas/timestamp'
         type:
+          description: SkyATP event type, such as `cc`, `fs`, or `mw`
           readOnly: true
           type: string
       required:
