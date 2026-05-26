@@ -65140,18 +65140,25 @@ components:
       description: IoT AP settings
       properties:
         A1:
+          description: Analog-capable IoT pin A1 output settings
           $ref: '#/components/schemas/ap_iot_output'
         A2:
+          description: Analog-capable IoT pin A2 output settings
           $ref: '#/components/schemas/ap_iot_output'
         A3:
+          description: Analog-capable IoT pin A3 output settings
           $ref: '#/components/schemas/ap_iot_output'
         A4:
+          description: Analog-capable IoT pin A4 output settings
           $ref: '#/components/schemas/ap_iot_output'
         DI1:
+          description: Digital input pin DI1 settings
           $ref: '#/components/schemas/ap_iot_input'
         DI2:
+          description: Digital input pin DI2 settings
           $ref: '#/components/schemas/ap_iot_input'
         DO:
+          description: Digital output pin DO settings
           $ref: '#/components/schemas/ap_iot_output'
       type: object
     ap_iot_input:
