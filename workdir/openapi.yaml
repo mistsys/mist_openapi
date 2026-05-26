@@ -62837,27 +62837,39 @@ components:
     aamw_profile:
       properties:
         categories:
+          description: File categories evaluated by this Advanced Anti Malware profile
           $ref: '#/components/schemas/aamw_profile_categories'
         created_time:
+          description: Time when the Advanced Anti Malware profile was created
           $ref: '#/components/schemas/created_time'
         fallback_action:
+          description: Action to take when Sky ATP cannot obtain a malware verdict
           $ref: '#/components/schemas/aamw_profile_action'
         file_action:
+          description: Action to take for files that meet or exceed the malware verdict
+            threshold
           $ref: '#/components/schemas/aamw_profile_action'
         id:
+          description: Unique identifier of the Advanced Anti Malware profile
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the Advanced Anti Malware profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the Advanced Anti Malware profile
           examples:
           - aamw-custom
           type: string
         org_id:
+          description: Organization that owns this Advanced Anti Malware profile
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with this derived Advanced Anti Malware profile
           $ref: '#/components/schemas/site_id'
         verdict_threshold:
           default: 8
+          description: Minimum Sky ATP verdict score that triggers the configured
+            file action
           maximum: 10
           minimum: 1
           type: integer
@@ -62877,9 +62889,12 @@ components:
       additionalProperties: false
       properties:
         category:
+          description: File category covered by this Advanced Anti Malware profile
           $ref: '#/components/schemas/aamw_profile_category_category'
         hash_lookup_only:
           default: false
+          description: Whether files in this category use hash lookup without full
+            file analysis
           type: boolean
       type: object
     aamw_profile_category_category:
