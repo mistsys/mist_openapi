@@ -66503,12 +66503,13 @@ components:
       type: object
     ap_usb:
       additionalProperties: false
-      description: "USB AP settings\n  - Note: if native imagotag is enabled, BLE\
+      description: "Legacy USB integration settings for an access point\n  - Note: if native imagotag is enabled, BLE\
         \ will be disabled automatically\n  - Note: legacy, new config moved to ESL\
         \ Config."
       properties:
         cacert:
-          description: Only if `type`==`imagotag`
+          description: Only if `type`==`imagotag`. CA certificate used to validate
+            the Imagotag service certificate
           type:
           - string
           - 'null'
@@ -66522,17 +66523,20 @@ components:
           description: Whether to enable any usb config
           type: boolean
         host:
-          description: Only if `type`==`imagotag`
+          description: Only if `type`==`imagotag`. Imagotag service host or IP address
+            contacted by the AP
           examples:
           - 1.1.1.1
           type: string
         port:
           default: 0
-          description: Only if `type`==`imagotag`
+          description: Only if `type`==`imagotag`. TCP port used to reach the Imagotag
+            service
           examples:
           - 0
           type: integer
         type:
+          description: USB integration type for this legacy AP USB configuration
           $ref: '#/components/schemas/ap_usb_type'
         verify_cert:
           description: Only if `type`==`imagotag`, whether to turn on SSL verification
