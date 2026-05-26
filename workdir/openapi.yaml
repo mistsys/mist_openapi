@@ -82427,28 +82427,28 @@ components:
       additionalProperties: false
       properties:
         dead_time:
-          description: Activity timer
+          description: Seconds remaining before the neighbor is considered inactive
           type: integer
         mac:
-          description: Router MAC address
+          description: Router MAC address of the device advertising the OSPF peer
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
-          description: Router org ID
+          description: Organization identifier of the router reporting the peer state
         peer_ip:
-          description: Neighbor address (IP)
+          description: IP address of the OSPF neighbor
           type: string
         port_id:
-          description: Interface name
+          description: Interface on which the OSPF neighbor is learned
           type: string
         priority:
-          description: Neighbor priority, 0-255
+          description: OSPF priority advertised by the neighbor, from 0 to 255
           maximum: 255
           minimum: 0
           type: integer
         site_id:
           $ref: '#/components/schemas/site_id'
-          description: Router site ID
+          description: Site identifier of the router reporting the peer state
         state:
           description: Eg. full, down, 2way, init, exstart, exchange, loading
           type: string
