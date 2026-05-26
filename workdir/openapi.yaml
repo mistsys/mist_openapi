@@ -74936,39 +74936,47 @@ components:
       type: object
     gateway_mgmt_host_out_policy:
       additionalProperties: false
+      description: Host-out path policy for gateway-originated management traffic
       properties:
         path_preference:
+          description: Preferred path name for this gateway-originated service traffic
           type: string
       type: object
     gateway_mgmt_host_out_policy_syslog:
       additionalProperties: false
+      description: Host-out path policy for gateway syslog traffic
       properties:
         path_preference:
+          description: Preferred path name used by default for gateway syslog traffic
           examples:
           - broadband_wans
           type: string
         servers:
+          description: Per-server host-out path policies for gateway syslog traffic
           $ref: '#/components/schemas/gateway_mgmt_host_out_policy_syslog_servers'
       type: object
     gateway_mgmt_host_out_policy_syslog_server:
       additionalProperties: false
-      description: Allows to define the host_out_policy per Syslog Server. The Property
-        key is the Syslog name
+      description: Per-syslog-server host-out path policy override
       properties:
         host:
+          description: Syslog server hostname or IP address
           examples:
           - 103.35.3.5
           type: string
         path_preference:
+          description: Preferred path name used for this syslog server
           examples:
           - dc_only
           type: string
         server_name:
+          description: Remote syslog server name referenced by the policy
           examples:
           - dc_syslog_server
           type: string
       type: object
     gateway_mgmt_host_out_policy_syslog_servers:
+      description: Per-server host-out path policies for gateway syslog traffic
       items:
         $ref: '#/components/schemas/gateway_mgmt_host_out_policy_syslog_server'
       type: array
