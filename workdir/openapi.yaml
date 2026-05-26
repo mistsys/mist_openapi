@@ -74800,11 +74800,13 @@ components:
       type: object
     gateway_matching:
       additionalProperties: false
-      description: Gateway matching
+      description: Gateway matching configuration used to apply gateway-specific settings
       properties:
         enable:
+          description: Whether gateway matching is enabled
           type: boolean
         rules:
+          description: Gateway matching rules evaluated for this configuration
           $ref: '#/components/schemas/gateway_matching_rules'
       type: object
     gateway_matching_rule:
@@ -74812,10 +74814,15 @@ components:
         description: 'Property key defines the type of matching. e.g: `match_name[0:3]`,
           `match_model[0-6]` or `match_role`'
         type: string
+      description: Gateway matching rule that applies settings when its match keys
+        select a gateway
       properties:
         additional_config_cmds:
+          description: Additional Junos CLI commands appended when this gateway matching
+            rule applies
           $ref: '#/components/schemas/additional_config_cmds'
         name:
+          description: Display name for the gateway matching rule
           type: string
         port_config:
           additionalProperties:
@@ -74824,6 +74831,7 @@ components:
           type: object
       type: object
     gateway_matching_rules:
+      description: Gateway matching rules used by a gateway matching configuration
       items:
         $ref: '#/components/schemas/gateway_matching_rule'
       type: array
