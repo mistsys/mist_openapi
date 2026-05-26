@@ -67839,127 +67839,161 @@ components:
       type: array
     call_troubleshoot:
       additionalProperties: false
+      description: Detailed call troubleshooting response
       properties:
         mac:
+          description: Client MAC address for the troubleshot call
           examples:
           - 983a78ea4a44
           type: string
         meeting_id:
+          description: Meeting identifier for the troubleshot call
           examples:
           - b784d744-9a7c-4fad-9af0-f78858a319b1
           format: uuid
           type: string
         results:
+          description: Per-sample troubleshooting results for the call
           $ref: '#/components/schemas/call_troubleshoots'
       type: object
     call_troubleshoot_data:
       additionalProperties: false
+      description: Per-media call troubleshooting metric values
       properties:
         ap_num_clients:
+          description: Troubleshooting metric value for AP client count
           examples:
           - -0.6565111
           type: number
         ap_rtt:
+          description: Troubleshooting metric value for AP round-trip time
           examples:
           - 0.16559607
           type: number
         client_cpu:
+          description: Troubleshooting metric value for client CPU load
           examples:
           - 3.7028809
           type: number
         client_n_streams:
+          description: Troubleshooting metric value for the number of client spatial
+            streams
           examples:
           - 0.15803306
           type: number
         client_radio_band:
+          description: Troubleshooting metric value for the client radio band
           examples:
           - 0.5576923
           type: number
         client_rssi:
+          description: Troubleshooting metric value for client RSSI
           examples:
           - -1.0839354
           type: number
         client_rx_bytes:
+          description: Troubleshooting metric value for bytes received by the client
           examples:
           - 2.2622051
           type: number
         client_rx_rates:
+          description: Troubleshooting metric value for client receive data rates
           examples:
           - 0.62357205
           type: number
         client_rx_retries:
+          description: Troubleshooting metric value for client receive retries
           examples:
           - 0.26726437
           type: number
         client_tx_bytes:
+          description: Troubleshooting metric value for bytes transmitted by the client
           examples:
           - 0.15803306
           type: number
         client_tx_rates:
+          description: Troubleshooting metric value for client transmit data rates
           examples:
           - 0.62357205
           type: number
         client_tx_retries:
+          description: Troubleshooting metric value for client transmit retries
           examples:
           - 0.77553505
           type: number
         client_vpn_distance:
+          description: Troubleshooting metric value for client VPN distance
           examples:
           - 1.6474955
           type: number
         client_wifi_version:
+          description: Troubleshooting metric value for the client Wi-Fi version
           examples:
           - 0.18267937
           type: number
         expected:
+          description: Model baseline value expected for this media direction
           examples:
           - 30.941595
           type: number
         radio_bandwidth:
+          description: Troubleshooting metric value for radio channel bandwidth
           examples:
           - -0.06538621
           type: number
         radio_channel:
+          description: Troubleshooting metric value for the radio channel
           examples:
           - -0.73391086
           type: number
         radio_tx_power:
+          description: Troubleshooting metric value for radio transmit power
           examples:
           - 0.10027129
           type: number
         radio_util:
+          description: Troubleshooting metric value for radio utilization
           examples:
           - 12.770318
           type: number
         radio_util_interference:
+          description: Troubleshooting metric value for radio interference utilization
           examples:
           - -3.079999
           type: number
         site_num_clients:
+          description: Troubleshooting metric value for the number of clients at the
+            site
           examples:
           - 0.017364305
           type: number
         wan_avg_download_mbps:
+          description: Troubleshooting metric value for average WAN download throughput
           examples:
           - 1.4803165
           type: number
         wan_avg_upload_mbps:
+          description: Troubleshooting metric value for average WAN upload throughput
           examples:
           - -0.038184267
           type: number
         wan_jitter:
+          description: Troubleshooting metric value for WAN jitter
           examples:
           - 5.9680853
           type: number
         wan_max_download_mbps:
+          description: Troubleshooting metric value for maximum WAN download throughput
           examples:
           - 1.4803165
           type: number
         wan_max_upload_mbps:
+          description: Troubleshooting metric value for maximum WAN upload throughput
           examples:
           - -0.038184267
           type: number
         wan_rtt:
+          description: Troubleshooting metric value for WAN round-trip time
           examples:
           - 46.77899
           type: number
@@ -84973,17 +85007,23 @@ components:
       type: array
     response_call_troubleshoot_summary:
       additionalProperties: false
+      description: Site call troubleshooting summary response
       properties:
         mac:
+          description: Client MAC address for the summarized call troubleshooting
+            result
           examples:
           - 983a78ea4a44
           type: string
         meeting_id:
+          description: Meeting identifier for the summarized call troubleshooting
+            result
           examples:
           - b784d744-9a7c-4fad-9af0-f78858a319b1
           format: uuid
           type: string
         results:
+          description: Summary troubleshooting results returned for matching calls
           $ref: '#/components/schemas/call_troubleshoot_summaries'
       type: object
     response_certificate:
