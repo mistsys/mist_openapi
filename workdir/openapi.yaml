@@ -64439,6 +64439,7 @@ components:
             received and sent to AES server for location calculation
           type: boolean
         port:
+          description: Required if enabled, Aeroscout server port
           default: 1144
           type:
           - integer
@@ -64460,6 +64461,7 @@ components:
           - string
           - 'null'
         port:
+          description: Required if enabled, Airista server port
           default: 1144
           type:
           - integer
@@ -64470,6 +64472,7 @@ components:
       properties:
         enabled:
           default: false
+          description: Whether to enable Centrak config
           type: boolean
       type: object
     ap_channel_band24_channel:
