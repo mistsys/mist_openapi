@@ -63531,21 +63531,23 @@ components:
       description: OAuth linked Zscaler apps account details
       properties:
         cloud_name:
+          description: Zscaler Internet Access cloud name used for the integration
           examples:
           - zscalerbeta.net
           type: string
         partner_key:
+          description: Zscaler partner key generated for the Mist integration
           examples:
           - K35vrZcK3JvrZc
           type: string
         password:
-          description: Customer account password
+          description: Credential password for the Zscaler partner administrator
           examples:
           - password
           format: password
           type: string
         username:
-          description: Customer account user name
+          description: Zscaler partner administrator username used by Mist
           examples:
           - john@nmo.com
           type: string
@@ -63560,15 +63562,17 @@ components:
       description: OAuth linked Zscaler apps account details
       properties:
         cloud_name:
+          description: Zscaler Internet Access cloud name configured for the integration
           examples:
           - zscalerbeta.net
           type: string
         partner_key:
+          description: Zscaler partner key configured for the Mist integration
           examples:
           - K35vrZcK3JvrZc
           type: string
         username:
-          description: Customer account user name
+          description: Zscaler partner administrator username configured for Mist
           examples:
           - john@nmo.com
           type: string
