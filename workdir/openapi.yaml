@@ -72841,20 +72841,25 @@ components:
       type: object
     dhcp_client_option:
       additionalProperties: false
+      description: DHCP client option observed in a DHCP packet
       properties:
         code:
+          description: DHCP option code and option name
           examples:
           - DHO_DHCP_MESSAGE_TYPE(53)
           type: string
         data:
+          description: Decoded value carried by the DHCP option
           examples:
           - DHCPREQUEST
           type: string
       type: object
     dhcp_snooping:
       additionalProperties: false
+      description: DHCP snooping security settings
       properties:
         all_networks:
+          description: Whether DHCP snooping applies to all configured networks
           type: boolean
         enable_arp_spoof_check:
           description: Enable for dynamic ARP inspection check
@@ -72863,8 +72868,10 @@ components:
           description: Enable for check for forging source IP address
           type: boolean
         enabled:
+          description: Whether DHCP snooping is enabled
           type: boolean
         networks:
+          description: Network names with DHCP snooping enabled when `all_networks`==`false`
           $ref: '#/components/schemas/dhcp_snooping_networks'
       type: object
     dhcp_snooping_networks:
@@ -72903,23 +72910,27 @@ components:
       type: array
     dhcpd_config_fixed_binding:
       additionalProperties: false
+      description: Static DHCP binding for a client MAC address
       properties:
         ip:
+          description: Reserved IPv4 address for this fixed DHCP binding
           examples:
           - 192.168.70.35
           type: string
         ip6:
+          description: Reserved IPv6 address for this fixed DHCP binding
           examples:
           - 2607:f8b0:4005:808::2
           type: string
         name:
+          description: Friendly name for this fixed DHCP binding
           type: string
       type: object
     dhcpd_config_fixed_bindings:
       additionalProperties:
         $ref: '#/components/schemas/dhcpd_config_fixed_binding'
-      description: If `type`==`local` or `type6`==`local`. Property key is the MAC
-        Address. Format is `[0-9a-f]{12}` (e.g. "5684dae9ac8b")
+      description: If `type`==`local` or `type6`==`local`. Property key is the client
+        MAC address. Format is `[0-9a-f]{12}` (e.g. "5684dae9ac8b")
       examples:
       - 5684dae9ac8b:
           ip: 192.168.70.35
@@ -72927,10 +72938,13 @@ components:
       type: object
     dhcpd_config_option:
       additionalProperties: false
+      description: Custom DHCP option value
       properties:
         type:
+          description: Data type used to encode this DHCP option value
           $ref: '#/components/schemas/dhcpd_config_option_type'
         value:
+          description: Option value to send for this DHCP option
           type: string
       type: object
     dhcpd_config_option_type:
@@ -72954,12 +72968,19 @@ components:
       type: object
     dhcpd_config_property:
       additionalProperties: false
+      description: DHCP server or relay configuration for one network
       properties:
         dns_servers:
+          description: If `type`==`local` or `type6`==`local`, DNS servers advertised
+            to DHCP clients
           $ref: '#/components/schemas/dhcpd_config_dns_servers'
         dns_suffix:
+          description: If `type`==`local` or `type6`==`local`, DNS search suffixes
+            advertised to DHCP clients
           $ref: '#/components/schemas/dhcpd_config_dns_suffix'
         fixed_bindings:
+          description: If `type`==`local` or `type6`==`local`, fixed client bindings
+            for local DHCP service
           $ref: '#/components/schemas/dhcpd_config_fixed_bindings'
         gateway:
           description: If `type`==`local` - optional, `ip` will be used if not provided
@@ -72967,22 +72988,26 @@ components:
           - 192.168.70.1
           type: string
         ip6_end:
-          description: If `type6`==`local`
+          description: If `type6`==`local`, ending IPv6 address for the DHCP lease
+            pool
           examples:
           - 2607:f8b0:4005:808::ff
           type: string
         ip6_start:
-          description: If `type6`==`local`
+          description: If `type6`==`local`, starting IPv6 address for the DHCP lease
+            pool
           examples:
           - 2607:f8b0:4005:808::2
           type: string
         ip_end:
-          description: If `type`==`local`
+          description: If `type`==`local`, ending IPv4 address for the DHCP lease
+            pool
           examples:
           - 192.168.70.200
           type: string
         ip_start:
-          description: If `type`==`local`
+          description: If `type`==`local`, starting IPv4 address for the DHCP lease
+            pool
           examples:
           - 192.168.70.100
           type: string
@@ -72994,6 +73019,8 @@ components:
           minimum: 3600
           type: integer
         options:
+          description: If `type`==`local` or `type6`==`local`, custom DHCP options
+            advertised to clients
           $ref: '#/components/schemas/dhcpd_config_options'
         server_id_override:
           default: false
@@ -73003,14 +73030,20 @@ components:
             \ in DHCP responses with its own IP address."
           type: boolean
         servers:
+          description: If `type`==`relay`, upstream IPv4 DHCP servers
           $ref: '#/components/schemas/dhcpd_config_servers'
         serversv6:
+          description: If `type6`==`relay`, upstream IPv6 DHCP servers
           $ref: '#/components/schemas/dhcpd_config_servers6'
         type:
+          description: IPv4 DHCP mode for this network
           $ref: '#/components/schemas/dhcpd_config_type'
         type6:
+          description: IPv6 DHCP mode for this network
           $ref: '#/components/schemas/dhcpd_config_type6'
         vendor_encapsulated:
+          description: If `type`==`local` or `type6`==`local`, vendor-encapsulated
+            DHCP options advertised to clients
           $ref: '#/components/schemas/dhcpd_config_vendor_options'
       type: object
     dhcpd_config_servers:
@@ -73045,10 +73078,13 @@ components:
       type: string
     dhcpd_config_vendor_option:
       additionalProperties: false
+      description: Vendor-encapsulated DHCP option value
       properties:
         type:
+          description: Data type used to encode this vendor option value
           $ref: '#/components/schemas/dhcpd_config_vendor_option_type'
         value:
+          description: Option value to send for this vendor option
           type: string
       type: object
     dhcpd_config_vendor_option_type:
@@ -73078,12 +73114,15 @@ components:
       type: object
     dhcpd_stat_lan:
       additionalProperties: false
+      description: DHCP lease statistics for one network
       properties:
         num_ips:
+          description: Total number of IP addresses in the DHCP pool
           examples:
           - 100
           type: integer
         num_leased:
+          description: Number of DHCP pool addresses currently leased
           examples:
           - 20
           type: integer
