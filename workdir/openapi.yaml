@@ -73863,9 +73863,11 @@ components:
       description: EVPN Junos settings
       properties:
         enabled:
+          description: Whether EVPN configuration is enabled on the switch
           readOnly: true
           type: boolean
         role:
+          description: EVPN topology role for the switch
           $ref: '#/components/schemas/evpn_config_role'
       readOnly: true
       type: object
@@ -73928,6 +73930,7 @@ components:
             in that state
           type: boolean
         overlay:
+          description: EVPN overlay BGP settings for the topology
           $ref: '#/components/schemas/evpn_options_overlay'
         per_vlan_vga_v4_mac:
           default: false
@@ -73944,10 +73947,13 @@ components:
             YY=vlan_id%256)
           type: boolean
         routed_at:
+          description: Topology tier where EVPN virtual gateway routing is placed
           $ref: '#/components/schemas/evpn_options_routed_at'
         underlay:
+          description: EVPN underlay BGP and subnet settings for the topology
           $ref: '#/components/schemas/evpn_options_underlay'
         vs_instances:
+          description: Virtual-switch instance mappings used to segregate EVPN networks
           $ref: '#/components/schemas/evpn_options_vs_instances'
       type: object
     evpn_options_overlay:
@@ -73983,6 +73989,8 @@ components:
           minimum: 1
           type: integer
         routed_id_prefix:
+          description: Prefix length used for automatically derived underlay router
+            identifiers
           examples:
           - /24
           type: string
@@ -74001,6 +74009,7 @@ components:
       additionalProperties: false
       properties:
         networks:
+          description: List of network names included in this virtual-switch instance
           $ref: '#/components/schemas/strings'
       type: object
     evpn_options_vs_instances:
