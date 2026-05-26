@@ -63762,8 +63762,10 @@ components:
     admin:
       properties:
         admin_id:
+          description: Unique identifier of the administrator
           $ref: '#/components/schemas/admin_id'
         compliance_status:
+          description: Trade compliance status for this administrator
           $ref: '#/components/schemas/admin_compliance_status'
         email:
           description: If admin account is not an Org API Token
@@ -63776,6 +63778,7 @@ components:
           readOnly: true
           type: boolean
         expire_time:
+          description: Expiration time for the admin invitation, in epoch seconds
           type: integer
         first_name:
           description: If admin account is not an Org API Token. For an invite, this
@@ -63824,8 +63827,11 @@ components:
             (numbers only, including country code)
           type: string
         privileges:
+          description: Privilege assignments that define the admin's MSP, organization,
+            site, or site group access
           $ref: '#/components/schemas/admin_privileges'
         session_expiry:
+          description: Session lifetime for the admin, in minutes
           examples:
           - 1440
           format: int64
@@ -63834,6 +63840,7 @@ components:
           readOnly: true
           type: integer
         tags:
+          description: Read-only tags associated with the admin account
           $ref: '#/components/schemas/admin_tags'
         two_factor_verified:
           description: If admin account is not an Org API Token. Two factor status
@@ -63869,46 +63876,54 @@ components:
           description: Whether to allow Mist to look at this org
           type: boolean
         city:
-          description: City of registering user
+          description: Registration city for the admin user
           examples:
           - Cupertino
           type: string
         country:
-          description: Country/region name or ISO code of registering user
+          description: Registration country or region for the admin user, as a name
+            or ISO code
           examples:
           - United States
           type: string
         email:
+          description: Registration email address for the admin user
           examples:
           - test@mistsys.com
           maxLength: 64
           type: string
         first_name:
+          description: Given name for the registering admin user
           examples:
           - John
           type: string
         invite_code:
-          description: Required initially
+          description: Required initially. Invite code used to authorize new admin
+            registration
           examples:
           - MISTROCKS
           type: string
         last_name:
+          description: Family name for the registering admin user
           examples:
           - Smith
           type: string
         org_name:
+          description: Organization name supplied during initial admin registration
           examples:
           - Smith LLC
           type: string
         password:
+          description: Credential password for the registering admin account
           examples:
           - foryoureyesonly
           format: password
           type: string
         recaptcha:
-          description: reCAPTCHA , see https://www.google.com/recaptcha/
+          description: CAPTCHA verification token submitted during admin registration
           type: string
         recaptcha_flavor:
+          description: CAPTCHA provider flavor used for registration verification
           $ref: '#/components/schemas/recaptcha_flavor'
         referer_invite_token:
           description: Invite token to apply after account creation
@@ -63921,8 +63936,8 @@ components:
           - https://mist.zendesk.com/hc/quickstart.pdf
           type: string
         state:
-          description: State name or ISO code of registering user, optional (depends
-            on country/region)
+          description: Registration state or province for the admin user, optional
+            depending on country or region
           examples:
           - CA
           type: string
@@ -63937,7 +63952,7 @@ components:
           - 1601 S De Anza Blvd Ste 248
           type: string
         zipcode:
-          description: zipcode of registering user
+          description: Postal code for the registering admin user
           examples:
           - '95014'
           type: string
@@ -63954,6 +63969,7 @@ components:
       description: Privilieges settings
       properties:
         msp_id:
+          description: Required if `scope`==`msp`. MSP granted by this privilege
           $ref: '#/components/schemas/admin_privilege_msp_id'
         msp_logo_url:
           description: Logo of the MSP (if the MSP belongs to an Advanced tier)
@@ -63970,26 +63986,34 @@ components:
           readOnly: true
           type: string
         name:
-          description: Name of the org/site/MSP depending on object scope
+          description: Display name of the object for this privilege scope
           readOnly: true
           type: string
         org_id:
+          description: Required if `scope`==`org`. Organization granted by this privilege
           $ref: '#/components/schemas/admin_privilege_org_id'
         org_name:
           description: Name of the org (for a site belonging to org)
           readOnly: true
           type: string
         orggroup_ids:
+          description: If `scope`==`orggroup`. Organization groups granted by this
+            privilege
           $ref: '#/components/schemas/admin_privilege_orggroup_ids'
         role:
+          description: Access role granted by this privilege
           $ref: '#/components/schemas/admin_privilege_role'
         scope:
+          description: Object scope where this privilege applies
           $ref: '#/components/schemas/admin_privilege_scope'
         site_id:
+          description: Required if `scope`==`site`. Site granted by this privilege
           $ref: '#/components/schemas/admin_privilege_site_id'
         sitegroup_ids:
+          description: If `scope`==`sitegroup`. Site groups granted by this privilege
           $ref: '#/components/schemas/admin_privilege_sitegroup_ids'
         views:
+          description: UI view restrictions applied when custom roles limit this privilege
           $ref: '#/components/schemas/admin_privilege_views'
       required:
       - role
