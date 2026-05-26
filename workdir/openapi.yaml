@@ -65830,6 +65830,7 @@ components:
       type: object
     ap_radio_mac:
       additionalProperties: false
+      description: Access point MAC address and its related radio MAC addresses
       examples:
       - mac: 5c5b350001a0
         radio_macs:
@@ -65837,17 +65838,20 @@ components:
         - 5c5b350001a1
       properties:
         mac:
+          description: Access point MAC address for this radio MAC mapping
           examples:
           - 5c5b350001a0
           minLength: 1
           type: string
         radio_macs:
+          description: List of radio MAC addresses associated with this access point
           $ref: '#/components/schemas/ap_radio_mac_radio_macs'
       required:
       - mac
       - radio_macs
       type: object
     ap_radio_mac_radio_macs:
+      description: Radio MAC addresses associated with an access point
       examples:
       - - 5c5b350001a0
         - 5c5b350001a1
@@ -65862,9 +65866,10 @@ components:
       uniqueItems: true
     ap_radio_stat:
       additionalProperties: false
-      description: Radio stat
+      description: Runtime radio statistics for an access point radio
       properties:
         bandwidth:
+          description: Current channel width reported for this radio
           $ref: '#/components/schemas/dot11_bandwidth'
         channel:
           description: Current channel the radio is running on
@@ -65879,12 +65884,14 @@ components:
           - boolean
           - 'null'
         mac:
-          description: Radio (base) mac, it can have 16 bssids (e.g. 5c5b350001a0-5c5b350001af)
+          description: Radio base MAC address; a base radio MAC can represent up to
+            16 BSSIDs (e.g. 5c5b350001a0-5c5b350001af)
           readOnly: true
           type:
           - string
           - 'null'
         noise_floor:
+          description: Measured noise floor for this radio, in dBm
           examples:
           - -90
           readOnly: true
@@ -65892,6 +65899,7 @@ components:
           - integer
           - 'null'
         num_clients:
+          description: Number of clients currently connected on this radio
           readOnly: true
           type:
           - integer
@@ -65906,14 +65914,19 @@ components:
           - integer
           - 'null'
         rx_bytes:
+          description: Received byte count reported for this radio
           $ref: '#/components/schemas/rx_bytes'
         rx_pkts:
+          description: Received packet count reported for this radio
           $ref: '#/components/schemas/rx_pkts'
         tx_bytes:
+          description: Transmitted byte count reported for this radio
           $ref: '#/components/schemas/tx_bytes'
         tx_pkts:
+          description: Transmitted packet count reported for this radio
           $ref: '#/components/schemas/tx_pkts'
         usage:
+          description: Operating band reported for this radio, such as 24, 5, or 6
           examples:
           - '24'
           readOnly: true
