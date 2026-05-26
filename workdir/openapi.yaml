@@ -73129,137 +73129,192 @@ components:
       type: object
     discovered_switch:
       additionalProperties: false
+      description: Switch discovered from AP uplink LLDP data and site switch discovery
       properties:
         adopted:
+          description: Whether the discovered switch has been adopted into Mist management
           type: boolean
         ap_redundancy:
+          description: AP switch redundancy summary for APs connected through the discovered
+            switch
           $ref: '#/components/schemas/ap_redundancy'
         aps:
+          description: Connected APs observed on ports of the discovered switch
           $ref: '#/components/schemas/discovered_switch_aps'
         chassis_id:
+          description: LLDP chassis identifier reported by the discovered switch
           $ref: '#/components/schemas/strings'
         for_site:
+          description: Whether the discovered switch is associated with the requested
+            site
           readOnly: true
           type: boolean
         mgmt_addr:
+          description: Management IP address advertised by the discovered switch
           type: string
         model:
+          description: Switch model reported for the discovered switch
           type: string
         org_id:
+          description: Organization that contains the discovered switch record
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site where the switch was discovered
           $ref: '#/components/schemas/site_id'
         system_desc:
+          description: LLDP system description advertised by the discovered switch
           type: string
         system_name:
+          description: LLDP system name advertised by the discovered switch
           type: string
         timestamp:
+          description: Time when the discovered switch data was observed
           $ref: '#/components/schemas/timestamp'
         vendor:
+          description: Switch vendor reported for the discovered switch
           type: string
         version:
+          description: Software version reported for the discovered switch
           type: string
       type: object
     discovered_switch_ap:
       additionalProperties: false
+      description: AP attachment details observed on a discovered switch
       properties:
         hostname:
+          description: AP hostname observed on the discovered switch
           type: string
         inactive_wired_vlans:
+          description: Inactive wired VLAN IDs reported for the AP attachment
           $ref: '#/components/schemas/integers'
         mac:
+          description: AP MAC address observed on the discovered switch
           type: string
         poe_status:
+          description: Whether the upstream switch port provides PoE for the AP
           type: boolean
         port:
+          description: Switch port name connected to the AP
           type: string
         port_id:
+          description: LLDP port identifier for the AP uplink
           type: string
         power_draw:
+          description: Power draw reported for the AP connection
           type: number
         when:
+          description: Time when this AP attachment was last observed
           type: string
       type: object
     discovered_switch_aps:
+      description: AP attachments observed on a discovered switch
       items:
         $ref: '#/components/schemas/discovered_switch_ap'
       type: array
       uniqueItems: true
     discovered_switch_metric:
       additionalProperties: false
+      description: Time-series metric result for discovered switch health or compliance
       properties:
         adopted:
+          description: Whether the discovered switch in this metric has been adopted
+            into Mist management
           type: boolean
         aps:
+          description: AP attachment details included with this discovered switch metric
           $ref: '#/components/schemas/discovered_switch_metric_aps'
         chassis_id:
+          description: LLDP chassis identifiers associated with this metric result
           $ref: '#/components/schemas/discovered_switch_metric_chassis_id'
         hostname:
+          description: Switch hostname associated with this metric result
           examples:
           - SW-HLAB-ea2e00
           type: string
         mgmt_addr:
+          description: Management IP address associated with this metric result
           examples:
           - 10.10.20.42
           type: string
         model:
+          description: Switch model associated with this metric result
           type: string
         org_id:
+          description: Organization that contains the discovered switch metric
           $ref: '#/components/schemas/org_id'
         scope:
+          description: Aggregation scope for the discovered switch metric result
           examples:
           - site
           type: string
         score:
+          description: Compliance or health score for the discovered switch metric
           examples:
           - 100
           type: integer
         site_id:
+          description: Site associated with the discovered switch metric
           $ref: '#/components/schemas/site_id'
         system_desc:
+          description: LLDP system description associated with this metric result
           examples:
           - 'Juniper Networks, Inc. ex4100-f-12p Ethernet Switch, kernel JUNOS 22.4R3.25,
             Build date: 2024-02-10 00:49:09 UTC Copyright (c) 1996-2024 Juniper Networks,
             Inc.'
           type: string
         system_name:
+          description: LLDP system name associated with this metric result
           examples:
           - SW-HLAB-ea2e00
           type: string
         timestamp:
+          description: Time bucket for the discovered switch metric result
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Metric category represented by this discovered switch metric
           examples:
           - inactive_wired_vlans
           type: string
         vendor:
+          description: Switch vendor associated with this metric result
           type: string
         version:
+          description: Software version associated with this metric result
           type: string
       type: object
     discovered_switch_metric_ap:
       additionalProperties: false
+      description: AP attachment details included in a discovered switch metric
       properties:
         hostname:
+          description: AP hostname included in the discovered switch metric
           type: string
         mac:
+          description: AP MAC address included in the discovered switch metric
           type: string
         poe_status:
+          description: Whether the upstream switch port provides PoE for this AP
           type: boolean
         port:
+          description: Switch port name connected to this AP
           type: string
         port_id:
+          description: LLDP port identifier for this AP uplink
           type: string
         power_draw:
+          description: Power draw reported for this AP connection
           type: integer
         when:
+          description: Time when this AP attachment metric was observed
           type: string
       type: object
     discovered_switch_metric_aps:
+      description: AP attachment details included in discovered switch metrics
       items:
         $ref: '#/components/schemas/discovered_switch_metric_ap'
       type: array
     discovered_switch_metric_chassis_id:
+      description: LLDP chassis identifiers associated with a discovered switch metric
       items:
         type: string
       type: array
