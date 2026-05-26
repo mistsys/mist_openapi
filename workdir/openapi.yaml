@@ -70430,18 +70430,27 @@ components:
       description: Access point configuration and placement data
       properties:
         aeroscout:
+          description: Location integration settings for AeroScout on this access
+            point
           $ref: '#/components/schemas/ap_aeroscout'
         airista:
+          description: Location integration settings for Airista on this access point
           $ref: '#/components/schemas/ap_airista'
         ble_config:
+          description: Bluetooth Low Energy beacon and asset settings for this access
+            point
           $ref: '#/components/schemas/ble_config'
         centrak:
+          description: Location integration settings for Centrak on this access point
           $ref: '#/components/schemas/ap_centrak'
         client_bridge:
+          description: Wireless client bridge settings for this access point
           $ref: '#/components/schemas/ap_client_bridge'
         created_time:
+          description: Time when the access point object was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
+          description: Device profile assigned to this access point
           examples:
           - 6f4bf402-45f9-2a56-6c8b-7f83d3bc98e9
           format: uuid
@@ -70465,6 +70474,8 @@ components:
           description: Whether to disable module port
           type: boolean
         esl_config:
+          description: Electronic shelf label integration settings for this access
+            point
           $ref: '#/components/schemas/ap_esl_config'
         flow_control:
           default: false
@@ -70472,6 +70483,8 @@ components:
             some switch compatibility issue
           type: boolean
         for_site:
+          description: Whether the access point configuration is scoped directly to
+            a site
           readOnly: true
           type: boolean
         height:
@@ -70481,32 +70494,40 @@ components:
           format: double
           type: number
         id:
+          description: Unique identifier of the access point object
           $ref: '#/components/schemas/id'
         image1_url:
+          description: First custom image URL associated with the access point
           type:
           - string
           - 'null'
         image2_url:
+          description: Second custom image URL associated with the access point
           type:
           - string
           - 'null'
         image3_url:
+          description: Third custom image URL associated with the access point
           type:
           - string
           - 'null'
         iot_config:
+          description: Digital and analog IoT pin settings for this access point
           $ref: '#/components/schemas/ap_iot'
         ip_config:
+          description: Management IP addressing settings for this access point
           $ref: '#/components/schemas/ap_ip_config'
         lacp_config:
+          description: Link aggregation settings for supported AP Ethernet uplinks
           $ref: '#/components/schemas/device_ap_lacp_config'
         led:
+          description: Indicator light behavior settings for this access point
           $ref: '#/components/schemas/ap_led'
         locked:
           description: Whether this map is considered locked down
           type: boolean
         mac:
-          description: AP MAC address
+          description: Access point MAC address used to identify the device
           readOnly: true
           type: string
         map_id:
@@ -70516,14 +70537,17 @@ components:
           format: uuid
           type: string
         mesh:
+          description: Wireless mesh role and band settings for this access point
           $ref: '#/components/schemas/ap_mesh'
         model:
-          description: AP model name
+          description: Hardware model reported for the access point
           readOnly: true
           type: string
         modified_time:
+          description: Time when the access point object was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Friendly display name assigned to the access point
           examples:
           - conference room
           type: string
@@ -70533,8 +70557,10 @@ components:
           - slightly off center
           type: string
         ntp_servers:
+          description: NTP servers used by this access point
           $ref: '#/components/schemas/strings'
         org_id:
+          description: Organization that owns this access point
           $ref: '#/components/schemas/org_id'
         orientation:
           description: AP orientation in degrees from 0 to 359, where 0 is up and 90 is right
@@ -70557,22 +70583,31 @@ components:
             manually, which is error-prone. thus deprecated)
           type: object
         pwr_config:
+          description: Power negotiation and peripheral power settings for this access
+            point
           $ref: '#/components/schemas/ap_pwr_config'
         radio_config:
+          description: Radio configuration overrides for this access point
           $ref: '#/components/schemas/ap_radio'
         serial:
-          description: AP serial number
+          description: Manufacturer serial number for the access point
           readOnly: true
           type: string
         site_id:
+          description: Site where this access point is assigned
           $ref: '#/components/schemas/site_id'
         type:
+          description: Device type discriminator for access point records
           $ref: '#/components/schemas/const_device_type_ap'
         uplink_port_config:
+          description: Authentication and failover behavior for AP uplink ports
           $ref: '#/components/schemas/ap_uplink_port_config'
         usb_config:
+          description: Legacy USB integration settings for this access point
           $ref: '#/components/schemas/ap_usb'
         vars:
+          description: Variable values that override site variables for this access
+            point
           $ref: '#/components/schemas/vars'
         x:
           description: Horizontal map position of the AP, in pixels
@@ -70587,6 +70622,7 @@ components:
           format: double
           type: number
         zigbee_config:
+          description: Zigbee radio and network settings for this access point
           $ref: '#/components/schemas/ap_zigbee'
       required:
       - type
