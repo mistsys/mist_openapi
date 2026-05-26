@@ -74097,7 +74097,7 @@ components:
       - stable
       type: string
     guest:
-      description: Guest
+      description: Guest authorization record at site scope
       properties:
         access_code_email:
           description: If `auth_method`==`email`, the email address where the authorization
@@ -74105,52 +74105,54 @@ components:
           readOnly: true
           type: string
         ap_mac:
-          description: MAC Address of the AP the guest was connected to during the
-            registration process
+          description: MAC address of the AP used during guest registration
           readOnly: true
           type: string
         auth_method:
-          description: Type of guest authorization
+          description: Guest authentication method used for the authorization
           readOnly: true
           type: string
         authorized:
           default: true
-          description: Whether the guest is current authorized
+          description: Whether the guest is currently authorized
           type: boolean
         authorized_expiring_time:
-          description: When the authorization would expire
+          description: Unix timestamp when the guest authorization expires
           examples:
           - 1480704955
           readOnly: true
           type: number
         authorized_time:
-          description: When the guest was authorized
+          description: Unix timestamp when the guest was authorized
           examples:
           - 1480704355
           readOnly: true
           type: number
         company:
-          description: Optional, the info provided by user
+          description: Optional company name provided by the guest during registration
           examples:
           - abc
           type: string
         email:
-          description: Optional, the info provided by user
+          description: Optional email address provided by the guest during registration
           examples:
           - john@abc.com
           format: email
           type: string
         field1:
-          description: Optional, the info provided by user
+          description: Optional custom field 1 value provided by the guest during registration
           type: string
         field2:
+          description: Optional custom field 2 value provided by the guest during registration
           type: string
         field3:
+          description: Optional custom field 3 value provided by the guest during registration
           type: string
         field4:
+          description: Optional custom field 4 value provided by the guest during registration
           type: string
         mac:
-          description: MAC Address
+          description: Device MAC address captured during guest registration
           readOnly: true
           type: string
         minutes:
@@ -74161,14 +74163,14 @@ components:
           minimum: 0
           type: integer
         name:
-          description: Optional, the info provided by user
+          description: Optional name provided by the guest during registration
           examples:
           - John Smith
           readOnly: true
           type: string
         random_mac:
-          description: If the client is using a randomized MAC Address to connect
-            the SSID
+          description: Whether the guest device used a randomized MAC address to connect
+            to the SSID
           readOnly: true
           type: boolean
         ssid:
@@ -74178,7 +74180,7 @@ components:
           readOnly: true
           type: string
         wlan_id:
-          description: ID of the SSID
+          description: Identifier of the WLAN used for the guest authorization
           examples:
           - 6748cfa6-4e12-11e6-9188-0242ac110007
           format: uuid
@@ -74200,32 +74202,31 @@ components:
           readOnly: true
           type: boolean
         ap_mac:
-          description: MAC Address of the AP the guest was connected to during the
-            registration process
+          description: MAC address of the AP used during guest registration
           readOnly: true
           type: string
         auth_method:
-          description: Type of guest authorization
+          description: Guest authentication method used for the authorization
           readOnly: true
           type: string
         authorized:
           default: true
-          description: Whether the guest is current authorized
+          description: Whether the guest is currently authorized
           type: boolean
         authorized_expiring_time:
-          description: When the authorization would expire
+          description: Unix timestamp when the guest authorization expires
           examples:
           - 1480704955
           readOnly: true
           type: number
         authorized_time:
-          description: When the guest was authorized
+          description: Unix timestamp when the guest was authorized
           examples:
           - 1480704355
           readOnly: true
           type: number
         company:
-          description: Optional, the info provided by user
+          description: Optional company name provided by the guest during registration
           examples:
           - abc
           type: string
@@ -74236,7 +74237,7 @@ components:
           readOnly: true
           type: boolean
         email:
-          description: Optional, the info provided by user
+          description: Optional email address provided by the guest during registration
           examples:
           - john@abc.com
           format: email
@@ -74254,7 +74255,7 @@ components:
           description: Optional custom field 4 value provided by the user during registration
           type: string
         mac:
-          description: MAC address used by the guest device during registration
+          description: Device MAC address captured during guest registration
           type: string
         minutes:
           default: 1440
@@ -74264,13 +74265,13 @@ components:
           minimum: 0
           type: integer
         name:
-          description: Optional, the info provided by user
+          description: Optional name provided by the guest during registration
           examples:
           - John Smith
           type: string
         random_mac:
-          description: If the client is using a randomized MAC Address to connect
-            the SSID
+          description: Whether the guest device used a randomized MAC address to connect
+            to the SSID
           readOnly: true
           type: boolean
         ssid:
@@ -74280,7 +74281,7 @@ components:
           readOnly: true
           type: string
         wlan_id:
-          description: ID of the WLAN
+          description: Identifier of the WLAN used for the guest authorization
           examples:
           - 6748cfa6-4e12-11e6-9188-0242ac110007
           format: uuid
