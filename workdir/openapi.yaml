@@ -69410,17 +69410,25 @@ components:
       additionalProperties: false
       properties:
         ap:
+          description: Observed AP MAC addresses for the wireless client during the
+            query duration
           $ref: '#/components/schemas/client_wireless_ap'
         app_version:
+          description: Marvis Client application versions reported by the wireless
+            client during the query duration
           $ref: '#/components/schemas/client_wireless_app_version'
         band:
-          description: Wi-Fi Radio band
+          description: Wi-Fi radio band used by the wireless client
           examples:
           - '5'
           type: string
         device:
+          description: Detected device types for the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_device'
         ftc:
+          description: Whether fast transition information is reported for the wireless
+            client
           type: boolean
         hardware:
           description: Only when client has the Marvis Client app running. Type of
@@ -69429,12 +69437,18 @@ components:
           - Apple Wi-Fi adapter
           type: string
         hostname:
+          description: Detected hostnames for the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_hostname'
         ip:
+          description: Detected IP addresses for the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_ip'
         last_ap:
+          description: Most recent AP MAC address used by the wireless client
           $ref: '#/components/schemas/last_ap'
         last_device:
+          description: Most recent device type detected for the wireless client
           $ref: '#/components/schemas/last_device'
         last_firmware:
           description: Only when client has the Marvis Client app running. Same as
@@ -69448,6 +69462,7 @@ components:
           - hostname-a
           type: string
         last_ip:
+          description: Most recent IP address detected for the wireless client
           $ref: '#/components/schemas/last_client_ip'
         last_model:
           description: Only when client has the Marvis Client app running. latest
@@ -69480,10 +69495,13 @@ components:
           - iot
           type: string
         last_ssid:
+          description: Most recent SSID used by the wireless client
           $ref: '#/components/schemas/last_username'
         last_username:
+          description: Most recent username associated with the wireless client
           type: string
         last_vlan:
+          description: Most recent VLAN associated with the wireless client
           $ref: '#/components/schemas/last_vlan'
         last_wlan_id:
           description: ID of the latest SSID (WLAN) the client is/was connected to
@@ -69492,7 +69510,7 @@ components:
           format: uuid
           type: string
         mac:
-          description: Client MAC Address
+          description: Client MAC address for the wireless client
           examples:
           - bcd074000000
           type: string
@@ -69508,24 +69526,34 @@ components:
           - MBP 16\" M1 2021
           type: string
         org_id:
+          description: Owning organization identifier for the wireless client
           $ref: '#/components/schemas/org_id'
         os:
+          description: Operating systems detected for the wireless client during
+            the query duration
           $ref: '#/components/schemas/client_wireless_os'
         os_version:
+          description: Operating system versions detected for the wireless client
+            during the query duration
           $ref: '#/components/schemas/client_wireless_os_version'
         protocol:
-          description: 802.11 amendment
+          description: 802.11 protocol amendment used by the wireless client
           examples:
           - ax
           type: string
         psk_id:
+          description: PPSK identifiers used by the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_psk_id'
         psk_name:
+          description: PPSK names used by the wireless client during the query duration
           $ref: '#/components/schemas/client_wireless_psk_name'
         random_mac:
-          description: Whether the client is using randomized MAC Address or not
+          description: Whether the wireless client uses a randomized MAC address
           type: boolean
         sdk_version:
+          description: Marvis Client SDK versions reported by the wireless client
+            during the query duration
           $ref: '#/components/schemas/client_wireless_sdk_version'
         site_id:
           description: Mist Site ID where the client is connected
@@ -69534,16 +69562,27 @@ components:
           format: uuid
           type: string
         site_ids:
+          description: Site identifiers where the wireless client was observed during
+            the query duration
           $ref: '#/components/schemas/client_wireless_site_ids'
         ssid:
+          description: Wireless network SSIDs used by the client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_ssid'
         timestamp:
+          description: Time when the wireless client record was observed
           $ref: '#/components/schemas/timestamp'
         username:
+          description: User identities associated with the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_username'
         vlan:
+          description: Network VLANs associated with the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_vlan'
         wlan_id:
+          description: WLAN identifiers used by the wireless client during the query
+            duration
           $ref: '#/components/schemas/client_wireless_wlan_id'
       type: object
     client_wireless_ap:
