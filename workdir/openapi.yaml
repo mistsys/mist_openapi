@@ -66651,6 +66651,7 @@ components:
             \ the API attempts to start BLE orchestration."
           type: boolean
         macs:
+          description: AP MAC addresses to include in the auto-orient run
           $ref: '#/components/schemas/auto_orient_macs'
         override:
           description: Set to `true` to run auto orient even if there are invalid
@@ -66676,6 +66677,7 @@ components:
             \ maintenance the API attempts to start orchestration."
           type: boolean
         macs:
+          description: AP MAC addresses to include in the auto-placement run
           $ref: '#/components/schemas/auto_placement_macs'
         override:
           default: false
