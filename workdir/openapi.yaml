@@ -66167,108 +66167,147 @@ components:
       type: array
     ap_stat_mesh_downlink:
       additionalProperties: false
+      description: Runtime statistics for a mesh downlink from this AP
       properties:
         band:
+          description: Radio band used by this mesh downlink
           examples:
           - '5'
           type: string
         channel:
+          description: Radio channel used by this mesh downlink
           examples:
           - 36
           type: integer
         idle_time:
+          description: Seconds since traffic was last observed on this mesh downlink
           examples:
           - 3
           type: integer
         last_seen:
+          description: Time when this mesh downlink was last observed
           $ref: '#/components/schemas/last_seen'
         proto:
+          description: 802.11 protocol reported for this mesh downlink
           examples:
           - n
           type: string
         rssi:
+          description: Received signal strength for this mesh downlink, in dBm
           examples:
           - -65
           type: integer
         rx_bps:
+          description: Inbound throughput on this mesh downlink, in bits per second
           $ref: '#/components/schemas/rx_bps'
         rx_bytes:
+          description: Inbound byte count for this mesh downlink
           $ref: '#/components/schemas/rx_bytes'
         rx_packets:
+          description: Inbound packet count for this mesh downlink
           $ref: '#/components/schemas/rx_pkts'
         rx_rate:
+          description: Inbound data rate reported for this mesh downlink
           $ref: '#/components/schemas/rx_rate'
         rx_retries:
+          description: Inbound retry count reported for this mesh downlink
           $ref: '#/components/schemas/rx_retries'
         site_id:
+          description: Site associated with this mesh downlink statistic
           $ref: '#/components/schemas/site_id'
         snr:
+          description: Signal-to-noise ratio for this mesh downlink, in dB
           examples:
           - 31
           type: integer
         tx_bps:
+          description: Outbound throughput on this mesh downlink, in bits per second
           $ref: '#/components/schemas/tx_bps'
         tx_bytes:
+          description: Outbound byte count for this mesh downlink
           $ref: '#/components/schemas/tx_bytes'
         tx_packets:
+          description: Outbound packet count for this mesh downlink
           $ref: '#/components/schemas/tx_pkts'
         tx_rate:
+          description: Outbound data rate reported for this mesh downlink
           $ref: '#/components/schemas/tx_rate'
         tx_retries:
+          description: Outbound retry count reported for this mesh downlink
           $ref: '#/components/schemas/tx_retries'
       type: object
     ap_stat_mesh_uplink:
       additionalProperties: false
+      description: Runtime statistics for this AP's mesh uplink
       properties:
         band:
+          description: Radio band used by this mesh uplink
           examples:
           - '5'
           type: string
         channel:
+          description: Radio channel used by this mesh uplink
           examples:
           - 36
           type: integer
         idle_time:
+          description: Seconds since traffic was last observed on this mesh uplink
           examples:
           - 3
           type: integer
         last_seen:
+          description: Time when this mesh uplink was last observed
           $ref: '#/components/schemas/last_seen'
         proto:
+          description: 802.11 protocol reported for this mesh uplink
           examples:
           - n
           type: string
         rssi:
+          description: Received signal strength for this mesh uplink, in dBm
           examples:
           - -65
           type: integer
         rx_bps:
+          description: Inbound throughput on this mesh uplink, in bits per second
           $ref: '#/components/schemas/rx_bps'
         rx_bytes:
+          description: Inbound byte count for this mesh uplink
           $ref: '#/components/schemas/rx_bytes'
         rx_packets:
+          description: Inbound packet count for this mesh uplink
           $ref: '#/components/schemas/rx_pkts'
         rx_rate:
+          description: Inbound data rate reported for this mesh uplink
           $ref: '#/components/schemas/rx_rate'
         rx_retries:
+          description: Inbound retry count reported for this mesh uplink
           $ref: '#/components/schemas/rx_retries'
         site_id:
+          description: Site associated with this mesh uplink statistic
           $ref: '#/components/schemas/site_id'
         snr:
+          description: Signal-to-noise ratio for this mesh uplink, in dB
           examples:
           - 31
           type: integer
         tx_bps:
+          description: Outbound throughput on this mesh uplink, in bits per second
           $ref: '#/components/schemas/tx_bps'
         tx_bytes:
+          description: Outbound byte count for this mesh uplink
           $ref: '#/components/schemas/tx_bytes'
         tx_packets:
+          description: Outbound packet count for this mesh uplink
           $ref: '#/components/schemas/tx_pkts'
         tx_rate:
+          description: Outbound data rate reported for this mesh uplink
           $ref: '#/components/schemas/tx_rate'
         tx_retries:
+          description: Outbound retry count reported for this mesh uplink
           $ref: '#/components/schemas/tx_retries'
         uplink_ap_id:
+          description: Identifier of the upstream AP for this mesh uplink
           examples:
           - 00000000-0000-0000-1000-5c5b35000010
           format: uuid
