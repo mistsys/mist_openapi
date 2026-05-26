@@ -65295,10 +65295,11 @@ components:
       type: array
     ap_led:
       additionalProperties: false
-      description: LED AP settings
+      description: Indicator light settings for an access point
       properties:
         brightness:
           default: 255
+          description: Indicator LED brightness level from 0 to 255
           examples:
           - 255
           maximum: 255
@@ -65306,13 +65307,15 @@ components:
           type: integer
         enabled:
           default: true
+          description: Whether the AP indicator LED is enabled
           type: boolean
       type: object
     ap_mesh:
       additionalProperties: false
-      description: Mesh AP settings
+      description: Wireless mesh settings for an access point
       properties:
         bands:
+          description: Radio bands allowed for AP mesh links
           $ref: '#/components/schemas/ap_mesh_bands'
         enabled:
           default: false
@@ -65329,6 +65332,7 @@ components:
           - integer
           - 'null'
         role:
+          description: Mesh role for this AP, either base or remote
           $ref: '#/components/schemas/ap_mesh_role'
         use_wpa3_on_5:
           default: false
@@ -65336,9 +65340,8 @@ components:
           type: boolean
       type: object
     ap_mesh_bands:
-      description: 'List of bands that the mesh should apply to. For relay, the first
-        viable one will be picked. For relay, the first viable one will be picked.
-        enum: `24`, `5`, `6`'
+      description: 'List of bands that mesh should use. For relay, the first viable
+        one will be picked. enum: `24`, `5`, `6`'
       items:
         $ref: '#/components/schemas/dot11_band'
       type: array
