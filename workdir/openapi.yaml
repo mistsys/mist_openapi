@@ -84202,53 +84202,72 @@ components:
       type: object
     org_setting_gateway_mgmt:
       additionalProperties: false
+      description: Organization-level gateway management settings
       properties:
         app_probing:
+          description: Application probing configuration applied to managed gateways
           $ref: '#/components/schemas/org_setting_gateway_mgmt_app_probing'
         app_usage:
-          description: consumes uplink bandwidth, requires WA license
+          description: Whether gateway application usage collection is enabled; consumes
+            uplink bandwidth
           type: boolean
         fips_enabled:
           default: false
+          description: Whether FIPS mode is enabled for managed gateways
           type: boolean
         host_in_policies:
+          description: Host-in access policies for gateway management services such
+            as ICMP and SNMP
           $ref: '#/components/schemas/org_setting_gateway_mgmt_host_in_policies'
         host_out_policies:
+          description: Path preference policies for gateway-originated management
+            traffic
           $ref: '#/components/schemas/org_setting_gateway_mgmt_host_out_policies'
         overlay_ip:
+          description: Overlay IP addresses used when gateway management traffic uses
+            the overlay
           $ref: '#/components/schemas/org_setting_gateway_mgmt_overlay_ip'
       type: object
     org_setting_gateway_mgmt_app_probing:
       additionalProperties: false
+      description: Application probing settings for organization gateway management
       properties:
         apps:
+          description: Predefined application keys to probe from managed gateways
           $ref: '#/components/schemas/app_probing_apps'
       type: object
     org_setting_gateway_mgmt_host_in_policies:
       additionalProperties: false
+      description: Host-in access policies for gateway management services
       properties:
         icmp:
+          description: Host-in access policy for ICMP traffic to managed gateways
           $ref: '#/components/schemas/org_setting_gateway_mgmt_host_in_policy'
         snmp:
+          description: Host-in access policy for SNMP traffic to managed gateways
           $ref: '#/components/schemas/org_setting_gateway_mgmt_host_in_policy'
       type: object
     org_setting_gateway_mgmt_host_in_policy:
       additionalProperties: false
+      description: Host-in access policy for a gateway management service
       properties:
         tenants:
+          description: Tenant names this host-in policy applies to
           $ref: '#/components/schemas/strings'
       type: object
     org_setting_gateway_mgmt_host_out_policies:
       additionalProperties: false
-      description: 'optional, for some of the host-out traffic, the path preference
-        can be specified by default, ECMP will be used from all available route/path
-        available services: dns/mist/ntp/pim'
+      description: Optional path preferences for gateway-originated management traffic;
+        ECMP is used across available paths when no preference is specified
       properties:
         dns:
+          description: Path preference policy for gateway-originated DNS traffic
           $ref: '#/components/schemas/gateway_mgmt_host_out_policy'
         ntp:
+          description: Path preference policy for gateway-originated NTP traffic
           $ref: '#/components/schemas/gateway_mgmt_host_out_policy'
         syslog:
+          description: Path preference policy for gateway-originated syslog traffic
           $ref: '#/components/schemas/gateway_mgmt_host_out_policy_syslog'
       type: object
     org_setting_gateway_mgmt_overlay_ip:
