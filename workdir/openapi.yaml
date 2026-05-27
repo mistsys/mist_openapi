@@ -81941,10 +81941,16 @@ components:
       readOnly: true
       type: array
     nac_portal:
+      description: NAC portal configuration for 802.1X onboarding, guest access, or
+        Marvis client certificate provisioning
       properties:
         access_type:
+          description: If `type`==`marvis_client`, whether onboarding applies to wireless
+            clients or both wireless and wired clients
           $ref: '#/components/schemas/nac_portal_access_type'
         additional_cacerts:
+          description: Additional CA certificates trusted during NAC portal certificate
+            onboarding
           $ref: '#/components/schemas/nac_portal_additional_cacerts'
         additional_nac_server_name:
           description: Optional list of additional NAC server names
@@ -81955,30 +81961,37 @@ components:
             type: string
           type: array
         bg_image_url:
-          description: Background image
+          description: URL of the NAC portal background image
           type: string
         cert_expire_time:
-          description: In days
+          description: Validity duration for portal-issued client certificates, in
+            days
           examples:
           - 365
           type: integer
         eap_type:
+          description: WPA mode used when onboarding wireless clients through the NAC
+            portal
           $ref: '#/components/schemas/nac_portal_eap_type'
         enable_telemetry:
           description: Model, version, fingering, events (connecting, disconnect,
             roaming), which ap
           type: boolean
         expiry_notification_time:
-          description: In days
+          description: Number of days before certificate expiration to start sending
+            reminder notifications
           type: integer
         name:
+          description: Human-readable name of the NAC portal
           examples:
           - get-wifi
           type: string
         notify_expiry:
-          description: phase 2
+          description: Whether to send reminder notifications before portal-issued
+            certificates expire
           type: boolean
         portal:
+          description: Guest portal settings used when `type`==`guest_portal`
           $ref: '#/components/schemas/nac_portal_guest_portal'
         portal_authorize_jwt_secret:
           description: If `type`==`guest_portal` and `auth`==`external`, the `portal_authorize_jwt_secret`
@@ -82003,19 +82016,26 @@ components:
           readOnly: true
           type: string
         ssid:
+          description: Wireless SSID associated with the NAC portal
           examples:
           - Corp
           type: string
         sso:
+          description: SAML SSO settings for NAC portal authentication and role mapping
           $ref: '#/components/schemas/nac_portal_sso'
         template_url:
+          description: URL for the NAC portal template customization resource
           type: string
         thumbnail_url:
+          description: Read-only URL of the NAC portal background image thumbnail
           readOnly: true
           type: string
         tos:
+          description: Terms of service text shown in the NAC portal
           type: string
         type:
+          description: NAC portal mode, such as guest admin, guest portal, or Marvis
+            client onboarding
           $ref: '#/components/schemas/nac_portal_type'
         ui_url:
           description: If `auth`==`guest_admin`, the URL to the guest admin portal
