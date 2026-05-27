@@ -80672,10 +80672,14 @@ components:
       type: array
     mxedge_event:
       additionalProperties: false
+      description: Event reported for a Mist Edge appliance or service
       properties:
         audit_id:
+          description: Audit log identifier associated with this event, when available
           $ref: '#/components/schemas/id'
         component:
+          description: Mist Edge component that reported the event, such as a power
+            supply or fan
           examples:
           - PS1
           - Fan1
@@ -80683,57 +80687,75 @@ components:
           - string
           - 'null'
         device_id:
-          description: Device id
+          description: Identifier of the device associated with the event, when available
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         device_type:
+          description: Device type associated with the event
           type: string
         from_version:
+          description: Service version before an upgrade-related event
           type: string
         mac:
+          description: Mist Edge MAC address associated with the event
           type: string
         mxcluster_id:
+          description: Mist Edge cluster identifier associated with the event
           examples:
           - 2815c917-58e7-472f-a190-bfd44fb58d05
           type: string
         mxedge_id:
+          description: Mist Edge identifier associated with the event
           examples:
           - 00000000-0000-0000-1000-020000dc585c
           type: string
         mxedge_name:
+          description: Display name of the Mist Edge associated with the event
           type: string
         org_id:
+          description: Identifier of the org where the event occurred
           $ref: '#/components/schemas/org_id'
         package:
+          description: Software package associated with the event
           type: string
         service:
+          description: Mist Edge service associated with the event
           examples:
           - tunterm
           type: string
         severity:
+          description: Event severity level reported for this Mist Edge event
           $ref: '#/components/schemas/event_severity'
         sys_info.usage:
+          description: System resource usage details associated with the event
           $ref: '#/components/schemas/mxedge_event_sys_info'
         text:
+          description: Human-readable message describing the Mist Edge event
           type: string
         timestamp:
+          description: Time when the Mist Edge event occurred
           $ref: '#/components/schemas/timestamp'
         to_version:
+          description: Service version after an upgrade-related event
           type: string
         type:
+          description: Mist Edge event type code
           examples:
           - ME_SERVICE_STOPPED
           type: string
       type: object
     mxedge_event_sys_info:
       additionalProperties: false
+      description: System resource details for a Mist Edge event
       properties:
         resource:
+          description: System resource referenced by the event
           type: string
         severity:
+          description: Event severity for the system resource condition
           $ref: '#/components/schemas/event_severity'
       type: object
     mxedge_events:
