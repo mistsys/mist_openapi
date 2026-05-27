@@ -81801,8 +81801,10 @@ components:
       type: string
     nac_crl_file:
       additionalProperties: false
+      description: Metadata for an uploaded NAC CRL file
       properties:
         created_time:
+          description: Epoch timestamp when the NAC CRL file was uploaded
           $ref: '#/components/schemas/created_time'
         id:
           description: Unique ID for the uploaded CRL file, used to reference the
@@ -81812,6 +81814,7 @@ components:
           readOnly: true
           type: string
         modified_time:
+          description: Epoch timestamp when the NAC CRL file metadata was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Issuer name for the CRL file
@@ -81819,7 +81822,7 @@ components:
           - SampleCertificateSigner
           type: string
         url:
-          description: URL to download the uploaded CRL file
+          description: Download URL for the uploaded NAC CRL file
           examples:
           - http://url/to/crl_file
           type: string
