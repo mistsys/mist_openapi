@@ -80774,22 +80774,30 @@ components:
       type: string
     mxedge_mgmt:
       additionalProperties: false
+      description: Management settings for a Mist Edge appliance
       properties:
         config_auto_revert:
           default: false
+          description: Whether the Mist Edge automatically reverts configuration changes
+            if connectivity is lost
           type: boolean
         fips_enabled:
           default: false
+          description: Whether FIPS mode is enabled on the Mist Edge
           type: boolean
         mist_password:
+          description: Password for the Mist service account on the Mist Edge
           examples:
           - MIST_PASSWORD
           type: string
         oob_ip_type:
+          description: IPv4 address assignment mode for out-of-band management
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type'
         oob_ip_type6:
+          description: IPv6 address assignment mode for out-of-band management
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type6'
         root_password:
+          description: Root account password for the Mist Edge
           examples:
           - ROOT_PASSWORD
           format: password
@@ -80814,46 +80822,61 @@ components:
       type: string
     mxedge_oob_ip_config:
       additionalProperties: false
-      description: IPconfiguration of the Mist Edge out-of_band management interface
+      description: IP configuration for the Mist Edge out-of-band management interface
       properties:
         autoconf6:
           default: true
+          description: Whether IPv6 autoconfiguration is enabled on the out-of-band
+            management interface
           type: boolean
         dhcp6:
           default: true
+          description: Whether DHCPv6 is enabled on the out-of-band management interface
           type: boolean
         dns:
+          description: Name server addresses for out-of-band management
           $ref: '#/components/schemas/mxedge_oob_ip_config_dns'
         gateway:
-          description: If `type`=`static`
+          description: If `type`=`static`, IPv4 default gateway for the out-of-band
+            management interface
           examples:
           - 10.2.1.254
           type: string
         gateway6:
+          description: If `type6`=`static`, IPv6 default gateway for the out-of-band
+            management interface
           examples:
           - 2601:1700:43c0:dc0::1
           type: string
         ip:
-          description: If `type`=`static`
+          description: If `type`=`static`, IPv4 address for the out-of-band management
+            interface
           examples:
           - 10.2.1.2
           type: string
         ip6:
+          description: If `type6`=`static`, IPv6 address for the out-of-band management
+            interface
           examples:
           - 2601:1700:43c0:dc0:20c:29ff:fea7:93bc
           type: string
         netmask:
-          description: If `type`=`static`
+          description: If `type`=`static`, IPv4 netmask for the out-of-band management
+            interface
           examples:
           - 255.255.255.0
           type: string
         netmask6:
+          description: If `type6`=`static`, IPv6 prefix length for the out-of-band
+            management interface
           examples:
           - /64
           type: string
         type:
+          description: IPv4 address assignment mode for out-of-band management
           $ref: '#/components/schemas/ip_type'
         type6:
+          description: IPv6 address assignment mode for out-of-band management
           $ref: '#/components/schemas/ip_type'
       type: object
     mxedge_oob_ip_config_dns:
