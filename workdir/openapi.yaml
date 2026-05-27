@@ -80976,15 +80976,19 @@ components:
       type: object
     mxedge_tunterm_igmp_snooping_config:
       additionalProperties: false
+      description: IGMP snooping settings for Mist Tunnel VLANs
       properties:
         enabled:
           anyOf:
           - type: boolean
           - type: string
           default: false
+          description: Whether IGMP snooping is enabled for the configured VLANs
         querier:
+          description: IGMP querier settings used with tunnel termination snooping
           $ref: '#/components/schemas/mxedge_tunterm_igmp_snooping_querier'
         vlan_ids:
+          description: List of VLAN IDs where tunnel termination performs IGMP snooping
           $ref: '#/components/schemas/mxedge_tunterm_igmp_snooping_config_vlan_ids'
       type: object
     mxedge_tunterm_igmp_snooping_config_vlan_ids:
@@ -80997,9 +81001,10 @@ components:
           type: integer
         type: array
       - type: string
-      description: List of vlans on which tunterm performs IGMP snooping
+      description: List of VLAN IDs where tunnel termination performs IGMP snooping
     mxedge_tunterm_igmp_snooping_querier:
       additionalProperties: false
+      description: IGMP querier settings for tunnel termination
       properties:
         max_response_time:
           description: Querier's query response interval, in tenths-of-seconds
@@ -81017,7 +81022,7 @@ components:
           - 125
           type: integer
         robustness:
-          description: Querier's robustness
+          description: IGMP querier robustness variable
           maximum: 7
           minimum: 1
           type: integer
@@ -81072,13 +81077,17 @@ components:
       type: array
     mxedge_tunterm_multicast_config:
       additionalProperties: false
+      description: Multicast forwarding settings for tunnel termination
       properties:
         mdns:
+          description: Settings for mDNS forwarding on tunnel termination VLANs
           $ref: '#/components/schemas/mxedge_tunterm_multicast_mdns'
         ssdp:
+          description: Settings for SSDP forwarding on tunnel termination VLANs
           $ref: '#/components/schemas/mxedge_tunterm_multicast_ssdp'
       type: object
     mxedge_tunterm_multicast_config_mdns_vlan_ids:
+      description: VLAN IDs where mDNS forwarding is enabled
       examples:
       - - 2
         - 3
@@ -81087,6 +81096,7 @@ components:
         type: integer
       type: array
     mxedge_tunterm_multicast_config_ssdp_vlan_ids:
+      description: VLAN IDs where SSDP forwarding is enabled
       examples:
       - - 2
         - 3
@@ -81096,18 +81106,24 @@ components:
       type: array
     mxedge_tunterm_multicast_mdns:
       additionalProperties: false
+      description: mDNS forwarding settings for tunnel termination
       properties:
         enabled:
+          description: Whether mDNS forwarding is enabled for the configured VLANs
           type: boolean
         vlan_ids:
+          description: List of VLAN IDs where mDNS forwarding is enabled
           $ref: '#/components/schemas/strings'
       type: object
     mxedge_tunterm_multicast_ssdp:
       additionalProperties: false
+      description: SSDP forwarding settings for tunnel termination
       properties:
         enabled:
+          description: Whether SSDP forwarding is enabled for the configured VLANs
           type: boolean
         vlan_ids:
+          description: List of VLAN IDs where SSDP forwarding is enabled
           $ref: '#/components/schemas/strings'
       type: object
     mxedge_tunterm_other_ip_config:
@@ -81126,22 +81142,30 @@ components:
       type: object
     mxedge_tunterm_switch_config:
       additionalProperties: false
+      description: Switch VLAN settings for one tunnel termination port
       properties:
         port_vlan_id:
+          description: Untagged VLAN ID for this tunnel termination switch port
           type: integer
         vlan_ids:
+          description: List of tagged VLAN IDs allowed on this tunnel termination
+            switch port
           $ref: '#/components/schemas/mxedge_tunterm_switch_config_vlan_ids'
       type: object
     mxedge_tunterm_switch_config_vlan_ids:
+      description: Tagged VLAN IDs allowed on a tunnel termination switch port
       items:
         $ref: '#/components/schemas/vlan_id_with_variable'
       type: array
     mxedge_tunterm_switch_configs:
       additionalProperties:
         $ref: '#/components/schemas/mxedge_tunterm_switch_config'
-      description: If custom vlan settings are desired
+      description: Custom VLAN settings for tunnel termination switch ports, if desired;
+        property key is the port identifier
       properties:
         enabled:
+          description: Whether custom tunnel termination switch VLAN settings are
+            enabled
           type: boolean
       type: object
     mxedge_upgrade_channel:
