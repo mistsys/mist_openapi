@@ -80920,25 +80920,33 @@ components:
     mxedge_tunterm_dhcpd_config:
       additionalProperties:
         $ref: '#/components/schemas/mxedge_tunterm_dhcpd_config_property'
-      description: Global and per-VLAN. Property key is the VLAN ID
+      description: Global and per-VLAN DHCP relay settings for Mist Tunneled VLANs;
+        property key is the VLAN ID
       properties:
         enabled:
           default: false
+          description: Whether DHCP relay is enabled for Mist Tunneled VLANs
           type: boolean
         servers:
+          description: DHCP relay server addresses used when `type`==`relay`
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_config_servers'
         type:
+          description: DHCP handling mode for the global tunnel termination config
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_type'
       type: object
     mxedge_tunterm_dhcpd_config_property:
       additionalProperties: false
+      description: Per-VLAN DHCP relay settings for a Mist Tunneled VLAN
       properties:
         enabled:
           default: false
+          description: Whether DHCP relay is enabled for this tunneled VLAN
           type: boolean
         servers:
+          description: DHCP relay server addresses used by this tunneled VLAN
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_config_servers'
         type:
+          description: DHCP handling mode for this tunneled VLAN
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_config_type'
       type: object
     mxedge_tunterm_dhcpd_config_servers:
@@ -80960,8 +80968,10 @@ components:
       type: string
     mxedge_tunterm_extra_route:
       additionalProperties: false
+      description: Extra route for Mist Tunnel traffic on a Mist Edge
       properties:
         via:
+          description: Next-hop IP address for this Mist Tunnel extra route
           type: string
       type: object
     mxedge_tunterm_igmp_snooping_config:
@@ -81019,30 +81029,35 @@ components:
       type: object
     mxedge_tunterm_ip_config:
       additionalProperties: false
-      description: IPconfiguration of the Mist Tunnel interface
+      description: IP configuration for the Mist Tunnel interface
       properties:
         gateway:
+          description: Default IPv4 gateway for the Mist Tunnel interface
           examples:
           - 10.2.1.254
           type: string
         gateway6:
+          description: Default IPv6 gateway for the Mist Tunnel interface
           examples:
           - 2001:1010:1010:1010::1
           type: string
         ip:
-          description: Untagged VLAN
+          description: Address on the untagged Mist Tunnel interface, in IPv4 format
           examples:
           - 10.2.1.1
           type: string
         ip6:
+          description: Address on the Mist Tunnel interface, in IPv6 format
           examples:
           - 2001:1010:1010:1010::2
           type: string
         netmask:
+          description: Subnet mask for the Mist Tunnel IPv4 address
           examples:
           - 255.255.255.0
           type: string
         netmask6:
+          description: Prefix length for the Mist Tunnel IPv6 address
           examples:
           - /64
           type: string
@@ -81097,10 +81112,13 @@ components:
       type: object
     mxedge_tunterm_other_ip_config:
       additionalProperties: false
+      description: Additional IP configuration for a Mist Tunnel VLAN interface
       properties:
         ip:
+          description: Address for the additional Mist Tunnel interface, in IPv4 format
           type: string
         netmask:
+          description: Subnet mask for the additional Mist Tunnel IPv4 address
           type: string
       required:
       - ip
