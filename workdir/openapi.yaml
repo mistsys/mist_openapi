@@ -67183,7 +67183,7 @@ components:
       - smtp
       type: string
     avprofile_protocols:
-      description: 'Network protocols monitored by the antivirus profile. enum: `ftp`,
+      description: 'List of network protocols monitored by the antivirus profile. enum: `ftp`,
         `http`, `imap`, `pop3`, `smtp`'
       items:
         $ref: '#/components/schemas/avprofile_protocol'
@@ -69972,25 +69972,25 @@ components:
       type: array
     const_ap_led:
       additionalProperties: false
-      description: AP LED status definition returned by the constants API
+      description: AP LED status and `last_trouble` code definition returned by the constants API
       properties:
         code:
-          description: Numeric LED status code reported by the AP
+          description: Numeric LED status and `last_trouble` code reported by the AP
           examples:
           - '01'
           type: string
         description:
-          description: Human-readable explanation of the LED status
+          description: Human-readable explanation of the AP status
           examples:
           - LED not working
           type: string
         key:
-          description: Machine-readable LED status key
+          description: Machine-readable AP status key
           examples:
           - LED_FAILURE
           type: string
         name:
-          description: Display name for the LED status
+          description: Display name for the AP status
           examples:
           - LED Failure
           type: string
@@ -103450,7 +103450,8 @@ components:
       properties:
         org_id:
           description: Organization included in the WLAN template application scope
-          $ref: '#/components/schemas/template_applies_org_id'
+          type: string
+          format: uuid
         site_ids:
           description: Sites included in the WLAN template application scope
           $ref: '#/components/schemas/template_applies_site_ids'
