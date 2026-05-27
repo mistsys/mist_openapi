@@ -78732,9 +78732,10 @@ components:
       type: object
     log_event:
       additionalProperties: false
+      description: Audit log event recorded for an organization or site
       properties:
         admin_id:
-          description: admin id
+          description: Admin user identifier associated with the log event
           format: uuid
           readOnly: true
           type:
@@ -78757,24 +78758,28 @@ components:
           readOnly: true
           type: object
         device_id:
-          description: Device id
+          description: Device identifier associated with the log event
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         for_site:
+          description: Whether this log event is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the log event
           $ref: '#/components/schemas/id'
         message:
-          description: log message
+          description: Human-readable log message describing the event
           readOnly: true
           type: string
         org_id:
+          description: Organization associated with the log event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the log event, if any
           format: uuid
           readOnly: true
           type:
@@ -78784,6 +78789,7 @@ components:
           description: sender source ip address
           type: string
         timestamp:
+          description: Time when the log event occurred
           $ref: '#/components/schemas/timestamp'
       required:
       - message
@@ -78791,21 +78797,26 @@ components:
       - timestamp
       type: object
     log_events:
+      description: Audit log events returned by a log query
       items:
         $ref: '#/components/schemas/log_event'
       type: array
       uniqueItems: true
     login:
+      description: Login request using email/password and an optional two-factor code
       properties:
         email:
+          description: Administrator email address used to log in
           examples:
           - test@mistsys.com
           type: string
         password:
+          description: Administrator password used to log in
           examples:
           - foryoureyesonly
           type: string
         two_factor:
+          description: Optional two-factor authentication code for the login request
           examples:
           - '123456'
           type: string
@@ -78818,12 +78829,12 @@ components:
       description: Failed login attempts
       properties:
         email:
-          description: Email address of the user
+          description: User email address for the failed login attempts
           examples:
           - admin@test.com
           type: string
         last_failure_at:
-          description: Last failure time
+          description: Time of the most recent failed login attempt
           examples:
           - 1509161968
           type: integer
@@ -78833,8 +78844,10 @@ components:
           - 1
           type: integer
         src_ips:
+          description: Source IP addresses observed for failed login attempts
           $ref: '#/components/schemas/login_failures_src_ips'
         user_agents:
+          description: User-Agent strings observed for failed login attempts
           $ref: '#/components/schemas/login_failures_user_agents'
       type: object
     login_failures_src_ips:
