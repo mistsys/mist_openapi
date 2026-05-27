@@ -77555,33 +77555,39 @@ components:
       type: string
     issued_client_certificate:
       additionalProperties: false
+      description: Issued Mist SCEP client certificate metadata
       properties:
         cert_provider:
+          description: Certificate provider that issued this client certificate
           examples:
           - byod
           type: string
         common_name:
+          description: Subject common name encoded in the issued client certificate
           examples:
           - john@corp.com
           type: string
         created_time:
-          description: When the certificate has been created
+          description: Time when the client certificate was created
           examples:
           - 2025-08-18 10:10:30.949165+00:00
           type: string
         device_id:
+          description: Device associated with the issued client certificate
           $ref: '#/components/schemas/device_id'
         expire_time:
-          description: When the certificate will expire
+          description: Time when the client certificate expires
           examples:
           - 2026-08-18 10:06:00+00:00
           type: string
         serial_number:
+          description: Certificate serial number used for lookup or revocation
           examples:
           - 91984382552102771A2B3C4E5F224719956718003374658
           type: string
       type: object
     issued_client_certificates:
+      description: Issued client certificates returned by a SCEP certificate query
       items:
         $ref: '#/components/schemas/issued_client_certificate'
       type: array
