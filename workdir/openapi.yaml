@@ -72451,7 +72451,7 @@ components:
       - $ref: '#/components/schemas/deviceprofile_switch'
     deviceprofile_ap:
       additionalProperties: false
-      description: Device Profile
+      description: AP Device Profile
       properties:
         aeroscout:
           description: Location integration defaults for AeroScout in this AP profile
