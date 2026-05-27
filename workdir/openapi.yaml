@@ -71704,9 +71704,11 @@ components:
         ap:
           description: Deprecated AP MAC address field; use `mac` instead
           type: string
+          deprecated: true
         ap_name:
           description: Deprecated AP name field; use `device_name` instead
           type: string
+          deprecated: true
         apfw:
           description: AP firmware version associated with the device event
           type: string
