@@ -83667,43 +83667,62 @@ components:
         $ref: '#/components/schemas/org_service_policy'
       type: array
     org_service_policy:
+      description: Organization-level service policy that allows or denies traffic
+        for tenants and services
       properties:
         aamw:
+          description: Advanced anti-malware settings applied by this service policy
           $ref: '#/components/schemas/service_policy_aamw'
         action:
+          description: Allow or deny action for traffic matched by this service policy
           $ref: '#/components/schemas/allow_deny'
         antivirus:
+          description: Malware and virus inspection settings applied by this service
+            policy
           $ref: '#/components/schemas/service_policy_antivirus'
         appqoe:
+          description: Application QoE settings applied by this service policy
           $ref: '#/components/schemas/service_policy_appqoe'
         created_time:
+          description: Epoch timestamp when the service policy was created
           $ref: '#/components/schemas/created_time'
         ewf:
+          description: Enhanced web filtering rules applied by this service policy
           $ref: '#/components/schemas/service_policy_ewf'
         id:
+          description: Unique identifier of the service policy
           $ref: '#/components/schemas/id'
         idp:
+          description: Intrusion detection and prevention settings applied by this
+            service policy
           $ref: '#/components/schemas/idp_config'
         local_routing:
-          description: access within the same VRF
+          description: Whether the policy permits access within the same VRF
           type: boolean
         modified_time:
+          description: Epoch timestamp when the service policy was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the service policy
           type: string
         org_id:
+          description: Organization that owns this service policy
           $ref: '#/components/schemas/org_id'
         path_preference:
           description: By default, we derive all paths available and use them, optionally,
             you can customize by using `path_preference`
           type: string
         secintel:
+          description: Security intelligence settings applied by this service policy
           $ref: '#/components/schemas/service_policy_secintel'
         services:
+          description: Application services or groups matched by this policy
           $ref: '#/components/schemas/strings'
         ssl_proxy:
+          description: SSL proxy inspection settings applied by this service policy
           $ref: '#/components/schemas/service_policy_ssl_proxy'
         tenants:
+          description: Tenant names matched by this service policy
           $ref: '#/components/schemas/strings'
       type: object
     org_setting:
