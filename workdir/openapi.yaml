@@ -78193,7 +78193,7 @@ components:
       type: object
     junos_port_config:
       additionalProperties: false
-      description: Switch port config
+      description: Junos switch port configuration
       properties:
         ae_disable_lacp:
           description: To disable LACP support for the AE interface
@@ -78213,6 +78213,7 @@ components:
           description: To use slow timeout
           type: boolean
         aggregated:
+          description: Whether this port is configured as an aggregated Ethernet member
           default: false
           type: boolean
         critical:
@@ -78220,12 +78221,14 @@ components:
           description: To generate port up/down alarm
           type: boolean
         description:
+          description: Human-readable description for this Junos port
           type: string
         disable_autoneg:
           default: false
           description: If `speed` and `duplex` are specified, whether to disable autonegotiation
           type: boolean
         duplex:
+          description: Link duplex mode for this Junos port
           $ref: '#/components/schemas/junos_port_config_duplex'
         dynamic_usage:
           description: Enable dynamic usage for this port. Set to `dynamic` to enable.
@@ -78233,6 +78236,7 @@ components:
           - string
           - 'null'
         esilag:
+          description: Whether this Junos port participates in an ESI-LAG
           type: boolean
         mtu:
           default: 1514
@@ -78249,6 +78253,7 @@ components:
           description: Prevent helpdesk to override the port config
           type: boolean
         poe_disabled:
+          description: Whether PoE capabilities are disabled for this Junos port
           default: false
           type: boolean
         port_network:
@@ -78258,6 +78263,7 @@ components:
             [View more information](https://www.juniper.net/documentation/us/en/software/junos/multicast-l2/topics/topic-map/q-in-q.html#id-understanding-qinq-tunneling-and-vlan-translation)
           type: string
         speed:
+          description: Link speed for this Junos port
           $ref: '#/components/schemas/junos_port_config_speed'
         usage:
           description: Port usage name. For Q-in-Q, use `vlan_tunnel`. If EVPN is
