@@ -79378,28 +79378,34 @@ components:
           type: number
       type: object
     map_sitesurvey_path:
-      description: Sitesurvey_path
+      description: Site survey path definitions for a map
       items:
         $ref: '#/components/schemas/map_sitesurvey_path_items'
       minItems: 0
       type: array
     map_sitesurvey_path_items:
       additionalProperties: false
+      description: Site survey path definition on a map
       properties:
         coordinate:
+          description: Site survey path coordinate space
           examples:
           - actual
           type: string
         id:
+          description: Unique identifier of the site survey path
           $ref: '#/components/schemas/id'
         name:
+          description: Display name of the site survey path
           examples:
           - Default
           type: string
         nodes:
+          description: Path nodes included in the site survey path
           $ref: '#/components/schemas/map_sitesurvey_path_items_nodes'
       type: object
     map_sitesurvey_path_items_nodes:
+      description: Map nodes included in a site survey path
       items:
         $ref: '#/components/schemas/map_node'
       minItems: 0
@@ -79428,13 +79434,16 @@ components:
       description: JSON blob for wall definition (same format as wayfinding_path)
       properties:
         coordinate:
+          description: Wall path coordinate space
           examples:
           - actual
           type: string
         nodes:
+          description: Path nodes that define the wall geometry
           $ref: '#/components/schemas/map_wall_path_nodes'
       type: object
     map_wall_path_nodes:
+      description: Map nodes included in a wall path
       items:
         $ref: '#/components/schemas/map_node'
       minItems: 0
@@ -79444,22 +79453,28 @@ components:
       description: Properties related to wayfinding
       properties:
         micello:
+          description: External Micello wayfinding integration settings for this map
           $ref: '#/components/schemas/map_wayfinding_micello'
         snap_to_path:
+          description: Whether wayfinding should snap routes to configured paths
           type: boolean
       type: object
     map_wayfinding_micello:
       additionalProperties: false
+      description: Micello wayfinding integration settings
       properties:
         account_key:
+          description: Micello account key used for wayfinding
           examples:
           - adasdf
           type: string
         default_level_id:
+          description: Default Micello floor or level identifier for wayfinding
           examples:
           - 5
           type: integer
         map_id:
+          description: Micello map identifier used for wayfinding
           examples:
           - c660f81dd250c
           type: string
@@ -79469,13 +79484,16 @@ components:
       description: "JSON blob for wayfinding (using Dijkstra\u2019s algorithm)"
       properties:
         coordinate:
+          description: Wayfinding path coordinate space
           examples:
           - actual
           type: string
         nodes:
+          description: Path nodes used for wayfinding routes
           $ref: '#/components/schemas/map_wayfinding_path_nodes'
       type: object
     map_wayfinding_path_nodes:
+      description: Map nodes included in a wayfinding path
       items:
         $ref: '#/components/schemas/map_node'
       minItems: 0
