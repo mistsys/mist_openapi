@@ -66763,7 +66763,7 @@ components:
           description: Owning organization identifier for this asset
           $ref: '#/components/schemas/org_id'
         site_id:
-          description: Containing site identifier for this asset, when site-scoped
+          description: Identifier of the site associated with this asset
           $ref: '#/components/schemas/site_id'
         tag_id:
           description: BLE tag identifier associated with this asset
@@ -67174,7 +67174,7 @@ components:
       - permit
       type: string
     avprofile_protocol:
-      description: Protocol that can be inspected by an antivirus profile
+      description: 'Protocol that can be inspected by an antivirus profile. enum: `ftp`, `http`, `imap`, `pop3`, `smtp`'
       enum:
       - ftp
       - http
