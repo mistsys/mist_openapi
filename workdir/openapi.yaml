@@ -77910,32 +77910,41 @@ components:
       type: string
     juniper_account:
       additionalProperties: false
+      description: Linked Juniper account available to the organization
       properties:
         linked_by:
+          description: User who linked this Juniper account
           examples:
           - John Smith (john@abccorp.com)
           readOnly: true
           type: string
         name:
+          description: Display name of the linked Juniper account
           examples:
           - ABC Corp
           readOnly: true
           type: string
       type: object
     juniper_accounts:
+      description: Linked Juniper accounts available to the organization
       items:
         $ref: '#/components/schemas/juniper_account'
       type: array
     juniper_srx_auto_upgrade:
       additionalProperties: false
-      description: auto_upgrade device first time it is onboarded
+      description: SRX firmware auto-upgrade settings applied when a device is first
+        onboarded
       properties:
         custom_versions:
+          description: Per-SRX-model firmware versions to deploy instead of the default
+            version
           $ref: '#/components/schemas/juniper_srx_auto_upgrade_custom_versions'
         enabled:
+          description: Whether SRX auto-upgrade is enabled for newly onboarded devices
           default: false
           type: boolean
         snapshot:
+          description: Whether to take a snapshot during the SRX upgrade process
           default: false
           type: boolean
         version:
