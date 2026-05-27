@@ -83955,7 +83955,7 @@ components:
       type: object
     org_setting_auto_assignment_rule:
       additionalProperties: false
-      description: Auto_rules in org settings
+      description: Automatic assignment rule used by org settings
       properties:
         create_new_site_if_needed:
           default: false
@@ -83977,30 +83977,38 @@ components:
             If a gateway template is desired for this newly created site
           type: string
         match_country:
-          description: If `src`==`geoip`
+          description: If `src`==`geoip`, country or region value that must match
+            the device location
           type: string
         match_device_type:
+          description: Device type filter that limits which claimed devices this rule
+            applies to
           $ref: '#/components/schemas/device_type_default_ap'
         match_model:
-          description: Optional/additional filter
+          description: Optional additional device model filter for this assignment
+            rule
           type: string
         model:
-          description: If `src`==`model`
+          description: If `src`==`model`, device model value to match
           type: string
         prefix:
-          description: If `src`==`name`
+          description: If `src`==`name`, prefix that must be present in the device
+            name
           examples:
           - XX-
           type:
           - string
           - 'null'
         src:
+          description: Source attribute used to evaluate the automatic assignment
+            rule
           $ref: '#/components/schemas/org_setting_auto_site_assignment_src'
         subnet:
           description: If `src`==`subnet` or `ext_ip`==`ext_ip`
           type: string
         suffix:
-          description: If `src`==`name`
+          description: If `src`==`name`, suffix that must be present in the device
+            name
           examples:
           - -YY
           type:
@@ -84016,14 +84024,18 @@ components:
       type: object
     org_setting_auto_device_naming:
       additionalProperties: false
+      description: Automatic device naming configuration for claimed devices
       properties:
         enable:
+          description: Whether automatic device naming is enabled
           type: boolean
         rules:
+          description: List of rules used to derive device names automatically
           $ref: '#/components/schemas/org_setting_auto_device_naming_rules'
       type: object
     org_setting_auto_device_naming_rule:
       additionalProperties: false
+      description: Automatic device naming rule
       properties:
         expression:
           description: "\"[0:3]\"            // \"abcdef\" -> \"abc\"  \n      \"\
@@ -84033,14 +84045,16 @@ components:
           - split(.)[1]
           type: string
         match_device:
+          description: Device type filter for this naming rule
           $ref: '#/components/schemas/device_type_default_ap'
         prefix:
-          description: Prefix to append to the device name
+          description: Text prepended to the generated device name
           type: string
         src:
+          description: Device attribute used to generate the name
           $ref: '#/components/schemas/org_setting_auto_device_naming_rule_src'
         suffix:
-          description: Suffix to append to the device name
+          description: Text appended to the generated device name
           type: string
       type: object
     org_setting_auto_device_naming_rule_src:
@@ -84057,10 +84071,13 @@ components:
       - 'null'
     org_setting_auto_deviceprofile_assignment:
       additionalProperties: false
+      description: Automatic device profile assignment configuration
       properties:
         enable:
+          description: Whether automatic device profile assignment is enabled
           type: boolean
         rules:
+          description: Assignment rules evaluated for automatic device profile selection
           $ref: '#/components/schemas/org_setting_auto_deviceprofile_assignment_rules'
       type: object
     org_setting_auto_deviceprofile_assignment_rules:
@@ -84071,10 +84088,13 @@ components:
       - 'null'
     org_setting_auto_site_assignment:
       additionalProperties: false
+      description: Automatic site assignment configuration for claimed devices
       properties:
         enable:
+          description: Whether automatic site assignment is enabled
           type: boolean
         rules:
+          description: Assignment rules evaluated for automatic site selection
           $ref: '#/components/schemas/org_setting_auto_site_assignment_rules'
       type: object
     org_setting_auto_site_assignment_rules:
