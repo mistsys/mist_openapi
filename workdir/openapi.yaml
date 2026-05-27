@@ -79988,21 +79988,28 @@ components:
           type: string
       type: object
     msp:
+      description: Managed service provider account
       properties:
         allow_mist:
+          description: Whether Mist support access is allowed for this MSP account
           type: boolean
         created_time:
+          description: Time when the MSP account was created
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier of the MSP account
           $ref: '#/components/schemas/id'
         logo_url:
           description: For advanced tier (uMSPs) only
           type: string
         modified_time:
+          description: Time when the MSP account was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the MSP account
           type: string
         tier:
+          description: Service tier for the MSP account
           $ref: '#/components/schemas/msp_tier'
         url:
           description: For advanced tier (uMSPs) only
@@ -80015,24 +80022,31 @@ components:
       readOnly: true
       type: string
     msp_license_action:
+      description: License operation request for an MSP account
       properties:
         amendment_id:
-          description: Required if `op`==`unamend`
+          description: Required if `op`==`unamend`; identifies the license amendment
+            to undo
           type: string
         dst_org_id:
-          description: Required if `op`==`amend`, destination org id
+          description: Required if `op`==`amend`; destination org ID that receives
+            the amended license quantity
           format: uuid
           type: string
         notes:
-          description: Required if `op`==`annotate`
+          description: Required if `op`==`annotate`; note text to attach to the license
+            action
           type: string
         op:
+          description: License operation to perform for this MSP request
           $ref: '#/components/schemas/msp_license_action_operation'
         quantity:
-          description: Required if `op`==`amend`
+          description: Required if `op`==`amend`; license quantity to move to the
+            destination org
           type: number
         subscription_id:
-          description: Required if `op`==`annotate`
+          description: Required if `op`==`annotate`; subscription ID for the license
+            action
           minLength: 1
           type: string
       required:
@@ -80048,8 +80062,10 @@ components:
       minLength: 1
       type: string
     msp_logo:
+      description: Payload for uploading an advanced-tier MSP logo
       properties:
         logo_url:
+          description: Public URL for the advanced-tier MSP logo image
           type: string
       type: object
     msp_logs_count_distinct:
@@ -80069,10 +80085,13 @@ components:
       - status
       type: string
     msp_org_change:
+      description: Request to assign or unassign orgs for an MSP account
       properties:
         op:
+          description: Assignment operation to apply to the listed org IDs
           $ref: '#/components/schemas/msp_org_change_operation'
         org_ids:
+          description: List of org IDs to assign to or unassign from the MSP account
           $ref: '#/components/schemas/msp_org_change_org_ids'
       required:
       - op
@@ -80085,7 +80104,7 @@ components:
       - unassign
       type: string
     msp_org_change_org_ids:
-      description: List of org_id
+      description: List of org IDs to assign to or unassign from an MSP account
       items:
         type: string
       type: array
