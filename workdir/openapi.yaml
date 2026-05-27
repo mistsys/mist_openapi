@@ -78400,14 +78400,15 @@ components:
       type: string
     last_trouble:
       additionalProperties: false
-      description: Last trouble code of switch
+      description: Last trouble indicator reported by a switch
       properties:
         code:
-          description: Code definitions list at [List Ap Led Definition]($e/Constants%20Definitions/listApLedDefinition)
+          description: Trouble code; definitions are listed at [List Ap Led Definition]($e/Constants%20Definitions/listApLedDefinition)
           examples:
           - '03'
           type: string
         timestamp:
+          description: Time when the last trouble code was reported
           $ref: '#/components/schemas/timestamp'
       type: object
     last_username:
@@ -78423,13 +78424,16 @@ components:
       type: integer
     lat_lng:
       additionalProperties: false
+      description: Geographic latitude and longitude coordinate pair
       properties:
         lat:
+          description: Geographic latitude in decimal degrees
           examples:
           - 37.295833
           format: double
           type: number
         lng:
+          description: Geographic longitude in decimal degrees
           examples:
           - -122.032946
           format: double
@@ -78440,20 +78444,25 @@ components:
       type: object
     latlng_br:
       additionalProperties: false
-      description: When type=google, latitude / longitude of the bottom-right corner
+      description: When `type`==`google`, latitude and longitude of the bottom-right
+        corner
       properties:
         lat:
+          description: Bottom-right latitude for the Google map bounds
           type: string
         lng:
+          description: Bottom-right longitude for the Google map bounds
           type: string
       type: object
     latlng_tl:
       additionalProperties: false
-      description: When type=google, latitude / longitude of the top-left corner
+      description: When `type`==`google`, latitude and longitude of the top-left corner
       properties:
         lat:
+          description: Top-left latitude for the Google map bounds
           type: string
         lng:
+          description: Top-left longitude for the Google map bounds
           type: string
       type: object
     license:
