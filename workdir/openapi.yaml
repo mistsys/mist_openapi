@@ -83400,10 +83400,13 @@ components:
       type: object
     org_device:
       additionalProperties: false
+      description: Organization device identifier returned by the devices list
       properties:
         mac:
+          description: Organization device MAC address
           type: string
         name:
+          description: Display name of the organization device
           type: string
       required:
       - mac
@@ -83467,6 +83470,7 @@ components:
             Only present when `status` is `available`.
           type: integer
         status:
+          description: Current generation state of the E911 AP BSSID report
           $ref: '#/components/schemas/org_e911_report_status'
         url:
           description: Presigned URL to download the CSV file. Only present when `status`
@@ -83483,16 +83487,21 @@ components:
       type: string
     org_event:
       additionalProperties: false
+      description: Event record generated at the organization level
       properties:
         org_id:
+          description: Organization associated with this event
           $ref: '#/components/schemas/org_id'
         text:
+          description: Detailed human-readable message for the organization event
           examples:
           - authentication failed, API key invalid
           type: string
         timestamp:
+          description: Time when the organization event occurred
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Event type code for this organization event
           examples:
           - CRADLEPOINT_SYNC_FAILED
           type: string
@@ -83512,6 +83521,8 @@ components:
       readOnly: true
       type: string
     org_license_action:
+      description: Request to amend, annotate, delete, or unamend an organization
+        license
       properties:
         amendment_id:
           description: If `op`==`unamend`, the ID of the operation to cancel
@@ -83522,9 +83533,10 @@ components:
           format: uuid
           type: string
         notes:
-          description: If `op`==`annotate`
+          description: If `op`==`annotate`, note text to attach to the license
           type: string
         op:
+          description: License action operation to perform
           $ref: '#/components/schemas/org_license_action_operation'
         quantity:
           description: If `op`==`amend`, the number of licenses to move
