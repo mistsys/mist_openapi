@@ -78871,13 +78871,16 @@ components:
         type: string
       type: array
     mac_addresses:
+      description: Request containing one or more MAC addresses
       properties:
         macs:
+          description: List of MAC addresses included in the request
           $ref: '#/components/schemas/mac_addresses_macs'
       required:
       - macs
       type: object
     mac_addresses_macs:
+      description: Unique MAC addresses included in a request
       examples:
       - - 683b679ac024
       items:
@@ -78887,10 +78890,13 @@ components:
       uniqueItems: true
     mac_table_stats:
       additionalProperties: false
+      description: MAC table capacity and usage statistics
       properties:
         mac_table_count:
+          description: Number of learned MAC table entries currently present
           type: integer
         max_mac_entries_supported:
+          description: Maximum number of MAC table entries supported
           type: integer
       type: object
     map:
