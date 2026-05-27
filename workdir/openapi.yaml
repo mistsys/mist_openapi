@@ -81623,82 +81623,112 @@ components:
       type: array
     nac_client_coa:
       additionalProperties: false
+      description: Change of Authorization request for a NAC client
       properties:
         coa_type:
+          description: Change of Authorization command to send to the NAC client
           $ref: '#/components/schemas/nac_coa_type'
       type: object
     nac_client_coa_response:
       additionalProperties: false
+      description: Response returned after sending a NAC client CoA command
       properties:
         device_mac:
-          description: MAC address of the target device (AP or switch MAC)
+          description: Target AP or switch MAC address for the CoA command
           type: string
         device_type:
+          description: Type of network device that received the CoA command
           $ref: '#/components/schemas/device_type'
       type: object
     nac_client_event:
       additionalProperties: false
+      description: NAC authentication event for a wired or wireless client
       properties:
         ap:
-          description: AP MAC address for the client session
+          description: Access point MAC address for the client session
           examples:
           - 5c5b35513227
           type: string
         auth_type:
+          description: Authentication method used for the NAC event
           $ref: '#/components/schemas/nac_auth_type'
         bssid:
-          description: BSSID used for the client session
+          description: Wireless BSSID used for the client session
           examples:
           - 5c5b355fafcc
           type: string
         client_type:
+          description: Access type for the NAC client event
           $ref: '#/components/schemas/nac_access_type'
         device_mac:
+          description: Network device MAC address for the AP or switch handling the
+            client session
           $ref: '#/components/schemas/nac_device_mac'
         dryrun_nacrule_id:
+          description: Dry-run NAC rule ID that matched the event, when present
           $ref: '#/components/schemas/nac_event_dryrun_nacrule_id'
         dryrun_nacrule_matched:
+          description: Whether a dry-run NAC rule matched the event
           $ref: '#/components/schemas/nac_event_dryrun_nacrule_matched'
         idp_id:
+          description: Identity provider configuration ID used for the event
           $ref: '#/components/schemas/nac_event_idp_id'
         idp_role:
+          description: Roles or groups returned by the identity provider
           $ref: '#/components/schemas/nac_client_event_idp_role'
         idp_username:
+          description: Username presented to the identity provider
           $ref: '#/components/schemas/nac_event_idp_username'
         mac:
+          description: Client MAC address for the NAC event
           $ref: '#/components/schemas/nac_client_mac'
         mxedge_id:
           description: Mist Edge ID used to connect to cloud
           type: string
         nacrule_id:
+          description: NAC rule ID that matched the event
           $ref: '#/components/schemas/nac_event_nacrule_id'
         nacrule_matched:
+          description: Whether a NAC rule matched the event
           $ref: '#/components/schemas/nac_event_nacrule_matched'
         nas_vendor:
+          description: Vendor of the network access server
           $ref: '#/components/schemas/nac_event_nas_vendor'
         org_id:
+          description: Identifier of the org where the NAC event occurred
           $ref: '#/components/schemas/org_id'
         port_id:
+          description: Switch port identifier where the NAC event occurred
           $ref: '#/components/schemas/nac_event_port_id'
         port_type:
+          description: Access type of the port where the NAC event occurred
           $ref: '#/components/schemas/nac_access_type'
         random_mac:
+          description: Whether the client used a randomized MAC address
           $ref: '#/components/schemas/random_mac'
         resp_attrs:
+          description: RADIUS response attributes returned by NAC to the NAS
           $ref: '#/components/schemas/resp_attrs'
         site_id:
+          description: Identifier of the site where the NAC event occurred
           $ref: '#/components/schemas/site_id'
         ssid:
+          description: Wireless network SSID used for the NAC session
           $ref: '#/components/schemas/nac_event_ssid'
         timestamp:
+          description: Time when the NAC event occurred
           $ref: '#/components/schemas/timestamp'
         type:
+          description: NAC event type code
           $ref: '#/components/schemas/nac_event_type'
         usermac_label:
+          description: Labels derived from the usermac entry matched by the client
           $ref: '#/components/schemas/nac_client_event_usermac_labels'
         username:
+          description: Client-presented username for the NAC event
           $ref: '#/components/schemas/nac_event_username'
         vlan:
+          description: Network VLAN name or ID returned for the NAC client
           $ref: '#/components/schemas/nac_event_vlan'
         vlan_source:
           description: Source of the assigned VLAN, for example `nactag` or `usermac`
@@ -81745,7 +81775,7 @@ components:
       - permitted
       type: string
     nac_client_mac:
-      description: Client MAC address
+      description: Client MAC address observed in the NAC event
       examples:
       - ac3eb179e535
       readOnly: true
@@ -81799,8 +81829,7 @@ components:
         $ref: '#/components/schemas/nac_crl_file'
       type: array
     nac_device_mac:
-      description: MAC Address of the device (AP, Switch) the client is connected
-        to
+      description: MAC address of the AP or switch the client is connected to
       examples:
       - 60c78d8c7f6f
       readOnly: true
