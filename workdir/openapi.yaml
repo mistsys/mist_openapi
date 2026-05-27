@@ -82614,78 +82614,100 @@ components:
           type: string
       type: object
     network:
-      description: Networks are usually subnets that have cross-site significance.
-        `networks`in Org Settings will got merged into `networks`in Site Setting.
-        For gateways, they can be used to define Service Routes.
+      description: Organization-level Layer 3 network definition that can be merged
+        into site settings and used for service routes
       properties:
         created_time:
+          description: Epoch timestamp when the network was created
           $ref: '#/components/schemas/created_time'
         disallow_mist_services:
           default: false
           description: Whether to disallow Mist Devices in the network
           type: boolean
         gateway:
+          description: IPv4 gateway address for this network
           examples:
           - 192.168.70.1
           format: ipv4
           type: string
         gateway6:
+          description: IPv6 gateway address for this network
           examples:
           - fdad:b0bc:f29e::1
           format: ipv6
           type: string
         id:
+          description: Unique identifier of the network
           $ref: '#/components/schemas/id'
         internal_access:
+          description: Internal access settings for this network
           $ref: '#/components/schemas/network_internal_access'
         internet_access:
+          description: Direct internet access and NAT settings for this network
           $ref: '#/components/schemas/network_internet_access'
         isolation:
           description: Whether to allow clients in the network to talk to each other
           type: boolean
         modified_time:
+          description: Epoch timestamp when the network was last modified
           $ref: '#/components/schemas/modified_time'
         multicast:
+          description: Settings for multicast routing on this network
           $ref: '#/components/schemas/network_multicast'
         name:
+          description: Display name of the organization network
           type: string
         org_id:
+          description: Organization that owns this network
           $ref: '#/components/schemas/org_id'
         routed_for_networks:
+          description: Other network names this network can route to, for example
+            through OSPF
           $ref: '#/components/schemas/network_routed_for_networks'
         subnet:
+          description: IPv4 subnet CIDR for this network
           examples:
           - 192.168.70.0/24
           type: string
         subnet6:
+          description: IPv6 subnet CIDR for this network
           examples:
           - fdad:b0bc:f29e::/32
           type: string
         tenants:
+          description: Tenant address mappings associated with this network
           $ref: '#/components/schemas/network_tenants'
         vlan_id:
+          description: VLAN ID or variable associated with this network
           $ref: '#/components/schemas/vlan_id_with_variable'
         vpn_access:
+          description: VPN access settings keyed by VPN name for this network
           $ref: '#/components/schemas/network_vpn_access'
       required:
       - name
       type: object
     network_internal_access:
       additionalProperties: false
+      description: Internal access settings for an organization network
       properties:
         enabled:
+          description: Whether internal access is enabled for this network
           type: boolean
       type: object
     network_internet_access:
       additionalProperties: false
-      description: Whether this network has direct internet access
+      description: Direct internet access settings for an organization network
       properties:
         create_simple_service_policy:
           default: false
+          description: Whether Mist should create simple service policies for restricted
+            internet access
           type: boolean
         destination_nat:
+          description: Destination NAT rules for direct internet access
           $ref: '#/components/schemas/network_internet_access_destination_nat'
         enabled:
+          description: Whether direct internet access is enabled for this network
           type: boolean
         restricted:
           default: false
@@ -82693,6 +82715,7 @@ components:
             make `restricted`=`true` and define service_policies
           type: boolean
         static_nat:
+          description: Static NAT rules for direct internet access
           $ref: '#/components/schemas/network_internet_access_static_nat'
       type: object
     network_internet_access_destination_nat:
@@ -82767,8 +82790,10 @@ components:
           type: boolean
         enabled:
           default: false
+          description: Whether multicast support is enabled for this network
           type: boolean
         groups:
+          description: Multicast group-to-RP mappings for this network
           $ref: '#/components/schemas/network_multicast_groups'
       type: object
     network_multicast_group:
@@ -82798,6 +82823,8 @@ components:
         be reachable from Hub
       properties:
         external_ip:
+          description: External source NAT IP or subnet used when spoke hosts must
+            be reachable from the hub
           examples:
           - 172.16.0.8/30
           type: string
@@ -82918,8 +82945,10 @@ components:
       type: array
     network_tenant:
       additionalProperties: false
+      description: Tenant address entry for a network
       properties:
         addresses:
+          description: IP addresses or subnets assigned to this tenant in the network
           $ref: '#/components/schemas/network_tenant_addresses'
       type: object
     network_tenant_addresses:
