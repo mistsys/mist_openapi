@@ -81405,15 +81405,21 @@ components:
         type: string
       type: array
     mxtunnel:
-      description: MxTunnel
+      description: Mist Tunnel configuration for tunneling AP user VLANs to Mist
+        Edge clusters
       properties:
         anchor_mxtunnel_ids:
+          description: IDs of anchor Mist Tunnels used for edge-to-edge tunnel formation
           $ref: '#/components/schemas/mxtunnel_anchor_mxtunnel_ids'
         auto_preemption:
+          description: Preemption behavior for restoring preferred tunnel peers after
+            failover
           $ref: '#/components/schemas/auto_preemption'
         created_time:
+          description: Time when the Mist Tunnel was created
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether this Mist Tunnel is scoped to a site
           readOnly: true
           type: boolean
         hello_interval:
@@ -81427,16 +81433,21 @@ components:
           - 'null'
         hello_retries:
           default: 7
+          description: Number of missed hello heartbeats before an AP tries another
+            tunnel peer
           maximum: 30
           minimum: 2
           type:
           - integer
           - 'null'
         id:
+          description: Unique identifier of the Mist Tunnel
           $ref: '#/components/schemas/id'
         ipsec:
+          description: Security settings for IPsec support on this Mist Tunnel
           $ref: '#/components/schemas/mxtunnel_ipsec'
         modified_time:
+          description: Time when the Mist Tunnel was last modified
           $ref: '#/components/schemas/modified_time'
         mtu:
           default: 0
@@ -81445,18 +81456,24 @@ components:
           minimum: 0
           type: integer
         mxcluster_ids:
+          description: Mist Edge cluster IDs that host this Mist Tunnel
           $ref: '#/components/schemas/mxtunnel_mxcluster_ids'
         name:
+          description: Display name of the Mist Tunnel
           type:
           - string
           - 'null'
         org_id:
+          description: Identifier of the org that owns the Mist Tunnel
           $ref: '#/components/schemas/org_id'
         protocol:
+          description: Encapsulation protocol used for the Mist Tunnel
           $ref: '#/components/schemas/mxtunnel_protocol'
         site_id:
+          description: Identifier of the site when the Mist Tunnel is site-scoped
           $ref: '#/components/schemas/site_id'
         vlan_ids:
+          description: List of VLAN IDs carried by this Mist Tunnel
           $ref: '#/components/schemas/mxtunnel_vlan_ids'
       type: object
     mxtunnel_anchor_mxtunnel_ids:
@@ -81469,21 +81486,29 @@ components:
       type: array
     mxtunnel_ipsec:
       additionalProperties: false
+      description: IPsec settings for a Mist Tunnel
       properties:
         dns_servers:
+          description: Name server addresses advertised for IPsec tunnel clients
           $ref: '#/components/schemas/mxtunnel_ipsec_dns_servers'
         dns_suffix:
+          description: Search suffixes advertised for IPsec tunnel clients
           $ref: '#/components/schemas/strings'
         enabled:
+          description: Whether IPsec support is enabled for this Mist Tunnel
           type: boolean
         extra_routes:
+          description: Additional routes advertised for the IPsec tunnel
           $ref: '#/components/schemas/mxtunnel_ipsec_extra_routes'
         split_tunnel:
+          description: Whether split tunneling is enabled for IPsec clients
           type: boolean
         use_mxedge:
+          description: Whether IPsec termination uses Mist Edge
           type: boolean
       type: object
     mxtunnel_ipsec_dns_servers:
+      description: Name server addresses advertised for IPsec tunnel clients
       items:
         type: string
       type:
@@ -81491,19 +81516,23 @@ components:
       - 'null'
     mxtunnel_ipsec_extra_route:
       additionalProperties: false
+      description: Extra route advertised for an IPsec tunnel
       properties:
         dest:
+          description: Route destination CIDR for the IPsec extra route
           type: string
         next_hop:
+          description: Route next-hop IPv4 address for the IPsec extra route
           format: ipv4
           type: string
       type: object
     mxtunnel_ipsec_extra_routes:
+      description: Additional routes advertised for IPsec tunnel clients
       items:
         $ref: '#/components/schemas/mxtunnel_ipsec_extra_route'
       type: array
     mxtunnel_mxcluster_ids:
-      description: List of mxclusters to deploy this tunnel to
+      description: Mist Edge cluster IDs that host this Mist Tunnel
       items:
         format: uuid
         type: string
@@ -81516,7 +81545,7 @@ components:
       - udp
       type: string
     mxtunnel_vlan_ids:
-      description: List of vlan_ids that will be used
+      description: List of VLAN IDs carried by this Mist Tunnel
       items:
         type: integer
       type: array
