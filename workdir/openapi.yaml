@@ -443,7 +443,7 @@ tags:
     Level.
 
     A Device Profile contains a subset of Device\''s configurations you\''d like a
-    device to have. It will be merged at runTimestamp when we\''re provisioning an AP.'
+    device to have. It will be merged at runtime when we\''re provisioning an AP.'
   name: Orgs Device Profiles
 - description: Devices are any Network device managed or monitored by Juniper Mist.
     It can be * Wireless Access Points * Juniper Switch (EX, QFX) * Juniper WAN Gateway
@@ -17784,7 +17784,7 @@ paths:
         3. Sky ATP by default will provide functionality for Security-Intelligence
         and Advanced Anti Malware.
 
-        4. Security Intelligence will provide configuration for CC, DNS Feeds, Infected
+        4. SecIntel will provide configuration for CC, DNS Feeds, Infected
         Host, Blocklists and Allowlists.'
       operationId: setupOrgAtpIntegration
       requestBody:
@@ -63434,16 +63434,16 @@ components:
     account_skyatp_data:
       properties:
         secintel:
-          description: Security Intelligence feed configuration provided by Sky ATP
+          description: SecIntel feed configuration provided by Sky ATP
           $ref: '#/components/schemas/account_skyatp_data_secintel'
         secintel_allowlist_url:
-          description: URL for the Sky ATP Security Intelligence allowlist
+          description: URL for the Sky ATP SecIntel allowlist
           examples:
           - https://papi.s3.amazonaws.com/secintel_allowlist/xxx...
           readOnly: true
           type: string
         secintel_blocklist_url:
-          description: URL for the Sky ATP Security Intelligence blocklist
+          description: URL for the Sky ATP SecIntel blocklist
           examples:
           - https://papi.s3.amazonaws.com/secintel_blocklist/xxx...
           readOnly: true
@@ -63457,7 +63457,7 @@ components:
         \ url-based: threatfox_url, urlhaus, open_phish\n  * domain-based: threatfox_domains"
       properties:
         third_party_threat_feeds:
-          description: Third-party threat feed names enabled for Security Intelligence
+          description: Third-party threat feed names enabled for SecIntel
           $ref: '#/components/schemas/strings'
       type: object
     account_skyatp_info:
@@ -63898,7 +63898,7 @@ components:
           - John
           type: string
         invite_code:
-          description: Required initially. Invite code used to authorize new admin
+          description: Invite code used to authorize new admin
             registration
           examples:
           - MISTROCKS
@@ -64198,7 +64198,7 @@ components:
           description: Gateway MAC addresses related to this alarm
           $ref: '#/components/schemas/alarm_gateways'
         group:
-          description: Category group for this alarm, such as infrastructure, marvis,
+          description: Category group for this alarm, such as certificate_expiry, infrastructure, marvis,
             or security
           examples:
           - security
@@ -64316,8 +64316,9 @@ components:
         type: string
       type: array
     alarm_group:
-      description: 'Alarm group. enum: `infrastructure`, `marvis`, `security`'
+      description: 'Alarm group. enum: `certificate_expiry`, `infrastructure`, `marvis`, `security`'
       enum:
+      - certificate_expiry
       - infrastructure
       - marvis
       - security
@@ -65223,7 +65224,7 @@ components:
           description: If `type`==`static`. DNS server IP addresses for AP management traffic
           $ref: '#/components/schemas/ap_ip_config_dns'
         dns_suffix:
-          description: Required if `type`==`static`. DNS search suffixes applied to AP management lookups
+          description: If `type`==`static`. DNS search suffixes applied to AP management lookups
           $ref: '#/components/schemas/ap_ip_config_dns_suffix'
         gateway:
           description: Required if `type`==`static`. IPv4 default gateway for AP management traffic
@@ -65232,7 +65233,7 @@ components:
           format: ipv4
           type: string
         gateway6:
-          description: IPv6 default gateway for AP management traffic when static IPv6 addressing is used
+          description: Required if `type6`==`static`. IPv6 default gateway for AP management traffic when static IPv6 addressing is used
           examples:
           - 2607:f8b0:4005:808::1
           format: ipv6
@@ -65244,7 +65245,7 @@ components:
           format: ipv4
           type: string
         ip6:
-          description: Static IPv6 address for the AP management interface when `type6`==`static`
+          description: Required if `type6`==`static`. Static IPv6 address for the AP management interface
           examples:
           - 2607:f8b0:4005:808::2004
           format: ipv6
@@ -65260,7 +65261,7 @@ components:
           - 255.255.255.0
           type: string
         netmask6:
-          description: IPv6 prefix length for the AP management interface when `type6`==`static`
+          description: Required if `type6`==`static`. IPv6 prefix length for the AP management interface
           examples:
           - /32
           type: string
@@ -65443,6 +65444,16 @@ components:
           - wifiguest
           type: string
       type: object
+    ap_port_config_dynamic_vlan_type:
+      type: string
+      enum:
+      - airespace-interface-name
+      - standard
+      description: 'Mapping mode for interpreting dynamic VLAN attributes returned by RADIUS.\
+        \ enum: `airespace-interface-name`, where the VLAN is determined by parsing\
+        \ the RADIUS attribute as an Airespace interface name (e.g. "guest"\
+        \ would map to VLAN 100), or `standard`, where the VLAN is determined by parsing\
+        \ the RADIUS attribute as a standard VLAN ID number'
     ap_port_config_dynamic_vlan:
       additionalProperties: false
       description: Dynamic VLAN assignment settings for AP port authentication
@@ -65459,16 +65470,16 @@ components:
           type: boolean
         type:
           description: Mapping mode for interpreting dynamic VLAN attributes returned by RADIUS
-          type: string
+          $ref: '#/components/schemas/ap_port_config_dynamic_vlan_type'
         vlans:
           additionalProperties:
             type:
             - string
             - 'null'
-          description: Mapping entries for RADIUS-assigned VLAN values on this AP port
+          description: Mapping entries for RADIUS-assigned VLAN values on this AP port. For `type`==`airespace-interface-name`, the property key is the Airespace interface name returned by RADIUS (e.g. "guest"), and the value is the corresponding VLAN ID (e.g. 100). For `type`==`standard`, the property key is the VLAN ID number returned by RADIUS, and the value is ignored.
           examples:
           - 1-10: null
-            user: null
+            user: 10
           type: object
       type: object
     ap_port_config_forwarding:
@@ -83713,7 +83724,7 @@ components:
             you can customize by using `path_preference`
           type: string
         secintel:
-          description: Security intelligence settings applied by this service policy
+          description: SecIntel settings applied by this service policy
           $ref: '#/components/schemas/service_policy_secintel'
         services:
           description: Application services or groups matched by this policy
