@@ -83726,7 +83726,8 @@ components:
           $ref: '#/components/schemas/strings'
       type: object
     org_setting:
-      description: Org Settings
+      description: Organization-wide feature, integration, management, and security
+        settings
       properties:
         allow_mist:
           default: false
@@ -83745,29 +83746,41 @@ components:
           - integer
           - 'null'
         api_policy:
+          description: Policy for hiding API secrets and passwords in responses
           $ref: '#/components/schemas/org_setting_api_policy'
         auto_device_naming:
+          description: Automatic device naming rules for claimed devices
           $ref: '#/components/schemas/org_setting_auto_device_naming'
         auto_deviceprofile_assignment:
+          description: Automatic device profile assignment rules for claimed devices
           $ref: '#/components/schemas/org_setting_auto_deviceprofile_assignment'
         auto_site_assignment:
+          description: Automatic site assignment rules for claimed devices
           $ref: '#/components/schemas/org_setting_auto_site_assignment'
         blacklist_url:
+          description: Read-only URL for the organization blacklist file
           examples:
           - https://papi.s3.amazonaws.com/blacklist/xxx...
           readOnly: true
           type: string
         cacerts:
+          description: CA certificates used by organization-level RADIUS and RADSec
+            settings
           $ref: '#/components/schemas/radsec_certs_ap'
         celona:
+          description: Integration settings for Celona
           $ref: '#/components/schemas/org_setting_celona'
         cloudshark:
+          description: Packet capture integration settings for CloudShark
           $ref: '#/components/schemas/org_setting_cloudshark'
         cradlepoint:
+          description: Integration settings for Cradlepoint devices
           $ref: '#/components/schemas/org_setting_cradlepoint'
         created_time:
+          description: Epoch timestamp when the organization settings were created
           $ref: '#/components/schemas/created_time'
         device_cert:
+          description: Common device certificate used by organization settings
           $ref: '#/components/schemas/org_setting_device_cert'
         device_updown_threshold:
           default: 0
@@ -83790,9 +83803,12 @@ components:
           description: Whether to disable remote shell access for an entire org
           type: boolean
         for_site:
+          description: Read-only indicator that the settings object is scoped to a
+            site
           readOnly: true
           type: boolean
         gateway_mgmt:
+          description: Gateway management defaults for the organization
           $ref: '#/components/schemas/org_setting_gateway_mgmt'
         gateway_tunnel_updown_threshold:
           description: enable threshold-based gateway tunnel (secure edge tunnels)
@@ -83816,51 +83832,74 @@ components:
           - integer
           - 'null'
         id:
+          description: Unique identifier of the organization settings object
           $ref: '#/components/schemas/id'
         installer:
+          description: Access settings for organization installer workflows
           $ref: '#/components/schemas/org_setting_installer'
         jcloud:
+          description: Integration settings for JCloud
           $ref: '#/components/schemas/org_setting_jcloud'
         jcloud_ra:
+          description: Routing Assurance integration settings for JCloud
           $ref: '#/components/schemas/org_setting_jcloud_ra'
         juniper:
+          description: Linked Juniper account information for this organization
           $ref: '#/components/schemas/account_juniper_info'
         juniper_srx:
+          description: SRX integration settings for Juniper devices
           $ref: '#/components/schemas/org_setting_juniper_srx'
         junos_shell_access:
+          description: Role-based Junos web-shell access settings
           $ref: '#/components/schemas/org_setting_junos_shell_access'
         marvis:
+          description: AI assistant and self-driving feature settings for Marvis
           $ref: '#/components/schemas/org_setting_marvis'
         mgmt:
+          description: Tunnel settings for organization management connectivity
           $ref: '#/components/schemas/org_setting_mgmt'
         mist_nac:
+          description: NAC settings for Mist Access Assurance
           $ref: '#/components/schemas/org_setting_mist_nac'
         modified_time:
+          description: Epoch timestamp when the organization settings were last modified
           $ref: '#/components/schemas/modified_time'
         msp_id:
+          description: Managed service provider account associated with these settings
           $ref: '#/components/schemas/msp_id'
         mxedge_mgmt:
+          description: Management settings for Mist Edge devices
           $ref: '#/components/schemas/mxedge_mgmt'
         optic_port_config:
+          description: Configuration defaults for optic ports
           $ref: '#/components/schemas/optic_port_config'
         org_id:
+          description: Organization that owns these settings
           $ref: '#/components/schemas/org_id'
         password_policy:
+          description: Admin credential policy settings for the organization
           $ref: '#/components/schemas/org_setting_password_policy'
         pcap:
+          description: Packet capture settings for the organization
           $ref: '#/components/schemas/org_setting_pcap'
         pcap_bucket_verified:
+          description: Whether the configured packet capture bucket has been verified
           readOnly: true
           type: boolean
         security:
+          description: Organization security controls such as local SSH restrictions
           $ref: '#/components/schemas/org_setting_security'
         simple_alert:
+          description: Basic alert delivery settings for the organization
           $ref: '#/components/schemas/simple_alert'
         ssr:
+          description: Session Smart Router settings for the organization
           $ref: '#/components/schemas/setting_ssr'
         switch:
+          description: Configuration defaults for switches in this organization
           $ref: '#/components/schemas/org_setting_switch'
         switch_mgmt:
+          description: Management settings for switches in this organization
           $ref: '#/components/schemas/org_setting_switch_mgmt'
         switch_updown_threshold:
           default: 0
@@ -83873,8 +83912,10 @@ components:
           - integer
           - 'null'
         synthetic_test:
+          description: Configuration for organization synthetic tests
           $ref: '#/components/schemas/synthetictest_config'
         tags:
+          description: Labels associated with these organization settings
           $ref: '#/components/schemas/org_setting_tags'
         ui_idle_timeout:
           default: 0
@@ -83887,14 +83928,19 @@ components:
           type: integer
         ui_no_tracking:
           default: false
+          description: Whether UI usage tracking is disabled for the organization
           type: boolean
         vpn_options:
+          description: Options for organization VPN behavior
           $ref: '#/components/schemas/org_setting_vpn_options'
         wan_pma:
+          description: PMA feature settings for WAN Assurance
           $ref: '#/components/schemas/org_setting_wan_pma'
         wired_pma:
+          description: PMA feature settings for Wired Assurance
           $ref: '#/components/schemas/org_setting_wired_pma'
         wireless_pma:
+          description: PMA feature settings for Wireless Assurance
           $ref: '#/components/schemas/org_setting_wireless_pma'
       type: object
     org_setting_api_policy:
