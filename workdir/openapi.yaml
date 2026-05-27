@@ -443,7 +443,7 @@ tags:
     Level.
 
     A Device Profile contains a subset of Device\''s configurations you\''d like a
-    device to have. It will be merged at runTimestamp we\''re provisioning an AP.'
+    device to have. It will be merged at runTimestamp when we\''re provisioning an AP.'
   name: Orgs Device Profiles
 - description: Devices are any Network device managed or monitored by Juniper Mist.
     It can be * Wireless Access Points * Juniper Switch (EX, QFX) * Juniper WAN Gateway
@@ -62840,7 +62840,7 @@ components:
           description: File categories evaluated by this Advanced Anti Malware profile
           $ref: '#/components/schemas/aamw_profile_categories'
         created_time:
-          description: Timestamp the Advanced Anti Malware profile was created
+          description: Timestamp when the Advanced Anti Malware profile was created
           $ref: '#/components/schemas/created_time'
         fallback_action:
           description: Action to take when Sky ATP cannot obtain a malware verdict
@@ -62853,7 +62853,7 @@ components:
           description: Unique identifier of the Advanced Anti Malware profile
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the Advanced Anti Malware profile was last modified
+          description: Timestamp when the Advanced Anti Malware profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the Advanced Anti Malware profile
@@ -64245,7 +64245,7 @@ components:
           description: Switch MAC addresses related to this alarm
           $ref: '#/components/schemas/alarm_switches'
         timestamp:
-          description: Timestamp the alarm was raised, in epoch seconds
+          description: Timestamp when the alarm was raised, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
           description: Key-name of the alarm type
@@ -64415,7 +64415,7 @@ components:
       description: Alarm Template
       properties:
         created_time:
-          description: Timestamp the alarm template was created
+          description: Timestamp when the alarm template was created
           $ref: '#/components/schemas/created_time'
         delivery:
           description: Default alarm delivery settings for rules in this template
@@ -64424,7 +64424,7 @@ components:
           description: Unique identifier of the alarm template
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the alarm template was last modified
+          description: Timestamp when the alarm template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Some string to name the alarm template
@@ -64501,7 +64501,7 @@ components:
           description: Event names contributing to this anomaly
           $ref: '#/components/schemas/anomaly_events'
         since:
-          description: Timestamp the anomalous period began
+          description: Timestamp when the anomalous period began
           readOnly: true
           type: number
         sle_baseline:
@@ -64513,7 +64513,7 @@ components:
           readOnly: true
           type: number
         timestamp:
-          description: Timestamp this anomaly data point was recorded, in epoch seconds
+          description: Timestamp when this anomaly data point was recorded, in epoch seconds
           $ref: '#/components/schemas/timestamp'
       required:
       - timestamp
@@ -66185,7 +66185,7 @@ components:
           - 3
           type: integer
         last_seen:
-          description: Timestamp this mesh downlink was last observed
+          description: Timestamp when this mesh downlink was last observed
           $ref: '#/components/schemas/last_seen'
         proto:
           description: 802.11 protocol reported for this mesh downlink
@@ -66256,7 +66256,7 @@ components:
           - 3
           type: integer
         last_seen:
-          description: Timestamp this mesh uplink was last observed
+          description: Timestamp when this mesh uplink was last observed
           $ref: '#/components/schemas/last_seen'
         proto:
           description: 802.11 protocol reported for this mesh uplink
@@ -66375,7 +66375,7 @@ components:
           description: Rules used to select access points for this AP template
           $ref: '#/components/schemas/ap_template_matching'
         created_time:
-          description: Timestamp the AP template was created
+          description: Timestamp when the AP template was created
           $ref: '#/components/schemas/created_time'
         for_site:
           description: Whether the AP template is scoped to a site rather than the
@@ -66386,7 +66386,7 @@ components:
           description: Unique identifier of the AP template
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the AP template was last modified
+          description: Timestamp when the AP template was last modified
           $ref: '#/components/schemas/modified_time'
         org_id:
           description: Organization that owns this AP template
@@ -66726,7 +66726,7 @@ components:
       description: Named Bluetooth Low Energy asset record
       properties:
         created_time:
-          description: Timestamp this asset record was created
+          description: Timestamp when this asset record was created
           $ref: '#/components/schemas/created_time'
         for_site:
           description: Whether this asset is scoped directly to a site
@@ -66743,7 +66743,7 @@ components:
           format: uuid
           type: string
         modified_time:
-          description: Timestamp this asset record was last modified
+          description: Timestamp when this asset record was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name or label for the BLE asset
@@ -66772,7 +66772,7 @@ components:
           description: BLE beam number used to filter asset observations
           type: integer
         created_time:
-          description: Timestamp this asset filter was created
+          description: Timestamp when this asset filter was created
           $ref: '#/components/schemas/created_time'
         disabled:
           default: false
@@ -66807,7 +66807,7 @@ components:
           - 935
           type: integer
         modified_time:
-          description: Timestamp this asset filter was last modified
+          description: Timestamp when this asset filter was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name for this BLE asset filter
@@ -66878,7 +66878,7 @@ components:
           description: Unique identifier of the matched asset or filter entry
           $ref: '#/components/schemas/id'
         last_seen:
-          description: Timestamp this BLE beacon was last observed
+          description: Timestamp when this BLE beacon was last observed
           $ref: '#/components/schemas/last_seen'
         mac:
           description: Bluetooth MAC address of this BLE beacon
@@ -66908,7 +66908,7 @@ components:
           description: Unique identifier of the RSSI zone
           $ref: '#/components/schemas/id'
         since:
-          description: Timestamp the asset entered this RSSI zone
+          description: Timestamp when the asset entered this RSSI zone
           type: number
       type: object
     asset_rssi_zones:
@@ -66924,7 +66924,7 @@ components:
           description: Unique identifier of the zone
           $ref: '#/components/schemas/id'
         since:
-          description: Timestamp the asset entered this zone
+          description: Timestamp when the asset entered this zone
           type: number
       type: object
     asset_zones:
@@ -66992,7 +66992,7 @@ components:
           description: Associated site identifier for this audit log entry
           $ref: '#/components/schemas/site_id'
         timestamp:
-          description: Timestamp the audited action occurred
+          description: Timestamp when the audited action occurred
           $ref: '#/components/schemas/timestamp'
       required:
       - admin_id
@@ -67116,7 +67116,7 @@ components:
       description: Antivirus scanning profile
       properties:
         created_time:
-          description: Timestamp this antivirus profile was created
+          description: Timestamp when this antivirus profile was created
           $ref: '#/components/schemas/created_time'
         fallback_action:
           description: Action to take when antivirus scanning cannot complete
@@ -67134,7 +67134,7 @@ components:
           description: Content MIME types exempted from antivirus scanning
           $ref: '#/components/schemas/strings'
         modified_time:
-          description: Timestamp this antivirus profile was last modified
+          description: Timestamp when this antivirus profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the antivirus profile
@@ -67186,7 +67186,7 @@ components:
       description: Beacon configuration and placement data
       properties:
         created_time:
-          description: Timestamp this beacon configuration was created
+          description: Timestamp when this beacon configuration was created
           $ref: '#/components/schemas/created_time'
         eddystone_instance:
           description: Eddystone-UID instance (6 bytes) in hexstring format
@@ -67222,7 +67222,7 @@ components:
           format: uuid
           type: string
         modified_time:
-          description: Timestamp this beacon configuration was last modified
+          description: Timestamp when this beacon configuration was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the beacon
@@ -67501,7 +67501,7 @@ components:
           description: Current state of the BGP session
           $ref: '#/components/schemas/bgp_stats_state'
         timestamp:
-          description: Timestamp these BGP peer stats were sampled
+          description: Timestamp when these BGP peer stats were sampled
           $ref: '#/components/schemas/timestamp'
         tx_pkts:
           description: Packets sent to this BGP neighbor
@@ -67589,7 +67589,7 @@ components:
           description: Current state of the BGP session
           $ref: '#/components/schemas/bgp_stats_state'
         timestamp:
-          description: Timestamp these BGP peer stats were sampled
+          description: Timestamp when these BGP peer stats were sampled
           $ref: '#/components/schemas/timestamp'
         tx_pkts:
           description: Packets sent to this BGP neighbor
@@ -68171,7 +68171,7 @@ components:
           - 2.0566701889e-07
           type: number
         timestamp:
-          description: Timestamp this call troubleshooting sample was recorded
+          description: Timestamp when this call troubleshooting sample was recorded
           $ref: '#/components/schemas/timestamp'
         video_in:
           description: Troubleshooting metrics for the inbound video stream
@@ -69391,7 +69391,7 @@ components:
           description: Wireless SSIDs used by the NAC client during the query duration
           $ref: '#/components/schemas/nac_ssid'
         timestamp:
-          description: Timestamp the NAC client record was observed
+          description: Timestamp when the NAC client record was observed
           $ref: '#/components/schemas/timestamp'
         type:
           description: Network access type for the NAC client
@@ -69570,7 +69570,7 @@ components:
             duration
           $ref: '#/components/schemas/client_wireless_ssid'
         timestamp:
-          description: Timestamp the wireless client record was observed
+          description: Timestamp when the wireless client record was observed
           $ref: '#/components/schemas/timestamp'
         username:
           description: User identities associated with the wireless client during the query
@@ -71171,7 +71171,7 @@ components:
           - Test_Suriya-SSID
           type: string
         timestamp:
-          description: Timestamp the NAC event occurred
+          description: Timestamp when the NAC event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: NAC event type key
@@ -71498,7 +71498,7 @@ components:
           description: Wireless client bridge settings for this access point
           $ref: '#/components/schemas/ap_client_bridge'
         created_time:
-          description: Timestamp the access point object was created
+          description: Timestamp when the access point object was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
           description: Device profile assigned to this access point
@@ -71595,7 +71595,7 @@ components:
           readOnly: true
           type: string
         modified_time:
-          description: Timestamp the access point object was last modified
+          description: Timestamp when the access point object was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Friendly display name assigned to the access point
@@ -71769,7 +71769,7 @@ components:
           description: Optional human-readable text for the device event
           type: string
         timestamp:
-          description: Timestamp the device event occurred
+          description: Timestamp when the device event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: Device event type key
@@ -71804,7 +71804,7 @@ components:
             the BGP session name
           type: object
         created_time:
-          description: Timestamp the gateway object was created
+          description: Timestamp when the gateway object was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
           description: Device profile associated with this gateway
@@ -71882,7 +71882,7 @@ components:
           readOnly: true
           type: string
         modified_time:
-          description: Timestamp the gateway object was last modified
+          description: Timestamp when the gateway object was last modified
           $ref: '#/components/schemas/modified_time'
         msp_id:
           description: MSP that manages this gateway, when applicable
@@ -72008,7 +72008,7 @@ components:
         integration
       properties:
         created_time:
-          description: Timestamp the third-party device record was created
+          description: Timestamp when the third-party device record was created
           $ref: '#/components/schemas/created_time'
         device_mac:
           description: MAC address of the Mist device this third-party device is attached
@@ -72024,7 +72024,7 @@ components:
           description: Third-party device model reported by the vendor integration
           type: string
         modified_time:
-          description: Timestamp the third-party device record was last modified
+          description: Timestamp when the third-party device record was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name reported or configured for the third-party device
@@ -72130,7 +72130,7 @@ components:
             the BGP session name
           type: object
         created_time:
-          description: Timestamp the switch object was created
+          description: Timestamp when the switch object was created
           $ref: '#/components/schemas/created_time'
         default_port_usage:
           default: default
@@ -72227,7 +72227,7 @@ components:
           readOnly: true
           type: string
         modified_time:
-          description: Timestamp the switch object was last modified
+          description: Timestamp when the switch object was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Friendly display name assigned to the switch
@@ -72450,7 +72450,7 @@ components:
           description: Bluetooth Low Energy beacon and asset defaults in this AP profile
           $ref: '#/components/schemas/ble_config'
         created_time:
-          description: Timestamp the AP device profile was created
+          description: Timestamp when the AP device profile was created
           $ref: '#/components/schemas/created_time'
         disable_eth1:
           default: false
@@ -72494,7 +72494,7 @@ components:
           description: Wireless mesh role and band defaults in this AP profile
           $ref: '#/components/schemas/ap_mesh'
         modified_time:
-          description: Timestamp the AP device profile was last modified
+          description: Timestamp when the AP device profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the AP device profile
@@ -72565,7 +72565,7 @@ components:
             is the BGP session name
           type: object
         created_time:
-          description: Timestamp the gateway profile was created
+          description: Timestamp when the gateway profile was created
           $ref: '#/components/schemas/created_time'
         dhcpd_config:
           description: DHCP server defaults provided by this gateway profile
@@ -72601,7 +72601,7 @@ components:
           description: Gateway interface IP configuration defaults by network name
           $ref: '#/components/schemas/gateway_ip_configs'
         modified_time:
-          description: Timestamp the gateway profile was last modified
+          description: Timestamp when the gateway profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the gateway profile
@@ -72696,7 +72696,7 @@ components:
           description: Additional IPv6 aggregate route defaults in this switch profile
           $ref: '#/components/schemas/aggregate_routes6'
         created_time:
-          description: Timestamp the switch profile was created
+          description: Timestamp when the switch profile was created
           $ref: '#/components/schemas/created_time'
         dhcp_snooping:
           description: DHCP snooping defaults provided by this switch profile
@@ -72732,7 +72732,7 @@ components:
           description: Mist NAC defaults applied by this switch profile
           $ref: '#/components/schemas/switch_mist_nac'
         modified_time:
-          description: Timestamp the switch profile was last modified
+          description: Timestamp when the switch profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the switch profile
@@ -73168,7 +73168,7 @@ components:
           description: LLDP system name advertised by the discovered switch
           type: string
         timestamp:
-          description: Timestamp the discovered switch data was observed
+          description: Timestamp when the discovered switch data was observed
           $ref: '#/components/schemas/timestamp'
         vendor:
           description: Switch vendor reported for the discovered switch
@@ -73203,7 +73203,7 @@ components:
           description: Power draw reported for the AP connection
           type: number
         when:
-          description: Timestamp this AP attachment was last observed
+          description: Timestamp when this AP attachment was last observed
           type: string
       type: object
     discovered_switch_aps:
@@ -73305,7 +73305,7 @@ components:
           description: Power draw reported for this AP connection
           type: integer
         when:
-          description: Timestamp this AP attachment metric was observed
+          description: Timestamp when this AP attachment metric was observed
           type: string
       type: object
     discovered_switch_metric_aps:
@@ -73627,7 +73627,7 @@ components:
           description: Detailed roaming event subtype
           type: string
         timestamp:
-          description: Timestamp the roaming event occurred
+          description: Timestamp when the roaming event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: Fast-roam result category for the event
@@ -73675,7 +73675,7 @@ components:
           - 'Plugged: The Internal 5GB (SIM1) has been inserted into Internal 1.'
           type: string
         timestamp:
-          description: Timestamp the other-device event occurred
+          description: Timestamp when the other-device event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: Event type for the other-device event
@@ -73725,7 +73725,7 @@ components:
           description: Human-readable message for the client event
           type: string
         timestamp:
-          description: Timestamp the client event occurred
+          description: Timestamp when the client event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: Event type, e.g. MARVIS_EVENT_CLIENT_FBT_FAILURE
@@ -73800,7 +73800,7 @@ components:
           description: Wireless network SSID advertised by the rogue BSSID
           type: string
         timestamp:
-          description: Timestamp the rogue event was observed
+          description: Timestamp when the rogue event was observed
           $ref: '#/components/schemas/timestamp'
       required:
       - ssid
@@ -73842,7 +73842,7 @@ components:
           readOnly: true
           type: integer
         timestamp:
-          description: Timestamp the SkyATP event occurred
+          description: Timestamp when the SkyATP event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: SkyATP event type, such as `cc`, `fs`, or `mw`
@@ -74034,7 +74034,7 @@ components:
       description: EVPN topology create or update payload
       properties:
         created_time:
-          description: Timestamp the EVPN topology was created
+          description: Timestamp when the EVPN topology was created
           $ref: '#/components/schemas/created_time'
         evpn_options:
           description: Generation options applied to the EVPN topology
@@ -74043,7 +74043,7 @@ components:
           description: Unique identifier of the EVPN topology
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the EVPN topology was last modified
+          description: Timestamp when the EVPN topology was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name for the EVPN topology
@@ -74078,7 +74078,7 @@ components:
       description: EVPN topology metadata returned by EVPN topology APIs
       properties:
         created_time:
-          description: Timestamp the EVPN topology was created
+          description: Timestamp when the EVPN topology was created
           $ref: '#/components/schemas/created_time'
         evpn_options:
           description: Generation options applied to the EVPN topology
@@ -74091,7 +74091,7 @@ components:
           description: Unique identifier of the EVPN topology
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the EVPN topology was last modified
+          description: Timestamp when the EVPN topology was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name for the EVPN topology
@@ -74521,7 +74521,7 @@ components:
           description: Site associated with the fingerprint record
           $ref: '#/components/schemas/site_id'
         timestamp:
-          description: Timestamp the fingerprint record was observed
+          description: Timestamp when the fingerprint record was observed
           $ref: '#/components/schemas/timestamp'
       type: object
     fingerprint_search_result:
@@ -74608,7 +74608,7 @@ components:
           - integer
           - 'null'
         timestamp:
-          description: Timestamp the firmware update status was last updated
+          description: Timestamp when the firmware update status was last updated
           $ref: '#/components/schemas/timestamp'
         will_retry:
           description: Whether the firmware update process will retry after the current
@@ -75632,7 +75632,7 @@ components:
           description: Most recent trouble code reported for the gateway
           type: string
         last_trouble_timestamp:
-          description: Timestamp the most recent gateway trouble code was reported
+          description: Timestamp when the most recent gateway trouble code was reported
           type: integer
         mac:
           description: Gateway MAC address reported in search results
@@ -75704,7 +75704,7 @@ components:
             is the BGP session name
           type: object
         created_time:
-          description: Timestamp the gateway template was created
+          description: Timestamp when the gateway template was created
           $ref: '#/components/schemas/created_time'
         dhcpd_config:
           description: DHCP server defaults provided by this gateway template
@@ -75743,7 +75743,7 @@ components:
           description: Gateway interface IP configuration defaults by network name
           $ref: '#/components/schemas/gateway_ip_configs'
         modified_time:
-          description: Timestamp the gateway template was last modified
+          description: Timestamp when the gateway template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the gateway template
@@ -76483,13 +76483,13 @@ components:
           description: Built-in IDP baseline profile inherited before applying overwrites
           $ref: '#/components/schemas/idp_profile_base_profile'
         created_time:
-          description: Timestamp the IDP profile was created
+          description: Timestamp when the IDP profile was created
           $ref: '#/components/schemas/created_time'
         id:
           description: Unique identifier of the IDP profile
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the IDP profile was last modified
+          description: Timestamp when the IDP profile was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the IDP profile
@@ -76851,7 +76851,7 @@ components:
           - 192.168.1.111
           type: string
         last_seen:
-          description: Timestamp the device was last seen by Mist
+          description: Timestamp when the device was last seen by Mist
           $ref: '#/components/schemas/last_seen'
         mac:
           description: Device MAC address shown to installers
@@ -77109,7 +77109,7 @@ components:
           description: Whether the device is connected
           type: boolean
         created_time:
-          description: Timestamp the inventory record was created
+          description: Timestamp when the inventory record was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
           description: Deviceprofile id if assigned, null if not assigned
@@ -77138,7 +77138,7 @@ components:
           description: Device model reported in inventory
           type: string
         modified_time:
-          description: Timestamp the inventory record was last modified
+          description: Timestamp when the inventory record was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Device name if configured
@@ -77568,7 +77568,7 @@ components:
           - john@corp.com
           type: string
         created_time:
-          description: Timestamp the client certificate was created
+          description: Timestamp when the client certificate was created
           examples:
           - 2025-08-18 10:10:30.949165+00:00
           type: string
@@ -77576,7 +77576,7 @@ components:
           description: Device associated with the issued client certificate
           $ref: '#/components/schemas/device_id'
         expire_time:
-          description: Timestamp the client certificate expires
+          description: Timestamp when the client certificate expires
           examples:
           - 2026-08-18 10:06:00+00:00
           type: string
@@ -77666,7 +77666,7 @@ components:
           description: Coverage details associated with the device warranty
           type: string
         warranty_time:
-          description: Timestamp warranty needs to be renewed
+          description: Timestamp when warranty needs to be renewed
           type: integer
         warranty_type:
           description: Warranty category reported for the device
@@ -77703,7 +77703,7 @@ components:
           description: External IP address for the JSE device, when available
           type: string
         last_seen:
-          description: Timestamp the JSE device was last seen
+          description: Timestamp when the JSE device was last seen
           $ref: '#/components/schemas/last_seen'
         mac:
           description: Device MAC address for the JSE device
@@ -78408,7 +78408,7 @@ components:
           - '03'
           type: string
         timestamp:
-          description: Timestamp the last trouble code was reported
+          description: Timestamp when the last trouble code was reported
           $ref: '#/components/schemas/timestamp'
       type: object
     last_username:
@@ -78498,7 +78498,7 @@ components:
       description: Read-only change applied to a license subscription
       properties:
         created_time:
-          description: Timestamp the license amendment was created
+          description: Timestamp when the license amendment was created
           $ref: '#/components/schemas/created_time'
         end_time:
           description: End time of the license amendment
@@ -78508,7 +78508,7 @@ components:
           description: Unique identifier of the license amendment
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the license amendment was last modified
+          description: Timestamp when the license amendment was last modified
           $ref: '#/components/schemas/modified_time'
         quantity:
           description: License quantity associated with this amendment
@@ -78548,7 +78548,7 @@ components:
       description: Read-only license subscription record
       properties:
         created_time:
-          description: Timestamp the license subscription was created
+          description: Timestamp when the license subscription was created
           $ref: '#/components/schemas/created_time'
         end_time:
           description: End date of the license term
@@ -78558,7 +78558,7 @@ components:
           description: Unique identifier of the license subscription
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the license subscription was last modified
+          description: Timestamp when the license subscription was last modified
           $ref: '#/components/schemas/modified_time'
         order_id:
           description: Order identifier for this license subscription
@@ -78789,7 +78789,7 @@ components:
           description: sender source ip address
           type: string
         timestamp:
-          description: Timestamp the log event occurred
+          description: Timestamp when the log event occurred
           $ref: '#/components/schemas/timestamp'
       required:
       - message
@@ -78903,7 +78903,7 @@ components:
       description: Map or floorplan metadata for a site or organization
       properties:
         created_time:
-          description: Timestamp the map was created
+          description: Timestamp when the map was created
           $ref: '#/components/schemas/created_time'
         flags:
           additionalProperties:
@@ -78954,7 +78954,7 @@ components:
           description: Whether this map is considered locked down
           type: boolean
         modified_time:
-          description: Timestamp the map was last modified
+          description: Timestamp when the map was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: The name of the map
@@ -79518,13 +79518,13 @@ components:
       description: Map Stack response object
       properties:
         created_time:
-          description: Timestamp the map stack was created
+          description: Timestamp when the map stack was created
           $ref: '#/components/schemas/created_time'
         id:
           description: Unique identifier of the map stack
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the map stack was last modified
+          description: Timestamp when the map stack was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: The name of the map stack
@@ -79994,7 +79994,7 @@ components:
           description: Whether Mist support access is allowed for this MSP account
           type: boolean
         created_time:
-          description: Timestamp the MSP account was created
+          description: Timestamp when the MSP account was created
           $ref: '#/components/schemas/created_time'
         id:
           description: Unique identifier of the MSP account
@@ -80003,7 +80003,7 @@ components:
           description: For advanced tier (uMSPs) only
           type: string
         modified_time:
-          description: Timestamp the MSP account was last modified
+          description: Timestamp when the MSP account was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the MSP account
@@ -80133,7 +80133,7 @@ components:
         tunneling, RadSec, and related edge services
       properties:
         created_time:
-          description: Timestamp the Mist Edge cluster was created
+          description: Timestamp when the Mist Edge cluster was created
           $ref: '#/components/schemas/created_time'
         for_site:
           description: Whether this Mist Edge cluster is scoped to a site
@@ -80149,7 +80149,7 @@ components:
           description: NAC settings for the Mist Edge cluster
           $ref: '#/components/schemas/mxcluster_nac'
         modified_time:
-          description: Timestamp the Mist Edge cluster was last modified
+          description: Timestamp when the Mist Edge cluster was last modified
           $ref: '#/components/schemas/modified_time'
         mxedge_mgmt:
           description: Out-of-band management settings for Mist Edges in the cluster
@@ -80507,7 +80507,7 @@ components:
       description: Mist Edge appliance configuration and registration state
       properties:
         created_time:
-          description: Timestamp the Mist Edge record was created
+          description: Timestamp when the Mist Edge record was created
           $ref: '#/components/schemas/created_time'
         for_site:
           description: Whether this Mist Edge is scoped to a site
@@ -80534,7 +80534,7 @@ components:
           - ME-100
           type: string
         modified_time:
-          description: Timestamp the Mist Edge record was last modified
+          description: Timestamp when the Mist Edge record was last modified
           $ref: '#/components/schemas/modified_time'
         mxagent_registered:
           description: Whether the Mist Edge agent has registered with Mist cloud
@@ -80736,7 +80736,7 @@ components:
           description: Human-readable message describing the Mist Edge event
           type: string
         timestamp:
-          description: Timestamp the Mist Edge event occurred
+          description: Timestamp when the Mist Edge event occurred
           $ref: '#/components/schemas/timestamp'
         to_version:
           description: Service version after an upgrade-related event
@@ -81416,7 +81416,7 @@ components:
             failover
           $ref: '#/components/schemas/auto_preemption'
         created_time:
-          description: Timestamp the Mist Tunnel was created
+          description: Timestamp when the Mist Tunnel was created
           $ref: '#/components/schemas/created_time'
         for_site:
           description: Whether this Mist Tunnel is scoped to a site
@@ -81447,7 +81447,7 @@ components:
           description: Security settings for IPsec support on this Mist Tunnel
           $ref: '#/components/schemas/mxtunnel_ipsec'
         modified_time:
-          description: Timestamp the Mist Tunnel was last modified
+          description: Timestamp when the Mist Tunnel was last modified
           $ref: '#/components/schemas/modified_time'
         mtu:
           default: 0
@@ -81716,7 +81716,7 @@ components:
           description: Wireless network SSID used for the NAC session
           $ref: '#/components/schemas/nac_event_ssid'
         timestamp:
-          description: Timestamp the NAC event occurred
+          description: Timestamp when the NAC event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: NAC event type code
@@ -82851,7 +82851,7 @@ components:
             is the BGP session name
           type: object
         created_time:
-          description: Timestamp the network template was created
+          description: Timestamp when the network template was created
           $ref: '#/components/schemas/created_time'
         dhcp_snooping:
           description: DHCP snooping defaults provided by this network template
@@ -82878,7 +82878,7 @@ components:
           description: Mist NAC defaults applied by this network template
           $ref: '#/components/schemas/switch_mist_nac'
         modified_time:
-          description: Timestamp the network template was last modified
+          description: Timestamp when the network template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the network template
@@ -83498,7 +83498,7 @@ components:
           - authentication failed, API key invalid
           type: string
         timestamp:
-          description: Timestamp the organization event occurred
+          description: Timestamp when the organization event occurred
           $ref: '#/components/schemas/timestamp'
         type:
           description: Event type code for this organization event
@@ -86948,12 +86948,12 @@ components:
           description: Only when `status`==`inprogress`, estimate of the time to completion
           type: number
         start_time:
-          description: Timestamp auto orient process was last queued for this map
+          description: Timestamp when auto orient process was last queued for this map
           type: number
         status:
           $ref: '#/components/schemas/response_auto_orientation_info_status'
         stop_time:
-          description: Timestamp auto orient completed or was manually stopped
+          description: Timestamp when auto orient completed or was manually stopped
           type: number
       type: object
     response_auto_orientation_info_status:
@@ -86971,13 +86971,13 @@ components:
       additionalProperties: false
       properties:
         end_time:
-          description: Timestamp autoplacement completed or was manually stopped
+          description: Timestamp when autoplacement completed or was manually stopped
           type: number
         est_time_left:
           description: (Only when inprogress) estimate of the time to completion
           type: number
         start_time:
-          description: Timestamp autoplacement process was last queued for this map
+          description: Timestamp when autoplacement process was last queued for this map
           type: integer
         status:
           $ref: '#/components/schemas/auto_placement_info_status'
@@ -89518,7 +89518,7 @@ components:
           description: Format of the spectrum analysis data (e.g., json, stream)
           type: string
         started_time:
-          description: Timestamp the spectrum analysis was started
+          description: Timestamp when the spectrum analysis was started
           type: integer
       type: object
     response_search:
@@ -90603,7 +90603,7 @@ components:
             to all sites using the RF Template
           type: string
         created_time:
-          description: Timestamp the RF template was created
+          description: Timestamp when the RF template was created
           $ref: '#/components/schemas/created_time'
         for_site:
           description: Whether the RF template is scoped to a site rather than the
@@ -90620,7 +90620,7 @@ components:
             will shadow the default. Property key is the model name (e.g. "AP63")
           type: object
         modified_time:
-          description: Timestamp the RF template was last modified
+          description: Timestamp when the RF template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: The name of the RF template
@@ -100816,7 +100816,7 @@ components:
           minLength: 1
           type: string
         last_seen:
-          description: Timestamp last Tx/Rx observed
+          description: Timestamp when last Tx/Rx observed
           type: number
         mac:
           description: Client mac
@@ -103404,7 +103404,7 @@ components:
             template
           $ref: '#/components/schemas/template_applies'
         created_time:
-          description: Timestamp the WLAN template was created
+          description: Timestamp when the WLAN template was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_ids:
           description: Device profile IDs that further limit where this WLAN template
@@ -103421,7 +103421,7 @@ components:
           description: Unique identifier of the WLAN template
           $ref: '#/components/schemas/id'
         modified_time:
-          description: Timestamp the WLAN template was last modified
+          description: Timestamp when the WLAN template was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Display name of the WLAN template
@@ -103912,7 +103912,7 @@ components:
           - 2.0566701889e-07
           type: number
         timestamp:
-          description: Timestamp this call troubleshooting sample was recorded
+          description: Timestamp when this call troubleshooting sample was recorded
           $ref: '#/components/schemas/timestamp'
         video_in:
           description: Troubleshooting metrics for the inbound video stream
@@ -107466,7 +107466,7 @@ components:
         bssid:
           type: string
         connect:
-          description: Timestamp the user connects
+          description: Timestamp when the user connects
           type: integer
         connect_float:
           description: floating point connect timestamp with millisecond precision
@@ -107626,13 +107626,13 @@ components:
           description: Device operating system E.g. "Mojave", "Windows 10", "Linux"
           type: string
         connect:
-          description: Timestamp the user connects
+          description: Timestamp when the user connects
           type: integer
         connect_float:
           description: floating point connect timestamp with millisecond precision
           type: number
         disconnect:
-          description: Timestamp the user disconnects
+          description: Timestamp when the user disconnects
           type: integer
         disconnect_float:
           description: floating point disconnect timestamp with millisecond precision
