@@ -79776,22 +79776,28 @@ components:
       type: array
     module_stat_item_errors_items:
       additionalProperties: false
+      description: Error condition reported for a device module
       properties:
         feature:
+          description: Affected feature associated with this module error condition
           examples:
           - Mist-Management
           type: string
         minimum_version:
+          description: Minimum software version associated with this module error
           examples:
           - 128T-6.0.0-1
           type: string
         reason:
+          description: Human-readable reason for the module error condition
           type: string
         since:
+          description: Epoch timestamp when the module error condition began
           examples:
           - 1657497600
           type: integer
         type:
+          description: Module error type code reported by the device
           examples:
           - FW_UPGRADE_REQUIRED_BY_FEATURE
           type: string
@@ -79800,24 +79806,30 @@ components:
       - type
       type: object
     module_stat_item_fans:
+      description: Cooling fan status records for a device module
       items:
         $ref: '#/components/schemas/module_stat_item_fans_items'
       type: array
       uniqueItems: true
     module_stat_item_fans_items:
       additionalProperties: false
+      description: Cooling fan telemetry for a device module
       properties:
         airflow:
+          description: Direction of airflow reported for the fan
           examples:
           - out
           type: string
         name:
+          description: Fan label reported by the device
           examples:
           - Fan 0
           type: string
         rpm:
+          description: Current fan speed in revolutions per minute
           type: integer
         status:
+          description: Operational status reported for the fan
           examples:
           - ok
           type: string
@@ -79826,19 +79838,19 @@ components:
       additionalProperties: false
       properties:
         count:
-          description: current usage of the network resource
+          description: Current utilization count for the network resource
           examples:
           - 17
           minimum: 0
           type: integer
         limit:
-          description: maximum usage of the network resource
+          description: Maximum supported count for the network resource
           examples:
           - 768000
           minimum: 0
           type: integer
         type:
-          description: type of the network resource (e.g. FIB, FLOW, ...)
+          description: Network resource category, such as FIB or FLOW
           examples:
           - FIB
           type: string
@@ -79848,100 +79860,129 @@ components:
         $ref: '#/components/schemas/module_stat_item_network_resource'
       type: array
     module_stat_item_pics:
+      description: Physical Interface Card summaries for a device module
       items:
         $ref: '#/components/schemas/module_stat_item_pics_item'
       type: array
     module_stat_item_pics_item:
       additionalProperties: false
+      description: Physical Interface Card summary for a device module
       properties:
         index:
+          description: PIC index within the device module
           type: integer
         model_number:
+          description: Model number reported for the PIC
           type: string
         port_groups:
+          description: Port groups provided by this PIC
           $ref: '#/components/schemas/module_stat_item_pics_item_port_groups'
       type: object
     module_stat_item_pics_item_port_groups:
+      description: Port group summaries for a PIC
       items:
         $ref: '#/components/schemas/module_stat_item_pics_item_port_groups_item'
       type: array
     module_stat_item_pics_item_port_groups_item:
       additionalProperties: false
+      description: Port group summary for a PIC
       properties:
         count:
+          description: Number of ports in this PIC port group
           type: integer
         type:
+          description: Port media or interface type for this PIC port group
           type: string
       type: object
     module_stat_item_poe:
       additionalProperties: false
+      description: Power over Ethernet telemetry for a device module
       properties:
         max_power:
+          description: Total PoE power budget available to the module, in watts
           examples:
           - 250
           type: number
         power_draw:
+          description: Current PoE power draw on the module, in watts
           examples:
           - 120.3
           type: number
         status:
+          description: Operational status of PoE on the module
           type: string
       type: object
     module_stat_item_psus:
+      description: Power supply status records for a device module
       items:
         $ref: '#/components/schemas/module_stat_item_psus_item'
       type: array
       uniqueItems: true
     module_stat_item_psus_item:
       additionalProperties: false
+      description: Power supply status for a device module
       properties:
         name:
+          description: Power supply label reported by the device
           examples:
           - Power Supply 0
           type: string
         status:
+          description: Operational status reported for the power supply
           examples:
           - ok
           type: string
       type: object
     module_stat_item_temperatures:
+      description: Temperature sensor readings for a device module
       items:
         $ref: '#/components/schemas/module_stat_item_temperatures_item'
       type: array
       uniqueItems: true
     module_stat_item_temperatures_item:
       additionalProperties: false
+      description: Temperature sensor reading for a device module
       properties:
         celsius:
+          description: Temperature reading for the sensor, in degrees Celsius
           examples:
           - 45
           type: number
         name:
+          description: Temperature sensor label reported by the device
           examples:
           - CPU
           type: string
         status:
+          description: Operational status reported for the temperature sensor
           examples:
           - ok
           type: string
       type: object
     module_stat_item_vc_links:
+      description: Virtual chassis link records for a device module
       items:
         $ref: '#/components/schemas/module_stat_item_vc_links_item'
       type: array
       uniqueItems: true
     module_stat_item_vc_links_item:
       additionalProperties: false
+      description: Virtual chassis link endpoint for a device module
       properties:
         neighbor_module_idx:
+          description: Index of the neighboring module connected through this virtual
+            chassis link
           examples:
           - 1
           type: integer
         neighbor_port_id:
+          description: Port identifier on the neighboring module for this virtual
+            chassis link
           examples:
           - vcp-255/1/0
           type: string
         port_id:
+          description: Local port identifier for this virtual chassis link
           examples:
           - vcp-255/1/0
           type: string
