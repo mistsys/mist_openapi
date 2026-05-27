@@ -82607,8 +82607,10 @@ components:
         $ref: '#/components/schemas/nac_tag'
       type: array
     name_string:
+      description: Request body containing a name value
       properties:
         name:
+          description: Value to create or update as the target resource name
           type: string
       type: object
     network:
@@ -83081,8 +83083,10 @@ components:
           type: string
       type: object
     notes_string:
+      description: Request body containing notes text
       properties:
         notes:
+          description: Text to attach to the target resource as notes
           examples:
           - wired pcap test
           type: string
