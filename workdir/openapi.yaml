@@ -66012,15 +66012,15 @@ components:
       type: object
     ap_redundancy_module:
       additionalProperties: false
-      description: AP switch redundancy counts for one switch module
+      description: AP switch redundancy counts for one VC member
       properties:
         num_aps:
-          description: Total number of APs connected through this switch module
+          description: Total number of APs connected through this VC member
           examples:
           - 15
           type: integer
         num_aps_with_switch_redundancy:
-          description: Number of APs on this module with switch redundancy coverage
+          description: Number of APs on this VC member with switch redundancy coverage
           examples:
           - 8
           type: integer
@@ -66035,31 +66035,31 @@ components:
       description: Access point record returned by device search endpoints
       properties:
         band_24_bandwidth:
-          description: Channel bandwidth configured on the AP 2.4 GHz radio
+          description: Current channel bandwidth on the AP 2.4 GHz radio
           type: string
         band_24_channel:
-          description: Channel configured on the AP 2.4 GHz radio
+          description: Current channel on the AP 2.4 GHz radio
           type: integer
         band_24_power:
-          description: Transmit power configured on the AP 2.4 GHz radio
+          description: Current transmit power on the AP 2.4 GHz radio
           type: integer
         band_5_bandwidth:
-          description: Channel bandwidth configured on the AP 5 GHz radio
+          description: Current channel bandwidth on the AP 5 GHz radio
           type: string
         band_5_channel:
-          description: Channel configured on the AP 5 GHz radio
+          description: Current channel on the AP 5 GHz radio
           type: integer
         band_5_power:
-          description: Transmit power configured on the AP 5 GHz radio
+          description: Current transmit power on the AP 5 GHz radio
           type: integer
         band_6_bandwidth:
-          description: Channel bandwidth configured on the AP 6 GHz radio
+          description: Current channel bandwidth on the AP 6 GHz radio
           type: string
         band_6_channel:
-          description: Channel configured on the AP 6 GHz radio
+          description: Current channel on the AP 6 GHz radio
           type: integer
         band_6_power:
-          description: Transmit power configured on the AP 6 GHz radio
+          description: Current transmit power on the AP 6 GHz radio
           type: integer
         eth0_port_speed:
           description: Port speed of eth0
