@@ -77964,24 +77964,30 @@ components:
       type: object
     junos_ip_config:
       additionalProperties: false
-      description: Junos IP Config
+      description: Junos management IP configuration
       properties:
         dns:
+          description: Configured DNS server addresses for Junos management traffic
           $ref: '#/components/schemas/strings'
         dns_suffix:
+          description: DNS search suffixes configured for Junos management traffic
           $ref: '#/components/schemas/strings'
         gateway:
+          description: Default gateway IPv4 address for this Junos IP configuration
           type: string
         ip:
+          description: Configured IPv4 address for this Junos IP configuration
           type: string
         netmask:
           description: Used only if `subnet` is not specified in `networks`
           type: string
         network:
-          description: Network where this mgmt IP reside, this will be used as default
-            network for outbound-ssh, dns, ntp, dns, tacplus, radius, syslog, snmp
+          description: Management network for this IP configuration; used as the default
+            source network for outbound SSH, DNS, NTP, TACACS+, RADIUS, syslog, and
+            SNMP
           type: string
         type:
+          description: IP assignment mode for this Junos IP configuration
           $ref: '#/components/schemas/ip_type'
       type: object
     junos_local_port_config:
@@ -78131,37 +78137,41 @@ components:
       type: object
     junos_other_ip_config:
       additionalProperties: false
-      description: Optional, if it's required to have switch's L3 presence on a network/vlan
+      description: Optional switch L3 presence on an additional network or VLAN
       properties:
         evpn_anycast:
           default: false
-          description: For EVPN, if anycast is desired
+          description: For EVPN, whether anycast is desired
           type: boolean
         ip:
-          description: Required if `type`==`static`
+          description: Required if `type`==`static`; IPv4 address for the additional
+            Junos L3 presence
           examples:
           - 10.3.3.1
           type: string
         ip6:
-          description: Required if `type6`==`static`
+          description: Required if `type6`==`static`; IPv6 address for the additional
+            Junos L3 presence
           examples:
           - fdad:b0bc:f29e::3d16
           type: string
         netmask:
-          description: Optional, `subnet` from `network` definition will be used if
-            defined
+          description: Optional IPv4 netmask; `subnet` from `network` definition will
+            be used if defined
           examples:
           - 255.255.255.0
           type: string
         netmask6:
-          description: Optional, `subnet` from `network` definition will be used if
-            defined
+          description: Optional IPv6 prefix length; `subnet` from `network` definition
+            will be used if defined
           examples:
           - /64
           type: string
         type:
+          description: IPv4 assignment mode for the additional Junos L3 presence
           $ref: '#/components/schemas/ip_type'
         type6:
+          description: IPv6 assignment mode for the additional Junos L3 presence
           $ref: '#/components/schemas/ip_type6'
       type: object
     junos_port_config:
