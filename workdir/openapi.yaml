@@ -80129,60 +80129,86 @@ components:
       - base
       type: string
     mxcluster:
-      description: MxCluster
+      description: Mist Edge cluster that groups one or more Mist Edge devices for
+        tunneling, RadSec, and related edge services
       properties:
         created_time:
+          description: Time when the Mist Edge cluster was created
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether this Mist Edge cluster is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the Mist Edge cluster
           $ref: '#/components/schemas/id'
         mist_das:
+          description: Dynamic authorization service settings for the cluster
           $ref: '#/components/schemas/mxedge_das'
         mist_nac:
+          description: NAC settings for the Mist Edge cluster
           $ref: '#/components/schemas/mxcluster_nac'
         modified_time:
+          description: Time when the Mist Edge cluster was last modified
           $ref: '#/components/schemas/modified_time'
         mxedge_mgmt:
+          description: Out-of-band management settings for Mist Edges in the cluster
           $ref: '#/components/schemas/mxedge_mgmt'
         name:
+          description: Display name of the Mist Edge cluster
           type: string
         org_id:
+          description: Identifier of the org that owns the Mist Edge cluster
           $ref: '#/components/schemas/org_id'
         proxy:
+          description: Network proxy settings used by Mist Edges in the cluster
           $ref: '#/components/schemas/proxy'
         radsec:
+          description: TLS RADIUS proxy settings for the Mist Edge cluster
           $ref: '#/components/schemas/mxcluster_radsec'
         radsec_tls:
+          description: TLS keypair settings for RadSec on the Mist Edge cluster
           $ref: '#/components/schemas/mxcluster_radsec_tls'
         site_id:
+          description: Identifier of the site when the Mist Edge cluster is site-scoped
           $ref: '#/components/schemas/site_id'
         tunterm_ap_subnets:
+          description: AP source subnets allowed to establish Mist tunnels
           $ref: '#/components/schemas/mxcluster_tunterm_ap_subnets'
         tunterm_dhcpd_config:
+          description: DHCP relay or server settings for tunneled VLANs
           $ref: '#/components/schemas/tunterm_dhcpd_config'
         tunterm_extra_routes:
+          description: Extra routes for Mist Tunnel VLAN traffic
           $ref: '#/components/schemas/mxcluster_tunterm_extra_routes'
         tunterm_hosts:
+          description: Hostnames or IP addresses used as Mist Tunnel peers
           $ref: '#/components/schemas/mxcluster_tunterm_hosts'
         tunterm_hosts_order:
+          description: Explicit host ordering indexes used when ordered selection
+            is configured
           $ref: '#/components/schemas/mxcluster_tunterm_hosts_order'
         tunterm_hosts_selection:
+          description: Selection strategy for ordering tunnel termination hosts
           $ref: '#/components/schemas/mxcluster_tunterm_hosts_selection'
         tunterm_monitoring:
+          description: Monitoring checks for tunnel termination reachability
           $ref: '#/components/schemas/mxcluster_tunterm_monitoring'
         tunterm_monitoring_disabled:
+          description: Whether tunnel termination monitoring is disabled for the cluster
           type: boolean
       type: object
     mxcluster_nac:
       additionalProperties: false
+      description: Mist NAC RADIUS settings for a Mist Edge cluster
       properties:
         acct_server_port:
           default: 1813
+          description: RADIUS accounting port used by Mist NAC on the cluster
           type: integer
         auth_server_port:
           default: 1812
+          description: RADIUS authentication port used by Mist NAC on the cluster
           type: integer
         client_ips:
           additionalProperties:
@@ -80191,34 +80217,41 @@ components:
           type: object
         enabled:
           default: false
+          description: Whether Mist NAC is enabled on the cluster
           type: boolean
         secret:
+          description: Shared RADIUS secret used by Mist NAC clients
           examples:
           - testing123
           type: string
       type: object
     mxcluster_nac_client_ip:
       additionalProperties: false
+      description: Mist NAC client settings for a RADIUS client IP or subnet
       properties:
         require_message_authenticator:
           default: false
           description: Whether to require Message-Authenticator in requests
           type: boolean
         secret:
-          description: If different from above
+          description: Client-specific shared secret, if different from the cluster
+            default
           type: string
         site_id:
-          description: Present only for 3rd party clients
+          description: Present only for third-party clients, identifies the associated
+            site
           examples:
           - 00000000-0000-0000-1234-000000000000
           format: uuid
           type: string
         vendor:
+          description: RADIUS client vendor profile for this IP or subnet
           $ref: '#/components/schemas/mxcluster_nac_client_vendor'
       type: object
     mxcluster_nac_client_ips:
       additionalProperties:
         $ref: '#/components/schemas/mxcluster_nac_client_ip'
+      description: Mist NAC client settings keyed by RADIUS client IP address or subnet
       type: object
     mxcluster_nac_client_vendor:
       description: 'convention to be followed is : "<vendor>-<variant>", <variant>
