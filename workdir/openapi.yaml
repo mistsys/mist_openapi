@@ -80504,76 +80504,99 @@ components:
         $ref: '#/components/schemas/mxcluster'
       type: array
     mxedge:
-      description: MxEdge
+      description: Mist Edge appliance configuration and registration state
       properties:
         created_time:
+          description: Time when the Mist Edge record was created
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether this Mist Edge is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the Mist Edge
           $ref: '#/components/schemas/id'
         mac:
+          description: Mist Edge MAC address
           examples:
           - 0200009fbe65
           readOnly: true
           type: string
         magic:
+          description: Registration claim code for the Mist Edge
           examples:
           - L-NpT5gi-ADR8WTFd4EiQPY3cP5WdSoD
           readOnly: true
           type: string
         model:
+          description: Mist Edge hardware or virtual appliance model
           examples:
           - ME-100
           type: string
         modified_time:
+          description: Time when the Mist Edge record was last modified
           $ref: '#/components/schemas/modified_time'
         mxagent_registered:
+          description: Whether the Mist Edge agent has registered with Mist cloud
           readOnly: true
           type: boolean
         mxcluster_id:
-          description: MxCluster this MxEdge belongs to
+          description: Mist Edge cluster identifier that this appliance belongs to
           examples:
           - 572586b7-f97b-a22b-526c-8b97a3f609c4
           format: uuid
           type: string
         mxedge_mgmt:
+          description: Management credentials and settings for the Mist Edge
           $ref: '#/components/schemas/mxedge_mgmt'
         name:
+          description: Display name of the Mist Edge
           examples:
           - Guest
           type: string
         notes:
+          description: Free-form notes for the Mist Edge
           examples:
           - note for mxedge
           type: string
         ntp_servers:
+          description: Time synchronization servers used by the Mist Edge
           $ref: '#/components/schemas/strings'
         oob_ip_config:
+          description: Out-of-band management IP configuration for the Mist Edge
           $ref: '#/components/schemas/mxedge_oob_ip_config'
         org_id:
+          description: Identifier of the org that owns the Mist Edge
           $ref: '#/components/schemas/org_id'
         proxy:
+          description: Network proxy settings used by the Mist Edge
           $ref: '#/components/schemas/proxy'
         services:
+          description: List of services enabled to run on the Mist Edge
           $ref: '#/components/schemas/mxedge_services'
         site_id:
+          description: Identifier of the site when the Mist Edge is site-scoped
           $ref: '#/components/schemas/site_id'
         tunterm_dhcpd_config:
+          description: DHCP relay or server settings for Mist Tunneled VLANs
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_config'
         tunterm_extra_routes:
           additionalProperties:
             $ref: '#/components/schemas/mxedge_tunterm_extra_route'
-          description: Property key is a CIDR
+          description: Extra routes for Mist Tunneled VLAN traffic; property key is
+            a CIDR
           type: object
         tunterm_igmp_snooping_config:
+          description: IGMP snooping settings for Mist Tunneled VLANs
           $ref: '#/components/schemas/mxedge_tunterm_igmp_snooping_config'
         tunterm_ip_config:
+          description: Tunnel termination IP configuration for the Mist Edge
           $ref: '#/components/schemas/mxedge_tunterm_ip_config'
         tunterm_monitoring:
+          description: Monitoring checks for tunnel termination reachability
           $ref: '#/components/schemas/mxedge_tunterm_monitoring'
         tunterm_multicast_config:
+          description: Multicast forwarding settings for tunnel termination
           $ref: '#/components/schemas/mxedge_tunterm_multicast_config'
         tunterm_other_ip_configs:
           additionalProperties:
@@ -80581,13 +80604,18 @@ components:
           description: IPconfigs by VLAN ID. Property key is the VLAN ID
           type: object
         tunterm_port_config:
+          description: Port configuration for tunnel termination traffic
           $ref: '#/components/schemas/tunterm_port_config'
         tunterm_registered:
+          description: Whether the tunnel termination service has registered with
+            Mist cloud
           readOnly: true
           type: boolean
         tunterm_switch_config:
+          description: Switch VLAN settings for tunnel termination
           $ref: '#/components/schemas/mxedge_tunterm_switch_configs'
         versions:
+          description: Service version information reported by the Mist Edge
           $ref: '#/components/schemas/mxedge_versions'
       required:
       - model
@@ -80595,36 +80623,44 @@ components:
       type: object
     mxedge_das:
       additionalProperties: false
-      description: Configure cloud-assisted dynamic authorization service on this
-        cluster of mist edges
+      description: Cloud-assisted Dynamic Authorization Service settings for a Mist
+        Edge cluster
       properties:
         coa_servers:
+          description: Dynamic authorization clients allowed to send CoA or Disconnect-Message
+            requests
           $ref: '#/components/schemas/mxedge_das_coa_servers'
         enabled:
           default: false
+          description: Whether cloud-assisted DAS is enabled for the Mist Edge cluster
           type: boolean
       type: object
     mxedge_das_coa_server:
       additionalProperties: false
+      description: CoA or Disconnect-Message client allowed to contact Mist Edge DAS
       properties:
         disable_event_timestamp_check:
           default: false
           description: Whether to disable Event-Timestamp Check
           type: boolean
         enabled:
+          description: Whether this DAS CoA or Disconnect-Message client is enabled
           type: boolean
         host:
-          description: This server configured to send CoA|DM to mist edges
+          description: Server host allowed to send CoA or Disconnect-Message requests
+            to Mist Edges
           type: string
         port:
           default: 3799
-          description: Mist edges will allow this host on this port
+          description: UDP port where Mist Edges accept CoA or Disconnect-Message
+            requests from this host
           type: integer
         require_message_authenticator:
           default: false
           description: Whether to require Message-Authenticator in requests
           type: boolean
         secret:
+          description: Shared secret used by this DAS CoA or Disconnect-Message client
           format: password
           type: string
       type: object
