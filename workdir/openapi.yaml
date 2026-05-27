@@ -1717,7 +1717,7 @@ paths:
       - Constants Definitions
   /api/v1/const/applications:
     get:
-      description: Get List of a list of applications that Juniper-Mist APs recognize
+      description: Get List of a list of applications that Juniper-Mist Devices recognize
       operationId: listApplications
       responses:
         '200':
@@ -70086,7 +70086,7 @@ components:
       type: array
     const_application_definition:
       additionalProperties: false
-      description: Application definition recognized by Juniper Mist APs
+      description: Application definition recognized by Juniper Devices
       properties:
         app_id:
           description: Whether an AppID is defined for this application
