@@ -79073,17 +79073,23 @@ components:
       type: array
     map_import_json:
       additionalProperties: false
+      description: Options for importing map data from Ekahau or iBwave JSON
       properties:
         import_all_floorplans:
+          description: Whether to import all floorplans from the uploaded map JSON
           default: false
           type: boolean
         import_height:
+          description: Whether to import height metadata from the uploaded map JSON
           default: true
           type: boolean
         import_orientation:
+          description: Whether to import orientation metadata from the uploaded map
+            JSON
           default: true
           type: boolean
         vendor_name:
+          description: Map import vendor for the uploaded JSON
           $ref: '#/components/schemas/map_import_json_vendor_name'
       required:
       - vendor_name
@@ -79098,15 +79104,16 @@ components:
       type: string
     map_jibestream:
       additionalProperties: false
+      description: Jibestream map import configuration
       properties:
         client_id:
-          description: Client id
+          description: Client identifier for the Jibestream API
           examples:
           - 199d6770-0f6f-407a-9bd5-fc33c7840194
           format: uuid
           type: string
         client_secret:
-          description: Client secret
+          description: Client secret for the Jibestream API
           examples:
           - /9Nog3yDzcYj0bY91XJZQLCt+m9DXaIVhx+Ghk3ddd
           format: password
@@ -79122,13 +79129,13 @@ components:
           - https://api.jibestream.com
           type: string
         map_id:
-          description: Jibestream map id
+          description: Jibestream map identifier to import
           examples:
           - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
           format: uuid
           type: string
         mmpp:
-          description: Millimeter per pixel
+          description: Millimeters per pixel for the Jibestream map
           examples:
           - 223
           type: integer
@@ -79138,6 +79145,7 @@ components:
           - 4
           type: number
         vendor_name:
+          description: Vendor identifier for a Jibestream import
           $ref: '#/components/schemas/map_jibestream_vendor_name'
         venue_id:
           description: Venue or organization id
@@ -79163,6 +79171,7 @@ components:
       type: string
     map_micello:
       additionalProperties: false
+      description: Micello map import configuration
       properties:
         account_key:
           description: Account key that has access to the map
@@ -79170,17 +79179,18 @@ components:
           - null
           type: string
         default_level_id:
-          description: Micello floor/level id
+          description: Micello default floor or level identifier
           examples:
           - 5
           type: integer
         map_id:
-          description: Micello map id
+          description: Micello map identifier to import
           examples:
           - 6f4bf402-45f9-2a56-6c8b-7f83d3bc98e9
           format: uuid
           type: string
         vendor_name:
+          description: Vendor identifier for a Micello import
           $ref: '#/components/schemas/map_micello_vendor_name'
       required:
       - vendor_name
