@@ -79682,10 +79682,12 @@ components:
       type: object
     memory_stat:
       additionalProperties: false
-      description: Memory usage stat (for virtual chassis, memory usage of master
-        RE)
+      description: Memory utilization statistics for a device; in a virtual chassis,
+        this reports the master Routing Engine
       properties:
         usage:
+          description: Current memory utilization percentage for the device or master
+            Routing Engine
           type: number
       required:
       - usage
@@ -79709,6 +79711,7 @@ components:
       - $ref: '#/components/schemas/device_gateway'
     mist_nacedge:
       additionalProperties: false
+      description: Mist NAC Edge settings for the site
       properties:
         auth_ttl:
           default: 604800
@@ -79727,8 +79730,10 @@ components:
           - test_vlan
           type: string
         enabled:
+          description: Whether Mist NAC Edge is enabled for the site
           type: boolean
         mxedge_hosts:
+          description: NAC Edge hostnames used by the site
           $ref: '#/components/schemas/mist_nacedge_mxedge_hosts'
       type: object
     mist_nacedge_mxedge_hosts:
@@ -79741,13 +79746,20 @@ components:
     ml_overwrite:
       additionalProperties:
         $ref: '#/components/schemas/ml_overwrite_additional_properties'
+      description: Location machine learning parameter overwrites keyed by client
+        model
       type: object
     ml_overwrite_additional_properties:
       additionalProperties: false
+      description: Location machine learning parameter overwrite values for one client
+        model
       properties:
         int:
+          description: Location ML intercept value to use for the model
           type: integer
         ple:
+          description: Path-loss estimate value to use for the location machine learning
+            model
           type: integer
       type: object
     modified_time:
