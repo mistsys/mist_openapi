@@ -77992,7 +77992,7 @@ components:
       type: object
     junos_local_port_config:
       additionalProperties: false
-      description: Switch port config
+      description: Local Junos switch port configuration
       properties:
         all_networks:
           default: false
@@ -78006,6 +78006,7 @@ components:
             defaults (access ports default to untrusted, trunk ports default to trusted).'
           type: boolean
         allow_multiple_supplicants:
+          description: Whether multiple supplicants may authenticate on the port
           default: false
           type: boolean
         bypass_auth_when_server_down:
@@ -78019,6 +78020,7 @@ components:
             unknown clients) if set to true when RADIUS server is down
           type: boolean
         description:
+          description: Human-readable description for this local port configuration
           type: string
         disable_autoneg:
           default: false
@@ -78030,14 +78032,18 @@ components:
           description: Whether the port is disabled
           type: boolean
         duplex:
+          description: Link duplex mode for this local port configuration
           $ref: '#/components/schemas/switch_port_local_usage_duplex'
         dynamic_vlan_networks:
+          description: Only if `port_auth`==`dot1x`, networks or VLANs that RADIUS
+            can return for dynamic VLAN assignment
           $ref: '#/components/schemas/switch_port_local_usage_dynamic_vlan_networks'
         enable_mac_auth:
           default: false
           description: Only if `port_auth`==`dot1x` whether to enable MAC Auth
           type: boolean
         enable_qos:
+          description: Whether QoS is enabled on ports using this local configuration
           default: false
           type: boolean
         guest_network:
@@ -78048,12 +78054,12 @@ components:
           - 'null'
         inter_switch_link:
           default: false
-          description: 'inter_switch_link is used together with "isolation" under
-            networks. NOTE: inter_switch_link works only between Juniper devices.
-            This has to be applied to both ports connected together'
+          description: Used together with "isolation" under networks for links between
+            Juniper devices; must be applied to both connected ports
           type: boolean
         mac_auth_only:
-          description: Only if `enable_mac_auth`==`true`
+          description: Only if `enable_mac_auth`==`true`, whether to use MAC authentication
+            without 802.1X
           type: boolean
         mac_auth_preferred:
           description: Only if `enable_mac_auth`==`true` + `mac_auth_only`==`false`,
@@ -78061,6 +78067,8 @@ components:
             over dot1x.
           type: boolean
         mac_auth_protocol:
+          description: Only if `enable_mac_auth`==`true`, MAC authentication protocol
+            to use
           $ref: '#/components/schemas/switch_port_local_usage_mac_auth_protocol'
         mac_limit:
           default: 0
@@ -78069,12 +78077,14 @@ components:
           minimum: 0
           type: integer
         mode:
+          description: Switching mode for this local port configuration
           $ref: '#/components/schemas/switch_port_local_usage_mode'
         mtu:
           description: Media maximum transmission unit (MTU) is the largest data unit
             that can be forwarded without fragmentation. The default value is 1514.
           type: integer
         networks:
+          description: Only if `mode`==`trunk`, network or VLAN names to trunk
           $ref: '#/components/schemas/switch_port_usage_networks'
         note:
           description: Additional note for the port config override
@@ -78091,11 +78101,14 @@ components:
           description: Whether PoE capabilities are disabled for a port
           type: boolean
         port_auth:
+          description: 802.1X authentication mode for this local port configuration
           $ref: '#/components/schemas/switch_port_local_usage_dot1x'
         port_network:
           description: Native network/vlan for untagged traffic
           type: string
         reauth_interval:
+          description: Only if `port_auth`==`dot1x`, RADIUS reauthentication interval
+            for clients on the port
           $ref: '#/components/schemas/switch_port_usage_reauth_interval'
         server_fail_network:
           description: Only if `port_auth`==`dot1x` sets server fail fallback vlan
@@ -78108,21 +78121,25 @@ components:
           - string
           - 'null'
         speed:
+          description: Link speed for this local port configuration
           $ref: '#/components/schemas/junos_port_config_speed'
         storm_control:
+          description: Storm-control settings for this local port configuration
           $ref: '#/components/schemas/switch_port_local_usage_storm_control'
         stp_edge:
           default: false
           description: When enabled, the port is not expected to receive BPDU frames
           type: boolean
         stp_no_root_port:
+          description: Whether STP should prevent this port from becoming a root port
           default: false
           type: boolean
         stp_p2p:
+          description: Whether STP treats this port as a point-to-point link
           default: false
           type: boolean
         usage:
-          description: Port usage name.
+          description: Port usage profile name for this local port configuration
           type: string
         use_vstp:
           default: false
