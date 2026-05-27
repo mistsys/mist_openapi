@@ -82737,6 +82737,7 @@ components:
           - 192.168.70.30
           type: string
         name:
+          description: Label for this direct internet destination NAT rule
           examples:
           - web server
           type: string
@@ -82769,6 +82770,7 @@ components:
           - 192.168.70.3
           type: string
         name:
+          description: Label for this direct internet static NAT rule
           examples:
           - pos_station-1
           type: string
@@ -82973,6 +82975,7 @@ components:
       type: object
     network_vpn_access_config:
       additionalProperties: false
+      description: VPN access settings for a network and VPN pair
       properties:
         advertised_subnet:
           description: If `routed`==`true`, whether to advertise an aggregated subnet
@@ -82985,6 +82988,7 @@ components:
           description: Whether to allow ping from vpn into this routed network
           type: boolean
         destination_nat:
+          description: Destination NAT rules applied for VPN access to this network
           $ref: '#/components/schemas/network_vpn_access_destination_nat'
         nat_pool:
           description: If `routed`==`false` (usually at Spoke), but some hosts needs
@@ -83006,13 +83010,17 @@ components:
             from Spokes
           type: boolean
         other_vrfs:
+          description: Other VRFs that can receive leaked routes from this spoke network
           $ref: '#/components/schemas/network_vpn_access_config_other_vrfs'
         routed:
           description: Whether this network is routable
           type: boolean
         source_nat:
+          description: Source NAT settings used when non-routed spoke hosts must be
+            reachable from the hub
           $ref: '#/components/schemas/network_source_nat'
         static_nat:
+          description: Static NAT rules applied for VPN access to this network
           $ref: '#/components/schemas/network_vpn_access_static_nat'
         summarized_subnet:
           description: toward overlay, how HUB should deal with routes it received
@@ -83058,10 +83066,12 @@ components:
           - 192.168.70.30
           type: string
         name:
+          description: Label for this VPN destination NAT rule
           examples:
           - web server
           type: string
         port:
+          description: Destination port or variable for this VPN destination NAT rule
           examples:
           - '443'
           type: string
@@ -83082,6 +83092,7 @@ components:
           - 192.168.70.3
           type: string
         name:
+          description: Label for this VPN static NAT rule
           examples:
           - pos_station-1
           type: string
