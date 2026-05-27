@@ -82078,6 +82078,7 @@ components:
         \ list\n"
       properties:
         auth:
+          description: Mode presented by the NAC guest portal for user authentication
           $ref: '#/components/schemas/nac_portal_guest_portal_auth'
         expire:
           description: If `auth`==`none` or `auth`==`multi`, whether to expire the
@@ -82131,31 +82132,40 @@ components:
       type: string
     nac_portal_sso:
       additionalProperties: false
+      description: SAML SSO configuration for a NAC portal
       properties:
         idp_cert:
+          description: Identity provider certificate used to verify signed SAML responses
           examples:
           - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
             CERTIFICATE-----'
           type: string
         idp_sign_algo:
+          description: Signing algorithm expected for SAML assertions from the identity
+            provider
           $ref: '#/components/schemas/nac_portal_sso_idp_sign_algo'
         idp_sso_url:
+          description: Identity provider Single Sign-On URL for SAML authentication
           examples:
           - https://yourorg.onelogin.com/trust/saml2/http-post/sso/138130
           type: string
         issuer:
+          description: Identity provider issuer URL for SAML authentication
           examples:
           - https://app.onelogin.com/saml/metadata/138130
           type: string
         nameid_format:
+          description: SAML NameID format expected from the identity provider
           examples:
           - email
           type: string
         sso_role_matching:
+          description: Rules that map SSO role values from the identity provider to
+            NAC portal roles
           $ref: '#/components/schemas/nac_portal_sso_role_matchings'
         use_sso_role_for_cert:
-          description: If it's desired to inject a role into Cert's Subject (so it
-            can be used later on in policy)
+          description: Whether to include the matched SSO role in the issued certificate
+            subject for later policy matching
           type: boolean
       type: object
     nac_portal_sso_idp_sign_algo:
@@ -82170,26 +82180,33 @@ components:
       type: string
     nac_portal_sso_role_matching:
       additionalProperties: false
+      description: Mapping rule from an SSO role claim value to a NAC portal role
       properties:
         assigned:
+          description: NAC portal role assigned when the SSO role value matches
           examples:
           - user
           type: string
         match:
+          description: SSO role value to match from the SAML assertion
           examples:
           - Student
           type: string
       type: object
     nac_portal_sso_role_matchings:
+      description: List of SSO role mapping rules for the NAC portal
       items:
         $ref: '#/components/schemas/nac_portal_sso_role_matching'
       type: array
     nac_portal_template:
+      description: Visual template settings for a NAC portal
       properties:
         alignment:
+          description: Text and content alignment for the NAC portal page
           $ref: '#/components/schemas/portal_template_alignment'
         color:
           default: '#1074bc'
+          description: Primary color used by the NAC portal template
           type: string
         logo:
           description: Custom logo custom logo with "data:image/png;base64," format.
