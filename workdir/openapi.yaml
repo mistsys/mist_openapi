@@ -83211,22 +83211,31 @@ components:
           type: string
       type: object
     org:
+      description: Mist organization containing sites, devices, users, and organization-level
+        settings
       properties:
         alarmtemplate_id:
+          description: Org-level alarm template ID used as the default for sites
           format: uuid
           type:
           - string
           - 'null'
         allow_mist:
           default: true
+          description: Whether Mist support access is allowed for this organization
           type: boolean
         created_time:
+          description: Epoch timestamp when the organization was created
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier of the organization
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Epoch timestamp when the organization was last modified
           $ref: '#/components/schemas/modified_time'
         msp_id:
+          description: Managed service provider account that owns this organization,
+            when applicable
           $ref: '#/components/schemas/msp_id'
         msp_logo_url:
           description: logo uploaded by the MSP with advanced tier, only present if
@@ -83243,13 +83252,16 @@ components:
           readOnly: true
           type: string
         name:
+          description: Display name of the organization
           examples:
           - Org
           type: string
         orggroup_ids:
+          description: Organization group IDs that include this organization
           $ref: '#/components/schemas/orggroup_ids'
         session_expiry:
           default: 1440
+          description: Admin session lifetime for the organization, in minutes
           format: int32
           maximum: 20160
           minimum: 10
