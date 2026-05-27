@@ -84208,8 +84208,7 @@ components:
           description: Application probing configuration applied to managed gateways
           $ref: '#/components/schemas/org_setting_gateway_mgmt_app_probing'
         app_usage:
-          description: Whether gateway application usage collection is enabled; consumes
-            uplink bandwidth
+          description: For SRX only, whether gateway application usage collection is enabled; requires App Track license
           type: boolean
         fips_enabled:
           default: false
