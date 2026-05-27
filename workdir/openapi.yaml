@@ -78602,20 +78602,29 @@ components:
       type: string
     license_usage_org:
       additionalProperties: false
+      description: License usage record for an organization usage scope
       properties:
         for_site:
+          description: Whether this license usage record is scoped to a site
           readOnly: true
           type: boolean
         fully_loaded:
+          description: Maximum license demand by service for devices in this usage
+            scope
           $ref: '#/components/schemas/license_fully_loaded'
         num_devices:
+          description: Number of devices counted in this license usage scope
           readOnly: true
           type: integer
         site_id:
+          description: Site associated with this license usage record
           $ref: '#/components/schemas/site_id'
         summary:
+          description: Current license consumption by license type for this usage
+            scope
           $ref: '#/components/schemas/license_summary'
         usages:
+          description: Available license counts by service for this usage scope
           $ref: '#/components/schemas/license_usages'
       required:
       - num_devices
@@ -78624,15 +78633,19 @@ components:
       type: object
     license_usage_site:
       additionalProperties: false
+      description: Site license usage and entitlement response
       properties:
         org_entitled:
+          description: Organization-level license entitlements available to this site
           $ref: '#/components/schemas/license_usage_site_org_entitled'
         svna_enabled:
           description: Eligibility for the Switch SLE
           type: boolean
         trial_enabled:
+          description: Whether trial licensing is enabled for the site
           type: boolean
         usages:
+          description: License usage counts by subscription type for this site
           $ref: '#/components/schemas/license_usage_site_usage'
         vna_eligible:
           description: Eligibility for the AP/Client SLE
