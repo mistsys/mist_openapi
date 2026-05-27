@@ -77389,17 +77389,17 @@ components:
           minimum: 0
           type: integer
         mac:
-          description: MAC address of the IoT endpoint
+          description: Endpoint MAC address reported in IoT statistics
           examples:
           - 63f9e299182b63f9
           type: string
         mfg:
-          description: Manufacturer name
+          description: Manufacturer name reported for the IoT endpoint
           examples:
           - Assa Abloy
           type: string
         model:
-          description: Model name
+          description: Device model reported for the IoT endpoint
           examples:
           - Assa Abloy
           type: string
@@ -77417,9 +77417,11 @@ components:
       description: IoT proxy configuration for the site
       properties:
         enabled:
+          description: Whether the site IoT proxy is enabled
           default: false
           type: boolean
         visionline:
+          description: Site access-control integration settings for Visionline
           $ref: '#/components/schemas/iotproxy_visionline'
       type: object
     iotproxy_visionline:
@@ -77432,15 +77434,16 @@ components:
           - 790e6c1790e6c18541d
           type: string
         enabled:
+          description: Whether the Visionline integration is enabled
           default: false
           type: boolean
         host:
-          description: Hostname or IP of the Visionline collector
+          description: Collector hostname or IP address for Visionline
           examples:
           - visionline_collector1.local
           type: string
         password:
-          description: Password for the Visionline service
+          description: Visionline service password used by the IoT proxy
           format: password
           type: string
         port:
@@ -77448,7 +77451,7 @@ components:
           description: TCP port of the Visionline collector
           type: integer
         username:
-          description: Username for the Visionline service
+          description: Visionline service username used by the IoT proxy
           examples:
           - card_administrator
           type: string
