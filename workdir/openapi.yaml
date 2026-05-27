@@ -71609,7 +71609,7 @@ components:
           description: Timestamp when the access point object was last modified
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Friendly display name assigned to the access point
+          description: Configured hostname assigned to the access point
           examples:
           - conference room
           type: string
