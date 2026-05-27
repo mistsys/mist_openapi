@@ -82230,36 +82230,49 @@ components:
         $ref: '#/components/schemas/nac_portal'
       type: array
     nac_rule:
+      description: NAC authentication policy rule that matches request criteria and
+        applies an allow or block action
       properties:
         action:
+          description: Allow or block decision applied when the NAC rule matches
           $ref: '#/components/schemas/nac_rule_action'
         apply_tags:
+          description: NAC tag IDs to include in the Access-Accept when the rule allows
+            access
           $ref: '#/components/schemas/nac_rule_apply_tags'
         created_time:
+          description: Epoch timestamp when the NAC rule was created
           $ref: '#/components/schemas/created_time'
         enabled:
           default: true
-          description: Enabled or not
+          description: Whether the NAC rule is evaluated during policy matching
           type: boolean
         guest_auth_state:
+          description: Guest portal authorization state condition for the rule
           $ref: '#/components/schemas/nac_rule_guest_auth_state'
         id:
+          description: Unique identifier of the NAC rule
           $ref: '#/components/schemas/id'
         matching:
+          description: Criteria that must match for the NAC rule to apply
           $ref: '#/components/schemas/nac_rule_matching'
         modified_time:
+          description: Epoch timestamp when the NAC rule was last modified
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Human-readable name of the NAC rule
           type: string
         not_matching:
+          description: Criteria that must not match for the NAC rule to apply
           $ref: '#/components/schemas/nac_rule_matching'
         order:
-          description: Order of the rule, lower value implies higher priority
+          description: Rule priority; lower values are evaluated with higher priority
           examples:
           - 1
           minimum: 0
           type: integer
         org_id:
+          description: Org identifier that owns the NAC rule
           $ref: '#/components/schemas/org_id'
       required:
       - action
@@ -82290,26 +82303,38 @@ components:
       type: string
     nac_rule_matching:
       additionalProperties: false
+      description: Criteria used to include or exclude a NAC authentication request
+        from a rule
       properties:
         auth_type:
+          description: NAC authentication method that must match the request
           $ref: '#/components/schemas/nac_auth_type'
         family:
+          description: Client device family values that must match the request
           $ref: '#/components/schemas/nac_rule_matching_family'
         mfg:
+          description: Client device manufacturer values that must match the request
           $ref: '#/components/schemas/nac_rule_matching_model'
         model:
+          description: Client device model values that must match the request
           $ref: '#/components/schemas/nac_rule_matching_mfg'
         nactags:
+          description: NAC tag IDs whose match criteria must be satisfied by the request
           $ref: '#/components/schemas/nac_rule_matching_nactags'
         os_type:
+          description: Client OS type values that must match the request
           $ref: '#/components/schemas/nac_rule_matching_os_type'
         port_types:
+          description: Wired or wireless access types that must match the request
           $ref: '#/components/schemas/nac_rule_matching_port_types'
         site_ids:
+          description: Site IDs where the rule criteria apply
           $ref: '#/components/schemas/nac_rule_matching_site_ids'
         sitegroup_ids:
+          description: Site group IDs where the rule criteria apply
           $ref: '#/components/schemas/nac_rule_matching_sitegroup_ids'
         vendor:
+          description: Client device vendor values that must match the request
           $ref: '#/components/schemas/nac_rule_matching_vendor'
       type: object
     nac_rule_matching_family:
