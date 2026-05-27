@@ -70144,7 +70144,7 @@ components:
           - FR
           type: string
         certified:
-          description: Whether this country is certified for use in Mist configuration
+          description: Whether this country is certified for use in Mist APs
           examples:
           - true
           type: boolean
