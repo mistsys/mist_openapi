@@ -77458,8 +77458,11 @@ components:
       type: object
     ip_stat:
       additionalProperties: false
+      description: Read-only IP addressing status reported by a device interface
       properties:
         dhcp_server:
+          description: Reported DHCP server IPv4 address for the interface, when
+            available
           examples:
           - 192.168.95.1
           readOnly: true
@@ -77467,15 +77470,19 @@ components:
           - string
           - 'null'
         dns:
+          description: Reported DNS server addresses for the interface
           $ref: '#/components/schemas/strings'
         dns_suffix:
+          description: Reported DNS search suffixes for the interface
           $ref: '#/components/schemas/strings'
         gateway:
+          description: Current IPv4 default gateway for the interface, when available
           readOnly: true
           type:
           - string
           - 'null'
         gateway6:
+          description: Current IPv6 default gateway for the interface, when available
           examples:
           - fdad:b0bc:f29e::1
           readOnly: true
@@ -77483,6 +77490,7 @@ components:
           - string
           - 'null'
         ip:
+          description: Current IPv4 address for the interface, when available
           examples:
           - 10.3.3.1
           readOnly: true
@@ -77490,6 +77498,7 @@ components:
           - string
           - 'null'
         ip6:
+          description: Current IPv6 address for the interface, when available
           examples:
           - fdad:b0bc:f29e::3d16
           readOnly: true
@@ -77499,8 +77508,10 @@ components:
         ips:
           additionalProperties:
             $ref: '#/components/schemas/ip_stat_ips'
+          description: Per-VLAN IP address summaries keyed by VLAN name
           type: object
         netmask:
+          description: Current IPv4 subnet mask for the interface, when available
           examples:
           - 255.255.255.0
           readOnly: true
@@ -77508,6 +77519,7 @@ components:
           - string
           - 'null'
         netmask6:
+          description: Current IPv6 prefix length for the interface, when available
           examples:
           - /64
           readOnly: true
