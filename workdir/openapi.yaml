@@ -79545,44 +79545,61 @@ components:
       type: array
     marvis:
       additionalProperties: false
+      description: Marvis automation and client settings
       properties:
         auto_operations:
+          description: Automatic remediation operations controlled by Marvis
           $ref: '#/components/schemas/marvis_auto_operations'
       type: object
     marvis_auto_operations:
       additionalProperties: false
+      description: Marvis automatic remediation operation toggles
       properties:
         ap_insufficient_capacity:
+          description: Whether Marvis may remediate AP insufficient-capacity issues
+            automatically
           default: false
           type: boolean
         ap_loop:
+          description: Whether Marvis may remediate AP loop issues automatically
           default: false
           type: boolean
         ap_non_compliant:
+          description: Whether Marvis may remediate AP non-compliance automatically
           default: false
           type: boolean
         bounce_port_for_abnormal_poe_client:
+          description: Whether Marvis may bounce switch ports for abnormal PoE clients
           default: false
           type: boolean
         disable_port_when_ddos_protocol_violation:
+          description: Whether Marvis may disable a port when DDOS protocol violations
+            are detected
           default: false
           type: boolean
         disable_port_when_rogue_dhcp_server_detected:
+          description: Whether Marvis may disable a port when a rogue DHCP server is
+            detected
           default: false
           type: boolean
         gateway_non_compliant:
+          description: Whether Marvis may remediate non-compliant gateways automatically
           default: false
           type: boolean
         switch_misconfigured_port:
+          description: Whether Marvis may remediate misconfigured switch ports automatically
           default: false
           type: boolean
         switch_port_stuck:
+          description: Whether Marvis may remediate stuck switch ports automatically
           default: false
           type: boolean
       type: object
     marvis_client:
+      description: Marvis Client configuration profile
       properties:
         disabled:
+          description: Whether this Marvis Client profile is disabled
           default: false
           type: boolean
         enrollment_url:
@@ -79593,28 +79610,37 @@ components:
           readOnly: true
           type: string
         id:
+          description: Unique identifier of the Marvis Client profile
           $ref: '#/components/schemas/id'
         location:
+          description: Client location collection settings for Marvis Client
           $ref: '#/components/schemas/marvis_client_location'
         name:
+          description: Display name for the Marvis Client profile
           examples:
           - Handhelds
           type: string
         synthetic_test:
+          description: Synthetic test settings for Marvis Client
           $ref: '#/components/schemas/marvis_client_synthetic_test'
         telemetry:
+          description: Client telemetry collection settings for Marvis Client
           $ref: '#/components/schemas/marvis_client_telemetry'
       type: object
     marvis_client_location:
       additionalProperties: false
+      description: Location collection settings for Marvis Client
       properties:
         enabled:
+          description: Whether location collection is enabled for Marvis Client
           type: boolean
       type: object
     marvis_client_synthetic_test:
       additionalProperties: false
+      description: Synthetic test settings for Marvis Client
       properties:
         enabled:
+          description: Whether synthetic testing is enabled for Marvis Client
           type: boolean
       type: object
     marvis_client_telemetry:
@@ -79623,9 +79649,11 @@ components:
         Mist infrastructure'
       properties:
         enabled:
+          description: Whether telemetry collection is enabled for Marvis Client
           type: boolean
       type: object
     marvis_clients:
+      description: Marvis Client profiles returned by the API
       items:
         $ref: '#/components/schemas/marvis_client'
       type: array
@@ -79634,16 +79662,21 @@ components:
       description: Self-driving network automation settings per domain
       properties:
         wan:
+          description: Self-driving automation settings for the WAN domain
           $ref: '#/components/schemas/marvis_self_driving_domain'
         wired:
+          description: Self-driving automation settings for the wired domain
           $ref: '#/components/schemas/marvis_self_driving_domain'
         wireless:
+          description: Self-driving automation settings for the wireless domain
           $ref: '#/components/schemas/marvis_self_driving_domain'
       type: object
     marvis_self_driving_domain:
       additionalProperties: false
+      description: Self-driving automation settings for one Marvis domain
       properties:
         enabled:
+          description: Whether self-driving automation is enabled for this domain
           default: false
           type: boolean
       type: object
