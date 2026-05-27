@@ -78467,9 +78467,10 @@ components:
       type: object
     license:
       additionalProperties: false
-      description: License
+      description: Organization license entitlement, subscription, and usage summary
       properties:
         amendments:
+          description: Read-only license amendments associated with the organization
           $ref: '#/components/schemas/license_amendments'
         entitled:
           additionalProperties:
@@ -78479,40 +78480,55 @@ components:
           readOnly: true
           type: object
         fully_loaded:
+          description: Maximum license demand by service if all organization devices
+            use each service
           $ref: '#/components/schemas/license_fully_loaded'
         licenses:
+          description: Read-only license subscriptions for the organization
           $ref: '#/components/schemas/licenses'
         summary:
+          description: Current license consumption by license type
           $ref: '#/components/schemas/license_summary'
         usages:
+          description: Available license counts by service
           $ref: '#/components/schemas/license_usages'
       type: object
     license_amendment:
       additionalProperties: false
+      description: Read-only change applied to a license subscription
       properties:
         created_time:
+          description: Time when the license amendment was created
           $ref: '#/components/schemas/created_time'
         end_time:
+          description: End time of the license amendment
           readOnly: true
           type: integer
         id:
+          description: Unique identifier of the license amendment
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the license amendment was last modified
           $ref: '#/components/schemas/modified_time'
         quantity:
+          description: License quantity associated with this amendment
           readOnly: true
           type: integer
         start_time:
+          description: Start time of the license amendment
           readOnly: true
           type: integer
         subscription_id:
+          description: Subscription identifier associated with this amendment
           readOnly: true
           type: string
         type:
+          description: License type affected by this amendment
           $ref: '#/components/schemas/license_type'
       readOnly: true
       type: object
     license_amendments:
+      description: Read-only list of license amendments
       items:
         $ref: '#/components/schemas/license_amendment'
       readOnly: true
@@ -78529,21 +78545,27 @@ components:
       type: object
     license_sub:
       additionalProperties: false
+      description: Read-only license subscription record
       properties:
         created_time:
+          description: Time when the license subscription was created
           $ref: '#/components/schemas/created_time'
         end_time:
           description: End date of the license term
           readOnly: true
           type: integer
         id:
+          description: Unique identifier of the license subscription
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the license subscription was last modified
           $ref: '#/components/schemas/modified_time'
         order_id:
+          description: Order identifier for this license subscription
           readOnly: true
           type: string
         org_id:
+          description: Organization that owns this license subscription
           $ref: '#/components/schemas/org_id'
         quantity:
           description: Number of devices entitled for this license
@@ -78557,9 +78579,11 @@ components:
           readOnly: true
           type: integer
         subscription_id:
+          description: Subscription identifier for this license subscription
           readOnly: true
           type: string
         type:
+          description: License type for this subscription
           $ref: '#/components/schemas/license_type'
       readOnly: true
       type: object
@@ -78648,11 +78672,12 @@ components:
       additionalProperties:
         readOnly: true
         type: integer
-      description: Number of available licenes. Property key is the service name (e.g.
-        "SUB-MAN"). name (e.g. "SUB-MAN")
+      description: Number of available licenses. Property key is the service name
+        (e.g. "SUB-MAN").
       readOnly: true
       type: object
     licenses:
+      description: License subscriptions for the organization
       items:
         $ref: '#/components/schemas/license_sub'
       type: array
