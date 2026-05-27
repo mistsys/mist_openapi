@@ -83270,9 +83270,9 @@ components:
       - name
       type: object
     org_apitoken:
-      description: "Org API Token\n\n**Note:**\n`privilege` field is required to create\
-        \ the object, but may not be \nreturned in the POST API Response (only in\
-        \ the afterward GET)"
+      description: "Organization API token with scoped privileges\n\n**Note:**\n`privileges`\
+        \ is required to create the object, but may not be returned in the POST API\
+        \ response. Retrieve the token afterward to inspect it."
       properties:
         created_by:
           description: email of the token creator / null if creator is deleted
@@ -83283,15 +83283,20 @@ components:
           - string
           - 'null'
         created_time:
+          description: Epoch timestamp when the organization API token was created
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier of the organization API token
           $ref: '#/components/schemas/id'
         key:
+          description: Token secret key returned only when the API token is created
           examples:
           - 1qkb...QQCL
           readOnly: true
           type: string
         last_used:
+          description: Epoch timestamp when the token was last used, or null if it
+            has not been used
           examples:
           - 1690115110
           readOnly: true
@@ -83299,15 +83304,19 @@ components:
           - number
           - 'null'
         name:
-          description: Name of the token
+          description: Display name of the organization API token
           examples:
           - org_token_xyz
           type: string
         org_id:
+          description: Organization that owns this API token
           $ref: '#/components/schemas/org_id'
         privileges:
+          description: Access scopes and roles granted to the organization API token
           $ref: '#/components/schemas/org_apitoken_privileges'
         src_ips:
+          description: Allowed source IP addresses or CIDRs from which the token may
+            be used
           $ref: '#/components/schemas/org_apitoken_src_ips'
       required:
       - name
