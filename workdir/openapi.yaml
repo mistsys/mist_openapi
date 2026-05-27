@@ -81177,36 +81177,47 @@ components:
       - stable
       type: string
     mxedge_upgrade_info:
+      description: Available Mist Edge upgrade versions by package
       items:
         $ref: '#/components/schemas/mxedge_upgrade_info_items'
       type: array
       uniqueItems: true
     mxedge_upgrade_info_items:
       additionalProperties: false
+      description: Available upgrade version for a Mist Edge package
       properties:
         default:
+          description: Whether this version is the default upgrade target for the
+            package
           type: boolean
         distro:
+          description: Linux distribution codename for the package version
           type: string
         package:
+          description: Mist Edge service package name
           type: string
         version:
+          description: Available version for this package
           type: string
       required:
       - package
       - version
       type: object
     mxedge_upgrade_multi:
+      description: Request to schedule upgrades for one or more Mist Edges
       properties:
         allow_downgrades:
+          description: Per-service downgrade permission settings for this upgrade
           $ref: '#/components/schemas/mxedge_upgrade_multi_allow_downgrades'
         canary_phases:
+          description: Canary phase percentages for phased Mist Edge upgrades
           $ref: '#/components/schemas/upgrade_device_canary_phases'
         channel:
+          description: Upgrade channel to use for qualified versions
           $ref: '#/components/schemas/mxedge_upgrade_channel'
         distro:
-          description: Distro upgrade, optional, to specific codename (e.g. bullseye)
-            with highest qualified versions
+          description: Linux distribution codename for an optional distro upgrade,
+            such as bullseye
           type: string
         max_failure_percentage:
           default: 5
@@ -81214,13 +81225,16 @@ components:
             failed
           type: integer
         mxedge_ids:
+          description: Mist Edge IDs included in the upgrade request
           $ref: '#/components/schemas/mxedge_upgrade_multi_mxedge_ids'
         start_time:
           description: Upgrade start time in epoch seconds, default is now
           type: integer
         strategy:
+          description: Upgrade rollout strategy for the selected Mist Edges
           $ref: '#/components/schemas/mxedge_upgrade_strategy'
         versions:
+          description: Per-service target versions for the upgrade request
           $ref: '#/components/schemas/mxedge_upgrade_version'
       required:
       - mxedge_ids
@@ -81232,18 +81246,23 @@ components:
       properties:
         mxagent:
           default: false
+          description: Whether downgrades are allowed for the mxagent service
           type: boolean
         mxdas:
           default: false
+          description: Whether downgrades are allowed for the mxdas service
           type: boolean
         mxocproxy:
           default: false
+          description: Whether downgrades are allowed for the mxocproxy service
           type: boolean
         radsecproxy:
           default: false
+          description: Whether downgrades are allowed for the radsecproxy service
           type: boolean
         tunterm:
           default: false
+          description: Whether downgrades are allowed for the tunterm service
           type: boolean
       type: object
     mxedge_upgrade_multi_mxedge_ids:
@@ -81255,14 +81274,19 @@ components:
       type: array
     mxedge_upgrade_response_counts:
       additionalProperties: false
+      description: Counts of Mist Edge upgrades by current status
       properties:
         failed:
+          description: Number of Mist Edge upgrades that failed
           type: integer
         queued:
+          description: Number of Mist Edge upgrades waiting to run
           type: integer
         success:
+          description: Number of Mist Edge upgrades completed successfully
           type: integer
         upgrading:
+          description: Number of Mist Edge upgrades currently in progress
           type: integer
       required:
       - queued
@@ -81287,18 +81311,23 @@ components:
       properties:
         mxagent:
           default: current
+          description: Target version for the mxagent service
           type: string
         mxdas:
           default: current
+          description: Target version for the mxdas service
           type: string
         mxocproxy:
           default: current
+          description: Target version for the mxocproxy service
           type: string
         radsecproxy:
           default: current
+          description: Target version for the radsecproxy service
           type: string
         tunterm:
           default: current
+          description: Target version for the tunterm service
           type: string
       required:
       - mxagent
@@ -81306,11 +81335,14 @@ components:
       type: object
     mxedge_versions:
       additionalProperties: false
+      description: Read-only Mist Edge service versions
       properties:
         mxagent:
+          description: Reported version of the mxagent service
           readOnly: true
           type: string
         tunterm:
+          description: Reported version of the tunnel termination service
           readOnly: true
           type: string
       readOnly: true
@@ -81336,10 +81368,13 @@ components:
         $ref: '#/components/schemas/mxedge'
       type: array
     mxedges_assign:
+      description: Request to assign Mist Edges to a site
       properties:
         mxedge_ids:
+          description: Mist Edge identifiers to assign to the site
           $ref: '#/components/schemas/mxedges_assign_mxedge_ids'
         site_id:
+          description: Identifier of the site that receives the Mist Edges
           examples:
           - 43e9c864-a7e4-4310-8031-d9817d2c5a43
           format: uuid
@@ -81349,18 +81384,22 @@ components:
       - mxedge_ids
       type: object
     mxedges_assign_mxedge_ids:
+      description: Mist Edge identifiers to assign to a site
       items:
         format: uuid
         type: string
       type: array
     mxedges_unassign:
+      description: Request to unassign Mist Edges from their site
       properties:
         mxedge_ids:
+          description: Mist Edge identifiers to unassign from their site
           $ref: '#/components/schemas/mxedges_unassign_mxedge_ids'
       required:
       - mxedge_ids
       type: object
     mxedges_unassign_mxedge_ids:
+      description: Mist Edge identifiers to unassign from their site
       items:
         format: uuid
         type: string
