@@ -84118,67 +84118,84 @@ components:
       type: string
     org_setting_celona:
       additionalProperties: false
+      description: Integration settings for Celona
       properties:
         api_key:
+          description: Credential used by Mist for the Celona integration
           examples:
           - $2a$04$OkaLCoJn6rDjR8ha.oduQVDST3.kJNIrte
           type: string
         api_prefix:
+          description: Celona API prefix configured for the integration
           examples:
           - cc3273fcb016470e
           type: string
       type: object
     org_setting_cloudshark:
       additionalProperties: false
+      description: Packet capture integration settings for CloudShark
       properties:
         apitoken:
+          description: Token used by Mist to access the CloudShark integration
           examples:
           - accbd6f10c6d05c3
           type: string
         url:
-          description: If using CS Enterprise
+          description: CloudShark Enterprise URL, if using a self-hosted CS Enterprise
+            instance
           examples:
           - https://cloudshark.hosted.domain
           type: string
       type: object
     org_setting_cradlepoint:
       additionalProperties: false
+      description: Read-only Cradlepoint integration settings stored for the organization
       properties:
         cp_api_id:
+          description: Cradlepoint API ID used by Mist for the integration
           examples:
           - 84446d61-2206-4ea5-855a-0043f980be54
           readOnly: true
           type: string
         cp_api_key:
+          description: Cradlepoint API key paired with the Cradlepoint API ID
           examples:
           - 79c329da9893e34099c7d8ad5cb9c941
           readOnly: true
           type: string
         ecm_api_id:
+          description: Cradlepoint ECM API ID used by Mist for the integration
           examples:
           - 73446d61-2206-4ea5-855a-0043f980be62
           readOnly: true
           type: string
         ecm_api_key:
+          description: Cradlepoint ECM API key paired with the ECM API ID
           examples:
           - 68b329da9893e34099c7d8ad5cb9c940
           readOnly: true
           type: string
         enable_lldp:
+          description: Whether Mist uses Cradlepoint LLDP data to link routers to
+            Mist sites and devices
           readOnly: true
           type: boolean
       readOnly: true
       type: object
     org_setting_device_cert:
       additionalProperties: false
-      description: common device cert, optional
+      description: Optional common device certificate configuration for organization
+        settings
       properties:
         cert:
+          description: PEM-encoded common device certificate used by organization
+            settings
           examples:
           - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
             CERTIFICATE-----'
           type: string
         key:
+          description: Private key paired with the common device certificate
           examples:
           - '-----BEGIN PRI...'
           type: string
