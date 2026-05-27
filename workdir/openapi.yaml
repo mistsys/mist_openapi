@@ -79206,32 +79206,38 @@ components:
       type: string
     map_node:
       additionalProperties: false
-      description: Nodes on maps
+      description: Node in a map path graph
       properties:
         edges:
           additionalProperties:
             type: string
+          description: Adjacent node IDs and path weights for this map node
           examples:
           - N1: '1'
           type: object
         name:
+          description: Map node identifier or display name
           examples:
           - N1
           type: string
         position:
+          description: Coordinates of this map node
           $ref: '#/components/schemas/map_node_position'
       required:
       - name
       type: object
     map_node_position:
       additionalProperties: false
+      description: Position of a map path node
       properties:
         x:
+          description: Horizontal coordinate of the map node
           examples:
           - 746
           format: double
           type: number
         y:
+          description: Vertical coordinate of the map node
           examples:
           - 104
           format: double
@@ -79242,6 +79248,7 @@ components:
       type: object
     map_org_import_file:
       additionalProperties: false
+      description: Multipart payload for importing map files at organization scope
       properties:
         auto_deviceprofile_assignment:
           description: Whether to auto assign device to deviceprofile by name
@@ -79250,30 +79257,38 @@ components:
           type: boolean
         csv:
           contentMediaType: application/octet-stream
-          description: CSV file for ap name mapping, optional
+          description: Optional AP name-mapping CSV file
           type: string
         file:
           contentMediaType: application/octet-stream
-          description: Ekahau or ibwave file
+          description: Ekahau or iBwave floorplan file to import
           type: string
         json:
+          description: Import options for the organization map file
           $ref: '#/components/schemas/map_org_import_file_json'
       type: object
     map_org_import_file_json:
       additionalProperties: false
+      description: Options for importing organization map files
       properties:
         import_all_floorplans:
+          description: Whether to import all floorplans from the uploaded map file
           default: false
           type: boolean
         import_height:
+          description: Whether to import height metadata from the uploaded map file
           default: true
           type: boolean
         import_orientation:
+          description: Whether to import orientation metadata from the uploaded map
+            file
           default: true
           type: boolean
         site_id:
+          description: Target site for imported floorplans, when specified
           $ref: '#/components/schemas/site_id'
         vendor_name:
+          description: Map import vendor for the uploaded file
           $ref: '#/components/schemas/map_org_import_file_json_vendor_name'
       required:
       - vendor_name
@@ -79288,6 +79303,7 @@ components:
       type: string
     map_site_import_file:
       additionalProperties: false
+      description: Multipart payload for importing map files at site scope
       properties:
         auto_deviceprofile_assignment:
           description: Whether to auto assign device to deviceprofile by name
@@ -79296,30 +79312,36 @@ components:
           type: boolean
         csv:
           contentMediaType: application/octet-stream
-          description: CSV file for ap name mapping, optional
+          description: Optional AP name-mapping CSV file
           type: string
         file:
           contentMediaType: application/octet-stream
-          description: Ekahau or ibwave file
+          description: Ekahau or iBwave floorplan file to import
           type: string
         json:
+          description: Import options for the site map file
           $ref: '#/components/schemas/map_import_json'
       type: object
     map_site_replace_file:
       additionalProperties: false
+      description: Multipart payload for replacing a site map image
       properties:
         file:
           contentMediaType: application/octet-stream
+          description: Map image file used to replace the existing site map
           type: string
         json:
+          description: Replacement transform options for the map image
           $ref: '#/components/schemas/map_site_replace_file_json'
       required:
       - file
       type: object
     map_site_replace_file_json:
       additionalProperties: false
+      description: Options for replacing a site map image
       properties:
         transform:
+          description: Coordinate transform to apply when replacing the map image
           $ref: '#/components/schemas/map_site_replace_file_json_transform'
       type: object
     map_site_replace_file_json_transform:
