@@ -78900,9 +78900,10 @@ components:
           type: integer
       type: object
     map:
-      description: Map
+      description: Map or floorplan metadata for a site or organization
       properties:
         created_time:
+          description: Time when the map was created
           $ref: '#/components/schemas/created_time'
         flags:
           additionalProperties:
@@ -78914,39 +78915,46 @@ components:
           readOnly: true
           type: object
         for_site:
+          description: Whether this map belongs to a site scope
           readOnly: true
           type: boolean
         geofences:
+          description: Location boundary definitions configured on this map
           $ref: '#/components/schemas/map_geofences'
         group_idx:
-          description: maps grouping, typically used for floor, optional
+          description: Optional floor or group ordering index for this map
           examples:
           - 1
           type: integer
         group_name:
-          description: maps grouping, optional
+          description: Optional floor or group display name for this map
           examples:
           - East Wing
           type: string
         height:
-          description: When type=image, height of the image map
+          description: When `type`==`image`, height of the map image in pixels
           examples:
           - 1500
           type: integer
         height_m:
+          description: Physical height of the map in meters
           format: double
           type: number
         id:
+          description: Unique identifier of the map
           $ref: '#/components/schemas/id'
         latlng_br:
+          description: When `type`==`google`, bottom-right map bounds coordinate
           $ref: '#/components/schemas/latlng_br'
         latlng_tl:
+          description: When `type`==`google`, top-left map bounds coordinate
           $ref: '#/components/schemas/latlng_tl'
         locked:
           default: false
           description: Whether this map is considered locked down
           type: boolean
         modified_time:
+          description: Time when the map was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: The name of the map
@@ -78954,12 +78962,14 @@ components:
           - Mist Office
           type: string
         occupancy_limit:
+          description: Maximum occupancy configured for this map
           type: integer
         org_id:
+          description: Organization associated with this map
           $ref: '#/components/schemas/org_id'
         orientation:
           default: 0
-          description: Orientation of the map, 0 means up is north, 90 means up is
+          description: Map orientation in degrees; 0 means up is north, 90 means up is
             west
           examples:
           - 30
@@ -78977,66 +78987,76 @@ components:
           - 60
           type: integer
         ppm:
-          description: When type=image, pixels per meter
+          description: When `type`==`image`, pixels per meter for the map image
           examples:
           - 40.94
           type: number
         site_id:
+          description: Site associated with this map, when scoped to a site
           $ref: '#/components/schemas/site_id'
         sitesurvey_path:
+          description: Site survey path geometry for this map
           $ref: '#/components/schemas/map_sitesurvey_path'
         thumbnail_url:
-          description: When type=image, the url for the thumbnail image / preview
+          description: When `type`==`image`, URL for the thumbnail image or preview
           examples:
           - https://url/to/image.png
           readOnly: true
           type: string
         type:
+          description: Map type, such as `image` or `google`
           $ref: '#/components/schemas/map_type'
         url:
-          description: When type=image, the url
+          description: When `type`==`image`, URL for the map image
           examples:
           - https://url/to/image.png
           readOnly: true
           type: string
         view:
+          description: If `type`==`google`, map tile view to display
           $ref: '#/components/schemas/map_view'
         wall_path:
+          description: Wall path geometry for this map
           $ref: '#/components/schemas/map_wall_path'
         wayfinding:
+          description: Navigation pathfinding settings for this map
           $ref: '#/components/schemas/map_wayfinding'
         wayfinding_path:
+          description: Wayfinding path geometry for this map
           $ref: '#/components/schemas/map_wayfinding_path'
         width:
-          description: When type=image, width of the image map
+          description: When `type`==`image`, width of the map image in pixels
           examples:
           - 1250
           type: integer
         width_m:
+          description: Physical width of the map in meters
           format: double
           type: number
       type: object
     map_geofence:
       additionalProperties: false
+      description: Geofence drawn on a map
       properties:
         name:
-          description: Name of the geofence
+          description: Display name for the map geofence
           examples:
           - example
           type: string
         vertices:
+          description: Polygon points that define the geofence boundary
           $ref: '#/components/schemas/map_geofence_vertices'
       type: object
     map_geofence_vertice:
       additionalProperties: false
       properties:
         X:
-          description: X coordinate
+          description: Geofence vertex X coordinate in map units
           examples:
           - 700
           type: number
         Y:
-          description: Y coordinate
+          description: Geofence vertex Y coordinate in map units
           examples:
           - 100
           type: number
