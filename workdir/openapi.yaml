@@ -79499,6 +79499,7 @@ components:
       minItems: 0
       type: array
     maps:
+      description: Maps or floorplans returned by the API
       items:
         $ref: '#/components/schemas/map'
       type: array
@@ -79517,10 +79518,13 @@ components:
       description: Map Stack response object
       properties:
         created_time:
+          description: Time when the map stack was created
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier of the map stack
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the map stack was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: The name of the map stack
@@ -79528,11 +79532,14 @@ components:
           - Board Room
           type: string
         org_id:
+          description: Organization associated with the map stack
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the map stack
           $ref: '#/components/schemas/site_id'
       type: object
     mapstacks:
+      description: Map stacks returned by the API
       items:
         $ref: '#/components/schemas/mapstack_response'
       type: array
