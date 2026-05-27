@@ -77093,13 +77093,14 @@ components:
       type: array
     inventory:
       additionalProperties: false
+      description: Organization inventory record for a claimed device
       properties:
         adopted:
           description: Only if `type`==`switch` or `type`==`gateway`, whether the
             switch/gateway is adopted
           type: boolean
         chassis_mac:
-          description: For Virtual Chassis only, the MAC Address of the FPC0
+          description: For Virtual Chassis only, MAC address of the FPC0 member
           type: string
         chassis_serial:
           description: For Virtual Chassis only, the Serial Number of the FPC0
@@ -77108,6 +77109,7 @@ components:
           description: Whether the device is connected
           type: boolean
         created_time:
+          description: Time when the inventory record was created
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
           description: Deviceprofile id if assigned, null if not assigned
@@ -77115,45 +77117,51 @@ components:
           - string
           - 'null'
         hostname:
-          description: Hostname reported by the device
+          description: Inventory hostname value reported by the device
           type: string
         hw_rev:
           description: Device hardware revision number
           type: string
         id:
+          description: Unique identifier of the inventory record
           $ref: '#/components/schemas/id'
         jsi:
+          description: Whether the inventory device is in JSI mode
           type: boolean
         mac:
-          description: Device MAC address
+          description: Device MAC address for this inventory record
           type: string
         magic:
-          description: Device claim code
+          description: Claim code used to add this device to inventory
           type: string
         model:
-          description: Device model
+          description: Device model reported in inventory
           type: string
         modified_time:
+          description: Time when the inventory record was last modified
           $ref: '#/components/schemas/modified_time'
         name:
           description: Device name if configured
           type: string
         org_id:
+          description: Organization that owns this inventory record
           $ref: '#/components/schemas/org_id'
         serial:
-          description: Device serial
+          description: Device serial number reported in inventory
           type: string
         site_id:
+          description: Site associated with this inventory record, when assigned
           $ref: '#/components/schemas/site_id'
         sku:
           description: Device stock keeping unit
           type: string
         type:
+          description: Device type for this inventory record
           $ref: '#/components/schemas/device_type_default_ap'
         vc_mac:
-          description: If `type`==`switch` and device part of a Virtual Chassis, MAC
-            Address of the Virtual Chassis. if `type`==`gateway` and device part of
-            a Cluster, MAC Address of the Cluster
+          description: If `type`==`switch` and the device is part of a Virtual Chassis,
+            MAC address of the Virtual Chassis. If `type`==`gateway` and the device
+            is part of a cluster, MAC address of the cluster
           type: string
       type: object
     inventory_count_distinct:
@@ -77167,102 +77175,133 @@ components:
       - version
       type: string
     inventory_list:
+      description: Inventory records for claimed devices
       items:
         $ref: '#/components/schemas/inventory'
       type: array
     inventory_search:
       additionalProperties: false
+      description: Paginated inventory search response
       properties:
         end:
+          description: Page ending index for this inventory search response
           type: integer
         limit:
+          description: Maximum number of inventory search results requested
           examples:
           - 1000
           type: integer
         next:
+          description: URL for the next page of inventory search results
           type: string
         results:
+          description: Inventory records returned by the search
           $ref: '#/components/schemas/inventory_search_results'
         start:
+          description: Page starting index for this inventory search response
           type: integer
         total:
+          description: Number of inventory records matching the search
           examples:
           - 1
           type: integer
       type: object
     inventory_search_result:
       additionalProperties: false
+      description: Inventory record returned by inventory search
       properties:
         mac:
+          description: Device MAC address for this inventory search result
           examples:
           - f01c2df166e0
           type: string
         master:
+          description: Whether this search result represents the master member of
+            a Virtual Chassis
           examples:
           - true
           type: boolean
         members:
+          description: Virtual Chassis members included in this inventory search result
           $ref: '#/components/schemas/inventory_search_result_members'
         model:
+          description: Device model for this inventory search result
           examples:
           - EX4300-48P
           type: string
         name:
+          description: Configured device name in this inventory search result
           examples:
           - mist-wa-ex4300-VC
           type: string
         org_id:
+          description: Organization that owns this inventory search result
           $ref: '#/components/schemas/org_id'
         serial:
+          description: Device serial number for this inventory search result
           examples:
           - PD3714460200
           type: string
         site_id:
+          description: Site associated with this inventory search result, when assigned
           $ref: '#/components/schemas/site_id'
         sku:
+          description: Device SKU for this inventory search result
           examples:
           - EX4300-48P
           type: string
         status:
+          description: Current inventory status for the device
           examples:
           - disconnected
           type: string
         type:
+          description: Device type for this inventory search result
           $ref: '#/components/schemas/device_type_default_ap'
         vc_mac:
+          description: Virtual Chassis MAC address for this inventory search result
           examples:
           - f01c2df166e0
           type: string
         version:
+          description: Software version reported for this inventory search result
           examples:
           - 21.4R3.5
           type: string
       type: object
     inventory_search_result_member:
       additionalProperties: false
+      description: Virtual Chassis member in an inventory search result
       properties:
         mac:
+          description: Member device MAC address in this inventory search result
           examples:
           - f01c2df166e0
           type: string
         model:
+          description: Member device model in this inventory search result
           examples:
           - EX4300-48P
           type: string
         serial:
+          description: Member device serial number in this inventory search result
           examples:
           - PD3714460200
           type: string
       type: object
     inventory_search_result_members:
+      description: Virtual Chassis members included in an inventory search result
       items:
         $ref: '#/components/schemas/inventory_search_result_member'
       type: array
     inventory_search_results:
+      description: Inventory records returned by an inventory search
       items:
         $ref: '#/components/schemas/inventory_search_result'
       type: array
     inventory_update:
+      description: Request to assign, unassign, delete, or change management mode
+        for inventory devices
       properties:
         disable_auto_config:
           default: false
@@ -77273,6 +77312,7 @@ components:
             the device to be Mist-managed.
           type: boolean
         macs:
+          description: Device MAC addresses affected by this inventory operation
           $ref: '#/components/schemas/inventory_update_macs'
         managed:
           default: false
@@ -77282,8 +77322,8 @@ components:
             switch/gateway to be managed/configured by Mist.
           type: boolean
         mist_configured:
-          description: whether the device can be configured by Mist or not. This deprecates
-            `managed` (for adopted device) and `disable_auto_config` for claimed device)
+          description: Whether the device can be configured by Mist. Replaces `managed`
+            for adopted devices and `disable_auto_config` for claimed devices
           type: boolean
         no_reassign:
           default: false
@@ -77291,19 +77331,21 @@ components:
             already assigned AP as error
           type: boolean
         op:
+          description: Inventory operation to apply to the listed devices
           $ref: '#/components/schemas/inventory_update_operation'
         serials:
+          description: Device serial numbers affected by this inventory operation
           $ref: '#/components/schemas/inventory_update_serials'
         site_id:
-          description: If `op`==`assign`, target site id
+          description: If `op`==`assign`, target site ID for the inventory operation
           format: uuid
           type: string
       required:
       - op
       type: object
     inventory_update_macs:
-      description: If `op`==`assign`, `op`==`unassign`, `op`==`upgrade_to_mist`or
-        `op`==`downgrade_to_jsi` , list of MAC, e.g. ["5c5b350e0001"]
+      description: If `op`==`assign`, `op`==`unassign`, `op`==`upgrade_to_mist`,
+        or `op`==`downgrade_to_jsi`, device MAC addresses to update
       items:
         type: string
       type: array
@@ -77323,7 +77365,7 @@ components:
       - upgrade_to_mist
       type: string
     inventory_update_serials:
-      description: If `op`==`delete`, list of serial numbers, e.g. ["FXLH2015150025"]
+      description: If `op`==`delete`, device serial numbers to delete from inventory
       items:
         type: string
       type: array
