@@ -77599,6 +77599,7 @@ components:
           $ref: '#/components/schemas/issued_client_certificates'
       type: object
     js_inventory:
+      description: JSI inventory items returned for an organization
       items:
         $ref: '#/components/schemas/js_inventory_item'
       type: array
@@ -77673,6 +77674,7 @@ components:
       type: object
     js_inventory_search:
       additionalProperties: false
+      description: Paginated JSI inventory search response
       properties:
         end:
           description: Offset to end at
@@ -77681,32 +77683,40 @@ components:
           description: Number of results to return
           type: integer
         next:
+          description: URL for the next page of JSI inventory results
           type: string
         results:
+          description: JSI inventory records returned by the search
           $ref: '#/components/schemas/js_inventory'
         start:
           description: Offset to start from
           type: integer
         total:
-          description: Total number of results
+          description: Number of JSI inventory records matching the search
           type: integer
       type: object
     jse_device:
       additionalProperties: false
+      description: JSE device reported for an organization
       properties:
         ext_ip:
-          description: When available
+          description: External IP address for the JSE device, when available
           type: string
         last_seen:
+          description: Time when the JSE device was last seen
           $ref: '#/components/schemas/last_seen'
         mac:
+          description: Device MAC address for the JSE device
           type: string
         model:
+          description: Device model for the JSE device
           type: string
         serial:
+          description: Device serial number for the JSE device
           type: string
       type: object
     jse_devices:
+      description: JSE devices returned for an organization
       items:
         $ref: '#/components/schemas/jse_device'
       type: array
