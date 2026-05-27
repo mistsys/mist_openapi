@@ -76946,35 +76946,41 @@ components:
         $ref: '#/components/schemas/installer_device'
       type: array
     installer_provision_device:
-      description: Provision Device
+      description: Installer payload for provisioning or replacing a device
       properties:
         deviceprofile_name:
+          description: Profile name applied to the device during installer provisioning
           examples:
           - SJ1
           type: string
         for_site:
+          description: Whether this installer provisioning request is scoped to a site
           readOnly: true
           type: boolean
         height:
+          description: Mounting height recorded for map placement
           examples:
           - 2.7
           format: double
           type: number
         map_id:
+          description: Identifier of the map where the device should be placed
           examples:
           - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
           format: uuid
           type: string
         name:
+          description: Device name to set during installer provisioning
           examples:
           - SJ1-AP1
           type: string
         orientation:
+          description: Map orientation of the device, in degrees
           examples:
           - 90
           type: integer
         replacing_mac:
-          description: Onlif this is to replace an existing device
+          description: Only if replacing an existing device; MAC address of the device being replaced
           examples:
           - 5c5b3500003
           type: string
@@ -76982,20 +76988,24 @@ components:
           description: Optional role for switch / gateway
           type: string
         site_id:
+          description: Identifier of the destination site for installer provisioning
           examples:
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
         site_name:
+          description: Destination site name for installer provisioning
           examples:
           - SJ1
           type: string
         x:
+          description: Horizontal map position for the device, in pixels
           examples:
           - 150
           format: double
           type: number
         y:
+          description: Vertical map position for the device, in pixels
           examples:
           - 300
           format: double
@@ -77004,30 +77014,39 @@ components:
       - name
       type: object
     installer_site:
+      description: Site definition available to installer workflows
       properties:
         address:
+          description: Street or postal address for the installer site
           examples:
           - 1601 S. Deanza Blvd., Cupertino, CA, 95014
           type: string
         country_code:
+          description: ISO country code for the installer site
           examples:
           - US
           type: string
         id:
+          description: Unique identifier of the installer site
           $ref: '#/components/schemas/id'
         latlng:
+          description: Geographic coordinates of the installer site
           $ref: '#/components/schemas/lat_lng'
         name:
+          description: Display name of the installer site
           examples:
           - Mist Office
           type: string
         rftemplate_name:
+          description: RF template name applied to the installer site
           examples:
           - rftemplate1
           type: string
         sitegroup_names:
+          description: Names of site groups associated with the installer site
           $ref: '#/components/schemas/installer_site_sitegroup_names'
         timezone:
+          description: Time zone configured for the installer site
           examples:
           - America/Los_Angeles
           type: string
@@ -77038,6 +77057,7 @@ components:
       - name
       type: object
     installer_site_sitegroup_names:
+      description: Site group names associated with an installer site
       examples:
       - - sg1
         - sg2
@@ -77045,19 +77065,24 @@ components:
         type: string
       type: array
     installer_sites:
+      description: Sites available to installer workflows
       items:
         $ref: '#/components/schemas/installer_site'
       type: array
     installers:
+      description: Installer access entries
       items:
         $ref: '#/components/schemas/installers_item'
       type: array
     installers_item:
       additionalProperties: false
+      description: Installer access entry
       properties:
         id:
+          description: Unique identifier of the installer access entry
           $ref: '#/components/schemas/id'
         name:
+          description: Display name of the installer access entry
           examples:
           - 'Entry #1'
           type: string
@@ -83335,17 +83360,23 @@ components:
       type: object
     org_setting_installer:
       additionalProperties: false
+      description: Organization-level permissions and grace period for installer workflows
       properties:
         allow_all_devices:
+          description: Whether installers may work with all eligible devices
           type: boolean
         allow_all_sites:
+          description: Whether installers may work with all sites
           type: boolean
         extra_site_ids:
+          description: Additional site IDs that installers may access
           $ref: '#/components/schemas/org_setting_installer_extra_site_ids'
         grace_period:
+          description: Grace period, in days, during which installers can modify recent sites or devices
           type: integer
       type: object
     org_setting_installer_extra_site_ids:
+      description: Additional site IDs that installers may access
       items:
         examples:
         - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
