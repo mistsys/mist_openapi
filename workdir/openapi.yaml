@@ -80283,11 +80283,13 @@ components:
       - 'null'
     mxcluster_radsec:
       additionalProperties: false
-      description: MxEdge RadSec Configuration
+      description: RadSec proxy configuration for a Mist Edge cluster
       properties:
         acct_servers:
+          description: RADIUS accounting servers used by the RadSec proxy
           $ref: '#/components/schemas/mxcluster_radsec_acct_servers'
         auth_servers:
+          description: RADIUS authentication servers used by the RadSec proxy
           $ref: '#/components/schemas/mxcluster_radsec_auth_servers'
         enabled:
           description: Whether to enable service on Mist Edge i.e. RADIUS proxy over
@@ -80298,12 +80300,19 @@ components:
             of RADIUS servers
           type: boolean
         nas_ip_source:
+          description: Source used to populate NAS-IP-Address and NAS-IPv6-Address
+            attributes
           $ref: '#/components/schemas/mxcluster_radsec_nas_ip_source'
         proxy_hosts:
+          description: AP-reachable hostnames or IP addresses advertised as RadSec
+            TLS servers
           $ref: '#/components/schemas/mxcluster_radsec_proxy_hosts'
         server_selection:
+          description: RADIUS server selection strategy for RadSec failover
           $ref: '#/components/schemas/mxcluster_radsec_server_selection'
         src_ip_source:
+          description: Connection source interface or address used when reaching RADIUS
+            servers
           $ref: '#/components/schemas/mxcluster_radsec_src_ip_source'
       type: object
     mxcluster_radsec_acct_server:
@@ -80317,10 +80326,12 @@ components:
           description: Acct port of RADIUS server
           type: integer
         secret:
-          description: Secret of RADIUS server
+          description: Shared secret used with this RADIUS accounting server
           format: password
           type: string
         ssids:
+          description: WLAN SSID filters that use this accounting server when matching
+            is enabled
           $ref: '#/components/schemas/mxcluster_radsec_acct_server_ssids'
       type: object
     mxcluster_radsec_acct_server_ssids:
@@ -80356,6 +80367,7 @@ components:
             false
           type: boolean
         keywrap_format:
+          description: Encoding format for Mist AP RADIUS keywrap keys
           $ref: '#/components/schemas/mxcluster_rad_auth_server_keywrap_format'
         keywrap_kek:
           description: If used for Mist APs, encryption key
@@ -80369,13 +80381,15 @@ components:
           type: integer
         retry:
           default: 2
-          description: Authentication request retry
+          description: Number of authentication request retries before failing over
           type: integer
         secret:
-          description: Secret of RADIUS server
+          description: Shared secret used with this RADIUS authentication server
           format: password
           type: string
         ssids:
+          description: WLAN SSID filters that use this authentication server when
+            matching is enabled
           $ref: '#/components/schemas/mxcluster_radsec_auth_server_ssids'
         timeout:
           default: 5
@@ -80433,8 +80447,10 @@ components:
       type: string
     mxcluster_radsec_tls:
       additionalProperties: false
+      description: TLS settings for RadSec on a Mist Edge cluster
       properties:
         keypair:
+          description: Name or identifier of the TLS keypair used by RadSec
           type: string
       type: object
     mxcluster_tunterm_ap_subnets:
@@ -80444,8 +80460,10 @@ components:
       type: array
     mxcluster_tunterm_extra_route:
       additionalProperties: false
+      description: Extra route for Mist Tunneled VLAN traffic
       properties:
         via:
+          description: Next-hop IP address for this extra route
           type: string
       type: object
     mxcluster_tunterm_extra_routes:
