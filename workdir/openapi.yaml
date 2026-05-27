@@ -76819,81 +76819,101 @@ components:
       type: object
     installer_device:
       additionalProperties: false
+      description: Recently claimed device visible to installer workflows
       properties:
         ble_stat:
+          description: BLE beacon statistics reported by the device
           $ref: '#/components/schemas/installer_device_ble_stat'
         connected:
+          description: Whether the device is currently connected to Mist
           examples:
           - true
           type: boolean
         deviceprofile_name:
+          description: Device profile name associated with this installer device
           examples:
           - SJ1
           type: string
         ext_ip:
+          description: External IP address observed for device management traffic
           examples:
           - 12.34.56.78
           type: string
         height:
+          description: Mounting height recorded for map placement
           examples:
           - 2.7
           format: double
           type: number
         ip:
+          description: Management IP address currently reported for the device
           examples:
           - 192.168.1.111
           type: string
         last_seen:
+          description: Time when the device was last seen by Mist
           $ref: '#/components/schemas/last_seen'
         mac:
+          description: Device MAC address shown to installers
           examples:
           - 5c5b35000018
           type: string
         map_id:
+          description: Map where the installer placed this device
           examples:
           - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
           format: uuid
           type: string
         model:
+          description: Device model reported for this installer device
           examples:
           - AP41
           type: string
         name:
+          description: Device name configured through the installer workflow
           examples:
           - hallway
           type: string
         orientation:
+          description: Map orientation of the device, in degrees
           examples:
           - 90
           type: integer
         serial:
+          description: Device serial number reported to installer workflows
           examples:
           - FXLH2015150025
           type: string
         site_name:
+          description: Site name associated with this installer device
           examples:
           - SJ1
           type: string
         uptime:
+          description: Device uptime, in seconds
           examples:
           - 12345
           type: integer
         vc_mac:
+          description: Virtual Chassis MAC address when this device is part of a VC
           examples:
           - null
           type:
           - string
           - 'null'
         version:
+          description: Software version currently running on the device
           examples:
           - 0.10.24362
           type: string
         x:
+          description: Horizontal map position of the device, in pixels
           examples:
           - 150
           format: double
           type: number
         y:
+          description: Vertical map position of the device, in pixels
           examples:
           - 300
           format: double
@@ -76904,20 +76924,24 @@ components:
       description: BLE statistics for the device
       properties:
         major:
+          description: iBeacon major value reported by the device
           examples:
           - 12345
           type: integer
         minors:
+          description: iBeacon minor values reported by the device
           items:
             type: integer
           type: array
         uuid:
+          description: iBeacon UUID advertised by the device
           examples:
           - ada72f8f-1643-e5c6-94db-f2a5636f1a64
           format: uuid
           type: string
       type: object
     installer_devices:
+      description: Recently claimed devices available to installer workflows
       items:
         $ref: '#/components/schemas/installer_device'
       type: array
