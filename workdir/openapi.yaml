@@ -82420,20 +82420,30 @@ components:
         type: string
       type: array
     nac_tag:
+      description: NAC tag used as a rule-matching classifier or as a result attribute
+        for allowed users
       properties:
         allow_usermac_override:
           default: false
-          description: Can be set to true to allow the override by usermac result
+          description: Whether usermac result values can override this NAC tag when
+            the result type is also supported by usermac
           type: boolean
         created_time:
+          description: Epoch timestamp when the NAC tag was created
           $ref: '#/components/schemas/created_time'
         egress_vlan_names:
+          description: If `type`==`egress_vlan_names`, list of egress VLAN names returned
+            by the NAC rule
           $ref: '#/components/schemas/nac_tag_egress_vlan_names'
         gbp_tag:
+          description: If `type`==`gbp_tag`, GBP tag value returned by the NAC rule
           $ref: '#/components/schemas/nac_tag_gbp_tag'
         id:
+          description: Unique identifier of the NAC tag
           $ref: '#/components/schemas/id'
         match:
+          description: If `type`==`match`, client or authentication attribute used
+            for rule matching
           $ref: '#/components/schemas/nac_tag_match'
         match_all:
           default: false
@@ -82444,34 +82454,50 @@ components:
             \ `match`==`usermac_label` and `edr_status`"
           type: boolean
         modified_time:
+          description: Epoch timestamp when the NAC tag was last modified
           $ref: '#/components/schemas/modified_time'
         nacportal_id:
+          description: If `type`==`redirect_nacportal_id`, NAC portal ID used for
+            client redirection
           $ref: '#/components/schemas/redirect_nacportal_id'
         name:
+          description: Human-readable name of the NAC tag
           minLength: 1
           type: string
         org_id:
+          description: Org identifier that owns the NAC tag
           $ref: '#/components/schemas/org_id'
         radius_attrs:
+          description: If `type`==`radius_attrs`, standard RADIUS attributes returned
+            by the NAC rule
           $ref: '#/components/schemas/nac_tag_radius_attrs'
         radius_group:
-          description: If `type`==`radius_group`
+          description: If `type`==`radius_group`, RADIUS group value returned by the
+            NAC rule
           type: string
         radius_vendor_attrs:
+          description: If `type`==`radius_vendor_attrs`, vendor-specific RADIUS attributes
+            returned by the NAC rule
           $ref: '#/components/schemas/nac_tag_radius_vendor_attrs'
         session_timeout:
-          description: If `type`==`session_timeout, in seconds
+          description: If `type`==`session_timeout`, session timeout returned by the
+            NAC rule, in seconds
           examples:
           - 86000
           type: integer
         type:
+          description: NAC tag type that determines whether the tag is a matcher or
+            a result attribute
           $ref: '#/components/schemas/nac_tag_type'
         username_attr:
+          description: If `type`==`username_attr`, attribute used to derive the username
+            returned by the NAC rule
           $ref: '#/components/schemas/nac_tag_username_attr'
         values:
+          description: If `type`==`match`, attribute values used by the NAC tag matcher
           $ref: '#/components/schemas/nac_tag_values'
         vlan:
-          description: If `type`==`vlan`
+          description: If `type`==`vlan`, VLAN name or ID returned by the NAC rule
           type: string
       required:
       - name
