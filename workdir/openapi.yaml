@@ -75401,6 +75401,7 @@ components:
         poser_password:
           description: Password used for PPPoE when `type`==`pppoe`
           type: string
+          format: password
         pppoe_auth:
           description: Authentication protocol used for PPPoE when `type`==`pppoe`
           $ref: '#/components/schemas/gateway_wan_ppoe_auth'
