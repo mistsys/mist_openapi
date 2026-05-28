@@ -80176,7 +80176,7 @@ components:
           description: Identifier of the org that owns the Mist Edge cluster
           $ref: '#/components/schemas/org_id'
         proxy:
-          description: Network proxy settings used by Mist Edges in the cluster
+          description: Network proxy settings used by Mist Edges in the cluster to communicate with the Mist Cloud
           $ref: '#/components/schemas/proxy'
         radsec:
           description: TLS RADIUS proxy settings for the Mist Edge cluster
@@ -80215,7 +80215,7 @@ components:
       type: object
     mxcluster_nac:
       additionalProperties: false
-      description: Mist NAC RADIUS settings for a Mist Edge cluster
+      description: Mist NAC RADIUS settings for a Mist Edge cluster. Used when the Mist Edge Cluster is used as a RADIUS Proxy between the local devices and the Mist NAC
       properties:
         acct_server_port:
           default: 1813
