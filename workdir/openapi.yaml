@@ -82680,7 +82680,7 @@ components:
           $ref: '#/components/schemas/org_id'
         routed_for_networks:
           description: Other network names this network can route to, for example
-            through OSPF
+            through BGP, OSPF or static routes
           $ref: '#/components/schemas/network_routed_for_networks'
         subnet:
           description: IPv4 subnet CIDR for this network
