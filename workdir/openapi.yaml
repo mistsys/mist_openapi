@@ -74831,7 +74831,7 @@ components:
         select a gateway
       properties:
         additional_config_cmds:
-          description: Additional Junos CLI commands appended when this gateway matching
+          description: For SRX only, additional Junos CLI commands appended when this gateway matching
             rule applies
           $ref: '#/components/schemas/additional_config_cmds'
         name:
