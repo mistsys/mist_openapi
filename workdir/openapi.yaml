@@ -74131,10 +74131,10 @@ components:
       description: Switch member of an EVPN topology, including role and link relationships
       properties:
         config:
-          description: Per-switch configuration supplied for this topology member
+          description: Per-switch configuration supplied for this topology member. Use the [Update Site Device]($e/Sites%20Devices/updateSiteDevice) endpoint to update the switch configuration.
           $ref: '#/components/schemas/evpn_topology_switch_config'
         deviceprofile_id:
-          description: Associated device profile identifier for the switch
+          description: Associated device profile identifier for the switch. Use the [Assign Org Device Profile]($e/Orgs%20Device%20Profiles/assignOrgDeviceProfile) endpoint to assign a Device Profile to the switch.
           examples:
           - 6a1deab1-96df-4fa2-8455-d5253f943d06
           format: uuid
