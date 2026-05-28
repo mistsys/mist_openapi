@@ -81985,7 +81985,7 @@ components:
           - 365
           type: integer
         eap_type:
-          description: WPA mode used when onboarding wireless clients through the NAC
+          description: EAP mode used when onboarding wireless clients through the NAC
             portal
           $ref: '#/components/schemas/nac_portal_eap_type'
         enable_telemetry:
