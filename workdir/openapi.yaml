@@ -76889,7 +76889,7 @@ components:
           - hallway
           type: string
         orientation:
-          description: Map orientation of the device, in degrees
+          description: Device orientation in degrees from 0 to 359, where 0 is up and 90 is right
           examples:
           - 90
           type: integer
@@ -76989,7 +76989,7 @@ components:
           - SJ1-AP1
           type: string
         orientation:
-          description: Map orientation of the device, in degrees
+          description: Device orientation in degrees from 0 to 359, where 0 is up and 90 is right
           examples:
           - 90
           type: integer
