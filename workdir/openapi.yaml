@@ -73610,8 +73610,8 @@ components:
           - inventory not empty
           type: string
         org_id:
-          description: Organization that still has inventory and prevents the delete
-            operation
+          description: Organization that could not be deleted and caused the delete
+            request to fail
           $ref: '#/components/schemas/org_id'
       required:
       - detail
