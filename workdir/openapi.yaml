@@ -79284,7 +79284,7 @@ components:
       type: object
     map_org_import_file_json:
       additionalProperties: false
-      description: Options for importing organization map files
+      description: Options for importing map files at organization scope
       properties:
         import_all_floorplans:
           description: Whether to import all floorplans from the uploaded map file
