@@ -79726,7 +79726,7 @@ components:
       - $ref: '#/components/schemas/device_gateway'
     mist_nacedge:
       additionalProperties: false
-      description: Mist NAC Edge settings for the site
+      description: Mist NAC Site Survivability settings for the site
       properties:
         auth_ttl:
           default: 604800
@@ -79745,14 +79745,14 @@ components:
           - test_vlan
           type: string
         enabled:
-          description: Whether Mist NAC Edge is enabled for the site
+          description: Whether Mist Site Survivability is enabled for the site
           type: boolean
         mxedge_hosts:
-          description: NAC Edge hostnames used by the site
+          description: NAC Edge hostnames used for the Site Survivability feature
           $ref: '#/components/schemas/mist_nacedge_mxedge_hosts'
       type: object
     mist_nacedge_mxedge_hosts:
-      description: List of NAC Edges in this site
+      description: List of NAC Edges used for the Site Survivability feature
       examples:
       - - mxedge1.local
       items:
