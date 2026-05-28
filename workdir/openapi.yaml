@@ -83307,7 +83307,7 @@ components:
           description: Unique identifier of the organization API token
           $ref: '#/components/schemas/id'
         key:
-          description: Token secret key returned only when the API token is created
+          description: Token secret key. The full API Token is only returned when the API token is created and can only be partially retrieved afterward
           examples:
           - 1qkb...QQCL
           readOnly: true
