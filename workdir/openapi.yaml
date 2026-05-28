@@ -78624,8 +78624,8 @@ components:
           readOnly: true
           type: boolean
         fully_loaded:
-          description: Maximum license demand by service for devices in this usage
-            scope
+          description: Maximum license demand by service if all organization devices
+            use each service
           $ref: '#/components/schemas/license_fully_loaded'
         num_devices:
           description: Number of devices counted in this license usage scope
