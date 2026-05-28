@@ -84180,6 +84180,7 @@ components:
           examples:
           - 79c329da9893e34099c7d8ad5cb9c941
           readOnly: true
+          format: password
           type: string
         ecm_api_id:
           description: Cradlepoint ECM API ID used by Mist for the integration
@@ -84192,6 +84193,7 @@ components:
           examples:
           - 68b329da9893e34099c7d8ad5cb9c940
           readOnly: true
+          format: password
           type: string
         enable_lldp:
           description: Whether Mist uses Cradlepoint LLDP data to link routers to
