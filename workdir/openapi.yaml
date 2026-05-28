@@ -78006,7 +78006,8 @@ components:
       type: object
     junos_local_port_config:
       additionalProperties: false
-      description: Local Junos switch port configuration
+      description: Per-port Switch Port Operator (SPO) override configuration used
+          in `local_port_config` to customize settings inherited from `port_config`
       properties:
         all_networks:
           default: false
@@ -78727,7 +78728,7 @@ components:
     local_port_config:
       additionalProperties:
         $ref: '#/components/schemas/junos_local_port_config'
-      description: Local port override, overriding the port configuration from `port_config`.
+      description: Per-port Switch Port Operator (SPO) override, overriding the port configuration from `port_config`.
         Property key is the port name or range (e.g. "ge-0/0/0-10")
       type: object
     locate_switch:
