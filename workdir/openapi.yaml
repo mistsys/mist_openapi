@@ -82258,6 +82258,9 @@ components:
         created_time:
           description: Epoch timestamp when the NAC rule was created
           $ref: '#/components/schemas/created_time'
+        dry_run:
+          type: boolean
+          description: Whether the NAC rule is in dry-run mode, where matches are logged but the action is not enforced
         enabled:
           default: true
           description: Whether the NAC rule is evaluated during policy matching
