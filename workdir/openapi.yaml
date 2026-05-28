@@ -81052,12 +81052,12 @@ components:
       description: IP configuration for the Mist Tunnel interface
       properties:
         gateway:
-          description: Default IPv4 gateway for the Mist Tunnel interface
+          description: IPv4 gateway for the Mist Tunnel interface
           examples:
           - 10.2.1.254
           type: string
         gateway6:
-          description: Default IPv6 gateway for the Mist Tunnel interface
+          description: IPv6 gateway for the Mist Tunnel interface
           examples:
           - 2001:1010:1010:1010::1
           type: string
