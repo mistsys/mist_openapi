@@ -80298,7 +80298,7 @@ components:
       - 'null'
     mxcluster_radsec:
       additionalProperties: false
-      description: RadSec proxy configuration for a Mist Edge cluster
+      description: RadSec proxy configuration for a Mist Edge cluster. Used when the Mist Edge Cluster is used as a RADIUS Proxy between the local devices and external RADIUS Server.
       properties:
         acct_servers:
           description: RADIUS accounting servers used by the RadSec proxy
