@@ -98550,14 +98550,17 @@ components:
       type: string
     sso_mxedge_proxy:
       additionalProperties: false
-      description: If `idp_type`==`mxedge_proxy`, this requires `mist_nac` to be enabled
-        on the mxcluster
+      description: Mist Edge proxy settings for NAC SSO. If `idp_type`==`mxedge_proxy`,
+        this requires `mist_nac` to be enabled on the mxcluster
       properties:
         acct_servers:
           $ref: '#/components/schemas/sso_mxedge_proxy_acct_servers'
+          description: RADIUS accounting servers used by the Mist Edge SSO proxy
         auth_servers:
           $ref: '#/components/schemas/sso_mxedge_proxy_auth_servers'
+          description: RADIUS authentication servers used by the Mist Edge SSO proxy
         mxcluster_id:
+          description: Mist Edge cluster identifier that provides the SSO proxy
           examples:
           - 572586b7-f97b-a22b-526c-8b97a3f609c4
           format: uuid
@@ -98567,38 +98570,49 @@ components:
           type: string
         proxy_hosts:
           $ref: '#/components/schemas/sso_mxedge_proxy_proxy_hosts'
+          description: Public hostnames or IP addresses that clients use to reach
+            the Mist Edge SSO proxy
         ssids:
           $ref: '#/components/schemas/sso_mxedge_proxy_ssids'
+          description: Eduroam SSIDs handled by the Mist Edge SSO proxy
       type: object
     sso_mxedge_proxy_acct_server:
       additionalProperties: false
+      description: RADIUS accounting server for the Mist Edge SSO proxy
       properties:
         host:
+          description: RADIUS accounting server hostname or IP address
           examples:
           - 1.2.3.4
           type: string
         port:
           default: 1813
+          description: UDP port for RADIUS accounting requests
           type: integer
         secret:
+          description: Shared secret used with the RADIUS accounting server
           examples:
           - testing123
           format: password
           type: string
       type: object
     sso_mxedge_proxy_acct_servers:
+      description: RADIUS accounting servers used by the Mist Edge SSO proxy
       items:
         $ref: '#/components/schemas/sso_mxedge_proxy_acct_server'
       type: array
     sso_mxedge_proxy_auth_server:
       additionalProperties: false
+      description: RADIUS authentication server for the Mist Edge SSO proxy
       properties:
         host:
+          description: RADIUS authentication server hostname or IP address
           examples:
           - 1.2.3.4
           type: string
         port:
           default: 1812
+          description: UDP port for RADIUS authentication requests
           type: integer
         require_message_authenticator:
           default: false
@@ -98606,9 +98620,10 @@ components:
           type: boolean
         retry:
           default: 2
-          description: Authentication request retry
+          description: Number of retry attempts for RADIUS authentication requests
           type: integer
         secret:
+          description: Shared secret used with the RADIUS authentication server
           examples:
           - testing123
           format: password
@@ -98619,11 +98634,12 @@ components:
           type: integer
       type: object
     sso_mxedge_proxy_auth_servers:
+      description: RADIUS authentication servers used by the Mist Edge SSO proxy
       items:
         $ref: '#/components/schemas/sso_mxedge_proxy_auth_server'
       type: array
     sso_mxedge_proxy_proxy_hosts:
-      description: Public hostname/IPs
+      description: Public hostnames or IP addresses for the Mist Edge SSO proxy
       examples:
       - - mxedge1.corp.com
         - 63.1.3.5
@@ -98631,7 +98647,7 @@ components:
         type: string
       type: array
     sso_mxedge_proxy_ssids:
-      description: SSIDs that support eduroam
+      description: Eduroam SSID names handled by the Mist Edge SSO proxy
       examples:
       - - eduroam_test, eduroam_main
       items:
@@ -98656,10 +98672,11 @@ components:
       type: string
     sso_openroaming:
       additionalProperties: false
-      description: if `idp_type`==`openroaming`
+      description: OpenRoaming SSO settings used when `idp_type`==`openroaming`
       properties:
         ssids:
           $ref: '#/components/schemas/sso_openroaming_ssids'
+          description: Network SSID names enabled for OpenRoaming SSO
         wba_cert:
           description: Optional WBA-issued certificate. If not provided, the default
             WBA-issued certificate for Juniper will be used.
@@ -98671,7 +98688,7 @@ components:
       - ssids
       type: object
     sso_openroaming_ssids:
-      description: SSIDs that support OpenRoaming
+      description: Network SSID names enabled for OpenRoaming SSO
       examples:
       - - ssid_name1
         - ssid_name2
