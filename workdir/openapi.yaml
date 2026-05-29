@@ -86051,7 +86051,7 @@ components:
           $ref: '#/components/schemas/created_time'
           description: Epoch timestamp when the PSK was created
         email:
-          description: Notification recipient email address for PSK expiration reminders
+          description: Notification recipient email address for PSK creation notification and expiration reminders
           type: string
         expire_time:
           default: null
@@ -86110,6 +86110,7 @@ components:
           maxLength: 64
           minLength: 8
           type: string
+          format: password
         role:
           description: Client role applied to users authenticated with this PSK
           maxLength: 32
@@ -86123,7 +86124,7 @@ components:
           type: string
         usage:
           $ref: '#/components/schemas/psk_usage'
-          description: Binding mode for this PSK, such as multi, single, or macs
+          description: 'Binding mode for this PSK, enum: `macs`, `multi`, `single`'
         vlan_id:
           $ref: '#/components/schemas/psk_vlan_id'
           description: VLAN ID returned for clients using this PSK
@@ -86169,7 +86170,7 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/psk_portal_auth'
-          description: Portal access method, such as SSO or sponsor approval
+          description: 'Portal access method, enum: `sponsor`, `sso`'
         bg_image_url:
           description: URL of the background image used by the PSK portal
           type: string
@@ -86201,6 +86202,7 @@ components:
           description: Maximum concurrent clients for each PSK created through this
             portal; `0` means unlimited
           type: integer
+          minimum: 0
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Epoch timestamp when the PSK portal was last modified
