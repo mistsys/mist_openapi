@@ -88949,18 +88949,22 @@ components:
       type: object
     response_insight_rogue:
       additionalProperties: false
+      description: Paginated response for rogue or neighbor AP insight results
       properties:
         end:
+          description: Epoch timestamp for the end of the rogue AP insight window
           type: integer
         limit:
+          description: Maximum number of rogue or neighbor AP observations returned in this page
           type: integer
         next:
-          description: "Link to next set of results. If more results aren\u2019t present,\
-            \ next is null."
+          description: Pagination cursor or URL for retrieving the next page of rogue or neighbor AP observations; null when no next page exists
           type: string
         results:
+          description: Rogue or neighbor AP observations returned for the site insight query
           $ref: '#/components/schemas/response_insight_rogue_results'
         start:
+          description: Epoch timestamp for the start of the rogue AP insight window
           type: integer
       required:
       - end
@@ -88970,16 +88974,22 @@ components:
       type: object
     response_insight_rogue_client:
       additionalProperties: false
+      description: Paginated response for rogue client insight results
       properties:
         end:
+          description: Epoch timestamp for the end of the rogue client insight window
           type: integer
         limit:
+          description: Maximum number of rogue client observations returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of rogue client observations
           type: string
         results:
+          description: Rogue client observations returned for the site insight query
           $ref: '#/components/schemas/response_insight_rogue_client_results'
         start:
+          description: Epoch timestamp for the start of the rogue client insight window
           type: integer
       required:
       - start
