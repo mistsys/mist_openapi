@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2604.1.3] - 2026-05-29
+
+- Improved numerous schema and response descriptions for clarity and better developer/LLM guidance (OSPF, RADIUS, RadSec, PSK, WLAN, WxLAN, webhooks, stats, NAC, Mist Edge, gateway, and more)
+
 ## [2604.1.2] - 2026-05-28
 
 - Improved numerous endpoint and schema descriptions for clarity and better developer/LLM guidance
