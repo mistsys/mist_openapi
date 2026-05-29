@@ -86966,70 +86966,95 @@ components:
       type: string
     remote_syslog_file_config:
       additionalProperties: false
+      description: Generated syslog file output settings
       properties:
         archive:
           $ref: '#/components/schemas/remote_syslog_archive'
+          description: Retention settings for this generated syslog file
         contents:
           $ref: '#/components/schemas/remote_syslog_contents'
+          description: Syslog facilities and severities written to this file
         enable_tls:
-          description: Only if `protocol`==`tcp`
+          description: Only if `protocol`==`tcp`, enable TLS for this syslog file
+            destination
           type: boolean
         explicit_priority:
+          description: Whether to include explicit syslog priority values in file
+            output
           type: boolean
         file:
+          description: Generated syslog file name
           examples:
           - file-name
           type: string
         match:
+          description: Expression used to filter log messages written to this file
           examples:
           - '!alarm|ntp|errors.crc_error[chan]'
           type: string
         structured_data:
+          description: Whether to include structured syslog data in file output
           type: boolean
       type: object
     remote_syslog_files:
+      description: Generated syslog file output definitions
       items:
         $ref: '#/components/schemas/remote_syslog_file_config'
       type: array
     remote_syslog_server:
       additionalProperties: false
+      description: Remote syslog server destination settings
       properties:
         contents:
           $ref: '#/components/schemas/remote_syslog_contents'
+          description: Syslog facilities and severities sent to this server
         explicit_priority:
+          description: Whether to include explicit syslog priority values in messages
+            sent to this server
           type: boolean
         facility:
           $ref: '#/components/schemas/remote_syslog_facility'
+          description: Default syslog facility for messages sent to this server
         host:
+          description: Address or hostname of the remote syslog server
           examples:
           - syslogd.internal
           type: string
         match:
+          description: Expression used to filter log messages sent to this server
           examples:
           - '!alarm|ntp|errors.crc_error[chan]'
           type: string
         port:
           $ref: '#/components/schemas/remote_syslog_server_port'
+          description: Network port used by the remote syslog server
         protocol:
           $ref: '#/components/schemas/remote_syslog_server_protocol'
+          description: Transport protocol used for this remote syslog server
         routing_instance:
+          description: Routing instance used to reach this remote syslog server
           examples:
           - routing-instance-name
           type: string
         server_name:
-          description: Name of the server
+          description: TLS server name used when verifying the remote syslog server
+            certificate
           examples:
           - syslogd.internal
           type: string
         severity:
           $ref: '#/components/schemas/remote_syslog_severity'
+          description: Default syslog severity for messages sent to this server
         source_address:
-          description: If source_address is configured, will use the vlan firstly
-            otherwise use source_ip
+          description: Source address for syslog traffic. If configured, Mist uses
+            the VLAN first; otherwise it uses `source_ip`
           type: string
         structured_data:
+          description: Whether to include structured syslog data in messages sent
+            to this server
           type: boolean
         tag:
+          description: Syslog tag value added to messages sent to this server
           type: string
       type: object
     remote_syslog_server_port:
@@ -87048,6 +87073,7 @@ components:
       - udp
       type: string
     remote_syslog_servers:
+      description: Remote syslog server destination list
       examples:
       - - facility: config
           host: syslogd.internal
@@ -87083,19 +87109,24 @@ components:
       type: string
     remote_syslog_user:
       additionalProperties: false
+      description: User-specific syslog logging rule
       properties:
         contents:
           $ref: '#/components/schemas/remote_syslog_contents'
+          description: Syslog facilities and severities logged for this user rule
         match:
+          description: Expression used to filter user log messages
           examples:
           - '"!alarm|ntp|errors.crc_error[chan]"'
           type: string
         user:
+          description: Account name or wildcard matched by this syslog rule
           examples:
           - '*'
           type: string
       type: object
     remote_syslog_users:
+      description: User-specific syslog logging rules
       items:
         $ref: '#/components/schemas/remote_syslog_user'
       type: array
