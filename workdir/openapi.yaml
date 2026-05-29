@@ -94052,30 +94052,37 @@ components:
       type: array
     setting_ssr:
       additionalProperties: false
+      description: SSR management settings for device onboarding and connectivity
       properties:
         auto_upgrade:
+          description: Automatic SSR firmware upgrade settings for newly onboarded devices
           $ref: '#/components/schemas/setting_ssr_auto_upgrade'
         conductor_hosts:
+          description: IP addresses or hostnames of conductors used by SSR devices
           $ref: '#/components/schemas/setting_ssr_conductor_hosts'
         conductor_token:
-          description: Token to be used by the SSR Devices to connect to the Conductor
+          description: Registration token used by SSR devices to connect to the conductor
           type: string
         disable_stats:
-          description: Disable stats collection on SSR devices
+          description: Whether stats collection is disabled on SSR devices
           type: boolean
         proxy:
+          description: Network proxy settings used by SSR devices to reach Mist
           $ref: '#/components/schemas/ssr_proxy'
       type: object
     setting_ssr_auto_upgrade:
       additionalProperties: false
-      description: auto_upgrade device first time it is onboarded
+      description: Automatic firmware upgrade settings applied when an SSR device is first onboarded
       properties:
         channel:
+          description: Firmware release channel used for SSR auto-upgrade
           $ref: '#/components/schemas/ssr_upgrade_channel'
         custom_versions:
+          description: Per-model SSR firmware versions used for auto-upgrade
           $ref: '#/components/schemas/setting_ssr_auto_upgrade_custom_versions'
         enabled:
           default: false
+          description: Whether SSR auto-upgrade is enabled for newly onboarded devices
           type: boolean
         version:
           description: Firmware version to deploy (e.g. 6.3.0-107.r1). Optional, used
@@ -94093,7 +94100,7 @@ components:
       description: Property key is the SSR model (e.g. "SSR130").
       type: object
     setting_ssr_conductor_hosts:
-      description: List of Conductor IP Addresses or Hosts to be used by the SSR Devices
+      description: Conductor IP addresses or hostnames used by SSR devices
       items:
         type: string
       type: array
