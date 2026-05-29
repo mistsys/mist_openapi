@@ -114220,6 +114220,7 @@ components:
       type: array
     wifi_beacon_extended_info_items:
       additionalProperties: false
+      description: Extended Wi-Fi beacon packet metadata with frame and sequence control fields
       properties:
         frame_ctrl:
           description: Frame control field of 802.11 header
@@ -114355,18 +114356,21 @@ components:
       readOnly: true
       type: object
     wired_client_response_ip:
+      description: Client IP addresses observed for a wired client
       items:
         readOnly: true
         type: string
       readOnly: true
       type: array
     wired_client_response_port_id:
+      description: Switch or gateway port identifiers where a wired client was observed
       items:
         readOnly: true
         type: string
       readOnly: true
       type: array
     wired_client_response_vlan:
+      description: Client VLAN IDs observed for a wired client
       items:
         readOnly: true
         type: integer
@@ -115579,6 +115583,7 @@ components:
       - airespace-interface-name
       type: string
     wlan_hotspot20_domain_name:
+      description: Domain names advertised to Hotspot 2.0 clients
       examples:
       - - mist.com
       items:
@@ -115613,6 +115618,7 @@ components:
       - verizon
       type: string
     wlan_hotspot20_rcoi:
+      description: Roaming Consortium Organization Identifiers advertised for Hotspot 2.0
       examples:
       - - 5A03BA0000
       items:
@@ -115645,6 +115651,7 @@ components:
       type: object
     wlan_inject_dhcp_option_82:
       additionalProperties: false
+      description: DHCP Option 82 injection settings for a WLAN
       properties:
         circuit_id:
           description: "Information to set in the `circuit_id` field of the DHCP Option\
@@ -115684,6 +115691,7 @@ components:
       description: In kbps, value from 1 to 999000
     wlan_mist_nac:
       additionalProperties: false
+      description: Mist NAC RADIUS settings for a WLAN
       properties:
         acct_interim_interval:
           default: 0
@@ -116336,12 +116344,14 @@ components:
       - $ref: '#/components/schemas/wlan_portal_sponsors_list'
       - $ref: '#/components/schemas/wlan_portal_sponsors_object'
     wlan_portal_sponsors_list:
+      description: Allowed sponsor email addresses for guest portal sponsor approval
       items:
         type: string
       type: array
     wlan_portal_sponsors_object:
       additionalProperties:
         type: string
+      description: Allowed guest portal sponsors keyed by email address with sponsor names as values
       examples:
       - sponsor1@company.com: FirstName1 LastName1
         sponsor2@company.com: FirstName2 LastName2
@@ -117355,6 +117365,7 @@ components:
           $ref: '#/components/schemas/hours'
       type: object
     wlan_vlan_id_with_variable:
+      description: WLAN VLAN ID, either numeric, a variable string, or null
       oneOf:
       - type: string
       - maximum: 4094
@@ -117362,6 +117373,7 @@ components:
         type: integer
       - type: 'null'
     wlan_vlan_ids:
+      description: WLAN VLAN pool IDs represented as either a comma-separated string or a list
       oneOf:
       - $ref: '#/components/schemas/wlan_vlan_ids_string'
       - $ref: '#/components/schemas/wlan_vlan_ids_list'
@@ -117390,6 +117402,7 @@ components:
       - array
       - 'null'
     wlans:
+      description: WLAN records returned by a list response
       items:
         $ref: '#/components/schemas/wlan'
       type: array
@@ -117466,6 +117479,7 @@ components:
       - allow
       type: string
     wxlan_rule_apply_tags:
+      description: WxLAN tag identifiers applied when a rule matches
       items:
         examples:
         - c049dfcd-0c73-5014-1c64-062e9903f1e5
@@ -117513,6 +117527,7 @@ components:
         type: string
       type: array
     wxlan_rules:
+      description: WxLAN policy rules returned by a list response
       items:
         $ref: '#/components/schemas/wxlan_rule'
       type: array
@@ -117595,6 +117610,7 @@ components:
       - name
       type: object
     wxlan_tag_last_ips:
+      description: Most recent IP addresses observed for a WxLAN tag
       items:
         type: string
       readOnly: true
@@ -117699,6 +117715,7 @@ components:
         minimum: 1
         type: integer
     wxlan_tags:
+      description: WxLAN tag records returned by a list response
       items:
         $ref: '#/components/schemas/wxlan_tag'
       type: array
@@ -117891,6 +117908,7 @@ components:
       type: array
       uniqueItems: true
     wxlan_tunnels:
+      description: WxLAN tunnel records returned by a list response
       items:
         $ref: '#/components/schemas/wxlan_tunnel'
       type: array
@@ -117913,12 +117931,14 @@ components:
       - since
       type: object
     wxtag_clients:
+      description: Clients associated with a WxLAN tag
       items:
         $ref: '#/components/schemas/wxtag_client'
       type: array
       uniqueItems: true
     zigbee_join_response:
       additionalProperties: false
+      description: Response containing the session identifier for a Zigbee join operation
       properties:
         session_id:
           description: Session ID for the Zigbee join operation
@@ -118040,6 +118060,7 @@ components:
         $ref: '#/components/schemas/zone_vertex_m'
       type: array
     zones:
+      description: Zone records returned by a list response
       items:
         $ref: '#/components/schemas/zone'
       type: array
