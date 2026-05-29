@@ -110978,15 +110978,18 @@ components:
       type: object
     vrrp_config:
       additionalProperties: false
-      description: Junos VRRP config
+      description: Junos VRRP configuration applied to a switch or switch profile
       properties:
         enabled:
+          description: Whether VRRP configuration is enabled
           type: boolean
         groups:
+          description: VRRP groups keyed by group name
           $ref: '#/components/schemas/vrrp_config_groups'
       type: object
     vrrp_config_group:
       additionalProperties: false
+      description: VRRP group behavior settings
       properties:
         preempt:
           default: false
@@ -110994,6 +110997,7 @@ components:
             primary router)
           type: boolean
         priority:
+          description: VRRP priority for this router in the group
           type: integer
       type: object
     vrrp_config_groups:
@@ -111006,17 +111010,20 @@ components:
       description: Junos VRRP group
       properties:
         auth_key:
-          description: If `auth_type`==`md5`
+          description: If `auth_type`==`md5`, authentication key used by the VRRP
+            group
           examples:
           - auth-key-1
           type: string
         auth_password:
-          description: If `auth_type`==`simple`
+          description: If `auth_type`==`simple`, password used by the VRRP group
           format: password
           type: string
         auth_type:
+          description: Authentication method used by the VRRP group
           $ref: '#/components/schemas/vrrp_group_auth_type'
         networks:
+          description: VRRP network mappings and their virtual IP addresses
           $ref: '#/components/schemas/vrrp_group_networks'
       type: object
     vrrp_group_auth_type:
@@ -111030,8 +111037,10 @@ components:
       type: string
     vrrp_group_network:
       additionalProperties: false
+      description: Virtual IP assignment for a VRRP network
       properties:
         ip:
+          description: Virtual IP address used by the VRRP group on this network
           type: string
       type: object
     vrrp_group_networks:
@@ -111056,8 +111065,10 @@ components:
       type: object
     vs_instance_property:
       additionalProperties: false
+      description: EX9200 virtual-switch instance settings
       properties:
         networks:
+          description: List of network names included in this virtual-switch instance
           $ref: '#/components/schemas/vs_instance_property_networks'
       type: object
     vs_instance_property_networks:
