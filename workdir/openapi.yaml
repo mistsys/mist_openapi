@@ -107213,16 +107213,21 @@ components:
       description: Support Ticket
       properties:
         case_number:
+          description: Support case number associated with this ticket
           readOnly: true
           type: string
         comments:
+          description: Discussion comments recorded on this support ticket
           $ref: '#/components/schemas/ticket_comments'
         created_at:
+          description: Time when this support ticket was created, in epoch seconds
           readOnly: true
           type: integer
         id:
+          description: Unique identifier for this support ticket
           $ref: '#/components/schemas/id'
         requester:
+          description: User who opened or requested this support ticket
           readOnly: true
           type: string
         requester_email:
@@ -107230,13 +107235,16 @@ components:
           format: email
           type: string
         status:
+          description: Current lifecycle status of this support ticket
           $ref: '#/components/schemas/ticket_status'
         subject:
+          description: Short summary of the support request
           type: string
         type:
           description: Question (default) / bug / critical
           type: string
         updated_at:
+          description: Time when this support ticket was last updated, in epoch seconds
           readOnly: true
           type: integer
       required:
@@ -107245,25 +107253,33 @@ components:
       type: object
     ticket_attachment:
       additionalProperties: false
+      description: Download information for a support ticket attachment
       properties:
         content_url:
+          description: Download URL for the support ticket attachment
           examples:
           - https://api.mist.com/api/v1/forward/download?jwt=...
           format: url
           type: string
       type: object
     ticket_comment:
+      description: Comment on a support ticket
       properties:
         attachment_ids:
+          description: Identifiers of attachments linked to this ticket comment
           $ref: '#/components/schemas/ticket_comments_attachment_ids'
         attachments:
+          description: Attachment metadata returned with this ticket comment
           $ref: '#/components/schemas/ticket_comments_attachments'
         author:
+          description: User who wrote this ticket comment
           readOnly: true
           type: string
         comment:
+          description: Text body of this ticket comment
           type: string
         created_at:
+          description: Time when this ticket comment was created, in epoch seconds
           readOnly: true
           type: integer
       required:
@@ -107273,53 +107289,68 @@ components:
       type: object
     ticket_comment_import_file:
       additionalProperties: false
+      description: Multipart payload for adding a ticket comment with an attachment
       properties:
         comment:
+          description: Text body for the ticket comment submitted with the uploaded
+            file
           examples:
           - this is urgent
           type: string
         file:
           contentMediaType: application/octet-stream
+          description: Binary file payload to attach to the ticket comment
           type: string
       type: object
     ticket_comments:
+      description: List of comments on a support ticket
       items:
         $ref: '#/components/schemas/ticket_comment'
       type: array
     ticket_comments_attachment:
       additionalProperties: false
+      description: Metadata for an attachment on a ticket comment
       properties:
         content_type:
+          description: MIME type of the ticket comment attachment
           examples:
           - image/png
           type: string
         content_url:
+          description: Download URL for the ticket comment attachment
           examples:
           - https://api.mist.com/api/v1/forward/download?jwt=...
           format: url
           type: string
         created_at:
+          description: Time when this ticket comment attachment was created, in epoch
+            seconds
           examples:
           - 1453908369
           type: integer
         file_name:
+          description: Original file name of the ticket comment attachment
           examples:
           - crash.png
           type: string
         id:
+          description: Unique identifier for this ticket comment attachment
           $ref: '#/components/schemas/id'
         size_in_bytes:
+          description: Attachment file size, in bytes
           examples:
           - 1943
           type: integer
       type: object
     ticket_comments_attachment_id:
+      description: Unique identifier for a ticket comment attachment
       examples:
       - 00000000-0000-0000-0000-15231a659c13
       format: uuid
       readOnly: true
       type: string
     ticket_comments_attachment_ids:
+      description: List of ticket comment attachment identifiers
       examples:
       - - 00000000-0000-0000-0000-15231a659c78
       items:
@@ -107327,6 +107358,7 @@ components:
       readOnly: true
       type: array
     ticket_comments_attachments:
+      description: List of attachment metadata objects for a ticket comment
       items:
         $ref: '#/components/schemas/ticket_comments_attachment'
       readOnly: true
