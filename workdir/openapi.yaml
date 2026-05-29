@@ -92607,37 +92607,45 @@ components:
       type: object
     rrm_event:
       additionalProperties: false
+      description: RRM event record for radio setting changes or RF conditions
       properties:
         ap:
-          description: AP MAC
+          description: MAC address of the AP associated with the RRM event
           examples:
           - 5c5b350e0001
           type: string
         band:
+          description: Radio band affected by the RRM event
           $ref: '#/components/schemas/dot11_band'
         bandwidth:
+          description: Channel width after the RRM event, in MHz
           $ref: '#/components/schemas/dot11_bandwidth'
         channel:
-          description: Channel for the band from rrm
+          description: RF channel after the RRM event
           type: integer
         event:
+          description: RRM event type that caused or records the change
           $ref: '#/components/schemas/rrm_event_type'
         power:
-          description: Tx power of the radio
+          description: Transmit power after the RRM event
           type: integer
         pre_bandwidth:
+          description: Channel width before the RRM event, in MHz
           $ref: '#/components/schemas/rrm_event_pre_bandwidth'
         pre_channel:
-          description: (previously) channel for the band, 0 means no previously available
+          description: RF channel before the RRM event; 0 means no previous value was available
           type: integer
         pre_power:
-          description: (previously) tx power of the radio, 0 means no previously available
+          description: Transmit power before the RRM event; 0 means no previous value was available
           type: number
         pre_usage:
+          description: Radio usage band before the RRM event
           type: string
         timestamp:
+          description: Time when the RRM event occurred
           $ref: '#/components/schemas/timestamp'
         usage:
+          description: Radio usage band after the RRM event
           type: string
       required:
       - ap
@@ -92679,27 +92687,34 @@ components:
       type: string
     rrm_neighbors:
       additionalProperties: false
+      description: RRM neighbor observations for one AP
       properties:
         mac:
+          description: AP MAC address whose neighbors are reported
           examples:
           - 5c5b35000001
           type: string
         neighbors:
+          description: Neighbor AP observations heard by this AP
           $ref: '#/components/schemas/rrm_neighbors_neighbors'
       type: object
     rrm_neighbors_neighbor:
       additionalProperties: false
+      description: Neighbor AP observed by RRM
       properties:
         mac:
+          description: Neighbor AP MAC address observed by RRM
           examples:
           - 5c5b35000311
           type: string
         rssi:
+          description: Observed RSSI for the neighbor AP, in dBm
           examples:
           - -66
           type: integer
       type: object
     rrm_neighbors_neighbors:
+      description: Neighbor AP observations heard by an AP
       items:
         $ref: '#/components/schemas/rrm_neighbors_neighbor'
       type: array
