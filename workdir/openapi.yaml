@@ -115235,18 +115235,22 @@ components:
       type: array
     wlan_hotspot_20:
       additionalProperties: false
-      description: Hostspot 2.0 wlan settings
+      description: Hotspot 2.0 WLAN settings
       properties:
         domain_name:
+          description: Advertised domain names for Hotspot 2.0 clients
           $ref: '#/components/schemas/wlan_hotspot20_domain_name'
         enabled:
           description: Whether to enable hotspot 2.0 config
           type: boolean
         nai_realms:
+          description: NAI realms advertised for Hotspot 2.0 authentication
           $ref: '#/components/schemas/strings'
         operators:
+          description: Operator profiles supported by this Hotspot 2.0 configuration
           $ref: '#/components/schemas/wlan_hotspot20_operators'
         rcoi:
+          description: Roaming Consortium Organization Identifiers advertised for Hotspot 2.0
           $ref: '#/components/schemas/wlan_hotspot20_rcoi'
         venue_name:
           description: Venue name, default is site name
