@@ -74862,6 +74862,7 @@ components:
       type: object
     gateway_cluster_node:
       additionalProperties: false
+      description: Gateway cluster node identified by MAC address
       properties:
         mac:
           description: Gateway device MAC address. Format is `[0-9a-f]{12}` (e.g.
@@ -76070,6 +76071,7 @@ components:
       - standalone
       type: string
     gateway_templates:
+      description: List of gateway device profiles
       items:
         $ref: '#/components/schemas/gateway_template'
       type: array
@@ -76369,6 +76371,7 @@ components:
       - wlan_id
       type: object
     guests:
+      description: List of guest authorization records
       items:
         $ref: '#/components/schemas/guest'
       type: array
@@ -76607,6 +76610,7 @@ components:
       type: object
     ha_cluster_config_node:
       additionalProperties: false
+      description: HA cluster inventory node identified by MAC address
       maxProperties: 2
       properties:
         mac:
@@ -76622,6 +76626,7 @@ components:
         $ref: '#/components/schemas/ha_cluster_config_node'
       type: array
     ha_cluster_delete:
+      description: Request body identifying the HA cluster node to remove
       properties:
         mac:
           description: Node0 MAC address identifying the HA cluster to delete
@@ -76694,6 +76699,7 @@ components:
       - integer
       - 'null'
     ibeacon_uuid:
+      description: iBeacon UUID value, or null when no iBeacon UUID is configured
       examples:
       - f3f17139-704a-f03a-2786-0400279e37c3
       format: uuid
@@ -77004,6 +77010,8 @@ components:
       type: array
       uniqueItems: true
     insight_metrics_results_item:
+      description: Insight metric result item, returned either as a number or an
+        object depending on the requested metric
       anyOf:
       - type: number
       - additionalProperties: true
@@ -77362,6 +77370,7 @@ components:
           type: string
       type: object
     integers:
+      description: List of integer values
       items:
         type: integer
       type: array
@@ -77866,6 +77875,7 @@ components:
       type: array
     issued_client_certificates_results:
       additionalProperties: false
+      description: Issued client certificate search results wrapper
       properties:
         results:
           $ref: '#/components/schemas/issued_client_certificates'
@@ -77878,6 +77888,8 @@ components:
       type: array
     js_inventory_item:
       additionalProperties: false
+      description: Juniper Support inventory item with entitlement, lifecycle, and
+        software metadata
       properties:
         claimed:
           description: Indicates if the device is claimed by any org
@@ -78993,6 +79005,8 @@ components:
         "ge-0/0/0-10")
       type: object
     locate_switch:
+      description: Request body for locating a switch or virtual chassis member by
+        MAC address for a limited duration
       properties:
         duration:
           default: 5
@@ -79325,6 +79339,7 @@ components:
       type: object
     map_geofence_vertice:
       additionalProperties: false
+      description: Vertex coordinate for a map geofence polygon
       properties:
         X:
           description: Geofence vertex X coordinate in map units
@@ -79975,6 +79990,7 @@ components:
       - qrcode
       type: string
     mist_device:
+      description: Mist-managed device object for an AP, switch, or gateway
       discriminator:
         mapping:
           ap: '#/components/schemas/device_ap'
@@ -80112,6 +80128,7 @@ components:
       type: object
     module_stat_item_network_resource:
       additionalProperties: false
+      description: Network resource usage counter reported by a device module
       properties:
         count:
           description: Current utilization count for the network resource
@@ -80132,6 +80149,7 @@ components:
           type: string
       type: object
     module_stat_item_network_resources:
+      description: Network resource usage counters reported by a device module
       items:
         $ref: '#/components/schemas/module_stat_item_network_resource'
       type: array
@@ -80292,6 +80310,7 @@ components:
           type: string
       type: object
     msp_id:
+      description: Managed service provider identifier
       examples:
       - b9d42c2e-88ee-41f8-b798-f009ce7fe909
       format: uuid
@@ -80598,6 +80617,7 @@ components:
       type: object
     mxcluster_radsec_acct_server:
       additionalProperties: false
+      description: RadSec accounting server settings for a Mist Edge cluster
       properties:
         host:
           description: IP / hostname of RADIUS server
@@ -80630,6 +80650,7 @@ components:
       uniqueItems: true
     mxcluster_radsec_auth_server:
       additionalProperties: false
+      description: RadSec authentication server settings for a Mist Edge cluster
       properties:
         host:
           description: IP / hostname of RADIUS server
@@ -80777,10 +80798,12 @@ components:
       - shuffle-by-site
       type: string
     mxcluster_tunterm_monitoring:
+      description: Tunnel termination monitoring checks for a Mist Edge cluster
       items:
         $ref: '#/components/schemas/tunterm_monitoring'
       type: array
     mxclusters:
+      description: List of Mist Edge clusters
       items:
         $ref: '#/components/schemas/mxcluster'
       type: array
@@ -81040,6 +81063,7 @@ components:
           description: Event severity for the system resource condition
       type: object
     mxedge_events:
+      description: Mist Edge event records
       items:
         $ref: '#/components/schemas/mxedge_event'
       minItems: 1
@@ -81353,6 +81377,7 @@ components:
       - netmask
       type: object
     mxedge_tunterm_monitoring:
+      description: Tunnel termination monitoring checks for a Mist Edge
       items:
         $ref: '#/components/schemas/tunterm_monitoring'
       type: array
@@ -81645,6 +81670,7 @@ components:
           type: string
       type: object
     mxedges:
+      description: List of Mist Edge appliances
       items:
         $ref: '#/components/schemas/mxedge'
       type: array
@@ -81831,6 +81857,7 @@ components:
         type: integer
       type: array
     mxtunnels:
+      description: List of Mist Tunnel configurations
       items:
         $ref: '#/components/schemas/mxtunnel'
       type: array
