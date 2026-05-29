@@ -66646,14 +66646,18 @@ components:
       properties:
         request_limit:
           default: 5000
-          description: max number of request permitted
+          description: Maximum API requests allowed in the current hourly rate-limit
+            window
           readOnly: true
           type: integer
         requests:
-          description: num of request made in the current hour
+          description: Number of API requests made in the current hourly rate-limit
+            window
           readOnly: true
           type: integer
         seconds:
+          description: Time remaining, in seconds, before the current hourly rate-limit
+            window resets
           type: number
       required:
       - requests
