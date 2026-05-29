@@ -104982,21 +104982,24 @@ components:
       uniqueItems: true
     switch_auto_upgrade:
       additionalProperties: false
+      description: Switch firmware auto-upgrade settings
       properties:
         custom_versions:
+          description: Per-model switch firmware versions to use for auto-upgrade
           $ref: '#/components/schemas/switch_auto_upgrade_custom_versions'
         enabled:
-          description: Enable auto upgrade for the switch
+          description: Whether switch auto-upgrade is enabled
           type: boolean
         snapshot:
           default: false
-          description: Enable snapshot during the upgrade process
+          description: Whether to create a recovery snapshot during the upgrade process
           type: boolean
       type: object
     switch_auto_upgrade_container:
       additionalProperties: false
       properties:
         auto_upgrade:
+          description: Switch firmware auto-upgrade configuration
           $ref: '#/components/schemas/switch_auto_upgrade'
       type: object
     switch_auto_upgrade_custom_versions:
