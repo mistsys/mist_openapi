@@ -1,0 +1,1290 @@
+# OpenAPI Duplicate Schema Report
+
+Spec: `openapi.yaml`
+
+This report is heuristic and read-only. Merging schemas can affect generated SDK model names even when structures match.
+
+## Normalization
+
+- Exact duplicates ignore: `description`, `example`, `examples`, `externalDocs`, `summary`, `title`, `xml`, and `x-*` keys.
+- Exact duplicates keep validation and API-shape fields such as `default`, `deprecated`, `readOnly`, `writeOnly`, `format`, and bounds.
+- Near duplicates additionally ignore selected value-level details and replace schema `$ref` targets with a placeholder.
+- Near duplicates ignore `readOnly` and `writeOnly`.
+
+## Summary
+
+- Schemas analyzed: 2832
+- Exact duplicate groups: 145
+- Schemas in exact duplicate groups: 738
+- Near-duplicate groups: 85
+- Schemas in near-duplicate groups: 1681
+
+## Exact Duplicate Groups
+
+### 236 schemas
+
+- Preview: array
+- Schemas:
+  - `acl_policy_src_tags` (1 refs)
+    - `components.schemas.acl_policy.properties.src_tags`
+  - `acl_tag_macs` (1 refs)
+    - `components.schemas.acl_tag.properties.macs`
+  - `acl_tag_subnets` (1 refs)
+    - `components.schemas.acl_tag.properties.subnets`
+  - `additional_config_cmds` (10 refs)
+    - `components.schemas.device_gateway.properties.additional_config_cmds`
+    - `components.schemas.device_switch.properties.additional_config_cmds`
+    - `components.schemas.deviceprofile_gateway.properties.additional_config_cmds`
+  - `alarm_aps` (1 refs)
+    - `components.schemas.alarm.properties.aps`
+  - `alarm_bssids` (1 refs)
+    - `components.schemas.alarm.properties.bssids`
+  - `alarm_gateways` (1 refs)
+    - `components.schemas.alarm.properties.gateways`
+  - `alarm_hostnames` (1 refs)
+    - `components.schemas.alarm.properties.hostnames`
+  - `alarm_ssids` (1 refs)
+    - `components.schemas.alarm.properties.ssids`
+  - `alarm_switches` (1 refs)
+    - `components.schemas.alarm.properties.switches`
+  - `ap_ip_config_dns` (1 refs)
+    - `components.schemas.ap_ip_config.properties.dns`
+  - `ap_ip_config_dns_suffix` (1 refs)
+    - `components.schemas.ap_ip_config.properties.dns_suffix`
+  - `ap_radio_mac_radio_macs` (1 refs)
+    - `components.schemas.ap_radio_mac.properties.radio_macs`
+  - `ap_search_hostnames` (1 refs)
+    - `components.schemas.ap_search.properties.hostname`
+  - `app_probing_apps` (2 refs)
+    - `components.schemas.app_probing.properties.apps`
+    - `components.schemas.org_setting_gateway_mgmt_app_probing.properties.apps`
+  - `app_probing_custom_app_hostname` (1 refs)
+    - `components.schemas.app_probing_custom_app.properties.hostnames`
+  - `auto_orient_macs` (1 refs)
+    - `components.schemas.auto_orient.properties.macs`
+  - `auto_placement_macs` (1 refs)
+    - `components.schemas.auto_placement.properties.macs`
+  - `bgp_config_networks` (1 refs)
+    - `components.schemas.bgp_config.properties.networks`
+  - `cacerts` (1 refs)
+    - `components.schemas.org_setting_mist_nac.properties.cacerts`
+  - ... 216 more schemas
+
+### 42 schemas
+
+- Preview: array
+- Schemas:
+  - `alarm_ack_alarm_ids` (1 refs)
+    - `components.schemas.alarm_ack.properties.alarm_ids`
+  - `alarm_ids` (1 refs)
+    - `components.schemas.alarms.properties.alarm_ids`
+  - `client_wireless_psk_id` (1 refs)
+    - `components.schemas.client_wireless.properties.psk_id`
+  - `client_wireless_site_ids` (1 refs)
+    - `components.schemas.client_wireless.properties.site_ids`
+  - `client_wireless_wlan_id` (1 refs)
+    - `components.schemas.client_wireless.properties.wlan_id`
+  - `mxedge_upgrade_multi_mxedge_ids` (1 refs)
+    - `components.schemas.mxedge_upgrade_multi.properties.mxedge_ids`
+  - `mxedges_assign_mxedge_ids` (1 refs)
+    - `components.schemas.mxedges_assign.properties.mxedge_ids`
+  - `mxedges_unassign_mxedge_ids` (1 refs)
+    - `components.schemas.mxedges_unassign.properties.mxedge_ids`
+  - `mxtunnel_anchor_mxtunnel_ids` (1 refs)
+    - `components.schemas.mxtunnel.properties.anchor_mxtunnel_ids`
+  - `mxtunnel_mxcluster_ids` (1 refs)
+    - `components.schemas.mxtunnel.properties.mxcluster_ids`
+  - `nac_rule_matching_site_ids` (1 refs)
+    - `components.schemas.nac_rule_matching.properties.site_ids`
+  - `nac_rule_matching_sitegroup_ids` (1 refs)
+    - `components.schemas.nac_rule_matching.properties.sitegroup_ids`
+  - `org_setting_installer_extra_site_ids` (1 refs)
+    - `components.schemas.org_setting_installer.properties.extra_site_ids`
+  - `org_setting_mgmt_mxtunnel_ids` (1 refs)
+    - `components.schemas.org_setting_mgmt.properties.mxtunnel_ids`
+  - `orggroup_ids` (1 refs)
+    - `components.schemas.org.properties.orggroup_ids`
+  - `orggroup_org_ids` (1 refs)
+    - `components.schemas.orggroup.properties.org_ids`
+  - `psk_id_list_psk_id` (1 refs)
+    - `components.schemas.psk_id_list.properties.psk_ids`
+  - `radsec_mxcluster_ids` (1 refs)
+    - `components.schemas.radsec.properties.mxcluster_ids`
+  - `site_sitegroup_ids` (1 refs)
+    - `components.schemas.site.properties.sitegroup_ids`
+  - `site_stats_sitegroup_ids` (1 refs)
+    - `components.schemas.stats_site.properties.sitegroup_ids`
+  - ... 22 more schemas
+
+### 21 schemas
+
+- Preview: array
+- Schemas:
+  - `admin_tags` (1 refs)
+    - `components.schemas.admin.properties.tags`
+  - `nac_cert_cn` (1 refs)
+    - `components.schemas.client_nac.properties.cert_cn`
+  - `nac_cert_issuer` (1 refs)
+    - `components.schemas.client_nac.properties.cert_issuer`
+  - `nac_cert_serial` (1 refs)
+    - `components.schemas.client_nac.properties.cert_serial`
+  - `nac_cert_subject` (1 refs)
+    - `components.schemas.client_nac.properties.cert_subject`
+  - `nac_client_ap` (1 refs)
+    - `components.schemas.client_nac.properties.ap`
+  - `nac_client_ip` (1 refs)
+    - `components.schemas.client_nac.properties.client_ip`
+  - `nac_client_username` (1 refs)
+    - `components.schemas.client_nac.properties.username`
+  - `nac_client_vlan` (1 refs)
+    - `components.schemas.client_nac.properties.vlan`
+  - `nac_nacrule_id` (1 refs)
+    - `components.schemas.client_nac.properties.nacrule_id`
+  - `nac_nacrule_name` (1 refs)
+    - `components.schemas.client_nac.properties.nacrule_name`
+  - `nac_nas_vendor` (1 refs)
+    - `components.schemas.client_nac.properties.nas_vendor`
+  - `nac_port_id` (1 refs)
+    - `components.schemas.client_nac.properties.port_id`
+  - `oauth_account_errors` (1 refs)
+    - `components.schemas.account_oauth_info_account.properties.errors`
+  - `response_client_sessions_search_item_tags` (1 refs)
+    - `components.schemas.response_client_sessions_search_item.properties.tags`
+  - `response_org_search_item_usage_types` (1 refs)
+    - `components.schemas.response_org_search_item.properties.usage_types`
+  - `webhook_alarm_event_aps` (1 refs)
+    - `components.schemas.webhook_alarm_event.properties.aps`
+  - `webhook_alarm_event_bssids` (1 refs)
+    - `components.schemas.webhook_alarm_event.properties.bssids`
+  - `webhook_alarm_event_ssids` (1 refs)
+    - `components.schemas.webhook_alarm_event.properties.ssids`
+  - `wireless_client_session_tags` (1 refs)
+    - `components.schemas.wireless_client_session.properties.tags`
+  - ... 1 more schemas
+
+### 18 schemas
+
+- Preview: string
+- Schemas:
+  - `last_ap` (2 refs)
+    - `components.schemas.client_nac.properties.last_ap`
+    - `components.schemas.client_wireless.properties.last_ap`
+  - `last_cert_cn` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_cn`
+  - `last_cert_issuer` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_issuer`
+  - `last_cert_serial` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_serial`
+  - `last_cert_subject` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_subject`
+  - `last_client_ip` (2 refs)
+    - `components.schemas.client_nac.properties.last_client_ip`
+    - `components.schemas.client_wireless.properties.last_ip`
+  - `last_device` (1 refs)
+    - `components.schemas.client_wireless.properties.last_device`
+  - `last_nacrule_id` (1 refs)
+    - `components.schemas.client_nac.properties.last_nacrule_id`
+  - `last_nacrule_name` (1 refs)
+    - `components.schemas.client_nac.properties.last_nacrule_name`
+  - `last_nas_vendor` (1 refs)
+    - `components.schemas.client_nac.properties.last_nas_vendor`
+  - `last_port_id` (1 refs)
+    - `components.schemas.client_nac.properties.last_port_id`
+  - `last_ssid` (1 refs)
+    - `components.schemas.client_nac.properties.last_ssid`
+  - `last_username` (2 refs)
+    - `components.schemas.client_nac.properties.last_username`
+    - `components.schemas.client_wireless.properties.last_ssid`
+  - `response_pcap_search_item_ap` (1 refs)
+    - `components.schemas.response_pcap_search_item_aps.items`
+  - `response_two_factor_octet` (1 refs)
+    - `components.responses.TwoFactor.content.application/octet-stream.schema`
+  - `stats_ap_lldp_stat_power_src` (2 refs)
+    - `components.schemas.stats_ap_lldp_stat.properties.power_src`
+    - `components.schemas.stats_ap_lldp_stat_power_srcs.items`
+  - `ui_settings_tile_sorted_columns_id` (1 refs)
+    - `components.schemas.ui_settings_tile_sorted_columns_ids.items`
+  - `wlan_vlan_ids_string` (1 refs)
+    - `components.schemas.wlan_vlan_ids.oneOf.0`
+
+### 17 schemas
+
+- Preview: array
+- Schemas:
+  - `ap_channel_band24_channel` (1 refs)
+    - `components.schemas.ap_channel_band24_channels.additionalProperties`
+  - `ap_channel_band5_channel` (1 refs)
+    - `components.schemas.ap_channel_band5_channels.additionalProperties`
+  - `ap_channel_band6_channel` (1 refs)
+    - `components.schemas.ap_channel_band6_channels.additionalProperties`
+  - `ap_search_inactive_wired_vlans` (1 refs)
+    - `components.schemas.ap_search.properties.inactive_wired_vlans`
+  - `ble_config_beam_disabled` (1 refs)
+    - `components.schemas.ble_config.properties.beam_disabled`
+  - `client_wireless_vlan` (1 refs)
+    - `components.schemas.client_wireless.properties.vlan`
+  - `const_device_ap_disallowed_channels` (1 refs)
+    - `components.schemas.const_device_ap.properties.disallowed_channels.additionalProperties.additionalProperties`
+  - `evpn_topology_switch_pods` (1 refs)
+    - `components.schemas.evpn_topology_switch.properties.pods`
+  - `gateway_traffic_shaping_class_percentages` (1 refs)
+    - `components.schemas.gateway_traffic_shaping.properties.class_percentages`
+  - `integers` (3 refs)
+    - `components.schemas.discovered_switch_ap.properties.inactive_wired_vlans`
+    - `components.schemas.stats_ap.properties.inactive_wired_vlans`
+    - `components.schemas.stats_ap_ble.properties.minors`
+  - `mxcluster_tunterm_hosts_order` (1 refs)
+    - `components.schemas.mxcluster.properties.tunterm_hosts_order`
+  - `mxedge_tunterm_multicast_config_mdns_vlan_ids` (1 refs)
+    - `components.schemas.site_setting_tunterm_multicast_config_mdns.properties.vlan_ids`
+  - `mxedge_tunterm_multicast_config_ssdp_vlan_ids` (1 refs)
+    - `components.schemas.site_setting_tunterm_multicast_config_ssdp.properties.vlan_ids`
+  - `mxtunnel_vlan_ids` (2 refs)
+    - `components.schemas.mxtunnel.properties.vlan_ids`
+    - `components.schemas.site_mxtunnel.properties.vlan_ids`
+  - `site_mxtunnel_additional_mxtunnel_vlan_ids` (1 refs)
+    - `components.schemas.site_mxtunnel_additional_mxtunnel.properties.vlan_ids`
+  - `stats_switch_clients_stats_total_total_num_aps` (1 refs)
+    - `components.schemas.stats_switch_clients_stats_total.properties.num_aps`
+  - `upgrade_devices_max_failures` (4 refs)
+    - `components.schemas.response_site_device_upgrade.properties.max_failures`
+    - `components.schemas.response_site_device_upgrades_item.properties.max_failures`
+    - `components.schemas.upgrade_org_devices.properties.max_failures`
+
+### 11 schemas
+
+- Preview: object with 1 properties: enabled
+- Schemas:
+  - `ap_centrak` (1 refs)
+    - `components.schemas.device_ap.properties.centrak`
+  - `device_ap_lacp_config` (2 refs)
+    - `components.schemas.device_ap.properties.lacp_config`
+    - `components.schemas.deviceprofile_ap.properties.lacp_config`
+  - `marvis_self_driving_domain` (3 refs)
+    - `components.schemas.marvis_self_driving.properties.wan`
+    - `components.schemas.marvis_self_driving.properties.wired`
+    - `components.schemas.marvis_self_driving.properties.wireless`
+  - `org_setting_wan_pma` (1 refs)
+    - `components.schemas.org_setting.properties.wan_pma`
+  - `org_setting_wired_pma` (1 refs)
+    - `components.schemas.org_setting.properties.wired_pma`
+  - `service_policy_appqoe` (2 refs)
+    - `components.schemas.org_service_policy.properties.appqoe`
+    - `components.schemas.service_policy.properties.appqoe`
+  - `site_setting_analytic` (1 refs)
+    - `components.schemas.site_setting.properties.analytic`
+  - `site_setting_srx_app` (1 refs)
+    - `components.schemas.site_setting.properties.srx_app`
+  - `site_setting_vna` (1 refs)
+    - `components.schemas.site_setting.properties.vna`
+  - `site_setting_wan_vna` (1 refs)
+    - `components.schemas.site_setting.properties.wan_vna`
+  - `site_setting_wired_vna` (1 refs)
+    - `components.schemas.site_setting.properties.wired_vna`
+
+### 10 schemas
+
+- Preview: string
+- Schemas:
+  - `admin_id` (2 refs)
+    - `components.schemas.admin.properties.admin_id`
+    - `components.schemas.audit_log.properties.admin_id`
+  - `device_id` (2 refs)
+    - `components.schemas.issued_client_certificate.properties.device_id`
+    - `components.schemas.rssi_zone_device.properties.device_id`
+  - `id` (130 refs)
+    - `components.schemas.aamw_profile.properties.id`
+    - `components.schemas.alarm.properties.id`
+    - `components.schemas.alarm_template.properties.id`
+  - `msp_id` (11 refs)
+    - `components.schemas.device_gateway.properties.msp_id`
+    - `components.schemas.org.properties.msp_id`
+    - `components.schemas.org_setting.properties.msp_id`
+  - `nac_event_dryrun_nacrule_id` (1 refs)
+    - `components.schemas.nac_client_event.properties.dryrun_nacrule_id`
+  - `nac_event_idp_id` (1 refs)
+    - `components.schemas.nac_client_event.properties.idp_id`
+  - `nac_event_nacrule_id` (1 refs)
+    - `components.schemas.nac_client_event.properties.nacrule_id`
+  - `org_id` (129 refs)
+    - `components.schemas.aamw_profile.properties.org_id`
+    - `components.schemas.alarm.properties.org_id`
+    - `components.schemas.alarm_template.properties.org_id`
+  - `site_id` (122 refs)
+    - `components.schemas.aamw_profile.properties.site_id`
+    - `components.schemas.alarm.properties.site_id`
+    - `components.schemas.ap_search.properties.site_id`
+  - `ticket_comments_attachment_id` (1 refs)
+    - `components.schemas.ticket_comments_attachment_ids.items`
+
+### 10 schemas
+
+- Preview: map object
+- Schemas:
+  - `const_device_gateway_defaults` (1 refs)
+    - `components.schemas.const_device_gateway.properties.defaults`
+  - `const_device_gateway_pic` (1 refs)
+    - `components.schemas.const_device_gateway.properties.pic`
+  - `juniper_srx_auto_upgrade_custom_versions` (1 refs)
+    - `components.schemas.juniper_srx_auto_upgrade.properties.custom_versions`
+  - `setting_ssr_auto_upgrade_custom_versions` (1 refs)
+    - `components.schemas.setting_ssr_auto_upgrade.properties.custom_versions`
+  - `site_setting_flags` (1 refs)
+    - `components.schemas.site_setting.properties.flags`
+  - `switch_auto_upgrade_custom_versions` (1 refs)
+    - `components.schemas.switch_auto_upgrade.properties.custom_versions`
+  - `upgrade_device_rule` (1 refs)
+    - `components.schemas.upgrade_device_rules.items`
+  - `upgrade_org_devices_version_model_version` (1 refs)
+    - `components.schemas.upgrade_org_devices_version.properties.model_version`
+  - `vars` (6 refs)
+    - `components.schemas.device_ap.properties.vars`
+    - `components.schemas.device_gateway.properties.vars`
+    - `components.schemas.device_switch.properties.vars`
+  - `wlan_portal_sponsors_object` (1 refs)
+    - `components.schemas.wlan_portal_sponsors.oneOf.1`
+
+### 10 schemas
+
+- Preview: string
+- Schemas:
+  - `license_type` (2 refs)
+    - `components.schemas.license_amendment.properties.type`
+    - `components.schemas.license_sub.properties.type`
+  - `nac_client_mac` (2 refs)
+    - `components.schemas.client_nac.properties.mac`
+    - `components.schemas.nac_client_event.properties.mac`
+  - `nac_device_mac` (2 refs)
+    - `components.schemas.client_nac.properties.device_mac`
+    - `components.schemas.nac_client_event.properties.device_mac`
+  - `nac_event_idp_username` (1 refs)
+    - `components.schemas.nac_client_event.properties.idp_username`
+  - `nac_event_nas_vendor` (1 refs)
+    - `components.schemas.nac_client_event.properties.nas_vendor`
+  - `nac_event_port_id` (1 refs)
+    - `components.schemas.nac_client_event.properties.port_id`
+  - `nac_event_ssid` (1 refs)
+    - `components.schemas.nac_client_event.properties.ssid`
+  - `nac_event_type` (1 refs)
+    - `components.schemas.nac_client_event.properties.type`
+  - `nac_event_username` (1 refs)
+    - `components.schemas.nac_client_event.properties.username`
+  - `nac_event_vlan` (1 refs)
+    - `components.schemas.nac_client_event.properties.vlan`
+
+### 8 schemas
+
+- Preview: array
+- Schemas:
+  - `anomaly_events` (1 refs)
+    - `components.schemas.anomaly.properties.events`
+  - `evpn_topology_switch_downlink_ips` (1 refs)
+    - `components.schemas.evpn_topology_switch.properties.downlink_ips`
+  - `evpn_topology_switch_suggested_downlinks` (1 refs)
+    - `components.schemas.evpn_topology_switch.properties.suggested_downlinks`
+  - `evpn_topology_switch_suggested_esilaglinks` (1 refs)
+    - `components.schemas.evpn_topology_switch.properties.suggested_esilaglinks`
+  - `evpn_topology_switch_suggested_uplinks` (1 refs)
+    - `components.schemas.evpn_topology_switch.properties.suggested_uplinks`
+  - `wired_client_response_device_mac` (1 refs)
+    - `components.schemas.wired_client_response.properties.device_mac`
+  - `wired_client_response_ip` (1 refs)
+    - `components.schemas.wired_client_response.properties.ip`
+  - `wired_client_response_port_id` (1 refs)
+    - `components.schemas.wired_client_response.properties.port_id`
+
+### 8 schemas
+
+- Preview: array
+- Schemas:
+  - `cpu_stat_load_avg` (1 refs)
+    - `components.schemas.cpu_stat.properties.load_avg`
+  - `response_location_coverage_beams_means_items` (1 refs)
+    - `components.schemas.response_location_coverage_beams_means.items`
+  - `response_location_coverage_result` (1 refs)
+    - `components.schemas.response_location_coverage_results.items`
+  - `sle_classifier_samples_duration` (1 refs)
+    - `components.schemas.sle_classifier_samples.properties.duration`
+  - `webhook_asset_raw_rssi_event_ap_loc` (1 refs)
+    - `components.schemas.webhook_asset_raw_rssi_event.properties.ap_loc`
+  - `webhook_discovered_raw_rssi_event_ap_loc` (1 refs)
+    - `components.schemas.webhook_discovered_raw_rssi_event.properties.ap_loc`
+  - `webhook_wifi_conn_raw_event_ap_loc` (1 refs)
+    - `components.schemas.webhook_wifi_conn_raw_event.properties.ap_loc`
+  - `webhook_wifi_unconn_raw_event_ap_loc` (1 refs)
+    - `components.schemas.webhook_wifi_unconn_raw_event.properties.ap_loc`
+
+### 8 schemas
+
+- Preview: object with 1 properties: enabled
+- Schemas:
+  - `evpn_topology_switch_config_dhcpd_config` (1 refs)
+    - `components.schemas.evpn_topology_switch_config.properties.dhcpd_config`
+  - `evpn_topology_switch_config_vrf_config` (1 refs)
+    - `components.schemas.evpn_topology_switch_config.properties.vrf_config`
+  - `marvis_client_location` (1 refs)
+    - `components.schemas.marvis_client.properties.location`
+  - `marvis_client_synthetic_test` (1 refs)
+    - `components.schemas.marvis_client.properties.synthetic_test`
+  - `marvis_client_telemetry` (1 refs)
+    - `components.schemas.marvis_client.properties.telemetry`
+  - `network_internal_access` (1 refs)
+    - `components.schemas.network.properties.internal_access`
+  - `service_policy_skyatp_iot_device_policy` (1 refs)
+    - `components.schemas.service_policy_skyatp.properties.iot_device_policy`
+  - `vrf_config` (7 refs)
+    - `components.schemas.device_gateway.properties.vrf_config`
+    - `components.schemas.device_switch.properties.vrf_config`
+    - `components.schemas.deviceprofile_gateway.properties.vrf_config`
+
+### 8 schemas
+
+- Preview: array
+- Schemas:
+  - `wlan_portal_allowed_hostnames` (1 refs)
+    - `components.schemas.wlan.properties.portal_allowed_hostnames`
+  - `wlan_portal_allowed_subnets` (1 refs)
+    - `components.schemas.wlan.properties.portal_allowed_subnets`
+  - `wlan_portal_amazon_email_domains` (1 refs)
+    - `components.schemas.wlan_portal.properties.amazon_email_domains`
+  - `wlan_portal_denied_hostnames` (1 refs)
+    - `components.schemas.wlan.properties.portal_denied_hostnames`
+  - `wlan_portal_facebook_email_domains` (1 refs)
+    - `components.schemas.wlan_portal.properties.facebook_email_domains`
+  - `wlan_portal_google_email_domains` (1 refs)
+    - `components.schemas.wlan_portal.properties.google_email_domains`
+  - `wlan_portal_microsoft_email_domains` (1 refs)
+    - `components.schemas.wlan_portal.properties.microsoft_email_domains`
+  - `wxlan_tag_spec_subnets` (1 refs)
+    - `components.schemas.wxlan_tag_spec.properties.subnets`
+
+### 7 schemas
+
+- Preview: string enum with 5 values
+- Schemas:
+  - `site_sle_histogram_scope_parameters` (1 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/histogram.parameters.1.schema`
+  - `site_sle_impact_summary_scope_parameters` (1 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/impact-summary.parameters.1.schema`
+  - `site_sle_metric_classifiers_scope_parameters` (1 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/classifiers.parameters.1.schema`
+  - `site_sle_metric_summary_scope_parameters` (2 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/summary.parameters.1.schema`
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/summary-trend.parameters.1.schema`
+  - `site_sle_metrics_scope_parameters` (1 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metrics.parameters.1.schema`
+  - `site_sle_threshold_scope_parameter` (1 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/threshold.parameters.1.schema`
+  - `sle_summary_scope` (2 refs)
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/classifier/{classifier}/summary.parameters.1.schema`
+    - `paths./api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/classifier/{classifier}/summary-trend.parameters.1.schema`
+
+### 6 schemas
+
+- Preview: string
+- Schemas:
+  - `admin_privilege_msp_id` (1 refs)
+    - `components.schemas.admin_privilege.properties.msp_id`
+  - `admin_privilege_org_id` (1 refs)
+    - `components.schemas.admin_privilege.properties.org_id`
+  - `admin_privilege_site_id` (1 refs)
+    - `components.schemas.admin_privilege.properties.site_id`
+  - `orggroup_id` (1 refs)
+    - `components.schemas.admin_privilege_orggroup_ids.items`
+  - `redirect_nacportal_id` (1 refs)
+    - `components.schemas.nac_tag.properties.nacportal_id`
+  - `sitegroup_id` (1 refs)
+    - `components.schemas.admin_privilege_sitegroup_ids.items`
+
+... 130 more exact duplicate groups omitted.
+
+## Near-Duplicate Groups
+
+### 325 schemas
+
+- Preview: array
+- Schemas:
+  - `acl_policy_src_tags` (1 refs)
+    - `components.schemas.acl_policy.properties.src_tags`
+  - `acl_tag_ether_types` (1 refs)
+    - `components.schemas.acl_tag.properties.ether_types`
+  - `acl_tag_macs` (1 refs)
+    - `components.schemas.acl_tag.properties.macs`
+  - `acl_tag_subnets` (1 refs)
+    - `components.schemas.acl_tag.properties.subnets`
+  - `additional_config_cmds` (10 refs)
+    - `components.schemas.device_gateway.properties.additional_config_cmds`
+    - `components.schemas.device_switch.properties.additional_config_cmds`
+    - `components.schemas.deviceprofile_gateway.properties.additional_config_cmds`
+  - `admin_tags` (1 refs)
+    - `components.schemas.admin.properties.tags`
+  - `alarm_ack_alarm_ids` (1 refs)
+    - `components.schemas.alarm_ack.properties.alarm_ids`
+  - `alarm_aps` (1 refs)
+    - `components.schemas.alarm.properties.aps`
+  - `alarm_bssids` (1 refs)
+    - `components.schemas.alarm.properties.bssids`
+  - `alarm_gateways` (1 refs)
+    - `components.schemas.alarm.properties.gateways`
+  - `alarm_hostnames` (1 refs)
+    - `components.schemas.alarm.properties.hostnames`
+  - `alarm_ids` (1 refs)
+    - `components.schemas.alarms.properties.alarm_ids`
+  - `alarm_ssids` (1 refs)
+    - `components.schemas.alarm.properties.ssids`
+  - `alarm_switches` (1 refs)
+    - `components.schemas.alarm.properties.switches`
+  - `anomaly_events` (1 refs)
+    - `components.schemas.anomaly.properties.events`
+  - `ap_ip_config_dns` (1 refs)
+    - `components.schemas.ap_ip_config.properties.dns`
+  - `ap_ip_config_dns_suffix` (1 refs)
+    - `components.schemas.ap_ip_config.properties.dns_suffix`
+  - `ap_radio_mac_radio_macs` (1 refs)
+    - `components.schemas.ap_radio_mac.properties.radio_macs`
+  - `ap_search_hostnames` (1 refs)
+    - `components.schemas.ap_search.properties.hostname`
+  - `app_probing_apps` (2 refs)
+    - `components.schemas.app_probing.properties.apps`
+    - `components.schemas.org_setting_gateway_mgmt_app_probing.properties.apps`
+  - ... 305 more schemas
+
+### 311 schemas
+
+- Preview: array of `#/components/schemas/aamw_profile_category`
+- Schemas:
+  - `aamw_profile_categories` (1 refs)
+    - `components.schemas.aamw_profile.properties.categories`
+  - `aamw_profiles` (2 refs)
+    - `components.responses.AamwProfilesArray.content.application/json.schema`
+    - `components.responses.AamwProfilesArray.content.application/vnd.api+json.schema`
+  - `account_oauth_info_accounts` (1 refs)
+    - `components.schemas.account_oauth_info.properties.accounts`
+  - `acl_policies` (4 refs)
+    - `components.schemas.device_switch.properties.acl_policies`
+    - `components.schemas.deviceprofile_switch.properties.acl_policies`
+    - `components.schemas.network_template.properties.acl_policies`
+  - `acl_policy_actions` (1 refs)
+    - `components.schemas.acl_policy.properties.actions`
+  - `acl_tag_specs` (1 refs)
+    - `components.schemas.acl_tag.properties.specs`
+  - `additional_vlan_ids_array` (1 refs)
+    - `components.schemas.additional_vlan_ids.anyOf.1`
+  - `admin_privilege_orggroup_ids` (1 refs)
+    - `components.schemas.admin_privilege.properties.orggroup_ids`
+  - `admin_privilege_sitegroup_ids` (1 refs)
+    - `components.schemas.admin_privilege.properties.sitegroup_ids`
+  - `admin_privilege_views` (3 refs)
+    - `components.schemas.admin_privilege.properties.views`
+    - `components.schemas.privilege_msp.properties.views`
+    - `components.schemas.privilege_org.properties.views`
+  - `alarm_search_results` (1 refs)
+    - `components.schemas.alarm_search_result.properties.results`
+  - `alarm_templates` (2 refs)
+    - `components.responses.AlarmtemplatesArray.content.application/json.schema`
+    - `components.responses.AlarmtemplatesArray.content.application/vnd.api+json.schema`
+  - `ap_import_json` (1 refs)
+    - `paths./api/v1/sites/{site_id}/devices/import.post.requestBody.content.application/json.schema`
+  - `ap_mesh_bands` (1 refs)
+    - `components.schemas.ap_mesh.properties.bands`
+  - `ap_search_wlans` (1 refs)
+    - `components.schemas.ap_search.properties.wlans`
+  - `ap_templates` (2 refs)
+    - `components.responses.AptemplatesArray.content.application/json.schema`
+    - `components.responses.AptemplatesArray.content.application/vnd.api+json.schema`
+  - `app_probing_custom_apps` (1 refs)
+    - `components.schemas.app_probing.properties.custom_apps`
+  - `asset_filters` (2 refs)
+    - `components.responses.AssetfiltersArray.content.application/json.schema`
+    - `components.responses.AssetfiltersArray.content.application/vnd.api+json.schema`
+  - `asset_rssi_zones` (1 refs)
+    - `components.schemas.stats_asset.properties.rssizones`
+  - `asset_zones` (1 refs)
+    - `components.schemas.stats_asset.properties.zones`
+  - ... 291 more schemas
+
+### 116 schemas
+
+- Preview: string enum with 3 values
+- Schemas:
+  - `alarm_severity` (1 refs)
+    - `components.parameters.alarm_severity.schema`
+  - `antenna_select` (2 refs)
+    - `components.schemas.ap_radio.properties.antenna_select`
+    - `components.schemas.stats_ap.properties.antenna_select`
+  - `ap_iot_pullup` (2 refs)
+    - `components.schemas.ap_iot_input.properties.pullup`
+    - `components.schemas.ap_iot_output.properties.pullup`
+  - `ap_port_config_mac_auth_protocol` (1 refs)
+    - `components.schemas.ap_port_config.properties.mac_auth_protocol`
+  - `ap_usb_type` (1 refs)
+    - `components.schemas.ap_usb.properties.type`
+  - `avprofile_fallback_action` (1 refs)
+    - `components.schemas.avprofile.properties.fallback_action`
+  - `beacon_type` (1 refs)
+    - `components.schemas.beacon.properties.type`
+  - `capture_scan_aps_band` (1 refs)
+    - `components.schemas.capture_scan_aps.properties.band`
+  - `capture_wireless_band` (1 refs)
+    - `components.schemas.capture_wireless.properties.band`
+  - `claim_type` (1 refs)
+    - `components.schemas.claim_activation.properties.type`
+  - `const_device_ap_band_24_usage` (1 refs)
+    - `components.schemas.const_device_ap_band_24_usages.items`
+  - `device_search_radius_filter_status` (1 refs)
+    - `components.schemas.device_search_radius_stat.properties.auth_server_status`
+  - `device_status` (2 refs)
+    - `paths./api/v1/orgs/{org_id}/jsi/inventory/search.get.parameters.4.schema`
+    - `paths./api/v1/orgs/{org_id}/stats/devices.get.parameters.1.schema`
+  - `device_type` (6 refs)
+    - `paths./api/v1/orgs/{org_id}/inventory.get.parameters.2.schema`
+    - `components.schemas.device_event.properties.device_type`
+    - `components.schemas.js_inventory_item.properties.type`
+  - `device_type_default_ap` (15 refs)
+    - `paths./api/v1/installer/orgs/{org_id}/deviceprofiles.get.parameters.0.schema`
+    - `paths./api/v1/orgs/{org_id}/deviceprofiles.get.parameters.0.schema`
+    - `paths./api/v1/orgs/{org_id}/devices/count.get.parameters.14.schema`
+  - `dhcpd_config_type` (1 refs)
+    - `components.schemas.dhcpd_config_property.properties.type`
+  - `dhcpd_config_type6` (1 refs)
+    - `components.schemas.dhcpd_config_property.properties.type6`
+  - `evpn_options_routed_at` (1 refs)
+    - `components.schemas.evpn_options.properties.routed_at`
+  - `fast_roam_result` (1 refs)
+    - `paths./api/v1/sites/{site_id}/events/fast_roam.get.parameters.0.schema`
+  - `for_site` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/stats/mxedges.get.parameters.0.schema`
+  - ... 96 more schemas
+
+### 115 schemas
+
+- Preview: string enum with 2 values
+- Schemas:
+  - `aamw_profile_action` (2 refs)
+    - `components.schemas.aamw_profile.properties.fallback_action`
+    - `components.schemas.aamw_profile.properties.file_action`
+  - `admin_compliance_status` (1 refs)
+    - `components.schemas.admin.properties.compliance_status`
+  - `alarm_status` (1 refs)
+    - `components.schemas.alarm.properties.status`
+  - `allow_deny` (3 refs)
+    - `components.schemas.acl_policy_action.properties.action`
+    - `components.schemas.org_service_policy.properties.action`
+    - `components.schemas.service_policy.properties.action`
+  - `ap_mesh_role` (1 refs)
+    - `components.schemas.ap_mesh.properties.role`
+  - `ap_port_config_dynamic_vlan_type` (1 refs)
+    - `components.schemas.ap_port_config_dynamic_vlan.properties.type`
+  - `ap_port_config_port_auth` (1 refs)
+    - `components.schemas.ap_port_config.properties.port_auth`
+  - `ap_zigbee_allow_join` (1 refs)
+    - `components.schemas.ap_zigbee.properties.allow_join`
+  - `app_probing_custom_app_protocol` (1 refs)
+    - `components.schemas.app_probing_custom_app.properties.protocol`
+  - `ble_config_beacon_rate_mode` (1 refs)
+    - `components.schemas.ble_config.properties.beacon_rate_mode`
+  - `ble_config_power_mode` (2 refs)
+    - `components.schemas.ble_config.properties.power_mode`
+    - `components.schemas.vbeacon.properties.power_mode`
+  - `capture_mxedge_format` (2 refs)
+    - `components.schemas.capture_mxedge.properties.format`
+    - `components.schemas.response_pcap_status.properties.format`
+  - `capture_radiotap_format` (1 refs)
+    - `components.schemas.capture_radiotap.properties.format`
+  - `capture_radiotapwired_format` (1 refs)
+    - `components.schemas.capture_radiotapwired.properties.format`
+  - `capture_scan_format` (1 refs)
+    - `components.schemas.capture_scan.properties.format`
+  - `capture_wired_format` (1 refs)
+    - `components.schemas.capture_wired.properties.format`
+  - `capture_wireless_format` (1 refs)
+    - `components.schemas.capture_wireless.properties.format`
+  - `client_info_source` (2 refs)
+    - `paths./api/v1/orgs/{org_id}/wired_clients/search.get.parameters.2.schema`
+    - `paths./api/v1/sites/{site_id}/wired_clients/search.get.parameters.4.schema`
+  - `const_device_ap_extios_default_dir` (1 refs)
+    - `components.schemas.const_device_ap_extios.properties.default_dir`
+  - `count_org_devices_mxtunnel_status` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/devices/count.get.parameters.8.schema`
+  - ... 95 more schemas
+
+### 97 schemas
+
+- Preview: array of `#/components/schemas/admin`
+- Schemas:
+  - `admins` (2 refs)
+    - `components.responses.AdminsArray.content.application/json.schema`
+    - `components.responses.AdminsArray.content.application/vnd.api+json.schema`
+  - `ap_template_matching_rules` (1 refs)
+    - `components.schemas.ap_template_matching.properties.rules`
+  - `count_results` (1 refs)
+    - `components.schemas.response_count.properties.results`
+  - `device_events` (3 refs)
+    - `components.schemas.response_device_events_search.properties.results`
+    - `components.schemas.response_events_devices.properties.results`
+    - `components.schemas.webhook_device_events.properties.events`
+  - `device_version` (2 refs)
+    - `components.responses.DeviceVersion.content.application/json.schema`
+    - `components.responses.DeviceVersion.content.application/vnd.api+json.schema`
+  - `discovered_switch_aps` (1 refs)
+    - `components.schemas.discovered_switch.properties.aps`
+  - `dswitches_compliance_major_versions` (1 refs)
+    - `components.schemas.dswitches_metrics_version_compliance_details.properties.major_versions`
+  - `evpn_topology_switches` (1 refs)
+    - `components.schemas.evpn_topology.properties.switches`
+  - `gateway_matching_rules` (1 refs)
+    - `components.schemas.gateway_matching.properties.rules`
+  - `gw_routing_policy_terms` (1 refs)
+    - `components.schemas.gw_routing_policy.properties.terms`
+  - `insight_metrics_results` (1 refs)
+    - `components.schemas.insight_metrics.properties.results`
+  - `license_amendments` (1 refs)
+    - `components.schemas.license.properties.amendments`
+  - `log_events` (2 refs)
+    - `components.schemas.response_log_search.properties.results`
+    - `components.schemas.webhook_audits.properties.events`
+  - `module_stat_item_fans` (2 refs)
+    - `components.schemas.stats_gateway_module_stat_item.properties.fans`
+    - `components.schemas.stats_switch_module_stat_item.properties.fans`
+  - `module_stat_item_psus` (2 refs)
+    - `components.schemas.stats_gateway_module_stat_item.properties.psus`
+    - `components.schemas.stats_switch_module_stat_item.properties.psus`
+  - `module_stat_item_temperatures` (2 refs)
+    - `components.schemas.stats_gateway_module_stat_item.properties.temperatures`
+    - `components.schemas.stats_switch_module_stat_item.properties.temperatures`
+  - `module_stat_item_vc_links` (2 refs)
+    - `components.schemas.stats_gateway_module_stat_item.properties.vc_links`
+    - `components.schemas.stats_switch_module_stat_item.properties.vc_links`
+  - `mxcluster_radsec_acct_servers` (1 refs)
+    - `components.schemas.mxcluster_radsec.properties.acct_servers`
+  - `mxcluster_radsec_auth_servers` (1 refs)
+    - `components.schemas.mxcluster_radsec.properties.auth_servers`
+  - `mxedge_upgrade_info` (2 refs)
+    - `components.responses.MxedgeUpgradeInfo.content.application/json.schema`
+    - `components.responses.MxedgeUpgradeInfo.content.application/vnd.api+json.schema`
+  - ... 77 more schemas
+
+### 90 schemas
+
+- Preview: map object
+- Schemas:
+  - `account_oauth_info_account_regions` (1 refs)
+    - `components.schemas.account_oauth_info_account.properties.regions`
+  - `acl_tags` (4 refs)
+    - `components.schemas.device_switch.properties.acl_tags`
+    - `components.schemas.deviceprofile_switch.properties.acl_tags`
+    - `components.schemas.network_template.properties.acl_tags`
+  - `aggregate_routes` (3 refs)
+    - `components.schemas.device_switch.properties.aggregate_routes`
+    - `components.schemas.deviceprofile_switch.properties.aggregate_routes`
+    - `components.schemas.switch_vrf_instance.properties.aggregate_routes`
+  - `aggregate_routes6` (3 refs)
+    - `components.schemas.device_switch.properties.aggregate_routes6`
+    - `components.schemas.deviceprofile_switch.properties.aggregate_routes6`
+    - `components.schemas.switch_vrf_instance.properties.aggregate_routes6`
+  - `ap_channel_band24_channels` (2 refs)
+    - `components.schemas.const_ap_channel.properties.band24_channels`
+    - `components.schemas.response_device_radio_channels.properties.band24_channels`
+  - `ap_channel_band5_channels` (2 refs)
+    - `components.schemas.const_ap_channel.properties.band5_channels`
+    - `components.schemas.response_device_radio_channels.properties.band5_channels`
+  - `ap_channel_band6_channels` (2 refs)
+    - `components.schemas.const_ap_channel.properties.band6_channels`
+    - `components.schemas.response_device_radio_channels.properties.band6_channels`
+  - `ap_redundancy_modules` (1 refs)
+    - `components.schemas.ap_redundancy.properties.modules`
+  - `capture_gateway_gateways_ports` (2 refs)
+    - `components.schemas.capture_gateway.properties.ports`
+    - `components.schemas.capture_gateway_gateways.properties.ports`
+  - `capture_switch_ports` (2 refs)
+    - `components.schemas.capture_switch.properties.ports`
+    - `components.schemas.capture_switch_switches.properties.ports`
+  - `config_switch_local_accounts` (1 refs)
+    - `components.schemas.switch_mgmt.properties.local_accounts`
+  - `const_insight_metrics` (2 refs)
+    - `components.responses.ConstInsightMetrics.content.application/json.schema`
+    - `components.responses.ConstInsightMetrics.content.application/vnd.api+json.schema`
+  - `const_insight_metrics_property_examples_object` (1 refs)
+    - `components.schemas.const_insight_metrics_property_example_any_of.anyOf.1`
+  - `const_insight_metrics_property_intervals` (1 refs)
+    - `components.schemas.const_insight_metrics_property.properties.intervals`
+  - `const_insight_metrics_property_params` (1 refs)
+    - `components.schemas.const_insight_metrics_property.properties.params`
+  - `const_insight_metrics_property_report_durations` (1 refs)
+    - `components.schemas.const_insight_metrics_property.properties.report_durations`
+  - `device_search_radius_stats` (1 refs)
+    - `components.schemas.switch_search.properties.radius_stats`
+  - `dhcpd_config_fixed_bindings` (1 refs)
+    - `components.schemas.dhcpd_config_property.properties.fixed_bindings`
+  - `dhcpd_config_options` (1 refs)
+    - `components.schemas.dhcpd_config_property.properties.options`
+  - `dhcpd_config_vendor_options` (1 refs)
+    - `components.schemas.dhcpd_config_property.properties.vendor_encapsulated`
+  - ... 70 more schemas
+
+### 71 schemas
+
+- Preview: string enum with 4 values
+- Schemas:
+  - `account_skyatp_cloud_name` (2 refs)
+    - `components.schemas.account_skyatp_config.properties.cloud_name`
+    - `components.schemas.account_skyatp_info.properties.cloud_name`
+  - `alarm_count_distinct` (1 refs)
+    - `paths./api/v1/sites/{site_id}/alarms/count.get.parameters.0.schema`
+  - `alarm_group` (1 refs)
+    - `components.parameters.alarm_group.schema`
+  - `ap_esl_type` (1 refs)
+    - `components.schemas.ap_esl_config.properties.type`
+  - `auto_placement_info_status` (1 refs)
+    - `components.schemas.response_auto_placement_info.properties.status`
+  - `bgp_config_via` (1 refs)
+    - `components.schemas.bgp_config.properties.via`
+  - `capture_radiotap_band` (1 refs)
+    - `components.schemas.capture_radiotap.properties.band`
+  - `capture_radiotapwired_band` (1 refs)
+    - `components.schemas.capture_radiotapwired.properties.band`
+  - `config_switch_local_accounts_user_role` (1 refs)
+    - `components.schemas.config_switch_local_accounts_user.properties.role`
+  - `count_pbn_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/jsi/pbn/count.get.parameters.0.schema`
+  - `count_sirt_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/jsi/sirt/count.get.parameters.0.schema`
+  - `count_usermac_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/usermacs/count.get.parameters.0.schema`
+  - `discovered_switch_metric_type` (1 refs)
+    - `paths./api/v1/sites/{site_id}/stats/discovered_switch_metrics/search.get.parameters.1.schema`
+  - `event_severity` (2 refs)
+    - `components.schemas.mxedge_event.properties.severity`
+    - `components.schemas.mxedge_event_sys_info.properties.severity`
+  - `fingerprints_count_distinct` (1 refs)
+    - `paths./api/v1/sites/{site_id}/insights/fingerprints/count.get.parameters.0.schema`
+  - `gateway_path_type` (1 refs)
+    - `components.schemas.gateway_path_preferences_path.properties.type`
+  - `gateway_port_usage` (1 refs)
+    - `components.schemas.gateway_port_config.properties.usage`
+  - `idp_profile_matching_severity_value` (1 refs)
+    - `components.schemas.idp_profile_matching_severity.items`
+  - `idp_user_cert_lookup_field` (1 refs)
+    - `components.schemas.org_setting_mist_nac.properties.idp_user_cert_lookup_field`
+  - `ip_type6` (3 refs)
+    - `components.schemas.ap_ip_config.properties.type6`
+    - `components.schemas.gateway_ip_config_property.properties.type6`
+    - `components.schemas.junos_other_ip_config.properties.type6`
+  - ... 51 more schemas
+
+### 63 schemas
+
+- Preview: string enum with 1 values
+- Schemas:
+  - `capture_client_type` (1 refs)
+    - `components.schemas.capture_client.properties.type`
+  - `capture_gateway_format` (1 refs)
+    - `components.schemas.capture_gateway.properties.format`
+  - `capture_gateway_type` (1 refs)
+    - `components.schemas.capture_gateway.properties.type`
+  - `capture_mxedge_type` (1 refs)
+    - `components.schemas.capture_mxedge.properties.type`
+  - `capture_new_assoc_type` (1 refs)
+    - `components.schemas.capture_new_assoc.properties.type`
+  - `capture_radiotap_type` (1 refs)
+    - `components.schemas.capture_radiotap.properties.type`
+  - `capture_radiotapwired_type` (1 refs)
+    - `components.schemas.capture_radiotapwired.properties.type`
+  - `capture_scan_type` (1 refs)
+    - `components.schemas.capture_scan.properties.type`
+  - `capture_switch_format` (1 refs)
+    - `components.schemas.capture_switch.properties.format`
+  - `capture_switch_type` (1 refs)
+    - `components.schemas.capture_switch.properties.type`
+  - `capture_wired_type` (1 refs)
+    - `components.schemas.capture_wired.properties.type`
+  - `capture_wireless_type` (1 refs)
+    - `components.schemas.capture_wireless.properties.type`
+  - `const_device_type_ap` (3 refs)
+    - `components.schemas.const_device_ap.properties.type`
+    - `components.schemas.device_ap.properties.type`
+    - `components.schemas.stats_ap.properties.type`
+  - `const_device_type_gateway` (3 refs)
+    - `components.schemas.const_device_gateway.properties.type`
+    - `components.schemas.device_gateway.properties.type`
+    - `components.schemas.stats_gateway.properties.type`
+  - `const_device_type_switch` (3 refs)
+    - `components.schemas.const_device_switch.properties.type`
+    - `components.schemas.device_switch.properties.type`
+    - `components.schemas.deviceprofile_switch.properties.type`
+  - `count_site_calls_distinct` (1 refs)
+    - `paths./api/v1/sites/{site_id}/stats/calls/count.get.parameters.0.schema`
+  - `device_type_ap` (1 refs)
+    - `components.schemas.deviceprofile_ap.properties.type`
+  - `device_type_gateway` (2 refs)
+    - `components.schemas.deviceprofile_gateway.properties.type`
+    - `components.schemas.gateway_search.properties.type`
+  - `device_type_switch` (2 refs)
+    - `components.schemas.stats_switch.properties.type`
+    - `components.schemas.switch_search.properties.type`
+  - `map_jibestream_vendor_name` (1 refs)
+    - `components.schemas.map_jibestream.properties.vendor_name`
+  - ... 43 more schemas
+
+### 47 schemas
+
+- Preview: string
+- Schemas:
+  - `admin_id` (2 refs)
+    - `components.schemas.admin.properties.admin_id`
+    - `components.schemas.audit_log.properties.admin_id`
+  - `admin_privilege_msp_id` (1 refs)
+    - `components.schemas.admin_privilege.properties.msp_id`
+  - `admin_privilege_org_id` (1 refs)
+    - `components.schemas.admin_privilege.properties.org_id`
+  - `admin_privilege_site_id` (1 refs)
+    - `components.schemas.admin_privilege.properties.site_id`
+  - `device_id` (2 refs)
+    - `components.schemas.issued_client_certificate.properties.device_id`
+    - `components.schemas.rssi_zone_device.properties.device_id`
+  - `device_type_with_all` (4 refs)
+    - `paths./api/v1/orgs/{org_id}/devices/events/search.get.parameters.2.schema`
+    - `paths./api/v1/orgs/{org_id}/stats/devices.get.parameters.0.schema`
+    - `paths./api/v1/sites/{site_id}/devices.get.parameters.0.schema`
+  - `hour` (7 refs)
+    - `components.schemas.hours.properties.fri`
+    - `components.schemas.hours.properties.mon`
+    - `components.schemas.hours.properties.sat`
+  - `id` (130 refs)
+    - `components.schemas.aamw_profile.properties.id`
+    - `components.schemas.alarm.properties.id`
+    - `components.schemas.alarm_template.properties.id`
+  - `last_ap` (2 refs)
+    - `components.schemas.client_nac.properties.last_ap`
+    - `components.schemas.client_wireless.properties.last_ap`
+  - `last_cert_cn` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_cn`
+  - `last_cert_issuer` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_issuer`
+  - `last_cert_serial` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_serial`
+  - `last_cert_subject` (1 refs)
+    - `components.schemas.client_nac.properties.last_cert_subject`
+  - `last_client_ip` (2 refs)
+    - `components.schemas.client_nac.properties.last_client_ip`
+    - `components.schemas.client_wireless.properties.last_ip`
+  - `last_device` (1 refs)
+    - `components.schemas.client_wireless.properties.last_device`
+  - `last_nacrule_id` (1 refs)
+    - `components.schemas.client_nac.properties.last_nacrule_id`
+  - `last_nacrule_name` (1 refs)
+    - `components.schemas.client_nac.properties.last_nacrule_name`
+  - `last_nas_vendor` (1 refs)
+    - `components.schemas.client_nac.properties.last_nas_vendor`
+  - `last_port_id` (1 refs)
+    - `components.schemas.client_nac.properties.last_port_id`
+  - `last_ssid` (1 refs)
+    - `components.schemas.client_nac.properties.last_ssid`
+  - ... 27 more schemas
+
+### 37 schemas
+
+- Preview: string enum with 5 values
+- Schemas:
+  - `admin_privilege_role` (1 refs)
+    - `components.schemas.admin_privilege.properties.role`
+  - `admin_privilege_scope` (1 refs)
+    - `components.schemas.admin_privilege.properties.scope`
+  - `ap_port_config_forwarding` (1 refs)
+    - `components.schemas.ap_port_config.properties.forwarding`
+  - `ap_radio_antenna_mode` (1 refs)
+    - `components.schemas.ap_radio.properties.antenna_mode`
+  - `avprofile_protocol` (1 refs)
+    - `components.schemas.avprofile_protocols.items`
+  - `gw_routing_policy_term_matching_protocol_enum` (1 refs)
+    - `components.schemas.gw_routing_policy_term_matching_protocol.items`
+  - `inventory_count_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/inventory/count.get.parameters.0.schema`
+  - `inventory_update_operation` (1 refs)
+    - `components.schemas.inventory_update.properties.op`
+  - `l2tp_state` (2 refs)
+    - `components.schemas.stats_ap_l2tp_stat.properties.state`
+    - `components.schemas.stats_ap_l2tp_stat_session.properties.state`
+  - `mxcluster_radsec_nas_ip_source` (1 refs)
+    - `components.schemas.mxcluster_radsec.properties.nas_ip_source`
+  - `mxcluster_radsec_src_ip_source` (1 refs)
+    - `components.schemas.mxcluster_radsec.properties.src_ip_source`
+  - `nac_tag_username_attr` (1 refs)
+    - `components.schemas.nac_tag.properties.username_attr`
+  - `oauth_ping_identity_region` (1 refs)
+    - `components.schemas.sso.properties.oauth_ping_identity_region`
+  - `org_mxedge_count_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/mxedges/count.get.parameters.0.schema`
+  - `org_wan_clients_count_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/wan_clients/count.get.parameters.0.schema`
+  - `org_wan_clients_events_count_distinct` (1 refs)
+    - `paths./api/v1/orgs/{org_id}/wan_client/events/count.get.parameters.0.schema`
+  - `port_auth_state` (6 refs)
+    - `paths./api/v1/orgs/{org_id}/stats/ports/count.get.parameters.24.schema`
+    - `paths./api/v1/orgs/{org_id}/stats/ports/search.get.parameters.1.schema`
+    - `paths./api/v1/sites/{site_id}/stats/ports/count.get.parameters.24.schema`
+  - `privilege_msp_role` (1 refs)
+    - `components.schemas.privilege_msp.properties.role`
+  - `privilege_org_role` (1 refs)
+    - `components.schemas.privilege_org.properties.role`
+  - `radio_band_antenna_mode` (6 refs)
+    - `components.schemas.ap_radio_band24.properties.antenna_mode`
+    - `components.schemas.ap_radio_band5.properties.antenna_mode`
+    - `components.schemas.ap_radio_band6.properties.antenna_mode`
+  - ... 17 more schemas
+
+### 25 schemas
+
+- Preview: array of `#/components/schemas/admin_privilege`
+- Schemas:
+  - `admin_privileges` (1 refs)
+    - `components.schemas.admin.properties.privileges`
+  - `ap_radio_macs` (2 refs)
+    - `components.responses.RadioMacs.content.application/json.schema`
+    - `components.responses.RadioMacs.content.application/vnd.api+json.schema`
+  - `assets_import_json` (2 refs)
+    - `paths./api/v1/orgs/{org_id}/assets/import.post.requestBody.content.application/json.schema`
+    - `paths./api/v1/sites/{site_id}/assets/import.post.requestBody.content.application/json.schema`
+  - `mxedge_events` (2 refs)
+    - `components.schemas.response_mxedge_events_search.properties.results`
+    - `components.schemas.webhook_mxedge_events.properties.events`
+  - `response_inventory_inventory_added` (1 refs)
+    - `components.schemas.response_inventory.properties.inventory_added`
+  - `sso_role_msp_privileges` (1 refs)
+    - `components.schemas.sso_role_msp.properties.privileges`
+  - `sso_role_org_privileges` (1 refs)
+    - `components.schemas.sso_role_org.properties.privileges`
+  - `stats_switch_module_stat` (2 refs)
+    - `components.schemas.response_virtual_chassis_config.properties.members`
+    - `components.schemas.stats_switch.properties.module_stat`
+  - `sw_routing_policy_terms` (1 refs)
+    - `components.schemas.sw_routing_policy.properties.terms`
+  - `webhook_alarms_events` (1 refs)
+    - `components.schemas.webhook_alarms.properties.events`
+  - `webhook_asset_raw_rssi_events` (1 refs)
+    - `components.schemas.webhook_asset_raw_rssi.properties.events`
+  - `webhook_client_join_events` (1 refs)
+    - `components.schemas.webhook_client_join.properties.events`
+  - `webhook_client_sessions_events` (1 refs)
+    - `components.schemas.webhook_client_sessions.properties.events`
+  - `webhook_device_updowns_events` (1 refs)
+    - `components.schemas.webhook_device_updowns.properties.events`
+  - `webhook_location_centrak_events` (1 refs)
+    - `components.schemas.webhook_location_centrak.properties.events`
+  - `webhook_location_events` (1 refs)
+    - `components.schemas.webhook_location.properties.events`
+  - `webhook_occupancy_alerts_event_alert_events` (1 refs)
+    - `components.schemas.webhook_occupancy_alerts_event.properties.alert_events`
+  - `webhook_occupancy_alerts_events` (1 refs)
+    - `components.schemas.webhook_occupancy_alerts.properties.events`
+  - `webhook_ping_events` (1 refs)
+    - `components.schemas.webhook_ping.properties.events`
+  - `webhook_rssizone_events` (1 refs)
+    - `components.schemas.webhook_rssizone.properties.events`
+  - ... 5 more schemas
+
+### 24 schemas
+
+- Preview: object with 2 properties: events, topic
+- Schemas:
+  - `webhook_alarms` (1 refs)
+    - `webhooks.alarms.post.requestBody.content.application/json.schema`
+  - `webhook_asset_raw_rssi` (1 refs)
+    - `webhooks.asset_raw_rssi.post.requestBody.content.application/json.schema`
+  - `webhook_audits` (1 refs)
+    - `webhooks.audits.post.requestBody.content.application/json.schema`
+  - `webhook_client_join` (1 refs)
+    - `webhooks.client_join.post.requestBody.content.application/json.schema`
+  - `webhook_client_sessions` (1 refs)
+    - `webhooks.client_sessions.post.requestBody.content.application/json.schema`
+  - `webhook_device_events` (1 refs)
+    - `webhooks.device_events.post.requestBody.content.application/json.schema`
+  - `webhook_device_updowns` (1 refs)
+    - `webhooks.device_updowns.post.requestBody.content.application/json.schema`
+  - `webhook_location` (1 refs)
+    - `webhooks.location.post.requestBody.content.application/json.schema`
+  - `webhook_location_asset` (1 refs)
+    - `webhooks.location_asset.post.requestBody.content.application/json.schema`
+  - `webhook_location_centrak` (1 refs)
+    - `webhooks.location_centrak.post.requestBody.content.application/json.schema`
+  - `webhook_location_client` (1 refs)
+    - `webhooks.location_client.post.requestBody.content.application/json.schema`
+  - `webhook_location_sdk` (1 refs)
+    - `webhooks.location_sdk.post.requestBody.content.application/json.schema`
+  - `webhook_location_unclient` (1 refs)
+    - `webhooks.location_unclient.post.requestBody.content.application/json.schema`
+  - `webhook_minis_application` (1 refs)
+    - `webhooks.minis_application.post.requestBody.content.application/json.schema`
+  - `webhook_minis_reachability` (1 refs)
+    - `webhooks.minis_reachability.post.requestBody.content.application/json.schema`
+  - `webhook_mxedge_events` (1 refs)
+    - `webhooks.mxedge_events.post.requestBody.content.application/json.schema`
+  - `webhook_occupancy_alerts` (1 refs)
+    - `webhooks.occupancy_alerts.post.requestBody.content.application/json.schema`
+  - `webhook_ping` (1 refs)
+    - `webhooks.ping.post.requestBody.content.application/json.schema`
+  - `webhook_rssizone` (1 refs)
+    - `webhooks.rssizone.post.requestBody.content.application/json.schema`
+  - `webhook_sdkclient_scan_data` (1 refs)
+    - `webhooks.sdkclient_scan_data.post.requestBody.content.application/json.schema`
+  - ... 4 more schemas
+
+### 22 schemas
+
+- Preview: array
+- Schemas:
+  - `ap_channel_band24_channel` (1 refs)
+    - `components.schemas.ap_channel_band24_channels.additionalProperties`
+  - `ap_channel_band5_channel` (1 refs)
+    - `components.schemas.ap_channel_band5_channels.additionalProperties`
+  - `ap_channel_band6_channel` (1 refs)
+    - `components.schemas.ap_channel_band6_channels.additionalProperties`
+  - `ap_search_inactive_wired_vlans` (1 refs)
+    - `components.schemas.ap_search.properties.inactive_wired_vlans`
+  - `ap_switch_setting_vlan_ids` (1 refs)
+    - `components.schemas.ap_switch_setting.properties.vlan_ids`
+  - `ble_config_beam_disabled` (1 refs)
+    - `components.schemas.ble_config.properties.beam_disabled`
+  - `client_wireless_vlan` (1 refs)
+    - `components.schemas.client_wireless.properties.vlan`
+  - `const_device_ap_disallowed_channels` (1 refs)
+    - `components.schemas.const_device_ap.properties.disallowed_channels.additionalProperties.additionalProperties`
+  - `evpn_topology_switch_pods` (1 refs)
+    - `components.schemas.evpn_topology_switch.properties.pods`
+  - `gateway_traffic_shaping_class_percentages` (1 refs)
+    - `components.schemas.gateway_traffic_shaping.properties.class_percentages`
+  - `integers` (3 refs)
+    - `components.schemas.discovered_switch_ap.properties.inactive_wired_vlans`
+    - `components.schemas.stats_ap.properties.inactive_wired_vlans`
+    - `components.schemas.stats_ap_ble.properties.minors`
+  - `mxcluster_tunterm_hosts_order` (1 refs)
+    - `components.schemas.mxcluster.properties.tunterm_hosts_order`
+  - `mxedge_tunterm_multicast_config_mdns_vlan_ids` (1 refs)
+    - `components.schemas.site_setting_tunterm_multicast_config_mdns.properties.vlan_ids`
+  - `mxedge_tunterm_multicast_config_ssdp_vlan_ids` (1 refs)
+    - `components.schemas.site_setting_tunterm_multicast_config_ssdp.properties.vlan_ids`
+  - `mxtunnel_vlan_ids` (2 refs)
+    - `components.schemas.mxtunnel.properties.vlan_ids`
+    - `components.schemas.site_mxtunnel.properties.vlan_ids`
+  - `response_site_device_upgrade_canary_phases` (1 refs)
+    - `components.schemas.response_site_device_upgrade.properties.canary_phases`
+  - `site_mxtunnel_additional_mxtunnel_vlan_ids` (1 refs)
+    - `components.schemas.site_mxtunnel_additional_mxtunnel.properties.vlan_ids`
+  - `stats_switch_clients_stats_total_total_num_aps` (1 refs)
+    - `components.schemas.stats_switch_clients_stats_total.properties.num_aps`
+  - `upgrade_device_canary_phases` (3 refs)
+    - `components.schemas.mxedge_upgrade_multi.properties.canary_phases`
+    - `components.schemas.upgrade_org_devices.properties.canary_phases`
+    - `components.schemas.upgrade_site_devices.properties.canary_phases`
+  - `upgrade_devices_max_failures` (4 refs)
+    - `components.schemas.response_site_device_upgrade.properties.max_failures`
+    - `components.schemas.response_site_device_upgrades_item.properties.max_failures`
+    - `components.schemas.upgrade_org_devices.properties.max_failures`
+  - ... 2 more schemas
+
+### 20 schemas
+
+- Preview: object with 1 properties: enabled
+- Schemas:
+  - `ap_centrak` (1 refs)
+    - `components.schemas.device_ap.properties.centrak`
+  - `device_ap_lacp_config` (2 refs)
+    - `components.schemas.device_ap.properties.lacp_config`
+    - `components.schemas.deviceprofile_ap.properties.lacp_config`
+  - `evpn_topology_switch_config_dhcpd_config` (1 refs)
+    - `components.schemas.evpn_topology_switch_config.properties.dhcpd_config`
+  - `evpn_topology_switch_config_vrf_config` (1 refs)
+    - `components.schemas.evpn_topology_switch_config.properties.vrf_config`
+  - `marvis_client_location` (1 refs)
+    - `components.schemas.marvis_client.properties.location`
+  - `marvis_client_synthetic_test` (1 refs)
+    - `components.schemas.marvis_client.properties.synthetic_test`
+  - `marvis_client_telemetry` (1 refs)
+    - `components.schemas.marvis_client.properties.telemetry`
+  - `marvis_self_driving_domain` (3 refs)
+    - `components.schemas.marvis_self_driving.properties.wan`
+    - `components.schemas.marvis_self_driving.properties.wired`
+    - `components.schemas.marvis_self_driving.properties.wireless`
+  - `network_internal_access` (1 refs)
+    - `components.schemas.network.properties.internal_access`
+  - `org_setting_wan_pma` (1 refs)
+    - `components.schemas.org_setting.properties.wan_pma`
+  - `org_setting_wired_pma` (1 refs)
+    - `components.schemas.org_setting.properties.wired_pma`
+  - `org_setting_wireless_pma` (1 refs)
+    - `components.schemas.org_setting.properties.wireless_pma`
+  - `service_policy_appqoe` (2 refs)
+    - `components.schemas.org_service_policy.properties.appqoe`
+    - `components.schemas.service_policy.properties.appqoe`
+  - `service_policy_skyatp_iot_device_policy` (1 refs)
+    - `components.schemas.service_policy_skyatp.properties.iot_device_policy`
+  - `site_setting_analytic` (1 refs)
+    - `components.schemas.site_setting.properties.analytic`
+  - `site_setting_srx_app` (1 refs)
+    - `components.schemas.site_setting.properties.srx_app`
+  - `site_setting_vna` (1 refs)
+    - `components.schemas.site_setting.properties.vna`
+  - `site_setting_wan_vna` (1 refs)
+    - `components.schemas.site_setting.properties.wan_vna`
+  - `site_setting_wired_vna` (1 refs)
+    - `components.schemas.site_setting.properties.wired_vna`
+  - `vrf_config` (7 refs)
+    - `components.schemas.device_gateway.properties.vrf_config`
+    - `components.schemas.device_switch.properties.vrf_config`
+    - `components.schemas.deviceprofile_gateway.properties.vrf_config`
+
+### 20 schemas
+
+- Preview: anyOf with 2 variants
+- Schemas:
+  - `ap_switch_setting_port_vlan_id` (1 refs)
+    - `components.schemas.ap_switch_setting.properties.port_vlan_id`
+  - `bgp_as` (9 refs)
+    - `components.schemas.bgp_config.properties.neighbor_as`
+    - `components.schemas.bgp_config_neighbors.properties.neighbor_as`
+    - `components.schemas.bgp_peer.properties.local_as`
+  - `bgp_local_as` (1 refs)
+    - `components.schemas.bgp_config.properties.local_as`
+  - `dscp` (2 refs)
+    - `components.schemas.wlan_app_qos_apps_properties.properties.dscp`
+    - `components.schemas.wlan_app_qos_others_item.properties.dscp`
+  - `gateway_port_config_reth_idx` (1 refs)
+    - `components.schemas.gateway_port_config.properties.reth_idx`
+  - `nac_tag_gbp_tag` (1 refs)
+    - `components.schemas.nac_tag.properties.gbp_tag`
+  - `radius_acct_port` (1 refs)
+    - `components.schemas.radius_acct_server.properties.port`
+  - `radius_auth_port` (1 refs)
+    - `components.schemas.radius_auth_server.properties.port`
+  - `radius_coa_port` (2 refs)
+    - `components.schemas.coa_server.properties.port`
+    - `components.schemas.switch_radius_config.properties.coa_port`
+  - `radsec_idle_timeout` (1 refs)
+    - `components.schemas.radsec.properties.idle_timeout`
+  - `remote_syslog_archive_files` (1 refs)
+    - `components.schemas.remote_syslog_archive.properties.files`
+  - `remote_syslog_server_port` (1 refs)
+    - `components.schemas.remote_syslog_server.properties.port`
+  - `routing_policy_local_preference` (2 refs)
+    - `components.schemas.gw_routing_policy_term_action.properties.local_preference`
+    - `components.schemas.sw_routing_policy_term_action.properties.local_preference`
+  - `sponsor_link_validity_duration` (1 refs)
+    - `components.schemas.wlan_portal.properties.sponsor_link_validity_duration`
+  - `switch_mgmt_mxedge_proxy_port` (1 refs)
+    - `components.schemas.switch_mgmt.properties.mxedge_proxy_port`
+  - `switch_ospf_config_reference_bandwidth` (1 refs)
+    - `components.schemas.switch_ospf_config.properties.reference_bandwidth`
+  - `switch_port_usage_mac_limit` (1 refs)
+    - `components.schemas.switch_port_usage.properties.mac_limit`
+  - `switch_port_usage_mac_limit_overwrite` (1 refs)
+    - `components.schemas.switch_port_config_overwrite.properties.mac_limit`
+  - `switch_port_usage_reauth_interval` (2 refs)
+    - `components.schemas.junos_local_port_config.properties.reauth_interval`
+    - `components.schemas.switch_port_usage.properties.reauth_interval`
+  - `wlan_limit` (4 refs)
+    - `components.schemas.wlan.properties.client_limit_down`
+    - `components.schemas.wlan.properties.client_limit_up`
+    - `components.schemas.wlan.properties.wlan_limit_down`
+
+... 70 more near-duplicate groups omitted.
+

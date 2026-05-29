@@ -62878,8 +62878,8 @@ components:
       type: object
     aamw_profile_action:
       default: block
-      description: >-
-        Action applied to files by an Advanced Anti Malware profile. enum: `block`, `permit`
+      description: 'Action applied to files by an Advanced Anti Malware profile. enum:
+        `block`, `permit`'
       enum:
       - block
       - permit
@@ -64097,9 +64097,9 @@ components:
         $ref: '#/components/schemas/sitegroup_id'
       type: array
     admin_privilege_view:
-      description: >-
-        UI view name allowed by a custom admin role. enum: `lobby_admin`, `location`,
-        `marketing`, `mxedge_admin`, `reporting`, `security`, `super_observer`, `switch_admin`
+      description: 'UI view name allowed by a custom admin role. enum: `lobby_admin`,
+        `location`, `marketing`, `mxedge_admin`, `reporting`, `security`, `super_observer`,
+        `switch_admin`'
       enum:
       - lobby_admin
       - location
@@ -64442,8 +64442,7 @@ components:
         type: string
       type: array
     alarm_status:
-      description: >-
-        Current lifecycle status of this alarm. enum: `open`, `resolved`
+      description: 'Current lifecycle status of this alarm. enum: `open`, `resolved`'
       enum:
       - open
       - resolved
@@ -64536,8 +64535,8 @@ components:
       - alarm_ids
       type: object
     allow_deny:
-      description: >-
-        Policy action value that either allows or denies matching traffic. enum: `allow`, `deny`
+      description: 'Policy action value that either allows or denies matching traffic.
+        enum: `allow`, `deny`'
       enum:
       - allow
       - deny
@@ -65417,8 +65416,7 @@ components:
         $ref: '#/components/schemas/dot11_band'
       type: array
     ap_mesh_role:
-      description: >-
-        Mesh role for this AP, either base or remote. enum: `base`, `remote`
+      description: 'Mesh role for this AP, either base or remote. enum: `base`, `remote`'
       enum:
       - base
       - remote
@@ -67936,9 +67934,8 @@ components:
       type: object
     ble_config_beacon_rate_mode:
       default: default
-      description: >-
-        Beacon rate mode for Mist BLE beacons; use custom to set beacon_rate. enum: `custom`,
-        `default`
+      description: 'Beacon rate mode for Mist BLE beacons; use custom to set beacon_rate.
+        enum: `custom`, `default`'
       enum:
       - custom
       - default
@@ -67958,9 +67955,8 @@ components:
       type: array
     ble_config_power_mode:
       default: default
-      description: >-
-        Transmit power mode for BLE beacons; use `custom` to set explicit power. enum: `custom`,
-        `default`
+      description: 'Transmit power mode for BLE beacons; use `custom` to set explicit
+        power. enum: `custom`, `default`'
       enum:
       - custom
       - default
@@ -68538,8 +68534,7 @@ components:
       - type
       type: object
     capture_client_type:
-      description: >-
-        Packet capture type discriminator for client captures. enum: `client`
+      description: 'Packet capture type discriminator for client captures. enum: `client`'
       enum:
       - client
       examples:
@@ -68596,8 +68591,7 @@ components:
       type: object
     capture_gateway_format:
       default: stream
-      description: >-
-        Output format for the gateway packet capture. enum: `stream`
+      description: 'Output format for the gateway packet capture. enum: `stream`'
       enum:
       - stream
       examples:
@@ -68626,8 +68620,8 @@ components:
       description: Property key is the port ID
       type: object
     capture_gateway_type:
-      description: >-
-        Packet capture type discriminator for gateway captures. enum: `gateway`
+      description: 'Packet capture type discriminator for gateway captures. enum:
+        `gateway`'
       enum:
       - gateway
       examples:
@@ -68738,8 +68732,8 @@ components:
           type: string
       type: object
     capture_mxedge_type:
-      description: >-
-        Packet capture type discriminator for Mist Edge captures. enum: `mxedge`
+      description: 'Packet capture type discriminator for Mist Edge captures. enum:
+        `mxedge`'
       enum:
       - mxedge
       examples:
@@ -68785,8 +68779,8 @@ components:
       - type
       type: object
     capture_new_assoc_type:
-      description: >-
-        Packet capture type discriminator for new association captures. enum: `new_assoc`
+      description: 'Packet capture type discriminator for new association captures.
+        enum: `new_assoc`'
       enum:
       - new_assoc
       examples:
@@ -68869,8 +68863,7 @@ components:
       type: string
     capture_radiotap_format:
       default: pcap
-      description: >-
-        Output format for the radiotap packet capture. enum: `pcap`, `stream`
+      description: 'Output format for the radiotap packet capture. enum: `pcap`, `stream`'
       enum:
       - pcap
       - stream
@@ -68878,8 +68871,8 @@ components:
       - stream
       type: string
     capture_radiotap_type:
-      description: >-
-        Packet capture type discriminator for radiotap captures. enum: `radiotap`
+      description: 'Packet capture type discriminator for radiotap captures. enum:
+        `radiotap`'
       enum:
       - radiotap
       examples:
@@ -68967,8 +68960,7 @@ components:
       type: string
     capture_radiotapwired_format:
       default: pcap
-      description: >-
-        Output format for the combined packet capture. enum: `pcap`, `stream`
+      description: 'Output format for the combined packet capture. enum: `pcap`, `stream`'
       enum:
       - pcap
       - stream
@@ -68976,9 +68968,8 @@ components:
       - stream
       type: string
     capture_radiotapwired_type:
-      description: >-
-        Packet capture type discriminator for combined radiotap and wired captures. enum:
-        `radiotap,wired`
+      description: 'Packet capture type discriminator for combined radiotap and wired
+        captures. enum: `radiotap,wired`'
       enum:
       - radiotap,wired
       examples:
@@ -69094,8 +69085,8 @@ components:
       - 'null'
     capture_scan_format:
       default: pcap
-      description: >-
-        Output format for the scan radio packet capture. enum: `pcap`, `stream`
+      description: 'Output format for the scan radio packet capture. enum: `pcap`,
+        `stream`'
       enum:
       - pcap
       - stream
@@ -69103,8 +69094,8 @@ components:
       - stream
       type: string
     capture_scan_type:
-      description: >-
-        Packet capture type discriminator for scan radio captures. enum: `scan`
+      description: 'Packet capture type discriminator for scan radio captures. enum:
+        `scan`'
       enum:
       - scan
       examples:
@@ -69174,8 +69165,7 @@ components:
       type: object
     capture_switch_format:
       default: stream
-      description: >-
-        Output format for the switch packet capture. enum: `stream`
+      description: 'Output format for the switch packet capture. enum: `stream`'
       enum:
       - stream
       type: string
@@ -69207,8 +69197,7 @@ components:
           description: Switch ports to include in the capture, keyed by port ID
       type: object
     capture_switch_type:
-      description: >-
-        Packet capture type discriminator for switch captures. enum: `switch`
+      description: 'Packet capture type discriminator for switch captures. enum: `switch`'
       enum:
       - switch
       examples:
@@ -69261,8 +69250,7 @@ components:
       - stream
       type: string
     capture_wired_type:
-      description: >-
-        Packet capture type discriminator for wired captures. enum: `wired`
+      description: 'Packet capture type discriminator for wired captures. enum: `wired`'
       enum:
       - wired
       examples:
@@ -69323,8 +69311,8 @@ components:
       - stream
       type: string
     capture_wireless_type:
-      description: >-
-        Packet capture type discriminator for wireless captures. enum: `wireless`
+      description: 'Packet capture type discriminator for wireless captures. enum:
+        `wireless`'
       enum:
       - wireless
       examples:
@@ -69411,10 +69399,9 @@ components:
       - mac
       type: string
     client_key_mgmt:
-      description: >-
-        Key management protocol used for the latest authentication. enum: `WPA2-PSK`,
-        `WPA2-PSK/CCMP`, `WPA2-PSK-FT`, `WPA2-PSK-SHA256`, `WPA3-EAP-SHA256`,
-        `WPA3-EAP-SHA256/CCMP`, `WPA3-EAP-FT/GCMP256`, `WPA3-SAE-FT`, `WPA3-SAE-PSK`
+      description: 'Key management protocol used for the latest authentication. enum:
+        `WPA2-PSK`, `WPA2-PSK/CCMP`, `WPA2-PSK-FT`, `WPA2-PSK-SHA256`, `WPA3-EAP-SHA256`,
+        `WPA3-EAP-SHA256/CCMP`, `WPA3-EAP-FT/GCMP256`, `WPA3-SAE-FT`, `WPA3-SAE-PSK`'
       enum:
       - WPA2-PSK
       - WPA2-PSK/CCMP
@@ -70606,8 +70593,7 @@ components:
           type: boolean
       type: object
     const_device_ap_extios_default_dir:
-      description: >-
-        Default direction for this external I/O port. enum: `IN`, `OUT`
+      description: 'Default direction for this external I/O port. enum: `IN`, `OUT`'
       enum:
       - IN
       - OUT
@@ -71530,16 +71516,15 @@ components:
         $ref: '#/components/schemas/const_webhook_topic'
       type: array
     count_org_devices_mxtunnel_status:
-      description: >-
-        Mist Tunnel status value used when counting organization devices. enum: `down`, `up`
+      description: 'Mist Tunnel status value used when counting organization devices.
+        enum: `down`, `up`'
       enum:
       - down
       - up
       type: string
     count_pbn_distinct:
-      description: >-
-        Fields that can be used to group PBN advisory count results. enum: `versions`, `models`,
-        `customer_risk`, `bug_type`
+      description: 'Fields that can be used to group PBN advisory count results. enum:
+        `versions`, `models`, `customer_risk`, `bug_type`'
       enum:
       - versions
       - models
@@ -71567,9 +71552,8 @@ components:
       type: array
       uniqueItems: true
     count_sirt_distinct:
-      description: >-
-        Fields that can be used to group SIRT advisory count results. enum: `versions`,
-        `models`, `severity`, `jsa_updated_date`
+      description: 'Fields that can be used to group SIRT advisory count results.
+        enum: `versions`, `models`, `severity`, `jsa_updated_date`'
       enum:
       - versions
       - models
@@ -71580,15 +71564,14 @@ components:
       type: string
     count_site_calls_distinct:
       default: mac
-      description: >-
-        Distinct field used when counting site call statistics. enum: `mac`
+      description: 'Distinct field used when counting site call statistics. enum:
+        `mac`'
       enum:
       - mac
       type: string
     count_usermac_distinct:
-      description: >-
-        Fields that can be used to group user MAC count results. enum: `mac`, `name`, `labels`,
-        `org_id`
+      description: 'Fields that can be used to group user MAC count results. enum:
+        `mac`, `name`, `labels`, `org_id`'
       enum:
       - mac
       - name
@@ -72675,8 +72658,7 @@ components:
       - $ref: '#/components/schemas/deviceprofile_switch'
     deviceprofile_ap:
       additionalProperties: false
-      description: AP device profile configuration applied to APs at a site or
-        organization
+      description: AP device profile configuration applied to APs at a site or organization
       properties:
         aeroscout:
           $ref: '#/components/schemas/ap_aeroscout'
@@ -73572,8 +73554,8 @@ components:
       type: string
     discovered_switches_metric_scope:
       default: site
-      description: >-
-        Scope level used when querying discovered switch metrics. enum: `site`, `switch`
+      description: 'Scope level used when querying discovered switch metrics. enum:
+        `site`, `switch`'
       enum:
       - site
       - switch
@@ -73797,8 +73779,7 @@ components:
       type: object
     dynamic_psk_source:
       default: radius
-      description: >-
-        Origin used to retrieve per-user PSKs. enum: `cloud_psks`, `radius`
+      description: 'Origin used to retrieve per-user PSKs. enum: `cloud_psks`, `radius`'
       enum:
       - cloud_psks
       - radius
@@ -73806,8 +73787,8 @@ components:
       - cloud_psks
       type: string
     edr_provider:
-      description: >-
-        EDR provider associated with the NAC client. enum: `crowdstrike`, `sentinelone`
+      description: 'EDR provider associated with the NAC client. enum: `crowdstrike`,
+        `sentinelone`'
       enum:
       - crowdstrike
       - sentinelone
@@ -73938,8 +73919,8 @@ components:
           type: string
       type: object
     event_severity:
-      description: >-
-        Severity level for an event. enum: `normal`, `critical`, `high`, `warning`
+      description: 'Severity level for an event. enum: `normal`, `critical`, `high`,
+        `warning`'
       enum:
       - normal
       - critical
@@ -76106,8 +76087,7 @@ components:
       type: object
     gateway_template_type:
       default: standalone
-      description: >-
-        Gateway template deployment type. enum: `spoke`, `standalone`
+      description: 'Gateway template deployment type. enum: `spoke`, `standalone`'
       enum:
       - spoke
       - standalone
@@ -76188,8 +76168,8 @@ components:
       type: object
     gateway_wan_probe_override_probe_profile:
       default: broadband
-      description: >-
-        WAN probe profile used for health checks on this port. enum: `broadband`, `lte`
+      description: 'WAN probe profile used for health checks on this port. enum: `broadband`,
+        `lte`'
       enum:
       - broadband
       - lte
@@ -76821,9 +76801,9 @@ components:
       type: object
     idp_profile_action:
       default: alert
-      description: >-
-        IDP profile action. enum: `alert`, `close`, `drop`. `alert` is the default, `drop`
-        silently drops packets, and `close` asks the client/server to close the connection
+      description: 'IDP profile action. enum: `alert`, `close`, `drop`. `alert` is
+        the default, `drop` silently drops packets, and `close` asks the client/server
+        to close the connection'
       enum:
       - alert
       - close
@@ -77018,8 +76998,8 @@ components:
       type: object
     import_site_assets_upsert:
       default: 'False'
-      description: >-
-        Whether site asset import should update matching existing assets. enum: `False`, `True`
+      description: 'Whether site asset import should update matching existing assets.
+        enum: `False`, `True`'
       enum:
       - 'False'
       - 'True'
@@ -77864,8 +77844,8 @@ components:
       - 'null'
     ip_type:
       default: dhcp
-      description: >-
-        IP address assignment mode, either DHCP or static. enum: `dhcp`, `static`
+      description: 'IP address assignment mode, either DHCP or static. enum: `dhcp`,
+        `static`'
       enum:
       - dhcp
       - static
@@ -78055,10 +78035,9 @@ components:
         $ref: '#/components/schemas/jse_device'
       type: array
     jsi_inventory_count_distinct:
-      description: >-
-        Distinct field used when counting Juniper Support Insight inventory records. enum:
-        `account_id`, `claimed`, `has_support`, `eol_time`, `eos_time`, `version_time`, `model`,
-        `sku`, `status`, `type`, `version`, `warranty_type`
+      description: 'Distinct field used when counting Juniper Support Insight inventory
+        records. enum: `account_id`, `claimed`, `has_support`, `eol_time`, `eos_time`,
+        `version_time`, `model`, `sku`, `status`, `type`, `version`, `warranty_type`'
       enum:
       - account_id
       - claimed
@@ -78129,8 +78108,7 @@ components:
       type: object
     jsi_pbn_search:
       additionalProperties: false
-      description: Juniper Security Intelligence PBN search response with result
-        metadata
+      description: Juniper Security Intelligence PBN search response with result metadata
       properties:
         end:
           description: Upper bound timestamp for the PBN search window
@@ -78228,12 +78206,12 @@ components:
           type: integer
       type: object
     jsi_warranty_type:
-      description: >-
-        Warranty type label for Juniper Support Insight (JSI) devices. enum: `Standard Hardware
-        Warranty`, `Enhanced Hardware Warranty`, `Dead On Arrival Warranty`, `Limited Lifetime
-        Warranty`, `Software Warranty`, `Limited Lifetime Warranty for WLA`, `Warranty-JCPO EOL
-        (DOA Not Included)`, `MIST Enhanced Hardware Warranty`, `MIST Standard Warranty`,
-        `Determine Lifetime warranty`
+      description: 'Warranty type label for Juniper Support Insight (JSI) devices.
+        enum: `Standard Hardware Warranty`, `Enhanced Hardware Warranty`, `Dead On
+        Arrival Warranty`, `Limited Lifetime Warranty`, `Software Warranty`, `Limited
+        Lifetime Warranty for WLA`, `Warranty-JCPO EOL (DOA Not Included)`, `MIST
+        Enhanced Hardware Warranty`, `MIST Standard Warranty`, `Determine Lifetime
+        warranty`'
       enum:
       - Standard Hardware Warranty
       - Enhanced Hardware Warranty
@@ -79438,8 +79416,7 @@ components:
       - vendor_name
       type: object
     map_import_json_vendor_name:
-      description: >-
-        Map import vendor for the uploaded JSON. enum: `ekahau`, `ibwave`
+      description: 'Map import vendor for the uploaded JSON. enum: `ekahau`, `ibwave`'
       enum:
       - ekahau
       - ibwave
@@ -79638,8 +79615,7 @@ components:
       - vendor_name
       type: object
     map_org_import_file_json_vendor_name:
-      description: >-
-        Map import vendor for the uploaded file. enum: `ekahau`, `ibwave`
+      description: 'Map import vendor for the uploaded file. enum: `ekahau`, `ibwave`'
       enum:
       - ekahau
       - ibwave
@@ -79757,8 +79733,7 @@ components:
       type: array
     map_type:
       default: image
-      description: >-
-        Map type, such as `image` or `google`. enum: `google`, `image`
+      description: 'Map type, such as `image` or `google`. enum: `google`, `image`'
       enum:
       - google
       - image
@@ -80040,8 +80015,7 @@ components:
       type: object
     mfa_secret_type:
       default: qrcode
-      description: >-
-        MFA secret representation format for enrollment. enum: `qrcode`
+      description: 'MFA secret representation format for enrollment. enum: `qrcode`'
       enum:
       - qrcode
       type: string
@@ -80430,8 +80404,8 @@ components:
       type: string
     msp_marvis_suggestions_count_distinct:
       default: org_id
-      description: >-
-        Distinct field used when counting MSP Marvis suggestions. enum: `org_id`, `status`
+      description: 'Distinct field used when counting MSP Marvis suggestions. enum:
+        `org_id`, `status`'
       enum:
       - org_id
       - status
@@ -80450,8 +80424,8 @@ components:
       - org_ids
       type: object
     msp_org_change_operation:
-      description: >-
-        Assignment operation to apply to the listed org IDs. enum: `assign`, `unassign`
+      description: 'Assignment operation to apply to the listed org IDs. enum: `assign`,
+        `unassign`'
       enum:
       - assign
       - unassign
@@ -80462,8 +80436,8 @@ components:
         type: string
       type: array
     msp_search_type:
-      description: >-
-        Search result type returned by MSP organization search. enum: `orgs`
+      description: 'Search result type returned by MSP organization search. enum:
+        `orgs`'
       enum:
       - orgs
       type: string
@@ -80477,8 +80451,7 @@ components:
       type: string
     msp_tier:
       default: base
-      description: >-
-        Service tier for the MSP account. enum: `advanced`, `base`
+      description: 'Service tier for the MSP account. enum: `advanced`, `base`'
       enum:
       - advanced
       - base
@@ -81267,9 +81240,8 @@ components:
       - stop
       type: string
     mxedge_service_name:
-      description: >-
-        Mist Edge service name. enum: `mxagent`, `mxdas`, `mxnacedge`, `mxocproxy`,
-        `radsecproxy`, `tunterm`
+      description: 'Mist Edge service name. enum: `mxagent`, `mxdas`, `mxnacedge`,
+        `mxocproxy`, `radsecproxy`, `tunterm`'
       enum:
       - mxagent
       - mxdas
@@ -81323,15 +81295,14 @@ components:
       type: array
     mxedge_tunterm_dhcpd_config_type:
       default: relay
-      description: >-
-        DHCP handling mode for this tunneled VLAN. enum: `relay`
+      description: 'DHCP handling mode for this tunneled VLAN. enum: `relay`'
       enum:
       - relay
       type: string
     mxedge_tunterm_dhcpd_type:
       default: relay
-      description: >-
-        DHCP handling mode for the global tunnel termination config. enum: `relay`
+      description: 'DHCP handling mode for the global tunnel termination config. enum:
+        `relay`'
       enum:
       - relay
       type: string
@@ -81910,8 +81881,8 @@ components:
       type: array
     mxtunnel_protocol:
       default: udp
-      description: >-
-        Encapsulation protocol used for Mist Tunnel traffic. enum: `ip`, `udp`
+      description: 'Encapsulation protocol used for Mist Tunnel traffic. enum: `ip`,
+        `udp`'
       enum:
       - ip
       - udp
@@ -82439,9 +82410,8 @@ components:
       type: array
     nac_portal_eap_type:
       default: wpa2
-      description: >-
-        EAP mode used when onboarding wireless clients through the NAC portal. enum: `wpa2`,
-        `wpa3`
+      description: 'EAP mode used when onboarding wireless clients through the NAC
+        portal. enum: `wpa2`, `wpa3`'
       enum:
       - wpa2
       - wpa3
@@ -82664,8 +82634,8 @@ components:
       - name
       type: object
     nac_rule_action:
-      description: >-
-        Allow or block decision applied when the NAC rule matches. enum: `allow`, `block`
+      description: 'Allow or block decision applied when the NAC rule matches. enum:
+        `allow`, `block`'
       enum:
       - allow
       - block
@@ -82759,8 +82729,7 @@ components:
         type: string
       type: array
     nac_rule_matching_port_type:
-      description: >-
-        Port attachment type matched by a NAC rule. enum: `wired`, `wireless`
+      description: 'Port attachment type matched by a NAC rule. enum: `wired`, `wireless`'
       enum:
       - wired
       - wireless
@@ -84475,8 +84444,8 @@ components:
           type: string
       type: object
     org_setting_auto_device_naming_rule_src:
-      description: >-
-        Device attribute used to generate the name. enum: `lldp_port_desc`, `mac`
+      description: 'Device attribute used to generate the name. enum: `lldp_port_desc`,
+        `mac`'
       enum:
       - lldp_port_desc
       - mac
@@ -84965,9 +84934,8 @@ components:
             fingerprints change
       type: object
     org_setting_mist_nac_fingerprinting_wireless_coa:
-      description: >-
-        Change of Authorization action sent to wireless clients when fingerprints change. enum:
-        `reauth`, `disconnect`
+      description: 'Change of Authorization action sent to wireless clients when fingerprints
+        change. enum: `reauth`, `disconnect`'
       enum:
       - reauth
       - disconnect
@@ -85535,8 +85503,8 @@ components:
       type: object
     org_tickets_count_distinct:
       default: status
-      description: >-
-        Distinct field used when counting organization tickets. enum: `status`, `type`
+      description: 'Distinct field used when counting organization tickets. enum:
+        `status`, `type`'
       enum:
       - status
       - type
@@ -85572,8 +85540,8 @@ components:
       type: string
     org_tunnel_type_count:
       default: wxtunnel
-      description: >-
-        Tunnel type used when counting organization tunnels. enum: `wan`, `wxtunnel`
+      description: 'Tunnel type used when counting organization tunnels. enum: `wan`,
+        `wxtunnel`'
       enum:
       - wan
       - wxtunnel
@@ -85628,8 +85596,7 @@ components:
         $ref: '#/components/schemas/org_ui_settings'
       type: array
     org_ui_settings_purpose:
-      description: >-
-        UI surface or purpose for this databoard. enum: `marvisdashboard`
+      description: 'UI surface or purpose for this databoard. enum: `marvisdashboard`'
       enum:
       - marvisdashboard
       type: string
@@ -86110,8 +86077,8 @@ components:
       - high
       type: string
     port_auth_state:
-      description: >-
-        Port authentication state. enum: `""`, `authenticated`, `authenticating`, `held`, `init`
+      description: 'Port authentication state. enum: `""`, `authenticated`, `authenticating`,
+        `held`, `init`'
       enum:
       - ''
       - authenticated
@@ -86120,9 +86087,8 @@ components:
       - init
       type: string
     port_stp_role:
-      description: >-
-        Spanning Tree Protocol role for the port. enum: `""`, `alternate`, `backup`,
-        `designated`, `disabled`, `root`, `root-prevented`
+      description: 'Spanning Tree Protocol role for the port. enum: `""`, `alternate`,
+        `backup`, `designated`, `disabled`, `root`, `root-prevented`'
       enum:
       - ''
       - alternate
@@ -86133,9 +86099,8 @@ components:
       - root-prevented
       type: string
     port_stp_state:
-      description: >-
-        Spanning Tree Protocol state for the port. enum: `""`, `blocking`, `disabled`,
-        `forwarding`, `learning`, `listening`
+      description: 'Spanning Tree Protocol state for the port. enum: `""`, `blocking`,
+        `disabled`, `forwarding`, `learning`, `listening`'
       enum:
       - ''
       - blocking
@@ -86281,8 +86246,7 @@ components:
           description: Trusted host or subnet entries allowed by the Protect RE policy
       type: object
     protect_re_allowed_service:
-      description: >-
-        Services allowed through protect-RE filters. enum: `icmp`, `ssh`
+      description: 'Services allowed through protect-RE filters. enum: `icmp`, `ssh`'
       enum:
       - icmp
       - ssh
@@ -86583,9 +86547,8 @@ components:
       type: object
     psk_portal_auth:
       default: sso
-      description: >-
-        Portal access method for guest authentication, either `sponsor` or `sso`. enum:
-        `sponsor`, `sso`
+      description: 'Portal access method for guest authentication, either `sponsor`
+        or `sso`. enum: `sponsor`, `sso`'
       enum:
       - sponsor
       - sso
@@ -87017,8 +86980,8 @@ components:
           type: string
       type: object
     radius_keywrap_format:
-      description: >-
-        Encoding format for RADIUS keywrap KEK and MACK values. enum: `ascii`, `hex`
+      description: 'Encoding format for RADIUS keywrap KEK and MACK values. enum:
+        `ascii`, `hex`'
       enum:
       - ascii
       - hex
@@ -87119,8 +87082,8 @@ components:
       type: array
       uniqueItems: true
     random_mac:
-      description: >-
-        Whether the client is using randomized MAC Address or not. enum: `true`, `false`
+      description: 'Whether the client is using randomized MAC Address or not. enum:
+        `true`, `false`'
       enum:
       - 'true'
       - 'false'
@@ -87398,8 +87361,8 @@ components:
       description: Syslog Service Port, value from 1 to 65535
     remote_syslog_server_protocol:
       default: udp
-      description: >-
-        Transport protocol used for this remote syslog server. enum: `tcp`, `udp`
+      description: 'Transport protocol used for this remote syslog server. enum: `tcp`,
+        `udp`'
       enum:
       - tcp
       - udp
@@ -87497,8 +87460,8 @@ components:
       type: array
     resolution:
       default: default
-      description: >-
-        Location resolution mode for map or placement calculations. enum: `default`, `fine`
+      description: 'Location resolution mode for map or placement calculations. enum:
+        `default`, `fine`'
       enum:
       - default
       - fine
@@ -87858,11 +87821,11 @@ components:
           description: Suggested zones awaiting review for the map
       type: object
     response_auto_zone_status:
-      description: >-
-        Status of auto-zone generation for a map. enum: `in_progress`, `awaiting_review`,
-        `not_started`, `error`. `not_started` means the service has not run or results were
-        cleared, `in_progress` means generation is active, `awaiting_review` means suggested
-        zones are ready for review, and `error` means generation failed
+      description: 'Status of auto-zone generation for a map. enum: `in_progress`,
+        `awaiting_review`, `not_started`, `error`. `not_started` means the service
+        has not run or results were cleared, `in_progress` means generation is active,
+        `awaiting_review` means suggested zones are ready for review, and `error`
+        means generation failed'
       enum:
       - in_progress
       - awaiting_review
@@ -93722,8 +93685,8 @@ components:
           type: integer
       type: object
     search_org_devices_mxtunnel_status:
-      description: >-
-        Mist Tunnel status filter for organization device search. enum: `down`, `up`
+      description: 'Mist Tunnel status filter for organization device search. enum:
+        `down`, `up`'
       enum:
       - down
       - up
@@ -93750,8 +93713,8 @@ components:
       - timestamp
       type: string
     search_site_devices_mxtunnel_status:
-      description: >-
-        Mist Tunnel status filter for site device search. enum: `down`, `up`
+      description: 'Mist Tunnel status filter for site device search. enum: `down`,
+        `up`'
       enum:
       - down
       - up
@@ -94567,8 +94530,7 @@ components:
           description: Sky ATP HTTP inspection profile to apply
       type: object
     service_policy_skyatp_http_inspection_profile:
-      description: >-
-        Sky ATP HTTP inspection profile to apply. enum: `standard`, `strict`
+      description: 'Sky ATP HTTP inspection profile to apply. enum: `standard`, `strict`'
       enum:
       - standard
       - strict
@@ -95390,8 +95352,8 @@ components:
         type: string
       type: array
     site_mxtunnel_protocol:
-      description: >-
-        Encapsulation protocol used for this additional Mist Tunnel. enum: `ip`, `udp`
+      description: 'Encapsulation protocol used for this additional Mist Tunnel. enum:
+        `ip`, `udp`'
       enum:
       - ip
       - udp
@@ -96575,8 +96537,7 @@ components:
       - switch
       type: string
     site_sle_impacted_aps_scope_parameters:
-      description: >-
-        Scope parameter value for impacted AP SLE queries. enum: `site`
+      description: 'Scope parameter value for impacted AP SLE queries. enum: `site`'
       enum:
       - site
       type: string
@@ -96595,8 +96556,8 @@ components:
       - switch
       type: string
     site_sle_impacted_gateways_scope_parameters:
-      description: >-
-        Scope parameter value for impacted gateway SLE queries. enum: `site`
+      description: 'Scope parameter value for impacted gateway SLE queries. enum:
+        `site`'
       enum:
       - site
       type: string
@@ -96608,14 +96569,13 @@ components:
       - switch
       type: string
     site_sle_impacted_switches_scope_parameters:
-      description: >-
-        Scope parameter value for impacted switch SLE queries. enum: `site`
+      description: 'Scope parameter value for impacted switch SLE queries. enum: `site`'
       enum:
       - site
       type: string
     site_sle_impacted_users_scope_parameter:
-      description: >-
-        Scope parameter value for impacted user SLE queries. enum: `ap`, `site`
+      description: 'Scope parameter value for impacted user SLE queries. enum: `ap`,
+        `site`'
       enum:
       - ap
       - site
@@ -96685,8 +96645,7 @@ components:
       type: array
     site_system_events_count_distinct:
       default: type
-      description: >-
-        Distinct field used when counting site system events. enum: `type`
+      description: 'Distinct field used when counting site system events. enum: `type`'
       enum:
       - type
       type: string
@@ -98394,8 +98353,7 @@ components:
       type: string
     snmp_config_engine_id_type:
       default: local
-      description: >-
-        Method used to derive the SNMP engine ID. enum: `local`, `use_mac_address`
+      description: 'Method used to derive the SNMP engine ID. enum: `local`, `use_mac_address`'
       enum:
       - local
       - use_mac_address
@@ -98516,8 +98474,8 @@ components:
           description: SNMPv3 USM users for this engine
       type: object
     snmp_usm_engine_type:
-      description: >-
-        SNMP engine type used for this USM configuration. enum: `local_engine`, `remote_engine`
+      description: 'SNMP engine type used for this USM configuration. enum: `local_engine`,
+        `remote_engine`'
       enum:
       - local_engine
       - remote_engine
@@ -98663,9 +98621,8 @@ components:
       - v2c
       type: string
     snmp_vacm_access_item_type:
-      description: >-
-        VACM context matching type for this access rule. enum: `context_prefix`,
-        `default_context_prefix`
+      description: 'VACM context matching type for this access rule. enum: `context_prefix`,
+        `default_context_prefix`'
       enum:
       - context_prefix
       - default_context_prefix
@@ -98782,9 +98739,8 @@ components:
             inform
       type: object
     snmpv3_config_notify_type:
-      description: >-
-        Delivery mode for this SNMPv3 notification, such as trap or inform. enum: `inform`,
-        `trap`
+      description: 'Delivery mode for this SNMPv3 notification, such as trap or inform.
+        enum: `inform`, `trap`'
       enum:
       - inform
       - trap
@@ -105140,8 +105096,8 @@ components:
       - action
       type: object
     stats_wxrule_action:
-      description: >-
-        Allow or block behavior enforced by this WxLAN rule. enum: `allow`, `block`
+      description: 'Allow or block behavior enforced by this WxLAN rule. enum: `allow`,
+        `block`'
       enum:
       - allow
       - block
@@ -105812,8 +105768,8 @@ components:
         type: string
       type: array
     switch_bgp_config_type:
-      description: >-
-        BGP session type for this switch BGP configuration. enum: `external`, `internal`
+      description: 'BGP session type for this switch BGP configuration. enum: `external`,
+        `internal`'
       enum:
       - external
       - internal
@@ -106110,15 +106066,14 @@ components:
       type: array
       uniqueItems: true
     switch_metric_scope:
-      description: >-
-        Scope level used when querying switch metrics. enum: `site`, `switch`
+      description: 'Scope level used when querying switch metrics. enum: `site`, `switch`'
       enum:
       - site
       - switch
       type: string
     switch_metric_type:
-      description: >-
-        Switch metric type requested for active port summaries. enum: `active_ports_summary`
+      description: 'Switch metric type requested for active port summaries. enum:
+        `active_ports_summary`'
       enum:
       - active_ports_summary
       type: string
@@ -107066,8 +107021,8 @@ components:
       type: object
     switch_radius_config_auth_server_selection:
       default: ordered
-      description: >-
-        Selection strategy for RADIUS authentication servers. enum: `ordered`, `unordered`
+      description: 'Selection strategy for RADIUS authentication servers. enum: `ordered`,
+        `unordered`'
       enum:
       - ordered
       - unordered
@@ -107297,8 +107252,8 @@ components:
       type: object
     synthetictest_config_aggressiveness:
       default: auto
-      description: >-
-        Aggressiveness level for a synthetic test. enum: `auto`, `high`, `med`, `low`
+      description: 'Aggressiveness level for a synthetic test. enum: `auto`, `high`,
+        `med`, `low`'
       enum:
       - auto
       - high
@@ -107606,8 +107561,7 @@ components:
           type: integer
       type: object
     synthetictest_protocol:
-      description: >-
-        Protocol used by a synthetic test probe. enum: `ping`, `traceroute`
+      description: 'Protocol used by a synthetic test probe. enum: `ping`, `traceroute`'
       enum:
       - ping
       - traceroute
@@ -108084,10 +108038,10 @@ components:
       readOnly: true
       type: array
     ticket_status:
-      description: >-
-        Ticket status. enum: `closed`, `open`, `pending`, `solved`. `open` means Mist is working
-        on it, `pending` means requester attention is needed, `solved` means Mist considers it
-        resolved but it can still be updated or rated, and `closed` means it is archived
+      description: 'Ticket status. enum: `closed`, `open`, `pending`, `solved`. `open`
+        means Mist is working on it, `pending` means requester attention is needed,
+        `solved` means Mist considers it resolved but it can still be updated or rated,
+        and `closed` means it is archived'
       enum:
       - closed
       - open
@@ -108447,19 +108401,17 @@ components:
         type: string
       type: array
     tunnel_config_auto_provision_provider:
-      description: >-
-        Tunnel provider used for automatic endpoint provisioning. enum: `jse-ipsec`,
-        `zscaler-ipsec`
+      description: 'Tunnel provider used for automatic endpoint provisioning. enum:
+        `jse-ipsec`, `zscaler-ipsec`'
       enum:
       - jse-ipsec
       - zscaler-ipsec
       type: string
     tunnel_config_dh_group:
       default: '14'
-      description: >-
-        Only if `provider`==`custom-ipsec`. Diffie-Hellman group for IPsec phase 2. enum: `1`,
-        `14`, `15`, `16`, `19`, `2`, `20`, `21`, `24`, `5`. `14` is the default 2048-bit group;
-        `19`, `20`, `21`, and `24` are ECP groups
+      description: 'Only if `provider`==`custom-ipsec`. Diffie-Hellman group for IPsec
+        phase 2. enum: `1`, `14`, `15`, `16`, `19`, `2`, `20`, `21`, `24`, `5`. `14`
+        is the default 2048-bit group; `19`, `20`, `21`, and `24` are ECP groups'
       enum:
       - '1'
       - '14'
@@ -108486,10 +108438,9 @@ components:
       - 'null'
     tunnel_config_ike_dh_group:
       default: '14'
-      description: >-
-        Diffie-Hellman group for IKE phase 1. enum: `1`, `14`, `15`, `16`, `19`, `2`, `20`,
-        `21`, `24`, `5`. `14` is the default 2048-bit group; `19`, `20`, `21`, and `24` are ECP
-        groups
+      description: 'Diffie-Hellman group for IKE phase 1. enum: `1`, `14`, `15`, `16`,
+        `19`, `2`, `20`, `21`, `24`, `5`. `14` is the default 2048-bit group; `19`,
+        `20`, `21`, and `24` are ECP groups'
       enum:
       - '1'
       - '14'
@@ -108625,8 +108576,8 @@ components:
       type: object
     tunnel_config_probe_type:
       default: icmp
-      description: >-
-        Protocol used by the custom IPsec tunnel health probe. enum: `http`, `icmp`
+      description: 'Protocol used by the custom IPsec tunnel health probe. enum: `http`,
+        `icmp`'
       enum:
       - http
       - icmp
@@ -108670,8 +108621,7 @@ components:
       - '2'
       type: string
     tunnel_priority:
-      description: >-
-        Relative preference assigned to the tunnel. enum: `primary`, `secondary`
+      description: 'Relative preference assigned to the tunnel. enum: `primary`, `secondary`'
       enum:
       - primary
       - secondary
@@ -108897,8 +108847,8 @@ components:
       type: object
     tunnel_type:
       default: wxtunnel
-      description: >-
-        Tunnel category, either WAN tunnel or WxLAN tunnel. enum: `wan`, `wxtunnel`
+      description: 'Tunnel category, either WAN tunnel or WxLAN tunnel. enum: `wan`,
+        `wxtunnel`'
       enum:
       - wan
       - wxtunnel
@@ -108945,8 +108895,7 @@ components:
       type: object
     tunterm_dhcpd_type:
       default: relay
-      description: >-
-        DHCP handling mode for tunnel termination. enum: `relay`
+      description: 'DHCP handling mode for tunnel termination. enum: `relay`'
       enum:
       - relay
       type: string
@@ -109895,8 +109844,7 @@ components:
           type: string
       type: object
     upgrade_org_devices_version_firmware_type:
-      description: >-
-        Firmware family this version entry applies to. enum: `ap`, `junos`
+      description: 'Firmware family this version entry applies to. enum: `ap`, `junos`'
       enum:
       - ap
       - junos
@@ -110422,9 +110370,8 @@ components:
         type: string
       type: array
     utils_devices_restart_node:
-      description: >-
-        only for SRX/SSR: if node is not present, both nodes are restarted. For other devices:
-        node should not be present. enum: `node0`, `node1`
+      description: 'only for SRX/SSR: if node is not present, both nodes are restarted.
+        For other devices: node should not be present. enum: `node0`, `node1`'
       enum:
       - node0
       - node1
@@ -111082,8 +111029,8 @@ components:
         type: string
       type: array
     var_source:
-      description: >-
-        Source level where a variable is defined. enum: `deviceprofile`, `site`
+      description: 'Source level where a variable is defined. enum: `deviceprofile`,
+        `site`'
       enum:
       - deviceprofile
       - site
@@ -111351,8 +111298,8 @@ components:
       type: array
       uniqueItems: true
     virtual_chassis_port_operation:
-      description: >-
-        Action to perform on the specified Virtual Chassis ports. enum: `delete`, `set`
+      description: 'Action to perform on the specified Virtual Chassis ports. enum:
+        `delete`, `set`'
       enum:
       - delete
       - set
@@ -111452,8 +111399,7 @@ components:
       type: object
     vpn_mode:
       default: hub_spoke
-      description: >-
-        VPN topology mode for this configuration. enum: `hub_spoke`, `mesh`
+      description: 'VPN topology mode for this configuration. enum: `hub_spoke`, `mesh`'
       enum:
       - hub_spoke
       - mesh
@@ -111490,8 +111436,7 @@ components:
       type: object
     vpn_path_bfd_profile:
       default: broadband
-      description: >-
-        BFD profile used for this VPN path. enum: `broadband`, `lte`
+      description: 'BFD profile used for this VPN path. enum: `broadband`, `lte`'
       enum:
       - broadband
       - lte
@@ -111675,8 +111620,7 @@ components:
       type: array
       uniqueItems: true
     vpn_type:
-      description: >-
-        VPN type for tunnel or peer configuration. enum: `ipsec`, `svr`
+      description: 'VPN type for tunnel or peer configuration. enum: `ipsec`, `svr`'
       enum:
       - ipsec
       - svr
@@ -111780,8 +111724,7 @@ components:
       type: object
     vrrp_group_auth_type:
       default: md5
-      description: >-
-        Authentication method used by the VRRP group. enum: `md5`, `simple`
+      description: 'Authentication method used by the VRRP group. enum: `md5`, `simple`'
       enum:
       - md5
       - simple
@@ -111850,8 +111793,7 @@ components:
           type: string
       type: object
     wan_tunnel_protocol:
-      description: >-
-        Tunnel protocol used for the connection. enum: `gre`, `ipsec`
+      description: 'Tunnel protocol used for the connection. enum: `gre`, `ipsec`'
       enum:
       - gre
       - ipsec
@@ -112142,8 +112084,7 @@ components:
       type: array
       uniqueItems: true
     webhook_alarms_topic:
-      description: >-
-        Webhook topic name for alarm event deliveries. enum: `alarms`
+      description: 'Webhook topic name for alarm event deliveries. enum: `alarms`'
       enum:
       - alarms
       type: string
@@ -112271,8 +112212,7 @@ components:
       type: array
       uniqueItems: true
     webhook_asset_raw_rssi_topic:
-      description: >-
-        Webhook topic name for asset raw RSSI deliveries. enum: `asset-raw-rssi`
+      description: 'Webhook topic name for asset raw RSSI deliveries. enum: `asset-raw-rssi`'
       enum:
       - asset-raw-rssi
       type: string
@@ -112299,8 +112239,7 @@ components:
       - topic
       type: object
     webhook_audits_topic:
-      description: >-
-        Webhook topic name for audit event deliveries. enum: `audits`
+      description: 'Webhook topic name for audit event deliveries. enum: `audits`'
       enum:
       - audits
       type: string
@@ -112348,8 +112287,7 @@ components:
         $ref: '#/components/schemas/webhook_client_info_event'
       type: array
     webhook_client_info_topic:
-      description: >-
-        Webhook topic name for client information deliveries. enum: `client-info`
+      description: 'Webhook topic name for client information deliveries. enum: `client-info`'
       enum:
       - client-info
       type: string
@@ -112443,8 +112381,7 @@ components:
       type: array
       uniqueItems: true
     webhook_client_join_topic:
-      description: >-
-        Webhook topic name for client join deliveries. enum: `client-join`
+      description: 'Webhook topic name for client join deliveries. enum: `client-join`'
       enum:
       - client-join
       type: string
@@ -112529,8 +112466,7 @@ components:
         $ref: '#/components/schemas/webhook_client_latency_event'
       type: array
     webhook_client_latency_topic:
-      description: >-
-        Webhook topic name for client latency deliveries. enum: `client-latency`
+      description: 'Webhook topic name for client latency deliveries. enum: `client-latency`'
       enum:
       - client-latency
       type: string
@@ -112665,8 +112601,7 @@ components:
       type: array
       uniqueItems: true
     webhook_client_sessions_topic:
-      description: >-
-        Webhook topic name for client session deliveries. enum: `client-sessions`
+      description: 'Webhook topic name for client session deliveries. enum: `client-sessions`'
       enum:
       - client-sessions
       type: string
@@ -112792,8 +112727,7 @@ components:
       - warn
       type: string
     webhook_device_events_topic:
-      description: >-
-        Webhook topic name for device event deliveries. enum: `device-events`
+      description: 'Webhook topic name for device event deliveries. enum: `device-events`'
       enum:
       - device-events
       type: string
@@ -112864,8 +112798,7 @@ components:
       type: array
       uniqueItems: true
     webhook_device_updowns_topic:
-      description: >-
-        Webhook topic name for device up/down deliveries. enum: `device-updowns`
+      description: 'Webhook topic name for device up/down deliveries. enum: `device-updowns`'
       enum:
       - device-updowns
       type: string
@@ -112961,8 +112894,7 @@ components:
         $ref: '#/components/schemas/webhook_discovered_raw_rssi_event'
       type: array
     webhook_discovered_raw_rssi_topic:
-      description: >-
-        Webhook topic name for discovered raw RSSI deliveries. enum: `discovered-raw-rssi`
+      description: 'Webhook topic name for discovered raw RSSI deliveries. enum: `discovered-raw-rssi`'
       enum:
       - discovered-raw-rssi
       type: string
@@ -113086,8 +113018,7 @@ components:
         $ref: '#/components/schemas/webhook_guest_authorizations_event'
       type: array
     webhook_guest_authorizations_topic:
-      description: >-
-        Webhook topic name for guest authorization deliveries. enum: `guest-authorizations`
+      description: 'Webhook topic name for guest authorization deliveries. enum: `guest-authorizations`'
       enum:
       - guest-authorizations
       type: string
@@ -113204,8 +113135,7 @@ components:
         $ref: '#/components/schemas/webhook_location_asset_event'
       type: array
     webhook_location_asset_topic:
-      description: >-
-        Webhook topic name for asset location deliveries. enum: `location-asset`
+      description: 'Webhook topic name for asset location deliveries. enum: `location-asset`'
       enum:
       - location-asset
       type: string
@@ -113264,8 +113194,7 @@ components:
           type: number
       type: object
     webhook_location_centrak_event_type:
-      description: >-
-        Location object type for CenTrak Wi-Fi beacon events. enum: `wifi`
+      description: 'Location object type for CenTrak Wi-Fi beacon events. enum: `wifi`'
       enum:
       - wifi
       type: string
@@ -113277,8 +113206,7 @@ components:
       type: array
       uniqueItems: true
     webhook_location_centrak_topic:
-      description: >-
-        Webhook topic name for CenTrak location deliveries. enum: `location-centrak`
+      description: 'Webhook topic name for CenTrak location deliveries. enum: `location-centrak`'
       enum:
       - location-centrak
       type: string
@@ -113346,8 +113274,8 @@ components:
         $ref: '#/components/schemas/webhook_location_client_event'
       type: array
     webhook_location_client_topic:
-      description: >-
-        Webhook topic name for connected client location deliveries. enum: `location-client`
+      description: 'Webhook topic name for connected client location deliveries. enum:
+        `location-client`'
       enum:
       - location-client
       type: string
@@ -113497,14 +113425,12 @@ components:
         $ref: '#/components/schemas/webhook_location_sdk_event'
       type: array
     webhook_location_sdk_topic:
-      description: >-
-        Webhook topic name for SDK client location deliveries. enum: `location-sdk`
+      description: 'Webhook topic name for SDK client location deliveries. enum: `location-sdk`'
       enum:
       - location-sdk
       type: string
     webhook_location_topic:
-      description: >-
-        Webhook topic name for generic location deliveries. enum: `location`
+      description: 'Webhook topic name for generic location deliveries. enum: `location`'
       enum:
       - location
       type: string
@@ -113573,8 +113499,8 @@ components:
         $ref: '#/components/schemas/webhook_location_unclient_event'
       type: array
     webhook_location_unclient_topic:
-      description: >-
-        Webhook topic name for unconnected client location deliveries. enum: `location-unclient`
+      description: 'Webhook topic name for unconnected client location deliveries.
+        enum: `location-unclient`'
       enum:
       - location-unclient
       type: string
@@ -113646,8 +113572,8 @@ components:
         $ref: '#/components/schemas/webhook_minis_application_event'
       type: array
     webhook_minis_application_topic:
-      description: >-
-        Webhook topic name for Minis application test deliveries. enum: `minis-application`
+      description: 'Webhook topic name for Minis application test deliveries. enum:
+        `minis-application`'
       enum:
       - minis-application
       type: string
@@ -113737,14 +113663,13 @@ components:
         $ref: '#/components/schemas/webhook_minis_reachability_event'
       type: array
     webhook_minis_reachability_topic:
-      description: >-
-        Webhook topic name for Minis reachability test deliveries. enum: `minis-reachability`
+      description: 'Webhook topic name for Minis reachability test deliveries. enum:
+        `minis-reachability`'
       enum:
       - minis-reachability
       type: string
     webhook_mxedge_event_topic:
-      description: >-
-        Webhook topic name for Mist Edge event deliveries. enum: `mxedge-events`
+      description: 'Webhook topic name for Mist Edge event deliveries. enum: `mxedge-events`'
       enum:
       - mxedge-events
       type: string
@@ -113848,8 +113773,7 @@ components:
         $ref: '#/components/schemas/webhook_nac_accounting_event'
       type: array
     webhook_nac_accounting_topic:
-      description: >-
-        Webhook topic name for NAC accounting deliveries. enum: `nac-accounting`
+      description: 'Webhook topic name for NAC accounting deliveries. enum: `nac-accounting`'
       enum:
       - nac-accounting
       type: string
@@ -113865,8 +113789,7 @@ components:
           description: Webhook topic name for NAC event deliveries
       type: object
     webhook_nac_events_topic:
-      description: >-
-        Webhook topic name for NAC event deliveries. enum: `nac-events`
+      description: 'Webhook topic name for NAC event deliveries. enum: `nac-events`'
       enum:
       - nac-events
       type: string
@@ -113883,9 +113806,8 @@ components:
         type: string
       type: array
     webhook_occupancy_alert_type:
-      description: >-
-        Occupancy compliance state reported for the zone. enum: `COMPLIANCE-OK`,
-        `COMPLIANCE-VIOLATION`
+      description: 'Occupancy compliance state reported for the zone. enum: `COMPLIANCE-OK`,
+        `COMPLIANCE-VIOLATION`'
       enum:
       - COMPLIANCE-OK
       - COMPLIANCE-VIOLATION
@@ -113985,8 +113907,7 @@ components:
       type: array
       uniqueItems: true
     webhook_occupancy_alerts_topic:
-      description: >-
-        Webhook topic name for occupancy alert deliveries. enum: `occupancy-alerts`
+      description: 'Webhook topic name for occupancy alert deliveries. enum: `occupancy-alerts`'
       enum:
       - occupancy-alerts
       type: string
@@ -114038,8 +113959,7 @@ components:
       type: array
       uniqueItems: true
     webhook_ping_topic:
-      description: >-
-        Webhook topic name for ping deliveries. enum: `ping`
+      description: 'Webhook topic name for ping deliveries. enum: `ping`'
       enum:
       - ping
       type: string
@@ -114101,8 +114021,7 @@ components:
       type: array
       uniqueItems: true
     webhook_rssizone_topic:
-      description: >-
-        Webhook topic name for RSSI zone event deliveries. enum: `rssizone`
+      description: 'Webhook topic name for RSSI zone event deliveries. enum: `rssizone`'
       enum:
       - rssizone
       type: string
@@ -114214,8 +114133,8 @@ components:
       type: array
       uniqueItems: true
     webhook_sdkclient_scan_data_topic:
-      description: >-
-        Webhook topic name for SDK client scan data deliveries. enum: `sdkclient-scan-data`
+      description: 'Webhook topic name for SDK client scan data deliveries. enum:
+        `sdkclient-scan-data`'
       enum:
       - sdkclient-scan-data
       type: string
@@ -114276,8 +114195,7 @@ components:
         $ref: '#/components/schemas/webhook_site_sle_event'
       type: array
     webhook_site_sle_topic:
-      description: >-
-        Webhook topic name for site SLE score deliveries. enum: `site-sle`
+      description: 'Webhook topic name for site SLE score deliveries. enum: `site-sle`'
       enum:
       - site-sle
       type: string
@@ -114410,8 +114328,8 @@ components:
       type: array
       uniqueItems: true
     webhook_wifi_conn_raw_topic:
-      description: >-
-        Webhook topic name for connected Wi-Fi raw packet deliveries. enum: `wifi-conn-raw`
+      description: 'Webhook topic name for connected Wi-Fi raw packet deliveries.
+        enum: `wifi-conn-raw`'
       enum:
       - wifi-conn-raw
       type: string
@@ -114505,8 +114423,8 @@ components:
       type: array
       uniqueItems: true
     webhook_wifi_unconn_raw_topic:
-      description: >-
-        Webhook topic name for unconnected Wi-Fi raw packet deliveries. enum: `wifi-unconn-raw`
+      description: 'Webhook topic name for unconnected Wi-Fi raw packet deliveries.
+        enum: `wifi-unconn-raw`'
       enum:
       - wifi-unconn-raw
       type: string
@@ -114571,8 +114489,8 @@ components:
       - zone_id
       type: object
     webhook_zone_event_trigger:
-      description: >-
-        Zone transition direction, either enter or exit. enum: `enter`, `exit`
+      description: 'Zone transition direction, either enter or exit. enum: `enter`,
+        `exit`'
       enum:
       - enter
       - exit
@@ -114592,8 +114510,7 @@ components:
       type: array
       uniqueItems: true
     webhook_zone_topic:
-      description: >-
-        Webhook topic name for zone transition deliveries. enum: `zone`
+      description: 'Webhook topic name for zone transition deliveries. enum: `zone`'
       enum:
       - zone
       type: string
@@ -118377,8 +118294,7 @@ components:
           type: boolean
       type: object
     wxlan_tunnel_session_ethertype:
-      description: >-
-        Frame type carried by this tunnel session. enum: `ethernet`, `vlan`
+      description: 'Frame type carried by this tunnel session. enum: `ethernet`, `vlan`'
       enum:
       - ethernet
       - vlan
@@ -118475,8 +118391,8 @@ components:
       - zone
       type: string
     zone_type:
-      description: >-
-        Zone collection type, either regular zones or RSSI zones. enum: `rssizones`, `zones`
+      description: 'Zone collection type, either regular zones or RSSI zones. enum:
+        `rssizones`, `zones`'
       enum:
       - rssizones
       - zones
