@@ -85686,29 +85686,36 @@ components:
           type: string
       type: object
     other_device_update:
+      description: Manual site association update for one other device
       properties:
         device_mac:
+          description: Other-device MAC address to associate with a site
           type: string
         site_id:
+          description: Site ID to associate with the other device
           examples:
           - 43e9c864-a7e4-4310-8031-d9817d2c5a43
           format: uuid
           type: string
       type: object
     other_device_update_multi:
+      description: Bulk site assignment update for other devices
       properties:
         macs:
           $ref: '#/components/schemas/other_device_update_multi_macs'
+          description: Other-device MAC addresses included in the bulk update
         op:
           $ref: '#/components/schemas/other_device_update_operation'
+          description: Action to perform on the other devices
         site_id:
+          description: Site ID used when assigning other devices
           format: uuid
           type: string
       required:
       - op
       type: object
     other_device_update_multi_macs:
-      description: MAC address of the peer device.
+      description: Other-device MAC addresses included in the bulk update
       items:
         type: string
       type: array
@@ -85719,8 +85726,10 @@ components:
       - unassign
       type: string
     pcap_bucket:
+      description: Request to configure a custom packet capture bucket
       properties:
         bucket:
+          description: Customer bucket name to use for packet capture files
           examples:
           - company-private-pcap
           type: string
@@ -85728,12 +85737,15 @@ components:
       - bucket
       type: object
     pcap_bucket_verify:
+      description: Request to verify ownership of a custom packet capture bucket
       properties:
         bucket:
+          description: Customer bucket name being verified for packet capture storage
           examples:
           - company-private-pcap
           type: string
         verify_token:
+          description: Token read from the MIST_TOKEN file written during bucket setup
           examples:
           - eyJhbGciOiJIUzI1J9.eyJzdWIiOiIxMjM0joiMjgxOG5MDIyfQ.2rzcRvMA3Eg09NnjCAC-1EWMRtxAnFDM
           type: string
