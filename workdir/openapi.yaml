@@ -89009,39 +89009,50 @@ components:
       uniqueItems: true
     response_inventory:
       additionalProperties: false
+      description: Result of adding device claim codes to organization inventory
       properties:
         added:
+          description: Claim codes accepted into organization inventory
           $ref: '#/components/schemas/response_inventory_added'
         duplicated:
+          description: Claim codes already present in organization inventory
           $ref: '#/components/schemas/response_inventory_duplicated'
         error:
+          description: Claim codes rejected by the inventory add operation
           $ref: '#/components/schemas/response_inventory_error'
         inventory_added:
+          description: Detailed inventory records added by the claim operation
           $ref: '#/components/schemas/response_inventory_inventory_added'
         inventory_duplicated:
+          description: Detailed inventory records already present during the claim operation
           $ref: '#/components/schemas/response_inventory_inventory_duplicated'
         reason:
+          description: Error reasons for claim codes that could not be added
           $ref: '#/components/schemas/strings'
       type: object
     response_inventory_added:
+      description: Claim codes accepted into organization inventory
       items:
         examples:
         - 6JG8E-PTFV2-A9Z2N
         type: string
       type: array
     response_inventory_duplicated:
+      description: Claim codes already present in organization inventory
       items:
         examples:
         - DVH4V-SNMSZ-PDXBR
         type: string
       type: array
     response_inventory_error:
+      description: Claim codes rejected by the inventory add operation
       items:
         examples:
         - PO1025335ohoh
         type: string
       type: array
     response_inventory_inventory_added:
+      description: Detailed inventory records added by the claim operation
       items:
         $ref: '#/components/schemas/response_inventory_inventory_added_items'
       minItems: 1
@@ -89049,24 +89060,30 @@ components:
       uniqueItems: true
     response_inventory_inventory_added_items:
       additionalProperties: false
+      description: Inventory device added by the claim operation
       properties:
         mac:
+          description: Device MAC address for the claimed inventory item
           examples:
           - 5c5b35000018
           type: string
         magic:
+          description: Activation code or claim code associated with the inventory item
           examples:
           - 6JG8EPTFV2A9Z2N
           type: string
         model:
+          description: Device model for the claimed inventory item
           examples:
           - AP41
           type: string
         serial:
+          description: Device serial number for the claimed inventory item
           examples:
           - FXLH2015150025
           type: string
         type:
+          description: Device type for the claimed inventory item
           examples:
           - ap
           type: string
@@ -89078,30 +89095,37 @@ components:
       - type
       type: object
     response_inventory_inventory_duplicated:
+      description: Detailed inventory records already present during the claim operation
       items:
         $ref: '#/components/schemas/response_inventory_inventory_duplicated_items'
       type: array
       uniqueItems: true
     response_inventory_inventory_duplicated_items:
       additionalProperties: false
+      description: Inventory device already present during the claim operation
       properties:
         mac:
+          description: Device MAC address for the duplicate inventory item
           examples:
           - 5c5b35000012
           type: string
         magic:
+          description: Activation code or claim code associated with the duplicate inventory item
           examples:
           - DVH4VSNMSZPDXBR
           type: string
         model:
+          description: Device model for the duplicate inventory item
           examples:
           - AP41
           type: string
         serial:
+          description: Device serial number for the duplicate inventory item
           examples:
           - FXLH2015150027
           type: string
         type:
+          description: Device type for the duplicate inventory item
           examples:
           - ap
           type: string
