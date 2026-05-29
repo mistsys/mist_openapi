@@ -103237,64 +103237,84 @@ components:
       type: object
     stats_switch_ap_redundancy:
       additionalProperties: false
+      description: AP switch redundancy coverage summary for a switch
       properties:
         modules:
           additionalProperties:
             $ref: '#/components/schemas/stats_switch_ap_redundancy_module'
-          description: For a VC / stacked switches.
+          description: Per-module AP redundancy counts for VC or stacked switches
           type: object
         num_aps:
+          description: Total number of APs considered for switch redundancy
           examples:
           - 15
           type: integer
         num_aps_with_switch_redundancy:
+          description: Number of APs that have switch redundancy coverage
           examples:
           - 8
           type: integer
       type: object
     stats_switch_ap_redundancy_module:
       additionalProperties: false
+      description: AP switch redundancy counts for one VC or stack member
       properties:
         num_aps:
+          description: Total number of APs connected through this switch member
           examples:
           - 15
           type: integer
         num_aps_with_switch_redundancy:
+          description: Number of APs on this switch member with switch redundancy
+            coverage
           examples:
           - 8
           type: integer
       type: object
     stats_switch_client_item:
       additionalProperties: false
+      description: Client observed on a switch port in switch statistics
       properties:
         device_mac:
+          description: Switch MAC address for the device reporting this client entry
           type: string
         hostname:
+          description: Reported client hostname, when known
           type: string
         mac:
+          description: Client MAC address observed on the switch port
           type: string
         port_id:
+          description: Switch port identifier where the client was observed
           type: string
       type: object
     stats_switch_clients:
+      description: Clients observed on switch ports in switch statistics
       items:
         $ref: '#/components/schemas/stats_switch_client_item'
       type: array
     stats_switch_clients_stats:
       additionalProperties: false
+      description: Aggregate switch client counts
       properties:
         total:
+          description: Aggregate client counts across the switch
           $ref: '#/components/schemas/stats_switch_clients_stats_total'
       type: object
     stats_switch_clients_stats_total:
       additionalProperties: false
+      description: Total AP and wired-client counts for switch client statistics
       properties:
         num_aps:
+          description: AP counts included in the aggregate switch client statistics
           $ref: '#/components/schemas/stats_switch_clients_stats_total_total_num_aps'
         num_wired_clients:
+          description: Number of wired clients included in the aggregate switch client
+            statistics
           type: integer
       type: object
     stats_switch_clients_stats_total_total_num_aps:
+      description: AP count values included in the aggregate switch client statistics
       items:
         type: integer
       type: array
