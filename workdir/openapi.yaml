@@ -84954,44 +84954,60 @@ components:
       type: string
     org_site_sle_wan_result:
       additionalProperties: false
+      description: WAN SLE scores and counts for one site
       properties:
         application_health:
+          description: Application health SLE score for this site
           type: number
         gateway-health:
+          description: Gateway health SLE score for this site
           type: number
         num_clients:
+          description: Number of WAN clients included in this site result
           type: number
         num_gateways:
+          description: Number of gateways included in this site result
           type: number
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site associated with this WAN SLE result
         wan-link-health:
+          description: WAN link health SLE score for this site
           type: number
       required:
       - site_id
       - gateway-health
       type: object
     org_site_sle_wan_results:
+      description: WAN SLE results returned for organization sites
       items:
         $ref: '#/components/schemas/org_site_sle_wan_result'
       type: array
       uniqueItems: true
     org_site_sle_wifi:
       additionalProperties: false
+      description: Paginated Wi-Fi SLE results for organization sites
       properties:
         end:
+          description: Query end timestamp for the returned SLE window
           type: number
         interval:
+          description: Aggregation interval, in seconds, used for the SLE query
           type: integer
         limit:
+          description: Maximum number of site results returned per page
           type: integer
         page:
+          description: Result page number returned by the query
           type: integer
         results:
           $ref: '#/components/schemas/org_site_sle_wifi_results'
+          description: Wi-Fi SLE results for the current page
         start:
+          description: Query start timestamp for the returned SLE window
           type: number
         total:
+          description: Number of matching site results available for the query
           type: integer
       required:
       - start
@@ -85004,78 +85020,107 @@ components:
       type: object
     org_site_sle_wifi_result:
       additionalProperties: false
+      description: Wi-Fi SLE scores and counts for one site
       properties:
         ap-availability:
+          description: AP availability SLE score for this site
           type: number
         ap-health:
+          description: AP health SLE score for this site
           type: number
         capacity:
+          description: Wi-Fi capacity SLE score for this site
           type: number
         coverage:
+          description: Wi-Fi coverage SLE score for this site
           type: number
         num_aps:
+          description: Number of APs included in this site result
           type: number
         num_clients:
+          description: Number of Wi-Fi clients included in this site result
           type: number
         roaming:
+          description: Wi-Fi roaming SLE score for this site
           type: number
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site associated with this Wi-Fi SLE result
         successful-connect:
+          description: Successful connection SLE score for this site
           type: number
         throughput:
+          description: Wi-Fi throughput SLE score for this site
           type: number
         time-to-connect:
+          description: Client connection-time SLE score for this site
           type: number
       required:
       - site_id
       - ap-availability
       type: object
     org_site_sle_wifi_results:
+      description: Wi-Fi SLE results returned for organization sites
       items:
         $ref: '#/components/schemas/org_site_sle_wifi_result'
       type: array
       uniqueItems: true
     org_site_sle_wired_result:
       additionalProperties: false
+      description: Wired SLE scores and counts for one site
       properties:
         num_clients:
+          description: Number of wired clients included in this site result
           type: number
         num_switches:
+          description: Number of switches included in this site result
           type: number
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site associated with this wired SLE result
         switch-bandwidth:
+          description: Switch bandwidth SLE score for this site
           type: number
         switch-health:
+          description: Switch health SLE score for this site
           type: number
         switch-throughput:
+          description: Switch throughput SLE score for this site
           type: number
       required:
       - site_id
       - switch-health
       type: object
     org_site_sle_wired_results:
+      description: Wired SLE results returned for organization sites
       items:
         $ref: '#/components/schemas/org_site_sle_wired_result'
       type: array
       uniqueItems: true
     org_site_wan_wifi:
       additionalProperties: false
+      description: Paginated WAN SLE results for organization sites
       properties:
         end:
+          description: Query end timestamp for the returned SLE window
           type: number
         interval:
+          description: Aggregation interval, in seconds, used for the SLE query
           type: integer
         limit:
+          description: Maximum number of site results returned per page
           type: integer
         page:
+          description: Result page number returned by the query
           type: integer
         results:
           $ref: '#/components/schemas/org_site_sle_wan_results'
+          description: WAN SLE results for the current page
         start:
+          description: Query start timestamp for the returned SLE window
           type: number
         total:
+          description: Number of matching site results available for the query
           type: integer
       required:
       - start
@@ -85088,20 +85133,28 @@ components:
       type: object
     org_site_wired_wifi:
       additionalProperties: false
+      description: Paginated wired SLE results for organization sites
       properties:
         end:
+          description: Query end timestamp for the returned SLE window
           type: number
         interval:
+          description: Aggregation interval, in seconds, used for the SLE query
           type: integer
         limit:
+          description: Maximum number of site results returned per page
           type: integer
         page:
+          description: Result page number returned by the query
           type: integer
         results:
           $ref: '#/components/schemas/org_site_sle_wired_results'
+          description: Wired SLE results for the current page
         start:
+          description: Query start timestamp for the returned SLE window
           type: number
         total:
+          description: Number of matching site results available for the query
           type: integer
       required:
       - start
