@@ -109319,15 +109319,19 @@ components:
       type: array
       uniqueItems: true
     use_auto_ap_values:
+      description: Request to accept or reject cached AP placement or orientation
+        values on a map
       properties:
         accept:
           default: false
-          description: If accept is true, accepts placement for devices in list otherwise.
-            If false, reject for devices in list.
+          description: Whether to accept cached values; false rejects them for the
+            selected APs
           type: boolean
         for:
+          description: Localization value type to accept or reject
           $ref: '#/components/schemas/use_auto_ap_values_for'
         macs:
+          description: AP MAC addresses whose cached values are accepted or rejected
           $ref: '#/components/schemas/use_auto_ap_values_macs'
       type: object
     use_auto_ap_values_for:
@@ -109339,8 +109343,8 @@ components:
       - placement
       type: string
     use_auto_ap_values_macs:
-      description: A list of macs to accept/reject. If a list is not provided the
-        API will accept/reject for the full map.
+      description: AP MAC addresses to accept or reject. If omitted, the API applies
+        the decision to the full map.
       items:
         type: string
       type: array
