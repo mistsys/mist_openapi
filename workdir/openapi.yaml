@@ -104894,54 +104894,73 @@ components:
     sw_routing_policies:
       additionalProperties:
         $ref: '#/components/schemas/sw_routing_policy'
-      description: Property key is the routing policy name
+      description: Switch routing policies keyed by routing policy name
       type: object
     sw_routing_policy:
       additionalProperties: false
+      description: Switch routing policy made of ordered match-action terms
       properties:
         terms:
+          description: Ordered terms evaluated by this switch routing policy
           $ref: '#/components/schemas/sw_routing_policy_terms'
       type: object
     sw_routing_policy_term:
       additionalProperties: false
+      description: Switch routing policy term with match criteria and actions
       properties:
         actions:
+          description: Policy actions applied when this routing policy term matches
           $ref: '#/components/schemas/sw_routing_policy_term_action'
         matching:
+          description: Route match criteria that must be satisfied before actions
+            are applied
           $ref: '#/components/schemas/sw_routing_policy_term_matching'
         name:
+          description: Display name of the switch routing policy term
           type: string
       required:
       - name
       type: object
     sw_routing_policy_term_action:
       additionalProperties: false
-      description: When used as import policy
+      description: Actions applied to routes matched by a switch routing policy term
       properties:
         accept:
+          description: Whether to accept routes that match this term
           type: boolean
         community:
+          description: BGP communities to set when this term is used as an export
+            policy
           $ref: '#/components/schemas/routing_policy_term_action_community'
         local_preference:
+          description: Preference value to set when this term is used as an import
+            policy
           $ref: '#/components/schemas/routing_policy_local_preference'
         prepend_as_path:
+          description: AS path values to prepend when this term is used as an export
+            policy
           $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
       type: object
     sw_routing_policy_term_matching:
       additionalProperties: false
-      description: zero or more criteria/filter can be specified to match the term,
-        all criteria have to be met
+      description: Route match criteria for a switch routing policy term; all specified
+        criteria must match
       properties:
         as_path:
+          description: AS path values that routes must match
           $ref: '#/components/schemas/routing_policy_term_matching_as_path'
         community:
+          description: BGP communities that routes must match
           $ref: '#/components/schemas/routing_policy_term_matching_community'
         prefix:
+          description: Route prefixes that routes must match
           $ref: '#/components/schemas/routing_policy_term_matching_prefix'
         protocol:
+          description: Routing protocols that routes must match
           $ref: '#/components/schemas/sw_routing_policy_term_matching_protocol'
       type: object
     sw_routing_policy_term_matching_protocol:
+      description: Routing protocols that can match a switch routing policy term
       items:
         $ref: '#/components/schemas/sw_routing_policy_term_matching_protocol_enum'
       type: array
@@ -104955,8 +104974,7 @@ components:
       - static
       type: string
     sw_routing_policy_terms:
-      description: at least criteria/filter must be specified to match the term, all
-        criteria have to be met
+      description: Ordered switch routing policy terms; at least one term is required
       items:
         $ref: '#/components/schemas/sw_routing_policy_term'
       minItems: 1
