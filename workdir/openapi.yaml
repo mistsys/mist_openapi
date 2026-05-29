@@ -108441,32 +108441,40 @@ components:
       type: object
     ui_settings_default_time_range:
       additionalProperties: false
+      description: Default time range applied to a site UI databoard
       properties:
         end:
+          description: Upper bound of the default databoard time range, in epoch seconds
           examples:
           - 1508828400
           type: integer
         endDate:
+          description: Display date for the end of the default databoard time range
           examples:
           - 10/23/2017
           type: string
         interval:
+          description: Bucket interval used for the default databoard time range
           examples:
           - 1d
           type: string
         name:
+          description: Display name for the default databoard time range
           examples:
           - This Week
           type: string
         shortName:
+          description: Compact display label for the default databoard time range
           examples:
           - thisWeek
           type: string
         start:
+          description: Lower bound of the default databoard time range, in epoch seconds
           examples:
           - 1508655600
           type: integer
         usePreset:
+          description: Whether the default databoard time range uses a named preset
           examples:
           - true
           type: boolean
@@ -108559,32 +108567,40 @@ components:
       type: array
     ui_settings_tile_time_range:
       additionalProperties: false
+      description: Time range override for a site UI databoard tile
       properties:
         end:
+          description: Upper bound of the tile time range, in epoch seconds
           examples:
           - 1508823743
           type: number
         endDate:
+          description: Display date for the end of the tile time range
           examples:
           - 10/23/2017
           type: string
         interval:
+          description: Bucket interval used for the tile time range
           examples:
           - 1d
           type: string
         name:
+          description: Display name for the tile time range
           examples:
           - Past 7 Days
           type: string
         shortName:
+          description: Compact display label for the tile time range
           examples:
           - 7d
           type: string
         start:
+          description: Lower bound of the tile time range, in epoch seconds
           examples:
           - 1508223600
           type: integer
         usePreset:
+          description: Whether the tile time range uses a named preset
           examples:
           - true
           type: boolean
