@@ -89599,48 +89599,62 @@ components:
       type: array
     response_mxtunnels_preempt_aps:
       additionalProperties: false
+      description: Result of preempting APs onto preferred MxTunnel peers
       properties:
         preempted_aps:
+          description: AP identifiers moved to the preferred MxTunnel peer
           $ref: '#/components/schemas/strings'
       required:
       - preempted_aps
       type: object
     response_nac_crl_files:
       additionalProperties: false
+      description: Response containing uploaded NAC CRL file metadata
       properties:
         results:
+          description: Uploaded NAC CRL files for the organization
           $ref: '#/components/schemas/nac_crl_files'
       type: object
     response_org_devices:
       additionalProperties: false
+      description: Response containing organization device records
       properties:
         results:
+          description: Device records returned by the organization device list operation
           $ref: '#/components/schemas/org_devices'
       required:
       - results
       type: object
     response_org_devices_summary:
       additionalProperties: false
+      description: Organization device count summary
       properties:
         num_aps:
+          description: Number of APs in the organization
           readOnly: true
           type: integer
         num_gateways:
+          description: Number of gateways in the organization
           readOnly: true
           type: integer
         num_mxedges:
+          description: Number of Mist Edges in the organization
           readOnly: true
           type: integer
         num_switches:
+          description: Number of switches in the organization
           readOnly: true
           type: integer
         num_unassigned_aps:
+          description: Number of APs in organization inventory that are not assigned to a site
           readOnly: true
           type: integer
         num_unassigned_gateways:
+          description: Number of gateways in organization inventory that are not assigned to a site
           readOnly: true
           type: integer
         num_unassigned_switches:
+          description: Number of switches in organization inventory that are not assigned to a site
           readOnly: true
           type: integer
       type: object
