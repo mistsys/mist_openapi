@@ -107787,12 +107787,16 @@ components:
       type: string
     tunnel_config_ike_proposal:
       additionalProperties: false
+      description: IKE proposal settings for custom IPsec tunnels
       properties:
         auth_algo:
+          description: Integrity algorithm used by this IKE proposal
           $ref: '#/components/schemas/tunnel_config_auth_algo'
         dh_group:
+          description: Diffie-Hellman group used by this IKE proposal
           $ref: '#/components/schemas/tunnel_config_ike_dh_group'
         enc_algo:
+          description: Cipher algorithm used by this IKE proposal
           $ref: '#/components/schemas/tunnel_config_enc_algo'
       type: object
     tunnel_config_ike_proposals:
@@ -107802,12 +107806,16 @@ components:
       type: array
     tunnel_config_ipsec_proposal:
       additionalProperties: false
+      description: IPsec proposal settings for custom IPsec tunnels
       properties:
         auth_algo:
+          description: Integrity algorithm used by this IPsec proposal
           $ref: '#/components/schemas/tunnel_config_auth_algo'
         dh_group:
+          description: Diffie-Hellman group used by this IPsec proposal
           $ref: '#/components/schemas/tunnel_config_dh_group'
         enc_algo:
+          description: Cipher algorithm used by this IPsec proposal
           $ref: '#/components/schemas/tunnel_config_enc_algo'
       type: object
     tunnel_config_ipsec_proposals:
@@ -107832,14 +107840,19 @@ components:
         `provider`==`custom-ipsec`
       properties:
         hosts:
+          description: Remote gateway host addresses for this tunnel node
           $ref: '#/components/schemas/tunnel_config_node_hosts'
         internal_ips:
+          description: Internal IP addresses configured on this tunnel node
           $ref: '#/components/schemas/tunnel_config_node_internal_ips'
         probe_ips:
+          description: Health-check IP addresses used to monitor this tunnel node
           $ref: '#/components/schemas/strings'
         remote_ids:
+          description: IKE identities expected from this tunnel node
           $ref: '#/components/schemas/tunnel_config_node_remote_ids'
         wan_names:
+          description: Interface names that source tunnel traffic for this node
           $ref: '#/components/schemas/tunnel_config_node_wan_names'
       required:
       - hosts
@@ -107879,6 +107892,7 @@ components:
           description: Time within which to complete the connectivity check
           type: integer
         type:
+          description: Protocol used by the custom IPsec tunnel health probe
           $ref: '#/components/schemas/tunnel_config_probe_type'
       type: object
     tunnel_config_probe_type:
