@@ -99991,8 +99991,10 @@ components:
       type: object
     stats_ap_port_stat:
       additionalProperties: false
+      description: Ethernet port statistics reported by an AP
       properties:
         full_duplex:
+          description: Whether the AP Ethernet port is operating in full-duplex mode
           examples:
           - true
           readOnly: true
@@ -100001,7 +100003,9 @@ components:
           - 'null'
         rx_bytes:
           $ref: '#/components/schemas/rx_bytes'
+          description: Bytes received on the AP Ethernet port
         rx_errors:
+          description: Receive error count reported for the AP Ethernet port
           examples:
           - 0
           readOnly: true
@@ -100009,6 +100013,8 @@ components:
           - integer
           - 'null'
         rx_peak_bps:
+          description: Peak receive throughput on the AP Ethernet port, in bits per
+            second
           examples:
           - 22185
           readOnly: true
@@ -100017,7 +100023,9 @@ components:
           - 'null'
         rx_pkts:
           $ref: '#/components/schemas/rx_pkts'
+          description: Packets received on the AP Ethernet port
         speed:
+          description: Negotiated Ethernet link speed for the AP port, in Mbps
           examples:
           - 1000
           readOnly: true
@@ -100026,7 +100034,10 @@ components:
           - 'null'
         tx_bytes:
           $ref: '#/components/schemas/tx_bytes'
+          description: Bytes transmitted on the AP Ethernet port
         tx_peak_bps:
+          description: Peak transmit throughput on the AP Ethernet port, in bits per
+            second
           examples:
           - 43922
           readOnly: true
@@ -100035,7 +100046,9 @@ components:
           - 'null'
         tx_pkts:
           $ref: '#/components/schemas/tx_pkts'
+          description: Packets transmitted on the AP Ethernet port
         up:
+          description: Whether the AP Ethernet port link is up
           examples:
           - true
           readOnly: true
@@ -100045,10 +100058,13 @@ components:
       type: object
     stats_ap_radio_config:
       additionalProperties: false
+      description: Radio configuration reported by an AP
       properties:
         band_24:
           $ref: '#/components/schemas/stats_ap_radio_config_band'
+          description: 2.4 GHz radio configuration reported by the AP
         band_24_usage:
+          description: Current operating use for the 2.4 GHz radio
           examples:
           - '5'
           readOnly: true
@@ -100057,20 +100073,26 @@ components:
           - 'null'
         band_5:
           $ref: '#/components/schemas/stats_ap_radio_config_band'
+          description: 5 GHz radio configuration reported by the AP
         band_6:
           $ref: '#/components/schemas/stats_ap_radio_config_band'
+          description: 6 GHz radio configuration reported by the AP
         scanning_enabled:
+          description: Whether radio scanning is enabled on the AP
           type: boolean
       type: object
     stats_ap_radio_config_band:
       additionalProperties: false
+      description: Per-band radio configuration reported by an AP
       properties:
         allow_rrm_disable:
+          description: Whether RRM disablement is allowed for this radio band
           readOnly: true
           type:
           - boolean
           - 'null'
         bandwidth:
+          description: Channel bandwidth configured for this radio band
           examples:
           - 20
           readOnly: true
@@ -100078,15 +100100,18 @@ components:
           - number
           - 'null'
         channel:
+          description: Operating channel configured for this radio band
           examples:
           - 1
           type: integer
         disabled:
+          description: Whether this radio band is disabled
           readOnly: true
           type:
           - boolean
           - 'null'
         dynamic_chaining_enabled:
+          description: Whether dynamic chaining is enabled for this radio band
           examples:
           - false
           readOnly: true
@@ -100094,6 +100119,7 @@ components:
           - boolean
           - 'null'
         power:
+          description: Transmit power configured for this radio band
           examples:
           - 10
           readOnly: true
@@ -100101,6 +100127,7 @@ components:
           - number
           - 'null'
         power_max:
+          description: Maximum transmit power allowed for this radio band
           examples:
           - 10
           readOnly: true
@@ -100108,6 +100135,7 @@ components:
           - number
           - 'null'
         power_min:
+          description: Minimum transmit power allowed for this radio band
           examples:
           - 10
           readOnly: true
@@ -100115,6 +100143,7 @@ components:
           - number
           - 'null'
         rx_chain:
+          description: Number of receive chains enabled for this radio band
           examples:
           - 4
           readOnly: true
@@ -100122,6 +100151,7 @@ components:
           - integer
           - 'null'
         tx_chain:
+          description: Number of transmit chains enabled for this radio band
           examples:
           - 4
           readOnly: true
@@ -100131,18 +100161,24 @@ components:
       type: object
     stats_ap_radio_stat:
       additionalProperties: false
+      description: Per-band radio statistics reported by an AP
       properties:
         band_24:
           $ref: '#/components/schemas/ap_radio_stat'
+          description: 2.4 GHz radio statistics reported by the AP
         band_5:
           $ref: '#/components/schemas/ap_radio_stat'
+          description: 5 GHz radio statistics reported by the AP
         band_6:
           $ref: '#/components/schemas/ap_radio_stat'
+          description: 6 GHz radio statistics reported by the AP
       type: object
     stats_ap_switch_redundancy:
       additionalProperties: false
+      description: Switch redundancy status reported by an AP
       properties:
         num_redundant_aps:
+          description: Number of redundant APs available for switch redundancy
           examples:
           - 1
           readOnly: true
@@ -100152,8 +100188,10 @@ components:
       type: object
     stats_ap_usb_stat:
       additionalProperties: false
+      description: USB peripheral status reported by an AP
       properties:
         channel:
+          description: Radio channel used by the USB peripheral
           examples:
           - 3
           readOnly: true
@@ -100161,6 +100199,7 @@ components:
           - integer
           - 'null'
         connected:
+          description: Whether the USB peripheral is connected
           examples:
           - true
           readOnly: true
@@ -100168,6 +100207,7 @@ components:
           - boolean
           - 'null'
         last_activity:
+          description: Time of the last USB peripheral activity, in epoch seconds
           examples:
           - 1586873254
           readOnly: true
@@ -100175,6 +100215,7 @@ components:
           - integer
           - 'null'
         type:
+          description: USB peripheral type reported by the AP
           examples:
           - imagotag
           readOnly: true
@@ -100182,6 +100223,7 @@ components:
           - string
           - 'null'
         up:
+          description: Whether the USB peripheral is operational
           examples:
           - true
           readOnly: true
