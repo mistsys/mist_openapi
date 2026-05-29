@@ -113993,45 +113993,60 @@ components:
       type: object
     wireless_client_session:
       additionalProperties: false
+      description: Wireless client session record returned by a session search
       properties:
         ap:
+          description: MAC address of the access point associated with the client session
           readOnly: true
           type: string
         band:
+          description: Radio band used by the client session
           readOnly: true
           type: string
         client_manufacture:
+          description: Manufacturer reported for the client device, when available
           readOnly: true
           type:
           - string
           - 'null'
         connect:
+          description: Time when the client session connected, in epoch seconds
           readOnly: true
           type: integer
         disconnect:
+          description: Time when the client session disconnected, in epoch seconds
           readOnly: true
           type: integer
         duration:
+          description: Length of the client session, in seconds
           readOnly: true
           type: number
         for_site:
+          description: Whether this client session record is scoped to a site
           readOnly: true
           type: boolean
         mac:
+          description: Client MAC address for the session
           readOnly: true
           type: string
         org_id:
+          description: Organization associated with the client session
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the client session
           $ref: '#/components/schemas/site_id'
         ssid:
+          description: WLAN SSID used by the client session
           readOnly: true
           type: string
         tags:
+          description: Event or classification tags attached to the client session
           $ref: '#/components/schemas/wireless_client_session_tags'
         timestamp:
+          description: Time when the client session record was observed, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         wlan_id:
+          description: Identifier of the WLAN associated with the client session
           format: uuid
           readOnly: true
           type: string
@@ -114049,6 +114064,7 @@ components:
       - wlan_id
       type: object
     wireless_client_session_tags:
+      description: Tags attached to a wireless client session
       items:
         type: string
       readOnly: true
