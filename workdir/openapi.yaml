@@ -88339,32 +88339,46 @@ components:
       - type: integer
     response_device_radio_channels:
       additionalProperties: false
+      description: Country and regulatory-domain channel capabilities for AP radios
       properties:
         band24_40mhz_allowed:
+          description: Whether 40 MHz channels are allowed on the 2.4 GHz band
           type: boolean
         band24_channels:
+          description: Allowed 2.4 GHz channels for this country or regulatory domain
           $ref: '#/components/schemas/ap_channel_band24_channels'
         band24_enabled:
+          description: Whether the 2.4 GHz band is enabled for this country or regulatory domain
           type: boolean
         band5_channels:
+          description: Allowed 5 GHz channels for this country or regulatory domain
           $ref: '#/components/schemas/ap_channel_band5_channels'
         band5_enabled:
+          description: Whether the 5 GHz band is enabled for this country or regulatory domain
           type: boolean
         band6_channels:
+          description: Allowed 6 GHz channels for this country or regulatory domain
           $ref: '#/components/schemas/ap_channel_band6_channels'
         band6_enabled:
+          description: Whether the 6 GHz band is enabled for this country or regulatory domain
           type: boolean
         certified:
+          description: Whether AP operation is certified for this country or regulatory domain
           type: boolean
         code:
+          description: Country code in ISO 3166-1 numeric format
           type: integer
         dfs_ok:
+          description: Whether DFS channels are allowed in this country or regulatory domain
           type: boolean
         key:
+          description: Two-character ISO 3166-1 country code
           type: string
         name:
+          description: Country or regulatory-domain display name
           type: string
         uses:
+          description: Regulatory ruleset used for AP channel validation
           type: string
       required:
       - key
