@@ -89248,26 +89248,34 @@ components:
       type: object
     response_login_failure:
       additionalProperties: false
+      description: Login failure response returned when authentication cannot continue locally
       properties:
         detail:
+          description: Human-readable login failure message returned by the API
           type: string
         forward_url:
+          description: SSO URL where the user should continue login, when provided
           type: string
       required:
       - detail
       type: object
     response_login_lookup:
       additionalProperties: false
+      description: Login lookup response indicating whether SSO is available for the account
       properties:
         sso_url:
+          description: URL for SSO login when the account must authenticate through an identity provider
           type: string
       type: object
     response_login_oauth_url:
       additionalProperties: false
+      description: OAuth2 authorization URL response for login
       properties:
         authorization_url:
+          description: OAuth2 provider authorization URL to open for login
           type: string
         client_id:
+          description: OAuth2 client identifier used for the authorization request
           type: string
       required:
       - client_id
@@ -89275,12 +89283,16 @@ components:
       type: object
     response_login_success:
       additionalProperties: false
+      description: Login response body, empty on normal success or populated with two-factor state
       properties:
         email:
+          description: Admin email address for a login flow that requires two-factor authentication
           type: string
         two_factor_passed:
+          description: Whether the supplied two-factor code has been accepted for this login
           type: boolean
         two_factor_required:
+          description: Whether this login requires a two-factor code before a session is established
           type: boolean
       type: object
     response_logout:
