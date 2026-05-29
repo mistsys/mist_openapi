@@ -104389,31 +104389,40 @@ components:
       type: array
     stats_wxrule:
       additionalProperties: false
-      description: Wxrule statistics
+      description: WxLAN rule usage statistics for a site
       properties:
         action:
+          description: Allow or block behavior enforced by this WxLAN rule
           $ref: '#/components/schemas/stats_wxrule_action'
         client_mac:
+          description: Wireless client MAC addresses matching this WxLAN rule
           $ref: '#/components/schemas/stats_wxrule_client_mac'
         dst_allow_wxtags:
+          description: Destination WxLAN tags explicitly allowed by this rule
           $ref: '#/components/schemas/stats_wxrule_dst_allow_wxtags'
         dst_deny_wxtags:
+          description: Destination WxLAN tags denied by this rule
           $ref: '#/components/schemas/stats_wxrule_dst_deny_wxtags'
         dst_wxtags:
+          description: Destination WxLAN tags matched by this rule
           $ref: '#/components/schemas/stats_wxrule_dst_wxtags'
         name:
+          description: Display name of the WxLAN rule
           examples:
           - Guest
           type: string
         order:
+          description: Rule evaluation order for WxLAN matching
           examples:
           - 1
           type: integer
         src_wxtags:
+          description: Source WxLAN tags matched by this rule
           $ref: '#/components/schemas/stats_wxrule_src_wxtags'
         usage:
           additionalProperties:
             $ref: '#/components/schemas/stats_wxrule_usage_properties'
+          description: Flow counts keyed by destination WxLAN tag identifier
           examples:
           - 1a42c7b0-d1d0-5a30-f349-e35fa43dc3b3:
               num_flows: 60
@@ -104440,6 +104449,7 @@ components:
       - allow
       type: string
     stats_wxrule_client_mac:
+      description: Wireless client MAC addresses matching a WxLAN rule
       examples:
       - - 3bbbf819bb6f
         - bd96cbc4910f
@@ -104447,6 +104457,8 @@ components:
         type: string
       type: array
     stats_wxrule_dst_allow_wxtags:
+      description: Destination WxLAN tag identifiers explicitly allowed by a WxLAN
+        rule
       examples:
       - - fff34466-eec0-3756-6765-381c728a6037
         - eee2c7b0-d1d0-5a30-f349-e35fa43dc3b3
@@ -104455,6 +104467,7 @@ components:
         type: string
       type: array
     stats_wxrule_dst_deny_wxtags:
+      description: Destination WxLAN tag identifiers denied by a WxLAN rule
       examples:
       - - aaa34466-eec0-3756-6765-381c728a6037
         - bbb2c7b0-d1d0-5a30-f349-e35fa43dc3b3
@@ -104463,6 +104476,7 @@ components:
         type: string
       type: array
     stats_wxrule_dst_wxtags:
+      description: Destination WxLAN tag identifiers matched by a WxLAN rule
       examples:
       - - d4134466-eec0-3756-6765-381c728a6037
         - 1a42c7b0-d1d0-5a30-f349-e35fa43dc3b3
@@ -104471,6 +104485,7 @@ components:
         type: string
       type: array
     stats_wxrule_src_wxtags:
+      description: Source WxLAN tag identifiers matched by a WxLAN rule
       examples:
       - - 8bfc2490-d726-3587-038d-cb2e71bd2330
         - 3aa8e73f-9f46-d827-8d6a-567bb7e67fc9
@@ -104480,11 +104495,15 @@ components:
       type: array
     stats_wxrule_usage_properties:
       additionalProperties: false
+      description: Usage counters for one WxLAN rule destination tag
       properties:
         num_flows:
+          description: Number of flows counted for this WxLAN rule and destination
+            tag
           type: integer
       type: object
     stats_wxrules:
+      description: WxLAN rule usage statistics returned by the request
       items:
         $ref: '#/components/schemas/stats_wxrule'
       type: array
