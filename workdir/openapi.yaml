@@ -113712,8 +113712,10 @@ components:
       description: Sample of the `zone` webhook payload.
       properties:
         events:
+          description: Zone transition events included in this webhook delivery
           $ref: '#/components/schemas/webhook_zone_events'
         topic:
+          description: Webhook topic name for zone transition deliveries
           $ref: '#/components/schemas/webhook_zone_topic'
       required:
       - events
@@ -113721,6 +113723,7 @@ components:
       type: object
     webhook_zone_event:
       additionalProperties: false
+      description: Zone enter or exit event for a Wi-Fi client, SDK client, or asset
       properties:
         asset_id:
           description: Only if `type`==`asset`. UUID of named asset
@@ -113731,25 +113734,29 @@ components:
           format: uuid
           type: string
         mac:
-          description: MAC address of Wi-Fi client, SDK Client or Asset
+          description: Client or asset MAC address associated with the zone event
           type: string
         map_id:
-          description: Map id
+          description: Map associated with the zone event
           format: uuid
           type: string
         name:
-          description: Name of the client, may be empty
+          description: Display name of the client or asset, when available
           type: string
         site_id:
+          description: Site associated with the zone event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the zone transition was reported, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         trigger:
+          description: Whether the client or asset entered or exited the zone
           $ref: '#/components/schemas/webhook_zone_event_trigger'
         type:
+          description: Client or asset type reported for the zone event
           $ref: '#/components/schemas/webhook_zone_event_type'
         zone_id:
-          description: Zone id
+          description: Zone identifier associated with the event
           format: uuid
           type: string
       required:
