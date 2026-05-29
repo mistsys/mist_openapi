@@ -103079,52 +103079,71 @@ components:
       type: array
     stats_switch:
       additionalProperties: false
-      description: Switch statistics
+      description: Switch statistics reported by Mist for a site or organization
+        stats response
       properties:
         ap_redundancy:
+          description: AP redundancy statistics associated with the switch
           $ref: '#/components/schemas/stats_switch_ap_redundancy'
         arp_table_stats:
+          description: ARP table utilization statistics for the switch
           $ref: '#/components/schemas/arp_table_stats'
         auto_upgrade_stat:
+          description: Automatic firmware upgrade status for the switch
           $ref: '#/components/schemas/stats_ap_auto_upgrade'
         cert_expiry:
+          description: Time when the switch certificate expires, in epoch seconds
           format: int64
           type: integer
         clients:
+          description: Switch port clients currently observed by the switch
           $ref: '#/components/schemas/stats_switch_clients'
         clients_stats:
+          description: Aggregate client counts reported for the switch
           $ref: '#/components/schemas/stats_switch_clients_stats'
         config_status:
+          description: Configuration synchronization status reported for the switch
           readOnly: true
           type: string
         config_timestamp:
+          description: Time when the switch configuration status was last updated,
+            in epoch seconds
           type: integer
         config_version:
+          description: Currently applied configuration version for the switch
           type: integer
         cpu_stat:
+          description: Processor utilization statistics for the switch
           $ref: '#/components/schemas/cpu_stat'
         created_time:
+          description: Time when the switch record was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
+          description: Applied device profile identifier for the switch, when present
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         dhcpd_stat:
+          description: Lease pool statistics from the switch DHCP service
           $ref: '#/components/schemas/dhcpd_stat'
         evpntopo_id:
+          description: Associated EVPN topology identifier for the switch, when present
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         ext_ip:
+          description: Public IP address observed for the switch
           type: string
         fw_versions_outofsync:
+          description: Whether firmware versions are out of sync across switch members
           readOnly: true
           type: boolean
         fwupdate:
+          description: Firmware update status for the switch
           $ref: '#/components/schemas/fwupdate_stat'
         has_pcap:
           description: Whether the switch supports packet capture
@@ -103133,7 +103152,7 @@ components:
           readOnly: true
           type: boolean
         hostname:
-          description: Hostname reported by the device
+          description: Device-reported hostname for the switch
           examples:
           - sj-sw1
           readOnly: true
@@ -103142,41 +103161,55 @@ components:
           description: Device hardware revision number
           type: string
         id:
+          description: Unique identifier of the switch record
           $ref: '#/components/schemas/id'
         if_stat:
+          description: Interface traffic statistics for the switch
           $ref: '#/components/schemas/if_stat'
         ip:
+          description: Management IP address reported for the switch
           examples:
           - 10.2.11.137
           readOnly: true
           type: string
         ip_stat:
+          description: Layer 3 address statistics for the switch
           $ref: '#/components/schemas/ip_stat'
         last_seen:
+          description: Time when Mist last observed the switch, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         last_trouble:
+          description: Most recent trouble-code summary reported for the switch
           $ref: '#/components/schemas/last_trouble'
         mac:
+          description: Switch MAC address reported by Mist
           readOnly: true
           type: string
         mac_table_stats:
+          description: Layer 2 MAC table utilization statistics for the switch
           $ref: '#/components/schemas/mac_table_stats'
         map_id:
+          description: Placement map identifier associated with the switch, when
+            present
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         memory_stat:
+          description: Utilization statistics for switch memory
           $ref: '#/components/schemas/memory_stat'
         model:
+          description: Switch model name reported by Mist
           examples:
           - EX4600
           readOnly: true
           type: string
         modified_time:
+          description: Time when the switch record was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         module_stat:
+          description: Hardware module statistics for the switch
           $ref: '#/components/schemas/stats_switch_module_stat'
         name:
           description: Device name if configured
@@ -103185,33 +103218,44 @@ components:
           readOnly: true
           type: string
         org_id:
+          description: Owning organization identifier for the switch statistics record
           $ref: '#/components/schemas/org_id'
         ports:
+          description: Port statistics reported by the switch
           $ref: '#/components/schemas/stats_switch_ports'
         route_summary_stats:
+          description: Route table summary statistics for the switch
           $ref: '#/components/schemas/route_summary_stats'
         serial:
+          description: Switch serial number reported by Mist
           examples:
           - TC3714190003
           readOnly: true
           type: string
         service_stat:
+          description: System service statistics for the switch
           $ref: '#/components/schemas/service_stat'
         site_id:
+          description: Associated site identifier for the switch statistics record
           $ref: '#/components/schemas/site_id'
         status:
+          description: Connection status reported for the switch, such as connected
           examples:
           - connected
           readOnly: true
           type: string
         tag_id:
+          description: Numeric inventory tag identifier associated with the switch
           type: integer
         tag_uuid:
+          description: Inventory tag UUID associated with the switch
           format: uuid
           type: string
         type:
+          description: Device type discriminator for switch statistics
           $ref: '#/components/schemas/device_type_switch'
         uptime:
+          description: Elapsed time since the switch last booted, in seconds
           examples:
           - 13501
           readOnly: true
@@ -103219,13 +103263,16 @@ components:
           - number
           - 'null'
         vc_mac:
+          description: Virtual Chassis MAC address reported for the switch, when present
           readOnly: true
           type:
           - string
           - 'null'
         vc_setup_info:
+          description: Virtual Chassis setup request and status details for the switch
           $ref: '#/components/schemas/stats_switch_vc_setup_info'
         version:
+          description: Software version running on the switch
           examples:
           - 18.4R1.8
           readOnly: true
