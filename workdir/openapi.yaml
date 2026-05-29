@@ -111596,8 +111596,10 @@ components:
       description: Sample of the `client-join` webhook payload.
       properties:
         events:
+          description: Client join events included in this webhook delivery
           $ref: '#/components/schemas/webhook_client_join_events'
         topic:
+          description: Webhook topic name for client join deliveries
           $ref: '#/components/schemas/webhook_client_join_topic'
       required:
       - events
@@ -111605,6 +111607,8 @@ components:
       type: object
     webhook_client_join_event:
       additionalProperties: false
+      description: Wireless client association event delivered when a client joins
+        a WLAN
       properties:
         ap:
           description: MAC address of the AP the client connected to
@@ -111616,34 +111620,40 @@ components:
           description: 5GHz or 2.4GHz band
           type: string
         bssid:
+          description: WLAN radio BSSID that the client associated with
           type: string
         connect:
-          description: Timestamp when the user connects
+          description: Time when the client connected, in epoch seconds
           type: integer
         connect_float:
-          description: floating point connect timestamp with millisecond precision
+          description: Client connection timestamp with millisecond precision
           type: number
         mac:
-          description: Client's MAC Address
+          description: Client MAC address that joined the WLAN
           type: string
         org_id:
+          description: Organization associated with the client join event
           $ref: '#/components/schemas/org_id'
         rssi:
-          description: RSSI when the client associated
+          description: Signal strength when the client associated, in dBm
           type: number
         site_id:
+          description: Site associated with the client join event
           $ref: '#/components/schemas/site_id'
         site_name:
+          description: Site name associated with the client join event
           type: string
         ssid:
-          description: ESSID
+          description: WLAN SSID that the client joined
           type: string
         timestamp:
+          description: Time when the client join event was generated, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         version:
           description: schema version of this message
           type: number
         wlan_id:
+          description: Unique identifier of the WLAN the client joined
           format: uuid
           type: string
       required:
