@@ -106364,57 +106364,82 @@ components:
       type: string
     switch_search:
       additionalProperties: false
+      description: Switch record returned by device search endpoints
       properties:
         clustered:
+          description: Whether the switch is part of a virtual chassis or cluster
           type: boolean
         evpn_missing_links:
+          description: Whether EVPN topology links are missing for this switch
           type: boolean
         evpntopo_id:
+          description: EVPN topology ID associated with this switch
           type: string
         ext_ip:
+          description: External IP address observed for switch management traffic
           type: string
         hostname:
+          description: Observed hostnames detected for the switch in search results
           $ref: '#/components/schemas/strings'
         ip:
+          description: Management IP address currently reported for the switch
           type: string
         last_config_status:
+          description: Most recent configuration status reported for the switch
           type: string
         last_hostname:
+          description: Most recent hostname detected for the switch
           type: string
         last_trouble_code:
+          description: Most recent trouble code reported for the switch
           type: string
         last_trouble_timestamp:
+          description: Time when the most recent switch trouble code was reported
           $ref: '#/components/schemas/timestamp'
         mac:
+          description: Switch MAC address reported in search results
           type: string
         managed:
           deprecated: true
+          description: Whether the switch is managed by Mist. Deprecated in favor
+            of `mist_configured`
           type: boolean
         mist_configured:
           description: whether the device can be configured by Mist or not. This deprecates
             `managed` (for adopted device) and `disable_auto_config` for claimed device)
           type: boolean
         model:
+          description: Switch model reported for this search result
           type: string
         num_members:
+          description: Number of members in the switch virtual chassis, when applicable
           type: integer
         org_id:
+          description: Organization that owns this switch search result
           $ref: '#/components/schemas/org_id'
         radius_stats:
+          description: RADIUS statistics for this switch keyed by server IP address
           $ref: '#/components/schemas/device_search_radius_stats'
         role:
+          description: Switch role reported for this search result
           type: string
         site_id:
+          description: Site that contains this switch search result
           $ref: '#/components/schemas/site_id'
         time_drifted:
+          description: Whether the switch clock has drifted from the expected time
           type: boolean
         timestamp:
+          description: Time associated with this switch search result
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Device type for this switch search result
           $ref: '#/components/schemas/device_type_switch'
         uptime:
+          description: Device uptime for the switch, in seconds
           type: integer
         version:
+          description: Software version currently running on the switch
           type: string
       required:
       - type
