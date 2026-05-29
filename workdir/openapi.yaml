@@ -91512,32 +91512,43 @@ components:
       type: array
     response_synthetictest:
       additionalProperties: false
+      description: Result returned after a site synthetic test is queued
       properties:
         id:
+          description: Unique value for the queued synthetic test request
           $ref: '#/components/schemas/id'
         message:
+          description: Human-readable queuing result returned by the API
           examples:
           - Successfully queued synthetic test for the site.
           type: string
         status:
+          description: Queue status for the synthetic test request
           examples:
           - success
           type: string
       type: object
     response_synthetictest_search:
       additionalProperties: false
+      description: Paginated response for site synthetic test search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the synthetic test search window
           type: integer
         limit:
+          description: Maximum number of synthetic test results returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of synthetic test results
           type: string
         results:
+          description: Synthetic test result records matching the search filters
           $ref: '#/components/schemas/response_synthetictest_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the synthetic test search window
           type: integer
         total:
+          description: Number of synthetic test results matching the search filters across all pages
           type: integer
       required:
       - end
@@ -91547,6 +91558,7 @@ components:
       - total
       type: object
     response_synthetictest_search_results:
+      description: Synthetic test result records returned by search
       items:
         $ref: '#/components/schemas/synthetictest_info'
       type: array
@@ -104344,8 +104356,10 @@ components:
           - guest
       type: object
     synthetictest:
+      description: Request body for triggering a site synthetic test
       properties:
         email:
+          description: Contact email address supplied when triggering the site synthetic test
           examples:
           - test@mist.com
           format: email
@@ -104596,50 +104610,65 @@ components:
         type: integer
     synthetictest_info:
       additionalProperties: false
+      description: Synthetic test status or result record
       properties:
         by:
+          description: Actor that triggered the synthetic test
           examples:
           - user
           type: string
         device_type:
+          description: Device category that ran the synthetic test
           $ref: '#/components/schemas/device_type'
         failed:
+          description: Whether the synthetic test failed
           examples:
           - false
           type: boolean
         latency:
+          description: Measured latency for the synthetic test, in milliseconds
           examples:
           - 40
           type: integer
         mac:
+          description: Device MAC address that ran the synthetic test
           type: string
         port_id:
+          description: Interface identifier used to run the synthetic test
           examples:
           - ge-0/0/2
           type: string
         reason:
+          description: Failure reason reported for the synthetic test, when available
           examples:
           - interface not ready to perform test
           type: string
         rx_mbps:
+          description: Receive throughput measured by the synthetic speed test, in Mbps
           examples:
           - 322
           type: integer
         start_time:
+          description: Epoch timestamp, in seconds, when the synthetic test started
           examples:
           - 1675718807
           type: integer
         status:
+          description: Current execution status of the synthetic test
           type: string
         timestamp:
+          description: Time when the synthetic test result was recorded
           $ref: '#/components/schemas/timestamp'
         tx_mbps:
+          description: Transmit throughput measured by the synthetic speed test, in Mbps
           examples:
           - 199
           type: integer
         type:
+          description: Synthetic test type for this result
           $ref: '#/components/schemas/synthetictest_type'
         vlan_id:
+          description: Identifier of the VLAN used by the synthetic test
           examples:
           - 20
           type: integer
