@@ -114183,6 +114183,9 @@ components:
           - string
           - 'null'
         amazon_email_domains:
+          description: Optional if `amazon_enabled`==`true`. Email domains allowed
+            for Amazon-authenticated guest users. If null or empty, any authenticated
+            Amazon email domain is allowed.
           $ref: '#/components/schemas/wlan_portal_amazon_email_domains'
         amazon_enabled:
           default: false
@@ -114197,6 +114200,7 @@ components:
           - integer
           - 'null'
         auth:
+          description: Guest portal login scheme used by the WLAN
           $ref: '#/components/schemas/wlan_portal_auth'
         azure_client_id:
           default: ''
@@ -114301,6 +114305,9 @@ components:
           - string
           - 'null'
         facebook_email_domains:
+          description: Optional if `facebook_enabled`==`true`. Email domains allowed
+            for Facebook-authenticated guest users. If null or empty, any authenticated
+            Facebook email domain is allowed.
           $ref: '#/components/schemas/wlan_portal_facebook_email_domains'
         facebook_enabled:
           default: false
@@ -114342,6 +114349,9 @@ components:
           - string
           - 'null'
         google_email_domains:
+          description: Optional if `google_enabled`==`true`. Email domains allowed
+            for Google-authenticated guest users. If null or empty, any authenticated
+            Google email domain is allowed.
           $ref: '#/components/schemas/wlan_portal_google_email_domains'
         google_enabled:
           default: false
@@ -114380,6 +114390,9 @@ components:
           - string
           - 'null'
         microsoft_email_domains:
+          description: Optional if `microsoft_enabled`==`true`. Email domains allowed
+            for Microsoft 365-authenticated guest users. If null or empty, any authenticated
+            Microsoft 365 email domain is allowed.
           $ref: '#/components/schemas/wlan_portal_microsoft_email_domains'
         microsoft_enabled:
           default: false
@@ -114426,6 +114439,7 @@ components:
           type: boolean
         privacy:
           default: false
+          description: Whether to show the privacy policy in the WLAN guest portal
           type: boolean
         puzzel_password:
           description: Required if `sms_provider`==`puzzel`. Password for the Puzzel
@@ -114457,6 +114471,8 @@ components:
           - integer
           - 'null'
         sms_provider:
+          description: Optional if `sms_enabled`==`true`. SMS provider used to deliver
+            guest portal access codes
           $ref: '#/components/schemas/wlan_portal_sms_provider'
         smsglobal_api_key:
           description: Required if `sms_provider`==`smsglobal`, Client API Key
@@ -114472,6 +114488,8 @@ components:
             enabled and sponsor_notify_all disabled
           type: boolean
         sponsor_email_domains:
+          description: Email domains allowed for sponsor email addresses. Required
+            if `sponsor_enabled` is `true` and `sponsors` is empty.
           $ref: '#/components/schemas/wlan_portal_sponsor_email_domains'
         sponsor_enabled:
           default: false
@@ -114486,6 +114504,9 @@ components:
           - integer
           - 'null'
         sponsor_link_validity_duration:
+          description: Optional if `sponsor_enabled`==`true`. Validity duration, in
+            minutes, for approve or deny links in sponsor emails. Valid values are
+            5 to 60.
           $ref: '#/components/schemas/sponsor_link_validity_duration'
         sponsor_notify_all:
           default: false
@@ -114500,6 +114521,8 @@ components:
             get email about sponsor's action (approve/deny)
           type: boolean
         sponsors:
+          description: Allowed sponsor email addresses and display names. Required
+            if `sponsor_enabled` is `true` and `sponsor_email_domains` is empty.
           $ref: '#/components/schemas/wlan_portal_sponsors'
         sso_default_role:
           default: ''
@@ -114518,6 +114541,8 @@ components:
             the signed response)
           type: string
         sso_idp_sign_algo:
+          description: Optional if `wlan_portal_auth`==`sso`. Signing algorithm used
+            for SAML assertions from the identity provider
           $ref: '#/components/schemas/wlan_portal_idp_sign_algo'
         sso_idp_sso_url:
           default: ''
@@ -114528,6 +114553,8 @@ components:
           description: Required if `wlan_portal_auth`==`sso`, IDP issuer URL
           type: string
         sso_nameid_format:
+          description: Optional if `wlan_portal_auth`==`sso`. SAML NameID format expected
+            from the identity provider
           $ref: '#/components/schemas/wlan_portal_sso_nameid_format'
         telstra_client_id:
           description: Required if `sms_provider`==`telstra`, Client ID provided by
