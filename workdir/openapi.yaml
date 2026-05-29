@@ -93697,62 +93697,76 @@ components:
           type: string
       type: object
     service_policies:
+      description: Service policies returned by derived site configuration
       items:
         $ref: '#/components/schemas/service_policy'
       type: array
     service_policy:
       additionalProperties: false
+      description: Site-level service policy that allows or denies traffic for tenants and services
       properties:
         action:
+          description: Allow or deny action for traffic matched by this service policy
           $ref: '#/components/schemas/allow_deny'
         antivirus:
+          description: Malware and virus inspection settings applied by this service policy
           $ref: '#/components/schemas/service_policy_antivirus'
         appqoe:
+          description: Application QoE settings applied by this service policy
           $ref: '#/components/schemas/service_policy_appqoe'
         ewf:
+          description: Enhanced web filtering rules applied by this service policy
           $ref: '#/components/schemas/service_policy_ewf'
         idp:
+          description: Intrusion detection and prevention settings applied by this service policy
           $ref: '#/components/schemas/idp_config'
         local_routing:
-          description: access within the same VRF
+          description: Whether the policy permits access within the same VRF
           type: boolean
         name:
+          description: Display name of the service policy
           type: string
         path_preference:
           description: By default, we derive all paths available and use them. Optionally,
             you can customize by using `path_preference`
           type: string
         secintel:
+          description: Threat intelligence settings applied by this service policy
           $ref: '#/components/schemas/service_policy_secintel'
         servicepolicy_id:
-          description: Used to link servicepolicy defined at org level and overwrite
-            some attributes
+          description: Organization-level service policy identifier used to link and override selected attributes
           format: uuid
           type: string
         services:
+          description: Application services or service groups matched by this policy
           $ref: '#/components/schemas/strings'
         skyatp:
+          description: Threat inspection settings provided by Sky ATP for this service policy
           $ref: '#/components/schemas/service_policy_skyatp'
         ssl_proxy:
+          description: TLS inspection settings applied by this service policy
           $ref: '#/components/schemas/service_policy_ssl_proxy'
         syslog:
+          description: Remote logging settings applied by this service policy
           $ref: '#/components/schemas/service_policy_syslog'
         tenants:
+          description: User or network tenants matched by this service policy
           $ref: '#/components/schemas/strings'
       type: object
     service_policy_aamw:
       additionalProperties: false
-      description: SRX only
+      description: SRX advanced anti-malware settings for a service policy
       properties:
         aamwprofile_id:
-          description: org-level Advanced Advance Anti Malware Profile (SkyAtp) Profile
-            can be used, this takes precedence over 'profile'
+          description: Organization-level advanced anti-malware profile ID; takes precedence over inline `profile` settings
           format: uuid
           type: string
         enabled:
           default: false
+          description: Whether advanced anti-malware inspection is enabled for the service policy
           type: boolean
         profile:
+          description: Built-in advanced anti-malware inspection profile to apply
           $ref: '#/components/schemas/service_policy_aamw_profile'
       type: object
     service_policy_aamw_profile:
@@ -93765,45 +93779,52 @@ components:
       type: string
     service_policy_antivirus:
       additionalProperties: false
-      description: For SRX-only
+      description: SRX antivirus inspection settings for a service policy
       properties:
         avprofile_id:
-          description: org-level AV Profile can be used, this takes precedence over
-            'profile'
+          description: Organization-level antivirus profile ID; takes precedence over inline `profile` settings
           format: uuid
           type: string
         enabled:
           default: false
+          description: Whether antivirus inspection is enabled for the service policy
           type: boolean
         profile:
-          description: Default / noftp / httponly / or keys from av_profiles
+          description: Antivirus profile name to apply, such as `default`, `noftp`, `httponly`, or an AV profile key
           type: string
       type: object
     service_policy_appqoe:
       additionalProperties: false
-      description: SRX only
+      description: SRX application QoE settings for a service policy
       properties:
         enabled:
           default: false
+          description: Whether application QoE is enabled for the service policy
           type: boolean
       type: object
     service_policy_ewf:
+      description: Enhanced web filtering rules applied by a service policy
       items:
         $ref: '#/components/schemas/service_policy_ewf_rule'
       type: array
     service_policy_ewf_rule:
       additionalProperties: false
+      description: Enhanced web filtering rule applied by a service policy
       properties:
         alert_only:
+          description: Whether matching enhanced web filtering traffic is logged without being blocked
           type: boolean
         block_message:
+          description: Message returned when enhanced web filtering blocks a request
           examples:
           - Access to this URL Category has been blocked
           type: string
         enabled:
           default: false
+          description: Whether this enhanced web filtering rule is enabled
           type: boolean
         profile:
+          description: Enhanced web filtering profile applied by this rule
           $ref: '#/components/schemas/service_policy_ewf_rule_profile'
       type: object
     service_policy_ewf_rule_profile:
@@ -93816,16 +93837,17 @@ components:
       type: string
     service_policy_secintel:
       additionalProperties: false
-      description: SRX only
+      description: SRX SecIntel settings for a service policy
       properties:
         enabled:
           default: false
+          description: Whether SecIntel inspection is enabled for the service policy
           type: boolean
         profile:
+          description: Protection level applied by SecIntel inspection
           $ref: '#/components/schemas/service_policy_secintel_profile'
         secintelprofile_id:
-          description: org-level secintel Profile can be used, this takes precedence
-            over 'profile'
+          description: Organization-level SecIntel profile ID; takes precedence over inline `profile` settings
           type: string
       type: object
     service_policy_secintel_profile:
@@ -93838,23 +93860,30 @@ components:
       type: string
     service_policy_skyatp:
       additionalProperties: false
-      description: SRX only
+      description: SRX Sky ATP threat inspection settings for a service policy
       properties:
         dns_dga_detection:
+          description: Detection settings for DNS DGA threats provided by Sky ATP
           $ref: '#/components/schemas/service_policy_skyatp_dns_dga_detection'
         dns_tunnel_detection:
+          description: Detection settings for DNS tunneling threats provided by Sky ATP
           $ref: '#/components/schemas/service_policy_skyatp_dns_tunnel_detection'
         http_inspection:
+          description: Web traffic inspection settings provided by Sky ATP
           $ref: '#/components/schemas/service_policy_skyatp_http_inspection'
         iot_device_policy:
+          description: Device threat policy settings provided by Sky ATP for IoT clients
           $ref: '#/components/schemas/service_policy_skyatp_iot_device_policy'
       type: object
     service_policy_skyatp_dns_dga_detection:
       additionalProperties: false
+      description: Sky ATP DNS DGA detection settings
       properties:
         enabled:
+          description: Whether Sky ATP DNS DGA detection is enabled
           type: boolean
         profile:
+          description: Sky ATP DNS DGA detection profile to apply
           $ref: '#/components/schemas/service_policy_skyatp_dns_dga_detection_profile'
       type: object
     service_policy_skyatp_dns_dga_detection_profile:
@@ -93866,10 +93895,13 @@ components:
       type: string
     service_policy_skyatp_dns_tunnel_detection:
       additionalProperties: false
+      description: Sky ATP DNS tunneling detection settings
       properties:
         enabled:
+          description: Whether Sky ATP DNS tunneling detection is enabled
           type: boolean
         profile:
+          description: Sky ATP DNS tunneling detection profile to apply
           $ref: '#/components/schemas/service_policy_skyatp_dns_tunnel_detection_profile'
       type: object
     service_policy_skyatp_dns_tunnel_detection_profile:
@@ -93881,10 +93913,13 @@ components:
       type: string
     service_policy_skyatp_http_inspection:
       additionalProperties: false
+      description: Sky ATP HTTP inspection settings
       properties:
         enabled:
+          description: Whether Sky ATP HTTP inspection is enabled
           type: boolean
         profile:
+          description: Sky ATP HTTP inspection profile to apply
           $ref: '#/components/schemas/service_policy_skyatp_http_inspection_profile'
       type: object
     service_policy_skyatp_http_inspection_profile:
@@ -93895,28 +93930,34 @@ components:
       type: string
     service_policy_skyatp_iot_device_policy:
       additionalProperties: false
+      description: Sky ATP IoT device policy settings
       properties:
         enabled:
+          description: Whether Sky ATP IoT device policy inspection is enabled
           type: boolean
       type: object
     service_policy_ssl_proxy:
       additionalProperties: false
-      description: For SRX-only
+      description: SRX SSL proxy inspection settings for a service policy
       properties:
         ciphers_category:
+          description: Allowed cipher strength category for SSL proxy inspection
           $ref: '#/components/schemas/ssl_proxy_ciphers_category'
         enabled:
           default: false
+          description: Whether SSL proxy inspection is enabled for the service policy
           type: boolean
       type: object
     service_policy_syslog:
       additionalProperties: false
-      description: Required for syslog logging
+      description: Syslog logging settings for a service policy
       properties:
         enabled:
           default: false
+          description: Whether syslog logging is enabled for the service policy
           type: boolean
         server_names:
+          description: Names of syslog servers that receive logs for this service policy
           examples:
           - - dc_syslog_server
           items:
