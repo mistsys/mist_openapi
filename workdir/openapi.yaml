@@ -103319,6 +103319,7 @@ components:
         type: integer
       type: array
     stats_switch_module_stat:
+      description: Hardware module statistics reported by a switch
       items:
         $ref: '#/components/schemas/stats_switch_module_stat_item'
       minItems: 1
@@ -103326,49 +103327,64 @@ components:
       uniqueItems: true
     stats_switch_module_stat_item:
       additionalProperties: false
+      description: Hardware module status and firmware inventory for a switch
       properties:
         backup_version:
+          description: Backup software version stored on the switch module
           readOnly: true
           type:
           - string
           - 'null'
         bios_version:
+          description: BIOS firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         boot_partition:
+          description: Active boot partition used by the switch module
           type: string
         cpld_version:
+          description: CPLD firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         cpu_stat:
+          description: Processor utilization statistics for the switch module
           $ref: '#/components/schemas/cpu_stat'
         errors:
+          description: Hardware error records reported for the switch module
           $ref: '#/components/schemas/module_stat_item_errors'
         fans:
+          description: Cooling fan status records for the switch module
           $ref: '#/components/schemas/module_stat_item_fans'
         fpc_idx:
+          description: FPC index identifying this switch module
           readOnly: true
           type: integer
         fpga_version:
+          description: FPGA firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         last_seen:
+          description: Time when Mist last observed this switch module, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         locating:
+          description: Whether the switch module locator indicator is active
           type: boolean
         mac:
+          description: Switch module MAC address reported by Mist
           examples:
           - fc3342123456
           type: string
         memory_stat:
+          description: Utilization statistics for switch module memory
           $ref: '#/components/schemas/memory_stat'
         model:
+          description: Switch module model name reported by Mist
           examples:
           - EX4300-48P
           readOnly: true
@@ -103376,42 +103392,53 @@ components:
           - string
           - 'null'
         optics_cpld_version:
+          description: Optics CPLD firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         pending_version:
+          description: Pending software version staged for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         pics:
+          description: Physical Interface Card status records for the switch module
           $ref: '#/components/schemas/module_stat_item_pics'
         poe:
+          description: Power over Ethernet telemetry for the switch module
           $ref: '#/components/schemas/module_stat_item_poe'
         poe_version:
+          description: PoE controller firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         power_cpld_version:
+          description: Power CPLD firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         psus:
+          description: Power supply status records for the switch module
           $ref: '#/components/schemas/module_stat_item_psus'
         re_fpga_version:
+          description: Routing Engine FPGA firmware version reported for the switch
+            module
           readOnly: true
           type:
           - string
           - 'null'
         recovery_version:
+          description: Recovery software version stored on the switch module
           readOnly: true
           type:
           - string
           - 'null'
         serial:
+          description: Switch module serial number reported by Mist
           examples:
           - PX8716230021
           readOnly: true
@@ -103419,35 +103446,43 @@ components:
           - string
           - 'null'
         status:
+          description: Connection status reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         temperatures:
+          description: Temperature sensor readings for the switch module
           $ref: '#/components/schemas/module_stat_item_temperatures'
         tmc_fpga_version:
+          description: TMC FPGA firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         type:
+          description: Module type reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         uboot_version:
+          description: U-Boot firmware version reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         uptime:
+          description: Elapsed time since the switch module last booted, in seconds
           readOnly: true
           type:
           - integer
           - 'null'
         vc_links:
+          description: Virtual chassis link records for the switch module
           $ref: '#/components/schemas/module_stat_item_vc_links'
         vc_mode:
+          description: Virtual chassis mode reported for the switch module
           readOnly: true
           type:
           - string
@@ -103461,11 +103496,13 @@ components:
           - string
           - 'null'
         vc_state:
+          description: Virtual chassis state reported for the switch module
           readOnly: true
           type:
           - string
           - 'null'
         version:
+          description: Software version running on the switch module
           readOnly: true
           type:
           - string
