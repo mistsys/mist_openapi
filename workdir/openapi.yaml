@@ -92321,6 +92321,7 @@ components:
       type: object
     rf_template_model_specific_property:
       additionalProperties: false
+      description: AP model-specific RF overrides for an RF template
       properties:
         ant_gain_24:
           default: 0
@@ -92355,6 +92356,7 @@ components:
             defaults
       type: object
     rf_templates:
+      description: List of RF templates
       items:
         $ref: '#/components/schemas/rf_template'
       type: array
@@ -92631,10 +92633,12 @@ components:
         type: string
       type: array
     routing_policy_term_matching_as_path:
+      description: BGP AS path values used as routing-policy match criteria
       items:
         $ref: '#/components/schemas/bgp_as'
       type: array
     routing_policy_term_matching_community:
+      description: BGP community values used as routing-policy match criteria
       items:
         examples:
         - '3900062'
@@ -93107,6 +93111,7 @@ components:
       - 'null'
     saml_metadata:
       additionalProperties: false
+      description: Read-only SAML and SCIM metadata generated for an SSO configuration
       properties:
         acs_url:
           description: If `idp_type`==`saml`, Assertion Consumer Service URL that
@@ -93420,6 +93425,7 @@ components:
       - all
       type: string
     search_org_user_macs_labels:
+      description: Labels associated with org user MAC search results
       items:
         type: string
       type: array
@@ -93908,6 +93914,7 @@ components:
         type: integer
     service_packet:
       additionalProperties: false
+      description: Service data packet observed from an asset or beacon
       properties:
         service_data:
           description: ata from service data
@@ -94250,6 +94257,7 @@ components:
       type: object
     service_spec:
       additionalProperties: false
+      description: Protocol and port match rule for a custom service
       properties:
         port_range:
           description: Port number, port range, or variable
@@ -94831,6 +94839,7 @@ components:
       - ssid
       type: string
     site_id:
+      description: Site identifier
       examples:
       - 441a1214-6928-442a-8e92-e1d34b8ec6a6
       format: uuid
@@ -95655,6 +95664,7 @@ components:
       type: object
     site_setting_analytic:
       additionalProperties: false
+      description: Advanced analytics feature settings for a site
       properties:
         enabled:
           default: false
@@ -95714,6 +95724,7 @@ components:
       type: array
     site_setting_ap_port_config:
       additionalProperties: false
+      description: AP Ethernet port configuration overrides by model
       properties:
         model_specific:
           additionalProperties:
@@ -95879,12 +95890,14 @@ components:
         $ref: '#/components/schemas/site_setting_critical_url_monitoring_monitor'
       type: array
     site_setting_derived:
+      description: Site settings with derived OAuth account integration data
       allOf:
       - $ref: '#/components/schemas/site_setting'
       - $ref: '#/components/schemas/site_setting_derived_accounts'
     site_setting_derived_accounts:
       additionalProperties:
         $ref: '#/components/schemas/account_oauth_info_account'
+      description: Derived OAuth account integration details keyed by account name
       type: object
     site_setting_disabled_system_defined_port_usages:
       description: If some system-default port usages are not desired - namely, ap
@@ -96065,6 +96078,8 @@ components:
         type: string
       type: array
     site_setting_switch:
+      description: Site switch settings combining a network template and auto-upgrade
+        controls
       allOf:
       - $ref: '#/components/schemas/network_template'
       - $ref: '#/components/schemas/switch_auto_upgrade_container'
@@ -96110,6 +96125,8 @@ components:
       type: object
     site_setting_vna:
       additionalProperties: false
+      description: Virtual Network Assistant settings for AP, switch, and gateway
+        experiences at a site
       properties:
         enabled:
           default: false
@@ -96294,6 +96311,7 @@ components:
       - switch
       type: string
     site_stats_sitegroup_ids:
+      description: Site group identifiers associated with a site statistics record
       items:
         format: uuid
         type: string
@@ -96305,6 +96323,7 @@ components:
       - type
       type: string
     site_template:
+      description: Site template containing auto-upgrade settings and template variables
       properties:
         auto_upgrade:
           $ref: '#/components/schemas/site_template_auto_upgrade'
@@ -96319,6 +96338,7 @@ components:
       type: object
     site_template_auto_upgrade:
       additionalProperties: false
+      description: Automatic upgrade settings applied by a site template
       properties:
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
@@ -96335,6 +96355,7 @@ components:
           type: string
       type: object
     site_templates:
+      description: List of site templates
       items:
         $ref: '#/components/schemas/site_template'
       type: array
@@ -96367,6 +96388,7 @@ components:
       type: object
     site_wids_repeated_auth_failures:
       additionalProperties: false
+      description: Detection settings for repeated authentication failures
       properties:
         duration:
           description: Window where a trigger will be detected and action to be taken
@@ -96526,6 +96548,7 @@ components:
       - name
       type: object
     sitegroup_id:
+      description: Site group identifier
       examples:
       - 3c708be3-9422-4695-b729-babdbd2f7615
       format: uuid
@@ -96542,6 +96565,7 @@ components:
         $ref: '#/components/schemas/sitegroup'
       type: array
     sites:
+      description: List of sites
       items:
         $ref: '#/components/schemas/site'
       type: array
@@ -97859,6 +97883,8 @@ components:
       type: object
     sle_thresholds:
       additionalProperties: false
+      description: Site SLE threshold overrides for capacity, coverage, throughput,
+        and time to connect
       properties:
         capacity:
           default: 20
@@ -98759,6 +98785,7 @@ components:
       type: object
     sso_delete_admins:
       additionalProperties: false
+      description: Request body listing SSO admin email addresses to delete
       properties:
         emails:
           description: List of admin email addresses to delete
@@ -98770,6 +98797,7 @@ components:
       type: object
     sso_delete_admins_response:
       additionalProperties: false
+      description: Result of deleting SSO admin accounts
       properties:
         deleted:
           description: List of email addresses that were successfully deleted
@@ -99076,6 +99104,7 @@ components:
         $ref: '#/components/schemas/sso_role_org'
       type: array
     ssos:
+      description: List of SSO configurations
       items:
         $ref: '#/components/schemas/sso'
       type: array
