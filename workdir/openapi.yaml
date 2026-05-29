@@ -104829,21 +104829,25 @@ components:
       type: array
       uniqueItems: true
     suppressed_alarm:
+      description: Request body for suppressing organization alarms
       properties:
         applies:
+          description: If `scope`==`site`. Site and site-group targets where alarms
+            are suppressed
           $ref: '#/components/schemas/suppressed_alarm_applies'
         duration:
           default: 3600
-          description: Duration, in seconds. Maximum duration is 86400 * 180 (180
-            days). 0 is to un-suppress alarms
+          description: Suppression length, in seconds. Maximum duration is 86400 *
+            180 (180 days). 0 is to un-suppress alarms
           maximum: 15552000
           minimum: 0
           type: number
         scheduled_time:
-          description: Epoch_time in seconds, Default as now, accepted time range
-            is from now to now + 7 days
+          description: Time when alarm suppression starts, in epoch seconds. Defaults
+            to now; accepted range is from now to now + 7 days
           type: integer
         scope:
+          description: Alarm suppression target level
           $ref: '#/components/schemas/suppressed_alarm_scope'
       type: object
     suppressed_alarm_applies:
@@ -104858,8 +104862,12 @@ components:
           format: uuid
           type: string
         site_ids:
+          description: Site identifiers included in the suppression scope. If provided,
+            alarms are suppressed for the listed sites.
           $ref: '#/components/schemas/suppressed_alarm_applies_site_ids'
         sitegroup_ids:
+          description: Site group identifiers included in the suppression scope. If
+            provided, alarms are suppressed for all sites in the listed site groups.
           $ref: '#/components/schemas/suppressed_alarm_applies_sitegroup_ids'
       type: object
     suppressed_alarm_applies_site_ids:
