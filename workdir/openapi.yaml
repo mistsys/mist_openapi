@@ -111409,8 +111409,10 @@ components:
         \ identifier)."
       properties:
         events:
+          description: Raw RSSI event records included in this webhook delivery
           $ref: '#/components/schemas/webhook_asset_raw_rssi_events'
         topic:
+          description: Webhook topic name for asset raw RSSI deliveries
           $ref: '#/components/schemas/webhook_asset_raw_rssi_topic'
       required:
       - events
@@ -111418,8 +111420,11 @@ components:
       type: object
     webhook_asset_raw_rssi_event:
       additionalProperties: false
+      description: Raw RSSI sample reported for an asset or beacon packet
       properties:
         ap_loc:
+          description: Location coordinates of the reporting AP when available, updated
+            about once per minute per client
           $ref: '#/components/schemas/webhook_asset_raw_rssi_event_ap_loc'
         beam:
           description: antenna index, clock-wise starting from the LED
@@ -111427,19 +111432,27 @@ components:
           minimum: 1
           type: integer
         device_id:
+          description: Identifier of the AP or device that reported the raw RSSI sample
           $ref: '#/components/schemas/id'
         ibeacon_major:
+          description: iBeacon major value decoded from the packet when present
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
+          description: iBeacon minor value decoded from the packet when present
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
+          description: iBeacon UUID decoded from the packet when present
           $ref: '#/components/schemas/ibeacon_uuid'
         is_asset:
+          description: Whether the advertising MAC address is recognized as an asset
           type: boolean
         mac:
-          description: MAC of the asset/ beacon
+          description: Client MAC address for the asset or beacon that emitted the
+            packet
           type: string
         map_id:
+          description: Map associated with the reporting AP when location context
+            is available
           $ref: '#/components/schemas/id'
         mfg_company_id:
           description: optional, BLE manufacturing company ID
@@ -111453,14 +111466,20 @@ components:
           - string
           - 'null'
         org_id:
+          description: Organization associated with the raw RSSI sample
           $ref: '#/components/schemas/org_id'
         rssi:
+          description: Received signal strength of the packet at the reporting AP,
+            in dBm
           type: integer
         service_packets:
+          description: BLE service data packets decoded from the advertised payload
           $ref: '#/components/schemas/webhook_asset_raw_rssi_event_service_packets'
         site_id:
+          description: Site associated with the raw RSSI sample
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the raw RSSI sample was observed, in epoch seconds
           $ref: '#/components/schemas/timestamp'
       type: object
     webhook_asset_raw_rssi_event_ap_loc:
