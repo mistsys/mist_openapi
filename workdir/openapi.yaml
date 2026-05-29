@@ -69547,6 +69547,8 @@ components:
       type: object
     client_wireless:
       additionalProperties: false
+      description: Wireless client record observed during a client search or stats
+        query
       properties:
         ap:
           $ref: '#/components/schemas/client_wireless_ap'
@@ -69876,6 +69878,7 @@ components:
         $ref: '#/components/schemas/coa_server'
       type: array
     code_string:
+      description: Request body containing a single authorization or claim code
       properties:
         code:
           description: Request-supplied authorization or claim code value
@@ -69884,6 +69887,7 @@ components:
       - code
       type: object
     config_device:
+      description: Device configuration object for an AP, switch, or gateway
       discriminator:
         mapping:
           ap: '#/components/schemas/device_ap'
@@ -69895,6 +69899,7 @@ components:
       - $ref: '#/components/schemas/device_switch'
       - $ref: '#/components/schemas/device_gateway'
     config_devices:
+      description: List of device configuration objects
       items:
         $ref: '#/components/schemas/config_device'
       type: array
@@ -70004,6 +70009,7 @@ components:
         type: string
       type: array
     const_alarm_definitions:
+      description: Alarm type definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_alarm_definition'
       type: array
@@ -70095,6 +70101,7 @@ components:
           type: string
       type: object
     const_ap_esl_versions:
+      description: Supported Electronic Shelf Label versions by AP model
       items:
         $ref: '#/components/schemas/const_ap_esl_version'
       type: array
@@ -70131,6 +70138,8 @@ components:
       - description
       type: object
     const_ap_leds:
+      description: AP LED status and trouble-code definitions returned by the constants
+        API
       items:
         $ref: '#/components/schemas/const_ap_led'
       type: array
@@ -70182,6 +70191,7 @@ components:
         type: string
       type: array
     const_app_category_definitions:
+      description: Application category definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_app_category_definition'
       type: array
@@ -70210,6 +70220,8 @@ components:
       - traffic_type
       type: object
     const_app_subcategory_definitions:
+      description: Application subcategory definitions returned by the constants
+        API
       items:
         $ref: '#/components/schemas/const_app_subcategory_definition'
       type: array
@@ -70256,10 +70268,12 @@ components:
           type: boolean
       type: object
     const_application_definitions:
+      description: Application definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_application_definition'
       type: array
     const_countries:
+      description: Country definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_country'
       type: array
@@ -70538,10 +70552,12 @@ components:
       - '6'
       type: string
     const_device_ap_band_24_usages:
+      description: Supported 2.4 GHz radio usage modes for AP models
       items:
         $ref: '#/components/schemas/const_device_ap_band_24_usage'
       type: array
     const_device_ap_disallowed_channels:
+      description: Disallowed RF channel definitions for AP device models
       items:
         type: integer
       type: array
@@ -70701,6 +70717,7 @@ components:
           type: integer
       type: object
     const_device_model:
+      description: Device model definition returned by the constants API
       discriminator:
         mapping:
           ap: '#/components/schemas/const_device_ap'
@@ -70712,6 +70729,7 @@ components:
       - $ref: '#/components/schemas/const_device_switch'
       - $ref: '#/components/schemas/const_device_gateway'
     const_device_models:
+      description: Device model definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_device_model'
       type: array
@@ -70902,6 +70920,7 @@ components:
       - display
       type: object
     const_events:
+      description: Event type definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_event'
       type: array
@@ -70948,6 +70967,7 @@ components:
           type: boolean
       type: object
     const_gateway_applications_definitions:
+      description: Gateway application definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_gateway_applications_definition'
       type: array
@@ -71004,6 +71024,7 @@ components:
           description: Enumerated or structured value metadata for this insight metric
       type: object
     const_insight_metrics_property_example:
+      description: Example value for an insight metric property
       anyOf:
       - type: integer
       - type: number
@@ -71013,10 +71034,13 @@ components:
       - additionalProperties: true
         type: object
     const_insight_metrics_property_example_any_of:
+      description: Example values for an insight metric property, as an array or
+        keyed object
       anyOf:
       - $ref: '#/components/schemas/const_insight_metrics_property_examples'
       - $ref: '#/components/schemas/const_insight_metrics_property_examples_object'
     const_insight_metrics_property_examples:
+      description: List of example values for an insight metric property
       items:
         $ref: '#/components/schemas/const_insight_metrics_property_example'
       type: array
@@ -71043,6 +71067,7 @@ components:
       type: object
     const_insight_metrics_property_keys:
       additionalProperties: true
+      description: Additional key metadata for an insight metric property
       type: object
     const_insight_metrics_property_param:
       additionalProperties: false
@@ -71096,11 +71121,14 @@ components:
       - zone
       type: string
     const_insight_metrics_property_scopes:
+      description: Entity scopes supported by an insight metric property
       items:
         $ref: '#/components/schemas/const_insight_metrics_property_scope'
       type: array
     const_insight_metrics_property_values:
       additionalProperties: true
+      description: Enumerated or structured value metadata for an insight metric
+        property
       type: object
     const_language:
       additionalProperties: false
@@ -71127,6 +71155,7 @@ components:
       - key
       type: object
     const_languages:
+      description: Language options returned by the constants API
       items:
         $ref: '#/components/schemas/const_language'
       type: array
@@ -71154,6 +71183,7 @@ components:
           type: string
       type: object
     const_license_type_includes:
+      description: License SKU components included by a license type
       examples:
       - - sub_ex12a
         - sub_ex12p
@@ -71161,6 +71191,7 @@ components:
         type: string
       type: array
     const_license_types:
+      description: License type definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_license_type'
       type: array
@@ -71193,6 +71224,7 @@ components:
           type: string
       type: object
     const_marvis_client_versions:
+      description: Marvis Client installer versions returned by the constants API
       items:
         $ref: '#/components/schemas/const_marvis_client_version'
       type: array
@@ -71236,6 +71268,7 @@ components:
           type: integer
       type: object
     const_mxedge_models:
+      description: Mist Edge model definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_mxedge_model'
       type: array
@@ -71329,6 +71362,7 @@ components:
           type: string
       type: object
     const_nac_events:
+      description: NAC event example payloads returned by the constants API
       items:
         $ref: '#/components/schemas/const_nac_event'
       type: array
@@ -71360,6 +71394,7 @@ components:
           type: string
       type: object
     const_other_device_models:
+      description: Other-device model definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_other_device_model'
       type: array
@@ -71379,6 +71414,7 @@ components:
           type: string
       type: object
     const_states:
+      description: State and territory definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_state'
       type: array
@@ -71429,6 +71465,7 @@ components:
           type: string
       type: object
     const_traffic_types:
+      description: Traffic type definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_traffic_type'
       type: array
@@ -71458,6 +71495,7 @@ components:
           type: string
       type: object
     const_webhook_topics:
+      description: Webhook topic definitions returned by the constants API
       items:
         $ref: '#/components/schemas/const_webhook_topic'
       type: array
