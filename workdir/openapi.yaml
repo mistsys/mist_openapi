@@ -107009,6 +107009,7 @@ components:
           $ref: '#/components/schemas/synthetictest_config_vlan_vlan_ids'
       type: object
     synthetictest_config_vlan_custom_test_urls:
+      description: Deprecated custom URLs tested by VLAN-based synthetic probes
       deprecated: true
       examples:
       - - https://www.abc.com/
@@ -107017,6 +107018,7 @@ components:
         type: string
       type: array
     synthetictest_config_vlan_vlan_ids:
+      description: VLAN identifiers where deprecated VLAN-based synthetic probes run
       examples:
       - - 10
         - 20
@@ -107025,6 +107027,7 @@ components:
         $ref: '#/components/schemas/vlan_id_with_variable'
       type: array
     synthetictest_config_vlans:
+      description: Deprecated VLAN-based synthetic test configurations
       deprecated: true
       items:
         $ref: '#/components/schemas/synthetictest_config_vlan'
@@ -107041,6 +107044,7 @@ components:
           $ref: '#/components/schemas/time_of_day'
       type: object
     synthetictest_device:
+      description: Request body for triggering a synthetic test on a device
       properties:
         host:
           description: If `type`==`lan_connectivity`. Hostname or IP address to probe
@@ -107225,6 +107229,7 @@ components:
       - traceroute
       type: string
     synthetictest_radius_server:
+      description: Request body for testing RADIUS server availability from a switch
       properties:
         password:
           description: Specify the password associated with the username
@@ -107391,6 +107396,7 @@ components:
           description: Site groups included in the WLAN template application scope
       type: object
     template_applies_org_id:
+      description: Organization identifier returned for a WLAN template application scope
       examples:
       - a97c1b22-a4e9-411e-9bfd-d8695a0f9e61
       format: uuid
@@ -107438,6 +107444,7 @@ components:
         type: string
       type: array
     templates:
+      description: WLAN template records returned by a template list response
       items:
         $ref: '#/components/schemas/template'
       type: array
@@ -107469,6 +107476,7 @@ components:
       readOnly: true
       type: string
     test_sms_global:
+      description: Request body for validating SMSGlobal SMS gateway credentials
       properties:
         smsglobal_api_key:
           description: SMSGlobal API key used to send the test SMS
@@ -107492,6 +107500,7 @@ components:
       - to
       type: object
     test_telstra:
+      description: Request body for validating Telstra SMS gateway credentials
       properties:
         telstra_client_id:
           description: Telstra client identifier used to send the test SMS
@@ -107515,6 +107524,7 @@ components:
       - to
       type: object
     test_twilio:
+      description: Request body for validating Twilio SMS gateway credentials
       properties:
         from:
           description: One of the numbers you have in your Twilio account
@@ -107710,6 +107720,7 @@ components:
       type: string
     ticket_upload_attachments_file:
       additionalProperties: false
+      description: Multipart upload payload containing a ticket attachment file
       properties:
         file:
           contentMediaType: application/octet-stream
@@ -107717,6 +107728,7 @@ components:
           type: string
       type: object
     tickets:
+      description: Support ticket records returned by a ticket list response
       items:
         $ref: '#/components/schemas/ticket'
       type: array
@@ -108192,6 +108204,7 @@ components:
       - wan_names
       type: object
     tunnel_config_node_hosts:
+      description: Remote gateway host addresses for a tunnel node
       items:
         description: IP Address of the remote host
         type: string
@@ -108208,6 +108221,7 @@ components:
         type: string
       type: array
     tunnel_config_node_wan_names:
+      description: Interface names that source tunnel traffic for a tunnel node
       items:
         type: string
       type: array
@@ -108813,6 +108827,7 @@ components:
           type: boolean
       type: object
     ui_settings_list:
+      description: Site UI settings records returned by a list response
       items:
         $ref: '#/components/schemas/ui_settings'
       type: array
