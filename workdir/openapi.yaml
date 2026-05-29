@@ -101253,6 +101253,7 @@ components:
           type: integer
       type: object
     stats_gateway_module_stat:
+      description: Hardware module statistics reported by a gateway
       items:
         $ref: '#/components/schemas/stats_gateway_module_stat_item'
       maxItems: 1
@@ -101260,42 +101261,55 @@ components:
       type: array
     stats_gateway_module_stat_item:
       additionalProperties: false
+      description: Hardware module status and firmware inventory for a gateway
       properties:
         backup_version:
+          description: Backup software version stored on the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         bios_version:
+          description: BIOS firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         boot_partition:
+          description: Active boot partition used by the gateway module
           type: string
         cpld_version:
+          description: CPLD firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         fans:
+          description: Cooling fan status records for the gateway module
           $ref: '#/components/schemas/module_stat_item_fans'
         fpga_version:
+          description: FPGA firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         last_seen:
+          description: Time when Mist last observed this gateway module, in epoch
+            seconds
           $ref: '#/components/schemas/last_seen'
         locating:
+          description: Whether the gateway module locator indicator is active
           type: boolean
         mac:
+          description: Gateway module MAC address reported by Mist
           examples:
           - fc3342123456
           type: string
         memory_stat:
+          description: Utilization statistics for gateway module memory
           $ref: '#/components/schemas/memory_stat'
         model:
+          description: Gateway module model name reported by Mist
           examples:
           - EX4300-48P
           readOnly: true
@@ -101303,42 +101317,53 @@ components:
           - string
           - 'null'
         network_resources:
+          description: Network resource utilization counters for the gateway module
           $ref: '#/components/schemas/module_stat_item_network_resources'
         optics_cpld_version:
+          description: Optics CPLD firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         pending_version:
+          description: Pending software version staged for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         poe:
+          description: Power over Ethernet telemetry for the gateway module
           $ref: '#/components/schemas/module_stat_item_poe'
         poe_version:
+          description: PoE controller firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         power_cpld_version:
+          description: Power CPLD firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         psus:
+          description: Power supply status records for the gateway module
           $ref: '#/components/schemas/module_stat_item_psus'
         re_fpga_version:
+          description: Routing Engine FPGA firmware version reported for the gateway
+            module
           readOnly: true
           type:
           - string
           - 'null'
         recovery_version:
+          description: Recovery software version stored on the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         serial:
+          description: Gateway module serial number reported by Mist
           examples:
           - PX8716230021
           readOnly: true
@@ -101346,36 +101371,44 @@ components:
           - string
           - 'null'
         status:
+          description: Connection status reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         temperatures:
+          description: Temperature sensor readings for the gateway module
           $ref: '#/components/schemas/module_stat_item_temperatures'
         tmc_fpga_version:
+          description: TMC FPGA firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         uboot_version:
+          description: U-Boot firmware version reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         uptime:
+          description: Elapsed time since the gateway module last booted, in seconds
           readOnly: true
           type:
           - integer
           - 'null'
         vc_links:
+          description: Virtual chassis link records for the gateway module
           $ref: '#/components/schemas/module_stat_item_vc_links'
         vc_mode:
+          description: Virtual chassis mode reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         vc_role:
-          description: 'enum: `master`, `backup`, `linecard`'
+          description: 'Virtual chassis role reported for the gateway module. enum:
+            `master`, `backup`, `linecard`'
           examples:
           - master
           readOnly: true
@@ -101383,11 +101416,13 @@ components:
           - string
           - 'null'
         vc_state:
+          description: Virtual chassis state reported for the gateway module
           readOnly: true
           type:
           - string
           - 'null'
         version:
+          description: Software version running on the gateway module
           readOnly: true
           type:
           - string
