@@ -116921,8 +116921,10 @@ components:
       type: object
     wlan_qos:
       additionalProperties: false
+      description: QoS override settings for WLAN client traffic
       properties:
         class:
+          description: QoS traffic class applied when WLAN QoS override is enabled
           $ref: '#/components/schemas/wlan_qos_class'
         overwrite:
           default: false
@@ -116961,8 +116963,10 @@ components:
       properties:
         enabled:
           default: false
+          description: Whether the WLAN operating schedule is enabled
           type: boolean
         hours:
+          description: Time ranges when the WLAN is scheduled to operate
           $ref: '#/components/schemas/hours'
       type: object
     wlan_vlan_id_with_variable:
