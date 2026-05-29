@@ -111850,6 +111850,7 @@ components:
       type: array
     webhook_asset_raw_rssi_event_service_packet:
       additionalProperties: false
+      description: BLE service data decoded from an asset raw RSSI packet
       properties:
         service_data:
           description: optional, data from service data
@@ -111863,10 +111864,12 @@ components:
           - 'null'
       type: object
     webhook_asset_raw_rssi_event_service_packets:
+      description: BLE service data packets decoded from an asset raw RSSI event
       items:
         $ref: '#/components/schemas/webhook_asset_raw_rssi_event_service_packet'
       type: array
     webhook_asset_raw_rssi_events:
+      description: Asset raw RSSI events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_asset_raw_rssi_event'
       minItems: 1
@@ -111943,6 +111946,7 @@ components:
           $ref: '#/components/schemas/timestamp'
       type: object
     webhook_client_info_events:
+      description: Client information events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_client_info_event'
       type: array
@@ -112034,6 +112038,7 @@ components:
       - wlan_id
       type: object
     webhook_client_join_events:
+      description: Client join events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_client_join_event'
       minItems: 1
@@ -112120,6 +112125,7 @@ components:
           $ref: '#/components/schemas/timestamp'
       type: object
     webhook_client_latency_events:
+      description: Client latency summary events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_client_latency_event'
       type: array
@@ -112252,6 +112258,7 @@ components:
       - wlan_id
       type: object
     webhook_client_sessions_events:
+      description: Client session events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_client_sessions_event'
       minItems: 1
@@ -112449,6 +112456,7 @@ components:
       - type
       type: object
     webhook_device_updowns_events:
+      description: Device up/down events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_device_updowns_event'
       minItems: 1
@@ -112546,6 +112554,7 @@ components:
         type: number
       type: array
     webhook_discovered_raw_rssi_events:
+      description: Discovered BLE raw RSSI events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_discovered_raw_rssi_event'
       type: array
@@ -112851,6 +112860,7 @@ components:
           type: number
       type: object
     webhook_location_centrak_event_type:
+      description: Location object type for CenTrak Wi-Fi beacon events
       enum:
       - wifi
       type: string
@@ -113224,6 +113234,7 @@ components:
           type: integer
       type: object
     webhook_minis_application_events:
+      description: Marvis Minis application test events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_minis_application_event'
       type: array
@@ -113313,6 +113324,7 @@ components:
           type: integer
       type: object
     webhook_minis_reachability_events:
+      description: Marvis Minis reachability test events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_minis_reachability_event'
       type: array
@@ -113422,6 +113434,7 @@ components:
           type: string
       type: object
     webhook_nac_accounting_events:
+      description: NAC accounting events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_nac_accounting_event'
       type: array
@@ -113552,6 +113565,7 @@ components:
       - zone_name
       type: object
     webhook_occupancy_alerts_events:
+      description: Occupancy alert batches included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_occupancy_alerts_event'
       minItems: 1
@@ -113603,6 +113617,7 @@ components:
       - timestamp
       type: object
     webhook_ping_events:
+      description: Ping events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_ping_event'
       minItems: 1
@@ -113665,6 +113680,7 @@ components:
       - type
       type: object
     webhook_rssizone_events:
+      description: RSSI zone transition events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_rssizone_event'
       minItems: 1
@@ -113731,6 +113747,7 @@ components:
       - site_id
       type: object
     webhook_sdkclient_scan_data_event_scan_data:
+      description: Background Wi-Fi scan observations reported by an SDK client
       items:
         $ref: '#/components/schemas/webhook_sdkclient_scan_data_event_scan_data_item'
       minItems: 1
@@ -113738,6 +113755,7 @@ components:
       uniqueItems: true
     webhook_sdkclient_scan_data_event_scan_data_item:
       additionalProperties: false
+      description: Single BSSID observation from an SDK client's background Wi-Fi scan
       properties:
         ap:
           description: MAC address of the AP associated with the BSSID scanned
@@ -113773,6 +113791,7 @@ components:
       - timestamp
       type: object
     webhook_sdkclient_scan_data_events:
+      description: SDK client scan data events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_sdkclient_scan_data_event'
       minItems: 1
@@ -113835,10 +113854,12 @@ components:
           type: number
       type: object
     webhook_site_sle_events:
+      description: Site SLE score events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_site_sle_event'
       type: array
     webhook_site_sle_topic:
+      description: Webhook topic name for site SLE score deliveries
       enum:
       - site-sle
       type: string
@@ -113960,10 +113981,12 @@ components:
           type: integer
       type: object
     webhook_wifi_conn_raw_event_packets:
+      description: RSSI packet observations for a connected Wi-Fi raw event
       items:
         $ref: '#/components/schemas/webhook_wifi_conn_raw_event_packet'
       type: array
     webhook_wifi_conn_raw_events:
+      description: Connected Wi-Fi raw packet events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_wifi_conn_raw_event'
       minItems: 1
@@ -114053,10 +114076,12 @@ components:
           type: integer
       type: object
     webhook_wifi_unconn_raw_event_packets:
+      description: RSSI packet observations for an unconnected Wi-Fi raw event
       items:
         $ref: '#/components/schemas/webhook_wifi_unconn_raw_event_packet'
       type: array
     webhook_wifi_unconn_raw_events:
+      description: Unconnected Wi-Fi raw packet events included in a webhook delivery
       items:
         $ref: '#/components/schemas/webhook_wifi_unconn_raw_event'
       minItems: 1
@@ -114153,6 +114178,7 @@ components:
       - zone
       type: string
     webhooks:
+      description: Webhook configuration records returned by a list response
       items:
         $ref: '#/components/schemas/webhook'
       type: array
