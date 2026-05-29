@@ -99301,15 +99301,17 @@ components:
       type: object
     stats_ap_auto_placement:
       additionalProperties: false
+      description: Auto placement result and status for an AP
       properties:
         info:
           $ref: '#/components/schemas/stats_ap_auto_placement_info'
+          description: Additional diagnostics for the AP auto placement result
         recommended_anchor:
           description: Flag to represent if AP is recommended as an anchor by auto
             placement service
           type: boolean
         status:
-          description: Basic Placement Status
+          description: Current auto placement status for the AP
           examples:
           - localized
           type: string
@@ -99319,25 +99321,25 @@ components:
           - localized
           type: string
         x:
-          description: X Autoplaced Position in pixels
+          description: Auto-placed X coordinate, in pixels
           examples:
           - 53.5
           format: double
           type: number
         x_m:
-          description: X Autoplaced Position in meters
+          description: Auto-placed X coordinate, in meters
           examples:
           - 5.35
           format: double
           type: number
         y:
-          description: Y Autoplaced Position in pixels
+          description: Auto-placed Y coordinate, in pixels
           examples:
           - 173.1
           format: double
           type: number
         y_m:
-          description: X Autoplaced Position in meters
+          description: Auto-placed Y coordinate, in meters
           examples:
           - 17.31
           format: double
@@ -99345,7 +99347,7 @@ components:
       type: object
     stats_ap_auto_placement_info:
       additionalProperties: false
-      description: Additional information about auto placements AP data
+      description: Additional diagnostics for AP auto placement
       properties:
         cluster_number:
           description: All APs sharing a given cluster number can be placed relative
@@ -99360,11 +99362,11 @@ components:
           type: integer
         probability_surface:
           $ref: '#/components/schemas/stats_ap_auto_placement_info_probability_surface'
+          description: Uncertainty area for the AP auto placement result
       type: object
     stats_ap_auto_placement_info_probability_surface:
       additionalProperties: false
-      description: Coordinates representing a circle where the AP is most likely exists
-        in the event of an inaccurate placement result
+      description: Circular uncertainty area for an AP auto placement result
       properties:
         radius:
           description: The radius representing placement uncertainty, measured in
@@ -99377,8 +99379,7 @@ components:
             meters
           type: number
         x:
-          description: "Y-coordinate of the potential placement\u2019s center, measured\
-            \ in pixels"
+          description: Potential placement center X coordinate, in pixels
           examples:
           - 17
           format: double
@@ -99386,8 +99387,10 @@ components:
       type: object
     stats_ap_auto_upgrade:
       additionalProperties: false
+      description: Auto-upgrade status for an AP
       properties:
         lastcheck:
+          description: Time when the AP last checked for auto-upgrade, in epoch seconds
           examples:
           - 1720594762
           format: int64
