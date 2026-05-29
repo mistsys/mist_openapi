@@ -93989,25 +93989,35 @@ components:
     service_stat:
       additionalProperties:
         $ref: '#/components/schemas/service_stat_property'
+      description: Service version information keyed by service name
       type: object
     service_stat_property:
       additionalProperties: false
+      description: Version information for gateway service packages
       properties:
         ash_version:
+          description: Version of the ASH service package
           type: string
         cia_version:
+          description: Version of the CIA service package
           type: string
         ember_version:
+          description: Version of the Ember service package
           type: string
         ipsec_client_version:
+          description: Version of the IPsec client package
           type: string
         mist_agent_version:
+          description: Version of the Mist agent package
           type: string
         package_version:
+          description: Version of the service package
           type: string
         testing_tools_version:
+          description: Version of the testing tools package
           type: string
         wheeljack_version:
+          description: Version of the Wheeljack service package
           type: string
       type: object
     service_traffic_class:
