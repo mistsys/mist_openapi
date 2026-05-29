@@ -112451,12 +112451,14 @@ components:
       type: object
     webhook_location_centrak_event:
       additionalProperties: false
+      description: CenTrak location update with map coordinates and Wi-Fi beacon
+        metadata
       properties:
         mac:
-          description: MAC address of the device
+          description: Device MAC address used as the CenTrak location identifier
           type: string
         map_id:
-          description: Map id
+          description: Identifier of the map where the CenTrak location was calculated
           type: string
         mfg_company_id:
           description: Optional, BLE manufacturing company ID
@@ -112466,20 +112468,25 @@ components:
             (i.e. "112233AABBCC")
           type: string
         site_id:
+          description: Site associated with the CenTrak location event
           format: uuid
           type: string
         timestamp:
+          description: Time when the CenTrak location was calculated, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Location object type for the CenTrak event
           $ref: '#/components/schemas/webhook_location_centrak_event_type'
         wifi_beacon_extended_info:
+          description: Extended Wi-Fi beacon metadata included with this CenTrak
+            location event
           $ref: '#/components/schemas/wifi_beacon_extended_info'
         x:
-          description: x, in meter
+          description: Horizontal map coordinate of the CenTrak device, in meters
           format: double
           type: number
         y:
-          description: y, in meter
+          description: Vertical map coordinate of the CenTrak device, in meters
           format: double
           type: number
       type: object
@@ -112669,33 +112676,42 @@ components:
       type: object
     webhook_location_sdk_event:
       additionalProperties: false
+      description: SDK client location update with map coordinates
       properties:
         id:
+          description: Unique identifier of the SDK client for this location event
           $ref: '#/components/schemas/id'
         map_id:
+          description: Map where the SDK client location was calculated
           examples:
           - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
           format: uuid
           type: string
         name:
+          description: Display name of the SDK client when available
           examples:
           - optional
           type: string
         site_id:
+          description: Site associated with the SDK client location event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the SDK client location was calculated, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Location object type for the SDK client event; defaults to
+            `sdk`
           default: sdk
           type: string
         x:
-          description: x, in meter
+          description: Horizontal map coordinate of the SDK client, in meters
           examples:
           - 13.5
           format: double
           type: number
         y:
-          description: y, in meter
+          description: Vertical map coordinate of the SDK client, in meters
           examples:
           - 3.2
           format: double
