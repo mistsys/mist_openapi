@@ -88538,18 +88538,25 @@ components:
       type: object
     response_events_devices:
       additionalProperties: false
+      description: Paginated response for site device event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the device event search window
           type: integer
         limit:
+          description: Maximum number of device event records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of device event records
           type: string
         results:
+          description: Device event records matching the search filters
           $ref: '#/components/schemas/device_events'
         start:
+          description: Epoch timestamp for the start of the device event search window
           type: integer
         total:
+          description: Number of device event records matching the search filters across all pages
           type: integer
       required:
       - end
@@ -88560,18 +88567,22 @@ components:
       type: object
     response_events_fastroam:
       additionalProperties: false
+      description: Paginated response for fast roaming event results
       properties:
         end:
+          description: Epoch timestamp for the end of the roaming event search window
           type: integer
         limit:
+          description: Maximum number of roaming event records returned in this page
           type: integer
         next:
-          description: Link to query next set of results. value is null if no next
-            page exists.
+          description: Pagination cursor or URL for retrieving the next page of roaming event records; null when no next page exists
           type: string
         results:
+          description: Fast roaming event records matching the search filters
           $ref: '#/components/schemas/response_events_fastroam_results'
         start:
+          description: Epoch timestamp for the start of the roaming event search window
           type: integer
       required:
       - start
@@ -88586,48 +88597,62 @@ components:
       uniqueItems: true
     response_events_nac_client_search:
       additionalProperties: false
+      description: Paginated response for NAC client event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the NAC client event search window
           examples:
           - 1513176951
           type: integer
         limit:
+          description: Maximum number of NAC client event records returned in this page
           examples:
           - 10
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of NAC client event records
           type: string
         results:
+          description: NAC client event records matching the search filters
           $ref: '#/components/schemas/nac_client_events'
         start:
+          description: Epoch timestamp for the start of the NAC client event search window
           examples:
           - 1512572151
           type: integer
         total:
+          description: Number of NAC client event records matching the search filters across all pages
           examples:
           - 1
           type: integer
       type: object
     response_events_orgs_search:
       additionalProperties: false
+      description: Paginated response for organization event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the organization event search window
           examples:
           - 1688035193
           type: integer
         limit:
+          description: Maximum number of organization event records returned in this page
           examples:
           - 10
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of organization event records
           type: string
         results:
+          description: Organization event records matching the search filters
           $ref: '#/components/schemas/response_events_orgs_search_results'
         start:
+          description: Epoch timestamp for the start of the organization event search window
           examples:
           - 1687948793
           type: integer
         total:
+          description: Number of organization event records matching the search filters across all pages
           type: integer
       type: object
     response_events_orgs_search_results:
@@ -88636,40 +88661,54 @@ components:
       type: array
     response_events_other_devices_search:
       additionalProperties: false
+      description: Paginated response for other-device event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the other-device event search window
           type: integer
         limit:
+          description: Maximum number of other-device event records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of other-device event records
           type: string
         results:
+          description: Other-device event data matching the search filters
           $ref: '#/components/schemas/event_otherdevice'
         start:
+          description: Epoch timestamp for the start of the other-device event search window
           type: integer
         total:
+          description: Number of other-device event records matching the search filters across all pages
           type: integer
       type: object
     response_events_path_search:
       additionalProperties: false
+      description: Paginated response for service path event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the service path event search window
           examples:
           - 1697096379
           type: integer
         limit:
+          description: Maximum number of service path event records returned in this page
           examples:
           - 10
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of service path event records
           type: string
         results:
+          description: Service path event records matching the search filters
           $ref: '#/components/schemas/response_events_path_search_results'
         start:
+          description: Epoch timestamp for the start of the service path event search window
           examples:
           - 1697009979
           type: integer
         total:
+          description: Number of service path event records matching the search filters across all pages
           examples:
           - 2
           type: integer
@@ -88680,18 +88719,25 @@ components:
       type: array
     response_events_rogue_search:
       additionalProperties: false
+      description: Paginated response for rogue AP event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the rogue AP event search window
           type: integer
         limit:
+          description: Maximum number of rogue AP event records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of rogue AP event records
           type: string
         results:
+          description: Rogue AP event records matching the search filters
           $ref: '#/components/schemas/response_events_rogue_search_results'
         start:
+          description: Epoch timestamp for the start of the rogue AP event search window
           type: integer
         total:
+          description: Number of rogue AP event records matching the search filters across all pages
           type: integer
       required:
       - end
@@ -88707,18 +88753,22 @@ components:
       uniqueItems: true
     response_events_rrm:
       additionalProperties: false
+      description: Paginated response for RRM event results
       properties:
         end:
+          description: Epoch timestamp for the end of the RRM event search window
           type: integer
         limit:
+          description: Maximum number of RRM event records returned in this page
           type: integer
         next:
-          description: Link to query next set of results. value is null if no next
-            page exists.
+          description: Pagination cursor or URL for retrieving the next page of RRM event records; null when no next page exists
           type: string
         results:
+          description: RRM event records matching the search filters
           $ref: '#/components/schemas/response_events_rrm_results'
         start:
+          description: Epoch timestamp for the start of the RRM event search window
           type: integer
       required:
       - end
@@ -88733,18 +88783,25 @@ components:
       uniqueItems: true
     response_events_search:
       additionalProperties: false
+      description: Paginated response for wireless client event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the wireless client event search window
           type: integer
         limit:
+          description: Maximum number of wireless client event records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of wireless client event records
           type: string
         results:
+          description: Wireless client event records matching the search filters
           $ref: '#/components/schemas/response_events_search_results'
         start:
+          description: Epoch timestamp for the start of the wireless client event search window
           type: integer
         total:
+          description: Number of wireless client event records matching the search filters across all pages
           type: integer
       required:
       - start
@@ -88760,18 +88817,25 @@ components:
       uniqueItems: true
     response_events_sky_atp_search:
       additionalProperties: false
+      description: Paginated response for Sky ATP event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the Sky ATP event search window
           type: integer
         limit:
+          description: Maximum number of Sky ATP event records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of Sky ATP event records
           type: string
         results:
+          description: Sky ATP event records matching the search filters
           $ref: '#/components/schemas/response_events_sky_atp_search_results'
         start:
+          description: Epoch timestamp for the start of the Sky ATP event search window
           type: integer
         total:
+          description: Number of Sky ATP event records matching the search filters across all pages
           type: integer
       required:
       - end
