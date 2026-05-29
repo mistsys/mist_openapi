@@ -109070,6 +109070,7 @@ components:
     upgrade_device_rule:
       additionalProperties:
         type: string
+      description: Device selection rule keyed by match criterion, with string values to match
       type: object
     upgrade_device_rules:
       description: "Rules used to identify devices which will be selected for upgrade.\
@@ -109435,6 +109436,7 @@ components:
         $ref: '#/components/schemas/upgrade_org_devices_item_site_upgrade'
       type: array
     upgrade_org_devices_list:
+      description: Organization device upgrade jobs returned by a list response
       items:
         $ref: '#/components/schemas/upgrade_org_devices_item'
       type: array
@@ -109624,6 +109626,7 @@ components:
       type: object
     upgrade_site_devices_counts:
       additionalProperties: false
+      description: Device counts grouped by status for a site upgrade job
       properties:
         download_requested:
           description: Count of devices which cloud has requested to download firmware
@@ -109662,6 +109665,7 @@ components:
         type: string
       type: array
     usage_org_licenses:
+      description: Organization license usage records returned by a usage response
       items:
         $ref: '#/components/schemas/license_usage_org'
       type: array
@@ -109883,6 +109887,7 @@ components:
         type: string
       type: array
     utils_cable_tests:
+      description: Request body for running a switch cable test on a port
       properties:
         port:
           description: The port to run the cable test
@@ -110055,6 +110060,7 @@ components:
           type: string
       type: object
     utils_monitor_traffic:
+      description: Request body for monitoring traffic on one port or all ports
       properties:
         port:
           description: Interface name to monitor; omit this field to monitor all
@@ -110660,6 +110666,7 @@ components:
         type: string
       type: array
     utils_zeroize_fips:
+      description: Request body for confirming FIPS AP zeroize operations
       properties:
         password:
           description: Confirmation password for the FIPS zeroize operation
@@ -110670,6 +110677,7 @@ components:
       type: object
     utils_zigbee_join:
       additionalProperties: false
+      description: Request body for temporarily allowing Zigbee end-device joins
       properties:
         duration:
           default: 600
@@ -110680,6 +110688,7 @@ components:
           type: integer
       type: object
     uuids:
+      description: UUID string values
       items:
         format: uuid
         type: string
@@ -110817,6 +110826,7 @@ components:
           type: number
       type: object
     vbeacons:
+      description: Virtual beacon records returned by a list response
       items:
         $ref: '#/components/schemas/vbeacon'
       type: array
@@ -111005,6 +111015,7 @@ components:
       - zone
       type: string
     vlan_id_with_variable:
+      description: VLAN ID, either numeric or expressed as a template variable string
       oneOf:
       - type: string
       - maximum: 4094
@@ -111273,16 +111284,19 @@ components:
       type: array
       uniqueItems: true
     vpn_type:
+      description: VPN type for tunnel or peer configuration
       enum:
       - ipsec
       - svr
       type: string
     vpns:
+      description: VPN records returned by a list response
       items:
         $ref: '#/components/schemas/vpn'
       type: array
     vrf_config:
       additionalProperties: false
+      description: VRF enablement settings applied when supported on the device
       properties:
         enabled:
           description: Whether to enable VRF (when supported on the device)
@@ -111418,6 +111432,7 @@ components:
           $ref: '#/components/schemas/vs_instance_property_networks'
       type: object
     vs_instance_property_networks:
+      description: Network names included in a virtual-switch instance
       items:
         examples:
         - guest
@@ -111506,6 +111521,7 @@ components:
       - tenant
       type: string
     wayfinding_import_json:
+      description: Vendor wayfinding map metadata imported from Jibestream or Micello
       oneOf:
       - $ref: '#/components/schemas/map_jibestream'
       - $ref: '#/components/schemas/map_micello'
