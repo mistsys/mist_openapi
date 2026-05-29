@@ -91774,16 +91774,20 @@ components:
       type: object
     response_wired_coa:
       additionalProperties: false
+      description: Response returned after triggering wired client CoA reauthentication
       properties:
         device_mac:
+          description: MAC address of the switch or gateway hosting the wired client session
           examples:
           - 5c5b35000002
           type: string
         port_id:
+          description: Interface identifier for the wired client session
           examples:
           - ge-0/0/0
           type: string
         session:
+          description: RADIUS session identifier used for the CoA request
           examples:
           - 0a2a11b8-4b30-40d8-a6d1-e91ea540d86f
           format: uuid
