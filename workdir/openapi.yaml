@@ -91130,20 +91130,26 @@ components:
       uniqueItems: true
     response_sso_failure_search:
       additionalProperties: false
+      description: Response containing recent SSO authentication failure records
       properties:
         results:
+          description: SSO authentication failure records returned by the request
           $ref: '#/components/schemas/response_sso_failure_search_results'
       required:
       - results
       type: object
     response_sso_failure_search_item:
       additionalProperties: false
+      description: SSO authentication failure record
       properties:
         detail:
+          description: Failure details reported for the SSO authentication attempt
           type: string
         saml_assertion_xml:
+          description: SAML assertion XML captured for the failed SSO authentication attempt
           type: string
         timestamp:
+          description: Epoch timestamp, in seconds, when the SSO authentication failure occurred
           $ref: '#/components/schemas/timestamp'
       required:
       - timestamp
@@ -91151,26 +91157,33 @@ components:
       - saml_assertion_xml
       type: object
     response_sso_failure_search_results:
+      description: SSO authentication failure records returned by the request
       items:
         $ref: '#/components/schemas/response_sso_failure_search_item'
       type: array
       uniqueItems: true
     response_ssr_export_id_tokens:
       additionalProperties: false
+      description: Response containing SSR ID tokens exported for device onboarding
       properties:
         results:
+          description: Exported SSR ID token records for the requested devices
           $ref: '#/components/schemas/response_ssr_export_id_tokens_results'
       type: object
     response_ssr_export_id_tokens_results:
+      description: Exported SSR ID token records
       items:
         $ref: '#/components/schemas/response_ssr_export_id_tokens_results_item'
       type: array
     response_ssr_export_id_tokens_results_item:
       additionalProperties: false
+      description: SSR ID token record for a device
       properties:
         mac:
+          description: SSR device MAC address for the exported ID token
           type: string
         token:
+          description: ID token to import into Conductor for SSR device onboarding
           type: string
       type: object
     response_ssr_upgrade:
