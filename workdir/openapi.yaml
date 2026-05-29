@@ -88025,18 +88025,25 @@ components:
       type: array
     response_config_history_search:
       additionalProperties: false
+      description: Paginated device config history search response
       properties:
         end:
+          description: Search window end timestamp for config history, in epoch seconds
           type: integer
         limit:
+          description: Maximum number of config history entries requested
           type: integer
         next:
+          description: URL for the next page of config history results
           type: string
         results:
           $ref: '#/components/schemas/response_config_history_search_results'
+          description: Device config history entries returned for this page
         start:
+          description: Search window start timestamp for config history, in epoch seconds
           type: integer
         total:
+          description: Number of config history entries matching the search
           type: integer
       required:
       - end
@@ -88047,29 +88054,41 @@ components:
       type: object
     response_config_history_search_item:
       additionalProperties: false
+      description: Device config history entry
       properties:
         channel_24:
+          description: 2.4 GHz channel configured in this history entry
           type: integer
         channel_5:
+          description: 5 GHz channel configured in this history entry
           type: integer
         radio_macs:
           $ref: '#/components/schemas/strings'
+          description: Radio MAC addresses included in this config history entry
         radios:
           $ref: '#/components/schemas/response_config_history_search_item_radios'
+          description: Radio configuration details included in this history entry
         secpolicy_violated:
+          description: Whether the device configuration violated a security policy
           type: boolean
         ssids:
           $ref: '#/components/schemas/strings'
+          description: WLAN SSIDs included in this config history entry
         ssids_24:
           $ref: '#/components/schemas/strings'
+          description: 2.4 GHz WLAN SSIDs included in this config history entry
         ssids_5:
           $ref: '#/components/schemas/strings'
+          description: 5 GHz WLAN SSIDs included in this config history entry
         timestamp:
           $ref: '#/components/schemas/timestamp'
+          description: Epoch timestamp when this config history entry was recorded
         version:
+          description: Configuration version associated with this history entry
           type: string
         wlans:
           $ref: '#/components/schemas/response_config_history_search_item_wlans'
+          description: WLAN configuration details included in this history entry
       required:
       - channel_24
       - channel_5
@@ -88079,44 +88098,56 @@ components:
       type: object
     response_config_history_search_item_radio:
       additionalProperties: false
+      description: Radio config history detail
       properties:
         band:
+          description: Radio band for this config history detail
           type: string
         channel:
+          description: Configured channel for this radio
           type: integer
       required:
       - band
       - channel
       type: object
     response_config_history_search_item_radios:
+      description: Radio config history details
       items:
         $ref: '#/components/schemas/response_config_history_search_item_radio'
       type: array
       uniqueItems: true
     response_config_history_search_item_wlan:
       additionalProperties: false
+      description: WLAN config history detail
       properties:
         auth:
+          description: Configured authentication method for this WLAN
           type: string
         bands:
           $ref: '#/components/schemas/strings'
+          description: Radio bands where this WLAN was configured
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier of the WLAN configuration
         ssid:
+          description: WLAN SSID for this config history detail
           type: string
         vlan_ids:
           $ref: '#/components/schemas/strings'
+          description: VLAN IDs configured for this WLAN
       required:
       - auth
       - id
       - ssid
       type: object
     response_config_history_search_item_wlans:
+      description: WLAN config history details
       items:
         $ref: '#/components/schemas/response_config_history_search_item_wlan'
       type: array
       uniqueItems: true
     response_config_history_search_results:
+      description: Device config history entries returned by a search response
       items:
         $ref: '#/components/schemas/response_config_history_search_item'
       type: array
