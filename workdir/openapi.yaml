@@ -89838,44 +89838,59 @@ components:
       - $ref: '#/components/schemas/org_site_wan_wifi'
     response_org_suppress_alarm:
       additionalProperties: false
+      description: Response containing currently suppressed organization alarm entries
       properties:
         results:
+          description: Suppressed alarm entries currently configured for the organization
           $ref: '#/components/schemas/response_org_suppress_alarm_results'
       type: object
     response_org_suppress_alarm_item:
       additionalProperties: false
+      description: Suppressed alarm entry for an organization or site alarm scope
       properties:
         duration:
-          description: Duration, in seconds. Maximum duration is 86400 * 14 (14 days).
-            0 is to un-suppress alarms.
+          description: Number of seconds that alarms remain suppressed. Maximum duration
+            is 86400 * 14 (14 days). Use 0 to remove suppression.
           type: integer
         expire_time:
+          description: Epoch timestamp, in seconds, when the alarm suppression expires
           type: integer
         scheduled_time:
+          description: Epoch timestamp, in seconds, when the alarm suppression starts
           type: integer
         scope:
+          description: Alarm suppression scope, either organization-wide or site-specific
           $ref: '#/components/schemas/suppressed_alarm_scope'
         site_id:
+          description: Site identifier for a site-scoped alarm suppression entry
           $ref: '#/components/schemas/site_id'
       type: object
     response_org_suppress_alarm_results:
+      description: Suppressed alarm entries returned for the organization
       items:
         $ref: '#/components/schemas/response_org_suppress_alarm_item'
       type: array
     response_org_system_events_search:
       additionalProperties: false
+      description: Paginated response for organization system event search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the system event search window
           type: integer
         limit:
+          description: Maximum number of system event records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of system event search results
           type: string
         results:
+          description: Organization system event records matching the search filters
           $ref: '#/components/schemas/response_org_system_events_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the system event search window
           type: integer
         total:
+          description: Number of system event records matching the search filters across all pages
           type: integer
       required:
       - results
@@ -89885,6 +89900,7 @@ components:
       - total
       type: object
     response_org_system_events_search_results:
+      description: Organization system event records returned by search
       items:
         $ref: '#/components/schemas/org_system_event'
       type: array
