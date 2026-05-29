@@ -100720,72 +100720,97 @@ components:
       type: object
     stats_device_other_interface:
       additionalProperties: false
+      description: Network interface statistics for a third-party device tracked by
+        Mist
       properties:
         bytes_in:
+          description: Total bytes received on the interface
           examples:
           - 5623096929
           type: integer
         bytes_out:
+          description: Total bytes transmitted from the interface
           examples:
           - 12372750366
           type: integer
         carrier:
+          description: Cellular carrier name reported for the interface, when applicable
           examples:
           - Orange
           type: string
         imei:
+          description: Modem IMEI serving the interface, when applicable
           examples:
           - '866401234567893'
           type: string
         imsi:
+          description: Subscriber IMSI associated with the interface, when
+            applicable
           examples:
           - '2080101234567893'
           type: string
         ip:
+          description: Interface IP address reported by the vendor
           examples:
           - 10.134.237.57
           type: string
         link:
+          description: Whether the interface link is up
           examples:
           - true
           type: boolean
         mode:
+          description: Interface role reported by the vendor, such as wan or lan
           examples:
           - wan
           type: string
         mtu:
+          description: Maximum transmission unit configured on the interface, in bytes
           examples:
           - 1500
           type: integer
         rsrp:
+          description: Reference signal received power for a cellular interface, in
+            dBm
           examples:
           - -108.0
           type: number
         rsrq:
+          description: Reference signal received quality for a cellular interface,
+            in dB
           examples:
           - -14.0
           type: number
         rssi:
+          description: Received signal strength indicator for a cellular interface,
+            in dBm
           examples:
           - -74
           type: integer
         service_mode:
+          description: Cellular service mode reported for the interface, such as 5G
+            NSA
           examples:
           - 5G NSA
           type: string
         sinr:
+          description: Signal-to-interference-plus-noise ratio for a cellular interface,
+            in dB
           examples:
           - -1.2
           type: number
         state:
+          description: Operational state reported for the interface
           examples:
           - READY
           type: string
         type:
+          description: Interface type reported by the vendor, such as mdm or ethernet
           examples:
           - mdm
           type: string
         uptime:
+          description: Elapsed time since the interface last became active, in seconds
           examples:
           - 2095779
           type: integer
@@ -100797,11 +100822,14 @@ components:
       type: object
     stats_device_other_vendor_specific:
       additionalProperties: false
-      description: When `vendor`==`cradlepoint`
+      description: When `vendor`==`cradlepoint`, contains Cradlepoint-specific statistics
+        reported for the other device
       properties:
         interfaces:
           additionalProperties:
             $ref: '#/components/schemas/stats_device_other_vendor_specific_port'
+          description: Cradlepoint interface statistics keyed by vendor interface
+            identifier
           examples:
           - mdm-4d0e073b:
               bytes_in: 5623096929
@@ -100822,86 +100850,116 @@ components:
               uptime: 2095779
           type: object
         target_version:
+          description: Cradlepoint software version targeted for the device
           examples:
           - 7.23.40
           type: string
       type: object
     stats_device_other_vendor_specific_port:
       additionalProperties: false
+      description: Cradlepoint interface statistics for a device tracked by Mist
       properties:
         bytes_in:
+          description: Total bytes received on the Cradlepoint interface
           examples:
           - 5623096929
           type: integer
         bytes_out:
+          description: Total bytes transmitted from the Cradlepoint interface
           examples:
           - 12372750366
           type: integer
         carrier:
+          description: Cellular carrier name reported for the Cradlepoint interface,
+            when applicable
           examples:
           - Orange
           type: string
         display_name:
+          description: Human-readable interface name reported by Cradlepoint
           examples:
           - mdm-4d0e073b
           type: string
         imei:
+          description: Modem IMEI serving the Cradlepoint interface, when applicable
           examples:
           - '866401234567893'
           type: string
         imsi:
+          description: Subscriber IMSI associated with the Cradlepoint interface,
+            when applicable
           examples:
           - '2080101234567893'
           type: string
         ip:
+          description: Cradlepoint interface IP address reported by the vendor
           examples:
           - 10.134.237.57
           type: string
         link:
+          description: Whether the Cradlepoint interface link is up
           examples:
           - true
           type: boolean
         mode:
+          description: Interface role reported by Cradlepoint, such as wan or lan
           examples:
           - wan
           type: string
         mtu:
+          description: Maximum transmission unit configured on the Cradlepoint interface,
+            in bytes
           examples:
           - 1500
           type: integer
         port_parent:
+          description: Parent Cradlepoint port or interface group for this interface
           examples:
           - mdm
           type: string
         rsrp:
+          description: Reference signal received power for a Cradlepoint cellular
+            interface, in dBm
           examples:
           - -108
           type: number
         rsrq:
+          description: Reference signal received quality for a Cradlepoint cellular
+            interface, in dB
           examples:
           - -14
           type: number
         rssi:
+          description: Received signal strength indicator for a Cradlepoint cellular
+            interface, in dBm
           examples:
           - -74
           type: integer
         service_mode:
+          description: Cellular service mode reported for the Cradlepoint interface,
+            such as 5G NSA
           examples:
           - 5G NSA
           type: string
         sinr:
+          description: Signal-to-interference-plus-noise ratio for a Cradlepoint cellular
+            interface, in dB
           examples:
           - -1.2
           type: number
         state:
+          description: Operational state reported for the Cradlepoint interface
           examples:
           - READY
           type: string
         type:
+          description: Interface type reported by Cradlepoint, such as mdm or ethernet
           examples:
           - mdm
           type: string
         uptime:
+          description: Elapsed time since the Cradlepoint interface last became active,
+            in seconds
           examples:
           - 2095779
           type: integer
