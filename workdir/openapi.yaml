@@ -97254,28 +97254,39 @@ components:
       type: array
     sle_impacted_users:
       additionalProperties: false
+      description: Paginated list of users impacted by an SLE metric
       properties:
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         clients:
           $ref: '#/components/schemas/sle_impacted_users_clients'
+          description: Impacted client rows returned for the SLE query
         end:
+          description: Last timestamp in the impacted users window
           type: number
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         limit:
+          description: Maximum number of impacted user rows returned per page
           type: number
         metric:
+          description: SLE metric name used for the impacted users query
           minLength: 1
           type: string
         page:
+          description: Current page number for impacted user results
           type: number
         start:
+          description: First timestamp in the impacted users window
           type: number
         total_count:
+          description: Number of impacted user rows matching the query
           type: number
         users:
           $ref: '#/components/schemas/sle_impacted_users_users'
+          description: Impacted user rows returned for the SLE query
       required:
       - start
       - end
@@ -97288,54 +97299,76 @@ components:
       type: object
     sle_impacted_users_client:
       additionalProperties: false
+      description: SLE impact row for a client in an impacted users response
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this client
           type: number
         duration:
+          description: Observation time represented by this client impact row
           type: number
         gateways:
           $ref: '#/components/schemas/sle_impacted_client_gateways'
+          description: Gateway rows associated with the impacted client
         mac:
+          description: Client MAC address for the impacted client
           type: string
         name:
+          description: Display name for the client impact row
           type: string
         src_ip:
+          description: Client source IP address for the impacted client
           type: string
         total:
+          description: Overall SLE total measured for this client impact row
           type: number
       type: object
     sle_impacted_users_clients:
+      description: Impacted client rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_users_client'
       type: array
       uniqueItems: true
     sle_impacted_users_user:
       additionalProperties: false
+      description: SLE impact row for a user
       properties:
         ap_mac:
+          description: MAC address of the AP associated with this impacted user
           type: string
         ap_name:
+          description: Display name of the AP associated with this impacted user
           type: string
         degraded:
+          description: Portion of the SLE total that was degraded for this user
           type: number
         device_os:
+          description: Client device OS for this impacted user
           type: string
         device_type:
+          description: Client device type for this impacted user
           type: string
         duration:
+          description: Observation time represented by this user impact row
           type: number
         mac:
+          description: Client MAC address for this impacted user
           type: string
         name:
+          description: Display name for the user impact row
           type: string
         ssid:
+          description: Wireless network SSID used by this impacted user
           type: string
         total:
+          description: Overall SLE total measured for this user impact row
           type: number
         wlan_id:
+          description: Identifier of the WLAN used by this impacted user
           type: string
       type: object
     sle_impacted_users_users:
+      description: Impacted user rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_users_user'
       type: array
