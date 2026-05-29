@@ -111530,8 +111530,10 @@ components:
       description: Sample of the `audits` webhook payload.
       properties:
         events:
+          description: Audit log events included in this webhook delivery
           $ref: '#/components/schemas/log_events'
         topic:
+          description: Webhook topic name for audit event deliveries
           $ref: '#/components/schemas/webhook_audits_topic'
       required:
       - events
@@ -111547,29 +111549,37 @@ components:
       description: Sample of the `client-info` webhook payload.
       properties:
         events:
+          description: Client information events included in this webhook delivery
           $ref: '#/components/schemas/webhook_client_info_events'
         topic:
+          description: Webhook topic name for client information deliveries
           $ref: '#/components/schemas/webhook_client_info_topic'
       type: object
     webhook_client_info_event:
       additionalProperties: false
+      description: Client identity and addressing details delivered by a `client-info`
+        webhook
       properties:
         hostname:
-          description: Hostname of client
+          description: Client hostname reported in the event
           examples:
           - service.company.net
           type: string
         ip:
-          description: IP address of client
+          description: Client IP address reported in the event
           type: string
         mac:
-          description: client's MAC Address
+          description: Client MAC address reported in the event
           type: string
         org_id:
+          description: Organization associated with the client information event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the client information event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the client information event was generated, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
       type: object
     webhook_client_info_events:
