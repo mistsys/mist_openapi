@@ -91862,39 +91862,39 @@ components:
       - sdkclient
       type: string
     rf_diag:
-      description: RF Diag
+      description: RF diagnostic recording request
       properties:
         duration:
           default: 180
-          description: recording length in seconds, max is 180. Default value is also
-            180.
+          description: Recording length, in seconds; maximum and default are 180
           maximum: 180
           type: integer
         mac:
-          description: If `type`==`client` or `asset`, mac of the device
+          description: If `type`==`client` or `asset`, MAC address of the device being recorded
           type: string
         name:
-          description: Name of the recording, the name of the sdk client would be
-            a good default choice
+          description: Recording name; the SDK client name is a good default for SDK-client recordings
           type: string
         sdkclient_id:
-          description: If `type`==`sdkclient`, sdkclient_id of this recording
+          description: If `type`==`sdkclient`, SDK client identifier for this recording
           format: uuid
           type: string
         type:
+          description: Target device category for the RF diagnostic recording
           $ref: '#/components/schemas/rf_client_type'
       required:
       - name
       - type
       type: object
     rf_diag_info:
-      description: RF Diag response
+      description: RF diagnostic recording response entries
       items:
         $ref: '#/components/schemas/rf_diag_info_item'
       type: array
       uniqueItems: true
     rf_diag_info_item:
       additionalProperties: false
+      description: RF diagnostic recording metadata and output links
       properties:
         asset_id:
           description: If `type`==`asset`, id of the asset
@@ -91916,14 +91916,17 @@ components:
           description: Number of frames in the output
           type: integer
         id:
+          description: Unique value identifying the RF diagnostic recording
           $ref: '#/components/schemas/id'
         mac:
-          description: If `type`==`client` or `asset`, mac of the device
+          description: If `type`==`client` or `asset`, MAC address of the recorded device
           type: string
         map_id:
+          description: Map identifier associated with the recording
           format: uuid
           type: string
         name:
+          description: Recording name returned for the RF diagnostic recording
           type: string
         next:
           description: Optional. id of the next recoding if present. Only valid for
@@ -91951,10 +91954,10 @@ components:
           description: Timestamp of the recording (the start)
           type: integer
         type:
+          description: Target device category for the recording
           $ref: '#/components/schemas/rf_client_type'
         url:
-          description: URL to a JSON file that contains an array of frames, each frame
-            is the same format
+          description: JSON file URL for frame data captured by the recording
           type: string
       required:
       - name
@@ -91969,6 +91972,7 @@ components:
       - ready
       type: object
     rf_diag_info_list:
+      description: List response containing RF diagnostic recording entry arrays
       items:
         $ref: '#/components/schemas/rf_diag_info'
       type: array
