@@ -93341,20 +93341,26 @@ components:
       - group
       type: object
     secintel_profile:
+      description: SecIntel profile containing category-specific threat intelligence actions
       properties:
         name:
+          description: Display name of the SecIntel profile
           examples:
           - secintel-custom
           type: string
         profiles:
+          description: Category-specific SecIntel action settings included in this profile
           $ref: '#/components/schemas/secintel_profile_profiles'
       type: object
     secintel_profile_profile:
       additionalProperties: false
+      description: SecIntel action setting for a specific feed category
       properties:
         action:
+          description: Protection level applied to the SecIntel category
           $ref: '#/components/schemas/secintel_profile_profile_action'
         category:
+          description: SecIntel feed category configured by this profile entry
           $ref: '#/components/schemas/secintel_profile_profile_category'
       type: object
     secintel_profile_profile_action:
@@ -93373,10 +93379,12 @@ components:
       - IH
       type: string
     secintel_profile_profiles:
+      description: Category-specific SecIntel action settings
       items:
         $ref: '#/components/schemas/secintel_profile_profile'
       type: array
     secintel_profiles:
+      description: SecIntel profiles returned by list operations
       items:
         $ref: '#/components/schemas/secintel_profile'
       type: array
