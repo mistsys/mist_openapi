@@ -93061,18 +93061,25 @@ components:
       type: array
     search_events_wan_client:
       additionalProperties: false
+      description: Paginated response for WAN client event searches
       properties:
         end:
+          description: Upper bound timestamp of the WAN client event search window, in epoch seconds
           type: integer
         limit:
+          description: Maximum number of WAN client event results returned by this page
           type: integer
         next:
+          description: URL for the next page of WAN client event results, when more results are available
           type: string
         results:
+          description: WAN client event result data returned by the search response
           $ref: '#/components/schemas/events_client_wan'
         start:
+          description: Lower bound timestamp of the WAN client event search window, in epoch seconds
           type: integer
         total:
+          description: Count of WAN client event results matching the search
           type: integer
       type: object
     search_mxedge:
@@ -93147,33 +93154,46 @@ components:
       type: string
     search_wan_client:
       additionalProperties: false
+      description: Paginated response for WAN client searches
       properties:
         end:
+          description: Upper bound timestamp of the WAN client search window, in epoch seconds
           type: integer
         limit:
+          description: Maximum number of WAN client records returned by this page
           type: integer
         next:
+          description: URL for the next page of WAN client records, when more results are available
           type: string
         results:
+          description: WAN client records returned by the search response
           $ref: '#/components/schemas/stats_wan_clients'
         start:
+          description: Lower bound timestamp of the WAN client search window, in epoch seconds
           type: integer
         total:
+          description: Count of WAN client records matching the search
           type: integer
       type: object
     search_wan_usage:
       additionalProperties: false
+      description: Paginated response for WAN usage searches
       properties:
         end:
+          description: Upper bound timestamp of the WAN usage search window, in epoch seconds
           type: number
         limit:
+          description: Maximum number of WAN usage records returned by this page
           type: integer
         results:
+          description: WAN usage records returned by the search response
           $ref: '#/components/schemas/search_wan_usage_results'
         start:
+          description: Lower bound timestamp of the WAN usage search window, in epoch seconds
           type: number
       type: object
     search_wan_usage_results:
+      description: WAN usage records returned by a search response
       items:
         $ref: '#/components/schemas/wan_usages'
       type: array
