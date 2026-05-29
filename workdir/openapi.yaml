@@ -107110,6 +107110,7 @@ components:
       type: array
     test_cradlepoint:
       additionalProperties: false
+      description: Cradlepoint integration connectivity test result
       properties:
         error:
           description: if status is `inactive` this field returns the reason for it
@@ -107120,6 +107121,8 @@ components:
           readOnly: true
           type: string
         last_status:
+          description: Integration status detected during the most recent Cradlepoint
+            sync
           $ref: '#/components/schemas/test_cradlepoint_last_status'
       type: object
     test_cradlepoint_last_status:
