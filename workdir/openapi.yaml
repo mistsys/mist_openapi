@@ -100510,74 +100510,109 @@ components:
       type: array
     stats_cluster_config:
       additionalProperties: false
+      description: High-availability cluster configuration and health reported by
+        a gateway
       properties:
         configuration:
+          description: Configured high-availability mode for the gateway cluster,
+            such as active-active
           type: string
         control_link_info:
+          description: Control link interface and operational state for the gateway
+            cluster
           $ref: '#/components/schemas/stats_cluster_config_control_link_info'
         ethernet_connection:
+          description: Ethernet interface connection states used by the gateway cluster
           $ref: '#/components/schemas/stats_cluster_config_ethernet_connection'
         fabric_link_info:
+          description: Fabric link state and data-plane notification details for
+            the gateway cluster
           $ref: '#/components/schemas/stats_cluster_config_fabric_link_info'
         last_status_change_reason:
+          description: Reason reported for the most recent gateway cluster status
+            change
           type: string
         operational:
+          description: Current operational high-availability mode of the gateway cluster
           type: string
         primary_node_health:
+          description: Health state reported for the primary gateway cluster node
           type: string
         redundancy_group_information:
+          description: Redundancy group monitoring state reported by the gateway cluster
           $ref: '#/components/schemas/stats_cluster_config_redundancy_group_info'
         secondary_node_health:
+          description: Health state reported for the secondary gateway cluster node
           type: string
         status:
+          description: Overall health status reported for the gateway cluster
           type: string
       type: object
     stats_cluster_config_control_link_info:
       additionalProperties: false
+      description: Control link status details for a gateway cluster
       properties:
         name:
+          description: Control link interface name reported by the gateway cluster
           type: string
         status:
+          description: Operational state reported for the control link
           type: string
       type: object
     stats_cluster_config_ethernet_connection:
+      description: Ethernet interface connection states for a gateway cluster
       items:
         $ref: '#/components/schemas/stats_cluster_config_ethernet_connection_item'
       type: array
     stats_cluster_config_ethernet_connection_item:
       additionalProperties: false
+      description: Ethernet interface connection state for a gateway cluster member
       properties:
         name:
+          description: Ethernet interface name reported for cluster connectivity
           type: string
         status:
+          description: Operational state reported for the Ethernet interface
           type: string
       type: object
     stats_cluster_config_fabric_link_info:
       additionalProperties: false
+      description: Fabric link status details for a gateway cluster
       properties:
         DataPlaneNotifiedStatus:
+          description: Fabric link data-plane notification status reported by the
+            gateway
           type: string
         Interface:
+          description: Fabric link interfaces reported for the gateway cluster
           $ref: '#/components/schemas/strings'
         InternalStatus:
+          description: Gateway-reported internal status for the fabric link
           type: string
         State:
+          description: Administrative state of the fabric link
           type: string
         Status:
+          description: Operational status of the fabric link
           type: string
       type: object
     stats_cluster_config_redundancy_group_info:
+      description: Redundancy group monitoring entries for a gateway cluster
       items:
         $ref: '#/components/schemas/stats_cluster_config_redundancy_group_info_item'
       type: array
     stats_cluster_config_redundancy_group_info_item:
       additionalProperties: false
+      description: Redundancy group monitoring entry for a gateway cluster
       properties:
         Id:
+          description: Redundancy group identifier reported by the gateway
           type: integer
         MonitoringFailure:
+          description: Detected monitoring failure condition for the redundancy group
           type: string
         Threshold:
+          description: Configured monitoring threshold for the redundancy group
           type: integer
       type: object
     stats_device:
