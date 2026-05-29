@@ -91564,40 +91564,50 @@ components:
       type: array
     response_troubleshoot:
       additionalProperties: false
+      description: Organization troubleshooting response for the requested time window
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the troubleshooting window
           examples:
           - 1655151856
           type: integer
         results:
+          description: Troubleshooting findings returned for the requested target and window
           $ref: '#/components/schemas/response_troubleshoot_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the troubleshooting window
           examples:
           - 1655065456
           type: integer
       type: object
     response_troubleshoot_item:
       additionalProperties: false
+      description: Troubleshooting finding with reason and remediation guidance
       properties:
         category:
+          description: Entity category associated with the troubleshooting finding
           examples:
           - client
           type: string
         reason:
+          description: Issue reason identified by the troubleshooting analysis
           examples:
           - slow association
           type: string
         recommendation:
+          description: Recommended remediation guidance for the troubleshooting finding
           examples:
           - Ensure the IP helper-address is configured on the VLAN interface.
           type: string
         text:
+          description: Human-readable explanation of the troubleshooting finding
           examples:
           - Clients of the AP had slow association 8% of the time on Bhavabhi and
             5 GHz. ...
           type: string
       type: object
     response_troubleshoot_results:
+      description: Troubleshooting findings returned by the organization troubleshoot API
       items:
         $ref: '#/components/schemas/response_troubleshoot_item'
       type: array
