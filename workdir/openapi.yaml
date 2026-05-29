@@ -92926,38 +92926,43 @@ components:
       type: array
     sdkstats_wireless_client:
       additionalProperties: false
-      description: SDK Client Details statistics
+      description: Detailed statistics for an individual SDK client
       properties:
         id:
+          description: Unique value identifying the SDK client
           $ref: '#/components/schemas/id'
         last_seen:
+          description: Time when the SDK client was last observed, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         map_id:
-          description: Map_id of the sdk client (if known), or null
+          description: Map identifier for the SDK client's location, if known
           format: uuid
           type:
           - string
           - 'null'
         name:
-          description: Name of the sdk client (if provided)
+          description: Display name provided for the SDK client
           type: string
         network_connection:
+          description: Current network connection details for the SDK client
           $ref: '#/components/schemas/stats_sdkclient_network_connection'
         uuid:
-          description: UUID of the sdk client
+          description: Application UUID for the SDK client
           format: uuid
           type: string
         vbeacons:
+          description: Virtual beacons currently associated with the SDK client and when each association began
           $ref: '#/components/schemas/sdkstats_wireless_client_vbeacons'
         x:
-          description: X (in pixels) of user location on the map (if known)
+          description: Horizontal map coordinate of the SDK client location, in pixels, if known
           format: double
           type: number
         y:
-          description: Y (in pixels) of user location on the map (if known)
+          description: Vertical map coordinate of the SDK client location, in pixels, if known
           format: double
           type: number
         zones:
+          description: Current zone memberships for the SDK client and when the client entered each zone
           $ref: '#/components/schemas/sdkstats_wireless_client_zones'
       required:
       - id
@@ -92965,36 +92970,40 @@ components:
       type: object
     sdkstats_wireless_client_vbeacon:
       additionalProperties: false
+      description: Virtual beacon currently associated with an SDK client
       properties:
         id:
+          description: Virtual beacon identifier currently associated with the SDK client
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the SDK client began matching the virtual beacon, in epoch seconds
           type: number
       required:
       - id
       - since
       type: object
     sdkstats_wireless_client_vbeacons:
-      description: "List of beacon_id\u2019s of the sdk client is in and since when\
-        \ (if known)"
+      description: Virtual beacon associations for the SDK client, including when each began
       items:
         $ref: '#/components/schemas/sdkstats_wireless_client_vbeacon'
       type: array
       uniqueItems: true
     sdkstats_wireless_client_zone:
       additionalProperties: false
+      description: Zone currently containing an SDK client
       properties:
         id:
+          description: Zone identifier that currently contains the SDK client
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the SDK client entered the zone, in epoch seconds
           type: number
       required:
       - id
       - since
       type: object
     sdkstats_wireless_client_zones:
-      description: "List of zone_id\u2019s of the sdk client is in and since when\
-        \ (if known)"
+      description: Zone memberships for the SDK client, including when each membership began
       items:
         $ref: '#/components/schemas/sdkstats_wireless_client_zone'
       type: array
