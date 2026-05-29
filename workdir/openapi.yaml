@@ -86538,28 +86538,35 @@ components:
       description: Radius Auth Port, value from 1 to 65535, default is 1813
     radius_acct_server:
       additionalProperties: false
+      description: RADIUS accounting server settings
       properties:
         host:
-          description: IP/ hostname of RADIUS server
+          description: Address or hostname of the RADIUS accounting server
           examples:
           - 1.2.3.4
           type: string
         keywrap_enabled:
+          description: Whether RADIUS keywrap is enabled for messages sent to this
+            accounting server
           type: boolean
         keywrap_format:
           $ref: '#/components/schemas/radius_keywrap_format'
+          description: Encoding format for RADIUS keywrap KEK and MACK values
         keywrap_kek:
+          description: RADIUS keywrap key encryption key (KEK)
           examples:
           - '1122334455'
           type: string
         keywrap_mack:
+          description: RADIUS keywrap message authentication code key (MACK)
           examples:
           - '1122334455'
           type: string
         port:
           $ref: '#/components/schemas/radius_acct_port'
+          description: UDP port used by the RADIUS accounting server
         secret:
-          description: Secret of RADIUS server
+          description: Shared secret used with this RADIUS accounting server
           examples:
           - testing123
           format: password
@@ -86582,33 +86589,39 @@ components:
       description: Radius Auth Port, value from 1 to 65535, default is 1812
     radius_auth_server:
       additionalProperties: false
-      description: Authentication Server
+      description: RADIUS authentication server settings
       properties:
         host:
-          description: IP/ hostname of RADIUS server
+          description: Address or hostname of the RADIUS authentication server
           examples:
           - 1.2.3.4
           type: string
         keywrap_enabled:
+          description: Whether RADIUS keywrap is enabled for messages sent to this
+            authentication server
           type: boolean
         keywrap_format:
           $ref: '#/components/schemas/radius_keywrap_format'
+          description: Encoding format for RADIUS keywrap KEK and MACK values
         keywrap_kek:
+          description: RADIUS keywrap key encryption key (KEK)
           examples:
           - '1122334455'
           type: string
         keywrap_mack:
+          description: RADIUS keywrap message authentication code key (MACK)
           examples:
           - '1122334455'
           type: string
         port:
           $ref: '#/components/schemas/radius_auth_port'
+          description: UDP port used by the RADIUS authentication server
         require_message_authenticator:
           default: false
           description: Whether to require Message-Authenticator in requests
           type: boolean
         secret:
-          description: Secret of RADIUS server
+          description: Shared secret used with this RADIUS authentication server
           examples:
           - testing123
           format: password
@@ -86631,7 +86644,7 @@ components:
       description: Radius CoA Port, value from 1 to 65535, default is 3799
     radius_config:
       additionalProperties: false
-      description: Junos Radius config
+      description: Junos RADIUS authentication and accounting configuration
       properties:
         acct_interim_interval:
           default: 0
@@ -86644,30 +86657,35 @@ components:
           type: integer
         acct_servers:
           $ref: '#/components/schemas/radius_acct_servers'
+          description: RADIUS accounting servers used by this Junos configuration
         auth_servers:
           $ref: '#/components/schemas/radius_auth_servers'
+          description: RADIUS authentication servers used by this Junos configuration
         auth_servers_retries:
           default: 3
-          description: radius auth session retries
+          description: Number of RADIUS authentication request retries before failover
           type: integer
         auth_servers_timeout:
           default: 5
-          description: radius auth session timeout
+          description: RADIUS authentication server timeout, in seconds
           type: integer
         coa_enabled:
           default: false
+          description: Whether RADIUS Change of Authorization (CoA) is enabled
           type: boolean
         coa_port:
           default: 3799
+          description: UDP port used for RADIUS Change of Authorization (CoA)
           maximum: 65535
           minimum: 1
           type: integer
         network:
-          description: use `network`or `source_ip`, which network the RADIUS server
-            resides, if there's static IP for this network, we'd use it as source-ip
+          description: Use `network` or `source_ip`. Network where the RADIUS server
+            resides; if the network has a static IP, Mist uses it as the source IP
           type: string
         source_ip:
-          description: use `network`or `source_ip`
+          description: Use `network` or `source_ip`. Explicit source IP address for
+            RADIUS traffic
           type: string
       type: object
     radius_keywrap_format:
