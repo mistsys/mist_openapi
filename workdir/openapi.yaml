@@ -108938,22 +108938,33 @@ components:
       - success
       type: string
     upgrade_org_devices:
+      description: Organization-wide device upgrade request
       properties:
         all_sites:
           default: false
           description: If `true`, will upgrade all sites in this org
           type: boolean
         canary_phases:
+          description: Only if `strategy`==`canary`. Canary phase percentages for
+            the organization upgrade
           $ref: '#/components/schemas/upgrade_device_canary_phases'
         device_type:
+          description: Device family selected for the organization upgrade
           $ref: '#/components/schemas/device_type'
         download_strategy:
+          description: Firmware download orchestration strategy for the organization
+            upgrade
           $ref: '#/components/schemas/upgrade_org_devices_download_strategy'
         max_failure_percentage:
+          description: If `strategy`!=`big_bang`. Allowed failure percentage across
+            the organization upgrade
           $ref: '#/components/schemas/upgrade_devices_max_failure_percentage'
         max_failures:
+          description: If `strategy`==`canary`. Per-phase failure limits for the organization
+            upgrade
           $ref: '#/components/schemas/upgrade_devices_max_failures'
         models:
+          description: Device models selected for the organization upgrade
           $ref: '#/components/schemas/upgrade_org_devices_models'
         p2p_cluster_size:
           default: 10
@@ -108980,6 +108991,7 @@ components:
           - 2024-06-13 15:00:00-07:00
           type: string
         reboot_strategy:
+          description: Device reboot orchestration strategy for selected devices
           $ref: '#/components/schemas/upgrade_device_strategy'
         rrm_first_batch_percentage:
           description: For APs only and if `strategy`==`rrm`. Percentage of APs that
@@ -108994,16 +109006,23 @@ components:
           - 10
           type: integer
         rrm_mesh_upgrade:
+          description: For APs only and if `strategy`==`rrm`. Mesh AP upgrade order
+            for the organization upgrade
           $ref: '#/components/schemas/upgrade_device_rrm_mesh_upgrade'
         rrm_node_order:
+          description: For APs only and if `strategy`==`rrm`. AP ordering direction
+            for RRM upgrade batches
           $ref: '#/components/schemas/upgrade_device_rrm_node_order'
         rrm_slow_ramp:
           description: For APs only and if `strategy`==`rrm`. True will make rrm batch
             sizes slowly ramp up
           type: boolean
         rules:
+          description: Selection rules used to choose devices for this organization
+            upgrade
           $ref: '#/components/schemas/upgrade_device_rules'
         site_ids:
+          description: Identifiers of sites used to limit the organization upgrade
           $ref: '#/components/schemas/upgrade_org_devices_site_ids'
         snapshot:
           default: false
@@ -109022,8 +109041,10 @@ components:
           - 1624399840
           type: integer
         strategy:
+          description: Upgrade orchestration strategy for selected devices
           $ref: '#/components/schemas/upgrade_device_strategy'
         versions:
+          description: Target firmware versions for this organization upgrade
           $ref: '#/components/schemas/upgrade_org_devices_versions'
       type: object
     upgrade_org_devices_download_strategy:
