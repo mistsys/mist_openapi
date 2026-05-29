@@ -104041,41 +104041,50 @@ components:
       type: object
     stats_wired_client:
       additionalProperties: false
+      description: Wired client statistics for a client connected through an AP Ethernet
+        port
       properties:
         auth_state:
-          description: Client authorization status
+          description: Authorization state reported for the wired client
           minLength: 1
           type: string
         device_id:
-          description: Device ID the client is connected to
+          description: Identifier of the AP the wired client is connected to
           minLength: 1
           type: string
         eth_port:
-          description: Port on AP where the wired client is connected
+          description: AP Ethernet port where the wired client is connected
           minLength: 1
           type: string
         last_seen:
-          description: Timestamp when last Tx/Rx observed
+          description: Time when transmit or receive traffic was last observed for
+            the wired client
           type: number
         mac:
-          description: Client mac
+          description: Wired client MAC address observed on the AP Ethernet port
           minLength: 1
           type: string
         rx_bytes:
+          description: Total bytes received by the wired client connection
           $ref: '#/components/schemas/rx_bytes'
         rx_pkts:
+          description: Total packets received by the wired client connection
           $ref: '#/components/schemas/rx_pkts'
         site_id:
+          description: Site identifier associated with the wired client statistics
+            record
           $ref: '#/components/schemas/site_id'
         tx_bytes:
+          description: Total bytes transmitted by the wired client connection
           $ref: '#/components/schemas/tx_bytes'
         tx_pkts:
+          description: Total packets transmitted by the wired client connection
           $ref: '#/components/schemas/tx_pkts'
         uptime:
-          description: How long, in seconds, has the client been connected
+          description: Elapsed time since the wired client connected, in seconds
           type: number
         vlan_id:
-          description: VLAN id, could be empty
+          description: VLAN identifier used by the wired client, when present
           type: number
       required:
       - mac
