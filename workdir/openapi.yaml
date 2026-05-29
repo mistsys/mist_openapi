@@ -110818,18 +110818,20 @@ components:
       type: object
     vpn_peer_stat:
       additionalProperties: false
+      description: VPN peer path statistics returned by organization VPN peer searches
       properties:
         is_active:
-          description: Redundancy status of the associated interface
+          description: Whether this VPN peer path is the active redundant path
           type: boolean
         jitter:
-          description: Jitter in milliseconds
+          description: Last sampled VPN peer jitter, in milliseconds
           minimum: 0
           type: number
         last_seen:
+          description: Time when this VPN peer was last observed, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         latency:
-          description: Latency in milliseconds
+          description: Last sampled VPN peer latency, in milliseconds
           minimum: 0
           type: number
         loss:
@@ -110838,7 +110840,7 @@ components:
           minimum: 0
           type: number
         mac:
-          description: Router mac address
+          description: Local router MAC address for the VPN link
           minLength: 1
           type: string
         mos:
@@ -110847,54 +110849,71 @@ components:
           minimum: 0
           type: number
         mtu:
+          description: Maximum transmission unit for the VPN peer path, in bytes
           type: integer
         org_id:
+          description: Organization identifier for the VPN peer statistic
           $ref: '#/components/schemas/org_id'
         peer_mac:
-          description: Peer router mac address
+          description: Peer router MAC address for the VPN link
           minLength: 1
           type: string
         peer_port_id:
-          description: Peer router device interface
+          description: Peer router interface identifier for the VPN link
           minLength: 1
           type: string
         peer_router_name:
+          description: Peer router name reported for the VPN link
           minLength: 1
           type: string
         peer_site_id:
+          description: Site identifier for the peer side of the VPN link
           $ref: '#/components/schemas/site_id'
         port_id:
-          description: Router device interface
+          description: Local router interface identifier for the VPN link
           minLength: 1
           type: string
         router_name:
+          description: Local router name reported for the VPN link
           minLength: 1
           type: string
         site_id:
+          description: Site identifier for the local side of the VPN link
           $ref: '#/components/schemas/site_id'
         type:
-          description: '`ipsec`for SRX, `svr` for 128T'
+          description: VPN implementation type for the peer, such as `ipsec` for
+            SRX or `svr` for SSR
           minLength: 1
           type: string
         up:
+          description: Whether the VPN peer is currently up
           type: boolean
         uptime:
+          description: Gateway-reported VPN peer uptime value, in seconds
           type: integer
       type: object
     vpn_peer_stat_search:
       additionalProperties: false
+      description: Search response containing VPN peer path statistics
       properties:
         end:
+          description: Search window end timestamp, in epoch seconds
           type: number
         limit:
+          description: Maximum number of VPN peer statistics returned
           type: integer
         next:
+          description: URL for the next page of VPN peer statistics, when more results
+            are available
           type: string
         results:
+          description: VPN peer statistic rows returned by the search
           $ref: '#/components/schemas/vpn_peer_stat_search_results'
         start:
+          description: Search window start timestamp, in epoch seconds
           type: number
         total:
+          description: Number of VPN peer statistics matching the search
           type: integer
       required:
       - end
@@ -110904,6 +110923,7 @@ components:
       - total
       type: object
     vpn_peer_stat_search_results:
+      description: VPN peer statistic rows returned by a search response
       items:
         $ref: '#/components/schemas/vpn_peer_stat'
       type: array
