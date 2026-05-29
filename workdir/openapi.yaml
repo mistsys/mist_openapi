@@ -115981,10 +115981,13 @@ components:
       properties:
         accessCodeAlternateEmail:
           default: Use alternate email address
+          description: Link text for using an alternate email address during access-code login
           type: string
         alignment:
+          description: Text and content alignment used by the guest portal template
           $ref: '#/components/schemas/portal_template_alignment'
         ar:
+          description: Localized portal template strings for Arabic
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         authButtonAmazon:
           default: Sign in with Amazon
@@ -116024,21 +116027,25 @@ components:
           type: string
         authLabel:
           default: Connect to Wi-Fi with
+          description: Heading text displayed above portal authentication options
           type: string
         backLink:
           description: Label of the link to go back to /logon
           type: string
         ca-ES:
+          description: Localized portal template strings for Catalan in Spain
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         color:
           default: '#1074bc'
-          description: Portal main color
+          description: Primary color used by the portal template
           type: string
         colorDark:
           default: '#0b5183'
+          description: Darker accent color used by the portal template
           type: string
         colorLight:
           default: '#3589c6'
+          description: Lighter accent color used by the portal template
           type: string
         company:
           default: false
@@ -116053,12 +116060,16 @@ components:
           description: Label displayed for the company input field
           type: string
         cs-CZ:
+          description: Localized portal template strings for Czech in Czechia
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         da-DK:
+          description: Localized portal template strings for Danish in Denmark
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         de-DE:
+          description: Localized portal template strings for German in Germany
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         el-GR:
+          description: Localized portal template strings for Greek in Greece
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         email:
           default: false
@@ -116075,21 +116086,27 @@ components:
           type: string
         emailCodeCancel:
           default: I did not receive the code
+          description: Link text for requesting help when the email access code was not received
           type: string
         emailCodeError:
           default: Please provide valid alternate email
+          description: Error message shown when the alternate email address for access-code delivery is invalid
           type: string
         emailCodeFieldLabel:
           default: Access Code
+          description: Label for the email access-code input field
           type: string
         emailCodeMessage:
           default: Enter the access number that was sent to your email address.
+          description: Instructional text shown before entering the email access code
           type: string
         emailCodeSubmit:
           default: Sign In
+          description: Button label for submitting the email access code
           type: string
         emailCodeTitle:
           default: Access Code
+          description: Title shown on the email access-code entry page
           type: string
         emailError:
           default: Please provide valid email
@@ -116097,6 +116114,7 @@ components:
           type: string
         emailFieldLabel:
           default: Enter your email address
+          description: Label for the email address input field
           type: string
         emailLabel:
           default: Email
@@ -116105,6 +116123,7 @@ components:
         emailMessage:
           default: We will email you an authentication code which you can use to connect
             to the Wi-Fi network.
+          description: Instructional text explaining email access-code delivery
           type: string
         emailSubmit:
           default: Send Access Code
@@ -116115,12 +116134,16 @@ components:
           description: Title for the Email registration
           type: string
         en-GB:
+          description: Localized portal template strings for English in the United Kingdom
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         en-US:
+          description: Localized portal template strings for English in the United States
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         es-ES:
+          description: Localized portal template strings for Spanish in Spain
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         fi-FI:
+          description: Localized portal template strings for Finnish in Finland
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         field1:
           default: false
@@ -116132,7 +116155,7 @@ components:
           type: string
         field1Label:
           default: Custom Field 1
-          description: Label of field1
+          description: Label for custom field 1 input
           type: string
         field1Required:
           description: Whether custom field 1 must be provided when the field is shown
@@ -116147,7 +116170,7 @@ components:
           type: string
         field2Label:
           default: Custom Field 2
-          description: Label of field2
+          description: Label for custom field 2 input
           type: string
         field2Required:
           description: Whether custom field 2 must be provided when the field is shown
@@ -116162,7 +116185,7 @@ components:
           type: string
         field3Label:
           default: Custom Field 3
-          description: Label of field3
+          description: Label for custom field 3 input
           type: string
         field3Required:
           description: Whether custom field 3 must be provided when the field is shown
@@ -116177,28 +116200,37 @@ components:
           type: string
         field4Label:
           default: Custom Field 4
-          description: Label of field4
+          description: Label for custom field 4 input
           type: string
         field4Required:
           description: Whether custom field 4 must be provided when the field is shown
           type: boolean
         fr-FR:
+          description: Localized portal template strings for French in France
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         he-IL:
+          description: Localized portal template strings for Hebrew in Israel
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         hi-IN:
+          description: Localized portal template strings for Hindi in India
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         hr-HR:
+          description: Localized portal template strings for Croatian in Croatia
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         hu-HU:
+          description: Localized portal template strings for Hungarian in Hungary
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         id-ID:
+          description: Localized portal template strings for Indonesian in Indonesia
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         it-IT:
+          description: Localized portal template strings for Italian in Italy
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         ja-JP:
+          description: Localized portal template strings for Japanese in Japan
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         ko-KR:
+          description: Localized portal template strings for Korean in Korea
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         logo:
           default: null
@@ -116238,15 +116270,18 @@ components:
           type: string
         marketingPolicyOptInText:
           default: Marketing policy content
-          description: marketing policy text
+          description: Text of the marketing policy opt-in content
           type: string
         message:
           default: Sign in to get online
+          description: Main message displayed on the guest portal sign-in page
           type: string
         ms-MY:
+          description: Localized portal template strings for Malay in Malaysia
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         multiAuth:
           default: false
+          description: Whether the portal presents multiple authentication methods
           type: boolean
         name:
           default: false
@@ -116261,8 +116296,10 @@ components:
           description: Label displayed for the name input field
           type: string
         nb-NO:
+          description: Localized portal template strings for Norwegian Bokmal in Norway
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         nl-NL:
+          description: Localized portal template strings for Dutch in the Netherlands
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         optOutDefault:
           default: true
@@ -116278,6 +116315,7 @@ components:
           type: string
         pageTitle:
           default: Welcome
+          description: Browser or page title shown for the guest portal
           type: string
         passphraseCancel:
           default: Cancel
@@ -116289,10 +116327,11 @@ components:
           type: string
         passphraseLabel:
           default: Passphrase
-          description: Passphrase
+          description: Label for the passphrase input field
           type: string
         passphraseMessage:
           default: Enter the secret passphrase to access the Wi-Fi network.
+          description: Instructional text shown on the passphrase sign-in page
           type: string
         passphraseSubmit:
           default: Sign in
@@ -116303,6 +116342,7 @@ components:
           description: Title for passphrase details page
           type: string
         pl-PL:
+          description: Localized portal template strings for Polish in Poland
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         poweredBy:
           default: true
@@ -116329,8 +116369,10 @@ components:
           description: Text of the Privacy Policy
           type: string
         pt-BR:
+          description: Localized portal template strings for Portuguese in Brazil
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         pt-PT:
+          description: Localized portal template strings for Portuguese in Portugal
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         requiredFieldLabel:
           default: required
@@ -116338,22 +116380,28 @@ components:
           type: string
         responsiveLayout:
           default: true
+          description: Whether the portal template uses a responsive layout
           type: boolean
         ro-RO:
+          description: Localized portal template strings for Romanian in Romania
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         ru-RU:
+          description: Localized portal template strings for Russian in Russia
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         signInLabel:
           default: Sign In
           description: Label of the button to signin
           type: string
         sk-SK:
+          description: Localized portal template strings for Slovak in Slovakia
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         smsCarrierDefault:
           default: Please Select
+          description: Default option text shown in the SMS carrier selector
           type: string
         smsCarrierError:
           default: Please select a mobile carrier
+          description: Error message shown when no mobile carrier is selected
           type: string
         smsCarrierFieldLabel:
           default: Mobile Carrier
@@ -116369,9 +116417,11 @@ components:
           type: string
         smsCodeFieldLabel:
           default: Confirmation Code
+          description: Label for the SMS confirmation-code input field
           type: string
         smsCodeMessage:
           default: Enter the access number that was sent to your mobile number.
+          description: Instructional text shown before entering the SMS access code
           type: string
         smsCodeSubmit:
           default: Sign In
@@ -116379,12 +116429,15 @@ components:
           type: string
         smsCodeTitle:
           default: Access Code
+          description: Title shown on the SMS access-code entry page
           type: string
         smsCountryFieldLabel:
           default: Country Code
+          description: Label for the SMS country-code input field
           type: string
         smsCountryFormat:
           default: '+1'
+          description: Example country code format shown for SMS authentication
           type: string
         smsHaveAccessCode:
           default: I have an access code
@@ -116392,6 +116445,7 @@ components:
           type: string
         smsIsTwilio:
           default: false
+          description: Whether the SMS portal flow uses Twilio-specific behavior
           type: boolean
         smsMessageFormat:
           description: Format of access code sms message. {{code}} and {{duration}}
@@ -116403,6 +116457,7 @@ components:
           type: string
         smsNumberError:
           default: Invalid Mobile Number
+          description: Error message shown when the mobile number is invalid
           type: string
         smsNumberFieldLabel:
           default: Mobile Number
@@ -116410,10 +116465,12 @@ components:
           type: string
         smsNumberFormat:
           default: 2125551212 (digits only)
+          description: Example mobile number format shown for SMS authentication
           type: string
         smsNumberMessage:
           default: We will send an access code to your mobile number which you can
             use to connect to the Wi-Fi network. Message and data rates may apply.
+          description: Instructional text explaining SMS access-code delivery
           type: string
         smsNumberSubmit:
           default: Send Access Code
@@ -116425,6 +116482,7 @@ components:
           type: string
         smsUsernameFormat:
           default: username
+          description: Example username format shown for SMS authentication
           type: string
         smsValidityDuration:
           description: How long confirmation code should be considered valid (in minutes)
@@ -116433,9 +116491,11 @@ components:
           type: integer
         sponsorBackLink:
           default: Go back and edit request form
+          description: Link text for returning to edit the sponsor request form
           type: string
         sponsorCancel:
           default: Cancel
+          description: Button label for canceling sponsor authentication
           type: string
         sponsorEmail:
           default: Sponsor Email
@@ -116443,6 +116503,7 @@ components:
           type: string
         sponsorEmailError:
           default: Please provide valid sponsor email
+          description: Error message shown when the sponsor email address is invalid
           type: string
         sponsorEmailTemplate:
           default: ''
@@ -116461,12 +116522,15 @@ components:
           type: string
         sponsorInfoApproved:
           default: Your request was approved by
+          description: Status message prefix shown when a sponsor approves the request
           type: string
         sponsorInfoDenied:
           default: Your request was denied by
+          description: Status message prefix shown when a sponsor denies the request
           type: string
         sponsorInfoPending:
           default: Your notification has been sent to
+          description: Status message prefix shown after a sponsor notification is sent
           type: string
         sponsorName:
           default: Sponsor Name
@@ -116474,9 +116538,11 @@ components:
           type: string
         sponsorNameError:
           default: Please provide sponsor name
+          description: Error message shown when the sponsor name is missing
           type: string
         sponsorNotePending:
           default: Please wait for them to acknowledge.
+          description: Additional status text shown while sponsor approval is pending
           type: string
         sponsorRequestAccess:
           default: Request Wi-Fi Access
@@ -116501,16 +116567,21 @@ components:
           type: string
         sponsorsError:
           default: Please select a sponsor
+          description: Error message shown when no sponsor is selected
           type: string
         sponsorsFieldLabel:
           default: Sponsors
+          description: Label for the sponsor selection field
           type: string
         sv-SE:
+          description: Localized portal template strings for Swedish in Sweden
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         th-TH:
+          description: Localized portal template strings for Thai in Thailand
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         tos:
           default: true
+          description: Whether the portal requires Terms of Service acceptance
           type: boolean
         tosAcceptLabel:
           default: I accept the Terms of Service
@@ -116529,14 +116600,19 @@ components:
           description: Text of the Terms of Service
           type: string
         tr-TR:
+          description: Localized portal template strings for Turkish in Turkey
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         uk-UA:
+          description: Localized portal template strings for Ukrainian in Ukraine
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         vi-VN:
+          description: Localized portal template strings for Vietnamese in Vietnam
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         zh-Hans:
+          description: Localized portal template strings for Simplified Chinese
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
         zh-Hant:
+          description: Localized portal template strings for Traditional Chinese
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
       required:
       - pageTitle
