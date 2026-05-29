@@ -112009,8 +112009,10 @@ components:
       description: Sample of the `device-events` webhook payload.
       properties:
         events:
+          description: Device events included in this webhook delivery
           $ref: '#/components/schemas/device_events'
         topic:
+          description: Webhook topic name for device event deliveries
           $ref: '#/components/schemas/webhook_device_events_topic'
       required:
       - events
@@ -112032,8 +112034,10 @@ components:
       description: Sample of the `device-updowns` webhook payload.
       properties:
         events:
+          description: Device up/down events included in this webhook delivery
           $ref: '#/components/schemas/webhook_device_updowns_events'
         topic:
+          description: Webhook topic name for device up/down deliveries
           $ref: '#/components/schemas/webhook_device_updowns_topic'
       required:
       - events
@@ -112041,26 +112045,38 @@ components:
       type: object
     webhook_device_updowns_event:
       additionalProperties: false
+      description: Device availability event delivered when a monitored AP changes
+        up/down state
       properties:
         ap:
+          description: MAC address for the AP whose availability changed
           readOnly: true
           type: string
         ap_name:
+          description: AP name for the device whose availability changed
           readOnly: true
           type: string
         for_site:
+          description: Whether this device up/down event is scoped to a site rather
+            than only to the organization
           readOnly: true
           type: boolean
         org_id:
+          description: Organization associated with the device up/down event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the device up/down event
           $ref: '#/components/schemas/site_id'
         site_name:
+          description: Site name associated with the device up/down event
           readOnly: true
           type: string
         timestamp:
+          description: Time when the device availability event occurred, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Reported up/down event type for the device
           readOnly: true
           type: string
       required:
