@@ -109058,24 +109058,31 @@ components:
       type: string
     upgrade_org_devices_item:
       additionalProperties: false
+      description: Organization device upgrade job returned by upgrade APIs
       properties:
         id:
+          description: Unique identifier for the organization upgrade job
           $ref: '#/components/schemas/id'
         site_upgrades:
+          description: Per-site upgrade jobs created by this organization upgrade
           $ref: '#/components/schemas/upgrade_org_devices_item_site_upgrades'
       type: object
     upgrade_org_devices_item_site_upgrade:
       additionalProperties: false
+      description: Site upgrade mapping returned for an organization upgrade
       properties:
         site_id:
+          description: Identifier of the site that received this upgrade job
           $ref: '#/components/schemas/site_id'
         upgrade_id:
+          description: Identifier of the site-level upgrade job
           examples:
           - ebbdbd0b-1bcf-4e55-8a6a-3416049a52b1
           format: uuid
           type: string
       type: object
     upgrade_org_devices_item_site_upgrades:
+      description: Site-level upgrade jobs created for an organization upgrade
       items:
         $ref: '#/components/schemas/upgrade_org_devices_item_site_upgrade'
       type: array
@@ -109132,8 +109139,10 @@ components:
       type: array
     upgrade_org_devices_version:
       additionalProperties: false
+      description: Target firmware version entry for an organization upgrade request
       properties:
         firmware_type:
+          description: Firmware family this version entry applies to
           $ref: '#/components/schemas/upgrade_org_devices_version_firmware_type'
         force:
           default: false
@@ -109141,9 +109150,11 @@ components:
             when target version <= running version
           type: boolean
         model_version:
+          description: If `firmware_type`==`junos`, model-specific firmware version
+            overrides
           $ref: '#/components/schemas/upgrade_org_devices_version_model_version'
         version:
-          description: version of the firmware to deploy
+          description: Firmware version to deploy for this entry
           type: string
       type: object
     upgrade_org_devices_version_firmware_type:
@@ -109161,6 +109172,7 @@ components:
         version (e.g. `23.4R1.9`)
       type: object
     upgrade_org_devices_versions:
+      description: Target firmware version entries for an organization upgrade request
       items:
         $ref: '#/components/schemas/upgrade_org_devices_version'
       type: array
