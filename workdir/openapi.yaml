@@ -97590,19 +97590,19 @@ components:
       properties:
         capacity:
           default: 20
-          description: Capacity, in %
+          description: Threshold percentage for capacity SLE scoring
           maximum: 50
           minimum: 5
           type: integer
         coverage:
           default: -72
-          description: Coverage, in dBm
+          description: RSSI threshold for coverage SLE scoring, in dBm
           maximum: -60
           minimum: -90
           type: integer
         throughput:
           default: 10
-          description: Throughput, in Mbps
+          description: Minimum throughput threshold for SLE scoring, in Mbps
           maximum: 100
           minimum: 1
           type: integer
