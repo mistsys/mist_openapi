@@ -112516,33 +112516,43 @@ components:
       type: object
     webhook_location_client_event:
       additionalProperties: false
+      description: Connected Wi-Fi client location update with map coordinates
       properties:
         mac:
+          description: Connected client MAC address used as the location identifier
           examples:
           - 5684dae9ac8b
           type: string
         map_id:
+          description: Map where the connected client location was calculated
           examples:
           - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
           format: uuid
           type: string
         site_id:
+          description: Site associated with the connected client location event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the connected client location was calculated, in
+            epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Location object type for the connected client event; defaults
+            to `wifi`
           default: wifi
           type: string
         wifi_beacon_extended_info:
+          description: Extended Wi-Fi beacon metadata included with this connected
+            client location event
           $ref: '#/components/schemas/wifi_beacon_extended_info'
         x:
-          description: x, in meter
+          description: Horizontal map coordinate of the connected client, in meters
           examples:
           - 13.5
           format: double
           type: number
         y:
-          description: y, in meter
+          description: Vertical map coordinate of the connected client, in meters
           examples:
           - 3.2
           format: double
@@ -112723,33 +112733,43 @@ components:
       type: object
     webhook_location_unclient_event:
       additionalProperties: false
+      description: Unconnected Wi-Fi client location update with map coordinates
       properties:
         mac:
+          description: Unconnected client MAC address used as the location identifier
           examples:
           - 5684dae9ac8b
           type: string
         map_id:
+          description: Map where the unconnected client location was calculated
           examples:
           - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
           format: uuid
           type: string
         site_id:
+          description: Site associated with the unconnected client location event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the unconnected client location was calculated,
+            in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Location object type for the unconnected client event; defaults
+            to `wifi`
           default: wifi
           type: string
         wifi_beacon_extended_info:
+          description: Extended Wi-Fi beacon metadata included with this unconnected
+            client location event
           $ref: '#/components/schemas/wifi_beacon_extended_info'
         x:
-          description: x, in meter
+          description: Horizontal map coordinate of the unconnected client, in meters
           examples:
           - 13.5
           format: double
           type: number
         y:
-          description: y, in meter
+          description: Vertical map coordinate of the unconnected client, in meters
           examples:
           - 3.2
           format: double
