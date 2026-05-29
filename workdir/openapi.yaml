@@ -100233,7 +100233,7 @@ components:
       type: object
     stats_asset:
       additionalProperties: false
-      description: Asset statistics
+      description: BLE asset location and advertisement statistics
       properties:
         _ttl:
           description: Time-to-live in seconds; how long this asset data is valid
@@ -100245,11 +100245,12 @@ components:
           - 2970
           type: number
         beam:
+          description: BLE beam number where the asset was observed
           examples:
           - 6
           type: integer
         by:
-          description: Source type
+          description: Observation source type for the asset statistic
           examples:
           - asset
           type: string
@@ -100261,42 +100262,52 @@ components:
           readOnly: true
           type: string
         device_name:
+          description: Display name of the loudest AP observing the asset
           examples:
           - a
           type: string
         duration:
+          description: Length of the current asset observation, in seconds
           examples:
           - 120
           type: integer
         eddystone_uid_instance:
+          description: Eddystone-UID instance value advertised by the asset
           examples:
           - 5c5b35000001
           type: string
         eddystone_uid_namespace:
+          description: Eddystone-UID namespace value advertised by the asset
           examples:
           - 2818e3868dec25629ede
           type: string
         eddystone_url_url:
+          description: URL value advertised by the asset through Eddystone-URL
           examples:
           - https://www.abc.com
           type: string
         ibeacon_major:
           $ref: '#/components/schemas/ibeacon_major'
+          description: iBeacon major value advertised by the asset
         ibeacon_minor:
           $ref: '#/components/schemas/ibeacon_minor'
+          description: iBeacon minor value advertised by the asset
         ibeacon_uuid:
           $ref: '#/components/schemas/ibeacon_uuid'
+          description: iBeacon UUID advertised by the asset
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for the asset statistic
         last_seen:
           $ref: '#/components/schemas/last_seen'
+          description: Time when the BLE asset was last observed, in epoch seconds
         mac:
-          description: Bluetooth MAC
+          description: Bluetooth MAC address for the asset
           examples:
           - 6fa474be7ae5
           type: string
         manufacture:
-          description: Manufacturer name resolved from company ID
+          description: Vendor name resolved from the BLE manufacturer company ID
           type: string
         map_id:
           description: Map where the device belongs to
@@ -100315,7 +100326,7 @@ components:
           - 648520a1020000
           type: string
         name:
-          description: Name / label of the device
+          description: Display label for the BLE asset
           examples:
           - 6fa474be7ae5
           type: string
@@ -100326,26 +100337,30 @@ components:
           type: integer
         rssizones:
           $ref: '#/components/schemas/asset_rssi_zones'
+          description: RSSI zones currently containing this asset
         service_packets:
           $ref: '#/components/schemas/stats_asset_service_packets'
+          description: Service data advertisements observed from this asset
         temperature:
+          description: Reported temperature value from the BLE asset
           examples:
           - 23
           type: number
         x:
-          description: X in pixel
+          description: Map X coordinate of the asset location, in pixels
           examples:
           - 280.19918140310193
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Map Y coordinate of the asset location, in pixels
           examples:
           - 420.2987721046529
           format: double
           type: number
         zones:
           $ref: '#/components/schemas/asset_zones'
+          description: Map zones currently containing this asset
       required:
       - mac
       type: object
