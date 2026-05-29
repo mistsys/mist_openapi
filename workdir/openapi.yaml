@@ -108794,76 +108794,88 @@ components:
       type: object
     upgrade_devices_targets:
       additionalProperties: false
+      description: Read-only device target lists grouped by upgrade status
       properties:
         download_requested:
+          description: Device MAC addresses for devices requested to download firmware
           $ref: '#/components/schemas/upgrade_devices_targets_download_requested'
         downloaded:
+          description: Device MAC addresses for devices that have downloaded firmware
           $ref: '#/components/schemas/upgrade_devices_targets_downloaded'
         downloading:
+          description: Device MAC addresses for devices currently downloading firmware
           $ref: '#/components/schemas/upgrade_devices_targets_downloading'
         failed:
+          description: Device MAC addresses for devices that failed to upgrade
           $ref: '#/components/schemas/upgrade_devices_targets_failed'
         reboot_in_progress:
+          description: Device MAC addresses for devices currently rebooting
           $ref: '#/components/schemas/upgrade_devices_targets_reboot_in_progress'
         rebooted:
+          description: Device MAC addresses for devices that rebooted successfully
           $ref: '#/components/schemas/upgrade_devices_targets_rebooted'
         scheduled:
+          description: Device MAC addresses for devices scheduled for upgrade by
+            the cloud
           $ref: '#/components/schemas/upgrade_devices_targets_scheduled'
         skipped:
+          description: Device MAC addresses for devices skipped because the requested
+            version matched the running version
           $ref: '#/components/schemas/upgrade_devices_targets_skipped'
         total:
           description: Count of devices part of this upgrade
           type: integer
         upgraded:
+          description: Device MAC addresses for devices that upgraded successfully
           $ref: '#/components/schemas/upgrade_devices_targets_upgraded'
       readOnly: true
       type: object
     upgrade_devices_targets_download_requested:
-      description: List of devices MAC Addresses which cloud has requested to download
+      description: List of device MAC addresses that the cloud requested to download
         firmware
       items:
         type: string
       type: array
     upgrade_devices_targets_downloaded:
-      description: List of devices MAC Addresses which have the firmware downloaded
+      description: List of device MAC addresses that have downloaded the firmware
       items:
         type: string
       type: array
     upgrade_devices_targets_downloading:
-      description: List of devices MAC Addresses which are currently downloading the
+      description: List of device MAC addresses that are currently downloading the
         firmware
       items:
         type: string
       type: array
     upgrade_devices_targets_failed:
-      description: List of devices MAC Addresses which have failed to upgrade
+      description: List of device MAC addresses that failed to upgrade
       items:
         type: string
       type: array
     upgrade_devices_targets_reboot_in_progress:
-      description: List of devices MAC Addresses which are rebooting
+      description: List of device MAC addresses for devices that are rebooting
       items:
         type: string
       type: array
     upgrade_devices_targets_rebooted:
-      description: List of devices MAC Addresses which have rebooted successfully
+      description: List of device MAC addresses that rebooted successfully
       items:
         type: string
       type: array
     upgrade_devices_targets_scheduled:
-      description: List of devices MAC Addresses which cloud has scheduled an upgrade
+      description: List of device MAC addresses that the cloud scheduled an upgrade
         for
       items:
         type: string
       type: array
     upgrade_devices_targets_skipped:
-      description: List of devices MAC Addresses which skipped upgrade since requested
+      description: List of device MAC addresses that skipped upgrade because requested
         version was same as running version. Use force to always upgrade
       items:
         type: string
       type: array
     upgrade_devices_targets_upgraded:
-      description: Count of devices which have upgraded successfully
+      description: List of device MAC addresses that upgraded successfully
       items:
         type: string
       type: array
