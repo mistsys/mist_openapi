@@ -93431,15 +93431,19 @@ components:
       type: array
       uniqueItems: true
     service:
-      description: Applications used for the Gateway configurations
+      description: Traffic service definition for applications or destinations used by gateway and SSR policies
       properties:
         addresses:
+          description: Custom IPv4 or IPv6 subnets matched by this service when `type`==`custom`
           $ref: '#/components/schemas/service_addresses'
         app_categories:
+          description: Categories of applications matched by this service when `type`==`app_categories`
           $ref: '#/components/schemas/service_app_categories'
         app_subcategories:
+          description: Application subcategories matched by this service when `type`==`app_categories`
           $ref: '#/components/schemas/service_app_subcategories'
         apps:
+          description: Application identifiers matched by this service when `type`==`apps`
           $ref: '#/components/schemas/service_apps'
         client_limit_down:
           default: 0
@@ -93458,28 +93462,40 @@ components:
           minimum: 0
           type: integer
         created_time:
+          description: Timestamp when the service definition was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         description:
+          description: Free-form description of the service definition
           type: string
         dscp:
+          description: QoS DSCP value used for custom SSR traffic classification
           $ref: '#/components/schemas/service_dscp'
         failover_policy:
+          description: Failover behavior for traffic matched by this service
           $ref: '#/components/schemas/service_failover_policy'
         hostnames:
+          description: Domain hostnames matched by this custom service for web filtering
           $ref: '#/components/schemas/service_hostnames'
         id:
+          description: Unique value identifying the service definition
           $ref: '#/components/schemas/id'
         max_jitter:
+          description: Maximum jitter threshold used for SSR uplink selection when `traffic_type`==`custom`
           $ref: '#/components/schemas/service_max_jitter'
         max_latency:
+          description: Maximum latency threshold used for SSR uplink selection when `traffic_type`==`custom`
           $ref: '#/components/schemas/service_max_latency'
         max_loss:
+          description: Maximum packet loss threshold used for SSR uplink selection when `traffic_type`==`custom`
           $ref: '#/components/schemas/service_max_loss'
         modified_time:
+          description: Timestamp when the service definition was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the service definition
           type: string
         org_id:
+          description: Organization identifier associated with the service definition
           $ref: '#/components/schemas/org_id'
         service_limit_down:
           default: 0
@@ -93502,19 +93518,24 @@ components:
           description: Whether to enable measure SLE
           type: boolean
         specs:
+          description: Protocol and port match rules used when `type`==`custom`
           $ref: '#/components/schemas/service_specs'
         ssr_relaxed_tcp_state_enforcement:
           default: false
+          description: Whether SSR relaxes TCP state enforcement for this service
           type: boolean
         traffic_class:
+          description: Traffic class applied when `traffic_type`==`custom`
           $ref: '#/components/schemas/service_traffic_class'
         traffic_type:
           default: data_best_effort
           description: values from [List Traffic Types]($e/Constants%20Definitions/listTrafficTypes)
           type: string
         type:
+          description: Matching mode that determines which app, URL, or custom fields are used
           $ref: '#/components/schemas/service_type'
         urls:
+          description: URL patterns matched by this service when `type`==`urls`
           $ref: '#/components/schemas/service_urls'
       type: object
     service_addresses:
@@ -93961,6 +93982,7 @@ components:
         type: string
       type: array
     services:
+      description: Service definitions returned by list operations
       items:
         $ref: '#/components/schemas/service'
       type: array
