@@ -110477,8 +110477,10 @@ components:
         $ref: '#/components/schemas/vbeacon'
       type: array
     vc_port:
+      description: Request to change the Virtual Chassis port mode on a switch
       properties:
         mode:
+          description: Virtual Chassis port mode to apply
           $ref: '#/components/schemas/vc_port_mode'
       type: object
     vc_port_mode:
@@ -110489,38 +110491,48 @@ components:
       - vcp-hgoe
       type: string
     version_string:
+      description: JSI device upgrade target version request
       properties:
         version:
+          description: Target software version for the JSI device upgrade
           type: string
       type: object
     virtual_chassis_config:
-      description: Virtual Chassis
+      description: Virtual Chassis creation or configuration request
       properties:
         locating:
+          description: Whether the Virtual Chassis is currently in locate mode
           readOnly: true
           type: boolean
         members:
+          description: Virtual Chassis members and their expected roles and VC ports
           $ref: '#/components/schemas/virtual_chassis_config_members'
         preprovisioned:
           default: false
-          description: To create the Virtual Chassis in Pre-Provisioned mode
+          description: Whether to create the Virtual Chassis in pre-provisioned mode
           type: boolean
       type: object
     virtual_chassis_config_member:
       additionalProperties: false
+      description: Virtual Chassis member configuration
       properties:
         locating:
+          description: Whether this Virtual Chassis member is currently in locate
+            mode
           readOnly: true
           type: boolean
         mac:
-          description: fpc0, same as the mac of device_id
+          description: Member MAC address; for FPC0 this matches the device
+            MAC address
           type: string
         member_id:
-          description: For preprovisionned virtual chassis
+          description: Member ID used for a pre-provisioned Virtual Chassis
           type: integer
         vc_ports:
+          description: Port names to use as Virtual Chassis ports on this member
           $ref: '#/components/schemas/strings'
         vc_role:
+          description: Role of this member in the Virtual Chassis
           $ref: '#/components/schemas/virtual_chassis_config_member_vc_role'
       required:
       - mac
@@ -110534,24 +110546,34 @@ components:
       - master
       type: string
     virtual_chassis_config_members:
+      description: Virtual Chassis member configurations
       items:
         $ref: '#/components/schemas/virtual_chassis_config_member'
       type: array
     virtual_chassis_member_update:
       additionalProperties: false
+      description: Member update for a Virtual Chassis add, remove, or preprovision
+        operation
       properties:
         mac:
-          description: Required if `op`==`add` or `op`==`preprovision`.
+          description: Required if `op`==`add` or `op`==`preprovision`; MAC address
+            of the member to add or preprovision
           type: string
         member:
-          description: Required if `op`==`remove`
+          description: Required if `op`==`remove`; member ID to remove from the Virtual
+            Chassis
           type: integer
         member_id:
-          description: Required if `op`==`preprovision`. Optional if `op`==`add`
+          description: Required if `op`==`preprovision`. Optional if `op`==`add`;
+            target member ID for the Virtual Chassis member
           type: integer
         vc_ports:
+          description: Required if `op`==`add` or `op`==`preprovision`; port names
+            to use as Virtual Chassis ports
           $ref: '#/components/schemas/virtual_chassis_member_update_vc_ports'
         vc_role:
+          description: Required if `op`==`add` or `op`==`preprovision`; role of the
+            member in the Virtual Chassis
           $ref: '#/components/schemas/virtual_chassis_member_update_vc_role'
       type: object
     virtual_chassis_member_update_vc_ports:
@@ -110568,16 +110590,20 @@ components:
       - master
       type: string
     virtual_chassis_port:
+      description: Request to set or delete Virtual Chassis ports on members
       properties:
         members:
+          description: Virtual Chassis members and ports affected by the operation
           $ref: '#/components/schemas/virtual_chassis_port_members'
         op:
+          description: Action to perform on the specified Virtual Chassis ports
           $ref: '#/components/schemas/virtual_chassis_port_operation'
       required:
       - op
       - members
       type: object
     virtual_chassis_port_members:
+      description: Virtual Chassis member port selections for a port operation
       items:
         $ref: '#/components/schemas/config_vc_port_member'
       type: array
@@ -110590,17 +110616,19 @@ components:
       minLength: 1
       type: string
     virtual_chassis_update:
-      description: Virtual Chassis
+      description: Virtual Chassis member update request
       properties:
         member:
-          description: Only if `op`==`renumber`
+          description: Only if `op`==`renumber`; existing member ID to renumber
           type: integer
         members:
+          description: Member updates for add, remove, or preprovision operations
           $ref: '#/components/schemas/virtual_chassis_update_members'
         new-member:
-          description: Only if `op`==`renumber`
+          description: Only if `op`==`renumber`; new member ID to assign
           type: integer
         op:
+          description: Action to perform on the Virtual Chassis
           $ref: '#/components/schemas/virtual_chassis_update_op'
         remove_inventory:
           default: false
@@ -110611,6 +110639,7 @@ components:
           type: boolean
       type: object
     virtual_chassis_update_members:
+      description: Member updates for a Virtual Chassis operation
       items:
         $ref: '#/components/schemas/virtual_chassis_member_update'
       type: array
