@@ -117543,14 +117543,17 @@ components:
           type: string
       type: object
     zone:
-      description: Zone
+      description: Zone defined on a site map
       properties:
         created_time:
+          description: Time when this zone was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether this zone is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier for this zone
           $ref: '#/components/schemas/id'
         map_id:
           description: Map where this zone is defined
@@ -117558,15 +117561,19 @@ components:
           readOnly: true
           type: string
         modified_time:
+          description: Time when this zone was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
-          description: The name of the zone
+          description: Display name of the zone
           type: string
         org_id:
+          description: Owning organization associated with this zone
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Mist site associated with this zone
           $ref: '#/components/schemas/site_id'
         vertices:
+          description: Polygon vertices that define the zone boundary
           $ref: '#/components/schemas/zone_vertices'
       type: object
     zone_scope:
@@ -117586,13 +117593,14 @@ components:
       type: string
     zone_vertex:
       additionalProperties: false
+      description: Zone polygon vertex expressed in map pixels
       properties:
         x:
-          description: X in pixel
+          description: Horizontal pixel coordinate of the zone vertex
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical pixel coordinate of the zone vertex
           format: double
           type: number
       required:
@@ -117602,13 +117610,14 @@ components:
       uniqueItems: true
     zone_vertex_m:
       additionalProperties: false
+      description: Zone polygon vertex expressed in meters
       properties:
         x:
-          description: X in pixel
+          description: Horizontal coordinate of the zone vertex, in meters
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical coordinate of the zone vertex, in meters
           format: double
           type: number
       required:
@@ -117632,6 +117641,7 @@ components:
         $ref: '#/components/schemas/zone_vertex'
       type: array
     zone_vertices_m:
+      description: Vertices used to define a zone boundary, expressed in meters
       examples:
       - - x: 24.1983341951072
           y: 60.198314985369144
