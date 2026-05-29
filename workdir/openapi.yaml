@@ -97376,18 +97376,25 @@ components:
     sle_summary:
       additionalProperties: false
       deprecated: true
+      description: Deprecated SLE summary response for a metric window
       properties:
         classifiers:
           $ref: '#/components/schemas/sle_summary_classifiers'
+          description: SLE classifier details included in the summary
         end:
+          description: Last timestamp in the SLE summary window
           type: number
         events:
           $ref: '#/components/schemas/sle_summary_events'
+          description: Event records included in the SLE summary
         impact:
           $ref: '#/components/schemas/sle_summary_impact'
+          description: AP and user impact counts for the summary window
         sle:
           $ref: '#/components/schemas/sle_summary_sle'
+          description: Time-series SLE samples for the summary window
         start:
+          description: First timestamp in the SLE summary window
           type: number
       required:
       - start
@@ -97398,25 +97405,32 @@ components:
       - events
       type: object
     sle_summary_classifiers:
+      description: SLE classifier details included in a summary response
       items:
         $ref: '#/components/schemas/sle_classifier'
       type: array
       uniqueItems: true
     sle_summary_events:
+      description: Event records included in an SLE summary response
       items:
         additionalProperties: true
         type: object
       type: array
     sle_summary_impact:
       additionalProperties: false
+      description: AP and user impact counts for an SLE summary window
       properties:
         num_aps:
+          description: Number of APs affected by degraded SLE experience
           type: number
         num_users:
+          description: Number of users affected by degraded SLE experience
           type: number
         total_aps:
+          description: Total number of APs considered in the summary window
           type: number
         total_users:
+          description: Total number of users considered in the summary window
           type: number
       required:
       - num_users
@@ -97435,18 +97449,24 @@ components:
       type: string
     sle_summary_sle:
       additionalProperties: false
+      description: Time-series SLE metric samples for a summary response
       properties:
         interval:
+          description: Sample interval in seconds for SLE summary data
           type: number
         name:
+          description: SLE metric name represented by the summary samples
           minLength: 1
           type: string
         samples:
           $ref: '#/components/schemas/sle_summary_sle_samples'
+          description: Per-interval sample arrays for the SLE metric
         x_label:
+          description: Label for the SLE summary x-axis
           minLength: 1
           type: string
         y_label:
+          description: Label for the SLE summary y-axis
           minLength: 1
           type: string
       required:
@@ -97458,40 +97478,52 @@ components:
       type: object
     sle_summary_sle_samples:
       additionalProperties: false
+      description: Per-interval sample arrays for an SLE summary
       properties:
         degraded:
           $ref: '#/components/schemas/sle_summary_sle_samples_degraded'
+          description: Per-interval degraded SLE values for the summary
         total:
           $ref: '#/components/schemas/sle_summary_sle_samples_total'
+          description: Per-interval total SLE values for the summary
         value:
           $ref: '#/components/schemas/sle_summary_sle_samples_value'
+          description: Per-interval SLE score values for the summary
       required:
       - total
       - degraded
       - value
       type: object
     sle_summary_sle_samples_degraded:
+      description: Per-interval degraded SLE values for a summary
       items:
         $ref: '#/components/schemas/number_or_null'
       type: array
     sle_summary_sle_samples_total:
+      description: Per-interval total SLE values for a summary
       items:
         $ref: '#/components/schemas/number_or_null'
       type: array
     sle_summary_sle_samples_value:
+      description: Per-interval SLE score values for a summary
       items:
         $ref: '#/components/schemas/number_or_null'
       type: array
     sle_summary_trend:
       additionalProperties: false
+      description: Time-series SLE summary trend response
       properties:
         classifiers:
           $ref: '#/components/schemas/sle_summary_trend_classifiers'
+          description: SLE classifier trend details included in the response
         end:
+          description: Last timestamp in the SLE summary trend window
           type: number
         sle:
           $ref: '#/components/schemas/sle_summary_sle'
+          description: Time-series SLE samples for the trend window
         start:
+          description: First timestamp in the SLE summary trend window
           type: number
       required:
       - start
@@ -97500,32 +97532,41 @@ components:
       - classifiers
       type: object
     sle_summary_trend_classifiers:
+      description: SLE classifier trend details included in a summary trend response
       items:
         $ref: '#/components/schemas/sle_trend_classifier'
       type: array
       uniqueItems: true
     sle_threshold:
+      description: Threshold metadata and configured value for an SLE metric
       properties:
         default:
+          description: Built-in threshold value for this SLE metric
           readOnly: true
           type: number
         direction:
+          description: Comparison direction used for SLE threshold evaluation
           minLength: 1
           readOnly: true
           type: string
         maximum:
+          description: Highest allowed threshold value for this SLE metric
           type: number
         metric:
+          description: SLE metric name associated with this threshold
           minLength: 1
           readOnly: true
           type: string
         minimum:
+          description: Lowest allowed threshold value for this SLE metric
           type: number
         threshold:
+          description: Configured threshold value for this SLE metric
           minLength: 1
           readOnly: true
           type: string
         units:
+          description: Measurement units for this SLE threshold
           minLength: 1
           readOnly: true
           type: string
@@ -97560,18 +97601,24 @@ components:
       type: object
     sle_trend_classifier:
       additionalProperties: false
+      description: Time-series classifier trend detail for an SLE metric
       properties:
         interval:
+          description: Sample interval in seconds for classifier trend data
           type: number
         name:
+          description: Classifier name for the SLE metric trend
           minLength: 1
           type: string
         samples:
           $ref: '#/components/schemas/sle_classifier_samples'
+          description: Time-series sample arrays for the classifier trend
         x_label:
+          description: Label for the classifier trend x-axis
           minLength: 1
           type: string
         y_label:
+          description: Label for the classifier trend y-axis
           minLength: 1
           type: string
       required:
