@@ -110946,17 +110946,19 @@ components:
       type: object
     vrf_extra_route:
       additionalProperties: false
+      description: Additional IPv4 static route for a VRF instance
       properties:
         via:
-          description: Next-hop address
+          description: IPv4 next-hop address for this VRF extra route
           format: ipv4
           type: string
       type: object
     vrf_extra_route6:
       additionalProperties: false
+      description: Additional IPv6 static route for a VRF instance
       properties:
         via:
-          description: Next-hop address
+          description: IPv6 next-hop address for this VRF extra route
           format: ipv6
           type: string
       type: object
@@ -111079,15 +111081,19 @@ components:
       type: array
     wan_extra_routes:
       additionalProperties: false
+      description: Additional IPv4 route for a WAN interface
       properties:
         via:
+          description: IPv4 next-hop address for this WAN extra route
           format: ipv4
           type: string
       type: object
     wan_extra_routes6:
       additionalProperties: false
+      description: Additional IPv6 route for a WAN interface
       properties:
         via:
+          description: IPv6 next-hop address for this WAN extra route
           format: ipv6
           type: string
       type: object
@@ -111099,36 +111105,45 @@ components:
       type: string
     wan_usages:
       additionalProperties: false
+      description: WAN usage record returned by site WAN usage searches
       properties:
         mac:
+          description: Local router MAC address for the WAN usage record
           examples:
           - 5c5b35000001
           type: string
         path_type:
+          description: WAN path type used by this usage record
           examples:
           - vpn
           type: string
         path_weight:
+          description: Configured weight for the WAN path
           examples:
           - 10
           type: integer
         peer_mac:
+          description: Remote peer MAC address for the WAN path
           examples:
           - 0200018c95e1
           type: string
         peer_port_id:
+          description: Remote peer interface identifier for the WAN path
           examples:
           - ge-0/0/3
           type: string
         policy:
+          description: WAN path policy that selected this path
           examples:
           - policy1
           type: string
         port_id:
+          description: Local router interface identifier for the WAN path
           examples:
           - ge-0/0/0.0
           type: string
         tenant:
+          description: Network tenant context for the WAN usage record
           examples:
           - tenant1
           type: string
