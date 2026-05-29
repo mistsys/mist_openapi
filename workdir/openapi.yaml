@@ -89907,23 +89907,25 @@ components:
       uniqueItems: true
     response_past_spectrum_analysis:
       additionalProperties: false
+      description: Paginated response for past site spectrum analysis records
       properties:
         end:
-          description: End time of the spectrum analysis in epoch seconds
+          description: Epoch timestamp, in seconds, for the end of the spectrum analysis query window
           type: integer
         limit:
-          description: Limit of the number of results returned
+          description: Maximum number of spectrum analysis records returned in this page
           type: integer
         page:
-          description: Page number of the results returned
+          description: Current page number returned for the spectrum analysis results
           type: integer
         results:
+          description: Spectrum analysis records for the requested site and time window
           $ref: '#/components/schemas/response_past_spectrum_analysis_results'
         start:
-          description: Start time of the spectrum analysis in epoch seconds
+          description: Epoch timestamp, in seconds, for the start of the spectrum analysis query window
           type: integer
         total:
-          description: Total number of results available for the given time range
+          description: Number of spectrum analysis records available for the given time range
           type: integer
       type: object
     response_past_spectrum_analysis_channel_usage:
@@ -89931,12 +89933,12 @@ components:
       description: Channel usage data for a specific channel
       properties:
         channel:
-          description: Channel number
+          description: Radio channel measured by this channel usage sample
           examples:
           - 36
           type: integer
         noise:
-          description: Noise level in dBm
+          description: Measured noise floor, in dBm, for the channel
           examples:
           - -90.0
           type: number
@@ -89953,6 +89955,7 @@ components:
           type: number
       type: object
     response_past_spectrum_analysis_channel_usages:
+      description: Per-channel utilization measurements captured during spectrum analysis
       items:
         $ref: '#/components/schemas/response_past_spectrum_analysis_channel_usage'
       type: array
@@ -89961,17 +89964,17 @@ components:
       description: FFT sample data for a specific frequency
       properties:
         frequency:
-          description: Frequency in MHz
+          description: Sample frequency, in MHz, for this FFT point
           examples:
           - 2437.0
           type: number
         rssi:
-          description: RSSI in dBm
+          description: Received signal strength, in dBm, for this FFT sample
           examples:
           - -70.0
           type: number
         signal7:
-          description: RSSI in dBm
+          description: Additional signal level, in dBm, reported for this FFT sample
           examples:
           - -70.0
           type: number
@@ -89986,22 +89989,26 @@ components:
       description: Result of a past spectrum analysis
       properties:
         band:
-          description: Band on which the spectrum analysis was run (e.g., 24, 5, 6)
+          description: Radio band on which the spectrum analysis was run (for example, 24, 5, or 6)
           type: string
         channel_usage:
+          description: Per-channel utilization measurements captured during the analysis
           $ref: '#/components/schemas/response_past_spectrum_analysis_channel_usages'
         fft_samples:
+          description: FFT signal samples captured during the analysis
           $ref: '#/components/schemas/response_past_spectrum_analysis_fft_samples'
         mac:
-          description: MAC Address of the AP that ran the spectrum analysis
+          description: AP MAC address for the access point that ran the spectrum analysis
           type: string
         org_id:
+          description: Organization that owns the site where the spectrum analysis was run
           $ref: '#/components/schemas/org_id'
         timestamp:
-          description: Timestamp when the spectrum analysis was run in epoch seconds
+          description: Epoch timestamp, in seconds, when the spectrum analysis was run
           type: integer
       type: object
     response_past_spectrum_analysis_results:
+      description: Past spectrum analysis records returned for the site
       items:
         $ref: '#/components/schemas/response_past_spectrum_analysis_result'
       type: array
