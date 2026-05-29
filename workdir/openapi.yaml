@@ -113320,8 +113320,10 @@ components:
       description: Sample of the `sdkclient-scan-data` webhook payload.
       properties:
         events:
+          description: SDK client scan data events included in this webhook delivery
           $ref: '#/components/schemas/webhook_sdkclient_scan_data_events'
         topic:
+          description: Webhook topic name for SDK client scan data deliveries
           $ref: '#/components/schemas/webhook_sdkclient_scan_data_topic'
       required:
       - topic
@@ -113329,6 +113331,7 @@ components:
       type: object
     webhook_sdkclient_scan_data_event:
       additionalProperties: false
+      description: SDK client connection state and background Wi-Fi scan observations
       properties:
         connection_ap:
           description: MAC address of the AP the client is connected to
@@ -113337,7 +113340,7 @@ components:
           description: 5GHz or 2.4GHz band, of the BSSID the client is connected to
           type: string
         connection_bssid:
-          description: BSSID of the AP the client is connected to
+          description: Connected AP BSSID for the SDK client
           type: string
         connection_channel:
           description: Channel of the band the client is connected to
@@ -113346,13 +113349,17 @@ components:
           description: "RSSI of the client\u2019s connection to the AP/BSSID"
           type: number
         last_seen:
+          description: Time when the SDK client scan data was last observed, in epoch
+            seconds
           $ref: '#/components/schemas/last_seen'
         mac:
-          description: Client's MAC Address
+          description: SDK client MAC address
           type: string
         scan_data:
+          description: Background Wi-Fi scan observations reported by the SDK client
           $ref: '#/components/schemas/webhook_sdkclient_scan_data_event_scan_data'
         site_id:
+          description: Site associated with the SDK client scan data event
           $ref: '#/components/schemas/site_id'
       required:
       - connection_ap
@@ -113376,20 +113383,25 @@ components:
           description: MAC address of the AP associated with the BSSID scanned
           type: string
         band:
+          description: Radio band on which the SDK client scanned the BSSID
           $ref: '#/components/schemas/scan_data_item_band'
         bssid:
-          description: "BSSID found during client\u2019s background scan for Wi-Fi"
+          description: Scanned BSSID found during the SDK client's background Wi-Fi
+            scan
           type: string
         channel:
-          description: Channel of the band found in the scan
+          description: Radio channel found in the SDK client's background scan
           type: integer
         rssi:
-          description: Client's RSSI relative to the BSSID scanned
+          description: Signal strength measured by the SDK client for the scanned
+            BSSID
           type: number
         ssid:
-          description: ESSID containing the BSSID scanned
+          description: Network SSID containing the BSSID scanned by the SDK client
           type: string
         timestamp:
+          description: Time when the SDK client scan observation was recorded, in
+            epoch seconds
           $ref: '#/components/schemas/timestamp'
       required:
       - ap
