@@ -107575,48 +107575,70 @@ components:
       type: string
     tunnel_config:
       additionalProperties: false
+      description: Gateway tunnel configuration for provider-managed or custom tunnels
       properties:
         auto_provision:
+          description: Provider auto-provisioning settings for tunnel endpoints
           $ref: '#/components/schemas/tunnel_config_auto_provision'
         ike_lifetime:
-          description: Only if `provider`==`custom-ipsec`
+          description: Only if `provider`==`custom-ipsec`. IKE lifetime configured
+            for the custom IPsec tunnel
           type: integer
         ike_mode:
+          description: Only if `provider`==`custom-ipsec`. IKE negotiation mode for
+            the tunnel
           $ref: '#/components/schemas/tunnel_config_ike_mode'
         ike_proposals:
+          description: If `provider`==`custom-ipsec`, IKE proposals used for custom
+            IPsec negotiation
           $ref: '#/components/schemas/tunnel_config_ike_proposals'
         ipsec_lifetime:
-          description: If `provider`==`custom-ipsec`
+          description: If `provider`==`custom-ipsec`, IPsec lifetime configured for
+            the custom tunnel
           type: integer
         ipsec_proposals:
+          description: Only if `provider`==`custom-ipsec`. IPsec proposals used for
+            custom IPsec negotiation
           $ref: '#/components/schemas/tunnel_config_ipsec_proposals'
         local_id:
           description: Required if `provider`==`zscaler-ipsec`, `provider`==`jse-ipsec`
             or `provider`==`custom-ipsec`
           type: string
         local_subnets:
+          description: Local protected subnets advertised by this tunnel
           $ref: '#/components/schemas/tunnel_config_local_subnets'
         mode:
+          description: Tunnel failover mode used for primary and secondary endpoints
           $ref: '#/components/schemas/tunnel_config_tunnel_mode'
         networks:
+          description: Destination networks reachable through this tunnel
           $ref: '#/components/schemas/tunnel_config_networks'
         primary:
+          description: Main remote tunnel endpoint settings
           $ref: '#/components/schemas/tunnel_config_node'
         probe:
+          description: Tunnel health probe settings
           $ref: '#/components/schemas/tunnel_config_probe'
         protocol:
+          description: Only if `provider`==`custom-ipsec`. Tunnel protocol for custom
+            tunnel negotiation
           $ref: '#/components/schemas/tunnel_config_protocol'
         provider:
+          description: Tunnel provider used when auto provisioning is disabled
           $ref: '#/components/schemas/tunnel_config_provider'
         psk:
           description: Required if `provider`==`zscaler-ipsec`, `provider`==`jse-ipsec`
             or `provider`==`custom-ipsec`
           type: string
         remote_subnets:
+          description: Remote protected subnets reached through policy-based IPsec
           $ref: '#/components/schemas/tunnel_config_remote_subnets'
         secondary:
+          description: Backup remote tunnel endpoint settings
           $ref: '#/components/schemas/tunnel_config_node'
         version:
+          description: Only if `provider`==`custom-gre` or `provider`==`custom-ipsec`.
+            Tunnel version value for custom tunnel configuration
           $ref: '#/components/schemas/tunnel_config_version'
       type: object
     tunnel_config_auth_algo:
