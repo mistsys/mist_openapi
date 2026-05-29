@@ -89138,14 +89138,19 @@ components:
       type: object
     response_iot_endpoints_search:
       additionalProperties: false
+      description: Time-bounded response for IoT endpoint search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the IoT endpoint search window
           type: number
         results:
+          description: IoT endpoint statistics matching the search filters
           $ref: '#/components/schemas/response_iot_endpoints_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the IoT endpoint search window
           type: number
         total:
+          description: Number of IoT endpoint records matching the search filters
           type: integer
       required:
       - start
@@ -89160,19 +89165,25 @@ components:
       uniqueItems: true
     response_location_coverage:
       additionalProperties: false
+      description: Beam coverage overview for a site location map
       properties:
         beams_means:
+          description: Grid beam mean samples as [x, y, mean] values for the coverage view
           $ref: '#/components/schemas/response_location_coverage_beams_means'
         end:
+          description: Epoch timestamp for the end of the coverage analysis window
           type: integer
         gridsize:
-          description: Size of grid, in meter
+          description: Grid cell size in meters for coverage samples
           type: number
         result_def:
+          description: Column names describing each value position in the coverage result rows
           $ref: '#/components/schemas/response_location_coverage_result_def'
         results:
+          description: Coverage result rows whose values follow the `result_def` column order
           $ref: '#/components/schemas/response_location_coverage_results'
         start:
+          description: Epoch timestamp for the start of the coverage analysis window
           type: integer
       required:
       - start
@@ -89208,18 +89219,25 @@ components:
       type: array
     response_log_search:
       additionalProperties: false
+      description: Paginated response for audit log search results
       properties:
         end:
+          description: Epoch timestamp for the end of the audit log search window
           type: integer
         limit:
+          description: Maximum number of audit log events returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of audit log events
           type: string
         results:
+          description: Audit log events matching the search filters
           $ref: '#/components/schemas/log_events'
         start:
+          description: Epoch timestamp for the start of the audit log search window
           type: integer
         total:
+          description: Number of audit log events matching the search filters across all pages
           type: integer
       required:
       - end
