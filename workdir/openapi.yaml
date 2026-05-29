@@ -102409,21 +102409,21 @@ components:
             \ only for service having its own cloud connection"
           type: string
         last_seen:
-          description: Timestamp when the last stats is seen (cloud unix time, in
-            second). valid only for service having its own stats or whole system (last
-            among last_seen of all services)
+          description: Cloud Unix time, in seconds, when stats were last seen for
+            this service, or the latest service last_seen time for whole-system records
           type: number
         package_state:
-          description: Package/service installation state.
+          description: Installation state of the Mist Edge service package
           type: string
         package_version:
-          description: Package/service installation state.
+          description: Installed version of the Mist Edge service package
           type: string
         running_state:
-          description: Service running state.
+          description: Runtime state reported by the Mist Edge service
           type: string
         uptime:
-          description: Service uptime.
+          description: Elapsed running time reported by the Mist Edge service, in
+            seconds
           type: integer
       type: object
     stats_mxedge_service_stats:
