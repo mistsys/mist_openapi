@@ -112323,8 +112323,10 @@ components:
       description: Sample of the `location` webhook payload.
       properties:
         events:
+          description: Location events included in this webhook delivery
           $ref: '#/components/schemas/webhook_location_events'
         topic:
+          description: Webhook topic name for generic location deliveries
           $ref: '#/components/schemas/webhook_location_topic'
       required:
       - events
@@ -112335,8 +112337,10 @@ components:
       description: Sample of the `location_asset` webhook payload.
       properties:
         events:
+          description: Asset location events included in this webhook delivery
           $ref: '#/components/schemas/webhook_location_asset_events'
         topic:
+          description: Webhook topic name for asset location deliveries
           $ref: '#/components/schemas/webhook_location_asset_topic'
       required:
       - events
@@ -112422,8 +112426,10 @@ components:
       description: Sample of the `location-centrak` webhook payload.
       properties:
         events:
+          description: CenTrak location events included in this webhook delivery
           $ref: '#/components/schemas/webhook_location_centrak_events'
         topic:
+          description: Webhook topic name for CenTrak location deliveries
           $ref: '#/components/schemas/webhook_location_centrak_topic'
       required:
       - events
@@ -112484,8 +112490,11 @@ components:
       description: Sample of the `location-client` webhook payload.
       properties:
         events:
+          description: Connected client location events included in this webhook
+            delivery
           $ref: '#/components/schemas/webhook_location_client_events'
         topic:
+          description: Webhook topic name for connected client location deliveries
           $ref: '#/components/schemas/webhook_location_client_topic'
       required:
       - events
@@ -112607,8 +112616,10 @@ components:
       description: Sample of the `location-sdk` webhook payload.
       properties:
         events:
+          description: SDK client location events included in this webhook delivery
           $ref: '#/components/schemas/webhook_location_sdk_events'
         topic:
+          description: Webhook topic name for SDK client location deliveries
           $ref: '#/components/schemas/webhook_location_sdk_topic'
       required:
       - events
@@ -112668,8 +112679,11 @@ components:
       description: Sample of the `location-unclient` webhook payload.
       properties:
         events:
+          description: Unconnected client location events included in this webhook
+            delivery
           $ref: '#/components/schemas/webhook_location_unclient_events'
         topic:
+          description: Webhook topic name for unconnected client location deliveries
           $ref: '#/components/schemas/webhook_location_unclient_topic'
       required:
       - events
