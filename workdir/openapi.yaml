@@ -91308,18 +91308,25 @@ components:
       type: array
     response_stats_assets:
       additionalProperties: false
+      description: Paginated response for asset statistics search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the asset statistics search window
           type: integer
         limit:
+          description: Maximum number of asset statistics records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of asset statistics results
           type: string
         results:
+          description: Asset statistics records matching the search filters
           $ref: '#/components/schemas/stats_assets'
         start:
+          description: Epoch timestamp, in seconds, for the start of the asset statistics search window
           type: integer
         total:
+          description: Number of asset statistics records matching the search filters across all pages
           type: integer
       required:
       - start
@@ -91330,48 +91337,63 @@ components:
       type: object
     response_stats_calls:
       additionalProperties: false
+      description: Paginated response for site call statistics search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the call statistics search window
           type: number
         limit:
+          description: Maximum number of call statistics records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of call statistics results
           type: string
         results:
+          description: Call statistics records matching the search filters
           $ref: '#/components/schemas/stats_calls'
         start:
+          description: Epoch timestamp, in seconds, for the start of the call statistics search window
           type: number
         total:
+          description: Number of call statistics records matching the search filters across all pages
           type: integer
       type: object
     response_stats_calls_summary:
       additionalProperties: false
+      description: Aggregated site call statistics summary
       properties:
         bad_minutes:
+          description: Total call minutes classified as bad across all quality categories
           examples:
           - 5566.0
           type: number
         bad_minutes_client:
+          description: Call minutes classified as bad due to client-side issues
           examples:
           - 526.0
           type: number
         bad_minutes_site_wan:
+          description: Call minutes classified as bad due to site WAN issues
           examples:
           - 3612.0
           type: number
         bad_minutes_wireless:
+          description: Call minutes classified as bad due to wireless issues
           examples:
           - 1428.0
           type: number
         num_aps:
+          description: Number of APs represented in the call statistics summary
           examples:
           - 1
           type: integer
         num_users:
+          description: Number of users represented in the call statistics summary
           examples:
           - 3
           type: integer
         total_minutes:
+          description: Total call minutes represented in the summary
           examples:
           - 5566.0
           type: number
