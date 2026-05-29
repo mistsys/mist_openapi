@@ -97629,65 +97629,85 @@ components:
       type: object
     snmp_config:
       additionalProperties: false
+      description: SNMP configuration for managed network devices
       properties:
         client_list:
           $ref: '#/components/schemas/snmp_config_client_lists'
+          description: SNMP client allowlists that can be referenced by communities
         contact:
+          description: Administrative contact string advertised through SNMP
           examples:
           - cns@juniper.net
           type: string
         description:
+          description: Device description string advertised through SNMP
           examples:
           - Juniper QFX Series Switch - 1K_5LA
           type: string
         enabled:
           default: true
+          description: Whether SNMP is enabled
           type: boolean
         engine_id:
           $ref: '#/components/schemas/snmp_config_engine_id'
+          description: SNMP engine ID used for SNMPv3
         engine_id_type:
           $ref: '#/components/schemas/snmp_config_engine_id_type'
+          description: Method used to derive the SNMP engine ID
         location:
+          description: Physical location string advertised through SNMP
           examples:
           - Las Vegas, NV
           type: string
         name:
+          description: System name advertised through SNMP
           examples:
           - TGH-1K-QFX10K
           type: string
         network:
           default: default
+          description: Management network used for SNMP traffic
           type: string
         trap_groups:
           $ref: '#/components/schemas/snmp_config_trap_groups'
+          description: SNMP trap group definitions
         v2c_config:
           $ref: '#/components/schemas/snmp_config_v2c_configs'
+          description: SNMPv2c community configuration entries for this SNMP profile
         v3_config:
           $ref: '#/components/schemas/snmpv3_config'
+          description: SNMPv3 user, VACM, notify, and target configuration
         views:
           $ref: '#/components/schemas/snmp_config_views'
+          description: SNMP MIB view definitions
       type: object
     snmp_config_client_list:
       additionalProperties: false
+      description: SNMP client allowlist definition
       properties:
         client_list_name:
+          description: Name of the SNMP client list
           examples:
           - clist-1
           type: string
         clients:
           $ref: '#/components/schemas/snmp_config_client_list_clients'
+          description: SNMP client IP addresses or CIDR ranges allowed by this list
       type: object
     snmp_config_client_list_clients:
+      description: SNMP client IP addresses or CIDR ranges allowed by a client list
       items:
         examples:
         - 151.140.101.218/32
         type: string
       type: array
     snmp_config_client_lists:
+      description: SNMP client allowlists that can be referenced by communities
       items:
         $ref: '#/components/schemas/snmp_config_client_list'
       type: array
     snmp_config_engine_id:
+      description: SNMP engine ID value used for SNMPv3
       maxLength: 27
       type: string
     snmp_config_engine_id_type:
@@ -97699,32 +97719,39 @@ components:
       type: string
     snmp_config_trap_group:
       additionalProperties: false
+      description: SNMP trap group definition
       properties:
         categories:
           $ref: '#/components/schemas/snmp_config_trap_group_categories'
+          description: Trap categories included in this SNMP trap group
         group_name:
-          description: Categories list can refer to https://www.juniper.net/documentation/software/topics/task/configuration/snmp_trap-groups-configuring-junos-nm.html
+          description: Trap group name for this SNMP trap group
           examples:
           - profiler
           type: string
         targets:
           $ref: '#/components/schemas/snmp_config_trap_group_targets'
+          description: Trap target addresses for this SNMP trap group
         version:
           $ref: '#/components/schemas/snmp_config_trap_version'
+          description: SNMP trap protocol version used by this group
       type: object
     snmp_config_trap_group_categories:
+      description: Trap categories included in an SNMP trap group
       items:
         examples:
         - authentication
         type: string
       type: array
     snmp_config_trap_group_targets:
+      description: Trap target addresses for an SNMP trap group
       items:
         examples:
         - 172.29.158.19
         type: string
       type: array
     snmp_config_trap_groups:
+      description: SNMP trap group definitions
       items:
         $ref: '#/components/schemas/snmp_config_trap_group'
       type: array
@@ -97738,54 +97765,64 @@ components:
       type: string
     snmp_config_v2c_config:
       additionalProperties: false
+      description: SNMPv2c community configuration
       properties:
         authorization:
+          description: Access level for the SNMPv2c community
           examples:
           - read-only
           type: string
         client_list_name:
-          description: Client_list_name here should refer to client_list above
+          description: SNMP client list name referenced by this community
           examples:
           - clist-1
           type: string
         community_name:
+          description: SNMPv2c community string name
           examples:
           - abc123
           type: string
         view:
-          description: View name here should be defined in views above
+          description: SNMP view name that must be defined in the views list
           examples:
           - all
           type: string
       type: object
     snmp_config_v2c_configs:
+      description: SNMPv2c community configurations
       items:
         $ref: '#/components/schemas/snmp_config_v2c_config'
       type: array
     snmp_config_view:
       additionalProperties: false
+      description: SNMP MIB view definition
       properties:
         include:
-          description: If the root oid configured is included
+          description: Whether the root OID is included in this SNMP view
           type: boolean
         oid:
+          description: Root OID for this SNMP view
           examples:
           - 1.3.6.1
           type: string
         view_name:
+          description: Name of the SNMP MIB view definition
           examples:
           - all
           type: string
       type: object
     snmp_config_views:
+      description: SNMP MIB view definitions
       items:
         $ref: '#/components/schemas/snmp_config_view'
       type: array
     snmp_usm:
       additionalProperties: false
+      description: SNMPv3 User-based Security Model configuration
       properties:
         engine_type:
           $ref: '#/components/schemas/snmp_usm_engine_type'
+          description: SNMP engine type used for this USM configuration
         remote_engine_id:
           description: Required only if `engine_type`==`remote_engine`
           examples:
@@ -97793,6 +97830,7 @@ components:
           type: string
         users:
           $ref: '#/components/schemas/snmp_usm_users'
+          description: SNMPv3 USM users for this engine
       type: object
     snmp_usm_engine_type:
       description: 'enum: `local_engine`, `remote_engine`'
@@ -97802,6 +97840,7 @@ components:
       type: string
     snmp_usm_user:
       additionalProperties: false
+      description: SNMPv3 USM user definition
       properties:
         authentication_password:
           description: Not required if `authentication_type`==`authentication-none`.
@@ -97811,6 +97850,7 @@ components:
           type: string
         authentication_type:
           $ref: '#/components/schemas/snmp_usm_user_authentication_type'
+          description: Authentication protocol used by this SNMPv3 USM user
         encryption_password:
           description: Not required if `encryption_type`==`privacy-none`. Include
             alphabetic, numeric, and special characters, but it cannot include control
@@ -97819,7 +97859,9 @@ components:
           type: string
         encryption_type:
           $ref: '#/components/schemas/snmp_usm_user_encryption_type'
+          description: Privacy protocol used by this SNMPv3 USM user
         name:
+          description: Username for the SNMPv3 USM user
           type: string
       type: object
     snmp_usm_user_authentication_type:
@@ -97845,63 +97887,78 @@ components:
       - privacy-none
       type: string
     snmp_usm_users:
+      description: SNMPv3 USM user definitions
       items:
         $ref: '#/components/schemas/snmp_usm_user'
       type: array
     snmp_usms:
+      description: SNMPv3 USM engine configurations
       items:
         $ref: '#/components/schemas/snmp_usm'
       type: array
     snmp_vacm:
       additionalProperties: false
+      description: SNMPv3 View-based Access Control Model configuration
       properties:
         access:
           $ref: '#/components/schemas/snmp_vacm_access'
+          description: VACM access rules for SNMPv3
         security_to_group:
           $ref: '#/components/schemas/snmp_vacm_security_to_group'
+          description: VACM security-name to group mappings
       type: object
     snmp_vacm_access:
+      description: VACM access rules for SNMPv3
       items:
         $ref: '#/components/schemas/snmp_vacm_access_item'
       type: array
     snmp_vacm_access_item:
       additionalProperties: false
+      description: VACM access rule for an SNMP group
       properties:
         group_name:
+          description: SNMP VACM group name
           type: string
         prefix_list:
           $ref: '#/components/schemas/snmp_vacm_access_item_prefix_list'
+          description: Context prefix rules for this VACM group
       type: object
     snmp_vacm_access_item_prefix_list:
+      description: Context prefix rules for a VACM access entry
       items:
         $ref: '#/components/schemas/snmp_vacm_access_item_prefix_list_item'
       type: array
     snmp_vacm_access_item_prefix_list_item:
       additionalProperties: false
+      description: Context prefix rule for a VACM access entry
       properties:
         context_prefix:
-          description: Only required if `type`==`context_prefix`
+          description: Context prefix for this VACM access rule. Required only if
+            `type`==`context_prefix`
           examples:
           - iil
           type: string
         notify_view:
-          description: Refer to view name
+          description: Notify view name referenced by this VACM access rule
           examples:
           - all
           type: string
         read_view:
-          description: Refer to view name
+          description: Read view name referenced by this VACM access rule
           examples:
           - all
           type: string
         security_level:
           $ref: '#/components/schemas/snmp_vacm_access_item_prefix_list_item_level'
+          description: Required security level for this VACM access rule
         security_model:
           $ref: '#/components/schemas/snmp_vacm_access_item_prefix_list_item_model'
+          description: Required security model for this VACM access rule
         type:
           $ref: '#/components/schemas/snmp_vacm_access_item_type'
+          description: VACM context matching type for this access rule
         write_view:
-          description: Refer to view name
+          description: Write view name referenced by this VACM access rule
           examples:
           - all
           type: string
@@ -97936,80 +97993,107 @@ components:
       type: string
     snmp_vacm_security_to_group:
       additionalProperties: false
+      description: VACM security-name to group mapping configuration
       properties:
         content:
           $ref: '#/components/schemas/snmp_vacm_security_to_group_content'
+          description: VACM security-name to group mapping entries
         security_model:
           $ref: '#/components/schemas/snmp_vacm_security_model'
+          description: Required security model for these VACM group mappings
       type: object
     snmp_vacm_security_to_group_content:
+      description: VACM security-name to group mapping entries
       items:
         $ref: '#/components/schemas/snmp_vacm_security_to_group_content_item'
       type: array
     snmp_vacm_security_to_group_content_item:
       additionalProperties: false
+      description: VACM security-name to group mapping entry
       properties:
         group:
-          description: Refer to group_name under access
+          description: VACM group name referenced by this mapping
           type: string
         security_name:
+          description: Name of the SNMP security principal mapped to a VACM group
           type: string
       type: object
     snmpv3_config:
       additionalProperties: false
+      description: SNMPv3 notification, target, USM, and VACM configuration
       properties:
         notify:
           $ref: '#/components/schemas/snmpv3_config_notify'
+          description: SNMPv3 notification definitions used for traps and informs
         notify_filter:
           $ref: '#/components/schemas/snmpv3_config_notify_filter'
+          description: SNMPv3 notification filter profiles
         target_address:
           $ref: '#/components/schemas/snmpv3_config_target_address'
+          description: SNMPv3 notification target addresses
         target_parameters:
           $ref: '#/components/schemas/snmpv3_config_target_params'
+          description: SNMPv3 target parameter profiles
         usm:
           $ref: '#/components/schemas/snmp_usms'
+          description: SNMPv3 USM engine configurations
         vacm:
           $ref: '#/components/schemas/snmp_vacm'
+          description: SNMPv3 VACM access control configuration
       type: object
     snmpv3_config_notify:
+      description: SNMPv3 notification definitions
       items:
         $ref: '#/components/schemas/snmpv3_config_notify_items'
       type: array
     snmpv3_config_notify_filter:
+      description: SNMPv3 notification filter profiles
       items:
         $ref: '#/components/schemas/snmpv3_config_notify_filter_item'
       type: array
     snmpv3_config_notify_filter_item:
       additionalProperties: false
+      description: SNMPv3 notification filter profile
       properties:
         contents:
           $ref: '#/components/schemas/snmpv3_config_notify_filter_item_contents'
+          description: OID filter rules in this notification filter profile
         profile_name:
+          description: Notification filter profile name
           type: string
       type: object
     snmpv3_config_notify_filter_item_content:
       additionalProperties: false
+      description: OID filter rule for an SNMPv3 notification profile
       properties:
         include:
+          description: Whether the matching OID subtree is included
           type: boolean
         oid:
+          description: Matched OID subtree for this notification filter rule
           examples:
           - 1.3.6.1.4.1
           type: string
       type: object
     snmpv3_config_notify_filter_item_contents:
+      description: OID filter rules in an SNMPv3 notification filter profile
       items:
         $ref: '#/components/schemas/snmpv3_config_notify_filter_item_content'
       type: array
     snmpv3_config_notify_items:
       additionalProperties: false
+      description: SNMPv3 notification definition
       properties:
         name:
+          description: Identifier for this SNMPv3 notification definition
           type: string
         tag:
+          description: Notification tag used to select target addresses
           type: string
         type:
           $ref: '#/components/schemas/snmpv3_config_notify_type'
+          description: Delivery mode for this SNMPv3 notification, such as trap or
+            inform
       type: object
     snmpv3_config_notify_type:
       description: 'enum: `inform`, `trap`'
@@ -98018,52 +98102,66 @@ components:
       - trap
       type: string
     snmpv3_config_target_address:
+      description: SNMPv3 notification target addresses
       items:
         $ref: '#/components/schemas/snmpv3_config_target_address_item'
       type: array
     snmpv3_config_target_address_item:
       additionalProperties: false
+      description: SNMPv3 notification target address entry
       properties:
         address:
+          description: IP address or hostname of the SNMP target
           examples:
           - 10.11.0.2
           type: string
         address_mask:
+          description: Mask applied to the SNMP target address
           examples:
           - 255.255.255.0
           type: string
         port:
           default: '161'
+          description: UDP port used by the SNMP target
           type:
           - string
           - 'null'
         tag_list:
-          description: Refer to notify tag, can be multiple with blank
+          description: Set of notification tags for this target address; use spaces
+            between multiple tags
           type: string
         target_address_name:
+          description: Name of the SNMP target address entry
           examples:
           - target_address_name
           type: string
         target_parameters:
-          description: Refer to notify target parameters name
+          description: Target parameter profile referenced by this target address
           type: string
       type: object
     snmpv3_config_target_param:
       additionalProperties: false
+      description: SNMPv3 target parameter profile
       properties:
         message_processing_model:
           $ref: '#/components/schemas/snmpv3_config_target_param_mess_process_model'
+          description: SNMP message processing model used by this target parameter
+            profile
         name:
+          description: Target parameter profile name
           type: string
         notify_filter:
-          description: Refer to profile-name in notify_filter
+          description: Notification filter profile referenced by this target parameter
+            profile
           type: string
         security_level:
           $ref: '#/components/schemas/snmpv3_config_target_param_security_level'
+          description: Required security level for this target parameter profile
         security_model:
           $ref: '#/components/schemas/snmpv3_config_target_param_security_model'
+          description: Required security model for this target parameter profile
         security_name:
-          description: Refer to security_name in usm
+          description: USM security name referenced by this target parameter profile
           examples:
           - m01620
           type: string
@@ -98090,6 +98188,7 @@ components:
       - v2c
       type: string
     snmpv3_config_target_params:
+      description: SNMPv3 target parameter profiles
       items:
         $ref: '#/components/schemas/snmpv3_config_target_param'
       type: array
