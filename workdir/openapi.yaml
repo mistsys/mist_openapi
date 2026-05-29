@@ -111753,8 +111753,10 @@ components:
       description: Sample of the `client-sessions` webhook payload.
       properties:
         events:
+          description: Client session events included in this webhook delivery
           $ref: '#/components/schemas/webhook_client_sessions_events'
         topic:
+          description: Webhook topic name for client session deliveries
           $ref: '#/components/schemas/webhook_client_sessions_topic'
       required:
       - events
@@ -111762,6 +111764,8 @@ components:
       type: object
     webhook_client_sessions_event:
       additionalProperties: false
+      description: Wireless client session event delivered when a client roams or
+        disconnects
       properties:
         ap:
           description: MAC address of the AP the client roamed or disconnected from
@@ -111774,6 +111778,7 @@ components:
           description: 5GHz or 2.4GHz band
           type: string
         bssid:
+          description: WLAN radio BSSID that the client was associated with
           type: string
         client_family:
           description: Device family E.g. "Mac", "iPhone", "Apple watch"
@@ -111788,37 +111793,41 @@ components:
           description: Device operating system E.g. "Mojave", "Windows 10", "Linux"
           type: string
         connect:
-          description: Timestamp when the user connects
+          description: Time when the client connected, in epoch seconds
           type: integer
         connect_float:
-          description: floating point connect timestamp with millisecond precision
+          description: Client connection timestamp with millisecond precision
           type: number
         disconnect:
-          description: Timestamp when the user disconnects
+          description: Time when the client disconnected, in epoch seconds
           type: integer
         disconnect_float:
-          description: floating point disconnect timestamp with millisecond precision
+          description: Client disconnect timestamp with millisecond precision
           type: number
         duration:
-          description: Duration of the roamed or complete session indicated by termination_reason
-            field.
+          description: Length of the roamed or completed client session indicated
+            by the `termination_reason` value
           type: integer
         mac:
-          description: Client's MAC Address'
+          description: Client MAC address for the roaming or disconnected session
           type: string
         next_ap:
           description: the AP the client has roamed to.
           type: string
         org_id:
+          description: Organization associated with the client session event
           $ref: '#/components/schemas/org_id'
         rssi:
           description: Latest average RSSI before the user disconnects
           type: number
         site_id:
+          description: Site associated with the client session event
           $ref: '#/components/schemas/site_id'
         site_name:
+          description: Site name associated with the client session event
           type: string
         ssid:
+          description: WLAN SSID for the client session
           type: string
         termination_reason:
           description: 1 disassociate - when the client disassociates. 2 inactive
@@ -111826,11 +111835,14 @@ components:
             APs
           type: integer
         timestamp:
+          description: Time when the client session event was generated, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
         version:
           description: schema version of this message
           type: number
         wlan_id:
+          description: Unique identifier of the WLAN for the client session
           format: uuid
           type: string
       required:
