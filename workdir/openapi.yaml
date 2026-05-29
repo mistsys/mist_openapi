@@ -97063,133 +97063,192 @@ components:
       type: array
     sle_impacted_gateways:
       additionalProperties: false
+      description: Paginated list of gateways impacted by an SLE metric
       properties:
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         end:
+          description: Last timestamp in the impacted gateways window
           type: integer
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         gateways:
           $ref: '#/components/schemas/sle_impacted_gateways_gateways'
+          description: Impacted gateway rows returned for the SLE query
         limit:
+          description: Maximum number of impacted gateway rows returned per page
           type: integer
         metric:
+          description: SLE metric name used for the impacted gateways query
           type: string
         page:
+          description: Current page number for impacted gateway results
           type: integer
         start:
+          description: First timestamp in the impacted gateways window
           type: integer
         total_count:
+          description: Number of impacted gateway rows matching the query
           type: integer
       type: object
     sle_impacted_gateways_gateway:
       additionalProperties: false
+      description: SLE impact row for a gateway
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this gateway
           type: number
         duration:
+          description: Observation time represented by this gateway impact row
           type: integer
         gateway_mac:
+          description: MAC address of the gateway represented by this impacted row
           type: string
         gateway_model:
+          description: Model of the gateway represented by this impacted row
           type: string
         gateway_version:
+          description: Firmware version of the gateway represented by this impacted
+            row
           type: string
         name:
+          description: Display name for the gateway impact row
           type: string
         total:
+          description: Overall SLE total measured for this gateway impact row
           type: integer
       type: object
     sle_impacted_gateways_gateways:
+      description: Impacted gateway rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_gateways_gateway'
       type: array
     sle_impacted_interfaces:
       additionalProperties: false
+      description: Paginated list of interfaces impacted by an SLE metric
       properties:
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         end:
+          description: Last timestamp in the impacted interfaces window
           type: integer
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         interfaces:
           $ref: '#/components/schemas/sle_impacted_interfaces_interfaces'
+          description: Impacted interface rows returned for the SLE query
         limit:
+          description: Maximum number of impacted interface rows returned per page
           type: integer
         metric:
+          description: SLE metric name used for the impacted interfaces query
           type: string
         page:
+          description: Current page number for impacted interface results
           type: integer
         start:
+          description: First timestamp in the impacted interfaces window
           type: integer
         total_count:
+          description: Number of impacted interface rows matching the query
           type: integer
       type: object
     sle_impacted_interfaces_interface:
       additionalProperties: false
+      description: SLE impact row for a switch interface
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this interface
           type: number
         duration:
+          description: Observation time represented by this interface impact row
           type: number
         interface_name:
+          description: Name of the switch interface represented by this impacted row
           type: string
         switch_mac:
+          description: MAC address of the switch associated with this interface
           type: string
         switch_name:
+          description: Display name of the switch associated with this interface
           type: string
         total:
+          description: Overall SLE total measured for this interface impact row
           type: number
       type: object
     sle_impacted_interfaces_interfaces:
+      description: Impacted interface rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_interfaces_interface'
       type: array
     sle_impacted_switches:
       additionalProperties: false
+      description: Paginated list of switches impacted by an SLE metric
       properties:
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         end:
+          description: Last timestamp in the impacted switches window
           type: integer
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         limit:
+          description: Maximum number of impacted switch rows returned per page
           type: integer
         metric:
+          description: SLE metric name used for the impacted switches query
           type: string
         page:
+          description: Current page number for impacted switch results
           type: integer
         start:
+          description: First timestamp in the impacted switches window
           type: integer
         switches:
           $ref: '#/components/schemas/sle_impacted_switches_switches'
+          description: Impacted switch rows returned for the SLE query
         total_count:
+          description: Number of impacted switch rows matching the query
           type: integer
       type: object
     sle_impacted_switches_switch:
       additionalProperties: false
+      description: SLE impact row for a switch
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this switch
           type: number
         duration:
+          description: Observation time represented by this switch impact row
           type: number
         interface:
           $ref: '#/components/schemas/strings'
+          description: Switch interfaces contributing to this impacted switch row
         name:
+          description: Display name for the switch impact row
           type: string
         switch_mac:
+          description: MAC address of the switch represented by this impacted row
           type: string
         switch_model:
+          description: Model of the switch represented by this impacted row
           type: string
         switch_version:
+          description: Firmware version of the switch represented by this impacted
+            row
           type: string
         total:
+          description: Overall SLE total measured for this switch impact row
           type: number
       type: object
     sle_impacted_switches_switches:
+      description: Impacted switch rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_switches_switch'
       type: array
