@@ -114604,6 +114604,7 @@ components:
           type: object
         enabled:
           default: false
+          description: Whether application bandwidth limits are enabled for this WLAN
           type: boolean
         wxtag_ids:
           additionalProperties:
@@ -114623,6 +114624,7 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/wlan_app_qos_apps_properties'
           default: {}
+          description: Map of application keys to QoS rewrite settings
           examples:
           - skype-business-video:
               dscp: 32
@@ -114631,14 +114633,18 @@ components:
           type: object
         enabled:
           default: false
+          description: Whether application QoS rewrite rules are enabled for this WLAN
           type: boolean
         others:
+          description: Custom traffic QoS rules that are not tied to named applications
           $ref: '#/components/schemas/wlan_app_qos_others'
       type: object
     wlan_app_qos_apps_properties:
       additionalProperties: false
+      description: QoS rewrite settings for traffic matching a named application
       properties:
         dscp:
+          description: Differentiated Services Code Point value applied to matching application traffic
           $ref: '#/components/schemas/dscp'
         dst_subnet:
           description: Subnet filter is not required but helps AP to only inspect
@@ -114650,28 +114656,35 @@ components:
           type: string
       type: object
     wlan_app_qos_others:
+      description: Custom application QoS rules for traffic matched by subnet, port, and protocol
       items:
         $ref: '#/components/schemas/wlan_app_qos_others_item'
       type: array
       uniqueItems: true
     wlan_app_qos_others_item:
       additionalProperties: false
+      description: Custom QoS rewrite rule for traffic not matched by a named application
       properties:
         dscp:
+          description: Differentiated Services Code Point value applied to matching traffic
           $ref: '#/components/schemas/dscp'
         dst_subnet:
+          description: Destination subnet filter for this custom QoS rule
           examples:
           - 10.2.0.0/16
           type: string
         port_ranges:
+          description: TCP or UDP port ranges matched by this custom QoS rule
           examples:
           - 80,1024-6553
           type: string
         protocol:
+          description: IP protocol matched by this custom QoS rule
           examples:
           - udp
           type: string
         src_subnet:
+          description: Source subnet filter for this custom QoS rule
           examples:
           - 10.2.0.0/16
           type: string
