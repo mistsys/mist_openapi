@@ -115100,9 +115100,11 @@ components:
           minLength: 8
           type: string
         default_vlan_id:
+          description: Default VLAN ID used when dynamic PSK lookup does not return a VLAN
           $ref: '#/components/schemas/vlan_id_with_variable'
         enabled:
           default: false
+          description: Whether dynamic PSK is enabled for this WLAN
           type: boolean
         force_lookup:
           default: false
@@ -115110,17 +115112,20 @@ components:
             can be disabled. `false` means auto
           type: boolean
         source:
+          description: Origin used to retrieve per-user PSKs
           $ref: '#/components/schemas/dynamic_psk_source'
       type:
       - object
       - 'null'
     wlan_dynamic_vlan:
       additionalProperties: false
-      description: For 802.1x
+      description: Dynamic VLAN assignment settings for 802.1X WLAN authentication
       properties:
         default_vlan_id:
+          description: Deprecated default VLAN ID used when no RADIUS VLAN match is returned
           $ref: '#/components/schemas/wlan_dynamic_vlan_default_vlan_id_deprecated'
         default_vlan_ids:
+          description: Fallback VLAN IDs, ranges, or variables used when no RADIUS VLAN match is returned
           $ref: '#/components/schemas/wlan_dynamic_vlan_default_vlan_ids'
         enabled:
           default: false
@@ -115128,8 +115133,10 @@ components:
             to enable dynamic vlan
           type: boolean
         local_vlan_ids:
+          description: VLAN IDs that should be locally bridged for dynamic VLAN assignment
           $ref: '#/components/schemas/wlan_dynamic_vlan_local_vlan_ids'
         type:
+          description: Dynamic VLAN mapping method used for RADIUS-provided VLAN attributes
           $ref: '#/components/schemas/wlan_dynamic_vlan_type'
         vlans:
           additionalProperties:
