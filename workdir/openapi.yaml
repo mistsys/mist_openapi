@@ -98264,6 +98264,7 @@ components:
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Time when this SSO configuration was created, in epoch seconds
         custom_logout_url:
           description: If `idp_type`==`saml`, a URL we will redirect the user after
             user logout from Mist (for some IdP which supports a custom logout URL
@@ -98287,17 +98288,20 @@ components:
           type: string
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for this SSO configuration
         idp_cert:
           description: If `idp_type`==`saml`. IDP Cert (used to verify the signed
             response)
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/sso_idp_sign_algo'
+          description: SAML assertion signing algorithm. Required if `idp_type`==`saml`
         idp_sso_url:
           description: Required if `idp_type`==`saml`, IDP Single-Sign-On URL
           type: string
         idp_type:
           $ref: '#/components/schemas/sso_idp_type'
+          description: Identity provider type for this SSO configuration
         ignore_unmatched_roles:
           description: If `idp_type`==`saml`, ignore any unmatched roles provided
             in assertion. By default, an assertion is treated as invalid for any unmatched
@@ -98327,6 +98331,8 @@ components:
           type: string
         ldap_cacerts:
           $ref: '#/components/schemas/sso_ldap_ca_certs'
+          description: CA certificates used to validate LDAP or LDAPS server certificates.
+            Required if `idp_type`==`ldap`
         ldap_client_cert:
           description: If `idp_type`==`ldap`, LDAPS Client certificate
           examples:
@@ -98340,11 +98346,11 @@ components:
           type: string
         ldap_group_attr:
           default: memberOf
-          description: If `ldap_type`==`custom`
+          description: Group attribute used to resolve LDAP memberships. If `ldap_type`==`custom`
           type: string
         ldap_group_dn:
           default: base_dn
-          description: If `ldap_type`==`custom`
+          description: Group search base used for custom LDAP group lookup. If `ldap_type`==`custom`
           type: string
         ldap_resolve_groups:
           default: false
@@ -98353,8 +98359,10 @@ components:
           type: boolean
         ldap_server_hosts:
           $ref: '#/components/schemas/sso_ldap_server_hosts'
+          description: Server hostnames or IP addresses for LDAP or LDAPS when `idp_type`==`ldap`
         ldap_type:
           $ref: '#/components/schemas/sso_ldap_type'
+          description: Provider template for LDAP SSO when `idp_type`==`ldap`
         ldap_user_filter:
           description: Required if `ldap_type`==`custom`, LDAP filter that will identify
             the type of user
@@ -98369,15 +98377,20 @@ components:
           type: string
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Time when this SSO configuration was last modified, in epoch
+            seconds
         msp_id:
           $ref: '#/components/schemas/msp_id'
+          description: Owning MSP identifier for this SSO configuration, when MSP-scoped
         mxedge_proxy:
           $ref: '#/components/schemas/sso_mxedge_proxy'
+          description: Mist Edge proxy settings used when `idp_type`==`mxedge_proxy`
         name:
           description: Display name of the SSO configuration
           type: string
         nameid_format:
           $ref: '#/components/schemas/sso_nameid_format'
+          description: SAML NameID format used when `idp_type`==`saml`
         oauth_cc_client_id:
           description: Required if `idp_type`==`oauth`, Client Credentials
           examples:
@@ -98391,12 +98404,14 @@ components:
           format: password
           type: string
         oauth_discovery_url:
-          description: If `idp_type`==`oauth`
+          description: OAuth discovery document URL used when `idp_type`==`oauth`
           type: string
         oauth_ping_identity_region:
           $ref: '#/components/schemas/oauth_ping_identity_region'
+          description: Ping Identity region for OAuth SSO when `oauth_type`==`ping_identity`
         oauth_provider_domain:
           $ref: '#/components/schemas/oauth_provider_domain'
+          description: Provider domain for Okta OAuth SSO when `oauth_type`==`okta`
         oauth_ropc_client_id:
           description: If `idp_type`==`oauth`, ropc = Resource Owner Password Credentials
           examples:
@@ -98416,10 +98431,13 @@ components:
           type: string
         oauth_type:
           $ref: '#/components/schemas/sso_oauth_type'
+          description: Provider type for OAuth SSO when `idp_type`==`oauth`
         openroaming:
           $ref: '#/components/schemas/sso_openroaming'
+          description: Configuration for OpenRoaming SSO when `idp_type`==`openroaming`
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Owning organization identifier for this SSO configuration
         role_attr_extraction:
           description: "If `idp_type`==`saml`, custom role attribute parsing scheme.\
             \ Supported Role Parsing Schemes <table><tr><th>Name</th><th>Scheme</th></tr><tr><td>`cn`</td><td><ul><li>The\
@@ -98450,6 +98468,8 @@ components:
           type: string
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Associated site identifier for this SSO configuration, when
+            site-scoped
       required:
       - name
       type: object
