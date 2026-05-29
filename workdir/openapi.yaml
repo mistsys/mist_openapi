@@ -93084,31 +93084,41 @@ components:
       type: object
     search_mxedge:
       additionalProperties: false
+      description: Mist Edge record returned by search APIs
       properties:
         distro:
+          description: Linux distribution codename running on the Mist Edge
           type: string
         last_seen:
+          description: Time when the Mist Edge was last observed, in epoch seconds
           type: number
         model:
+          description: Mist Edge hardware or VM model
           examples:
           - ME-VM
           type: string
         mxcluster_id:
+          description: Cluster identifier associated with the Mist Edge
           $ref: '#/components/schemas/id'
         mxedge_id:
+          description: Mist Edge identifier for the search record
           $ref: '#/components/schemas/id'
         name:
-          description: The name of the tunnel
+          description: Display name of the Mist Edge
           examples:
           - me-vm-1
           type: string
         org_id:
+          description: Organization identifier associated with the Mist Edge
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site identifier associated with the Mist Edge, when assigned to a site
           $ref: '#/components/schemas/site_id'
         tunterm_version:
+          description: Tunnel termination service version running on the Mist Edge
           type: string
         uptime:
+          description: Number of seconds the Mist Edge has been running since last boot
           type: integer
       type: object
     search_org_devices_mxtunnel_status:
