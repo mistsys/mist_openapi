@@ -106560,19 +106560,26 @@ components:
       type: object
     synthetictest_config:
       additionalProperties: false
+      description: Synthetic test configuration for Marvis Minis
       properties:
         aggressiveness:
+          description: Overall aggressiveness level for synthetic test probes
           $ref: '#/components/schemas/synthetictest_config_aggressiveness'
         custom_probes:
+          description: Custom synthetic probe definitions keyed by probe name
           $ref: '#/components/schemas/synthetictest_config_custom_probes'
         disabled:
           default: false
+          description: Whether synthetic tests are disabled
           type: boolean
         lan_networks:
+          description: LAN network probe groups used by synthetic tests
           $ref: '#/components/schemas/synthetictest_config_lan_networks'
         vlans:
+          description: Deprecated VLAN-based synthetic test settings
           $ref: '#/components/schemas/synthetictest_config_vlans'
         wan_speedtest:
+          description: WAN speedtest settings for synthetic tests
           $ref: '#/components/schemas/synthetictest_config_wan_speedtest'
       type: object
     synthetictest_config_aggressiveness:
@@ -106586,8 +106593,10 @@ components:
       type: string
     synthetictest_config_custom_probe:
       additionalProperties: false
+      description: Custom probe definition for synthetic tests
       properties:
         aggressiveness:
+          description: Probe aggressiveness level for this custom synthetic probe
           $ref: '#/components/schemas/synthetictest_config_aggressiveness'
         target:
           description: Can be URL (e.g. http://x.com, https://x.com:8080/path/to/resource),
@@ -106596,11 +106605,12 @@ components:
           - 10.3.5.3:8080
           type: string
         threshold:
-          description: In milliseconds
+          description: Response-time threshold for this custom probe, in milliseconds
           examples:
           - 100
           type: integer
         type:
+          description: Probe type used by this custom synthetic probe
           $ref: '#/components/schemas/synthetictest_config_custom_probe_type'
       type: object
     synthetictest_config_custom_probe_type:
@@ -106623,8 +106633,10 @@ components:
       description: configure minis probes to be tested on lan networks of gateways
       properties:
         networks:
+          description: LAN network names where synthetic probes are run
           $ref: '#/components/schemas/synthetictest_config_lan_networks_networks'
         probes:
+          description: Synthetic probe names to run on the listed LAN networks
           $ref: '#/components/schemas/synthetictest_config_probes'
       type: object
     synthetictest_config_lan_networks:
@@ -106647,16 +106659,20 @@ components:
       type: array
     synthetictest_config_vlan:
       additionalProperties: false
+      description: Deprecated VLAN-based synthetic test settings
       properties:
         custom_test_urls:
+          description: Deprecated custom URLs tested by VLAN-based synthetic probes
           $ref: '#/components/schemas/synthetictest_config_vlan_custom_test_urls'
         disabled:
           default: false
           description: For some vlans where we don't want this to run
           type: boolean
         probes:
+          description: Synthetic probe names to run for the listed VLANs
           $ref: '#/components/schemas/synthetictest_config_probes'
         vlan_ids:
+          description: VLAN identifiers where synthetic probes are run
           $ref: '#/components/schemas/synthetictest_config_vlan_vlan_ids'
       type: object
     synthetictest_config_vlan_custom_test_urls:
@@ -106682,10 +106698,13 @@ components:
       type: array
     synthetictest_config_wan_speedtest:
       additionalProperties: false
+      description: WAN speedtest scheduling settings for synthetic tests
       properties:
         enabled:
+          description: Whether scheduled WAN speedtests are enabled
           type: boolean
         time_of_day:
+          description: Scheduled time of day for WAN speedtests
           $ref: '#/components/schemas/time_of_day'
       type: object
     synthetictest_device:
