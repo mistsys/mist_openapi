@@ -91705,14 +91705,19 @@ components:
       type: object
     response_verify_token_success:
       additionalProperties: false
+      description: Successful registration token verification response
       properties:
         detail:
+          description: Result message returned with the verification response
           type: string
         invite_not_applied:
+          description: Whether the invitation was verified but not applied automatically
           type: boolean
         min_length:
+          description: Required minimum password length from the applicable password policy
           type: integer
         return_to:
+          description: URL to redirect the user to after successful registration verification
           type: string
       type: object
     response_virtual_chassis_config:
