@@ -111166,16 +111166,22 @@ components:
       - $ref: '#/components/schemas/map_jibestream'
       - $ref: '#/components/schemas/map_micello'
     webhook:
+      description: Webhook configuration for delivering selected Mist events to an
+        external destination
       properties:
         assetfilter_ids:
+          description: Asset filter identifiers used to restrict `asset-raw-rssi`
+            webhook events
           $ref: '#/components/schemas/webhook_assetfilter_ids'
         created_time:
+          description: Epoch timestamp when the webhook was created
           $ref: '#/components/schemas/created_time'
         enabled:
           default: true
           description: Whether webhook is enabled
           type: boolean
         for_site:
+          description: Whether this webhook is scoped to a site rather than the organization
           readOnly: true
           type: boolean
         headers:
@@ -111191,36 +111197,46 @@ components:
           - object
           - 'null'
         id:
+          description: Unique identifier of the webhook
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Epoch timestamp when the webhook was last modified
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Name of the webhook
+          description: Display name of the webhook
           type:
           - string
           - 'null'
         oauth2_client_id:
-          description: Required when `oauth2_grant_type`==`client_credentials`
+          description: Required when `oauth2_grant_type`==`client_credentials`; OAuth2
+            client identifier used to request an access token
           type: string
         oauth2_client_secret:
-          description: Required when `oauth2_grant_type`==`client_credentials`
+          description: Required when `oauth2_grant_type`==`client_credentials`; OAuth2
+            client secret used to request an access token
           format: password
           type: string
         oauth2_grant_type:
+          description: OAuth2 grant type used when `type`==`oauth2`
           $ref: '#/components/schemas/webhook_oauth2_grant_type'
         oauth2_password:
-          description: Required when `oauth2_grant_type`==`password`
+          description: Required when `oauth2_grant_type`==`password`; password used
+            for the OAuth2 token request
           format: password
           type: string
         oauth2_scopes:
+          description: OAuth2 scopes included in the token request when `type`==`oauth2`
           $ref: '#/components/schemas/webhook_oauth2_scopes'
         oauth2_token_url:
-          description: Required when `type`==`oauth2`
+          description: Required when `type`==`oauth2`; token endpoint URL used to
+            obtain the OAuth2 access token
           type: string
         oauth2_username:
-          description: Required when `oauth2_grant_type`==`password`
+          description: Required when `oauth2_grant_type`==`password`; username used
+            for the OAuth2 token request
           type: string
         org_id:
+          description: Organization that owns the webhook
           $ref: '#/components/schemas/org_id'
         secret:
           description: "Only if `type`=`http-post` \n\nwhen `secret` is provided,\
@@ -111237,6 +111253,7 @@ components:
             topics (see [List Webhook Topics]($e/Constants%20Definitions/listWebhookTopics))
           type: boolean
         site_id:
+          description: Site associated with this webhook when it is site-scoped
           $ref: '#/components/schemas/site_id'
         splunk_token:
           description: Required if `type`=`splunk`. If splunk_token is not defined
@@ -111246,10 +111263,13 @@ components:
           - string
           - 'null'
         topics:
+          description: Event topics delivered by this webhook
           $ref: '#/components/schemas/webhook_topics'
         type:
+          description: Delivery mechanism used by this webhook
           $ref: '#/components/schemas/webhook_type'
         url:
+          description: Destination URL that receives webhook deliveries
           type: string
         verify_cert:
           default: true
