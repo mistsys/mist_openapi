@@ -93639,46 +93639,59 @@ components:
       type: array
     service_path_event:
       additionalProperties: false
+      description: Event describing a service path state change reported by a gateway or SSR device
       properties:
         mac:
+          description: Device MAC address that reported the service path event
           examples:
           - 90ec7734b374
           type: string
         model:
+          description: Device model that reported the service path event
           examples:
           - SSR120
           type: string
         org_id:
+          description: Organization identifier associated with the service path event
           $ref: '#/components/schemas/org_id'
         policy:
+          description: Service policy name associated with the path event
           examples:
           - INTERNET
           type: string
         port_id:
+          description: Network interface associated with the service path event
           examples:
           - ge-1/0/6
           type: string
         site_id:
+          description: Site identifier associated with the service path event
           $ref: '#/components/schemas/site_id'
         text:
+          description: Human-readable message for the service path event
           examples:
           - Peer Path Down
           type: string
         timestamp:
+          description: Time when the service path event occurred, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Event type for the service path change
           examples:
           - GW_SERVICE_PATH_REMOVE
           type: string
         version:
+          description: Device firmware version that reported the service path event
           examples:
           - 6.1.5-14.lts
           type: string
         vpn_name:
+          description: Peer name associated with the service path event
           examples:
           - Syracuse_HUB
           type: string
         vpn_path:
+          description: Peer path name associated with the service path event
           examples:
           - Syracuse_HUB-Wan0
           type: string
