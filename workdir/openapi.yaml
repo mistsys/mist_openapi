@@ -92832,25 +92832,29 @@ components:
       additionalProperties: false
       properties:
         acs_url:
-          description: If `idp_type`==`saml`
+          description: If `idp_type`==`saml`, Assertion Consumer Service URL that
+            receives SAML responses for this Mist SSO configuration
           examples:
           - https://api.mist.com/api/v1/saml/llDfa13f/login
           readOnly: true
           type: string
         entity_id:
-          description: If `idp_type`==`saml`
+          description: If `idp_type`==`saml`, service provider entity ID for this
+            Mist SSO configuration
           examples:
           - https://api.mist.com/api/v1/saml/llDfa13f/login
           readOnly: true
           type: string
         logout_url:
-          description: If `idp_type`==`saml`
+          description: If `idp_type`==`saml`, Single Logout URL used by the identity
+            provider to end the Mist SSO session
           examples:
           - https://api.mist.com/api/v1/saml/llDfa13f/logout
           readOnly: true
           type: string
         metadata:
-          description: If `idp_type`==`saml`
+          description: If `idp_type`==`saml`, service provider metadata XML for configuring
+            the identity provider
           examples:
           - <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
             entityID="https://api.mist.com/api/v1/saml/llDfa13f/login" validUntil="2027-10-12T21:59:01Z"
@@ -92861,7 +92865,8 @@ components:
           readOnly: true
           type: string
         scim_base_url:
-          description: If `idp_type`==`oauth` and `scim_enabled`==`true`
+          description: If `idp_type`==`oauth` and `scim_enabled`==`true`, SCIM base
+            URL that the identity provider uses to send provisioning requests to Mist
           examples:
           - https://scim.nac-staging.mistsys.com/S_41b2525a-e8b8-4809-8168-f1d8dcbe9735/azure/4d72b1dc-7503-4717-81ea-80d0125b886e
           type: string
