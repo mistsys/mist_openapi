@@ -91613,18 +91613,25 @@ components:
       type: array
     response_tunnel_search:
       additionalProperties: false
+      description: Paginated response for organization tunnel statistics search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the tunnel statistics search window
           type: integer
         limit:
+          description: Maximum number of tunnel statistics records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of tunnel statistics results
           type: string
         results:
+          description: Tunnel statistics records matching the search filters
           $ref: '#/components/schemas/response_tunnel_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the tunnel statistics search window
           type: integer
         total:
+          description: Number of tunnel statistics records matching the search filters across all pages
           type: integer
       required:
       - end
@@ -91634,10 +91641,12 @@ components:
       - total
       type: object
     response_tunnel_search_item:
+      description: Tunnel statistics record; shape depends on the requested tunnel type
       oneOf:
       - $ref: '#/components/schemas/stats_mxtunnel'
       - $ref: '#/components/schemas/stats_wan_tunnel'
     response_tunnel_search_results:
+      description: Tunnel statistics records returned by search
       items:
         $ref: '#/components/schemas/response_tunnel_search_item'
       type: array
@@ -100874,34 +100883,43 @@ components:
       type: array
     stats_mxtunnel:
       additionalProperties: false
-      description: MxTunnels statistics
+      description: WxLAN or Mist tunnel statistics record
       properties:
         ap:
+          description: MAC address of the AP associated with the tunnel statistics
           readOnly: true
           type: string
         for_site:
+          description: Whether the tunnel statistics are scoped to a site
           readOnly: true
           type: boolean
         fwupdate:
+          description: Firmware update status included with the tunnel statistics, when available
           $ref: '#/components/schemas/fwupdate_stat'
         last_seen:
+          description: Time when the tunnel statistics were last observed
           $ref: '#/components/schemas/last_seen'
         mtu:
+          description: Maximum transmission unit reported for the tunnel path
           readOnly: true
           type: integer
         mxcluster_id:
+          description: Mist Edge cluster identifier associated with the tunnel statistics
           format: uuid
           readOnly: true
           type: string
         mxedge_id:
+          description: Mist Edge identifier for the tunnel endpoint
           format: uuid
           readOnly: true
           type: string
         mxtunnel_id:
+          description: Mist tunnel identifier associated with the tunnel statistics
           format: uuid
           readOnly: true
           type: string
         org_id:
+          description: Organization identifier associated with the tunnel statistics
           $ref: '#/components/schemas/org_id'
         peer_mxedge_id:
           description: MxEdge ID of the peer(mist edge to mist edge tunnel)
@@ -100909,24 +100927,32 @@ components:
           readOnly: true
           type: string
         remote_ip:
+          description: Remote endpoint IP address for the tunnel
           readOnly: true
           type: string
         remote_port:
+          description: Remote endpoint port for the tunnel
           readOnly: true
           type: integer
         rx_control_pkts:
+          description: Number of control packets received for the tunnel
           readOnly: true
           type: integer
         sessions:
+          description: WxLAN tunnel sessions reported for this tunnel
           $ref: '#/components/schemas/stats_mxtunnel_sessions'
         site_id:
+          description: Site identifier associated with the tunnel statistics
           $ref: '#/components/schemas/site_id'
         state:
+          description: Current state of the WxLAN or Mist tunnel
           $ref: '#/components/schemas/stats_mxtunnel_state'
         tx_control_pkts:
+          description: Number of control packets transmitted for the tunnel
           readOnly: true
           type: integer
         uptime:
+          description: Duration, in seconds, that the tunnel has been up
           readOnly: true
           type: integer
       required:
@@ -100934,19 +100960,19 @@ components:
       type: object
     stats_mxtunnel_session:
       additionalProperties: false
+      description: Session information for a WxLAN or Mist tunnel
       properties:
         local_sid:
-          description: Remote sessions id (dynamically unless Tunnel is said to be
-            static)
+          description: Local session identifier for the tunnel session
           type: integer
         remote_id:
-          description: WxlanTunnel Remote ID
+          description: Configured remote identifier for the tunnel session
           type: string
         remote_sid:
-          description: Remote sessions id (dynamically unless Tunnel is said to be
-            static)
+          description: Peer session identifier for the tunnel session
           type: integer
         state:
+          description: Current state of the tunnel session
           type: string
       required:
       - local_sid
@@ -100955,7 +100981,7 @@ components:
       - state
       type: object
     stats_mxtunnel_sessions:
-      description: List of sessions
+      description: Tunnel sessions reported for a WxLAN or Mist tunnel
       items:
         $ref: '#/components/schemas/stats_mxtunnel_session'
       readOnly: true
