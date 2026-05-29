@@ -84470,9 +84470,12 @@ components:
       type: object
     org_setting_juniper_srx:
       additionalProperties: false
+      description: Organization settings for Juniper SRX devices
       properties:
         auto_upgrade:
           $ref: '#/components/schemas/juniper_srx_auto_upgrade'
+          description: SRX auto-upgrade settings applied when Juniper SRX devices are
+            first onboarded
       type: object
     org_setting_junos_shell_access:
       additionalProperties: false
@@ -84487,12 +84490,16 @@ components:
       properties:
         admin:
           $ref: '#/components/schemas/org_setting_junos_shell_access_admin'
+          description: Shell access level used for administrator web-shell sessions
         helpdesk:
           $ref: '#/components/schemas/org_setting_junos_shell_access_helpdesk'
+          description: Shell access level used for helpdesk web-shell sessions
         read:
           $ref: '#/components/schemas/org_setting_junos_shell_access_read'
+          description: Shell access level used for read-only web-shell sessions
         write:
           $ref: '#/components/schemas/org_setting_junos_shell_access_write'
+          description: Shell access level used for write-role web-shell sessions
       type: object
     org_setting_junos_shell_access_admin:
       default: admin
@@ -84528,16 +84535,19 @@ components:
       type: string
     org_setting_marvis:
       additionalProperties: false
+      description: Organization settings for Marvis automation
       properties:
         self_driving:
           $ref: '#/components/schemas/marvis_self_driving'
+          description: Self-driving network automation settings by domain
       type: object
     org_setting_mgmt:
       additionalProperties: false
-      description: management-related properties
+      description: Organization management connectivity settings
       properties:
         mxtunnel_ids:
           $ref: '#/components/schemas/org_setting_mgmt_mxtunnel_ids'
+          description: Mist Tunnel IDs selected for management connectivity
         use_mxtunnel:
           default: false
           description: Whether to use Mist Tunnel for mgmt connectivity, this takes
@@ -84549,7 +84559,7 @@ components:
           type: boolean
       type: object
     org_setting_mgmt_mxtunnel_ids:
-      description: List of Mist Tunnels
+      description: Mist Tunnel IDs available for organization management connectivity
       items:
         examples:
         - 08cd7499-5841-51c8-e663-fb16b6f3b45e
