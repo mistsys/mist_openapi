@@ -84606,7 +84606,7 @@ components:
           type: boolean
         fingerprinting:
           $ref: '#/components/schemas/org_setting_mist_nac_fingerprinting'
-          description: Client fingerprinting and CoA settings used by Mist NAC
+          description: Client fingerprinting settings used by Mist NAC
         idp_machine_cert_lookup_field:
           $ref: '#/components/schemas/idp_machine_cert_lookup_field'
           description: Client certificate field used to look up machine groups in identity
@@ -84742,9 +84742,11 @@ components:
           examples:
           - '-----BEGIN PRI...'
           type: string
+          format: password
         password:
           description: Optional password for the private key
           type: string
+          format: password
       type: object
     org_setting_password_policy:
       additionalProperties: false
@@ -109523,12 +109525,14 @@ components:
           type: string
       type: object
     utils_bounce_port:
+      description: Request to bounce one or more device ports
       properties:
         ports:
+          description: Device ports to bounce
           $ref: '#/components/schemas/utils_bounce_port_ports'
       type: object
     utils_bounce_port_ports:
-      description: List of ports to bounce
+      description: Device port identifiers to bounce
       items:
         type: string
       type: array
@@ -109541,6 +109545,7 @@ components:
       - port
       type: object
     utils_clear_arp:
+      description: Request to clear ARP entries on a device
       properties:
         ip:
           description: The IP address for which to clear an ARP entry. port_id must
@@ -109549,6 +109554,7 @@ components:
           - 10.1.1.1
           type: string
         node:
+          description: HA cluster node on which to clear ARP entries
           $ref: '#/components/schemas/ha_cluster_node_enum'
         port_id:
           description: The device interface on which to clear the ARP cache.
@@ -109567,17 +109573,20 @@ components:
           type: string
       type: object
     utils_clear_bgp:
+      description: Request to clear BGP sessions on a device
       properties:
         neighbor:
           default: all
           description: can be ip, ipv6, all
           type: string
         node:
+          description: HA cluster node on which to clear BGP sessions
           $ref: '#/components/schemas/ha_cluster_node_enum'
         type:
+          description: BGP clear operation type to run
           $ref: '#/components/schemas/utils_clear_bgp_type'
         vrf:
-          description: VRF name
+          description: Routing instance or VRF containing the BGP session
           type: string
       required:
       - neighbor
@@ -109593,8 +109602,10 @@ components:
       - soft
       type: string
     utils_clear_bpdu:
+      description: Request to clear detected BPDU errors on switch ports
       properties:
         ports:
+          description: Switch ports on which to clear detected BPDU errors
           $ref: '#/components/schemas/utils_clear_bpdu_ports'
       type: object
     utils_clear_bpdu_ports:
@@ -109604,13 +109615,15 @@ components:
         type: string
       type: array
     utils_clear_macs:
+      description: Request to clear learned MAC addresses from device ports
       properties:
         ports:
+          description: Switch ports on which to clear learned MAC addresses
           $ref: '#/components/schemas/utils_clear_macs_ports'
       type: object
     utils_clear_macs_ports:
-      description: List of ports on which to clear mac addresses. must include logical
-        unit number
+      description: Device ports on which to clear learned MAC addresses. Must include
+        logical unit number
       items:
         type: string
       type: array
@@ -109619,6 +109632,7 @@ components:
         be provided
       properties:
         node:
+          description: HA cluster node on which to clear sessions
           $ref: '#/components/schemas/ha_cluster_node_enum'
         service_name:
           description: Service name, only supported in SSR
@@ -109626,10 +109640,11 @@ components:
           - internet-wan_and_lte
           type: string
         session_ids:
+          description: Session identifiers to clear
           $ref: '#/components/schemas/utils_clear_session_session_ids'
       type: object
     utils_clear_session_session_ids:
-      description: List of id of the sessions to be cleared
+      description: Session identifiers to clear
       examples:
       - - 88776655-0123-4567-890a-112233445566
       items:
@@ -109637,27 +109652,32 @@ components:
         type: string
       type: array
     utils_devices_restart:
+      description: Request to restart a device or device node
       properties:
         member:
-          description: Optional for VC member
+          description: Virtual Chassis member number to restart
           maximum: 9
           minimum: 0
           type: integer
         node:
+          description: SRX or SSR node to restart
           $ref: '#/components/schemas/utils_devices_restart_node'
       type: object
     utils_devices_restart_multi:
+      description: Request to restart multiple devices
       properties:
         device_ids:
+          description: Identifiers of devices to restart
           $ref: '#/components/schemas/utils_devices_restart_multi_device_ids'
         node:
-          description: 'only for SSR: if node is not present, both nodes are restarted.
+          description: 'Only for SSR: if node is not present, both nodes are restarted.
             For other devices: node should not be present'
           type: string
       required:
       - device_ids
       type: object
     utils_devices_restart_multi_device_ids:
+      description: List of device identifiers to restart
       items:
         format: uuid
         type: string
@@ -109670,16 +109690,20 @@ components:
       - node1
       type: string
     utils_mac_table:
+      description: MAC table lookup filters
       properties:
         mac_address:
+          description: Client MAC address filter for the MAC table lookup
           examples:
           - f8c1165c6400
           type: string
         port_id:
+          description: Interface identifier filter for the MAC table lookup
           examples:
           - ge-0/0/0.0
           type: string
         vlan_id:
+          description: VLAN identifier filter for the MAC table lookup
           examples:
           - ge-0/0/0.0
           type: string
@@ -109694,22 +109718,26 @@ components:
           type: string
       type: object
     utils_ping:
+      description: Ping utility request
       properties:
         count:
           default: 10
+          description: Number of echo requests to send
           type: integer
         egress_interface:
-          description: Interface through which packet needs to egress
+          description: Interface through which ping packets should egress
           type: string
         host:
-          description: can be ip, ipv6, hostname
+          description: Destination IP address, IPv6 address, or hostname to ping
           examples:
           - 1.1.1.1
           type: string
         node:
+          description: HA cluster node from which to send ping packets
           $ref: '#/components/schemas/ha_cluster_node_enum'
         size:
           default: 56
+          description: ICMP payload size, in bytes
           maximum: 65535
           minimum: 56
           type: integer
@@ -109718,7 +109746,7 @@ components:
           description: applicable when host is hostname
           type: boolean
         vrf:
-          description: VRF/Routing instance through which the packet needs to be sent
+          description: Routing instance or VRF through which ping packets are sent
           type: string
       required:
       - host
