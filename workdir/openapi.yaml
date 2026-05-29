@@ -113258,8 +113258,10 @@ components:
       description: Sample of the `rssizone` webhook payload.
       properties:
         events:
+          description: RSSI zone events included in this webhook delivery
           $ref: '#/components/schemas/webhook_rssizone_events'
         topic:
+          description: Webhook topic name for RSSI zone event deliveries
           $ref: '#/components/schemas/webhook_rssizone_topic'
       required:
       - events
@@ -113267,24 +113269,31 @@ components:
       type: object
     webhook_rssizone_event:
       additionalProperties: false
+      description: RSSI zone transition event for a Wi-Fi, SDK, or asset client
       properties:
         mac:
-          description: Client MAC address
+          description: Client MAC address associated with the RSSI zone event
           type: string
         map_id:
+          description: Map associated with the RSSI zone event
           format: uuid
           type: string
         rssizone_id:
-          description: RSSI zone name
+          description: RSSI zone identifier associated with the event
           format: uuid
           type: string
         site_id:
+          description: Site associated with the RSSI zone event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the RSSI zone transition was reported, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
         trigger:
+          description: Whether the client entered or exited the RSSI zone
           $ref: '#/components/schemas/webhook_zone_event_trigger'
         type:
+          description: Client type reported for the RSSI zone event
           $ref: '#/components/schemas/webhook_zone_event_type'
       required:
       - mac
