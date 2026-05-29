@@ -107948,12 +107948,16 @@ components:
       type: string
     tunnel_provider_options:
       additionalProperties: false
+      description: Provider-specific options for gateway tunnel auto provisioning
       properties:
         jse:
+          description: Juniper Secure Edge provisioning options for tunnel endpoints
           $ref: '#/components/schemas/tunnel_provider_options_jse'
         prisma:
+          description: Palo Alto Prisma Access provisioning options for tunnel endpoints
           $ref: '#/components/schemas/tunnel_provider_options_prisma'
         zscaler:
+          description: Provider settings for Zscaler tunnel endpoints
           $ref: '#/components/schemas/tunnel_provider_options_zscaler'
       type: object
     tunnel_provider_options_jse:
@@ -107962,6 +107966,7 @@ components:
         JSE. Make sure adequate licenses are added
       properties:
         num_users:
+          description: User capacity to provision on Juniper Secure Edge
           examples:
           - 5
           type: integer
@@ -107975,6 +107980,7 @@ components:
       type: object
     tunnel_provider_options_prisma:
       additionalProperties: false
+      description: Prisma Access provider options for tunnel auto provisioning
       properties:
         service_account_name:
           description: For prisma-ipsec, service account name to used for tunnel auto
@@ -107989,6 +107995,8 @@ components:
       properties:
         aup_block_internet_until_accepted:
           default: false
+          description: Whether Zscaler blocks internet access until the Acceptable
+            Use Policy is accepted
           type: boolean
         aup_enabled:
           default: false
@@ -108036,6 +108044,7 @@ components:
           description: If `true`, enable the firewall control option
           type: boolean
         sub_locations:
+          description: Per-network Zscaler sub-location settings
           $ref: '#/components/schemas/zscaler_sub_locations'
         surrogate_IP:
           default: false
@@ -108072,9 +108081,12 @@ components:
       type: object
     tunnel_provider_options_zscaler_sub_location:
       additionalProperties: false
+      description: Zscaler sub-location settings for a specific network
       properties:
         aup_block_internet_until_accepted:
           default: false
+          description: Whether this sub-location blocks internet access until the
+            Acceptable Use Policy is accepted
           type: boolean
         aup_enabled:
           default: false
