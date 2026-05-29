@@ -99553,6 +99553,7 @@ components:
         Humidity, Attitude, Pressure, Accelerometers, Magnetometers and vCore Voltage
       properties:
         accel_x:
+          description: X-axis accelerometer reading reported by the AP
           examples:
           - 0
           format: float
@@ -99561,6 +99562,7 @@ components:
           - number
           - 'null'
         accel_y:
+          description: Y-axis accelerometer reading reported by the AP
           examples:
           - 0.032
           format: float
@@ -99569,6 +99571,7 @@ components:
           - number
           - 'null'
         accel_z:
+          description: Z-axis accelerometer reading reported by the AP
           examples:
           - -1.088
           format: float
@@ -99577,6 +99580,7 @@ components:
           - number
           - 'null'
         ambient_temp:
+          description: Temperature reading from the AP ambient sensor
           examples:
           - 43
           format: int32
@@ -99585,6 +99589,7 @@ components:
           - integer
           - 'null'
         attitude:
+          description: Device attitude or orientation reading reported by the AP
           examples:
           - 0
           format: int32
@@ -99593,6 +99598,7 @@ components:
           - integer
           - 'null'
         cpu_temp:
+          description: Temperature reading from the AP CPU sensor
           examples:
           - 61
           format: int32
@@ -99601,6 +99607,7 @@ components:
           - integer
           - 'null'
         humidity:
+          description: Relative humidity sensor reading reported by the AP
           examples:
           - 9
           format: int32
@@ -99609,6 +99616,7 @@ components:
           - integer
           - 'null'
         magne_x:
+          description: X-axis magnetometer reading reported by the AP
           examples:
           - 0
           format: float
@@ -99617,6 +99625,7 @@ components:
           - number
           - 'null'
         magne_y:
+          description: Y-axis magnetometer reading reported by the AP
           examples:
           - 0
           format: float
@@ -99625,6 +99634,7 @@ components:
           - number
           - 'null'
         magne_z:
+          description: Z-axis magnetometer reading reported by the AP
           examples:
           - 0
           format: float
@@ -99633,6 +99643,7 @@ components:
           - number
           - 'null'
         pressure:
+          description: Barometric pressure sensor reading reported by the AP
           examples:
           - 968
           format: float
@@ -99641,6 +99652,7 @@ components:
           - number
           - 'null'
         vcore_voltage:
+          description: Core voltage sensor reading reported by the AP
           examples:
           - 0
           format: int32
@@ -99651,19 +99663,22 @@ components:
       type: object
     stats_ap_esl_stat:
       additionalProperties: false
+      description: Electronic shelf label dongle status reported by an AP
       properties:
         channel:
+          description: Radio channel used by the ESL dongle
           readOnly: true
           type:
           - integer
           - 'null'
         connected:
+          description: Whether the ESL dongle is connected
           readOnly: true
           type:
           - boolean
           - 'null'
         ip:
-          description: IP address of Hanshow and SoluM dongles
+          description: Network IP address of Hanshow and SoluM dongles
           examples:
           - 172.16.2.249
           readOnly: true
@@ -99671,7 +99686,7 @@ components:
           - string
           - 'null'
         mac:
-          description: MAC address of Hanshow and SoluM dongles
+          description: Dongle MAC address for Hanshow and SoluM dongles
           examples:
           - 98-6d-35-79-76-3b
           readOnly: true
@@ -99687,6 +99702,7 @@ components:
           - string
           - 'null'
         type:
+          description: ESL dongle type reported by the AP
           examples:
           - imagotag
           readOnly: true
@@ -99694,6 +99710,7 @@ components:
           - string
           - 'null'
         up:
+          description: Whether the ESL dongle is operational
           readOnly: true
           type:
           - boolean
@@ -99720,6 +99737,7 @@ components:
       type: object
     stats_ap_gps_stat:
       additionalProperties: false
+      description: GPS location data reported by an AP
       properties:
         accuracy:
           description: The estimated accuracy or accuracy of the GPS coordinates,
@@ -99744,8 +99762,10 @@ components:
           type: number
         src:
           $ref: '#/components/schemas/stats_ap_gps_stat_src'
+          description: Source of the GPS location data
         timestamp:
           $ref: '#/components/schemas/timestamp'
+          description: Time when the GPS location data was observed, in epoch seconds
       type: object
     stats_ap_gps_stat_src:
       description: 'The origin of the GPS data. enum: `gps`: from this device GPS
@@ -99759,14 +99779,17 @@ components:
     stats_ap_iot_stat:
       additionalProperties:
         $ref: '#/components/schemas/stats_ap_iot_stat_additional_properties'
+      description: IoT input statistics reported by an AP
       examples:
       - DI2:
           value: 0
       type: object
     stats_ap_iot_stat_additional_properties:
       additionalProperties: false
+      description: IoT input statistic value
       properties:
         value:
+          description: Reported value for this IoT input
           readOnly: true
           type:
           - integer
