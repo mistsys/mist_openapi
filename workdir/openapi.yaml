@@ -87183,26 +87183,34 @@ components:
       uniqueItems: true
     response_anomaly_search:
       additionalProperties: false
+      description: Paginated anomaly search response
       properties:
         end:
+          description: Search window end timestamp for anomaly results, in epoch seconds
           examples:
           - 1711035686
           type: integer
         limit:
+          description: Maximum number of anomaly results requested per page
           examples:
           - 10
           type: integer
         page:
+          description: Current page number in the anomaly search results
           examples:
           - 1
           type: integer
         results:
           $ref: '#/components/schemas/response_anomaly_search_results'
+          description: Anomaly records returned for this page
         start:
+          description: Search window start timestamp for anomaly results, in epoch
+            seconds
           examples:
           - 1710949286
           type: integer
         total:
+          description: Number of anomaly records matching the search
           examples:
           - 232
           type: integer
@@ -87214,74 +87222,93 @@ components:
       - results
       type: object
     response_anomaly_search_results:
+      description: Anomaly records returned by a search response
       items:
         $ref: '#/components/schemas/anomaly'
       type: array
       uniqueItems: true
     response_assign_success:
       additionalProperties: false
+      description: Assignment operation success response
       properties:
         success:
           $ref: '#/components/schemas/strings'
+          description: Messages describing successful assignment results
       required:
       - success
       type: object
     response_async_license:
       additionalProperties: false
+      description: Asynchronous license claim progress response
       properties:
         completed:
           $ref: '#/components/schemas/response_async_license_completed'
+          description: Device MAC addresses that completed asynchronous license claim
+            processing
         details:
           $ref: '#/components/schemas/response_async_license_details'
+          description: Per-device status details for asynchronous license claim processing
         failed:
-          description: Current failed number of device
+          description: Number of devices that failed license claim processing
           type: integer
         incompleted:
           $ref: '#/components/schemas/response_async_license_incompleted'
+          description: Device MAC addresses not yet completed in asynchronous license
+            claim processing
         processed:
-          description: Current processed number of device
+          description: Number of devices processed so far by asynchronous license
+            claim
           type: integer
         scheduled_at:
-          description: epoch time of aysnc claim scheduled
+          description: Epoch timestamp when the asynchronous license claim was scheduled
           type: integer
         status:
           $ref: '#/components/schemas/response_async_license_status'
+          description: Current asynchronous license claim processing state
         succeed:
-          description: Current succeed number of device
+          description: Number of devices that successfully completed license claim
+            processing
           type: integer
         timestamp:
           $ref: '#/components/schemas/timestamp'
+          description: Epoch timestamp when this asynchronous license status was reported
         total:
-          description: total number of device included in claim
+          description: Number of devices included in the license claim
           type: integer
       type: object
     response_async_license_completed:
+      description: Device MAC addresses that completed asynchronous license claim processing
       items:
         type: string
       type: array
     response_async_license_detail:
       additionalProperties: false
-      description: detail claim status per device
+      description: Per-device asynchronous license claim status
       properties:
         mac:
-          description: Device MAC Address
+          description: Device MAC address for this license claim detail
           type: string
         status:
+          description: Claim processing state for this device
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
+          description: Epoch timestamp when this device claim status was reported
       type: object
     response_async_license_details:
+      description: Per-device asynchronous license claim status details
       items:
         $ref: '#/components/schemas/response_async_license_detail'
       type: array
     response_async_license_incompleted:
-      description: Current incompleted lists (macs)
+      description: Device MAC addresses not yet completed in asynchronous license
+        claim processing
       items:
         type: string
       type: array
     response_async_license_status:
-      description: 'processing status of async. enum: `prepared`, `ongoing`, `done`'
+      description: 'Processing state for an asynchronous license claim. enum: `prepared`,
+        `ongoing`, `done`'
       enum:
       - prepared
       - ongoing
