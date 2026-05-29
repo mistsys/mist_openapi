@@ -90466,18 +90466,25 @@ components:
       type: array
     response_port_stats_search:
       additionalProperties: false
+      description: Paginated response for switch and gateway port statistics search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the port statistics reporting window
           type: integer
         limit:
+          description: Maximum number of port statistics records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of port statistics search results
           type: string
         results:
+          description: Switch and gateway port statistics records matching the search filters
           $ref: '#/components/schemas/stats_switch_ports'
         start:
+          description: Epoch timestamp, in seconds, for the start of the port statistics reporting window
           type: integer
         total:
+          description: Number of port statistics records matching the search filters across all pages
           type: integer
       required:
       - limit
@@ -90486,61 +90493,78 @@ components:
       type: object
     response_psk_portal_logs_search:
       additionalProperties: false
+      description: Paginated response for organization PSK Portal log search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the PSK Portal log search window
           examples:
           - 1428954000
           type: integer
         limit:
+          description: Maximum number of PSK Portal log entries returned in this page
           examples:
           - 100
           type: integer
         next:
+          description: URL for retrieving the next page of PSK Portal log search results
           type: string
         results:
+          description: PSK Portal log entries matching the search filters
           $ref: '#/components/schemas/response_psk_portal_logs_search_item_list'
         start:
+          description: Epoch timestamp, in seconds, for the start of the PSK Portal log search window
           examples:
           - 1428939600
           type: integer
         total:
+          description: Number of PSK Portal log entries matching the search filters across all pages
           examples:
           - 135
           type: integer
       type: object
     response_psk_portal_logs_search_item:
       additionalProperties: false
+      description: PSK Portal log entry returned by organization log search
       properties:
         id:
+          description: Audit log identifier for this PSK Portal log entry
           $ref: '#/components/schemas/id'
         message:
+          description: Human-readable message describing the PSK Portal action
           examples:
           - Rotate PSK test@mist.com
           type: string
         name_id:
+          description: SSO NameID value associated with the PSK Portal action
           examples:
           - test@mist.com
           type: string
         org_id:
+          description: Organization associated with the PSK Portal log entry
           $ref: '#/components/schemas/org_id'
         psk_id:
+          description: Identifier of the PSK associated with the log entry
           examples:
           - 608fe603-f9f0-4ce9-9473-04ef6c6ea749
           format: uuid
           type: string
         psk_name:
+          description: Display name of the PSK associated with the log entry
           examples:
           - test@mist.com
           type: string
         pskportal_id:
+          description: Identifier of the PSK Portal associated with the log entry
           examples:
           - c1742c09-af35-4161-96ef-7dc65c6d5674
           format: uuid
           type: string
         timestamp:
+          description: Epoch timestamp, in seconds, when the PSK Portal log entry was recorded
           $ref: '#/components/schemas/timestamp'
       type: object
     response_psk_portal_logs_search_item_list:
+      description: PSK Portal log entries returned by search
       items:
         $ref: '#/components/schemas/response_psk_portal_logs_search_item'
       type: array
