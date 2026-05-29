@@ -108188,21 +108188,28 @@ components:
       properties:
         enabled:
           default: false
+          description: Whether DHCP relay is enabled for tunnel termination VLANs
           type: boolean
         servers:
+          description: DHCP server IP addresses used as relay targets
           $ref: '#/components/schemas/strings'
         type:
+          description: DHCP forwarding mode for tunnel termination VLANs
           $ref: '#/components/schemas/tunterm_dhcpd_type'
       type: object
     tunterm_dhcpd_config_property:
       additionalProperties: false
+      description: Per-VLAN DHCP relay configuration for tunnel termination
       properties:
         enabled:
           default: false
+          description: Whether DHCP relay is enabled for this tunneled VLAN
           type: boolean
         servers:
+          description: DHCP server IP addresses used as relay targets for this VLAN
           $ref: '#/components/schemas/strings'
         type:
+          description: DHCP forwarding mode for this tunneled VLAN
           $ref: '#/components/schemas/tunterm_dhcpd_type'
       type: object
     tunterm_dhcpd_type:
@@ -108212,11 +108219,13 @@ components:
       - relay
       type: string
     tunterm_monitoring:
+      description: Tunnel termination monitoring checks
       items:
         $ref: '#/components/schemas/tunterm_monitoring_item'
       type: array
     tunterm_monitoring_item:
       additionalProperties: false
+      description: Monitoring check for tunnel termination reachability
       properties:
         host:
           description: Can be ip, ipv6, hostname
@@ -108225,11 +108234,13 @@ components:
           minLength: 1
           type: string
         port:
-          description: When `protocol`==`tcp`
+          description: When `protocol`==`tcp`, TCP port checked by the monitoring
+            probe
           examples:
           - 80
           type: integer
         protocol:
+          description: Monitoring method used for this tunnel termination check
           $ref: '#/components/schemas/tunterm_monitoring_protocol'
         src_vlan_id:
           description: Optional source for the monitoring check, vlan_id configured
@@ -108239,6 +108250,7 @@ components:
           type: integer
         timeout:
           default: 300
+          description: Maximum time for this monitoring check, in seconds
           examples:
           - 300
           type: integer
@@ -108258,6 +108270,7 @@ components:
       description: Ethernet port configurations
       properties:
         downstream_ports:
+          description: Ports connected downstream toward APs for tunnel termination
           $ref: '#/components/schemas/tunterm_port_config_downstream_ports'
         separate_upstream_downstream:
           default: false
@@ -108265,8 +108278,10 @@ components:
             false where all ports will be used.
           type: boolean
         upstream_port_vlan_id:
+          description: Native VLAN ID applied to upstream tunnel termination ports
           $ref: '#/components/schemas/tunterm_port_config_upstream_port_vlan_id'
         upstream_ports:
+          description: Ports connected upstream toward the LAN for tunnel termination
           $ref: '#/components/schemas/tunterm_port_config_upstream_ports'
       type: object
     tunterm_port_config_downstream_ports:
