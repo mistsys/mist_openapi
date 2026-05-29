@@ -88851,18 +88851,25 @@ components:
       uniqueItems: true
     response_guest_search:
       additionalProperties: false
+      description: Paginated response for guest authorization search results
       properties:
         end:
+          description: Epoch timestamp for the end of the guest authorization search window
           type: integer
         limit:
+          description: Maximum number of guest authorization records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of guest authorization records
           type: string
         results:
+          description: Guest authorization records matching the search filters
           $ref: '#/components/schemas/response_guest_search_results'
         start:
+          description: Epoch timestamp for the start of the guest authorization search window
           type: integer
         total:
+          description: Number of guest authorization records matching the search filters across all pages
           type: integer
       required:
       - end
@@ -88878,50 +88885,63 @@ components:
       uniqueItems: true
     response_http400:
       additionalProperties: false
+      description: Standard HTTP 400 bad request error response
       properties:
         detail:
+          description: Human-readable explanation of the bad request error
           examples:
           - 'JSON parse error - Expecting value: line 5 column 8 (char 56)'
           type: string
       type: object
     response_http400_webhook:
       additionalProperties: false
+      description: Webhook-specific HTTP 400 bad request error response
       properties:
         detail:
+          description: Human-readable explanation of the invalid webhook request
           examples:
           - 'invalid field: assetfilter_ids'
           type: string
         reason:
+          description: Additional reason explaining why the webhook request was invalid
           examples:
           - contains duplicate uuids
           type: string
       type: object
     response_http401:
       additionalProperties: false
+      description: Standard HTTP 401 authentication error response
       properties:
         detail:
+          description: Human-readable explanation of the authentication error
           examples:
           - Authentication credentials were not provided.
           type: string
       type: object
     response_http403:
       additionalProperties: false
+      description: Standard HTTP 403 permission error response
       properties:
         detail:
+          description: Human-readable explanation of the permission error
           examples:
           - You do not have permission to perform this action.
           type: string
       type: object
     response_http404:
       additionalProperties: false
+      description: Standard HTTP 404 not found error response
       properties:
         id:
+          description: Missing resource identifier, when the API includes one
           type: string
       type: object
     response_http429:
       additionalProperties: false
+      description: Standard HTTP 429 rate limit error response
       properties:
         detail:
+          description: Human-readable explanation of the rate limit error
           examples:
           - Too Many Request. The API Token used for the request reached the 5000
             API Calls per hour threshold
