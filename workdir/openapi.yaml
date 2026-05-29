@@ -101864,21 +101864,27 @@ components:
       type: array
     stats_mxedge:
       additionalProperties: false
+      description: Statistics for a Mist Edge appliance returned by stats endpoints
       properties:
         cpu_stat:
+          description: CPU utilization statistics reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_cpu_stat'
         created_time:
+          description: Time when the Mist Edge record was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         fips_enabled:
-          description: Indicate fips configuration on the device
+          description: Whether FIPS mode is enabled on the Mist Edge
           type: boolean
         for_site:
+          description: Whether the Mist Edge is assigned directly to a site
           examples:
           - false
           type: boolean
         fwupdate:
+          description: Firmware or package update status for the Mist Edge
           $ref: '#/components/schemas/fwupdate_stat'
         id:
+          description: Unique identifier of the Mist Edge
           $ref: '#/components/schemas/id'
         idrac_version:
           description: IDRAC version of the mist edge device
@@ -101886,83 +101892,115 @@ components:
           - 7.00.00.00
           type: string
         inactive_vlan_strs:
+          description: Inactive VLAN identifiers reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_inactive_vlan_strs'
         ip_stat:
+          description: IP address statistics reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_ip_stat'
         lag_stat:
+          description: Link aggregation statistics reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_lag_stats'
         last_seen:
+          description: Time when Mist last observed the Mist Edge, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         mac:
+          description: Mist Edge MAC address reported by Mist
           examples:
           - 020000a80cb4
           type: string
         magic:
+          description: Claim magic token associated with the Mist Edge
           type: string
         memory_stat:
+          description: Memory utilization statistics reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_memory_stat'
         model:
+          description: Mist Edge hardware or VM model
           examples:
           - ME-VM
           type: string
         modified_time:
+          description: Time when the Mist Edge record was last modified, in epoch
+            seconds
           $ref: '#/components/schemas/modified_time'
         mxagent_registered:
+          description: Whether the Mist Edge management agent is registered with Mist
           examples:
           - true
           type: boolean
         mxcluster_id:
+          description: Mist Edge cluster identifier associated with this Mist Edge
           examples:
           - 678bc339-7635-4556-bbc0-e77ad493ef8b
           format: uuid
           type: string
         name:
-          description: The name of the tunnel
+          description: Display name of the Mist Edge
           examples:
           - me-vm-1
           type: string
         num_tunnels:
+          description: Number of tunnels currently terminated by the Mist Edge
           examples:
           - 0
           type: integer
         oob_ip_config:
+          description: Configured out-of-band management IP settings for the Mist
+            Edge
           $ref: '#/components/schemas/mxedge_oob_ip_config'
         oob_ip_stat:
+          description: Observed out-of-band management IP status for the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_oob_ip_stat'
         org_id:
+          description: Organization identifier associated with the Mist Edge
           $ref: '#/components/schemas/org_id'
         port_stat:
+          description: Port statistics reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_port_stats'
         serial:
+          description: Device serial number reported for the Mist Edge, when available
           type:
           - string
           - 'null'
         service_stat:
+          description: Per-service runtime statistics reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_service_stats'
         services:
+          description: Mist Edge services enabled or running on the device
           $ref: '#/components/schemas/stats_mxedge_services'
         site_id:
+          description: Site identifier associated with the Mist Edge, when assigned
+            to a site
           $ref: '#/components/schemas/site_id'
         status:
+          description: Connection status reported for the Mist Edge, such as connected
           examples:
           - connected
           type: string
         tunterm_ip_config:
+          description: Configured tunnel termination IP settings for the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_tunterm_ip_config'
         tunterm_port_config:
+          description: Tunnel termination port configuration reported for the Mist
+            Edge
           $ref: '#/components/schemas/stats_mxedge_tunterm_port_config'
         tunterm_registered:
+          description: Whether the tunnel termination service is registered with Mist
           examples:
           - true
           type: boolean
         tunterm_stat:
+          description: Tunnel termination monitoring status reported by the Mist Edge
           $ref: '#/components/schemas/stats_mxedge_tunterm_stat'
         uptime:
+          description: Number of seconds the Mist Edge has been running since last
+            boot
           examples:
           - 76281
           type: integer
         virtualization_type:
-          description: Virtualization environment
+          description: Virtualization platform or environment running the Mist Edge
+            VM
           examples:
           - KVM
           type: string
