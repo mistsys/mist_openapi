@@ -86846,40 +86846,54 @@ components:
       type: string
     remote_syslog:
       additionalProperties: false
+      description: Remote syslog forwarding settings
       properties:
         archive:
           $ref: '#/components/schemas/remote_syslog_archive'
+          description: Retention settings for generated syslog archive files
         cacerts:
           $ref: '#/components/schemas/remote_syslog_cacerts'
+          description: CA certificates used to verify TLS syslog servers
         console:
           $ref: '#/components/schemas/remote_syslog_console'
+          description: Log forwarding filters for console messages sent to remote syslog
         enabled:
           default: false
+          description: Whether remote syslog forwarding is enabled
           type: boolean
         files:
           $ref: '#/components/schemas/remote_syslog_files'
+          description: Local syslog file definitions to generate and forward
         network:
-          description: If source_address is configured, will use the vlan firstly
-            otherwise use source_ip
+          description: Source network used for syslog traffic. If `source_address`
+            is configured, Mist uses the VLAN first; otherwise it uses `source_ip`
           examples:
           - default
           type: string
         send_to_all_servers:
           default: false
+          description: Whether each log entry is sent to all configured remote syslog
+            servers
           type: boolean
         servers:
           $ref: '#/components/schemas/remote_syslog_servers'
+          description: Remote syslog server destinations
         time_format:
           $ref: '#/components/schemas/remote_syslog_time_format'
+          description: Timestamp format used in forwarded syslog messages
         users:
           $ref: '#/components/schemas/remote_syslog_users'
+          description: User-specific syslog logging rules
       type: object
     remote_syslog_archive:
       additionalProperties: false
+      description: Syslog file archive retention settings
       properties:
         files:
           $ref: '#/components/schemas/remote_syslog_archive_files'
+          description: Number of archived syslog files to retain
         size:
+          description: Maximum size of each archived syslog file, such as 5m
           examples:
           - 5m
           type: string
@@ -86890,7 +86904,9 @@ components:
       - type: integer
       examples:
       - 20
+      description: Number of archived syslog files to retain
     remote_syslog_cacerts:
+      description: CA certificates used to verify TLS syslog servers
       examples:
       - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
           CERTIFICATE-----'
@@ -86901,19 +86917,25 @@ components:
       type: array
     remote_syslog_console:
       additionalProperties: false
+      description: Console log forwarding filters for remote syslog
       properties:
         contents:
           $ref: '#/components/schemas/remote_syslog_contents'
+          description: Syslog facilities and severities forwarded from console logs
       type: object
     remote_syslog_content:
       additionalProperties: false
+      description: Syslog content selector
       properties:
         facility:
           $ref: '#/components/schemas/remote_syslog_facility'
+          description: Syslog facility to match for this selector
         severity:
           $ref: '#/components/schemas/remote_syslog_severity'
+          description: Syslog severity to match for this selector
       type: object
     remote_syslog_contents:
+      description: List of syslog content selectors
       items:
         $ref: '#/components/schemas/remote_syslog_content'
       type: array
