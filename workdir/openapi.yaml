@@ -113109,8 +113109,10 @@ components:
       description: Sample of the `occupancy-alerts` webhook payload.
       properties:
         events:
+          description: Occupancy alert batches included in this webhook delivery
           $ref: '#/components/schemas/webhook_occupancy_alerts_events'
         topic:
+          description: Webhook topic name for occupancy alert deliveries
           $ref: '#/components/schemas/webhook_occupancy_alerts_topic'
       required:
       - events
@@ -113118,15 +113120,22 @@ components:
       type: object
     webhook_occupancy_alerts_event:
       additionalProperties: false
+      description: Site-level occupancy alert batch containing one or more zone alerts
       properties:
         alert_events:
+          description: Occupancy zone alerts detected for this site around the same
+            time
           $ref: '#/components/schemas/webhook_occupancy_alerts_event_alert_events'
         for_site:
+          description: Whether this occupancy alert batch is scoped to a site rather
+            than only to the organization
           readOnly: true
           type: boolean
         site_id:
+          description: Site associated with the occupancy alert batch
           $ref: '#/components/schemas/site_id'
         site_name:
+          description: Site name associated with the occupancy alert batch
           readOnly: true
           type: string
       required:
@@ -113144,24 +113153,33 @@ components:
       uniqueItems: true
     webhook_occupancy_alerts_event_alert_events_items:
       additionalProperties: false
+      description: Occupancy compliance alert for a single zone
       properties:
         current_occupancy:
+          description: Current number of occupants detected in the zone
           type: integer
         map_id:
+          description: Map associated with the occupancy zone
           format: uuid
           type: string
         occupancy_limit:
+          description: Configured occupancy limit for the zone
           type: integer
         org_id:
+          description: Organization associated with the occupancy alert
           $ref: '#/components/schemas/org_id'
         timestamp:
+          description: Time when the occupancy alert was generated, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Occupancy compliance state reported for the zone
           $ref: '#/components/schemas/webhook_occupancy_alert_type'
         zone_id:
+          description: Zone identifier associated with the occupancy alert
           format: uuid
           type: string
         zone_name:
+          description: Zone name associated with the occupancy alert
           type: string
       required:
       - current_occupancy
@@ -113180,7 +113198,7 @@ components:
       type: array
       uniqueItems: true
     webhook_occupancy_alerts_topic:
-      description: 'enum: `occupeancy-alerts`'
+      description: 'enum: `occupancy-alerts`'
       enum:
       - occupancy-alerts
       type: string
@@ -113193,8 +113211,10 @@ components:
         endpoint
       properties:
         events:
+          description: Ping events included in this webhook delivery
           $ref: '#/components/schemas/webhook_ping_events'
         topic:
+          description: Webhook topic name for ping deliveries
           $ref: '#/components/schemas/webhook_ping_topic'
       required:
       - events
@@ -113202,14 +113222,19 @@ components:
       type: object
     webhook_ping_event:
       additionalProperties: false
+      description: Ping webhook event generated to verify webhook delivery
       properties:
         id:
+          description: Unique identifier of the webhook ping event
           $ref: '#/components/schemas/id'
         name:
+          description: Display name associated with the webhook ping event
           type: string
         site_id:
+          description: Site associated with the webhook ping event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the webhook ping event was generated, in epoch seconds
           $ref: '#/components/schemas/timestamp'
       required:
       - id
