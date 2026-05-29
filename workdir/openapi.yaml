@@ -86039,7 +86039,7 @@ components:
           type: string
       type: object
     psk:
-      description: PSK
+      description: Personal pre-shared key configuration for WLAN access
       properties:
         admin_sso_id:
           description: sso id for psk created from psk portal
@@ -86047,8 +86047,9 @@ components:
           type: string
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Epoch timestamp when the PSK was created
         email:
-          description: email to send psk expiring notifications to
+          description: Notification recipient email address for PSK expiration reminders
           type: string
         expire_time:
           default: null
@@ -86065,12 +86066,14 @@ components:
           type: integer
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier of the PSK
         mac:
-          description: If `usage`==`single`, the mac that this PSK ties to, empty
-            if `auto-binding`
+          description: If `usage`==`single`, client MAC address this PSK is bound
+            to; empty when auto-binding is used
           type: string
         macs:
           $ref: '#/components/schemas/psk_macs'
+          description: Client MAC addresses or MAC patterns allowed when `usage`==`macs`
         max_usage:
           default: 0
           description: For Org PSK Only. Max concurrent users for this PSK key. Default
@@ -86078,9 +86081,12 @@ components:
           type: integer
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Epoch timestamp when the PSK was last modified
         name:
+          description: Display name of the PSK
           type: string
         note:
+          description: Admin note or description stored with the PSK
           type: string
         notify_expiry:
           default: false
@@ -86096,24 +86102,29 @@ components:
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization that owns the org-level PSK
         passphrase:
-          description: passphrase of the PSK (8-63 character or 64 in hex)
+          description: PSK passphrase, 8-63 characters or 64 hexadecimal characters
           maxLength: 64
           minLength: 8
           type: string
         role:
+          description: Client role applied to users authenticated with this PSK
           maxLength: 32
           minLength: 0
           type: string
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site associated with the site-level PSK
         ssid:
-          description: SSID this PSK should be applicable to
+          description: WLAN SSID where this PSK can be used
           type: string
         usage:
           $ref: '#/components/schemas/psk_usage'
+          description: Binding mode for this PSK, such as multi, single, or macs
         vlan_id:
           $ref: '#/components/schemas/psk_vlan_id'
+          description: VLAN ID returned for clients using this PSK
         vlan_name:
           description: VLAN name to be assigned. Optional, `vlan_id` takes precedence
             if both are provided
@@ -86124,9 +86135,11 @@ components:
       - ssid
       type: object
     psk_id_list:
+      description: PSK delete request payload
       properties:
         psk_ids:
           $ref: '#/components/schemas/psk_id_list_psk_id'
+          description: PSK IDs to delete
       type: object
     psk_id_list_psk_id:
       examples:
