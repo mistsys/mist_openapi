@@ -109754,12 +109754,13 @@ components:
       - host
       type: object
     utils_release_dhcp:
+      description: Request to release the DHCP lease on a device interface
       properties:
         node:
+          description: HA cluster node on which to release the DHCP lease
           $ref: '#/components/schemas/ha_cluster_node_enum'
         port_id:
-          description: The network interface on which to release the current DHCP
-            release
+          description: Network interface whose current DHCP lease should be released
           examples:
           - ge-0/0/1.10
           minLength: 1
@@ -109775,17 +109776,18 @@ components:
         \ under network or port_id"
       properties:
         macs:
+          description: Client MAC addresses whose DHCP leases should be released
           $ref: '#/components/schemas/utils_release_dhcp_leases_macs'
         network:
-          description: The network for the leases IPs to be released
+          description: DHCP network containing the leases to release
           examples:
           - guest
           type: string
         node:
+          description: HA cluster node on which to release DHCP leases
           $ref: '#/components/schemas/ha_cluster_node_enum'
         port_id:
-          description: The network interface on which to release the current DHCP
-            release
+          description: Network interface containing the DHCP leases to release
           examples:
           - ge-0/0/1.10
           minLength: 1
@@ -109794,7 +109796,7 @@ components:
       - port_id
       type: object
     utils_release_dhcp_leases_macs:
-      description: A list of client macs to be released
+      description: Client MAC addresses whose DHCP leases should be released
       examples:
       - - 90ec77aabbcc
         - 90ec77aabbdd
@@ -109802,70 +109804,84 @@ components:
         type: string
       type: array
     utils_reset_radio_config:
+      description: Request to reset AP radio settings to RRM-managed values
       properties:
         bands:
+          description: Radio bands to reset to RRM management
           $ref: '#/components/schemas/utils_reset_radio_config_bands'
         force:
           default: false
-          description: Whether to reset those with radio disabled. default is false
-            (i.e. if user intentionally disables a radio, honor it)
+          description: Whether to reset radios that are currently disabled; default
+            `false` honors radios intentionally disabled by the user
           type: boolean
       required:
       - bands
       type: object
     utils_reset_radio_config_bands:
-      description: List of bands
+      description: Radio bands to reset, such as `24`, `5`, or `6`
       items:
         type: string
       type: array
     utils_rrm_optimize:
+      description: Request to optimize RRM for selected AP radio bands
       properties:
         bands:
+          description: Radio bands to include in the RRM optimization
           $ref: '#/components/schemas/utils_rrm_optimize_bands'
         macs:
+          description: AP MAC addresses to target for optimization; omitted or empty
+            targets all APs
           $ref: '#/components/schemas/utils_rrm_optimize_macs'
         txpower_only:
           default: false
-          description: Only changing TX Power (will not disconnect clients)
+          description: When true, adjust only transmit power so clients are not disconnected
           type: boolean
       required:
       - bands
       type: object
     utils_rrm_optimize_bands:
-      description: List of bands
+      description: Radio bands to include in the RRM optimization
       items:
         type: string
       type: array
     utils_rrm_optimize_macs:
-      description: Targeting AP (neighbor APs may get changed, too), default is empty
-        for ALL APs
+      description: AP MAC addresses to target for optimization. Neighboring APs may
+        also change; omitted or empty targets all APs
       items:
         examples:
         - 5c5b35000001
         type: string
       type: array
     utils_send_ble_beacon:
+      description: Request to transmit an arbitrary BLE beacon frame from selected
+        APs
       properties:
         beacon_frame:
+          description: Raw BLE beacon frame payload to transmit
           examples:
           - 68b329da9893e34099c7d8ad5cb9c940
           type: string
         beacon_freq:
+          description: Transmission interval for the arbitrary BLE beacon frame
           examples:
           - 100
           type: integer
         duration:
+          description: Number of seconds to continue sending the BLE beacon frame
           examples:
           - 10
           maximum: 60
           minimum: 1
           type: integer
         macs:
+          description: AP MAC addresses of devices that should transmit the BLE beacon
           $ref: '#/components/schemas/utils_send_ble_beacon_macs'
         map_ids:
+          description: Identifiers of maps whose APs should transmit the BLE beacon
           $ref: '#/components/schemas/utils_send_ble_beacon_map_ids'
       type: object
     utils_send_ble_beacon_macs:
+      description: AP MAC addresses of devices that should transmit the BLE beacon
       examples:
       - - 5c5b35584a6f
         - 5c5b350ea3b3
@@ -109873,22 +109889,26 @@ components:
         type: string
       type: array
     utils_send_ble_beacon_map_ids:
+      description: Map identifiers used to select APs that should transmit the BLE
+        beacon
       examples:
       - - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
       items:
         type: string
       type: array
     utils_send_support_logs:
+      description: Request to upload support files from a device
       properties:
         info:
+          description: Support file bundle type to upload
           $ref: '#/components/schemas/utils_send_support_logs_info'
         node:
-          description: 'optional: for SSR, if node is not present, both nodes support
+          description: 'Optional for SSR: if node is not present, both nodes support
             files are uploaded'
           type: string
         num_messages_files:
           default: 1
-          description: 'optional: number of most recent messages files to upload.'
+          description: Number of most recent messages files to upload when `info`==`messages`
           maximum: 10
           minimum: 1
           type: integer
@@ -109913,25 +109933,30 @@ components:
       - var-logs
       type: string
     utils_service_ping:
+      description: Service ping request for SSR devices
       properties:
         count:
           default: 10
+          description: Number of ICMP echo requests to send for the service ping
           type: integer
         host:
+          description: Destination IPv4 address for the service ping
           format: ipv4
           type: string
         node:
+          description: HA cluster node from which to send the service ping
           $ref: '#/components/schemas/ha_cluster_node_enum'
         service:
           description: Ping packet takes the same path as the service
           type: string
         size:
           default: 56
+          description: ICMP payload size, in bytes
           maximum: 65535
           minimum: 56
           type: integer
         tenant:
-          description: Tenant context in which the packet is sent
+          description: Routing tenant context in which the packet is sent
           type: string
       required:
       - host
