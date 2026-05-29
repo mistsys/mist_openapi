@@ -117511,12 +117511,15 @@ components:
       type: array
     wxtag_client:
       additionalProperties: false
+      description: Client associated with a WxLAN tag
       properties:
         mac:
+          description: Client MAC address associated with the WxLAN tag entry
           examples:
           - 5684dae9ac8b
           type: string
         since:
+          description: Time when the client became associated with the WxLAN tag, in epoch seconds
           examples:
           - 1428939600
           type: number
