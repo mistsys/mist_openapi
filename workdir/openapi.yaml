@@ -106287,21 +106287,27 @@ components:
       type: object
     switch_radius:
       additionalProperties: false
-      description: By default, `radius_config` will be used. if a different one has
-        to be used set `use_different_radius
+      description: Switch RADIUS override settings. By default, the switch `radius_config`
+        is used; set `use_different_radius` to use alternate RADIUS settings.
       properties:
         enabled:
+          description: Whether RADIUS is enabled for switch management authentication
           type: boolean
         radius_config:
+          description: RADIUS configuration used when alternate RADIUS settings are
+            required
           $ref: '#/components/schemas/switch_radius_config'
         use_different_radius:
+          description: Selector for alternate RADIUS settings instead of the default
+            switch `radius_config`
           type: string
       type: object
     switch_radius_config:
       additionalProperties: false
-      description: Junos Radius config
+      description: Switch RADIUS authentication and accounting configuration
       properties:
         acct_immediate_update:
+          description: Whether immediate RADIUS accounting updates are sent
           type: boolean
         acct_interim_interval:
           default: 0
@@ -106313,10 +106319,13 @@ components:
           minimum: 0
           type: integer
         acct_servers:
+          description: RADIUS accounting servers used by this switch configuration
           $ref: '#/components/schemas/radius_acct_servers'
         auth_server_selection:
+          description: Selection strategy for RADIUS authentication servers
           $ref: '#/components/schemas/switch_radius_config_auth_server_selection'
         auth_servers:
+          description: RADIUS authentication servers used by this switch configuration
           $ref: '#/components/schemas/radius_auth_servers'
         auth_servers_retries:
           default: 3
@@ -106328,18 +106337,22 @@ components:
           type: integer
         coa_enabled:
           default: false
+          description: Whether RADIUS Change of Authorization (CoA) is enabled
           type: boolean
         coa_port:
+          description: UDP port used for RADIUS Change of Authorization (CoA)
           $ref: '#/components/schemas/radius_coa_port'
         fast_dot1x_timers:
           default: false
+          description: Whether fast 802.1X timers are enabled for RADIUS authentication
           type: boolean
         network:
           description: Use `network`or `source_ip`. Which network the RADIUS server
             resides, if there's static IP for this network, we'd use it as source-ip
           type: string
         source_ip:
-          description: Use `network`or `source_ip`
+          description: Use `network` or `source_ip`. Explicit source IP address for
+            RADIUS traffic
           type: string
       type: object
     switch_radius_config_auth_server_selection:
