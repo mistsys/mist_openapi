@@ -95970,11 +95970,14 @@ components:
       type: string
     site_sle_metrics:
       additionalProperties: false
+      description: SLE metrics available for a site
       properties:
         enabled:
           $ref: '#/components/schemas/strings'
+          description: SLE metric names enabled for the site
         supported:
           $ref: '#/components/schemas/strings'
+          description: SLE metric names supported for the site
       required:
       - supported
       - enabled
@@ -96070,10 +96073,11 @@ components:
       type: string
     site_wids:
       additionalProperties: false
-      description: WIDS site settings
+      description: Wireless intrusion detection settings for a site
       properties:
         repeated_auth_failures:
           $ref: '#/components/schemas/site_wids_repeated_auth_failures'
+          description: Detection settings for repeated authentication failures
       type: object
     site_wids_repeated_auth_failures:
       additionalProperties: false
@@ -96090,10 +96094,11 @@ components:
       type: object
     site_wifi:
       additionalProperties: false
-      description: Wi-Fi site settings
+      description: Wi-Fi configuration settings for a site
       properties:
         cisco_enabled:
           default: true
+          description: Whether Cisco compatibility features are enabled for site Wi-Fi
           type: boolean
         disable_11k:
           default: false
@@ -96101,6 +96106,7 @@ components:
           type: boolean
         disable_radios_when_power_constrained:
           default: false
+          description: Whether AP radios are disabled when AP power is constrained
           type: boolean
         enable_arp_spoof_check:
           default: false
@@ -96108,6 +96114,7 @@ components:
           type: boolean
         enable_shared_radio_scanning:
           default: true
+          description: Whether shared radio scanning is enabled for site Wi-Fi
           type: boolean
         enabled:
           default: true
@@ -96149,6 +96156,7 @@ components:
           - 'null'
         proxy_arp:
           $ref: '#/components/schemas/site_wifi_proxy_arp'
+          description: ARP proxy mode for site Wi-Fi
       type: object
     site_wifi_proxy_arp:
       description: 'enum: `default`, `disabled`, `enabled`'
@@ -96178,10 +96186,11 @@ components:
       type: string
     site_zone_occupancy_alert:
       additionalProperties: false
-      description: Zone Occupancy alert site settings
+      description: Zone occupancy alert settings for a site
       properties:
         email_notifiers:
           $ref: '#/components/schemas/site_zone_occupancy_alert_email_notifiers'
+          description: Notification email recipients for zone occupancy alerts
         enabled:
           default: false
           description: Indicate whether zone occupancy alert is enabled for the site
@@ -96207,20 +96216,26 @@ components:
         type: string
       type: array
     sitegroup:
-      description: Sites Group
+      description: Group of sites within an organization
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Timestamp when the site group was created
         id:
           $ref: '#/components/schemas/id'
+          description: Unique value identifying the site group
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the site group was last modified
         name:
+          description: Display name of the site group
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Identifier of the org that owns the site group
         site_ids:
           $ref: '#/components/schemas/sitegroup_site_ids'
+          description: Site identifiers included in the site group
       required:
       - name
       type: object
@@ -96230,11 +96245,13 @@ components:
       format: uuid
       type: string
     sitegroup_site_ids:
+      description: Site identifiers included in a site group
       items:
         format: uuid
         type: string
       type: array
     sitegroups:
+      description: Site groups returned by list operations
       items:
         $ref: '#/components/schemas/sitegroup'
       type: array
