@@ -85842,7 +85842,8 @@ components:
       description: Privileges settings
       properties:
         org_id:
-          description: If `scope`==`org`
+          description: If `scope`==`org`, organization ID this MSP privilege applies
+            to
           format: uuid
           type: string
         org_name:
@@ -85850,15 +85851,19 @@ components:
           readOnly: true
           type: string
         orggroup_id:
-          description: If `scope`==`orggroup`
+          description: If `scope`==`orggroup`, organization group ID this MSP privilege
+            applies to
           format: uuid
           type: string
         role:
           $ref: '#/components/schemas/privilege_msp_role'
+          description: Access role granted by this MSP privilege
         scope:
           $ref: '#/components/schemas/privilege_msp_scope'
+          description: MSP hierarchy level where this privilege applies
         views:
           $ref: '#/components/schemas/admin_privilege_views'
+          description: UI views allowed by custom role restrictions
       required:
       - role
       - scope
@@ -85885,20 +85890,23 @@ components:
       description: Privileges settings
       properties:
         org_id:
-          description: If `scope`==`org`
+          description: If `scope`==`org`, organization ID this privilege applies to
           format: uuid
           readOnly: true
           type: string
         role:
           $ref: '#/components/schemas/privilege_org_role'
+          description: Access role granted by this organization privilege
         scope:
           $ref: '#/components/schemas/privilege_org_scope'
+          description: Organization hierarchy level where this privilege applies
         site_id:
-          description: If `scope`==`site`
+          description: If `scope`==`site`, site ID this privilege applies to
           format: uuid
           type: string
         sitegroup_id:
-          description: If `scope`==`sitegroup`
+          description: If `scope`==`sitegroup`, site group ID this privilege applies
+            to
           format: uuid
           type: string
         view:
@@ -85907,6 +85915,7 @@ components:
           type: string
         views:
           $ref: '#/components/schemas/admin_privilege_views'
+          description: UI views allowed by custom role restrictions
       required:
       - role
       - scope
@@ -85938,8 +85947,10 @@ components:
       properties:
         allowed_services:
           $ref: '#/components/schemas/protect_re_allowed_services'
+          description: Built-in services explicitly allowed by the Protect RE policy
         custom:
           $ref: '#/components/schemas/protect_re_customs'
+          description: Additional ACL entries allowed by the Protect RE policy
         enabled:
           default: false
           description: "When enabled, all traffic that is not essential to our operation\
@@ -85952,6 +85963,7 @@ components:
           type: boolean
         trusted_hosts:
           $ref: '#/components/schemas/protect_re_trusted_hosts'
+          description: Trusted host or subnet entries allowed by the Protect RE policy
       type: object
     protect_re_allowed_service:
       description: 'enum: `icmp`, `ssh`'
@@ -85960,7 +85972,7 @@ components:
       - ssh
       type: string
     protect_re_allowed_services:
-      description: Optionally, services we'll allow
+      description: Built-in services explicitly allowed by the Protect RE policy
       examples:
       - - icmp
         - ssh
@@ -85969,7 +85981,7 @@ components:
       type: array
     protect_re_custom:
       additionalProperties: false
-      description: Custom acls
+      description: Custom Protect RE ACL entry
       properties:
         port_range:
           default: '0'
@@ -85979,8 +85991,10 @@ components:
           type: string
         protocol:
           $ref: '#/components/schemas/protect_re_custom_protocol'
+          description: Transport protocol matched by this custom Protect RE ACL
         subnets:
           $ref: '#/components/schemas/protect_re_custom_subnet'
+          description: Source subnets matched by this custom Protect RE ACL
       type: object
     protect_re_custom_protocol:
       default: any
@@ -86002,7 +86016,7 @@ components:
         $ref: '#/components/schemas/protect_re_custom'
       type: array
     protect_re_trusted_hosts:
-      description: host/subnets we'll allow traffic to/from
+      description: Host or subnet entries allowed by the Protect RE policy
       items:
         examples:
         - 10.242.3.0/24
@@ -86014,10 +86028,12 @@ components:
       properties:
         disabled:
           default: false
+          description: Whether this proxy configuration is disabled
           examples:
           - true
           type: boolean
         url:
+          description: Proxy URL used to reach Mist
           examples:
           - https://proxy.corp.com:8080/
           type: string
