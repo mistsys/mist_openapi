@@ -96898,117 +96898,166 @@ components:
       uniqueItems: true
     sle_impacted_chassis:
       additionalProperties: false
+      description: Paginated list of chassis impacted by an SLE metric
       properties:
         chassis:
           $ref: '#/components/schemas/sle_impacted_chassis_chassis'
+          description: Impacted chassis rows returned for the SLE query
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         end:
+          description: Last timestamp in the impacted chassis window
           type: integer
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         limit:
+          description: Maximum number of impacted chassis rows returned per page
           type: integer
         metric:
+          description: SLE metric name used for the impacted chassis query
           type: string
         page:
+          description: Current page number for impacted chassis results
           type: integer
         start:
+          description: First timestamp in the impacted chassis window
           type: integer
         total_count:
+          description: Number of impacted chassis rows matching the query
           type: integer
       type: object
     sle_impacted_chassis_chassis:
+      description: Impacted chassis rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_chassis_chassis_item'
       type: array
     sle_impacted_chassis_chassis_item:
       additionalProperties: false
+      description: SLE impact row for a chassis
       properties:
         chassis:
+          description: Identifier of the chassis represented by this impacted row
           type: string
         degraded:
+          description: Portion of the SLE total that was degraded for this chassis
           type: number
         duration:
+          description: Observation time represented by this chassis impact row
           type: number
         role:
+          description: Virtual Chassis role for the switch member
           type: string
         switch_mac:
+          description: MAC address of the switch represented by this chassis row
           type: string
         switch_name:
+          description: Display name of the switch represented by this chassis row
           type: string
         total:
+          description: Overall SLE total measured for this chassis impact row
           type: number
       type: object
     sle_impacted_client_gateway:
       additionalProperties: false
+      description: Gateway association for an impacted client
       properties:
         chassis_mac:
+          description: MAC address of the chassis associated with this client gateway
+            row
           type: string
         gateway_mac:
+          description: MAC address of the gateway associated with this client row
           type: string
         gateway_name:
+          description: Display name of the gateway associated with this client row
           type: string
         interfaces:
           $ref: '#/components/schemas/strings'
+          description: Network interfaces associated with this client gateway row
       type: object
     sle_impacted_client_gateways:
+      description: Gateway associations for impacted clients
       items:
         $ref: '#/components/schemas/sle_impacted_client_gateway'
       type: array
     sle_impacted_clients:
       additionalProperties: false
+      description: Paginated list of clients impacted by an SLE metric
       properties:
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         clients:
           $ref: '#/components/schemas/sle_impacted_clients_clients'
+          description: Impacted client rows returned for the SLE query
         end:
+          description: Last timestamp in the impacted clients window
           type: integer
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         limit:
+          description: Maximum number of impacted client rows returned per page
           type: integer
         metric:
+          description: SLE metric name used for the impacted clients query
           type: string
         page:
+          description: Current page number for impacted client results
           type: integer
         start:
+          description: First timestamp in the impacted clients window
           type: integer
         total_count:
+          description: Number of impacted client rows matching the query
           type: integer
       type: object
     sle_impacted_clients_client:
       additionalProperties: false
+      description: SLE impact row for a client
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this client
           type: integer
         duration:
+          description: Observation time represented by this client impact row
           type: integer
         mac:
+          description: Client MAC address for the impacted client
           type: string
         name:
+          description: Display name for the client impact row
           type: string
         switches:
           $ref: '#/components/schemas/sle_impacted_clients_client_switches'
+          description: Switch rows associated with the impacted client
         total:
+          description: Overall SLE total measured for this client impact row
           type: integer
       type: object
     sle_impacted_clients_client_switch:
       additionalProperties: false
+      description: Switch association for an impacted client
       properties:
         interfaces:
           $ref: '#/components/schemas/strings'
+          description: Switch interfaces associated with this impacted client
         switch_mac:
+          description: MAC address of the switch associated with this impacted client
           type: string
         switch_name:
+          description: Display name of the switch associated with this impacted client
           type: string
       type: object
     sle_impacted_clients_client_switches:
+      description: Switch associations for impacted clients
       items:
         $ref: '#/components/schemas/sle_impacted_clients_client_switch'
       type: array
     sle_impacted_clients_clients:
+      description: Impacted client rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_clients_client'
       type: array
