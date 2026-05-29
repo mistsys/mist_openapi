@@ -92279,10 +92279,13 @@ components:
       type: object
     rogue_details:
       additionalProperties: false
+      description: Rogue AP detail response
       properties:
         manufacture:
+          description: Vendor or manufacturer name reported for the rogue AP
           type: string
         seen_as_client:
+          description: Whether this rogue AP was also observed as a client
           type: boolean
       required:
       - seen_as_client
@@ -92298,8 +92301,10 @@ components:
       type: string
     root_password_string:
       additionalProperties: false
+      description: Temporary root password response for device ZTP recovery
       properties:
         root_password:
+          description: Temporary root password returned for ZTP recovery
           format: password
           minLength: 1
           type: string
@@ -92308,14 +92313,19 @@ components:
       type: object
     route_summary_stats:
       additionalProperties: false
+      description: Route table capacity and usage summary
       properties:
         fib_routes:
+          description: Number of routes installed in the forwarding information base
           type: integer
         max_unicast_routes_supported:
+          description: Supported maximum number of unicast routes
           type: integer
         rib_routes:
+          description: Number of routes present in the routing information base
           type: integer
         total_routes:
+          description: Aggregate number of routes reported by the device
           type: integer
       type: object
     routing_policy_local_preference:
