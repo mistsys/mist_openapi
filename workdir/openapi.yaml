@@ -89304,17 +89304,23 @@ components:
       type: object
     response_map_import:
       additionalProperties: false
+      description: Result of importing map files and matching AP placements
       properties:
         aps:
+          description: AP placement results produced by the map import
           $ref: '#/components/schemas/response_map_import_aps'
         floorplans:
+          description: Floorplan import results produced by the map import
           $ref: '#/components/schemas/response_map_import_floorplans'
         for_site:
+          description: Whether this map import response is scoped to a site
           readOnly: true
           type: boolean
         site_id:
+          description: Site associated with the map import result
           $ref: '#/components/schemas/site_id'
         summary:
+          description: Counts summarizing assignments made during the map import
           $ref: '#/components/schemas/response_map_import_summary'
       required:
       - site_id
@@ -89324,23 +89330,31 @@ components:
       type: object
     response_map_import_ap:
       additionalProperties: false
+      description: AP placement result from a map import
       properties:
         action:
+          description: Import action applied to this AP
           $ref: '#/components/schemas/response_map_import_ap_action'
         floorplan_id:
+          description: Floorplan identifier where the AP placement was imported
           format: uuid
           type: string
         height:
+          description: Mounting height for the AP on the imported floorplan
           format: double
           type: number
         mac:
+          description: AP MAC address matched from the import file
           type: string
         map_id:
+          description: Map identifier associated with the imported AP placement
           format: uuid
           type: string
         orientation:
+          description: AP orientation in degrees on the imported floorplan
           type: integer
         reason:
+          description: Explanation of why the AP import action was not completed, when provided
           type: string
       required:
       - mac
@@ -89360,23 +89374,30 @@ components:
       - placed
       type: string
     response_map_import_aps:
+      description: AP placement results produced by the map import
       items:
         $ref: '#/components/schemas/response_map_import_ap'
       type: array
       uniqueItems: true
     response_map_import_floorplan:
       additionalProperties: false
+      description: Floorplan result from a map import
       properties:
         action:
+          description: Import action applied to this floorplan
           type: string
         id:
+          description: Floorplan identifier returned by the import
           $ref: '#/components/schemas/id'
         map_id:
+          description: Map identifier associated with the imported floorplan
           format: uuid
           type: string
         name:
+          description: Floorplan name imported from the map file
           type: string
         reason:
+          description: Explanation of why the floorplan import action was not completed, when provided
           type: string
       required:
       - id
@@ -89385,18 +89406,23 @@ components:
       - map_id
       type: object
     response_map_import_floorplans:
+      description: Floorplan import results produced by the map import
       items:
         $ref: '#/components/schemas/response_map_import_floorplan'
       type: array
       uniqueItems: true
     response_map_import_summary:
       additionalProperties: false
+      description: Counts summarizing assignments made during the map import
       properties:
         num_ap_assigned:
+          description: Number of AP placements assigned during the map import
           type: integer
         num_inv_assigned:
+          description: Number of inventory records assigned to the site during the map import
           type: integer
         num_map_assigned:
+          description: Number of map floorplans assigned during the map import
           type: integer
       required:
       - num_ap_assigned
