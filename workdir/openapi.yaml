@@ -94563,21 +94563,31 @@ components:
       type: string
     site_mxtunnel:
       additionalProperties: false
-      description: Site MxTunnel
+      description: Site Mist Tunnel configuration for tunneling AP user VLANs to Mist
+        Edge tunnel peers
       properties:
         additional_mxtunnels:
           $ref: '#/components/schemas/site_mxtunnel_additional_mxtunnels'
+          description: Additional named Mist Tunnel definitions configured for the
+            site
         ap_subnets:
           $ref: '#/components/schemas/site_mxtunnel_ap_subnets'
+          description: AP source subnets allowed to establish Mist Tunnels
         auto_preemption:
           $ref: '#/components/schemas/auto_preemption'
+          description: Preemption behavior for restoring preferred tunnel peers after
+            failover
         clusters:
           $ref: '#/components/schemas/site_mxtunnel_clusters'
+          description: Tunnel peer clusters used by APs for this site Mist Tunnel
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Timestamp when the site Mist Tunnel configuration was created
         enabled:
+          description: Whether site Mist Tunnel tunneling is enabled
           type: boolean
         for_site:
+          description: Whether this Mist Tunnel configuration is scoped to a site
           readOnly: true
           type: boolean
         hello_interval:
@@ -94591,6 +94601,8 @@ components:
           type: integer
         hello_retries:
           default: 7
+          description: Number of missed hello heartbeats before an AP tries another
+            tunnel peer
           examples:
           - 3
           maximum: 30
@@ -94598,10 +94610,14 @@ components:
           type: integer
         hosts:
           $ref: '#/components/schemas/site_mxtunnel_hosts'
+          description: Tunnel peer hostnames or IP addresses reachable from APs
         id:
           $ref: '#/components/schemas/id'
+          description: Unique value identifying the site Mist Tunnel configuration
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the site Mist Tunnel configuration was last
+            modified
         mtu:
           default: 0
           description: 0 to enable MTU, 552-1500 to start MTU with a lower MTU
@@ -94612,20 +94628,27 @@ components:
           type: integer
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Identifier of the org that owns the site Mist Tunnel configuration
         protocol:
           $ref: '#/components/schemas/mxtunnel_protocol'
+          description: Encapsulation protocol used for the site Mist Tunnel
         radsec:
           $ref: '#/components/schemas/site_mxtunnel_radsec'
+          description: TLS-secured RADIUS proxy settings for the site Mist Tunnel
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Identifier of the site that owns this Mist Tunnel configuration
         vlan_ids:
           $ref: '#/components/schemas/mxtunnel_vlan_ids'
+          description: List of VLAN IDs carried by this site Mist Tunnel
       type: object
     site_mxtunnel_additional_mxtunnel:
       additionalProperties: false
+      description: Additional named Mist Tunnel configuration for a site
       properties:
         clusters:
           $ref: '#/components/schemas/site_mxtunnel_additional_mxtunnel_clusters'
+          description: Tunnel peer clusters used by APs for this additional Mist Tunnel
         hello_interval:
           default: 60
           description: In seconds, used as heartbeat to detect if a tunnel is alive.
@@ -94637,6 +94660,8 @@ components:
           type: integer
         hello_retries:
           default: 7
+          description: Number of missed hello heartbeats before an AP tries another
+            tunnel peer
           examples:
           - 3
           maximum: 30
@@ -94644,15 +94669,19 @@ components:
           type: integer
         protocol:
           $ref: '#/components/schemas/site_mxtunnel_protocol'
+          description: Encapsulation protocol used for this additional Mist Tunnel
         vlan_ids:
           $ref: '#/components/schemas/site_mxtunnel_additional_mxtunnel_vlan_ids'
+          description: List of VLAN IDs carried by this additional Mist Tunnel
       type: object
     site_mxtunnel_additional_mxtunnel_clusters:
-      description: For AP, how to connect to tunterm or RadSec Proxy
+      description: Tunnel peer cluster definitions APs use for an additional Mist
+        Tunnel
       items:
         $ref: '#/components/schemas/site_mxtunnel_cluster'
       type: array
     site_mxtunnel_additional_mxtunnel_vlan_ids:
+      description: VLAN IDs carried by an additional site Mist Tunnel
       examples:
       - - 300
         - 310
@@ -94663,6 +94692,7 @@ components:
     site_mxtunnel_additional_mxtunnels:
       additionalProperties:
         $ref: '#/components/schemas/site_mxtunnel_additional_mxtunnel'
+      description: Additional named Mist Tunnel definitions keyed by tunnel name
       type: object
     site_mxtunnel_ap_subnets:
       description: List of subnets where we allow AP to establish Mist Tunnels from
@@ -94673,15 +94703,20 @@ components:
       type: array
     site_mxtunnel_cluster:
       additionalProperties: false
+      description: Mist Tunnel peer cluster definition for a site
       properties:
         name:
+          description: Peer cluster name used in the site Mist Tunnel configuration
           examples:
           - primary
           type: string
         tunterm_hosts:
           $ref: '#/components/schemas/site_mxtunnel_cluster_tunterm_hosts'
+          description: Tunnel termination hostnames or IP addresses in this peer cluster
       type: object
     site_mxtunnel_cluster_tunterm_hosts:
+      description: Tunnel termination hostnames or IP addresses in a site Mist Tunnel
+        cluster
       examples:
       - - mxedge1
         - mxedge2.local
@@ -94689,13 +94724,12 @@ components:
         type: string
       type: array
     site_mxtunnel_clusters:
-      description: For AP, how to connect to tunterm or RadSec Proxy
+      description: Tunnel peer cluster definitions APs use for the site Mist Tunnel
       items:
         $ref: '#/components/schemas/site_mxtunnel_cluster'
       type: array
     site_mxtunnel_hosts:
-      description: Hostnames or IPs where a Mist Tunnel will use as the Peer (i.e.
-        they are reachable from AP)
+      description: Tunnel peer hostnames or IP addresses reachable from APs
       items:
         type: string
       type: array
@@ -94709,22 +94743,32 @@ components:
       type: string
     site_mxtunnel_radsec:
       additionalProperties: false
+      description: RadSec proxy settings for a site Mist Tunnel
       properties:
         acct_servers:
           $ref: '#/components/schemas/site_mxtunnel_radsec_acct_servers'
+          description: RADIUS accounting servers used by the site Mist Tunnel RadSec
+            proxy
         auth_servers:
           $ref: '#/components/schemas/site_mxtunnel_radsec_auth_servers'
+          description: RADIUS authentication servers used by the site Mist Tunnel
+            RadSec proxy
         enabled:
           default: false
+          description: Whether RadSec proxying is enabled for this site Mist Tunnel
           type: boolean
         use_mxedge:
+          description: Whether RadSec proxying uses Mist Edge
           type: boolean
       type: object
     site_mxtunnel_radsec_acct_servers:
+      description: RADIUS accounting servers used by the site Mist Tunnel RadSec proxy
       items:
         $ref: '#/components/schemas/radius_acct_server'
       type: array
     site_mxtunnel_radsec_auth_servers:
+      description: RADIUS authentication servers used by the site Mist Tunnel RadSec
+        proxy
       items:
         $ref: '#/components/schemas/radius_auth_server'
       type: array
