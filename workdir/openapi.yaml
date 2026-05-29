@@ -87583,6 +87583,7 @@ components:
       type: object
     response_auto_map_assignment_apply:
       additionalProperties: false
+      description: Result returned after applying accepted auto map assignments
       properties:
         accepted_maps:
           description: List of map IDs that were successfully accepted
@@ -87599,6 +87600,7 @@ components:
       type: object
     response_auto_map_assignment_clear:
       additionalProperties: false
+      description: Result returned after clearing auto map assignment candidates
       properties:
         message:
           description: Human-readable description of the operation result
@@ -87615,6 +87617,7 @@ components:
       type: object
     response_auto_map_assignment_device:
       additionalProperties: false
+      description: Per-device validation result for auto map assignment
       properties:
         reason:
           description: Provides the reason for the status if the AP is invalid
@@ -87692,6 +87695,7 @@ components:
       type: object
     response_auto_orientation_device:
       additionalProperties: false
+      description: Per-device validation result for auto orientation
       properties:
         reason:
           description: Provides the reason for the status if the AP is invalid.
@@ -87847,6 +87851,7 @@ components:
       type: object
     response_autoplacement_device:
       additionalProperties: false
+      description: Per-AP validation result for autoplacement
       properties:
         reason:
           description: Provides the reason for the status if the AP is invalid.
@@ -87865,6 +87870,7 @@ components:
       readOnly: true
       type: object
     response_bgp_search_list_results:
+      description: BGP statistics records returned by a search response
       items:
         $ref: '#/components/schemas/bgp_stats'
       type: array
@@ -88576,10 +88582,12 @@ components:
       - start
       type: object
     response_device_metrics_results:
+      description: Device metric result values aligned with the response timestamps
       items:
         $ref: '#/components/schemas/response_device_metrics_results_items'
       type: array
     response_device_metrics_results_items:
+      description: Device metric result value, returned as a string or integer
       oneOf:
       - type: string
       - type: integer
@@ -88669,11 +88677,13 @@ components:
       - total
       type: object
     response_device_search_results:
+      description: Device search records for APs, switches, or gateways
       items:
         $ref: '#/components/schemas/response_device_search_results_items'
       type: array
       uniqueItems: true
     response_device_search_results_items:
+      description: Device search record for an AP, switch, or gateway
       oneOf:
       - $ref: '#/components/schemas/ap_search'
       - $ref: '#/components/schemas/switch_search'
@@ -88722,6 +88732,7 @@ components:
       - total
       type: object
     response_discovered_switch_metrics_results:
+      description: Discovered switch metric records returned by a search response
       items:
         $ref: '#/components/schemas/discovered_switch_metric'
       type: array
@@ -88755,6 +88766,7 @@ components:
       - total
       type: object
     response_discovered_switches_results:
+      description: Discovered switch records returned by a search response
       items:
         $ref: '#/components/schemas/discovered_switch'
       type: array
@@ -88837,6 +88849,7 @@ components:
       - results
       type: object
     response_events_fastroam_results:
+      description: Fast roaming event records returned by a search response
       items:
         $ref: '#/components/schemas/event_fastroam'
       type: array
@@ -88902,6 +88915,7 @@ components:
           type: integer
       type: object
     response_events_orgs_search_results:
+      description: Organization event records returned by a search response
       items:
         $ref: '#/components/schemas/org_event'
       type: array
@@ -88960,6 +88974,7 @@ components:
           type: integer
       type: object
     response_events_path_search_results:
+      description: Service path event records returned by a search response
       items:
         $ref: '#/components/schemas/service_path_event'
       type: array
@@ -88993,6 +89008,7 @@ components:
       - total
       type: object
     response_events_rogue_search_results:
+      description: Rogue AP event records returned by a search response
       items:
         $ref: '#/components/schemas/events_rogue'
       type: array
@@ -89023,6 +89039,7 @@ components:
       - start
       type: object
     response_events_rrm_results:
+      description: RRM event records returned by a search response
       items:
         $ref: '#/components/schemas/rrm_event'
       type: array
@@ -89057,6 +89074,7 @@ components:
       - results
       type: object
     response_events_search_results:
+      description: Wireless client event records returned by a search response
       items:
         $ref: '#/components/schemas/events_client'
       type: array
@@ -89091,6 +89109,7 @@ components:
       - total
       type: object
     response_events_sky_atp_search_results:
+      description: Sky ATP event records returned by a search response
       items:
         $ref: '#/components/schemas/events_skyatp'
       type: array
@@ -89125,6 +89144,7 @@ components:
       - total
       type: object
     response_guest_search_results:
+      description: Guest authorization records returned by a search response
       items:
         $ref: '#/components/schemas/guest'
       type: array
@@ -89244,11 +89264,13 @@ components:
       - results
       type: object
     response_insight_rogue_client_results:
+      description: Rogue client insight observations returned by a query
       items:
         $ref: '#/components/schemas/insight_rogue_client'
       type: array
       uniqueItems: true
     response_insight_rogue_results:
+      description: Rogue or neighbor AP insight observations returned by a query
       items:
         $ref: '#/components/schemas/insight_rogue_ap'
       type: array
@@ -89405,6 +89427,7 @@ components:
       - results
       type: object
     response_iot_endpoints_search_results:
+      description: IoT endpoint statistics returned by a search response
       items:
         $ref: '#/components/schemas/iotendpoint_stats'
       type: array
@@ -89446,10 +89469,13 @@ components:
         $ref: '#/components/schemas/response_location_coverage_beams_means_items'
       type: array
     response_location_coverage_beams_means_items:
+      description: One location coverage beam mean row, encoded as x, y, and mean
+        values
       items:
         type: number
       type: array
     response_location_coverage_result:
+      description: One location coverage result row whose columns follow `result_def`
       items:
         type: number
       type: array
@@ -89543,6 +89569,7 @@ components:
       type: object
     response_logout:
       additionalProperties: false
+      description: Logout response with optional SSO forwarding URL
       properties:
         forward_url:
           description: If configured in SSO as custom_logout_url
@@ -89676,6 +89703,7 @@ components:
       - num_inv_assigned
       type: object
     response_ml:
+      description: Machine-learning response records returned as opaque objects
       items:
         additionalProperties: true
         type: object
@@ -89801,6 +89829,7 @@ components:
           type: integer
       type: object
     response_mxedge_search_results:
+      description: Mist Edge search records returned by a search response
       items:
         $ref: '#/components/schemas/search_mxedge'
       type: array
@@ -90078,6 +90107,7 @@ components:
       type: array
       uniqueItems: true
     response_org_site_sle:
+      description: Organization site SLE response for Wi-Fi, wired, or WAN
       oneOf:
       - $ref: '#/components/schemas/org_site_sle_wifi'
       - $ref: '#/components/schemas/org_site_wired_wifi'
@@ -90707,6 +90737,7 @@ components:
         type: string
       type: array
     response_pma_dashboards:
+      description: List of PMA dashboard metadata records
       items:
         $ref: '#/components/schemas/pma_dashboard'
       type: array
