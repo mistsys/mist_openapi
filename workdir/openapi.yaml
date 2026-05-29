@@ -112971,8 +112971,10 @@ components:
       description: Sample of the `mxedge-events` webhook payload.
       properties:
         events:
+          description: Mist Edge events included in this webhook delivery
           $ref: '#/components/schemas/mxedge_events'
         topic:
+          description: Webhook topic name for Mist Edge event deliveries
           $ref: '#/components/schemas/webhook_mxedge_event_topic'
       required:
       - events
@@ -112983,12 +112985,15 @@ components:
       description: Sample of the `nac-accounting` webhook payload.
       properties:
         events:
+          description: NAC accounting events included in this webhook delivery
           $ref: '#/components/schemas/webhook_nac_accounting_events'
         topic:
+          description: Webhook topic name for NAC accounting deliveries
           $ref: '#/components/schemas/webhook_nac_accounting_topic'
       type: object
     webhook_nac_accounting_event:
       additionalProperties: false
+      description: NAC accounting event for a client session with traffic counters
       properties:
         ap:
           description: MAC address of the AP the client roamed or disconnected from
@@ -112996,14 +113001,15 @@ components:
           - 5c5b355005be
           type: string
         auth_type:
+          description: Authentication method used for the NAC accounting session
           $ref: '#/components/schemas/nac_auth_type'
         bssid:
-          description: MAC physical address of the access point
+          description: Wireless BSSID used for the NAC accounting session
           examples:
           - 5c5b35546bb4
           type: string
         client_ip:
-          description: IP Address of client
+          description: Client IP address observed for the NAC accounting session
           examples:
           - 172.16.87.4
           type: string
@@ -113013,7 +113019,7 @@ components:
           - wireless
           type: string
         mac:
-          description: Client's MAC Address
+          description: Client MAC address for the NAC accounting session
           examples:
           - 6e795836d5f9
           type: string
@@ -113023,28 +113029,34 @@ components:
           - juniper-mist
           type: string
         org_id:
+          description: Organization associated with the NAC accounting event
           $ref: '#/components/schemas/org_id'
         rx_pkts:
+          description: Number of packets received during the NAC accounting session
           $ref: '#/components/schemas/rx_pkts'
         site_id:
+          description: Site associated with the NAC accounting event
           $ref: '#/components/schemas/site_id'
         ssid:
-          description: ESSID
+          description: Wireless SSID used for the NAC accounting session
           examples:
           - Test-CMR SSID
           type: string
         timestamp:
+          description: Time when the NAC accounting event was reported, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
         tx_pkts:
+          description: Number of packets sent during the NAC accounting session
           $ref: '#/components/schemas/tx_pkts'
         type:
-          description: Type of event. E.g. "ACCOUNTING_START", "ACCOUNTING_UPDATE",
-            "ACCOUNTING_STOP"
+          description: NAC accounting event type, such as `ACCOUNTING_START`, `ACCOUNTING_UPDATE`,
+            or `ACCOUNTING_STOP`
           examples:
           - NAC_ACCOUNTING_STOP
           type: string
         username:
-          description: Username authenticated with
+          description: Client-presented username for NAC authentication
           examples:
           - hi
           type: string
@@ -113063,8 +113075,10 @@ components:
       description: Sample of the `nac-events` webhook payload.
       properties:
         events:
+          description: NAC authentication events included in this webhook delivery
           $ref: '#/components/schemas/nac_client_events'
         topic:
+          description: Webhook topic name for NAC event deliveries
           $ref: '#/components/schemas/webhook_nac_events_topic'
       type: object
     webhook_nac_events_topic:
