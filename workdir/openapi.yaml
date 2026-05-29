@@ -112560,27 +112560,40 @@ components:
       type: string
     webhook_location_event:
       additionalProperties: false
+      description: Generic location update with map coordinates and optional BLE
+        or Wi-Fi metadata
       properties:
         battery_voltage:
+          description: Battery voltage value reported by the located entity
           type: integer
         eddystone_uid_instance:
+          description: Eddystone UID instance value advertised by the located entity
           type: string
         eddystone_uid_namespace:
+          description: Eddystone UID namespace value advertised by the located entity
           type: string
         eddystone_url_url:
+          description: Eddystone URL advertised by the located entity
           type: string
         ibeacon_major:
+          description: iBeacon major value advertised by the located entity when
+            present
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
+          description: iBeacon minor value advertised by the located entity when
+            present
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
+          description: iBeacon UUID advertised by the located entity when present
           $ref: '#/components/schemas/ibeacon_uuid'
         id:
+          description: Unique identifier for the located entity in this event
           $ref: '#/components/schemas/id'
         mac:
+          description: Located entity MAC address for this location event
           type: string
         map_id:
-          description: Map id
+          description: Identifier of the map where the location was calculated
           format: uuid
           type: string
         mfg_company_id:
@@ -112591,22 +112604,27 @@ components:
             (ie "112233AABBCC")
           type: string
         name:
-          description: Name of the client, may be empty
+          description: Client or asset display name, when available
           type: string
         site_id:
+          description: Site associated with the location event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the location was calculated, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Location object type for this event
           type: string
         wifi_beacon_extended_info:
+          description: Extended Wi-Fi beacon metadata included with this location
+            event
           $ref: '#/components/schemas/wifi_beacon_extended_info'
         x:
-          description: x, in meter
+          description: Horizontal map coordinate of the located entity, in meters
           format: double
           type: number
         y:
-          description: y, in meter
+          description: Vertical map coordinate of the located entity, in meters
           format: double
           type: number
       required:
