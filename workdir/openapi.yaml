@@ -91188,25 +91188,33 @@ components:
       type: object
     response_ssr_upgrade:
       additionalProperties: false
+      description: SSR firmware upgrade job summary
       properties:
         channel:
+          description: Firmware release channel used for the SSR upgrade
           minLength: 1
           type: string
         counts:
+          description: Device counts grouped by SSR upgrade status
           $ref: '#/components/schemas/response_ssr_upgrade_counts'
         device_type:
+          description: Type of devices targeted by the SSR upgrade
           type: string
         id:
+          description: Unique identifier for the SSR upgrade job
           $ref: '#/components/schemas/id'
         status:
+          description: Current status of the SSR upgrade job
           minLength: 1
           type: string
         strategy:
+          description: Upgrade strategy used by the SSR upgrade job
           minLength: 1
           type: string
         versions:
           additionalProperties:
             type: string
+          description: SSR firmware versions included in the upgrade job
           type: object
       required:
       - status
@@ -91219,14 +91227,19 @@ components:
       type: object
     response_ssr_upgrade_counts:
       additionalProperties: false
+      description: Device counts grouped by SSR upgrade status
       properties:
         failed:
+          description: Number of SSR devices that failed the upgrade
           type: integer
         queued:
+          description: Number of SSR devices queued for upgrade
           type: integer
         success:
+          description: Number of SSR devices successfully upgraded
           type: integer
         upgrading:
+          description: Number of SSR devices currently upgrading
           type: integer
       required:
       - queued
@@ -91236,21 +91249,28 @@ components:
       type: object
     response_ssr_upgrade_status:
       additionalProperties: false
+      description: Detailed status for an SSR firmware upgrade job
       properties:
         channel:
+          description: Firmware release channel used for the SSR upgrade
           minLength: 1
           type: string
         device_type:
+          description: Type of devices targeted by the SSR upgrade
           type: string
         id:
+          description: Unique identifier for the SSR upgrade job
           $ref: '#/components/schemas/id'
         status:
+          description: Current status of the SSR upgrade job
           minLength: 1
           type: string
         targets:
+          description: SSR device IDs grouped by upgrade status
           $ref: '#/components/schemas/response_ssr_upgrade_status_targets'
         versions:
           additionalProperties: true
+          description: SSR firmware versions included in the upgrade job
           type: object
       required:
       - status
@@ -91261,14 +91281,19 @@ components:
       type: object
     response_ssr_upgrade_status_targets:
       additionalProperties: false
+      description: SSR device IDs grouped by upgrade status
       properties:
         failed:
+          description: SSR device IDs that failed the upgrade
           $ref: '#/components/schemas/strings'
         queued:
+          description: SSR device IDs queued for upgrade
           $ref: '#/components/schemas/strings'
         success:
+          description: SSR device IDs successfully upgraded
           $ref: '#/components/schemas/strings'
         upgrading:
+          description: SSR device IDs currently upgrading
           $ref: '#/components/schemas/strings'
       required:
       - queued
@@ -91277,6 +91302,7 @@ components:
       - failed
       type: object
     response_ssr_upgrades:
+      description: SSR firmware upgrade jobs returned by list operations
       items:
         $ref: '#/components/schemas/response_ssr_upgrade'
       type: array
