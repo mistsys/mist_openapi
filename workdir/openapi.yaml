@@ -94303,14 +94303,18 @@ components:
       type: object
     site_app:
       additionalProperties: false
+      description: Application summary returned by the site applications endpoint
       properties:
         group:
+          description: Application category group for the site app
           minLength: 1
           type: string
         key:
+          description: Stable application key for the site app
           minLength: 1
           type: string
         name:
+          description: Display name of the site app
           minLength: 1
           type: string
       required:
@@ -94319,6 +94323,7 @@ components:
       - group
       type: object
     site_apps:
+      description: Application summaries returned for a site
       items:
         $ref: '#/components/schemas/site_app'
       type: array
@@ -94449,75 +94454,86 @@ components:
       type: string
     site_engagement:
       additionalProperties: false
-      description: '**Note**: if hours does not exist, it''s treated as everyday of
-        the week, 00:00-23:59. Currently, we don''t allow multiple ranges for the
-        same day'
+      description: Engagement analytics dwell-time rules for classifying site visits.
+        If hours is omitted, rules apply every day from 00:00 to 23:59. Multiple
+        ranges for the same day are not supported.
       properties:
         dwell_tag_names:
+          description: Display labels for dwell-time visit categories
           $ref: '#/components/schemas/site_engagement_dwell_tag_names'
         dwell_tags:
+          description: Visit duration ranges used to assign engagement categories
           $ref: '#/components/schemas/site_engagement_dwell_tags'
         hours:
+          description: Schedule during which engagement analytics rules apply
           $ref: '#/components/schemas/hours'
         max_dwell:
           default: 43200
-          description: Max time, default is 43200(12h), max is 68400 (18h)
+          description: Maximum dwell time in seconds considered by engagement analytics
           examples:
           - 43200
           maximum: 68400
           minimum: 1
           type: integer
         min_dwell:
-          description: min time
+          description: Minimum dwell time in seconds for engagement analytics
           minimum: 0
           type: integer
       type: object
     site_engagement_dwell_tag_names:
       additionalProperties: false
-      description: Name associated to each tag
+      description: Display labels for engagement dwell-time categories
       properties:
         bounce:
           default: Visitor
+          description: Display label for bounce visits
           examples:
           - Bounce
           type: string
         engaged:
           default: Associates
+          description: Display label for engaged visits
           examples:
           - Engaged
           type: string
         passerby:
           default: Passerby
+          description: Display label for passerby visits
           examples:
           - Passer By
           type: string
         stationed:
           default: Assets
+          description: Display label for stationed visits
           examples:
           - Stationed
           type: string
       type: object
     site_engagement_dwell_tags:
       additionalProperties: false
-      description: add tags to visits within the duration (in seconds)
+      description: Visit duration ranges in seconds used to assign engagement tags
       properties:
         bounce:
           default: 301-14400
+          description: Visit duration range for bounce visits, in seconds
           type:
           - string
           - 'null'
         engaged:
           default: 14401-28800
+          description: Visit duration range for engaged visits, in seconds
           type:
           - string
           - 'null'
         passerby:
           default: 1-300
+          description: Visit duration range for passerby visits, in seconds
           type:
           - string
           - 'null'
         stationed:
           default: 28801-42000
+          description: Visit duration range for stationed visits, in seconds
           type:
           - string
           - 'null'
