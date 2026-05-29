@@ -105631,6 +105631,7 @@ components:
           type: boolean
       type: object
     switch_ospf_config:
+      description: OSPF routing configuration for a Junos switch
       properties:
         areas:
           description: OSPF areas configured on the switch
@@ -105651,6 +105652,7 @@ components:
           description: Reference bandwidth used for OSPF cost calculation
           $ref: '#/components/schemas/switch_ospf_config_reference_bandwidth'
     switch_ospf_config_area:
+      description: Settings for a single OSPF area on a switch
       properties:
         no_summary:
           default: false
