@@ -85775,23 +85775,22 @@ components:
       additionalProperties: false
       properties:
         description:
-          description: Description of the dashboard
+          description: Human-readable summary of the PMA dashboard
           examples:
           - Dashboard 1 description
           type: string
         label:
-          description: group label name
+          description: Group label that categorizes the PMA dashboard
           examples:
           - Wireless
           type: string
         name:
-          description: Name of the dashboard
+          description: Display name of the PMA dashboard
           examples:
           - dashboard_1
           type: string
         url:
-          description: url to access dashboard. Url will redirect the user to the
-            dashboard
+          description: Access URL that redirects the user to the PMA dashboard
           examples:
           - https://api.mist.com/api/v1/forward/looker?jwt=...
           type: string
