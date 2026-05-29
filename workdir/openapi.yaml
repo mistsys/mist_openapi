@@ -109177,10 +109177,14 @@ components:
         $ref: '#/components/schemas/upgrade_org_devices_version'
       type: array
     upgrade_site_devices:
+      description: Site device upgrade request
       properties:
         canary_phases:
+          description: Only if `strategy`==`canary`. Canary phase percentages for
+            the site upgrade
           $ref: '#/components/schemas/upgrade_device_canary_phases'
         device_ids:
+          description: Specific device IDs selected for the site upgrade
           $ref: '#/components/schemas/upgrade_site_devices_device_ids'
         enable_p2p:
           description: For APs only. Whether to allow local AP-to-AP FW upgrade
@@ -109191,10 +109195,15 @@ components:
             is same as running version'
           type: boolean
         max_failure_percentage:
+          description: If `strategy`!=`big_bang`. Allowed failure percentage across
+            the site upgrade
           $ref: '#/components/schemas/upgrade_devices_max_failure_percentage'
         max_failures:
+          description: If `strategy`==`canary`. Per-phase failure limits for the site
+            upgrade
           $ref: '#/components/schemas/upgrade_devices_max_failures'
         models:
+          description: Device models selected for the site upgrade
           $ref: '#/components/schemas/upgrade_device_models'
         p2p_cluster_size:
           default: 10
@@ -109231,14 +109240,19 @@ components:
           - 10
           type: integer
         rrm_mesh_upgrade:
+          description: For APs only and if `strategy`==`rrm`. Mesh AP upgrade order
+            for the site upgrade
           $ref: '#/components/schemas/upgrade_device_rrm_mesh_upgrade'
         rrm_node_order:
+          description: For APs only and if `strategy`==`rrm`. AP ordering direction
+            for RRM upgrade batches
           $ref: '#/components/schemas/upgrade_device_rrm_node_order'
         rrm_slow_ramp:
           description: For APs only and if `strategy`==`rrm`. True will make rrm batch
             sizes slowly ramp up
           type: boolean
         rules:
+          description: Selection rules used to choose devices for this site upgrade
           $ref: '#/components/schemas/upgrade_device_rules'
         snapshot:
           default: false
@@ -109251,6 +109265,7 @@ components:
           - 1624399840
           type: integer
         strategy:
+          description: Upgrade orchestration strategy for selected devices
           $ref: '#/components/schemas/upgrade_device_strategy'
         version:
           description: Specific version / stable, default is to use the latest available
@@ -109293,7 +109308,7 @@ components:
       readOnly: true
       type: object
     upgrade_site_devices_device_ids:
-      description: id's of devices which will be selected for upgrade
+      description: Device IDs selected for a site device upgrade
       items:
         format: uuid
         type: string
