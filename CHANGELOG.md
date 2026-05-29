@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2604.1.2] - 2026-05-28
+
+- Improved numerous endpoint and schema descriptions for clarity and better developer/LLM guidance
+- Updated schema definitions
+  - Marked `device_event.ap` and `device_event.ap_name` as deprecated; use `mac` and `device_name` instead
+  - Added `format: password` to the PPPoE `poser_password` field
+  - Added `format: password` to the read-only Cradlepoint `cp_api_key` and `ecm_api_key` fields
+
 ## [2604.1.0] - 2026-05-05
 
 - Added `GET /api/v1/sites/{site_id}/rrm/channel_scores/band/{band}`
