@@ -102742,29 +102742,36 @@ components:
       type: array
     stats_rssi_zone:
       additionalProperties: false
-      description: Zone statistics
+      description: RSSI-based zone statistics for a site
       properties:
         assets_wait:
+          description: BLE asset wait-time summary for the RSSI zone
           $ref: '#/components/schemas/stats_zone_assets_waits'
         clients_wait:
+          description: Wi-Fi client wait-time summary for the RSSI zone
           $ref: '#/components/schemas/stats_zone_clients_waits'
         created_time:
+          description: Time when the RSSI zone was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         devices:
+          description: AP devices and RSSI thresholds that define the RSSI zone
           $ref: '#/components/schemas/stats_rssi_zones_devices'
         discovered_assets_wait:
+          description: Discovered BLE asset wait-time summary for the RSSI zone
           $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
         id:
+          description: Unique identifier of the RSSI zone
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the RSSI zone was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Name of the zone
+          description: Display name of the RSSI zone
           examples:
           - Zone A
           type: string
         num_assets:
-          description: Number of assets
+          description: Number of BLE assets currently counted in the RSSI zone
           examples:
           - 0
           type: integer
@@ -102774,12 +102781,13 @@ components:
           - 80
           type: integer
         num_discovered_assets:
-          description: Number of discoveredassets
+          description: Number of discovered BLE assets currently counted in the RSSI
+            zone
           examples:
           - 0
           type: integer
         num_sdkclients:
-          description: Number of sdk clients
+          description: Number of SDK clients currently counted in the RSSI zone
           examples:
           - 10
           type: integer
@@ -102789,16 +102797,21 @@ components:
           - 80
           type: integer
         occupancy_limit:
+          description: Configured occupancy limit for the RSSI zone
           examples:
           - 4
           type: integer
         org_id:
+          description: Organization identifier associated with the RSSI zone
           $ref: '#/components/schemas/org_id'
         sdkclients_wait:
+          description: SDK client wait-time summary for the RSSI zone
           $ref: '#/components/schemas/stats_zone_sdkclients_waits'
         site_id:
+          description: Site identifier associated with the RSSI zone
           $ref: '#/components/schemas/site_id'
         unconnected_clients_wait:
+          description: Unconnected Wi-Fi client wait-time summary for the RSSI zone
           $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
       required:
       - id
@@ -102806,19 +102819,25 @@ components:
       - devices
       type: object
     stats_rssi_zones:
+      description: RSSI-based zone statistics returned by the request
       items:
         $ref: '#/components/schemas/stats_rssi_zone'
       type: array
     stats_rssi_zones_device:
       additionalProperties: false
+      description: AP device and RSSI threshold used by an RSSI zone
       properties:
         device_id:
+          description: Identifier of the AP device used by this RSSI zone
           format: uuid
           type: string
         rssi:
+          description: Minimum RSSI threshold for considering a device inside the
+            zone
           type: integer
       type: object
     stats_rssi_zones_devices:
+      description: AP devices and RSSI thresholds that define an RSSI zone
       items:
         $ref: '#/components/schemas/stats_rssi_zones_device'
       type: array
