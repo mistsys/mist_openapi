@@ -87650,29 +87650,41 @@ components:
         timestamp.
       properties:
         cert:
+          description: Current organization CA certificate in PEM format
           type: string
         pending_cert:
+          description: Pending auto-renewed organization CA certificate returned when
+            the current certificate nears expiry
           type: string
         pending_cert_expiry:
+          description: Epoch timestamp when the pending certificate is expected to
+            replace the current certificate
           type: integer
       required:
       - cert
       type: object
     response_claim_license:
       additionalProperties: false
+      description: Result of claiming licenses or activation codes
       properties:
         inventory_added:
           $ref: '#/components/schemas/response_claim_license_inventory_added'
+          description: Inventory devices added by the claim operation
         inventory_duplicated:
           $ref: '#/components/schemas/response_claim_license_inventory_duplicated'
+          description: Inventory devices already present during the claim operation
         inventory_pending:
           $ref: '#/components/schemas/response_claim_license_inventory_pending'
+          description: Inventory devices pending asynchronous claim processing
         license_added:
           $ref: '#/components/schemas/response_claim_license_license_added'
+          description: License entitlements added by the claim operation
         license_duplicated:
           $ref: '#/components/schemas/response_claim_license_license_duplicated'
+          description: License entitlements already present during the claim operation
         license_error:
           $ref: '#/components/schemas/response_claim_license_license_error'
+          description: License claim errors returned by order number
       required:
       - license_added
       - license_duplicated
@@ -87681,26 +87693,35 @@ components:
       - inventory_duplicated
       type: object
     response_claim_license_inventory_added:
+      description: Inventory devices added by the claim operation
       items:
         $ref: '#/components/schemas/response_claim_license_inventory_item'
       type: array
       uniqueItems: true
     response_claim_license_inventory_duplicated:
+      description: Inventory devices already present during the claim operation
       items:
         $ref: '#/components/schemas/response_claim_license_inventory_item'
       type: array
       uniqueItems: true
     response_claim_license_inventory_item:
+      description: Inventory device returned by a license claim
       properties:
         mac:
+          description: Device MAC address for the claimed inventory item
           type: string
         magic:
+          description: Activation code or claim code associated with the inventory
+            item
           type: string
         model:
+          description: Device model for the claimed inventory item
           type: string
         serial:
+          description: Device serial number for the claimed inventory item
           type: string
         type:
+          description: Device type for the claimed inventory item
           type: string
       required:
       - serial
@@ -87709,50 +87730,63 @@ components:
       - magic
       - mac
     response_claim_license_inventory_pending:
-      description: for async claim
+      description: Inventory devices pending asynchronous claim processing
       items:
         $ref: '#/components/schemas/response_claim_license_inventory_pending_item'
       type: array
       uniqueItems: true
     response_claim_license_inventory_pending_item:
       additionalProperties: false
+      description: Inventory device pending asynchronous claim processing
       properties:
         mac:
+          description: Device MAC address pending asynchronous inventory claim
           type: string
       type: object
     response_claim_license_license_added:
+      description: License entitlements added by the claim operation
       items:
         $ref: '#/components/schemas/response_claim_license_license_item'
       type: array
       uniqueItems: true
     response_claim_license_license_duplicated:
+      description: License entitlements already present during the claim operation
       items:
         $ref: '#/components/schemas/response_claim_license_license_item'
       type: array
       uniqueItems: true
     response_claim_license_license_error:
+      description: License claim errors returned by order number
       items:
         $ref: '#/components/schemas/response_claim_license_license_error_item'
       type: array
       uniqueItems: true
     response_claim_license_license_error_item:
+      description: License order that could not be claimed
       properties:
         order:
+          description: License order number or claim identifier that failed
           type: string
         reason:
+          description: Explanation of why the license order could not be claimed
           type: string
       required:
       - order
       - reason
     response_claim_license_license_item:
+      description: License entitlement returned by a claim operation
       properties:
         end:
+          description: Epoch timestamp when the license entitlement ends
           type: integer
         quantity:
+          description: Number of license units included in the entitlement
           type: integer
         start:
+          description: Epoch timestamp when the license entitlement starts
           type: integer
         type:
+          description: License SKU or subscription type
           type: string
       required:
       - type
@@ -87761,10 +87795,13 @@ components:
       - quantity
     response_claim_mx_edge:
       additionalProperties: false
+      description: Mist Edge claim response
       properties:
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier assigned to the claimed Mist Edge
         magic:
+          description: Claim magic token returned for the Mist Edge
           type: string
       required:
       - id
