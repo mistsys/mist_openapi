@@ -110384,46 +110384,51 @@ components:
           note: RADIUS server IP address for US East Campus
       type: object
     vbeacon:
-      description: vBeacon
+      description: Virtual beacon configuration for SDK proximity notifications
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Epoch timestamp when the virtual beacon was created
         for_site:
+          description: Whether this virtual beacon is defined at site scope
           readOnly: true
           type: boolean
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier of the virtual beacon
         major:
-          description: Bluetooth tag major
+          description: Bluetooth beacon major value used for proximity matching
           examples:
           - 1356
           type: integer
         map_id:
-          description: Map where the device belongs to
+          description: Floorplan map identifier containing the virtual beacon
           examples:
           - 63eda950-c6da-11e4-a628-60f81dd250cc
           format: uuid
           type: string
         message:
-          description: Message that can be displayed when the sdkclient gets near
-            the vbeacon
+          description: Notification message displayed by the SDK application when
+            a client is near the virtual beacon
           examples:
           - Welcome to Mist
           type: string
         minor:
-          description: Bluetooth tag minor
+          description: Bluetooth beacon minor value used for proximity matching
           examples:
           - 21
           type: integer
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Epoch timestamp when the virtual beacon was last modified
         name:
-          description: Name / label of the device
+          description: Display name or label for the virtual beacon
           examples:
           - conference room
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization identifier that owns the virtual beacon
         power:
           default: 4
           description: Required if `power_mode`==`custom`, -30 - 100, in dBm. For
@@ -110433,15 +110438,18 @@ components:
           type: integer
         power_mode:
           $ref: '#/components/schemas/ble_config_power_mode'
+          description: Transmit power mode for the virtual beacon
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site identifier that owns the virtual beacon
         url:
-          description: URL to show, optional
+          description: Destination URL shown by the SDK application when a client
+            is near the virtual beacon
           examples:
           - https://www.mist.com/any
           type: string
         uuid:
-          description: Bluetooth tag UUID
+          description: Bluetooth beacon UUID used for proximity matching
           examples:
           - 31375aeb-b8d3-1ea6-83bf-a31eb04e1c38
           format: uuid
@@ -110452,13 +110460,13 @@ components:
           - node1
           type: string
         x:
-          description: X in pixel
+          description: Horizontal pixel coordinate of the virtual beacon on the map
           examples:
           - 53.5
           format: double
           type: number
         y:
-          description: Y in pixel
+          description: Vertical pixel coordinate of the virtual beacon on the map
           examples:
           - 173.1
           format: double
