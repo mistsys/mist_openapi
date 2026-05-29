@@ -81475,7 +81475,7 @@ components:
       description: Mist Edge VM parameters
       properties:
         model:
-          description: SKU
+          description: Mist Edge VM SKU or model to deploy
           examples:
           - ME-VM
           type: string
@@ -83329,7 +83329,7 @@ components:
       properties:
         channelized:
           default: false
-          description: Enable channelization
+          description: Whether channelization is enabled on this optic port
           type: boolean
         speed:
           description: Interface speed (e.g. `25g`, `50g`), use the chassis speed
@@ -84768,7 +84768,7 @@ components:
           type: integer
         min_length:
           default: 8
-          description: Required password length
+          description: Minimum number of characters required for passwords
           type: integer
         requires_special_char:
           default: false
@@ -94851,7 +94851,8 @@ components:
           type: boolean
         min_duration:
           default: 3000
-          description: Minimum duration
+          description: Minimum dwell duration before a client or asset is counted
+            in occupancy analytics
           examples:
           - 3000
           type: integer
@@ -100395,7 +100396,7 @@ components:
           - 213065
           type: integer
         uuid:
-          description: Service UUID
+          description: BLE service UUID advertised by the asset service packet
           examples:
           - 00003e10-0000-1000-8000-00805f9b34fb
           type: string
