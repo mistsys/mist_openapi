@@ -92371,39 +92371,47 @@ components:
       type: array
     rrm:
       additionalProperties: false
-      description: RRM
+      description: Current RRM channel-planning state for a site
       properties:
         band_24:
           additionalProperties:
             $ref: '#/components/schemas/rrm_band'
-          description: proposal on band 2.4G, key is ap_id, value is the proposal
+          description: RRM proposed channel, power, and usage settings for 2.4 GHz radios; property key is AP ID
           type: object
         band_24_metric:
+          description: Aggregate RRM metrics for the 2.4 GHz band
           $ref: '#/components/schemas/rrm_band_metric'
         band_5:
           additionalProperties:
             $ref: '#/components/schemas/rrm_band'
-          description: proposal on band 5G, key is ap_id, value is the proposal
+          description: RRM proposed channel, power, and usage settings for 5 GHz radios; property key is AP ID
           type: object
         band_5_metric:
+          description: Aggregate RRM metrics for the 5 GHz band
           $ref: '#/components/schemas/rrm_band_metric'
         band_6:
           additionalProperties:
             $ref: '#/components/schemas/rrm_band'
-          description: proposal on band 6G, key is ap_id, value is the proposal
+          description: RRM proposed channel, power, and usage settings for 6 GHz radios; property key is AP ID
           type: object
         band_6_metric:
+          description: Aggregate RRM metrics for the 6 GHz band
           $ref: '#/components/schemas/rrm_band_metric'
         rftemplate:
+          description: RF template used by the current RRM calculation
           $ref: '#/components/schemas/rf_template'
         rftemplate_id:
+          description: RF template identifier used by the current RRM calculation
           format: uuid
           type: string
         rftemplate_name:
+          description: RF template name used by the current RRM calculation
           type: string
         status:
+          description: Current RRM calculation status
           $ref: '#/components/schemas/rrm_status'
         timestamp:
+          description: Time when the current RRM data was generated
           $ref: '#/components/schemas/timestamp'
       required:
       - band_24
@@ -92418,34 +92426,38 @@ components:
       type: object
     rrm_band:
       additionalProperties: false
+      description: RRM proposed and current radio settings for an AP band
       properties:
         bandwidth:
+          description: Proposed channel width for the radio band, in MHz
           $ref: '#/components/schemas/dot11_bandwidth'
         channel:
-          description: proposed channel
+          description: Proposed RF channel for the radio band
           type: integer
         curr_bandwidth:
+          description: Current channel width for the radio band, in MHz
           $ref: '#/components/schemas/dot11_bandwidth'
         curr_channel:
-          description: Current channel
+          description: Current RF channel for the radio band
           type: integer
         curr_power:
-          description: Current tx power
+          description: Current transmit power for the radio band
           type: integer
         curr_usage:
-          description: Current radio band
+          description: Current radio usage band for the AP radio
           minLength: 1
           type: string
         power:
-          description: proposed tx power
+          description: Proposed transmit power for the radio band
           type: integer
         usage:
-          description: proposed radio band
+          description: Proposed radio usage band for the AP radio
           minLength: 1
           type: string
       type: object
     rrm_band_metric:
       additionalProperties: false
+      description: Aggregate RRM metrics for a radio band
       properties:
         avg_aps_per_channel:
           description: Average number of APs per channel
@@ -92473,8 +92485,10 @@ components:
               radar: 0.2
           type: object
         naps_by_channel:
+          description: Number of APs grouped by channel for this band
           $ref: '#/components/schemas/rrm_band_metric_naps_by_channel'
         naps_by_power:
+          description: Number of APs grouped by transmit power for this band
           $ref: '#/components/schemas/rrm_band_metric_naps_by_power'
         neighbors:
           description: Average number of neighbors
@@ -92490,8 +92504,10 @@ components:
       type: object
     rrm_band_metric_interference:
       additionalProperties: false
+      description: Interference metrics observed for one channel
       properties:
         radar:
+          description: Interference value attributed to radar on the channel
           type: number
       type: object
     rrm_band_metric_naps_by_channel:
@@ -92508,9 +92524,10 @@ components:
       type: object
     rrm_channel_score:
       additionalProperties: false
+      description: RRM utilization score for a channel
       properties:
         channel:
-          description: Channel number
+          description: RF channel number represented by this score record
           type: integer
         util_score:
           description: Utilization score for the channel, 0-1, lower means cleaner
@@ -92551,10 +92568,13 @@ components:
       type: object
     rrm_consideration:
       additionalProperties: false
+      description: RRM consideration metrics for one candidate channel
       properties:
         channel:
+          description: Candidate RF channel evaluated by RRM
           type: integer
         noise:
+          description: Observed noise floor for the candidate channel, in dBm
           type: number
         other_rssi:
           description: Avg RSSI heard from other APs (that does NOT belongs to the
