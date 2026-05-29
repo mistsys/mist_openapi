@@ -113631,8 +113631,11 @@ components:
         \ identifier)."
       properties:
         events:
+          description: Unconnected Wi-Fi raw packet events included in this webhook
+            delivery
           $ref: '#/components/schemas/webhook_wifi_unconn_raw_events'
         topic:
+          description: Webhook topic name for unconnected Wi-Fi raw packet deliveries
           $ref: '#/components/schemas/webhook_wifi_unconn_raw_topic'
       required:
       - events
@@ -113640,22 +113643,35 @@ components:
       type: object
     webhook_wifi_unconn_raw_event:
       additionalProperties: false
+      description: Raw packet observation for an unconnected Wi-Fi client
       properties:
         ap_id:
+          description: AP MAC address that reported the unconnected client packet
           type: string
         ap_loc:
+          description: Location coordinates of the reporting AP when available, updated
+            about once per minute per client
           $ref: '#/components/schemas/webhook_wifi_unconn_raw_event_ap_loc'
         client_id:
+          description: Client MAC address that emitted the unconnected Wi-Fi packet
           type: string
         connected_site:
+          description: Whether the observed client is connected to the reporting
+            site
           type: boolean
         map_id:
+          description: Map associated with the reporting AP when location context
+            is available
           $ref: '#/components/schemas/id'
         org_id:
+          description: Organization associated with the unconnected Wi-Fi raw event
           $ref: '#/components/schemas/org_id'
         packets:
+          description: RSSI packet observations reported for the unconnected Wi-Fi
+            client
           $ref: '#/components/schemas/webhook_wifi_unconn_raw_event_packets'
         site_id:
+          description: Site associated with the unconnected Wi-Fi raw event
           $ref: '#/components/schemas/site_id'
       type: object
     webhook_wifi_unconn_raw_event_ap_loc:
@@ -113666,10 +113682,14 @@ components:
       type: array
     webhook_wifi_unconn_raw_event_packet:
       additionalProperties: false
+      description: RSSI observation for an unconnected Wi-Fi client packet
       properties:
         band:
+          description: Radio band on which the unconnected Wi-Fi packet was observed
           type: string
         rssi:
+          description: Received signal strength of the unconnected Wi-Fi packet at
+            the reporting AP, in dBm
           type: integer
       type: object
     webhook_wifi_unconn_raw_event_packets:
