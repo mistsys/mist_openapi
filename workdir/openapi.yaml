@@ -114091,8 +114091,10 @@ components:
           minimum: 0
           type: integer
         acct_servers:
+          description: RADIUS accounting servers used by this WLAN
           $ref: '#/components/schemas/wlan_acct_servers'
         airwatch:
+          description: Integration settings for AirWatch device compliance on this WLAN
           $ref: '#/components/schemas/wlan_airwatch'
         allow_ipv6_ndp:
           default: true
@@ -114109,22 +114111,29 @@ components:
           description: Only applicable when `limit_bcast`==`true`, which allows SSDP
           type: boolean
         ap_ids:
+          description: Access point identifiers used when `apply_to`==`aps`
           $ref: '#/components/schemas/wlan_ap_ids'
         app_limit:
+          description: Bandwidth limits for applications on this WLAN
           $ref: '#/components/schemas/wlan_app_limit'
         app_qos:
+          description: QoS rules for application traffic on this WLAN
           $ref: '#/components/schemas/wlan_app_qos'
         apply_to:
+          description: Scope that determines where this WLAN is applied
           $ref: '#/components/schemas/wlan_apply_to'
         arp_filter:
           default: false
           description: Whether to enable smart arp filter
           type: boolean
         auth:
+          description: Settings that control client authentication for this WLAN
           $ref: '#/components/schemas/wlan_auth'
         auth_server_selection:
+          description: RADIUS authentication server selection behavior for this WLAN
           $ref: '#/components/schemas/wlan_auth_server_selection'
         auth_servers:
+          description: RADIUS authentication servers used by this WLAN. Required when `auth.type`==`eap`
           $ref: '#/components/schemas/wlan_auth_servers'
         auth_servers_nas_id:
           description: Optional, up to 48 bytes, will be dynamically generated if
@@ -114172,6 +114181,7 @@ components:
           description: Force dual_band capable client to connect to 5G
           type: boolean
         bands:
+          description: Radio bands on which this WLAN is broadcast
           $ref: '#/components/schemas/wlan_bands'
         block_blacklist_clients:
           default: false
@@ -114179,24 +114189,30 @@ components:
             256 macs)
           type: boolean
         bonjour:
+          description: Service discovery gateway settings for Bonjour traffic on this WLAN
           $ref: '#/components/schemas/wlan_bonjour'
         cisco_cwa:
+          description: Central web authentication settings for Cisco CWA on this WLAN
           $ref: '#/components/schemas/wlan_cisco_cwa'
         client_limit_down:
+          description: Downlink bandwidth limit applied per client
           $ref: '#/components/schemas/wlan_limit'
         client_limit_down_enabled:
           default: false
           description: If downlink limiting per-client is enabled
           type: boolean
         client_limit_up:
+          description: Uplink bandwidth limit applied per client
           $ref: '#/components/schemas/wlan_limit'
         client_limit_up_enabled:
           default: false
           description: If uplink limiting per-client is enabled
           type: boolean
         coa_servers:
+          description: RADIUS Change of Authorization servers available to this WLAN
           $ref: '#/components/schemas/coa_servers'
         created_time:
+          description: Time when this WLAN was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         disable_11ax:
           default: false
@@ -114236,19 +114252,24 @@ components:
           type: boolean
         disable_when_mxtunnel_down:
           default: false
+          description: Whether to disable this WLAN when the configured Mist tunnel is down
           type: boolean
         disable_wmm:
           default: false
           description: Whether to disable WMM
           type: boolean
         dns_server_rewrite:
+          description: RADIUS group based DNS server rewrite settings for this WLAN
           $ref: '#/components/schemas/wlan_dns_server_rewrite'
         dtim:
           default: 2
+          description: Delivery Traffic Indication Message interval for this WLAN
           type: integer
         dynamic_psk:
+          description: Per-user PSK selection settings for this WLAN
           $ref: '#/components/schemas/wlan_dynamic_psk'
         dynamic_vlan:
+          description: VLAN assignment settings for 802.1X dynamic VLANs
           $ref: '#/components/schemas/wlan_dynamic_vlan'
         enable_local_keycaching:
           default: false
@@ -114278,6 +114299,7 @@ components:
             \ ."
           type: boolean
         for_site:
+          description: Whether this WLAN record is scoped to a site
           readOnly: true
           type: boolean
         hide_ssid:
@@ -114289,12 +114311,16 @@ components:
           description: Include hostname inside IE in AP beacons / probe responses
           type: boolean
         hotspot20:
+          description: Passpoint and Hotspot 2.0 settings for this WLAN
           $ref: '#/components/schemas/wlan_hotspot_20'
         id:
+          description: Unique identifier for this WLAN
           $ref: '#/components/schemas/id'
         inject_dhcp_option_82:
+          description: DHCP Option 82 insertion settings for this WLAN
           $ref: '#/components/schemas/wlan_inject_dhcp_option_82'
         interface:
+          description: Network interface or tunnel where this WLAN bridges client traffic
           $ref: '#/components/schemas/wlan_interface'
         isolation:
           default: false
@@ -114335,10 +114361,13 @@ components:
           minimum: 0
           type: integer
         mist_nac:
+          description: Juniper Mist NAC settings used by this WLAN
           $ref: '#/components/schemas/wlan_mist_nac'
         modified_time:
+          description: Time when this WLAN was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         msp_id:
+          description: Managed service provider identifier associated with this WLAN
           $ref: '#/components/schemas/msp_id'
         mxtunnel_id:
           deprecated: true
@@ -114347,8 +114376,10 @@ components:
           format: uuid
           type: string
         mxtunnel_ids:
+          description: Mist Tunnel identifiers used when `interface`==`mxtunnel`
           $ref: '#/components/schemas/wlan_mxtunnel_ids'
         mxtunnel_name:
+          description: Mist Tunnel names used when `interface`==`site_mxedge`
           $ref: '#/components/schemas/wlan_mxtunnel_name'
         no_static_dns:
           default: false
@@ -114361,12 +114392,16 @@ components:
             \ DHCP exchange to talk"
           type: boolean
         org_id:
+          description: Owning organization associated with this WLAN
           $ref: '#/components/schemas/org_id'
         portal:
+          description: Guest portal settings for this WLAN
           $ref: '#/components/schemas/wlan_portal'
         portal_allowed_hostnames:
+          description: Guest portal hostnames that clients may reach before authorization
           $ref: '#/components/schemas/wlan_portal_allowed_hostnames'
         portal_allowed_subnets:
+          description: Guest portal CIDR subnets that clients may reach before authorization
           $ref: '#/components/schemas/wlan_portal_allowed_subnets'
         portal_api_secret:
           default: ''
@@ -114378,6 +114413,7 @@ components:
           - string
           - 'null'
         portal_denied_hostnames:
+          description: Guest portal hostnames denied before authorization, taking precedence over allowed hostnames
           $ref: '#/components/schemas/wlan_portal_denied_hostnames'
         portal_image:
           default: ''
@@ -114406,10 +114442,13 @@ components:
           - string
           - 'null'
         qos:
+          description: Quality-of-service settings for WLAN client traffic
           $ref: '#/components/schemas/wlan_qos'
         radsec:
+          description: TLS-secured RADIUS transport settings for this WLAN
           $ref: '#/components/schemas/radsec'
         rateset:
+          description: Data rate settings by RF band for this WLAN
           $ref: '#/components/schemas/wlan_rateset'
         reconnect_clients_when_roaming_mxcluster:
           default: false
@@ -114417,10 +114456,13 @@ components:
             to disconnect clients (so they'll reconnect and get new IPs)
           type: boolean
         roam_mode:
+          description: Fast roaming mode configured for this WLAN
           $ref: '#/components/schemas/wlan_roam_mode'
         schedule:
+          description: Operating schedule controlling when this WLAN is active
           $ref: '#/components/schemas/wlan_schedule'
         site_id:
+          description: Mist site associated with this WLAN, when site-scoped
           $ref: '#/components/schemas/site_id'
         sle_excluded:
           default: false
@@ -114433,6 +114475,7 @@ components:
           type: string
         template_id:
           default: ''
+          description: Identifier of the WLAN template associated with this WLAN
           format: uuid
           type:
           - string
@@ -114455,8 +114498,10 @@ components:
           description: If vlan tagging is enabled
           type: boolean
         vlan_id:
+          description: Default VLAN ID, range, or variable used when `vlan_enabled`==`true`
           $ref: '#/components/schemas/wlan_vlan_id_with_variable'
         vlan_ids:
+          description: Pool of VLAN IDs used when `vlan_enabled`==`true` and `vlan_pooling`==`true`
           $ref: '#/components/schemas/wlan_vlan_ids'
         vlan_pooling:
           default: false
@@ -114464,18 +114509,21 @@ components:
             allows AP to place client on different VLAN using a deterministic algorithm
           type: boolean
         wlan_limit_down:
+          description: Downlink bandwidth limit applied to the whole WLAN
           $ref: '#/components/schemas/wlan_limit'
         wlan_limit_down_enabled:
           default: false
           description: If downlink limiting for whole wlan is enabled
           type: boolean
         wlan_limit_up:
+          description: Uplink bandwidth limit applied to the whole WLAN
           $ref: '#/components/schemas/wlan_limit'
         wlan_limit_up_enabled:
           default: false
           description: If uplink limiting for whole wlan is enabled
           type: boolean
         wxtag_ids:
+          description: Identifiers of WxLAN tags used when `apply_to`==`wxtags`
           $ref: '#/components/schemas/wlan_wxtag_ids'
         wxtunnel_id:
           default: ''
