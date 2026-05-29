@@ -62878,7 +62878,7 @@ components:
       type: object
     aamw_profile_action:
       default: block
-      description: 'enum: `block`, `permit`'
+      description: Action applied to files by an Advanced Anti Malware profile
       enum:
       - block
       - permit
@@ -63994,7 +63994,7 @@ components:
       type: object
     admin_privilege:
       additionalProperties: false
-      description: Privilieges settings
+      description: Admin privilege scope, role, and UI access settings
       properties:
         msp_id:
           $ref: '#/components/schemas/admin_privilege_msp_id'
@@ -64453,7 +64453,7 @@ components:
         type: string
       type: array
     alarm_template:
-      description: Alarm Template
+      description: Alarm template defining default delivery and per-alarm rules
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
@@ -64532,14 +64532,15 @@ components:
       - alarm_ids
       type: object
     allow_deny:
-      description: 'enum: `allow`, `deny`'
+      description: Policy action value that either allows or denies matching traffic
       enum:
       - allow
       - deny
       type: string
     anomaly:
       additionalProperties: false
-      description: Anomaly
+      description: SLE anomaly data point with baseline, deviation, and contributing
+        events
       properties:
         events:
           $ref: '#/components/schemas/anomaly_events'
@@ -64594,7 +64595,8 @@ components:
       type: object
     ap_aeroscout:
       additionalProperties: false
-      description: Aeroscout AP settings
+      description: AeroScout location integration settings applied to an AP or AP
+        profile
       properties:
         enabled:
           default: false
@@ -65191,7 +65193,7 @@ components:
       type: array
     ap_iot:
       additionalProperties: false
-      description: IoT AP settings
+      description: Digital and analog IoT port settings applied to an AP or AP profile
       properties:
         A1:
           $ref: '#/components/schemas/ap_iot_output'
@@ -65589,7 +65591,8 @@ components:
       type: string
     ap_pwr_config:
       additionalProperties: false
-      description: Power related configs
+      description: Power negotiation and peripheral power settings for an AP or AP
+        profile
       properties:
         base:
           default: 0
@@ -66657,7 +66660,7 @@ components:
       type: string
     ap_zigbee:
       additionalProperties: false
-      description: Zigbee AP settings
+      description: Zigbee radio and network settings applied to an AP or AP profile
       properties:
         allow_join:
           $ref: '#/components/schemas/ap_zigbee_allow_join'
@@ -67231,7 +67234,8 @@ components:
           description: Scheduled time of day for auto preemption
       type: object
     avprofile:
-      description: Antivirus scanning profile
+      description: Antivirus scanning profile with protocols, limits, and whitelist
+        settings
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
@@ -67946,7 +67950,8 @@ components:
       type: array
     ble_config_power_mode:
       default: default
-      description: 'enum: `custom`, `default`'
+      description: Transmit power mode for BLE beacons; use `custom` to set explicit
+        power
       enum:
       - custom
       - default
@@ -69188,7 +69193,7 @@ components:
       - switch
       type: string
     capture_tcpdump_expression:
-      description: tcpdump expression
+      description: tcpdump filter expression applied to packet capture traffic
       examples:
       - tcp port 80
       type:
@@ -71499,7 +71504,7 @@ components:
         $ref: '#/components/schemas/const_webhook_topic'
       type: array
     count_org_devices_mxtunnel_status:
-      description: 'enum: `down`, `up`'
+      description: Mist Tunnel status value used when counting organization devices
       enum:
       - down
       - up
@@ -71544,7 +71549,7 @@ components:
       type: string
     count_site_calls_distinct:
       default: mac
-      description: 'enum: `mac`'
+      description: Distinct field used when counting site call statistics
       enum:
       - mac
       type: string
@@ -72636,7 +72641,8 @@ components:
       - $ref: '#/components/schemas/deviceprofile_switch'
     deviceprofile_ap:
       additionalProperties: false
-      description: AP Device Profile
+      description: AP device profile configuration applied to APs at a site or
+        organization
       properties:
         aeroscout:
           $ref: '#/components/schemas/ap_aeroscout'
@@ -73532,7 +73538,7 @@ components:
       type: string
     discovered_switches_metric_scope:
       default: site
-      description: 'enum: `site`, `switch`'
+      description: Scope level used when querying discovered switch metrics
       enum:
       - site
       - switch
@@ -74067,7 +74073,7 @@ components:
       type: object
     evpn_config:
       additionalProperties: false
-      description: EVPN Junos settings
+      description: EVPN configuration settings applied to a Junos switch
       properties:
         enabled:
           description: Whether EVPN configuration is enabled on the switch
@@ -74093,7 +74099,7 @@ components:
       type: string
     evpn_options:
       additionalProperties: false
-      description: EVPN Options
+      description: EVPN topology generation options for campus fabric configuration
       properties:
         auto_loopback_subnet:
           default: 172.16.192.0/24
@@ -75068,7 +75074,7 @@ components:
       type: object
     gateway_mgmt:
       additionalProperties: false
-      description: Gateway management settings
+      description: Gateway management-plane and access settings
       properties:
         admin_sshkeys:
           $ref: '#/components/schemas/gateway_mgmt_admin_sshkeys'
@@ -75369,7 +75375,7 @@ components:
       type: string
     gateway_port_config:
       additionalProperties: false
-      description: Gateway port config
+      description: Gateway port configuration for LAN, WAN, tunnel, and HA interfaces
       properties:
         ae_disable_lacp:
           default: false
@@ -76856,7 +76862,7 @@ components:
         $ref: '#/components/schemas/idp_profile_overwrite'
       type: array
     idp_profiles:
-      description: Organization IDP profiles
+      description: IDP profile records returned for an organization
       items:
         $ref: '#/components/schemas/idp_profile'
       type: array
@@ -76971,7 +76977,7 @@ components:
       type: object
     import_site_assets_upsert:
       default: 'False'
-      description: 'enum: `False`, `True`'
+      description: Whether site asset import should update matching existing assets
       enum:
       - 'False'
       - 'True'
@@ -77351,13 +77357,13 @@ components:
         $ref: '#/components/schemas/installer_site'
       type: array
     installers:
-      description: Installer access entries
+      description: Installer access entries returned by list responses
       items:
         $ref: '#/components/schemas/installers_item'
       type: array
     installers_item:
       additionalProperties: false
-      description: Installer access entry
+      description: Installer access entry with scope and role details
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -77653,7 +77659,7 @@ components:
       type: array
     iotendpoint_stats:
       additionalProperties: false
-      description: IoT endpoint statistics
+      description: IoT endpoint statistics returned by a search response
       properties:
         ap_mac:
           description: MAC address of the AP the endpoint was seen on
@@ -77816,7 +77822,7 @@ components:
       - 'null'
     ip_type:
       default: dhcp
-      description: 'enum: `dhcp`, `static`'
+      description: IP address assignment mode, either DHCP or static
       enum:
       - dhcp
       - static
@@ -78078,7 +78084,8 @@ components:
       type: object
     jsi_pbn_search:
       additionalProperties: false
-      description: PBN search response
+      description: Juniper Security Intelligence PBN search response with result
+        metadata
       properties:
         end:
           description: Upper bound timestamp for the PBN search window
@@ -78103,7 +78110,7 @@ components:
       type: object
     jsi_sirt_item:
       additionalProperties: false
-      description: SIRT advisory item
+      description: Juniper Security Intelligence SIRT advisory item
       properties:
         cvss_score:
           description: Common Vulnerability Scoring System score for the SIRT advisory
@@ -78151,7 +78158,8 @@ components:
       type: object
     jsi_sirt_search:
       additionalProperties: false
-      description: SIRT search response
+      description: Juniper Security Intelligence SIRT search response with result
+        metadata
       properties:
         end:
           description: Upper bound timestamp for the SIRT search window
@@ -78672,7 +78680,7 @@ components:
       - ge-0/0/17.0
       type: string
     last_seen:
-      description: Last seen timestamp
+      description: Timestamp indicating when the entity was last seen
       examples:
       - 1470417522
       format: double
@@ -79117,7 +79125,7 @@ components:
       type: object
     login_failures:
       additionalProperties: false
-      description: Failed login attempts
+      description: Failed login attempt summary with source IPs and user agents
       properties:
         email:
           description: User email address for the failed login attempts
@@ -79986,7 +79994,7 @@ components:
       type: object
     mfa_secret_type:
       default: qrcode
-      description: 'enum: `qrcode`'
+      description: MFA secret representation format for enrollment
       enum:
       - qrcode
       type: string
@@ -80375,7 +80383,7 @@ components:
       type: string
     msp_marvis_suggestions_count_distinct:
       default: org_id
-      description: 'enum: `org_id`, `status`'
+      description: Distinct field used when counting MSP Marvis suggestions
       enum:
       - org_id
       - status
@@ -80405,7 +80413,7 @@ components:
         type: string
       type: array
     msp_search_type:
-      description: 'enum: `orgs`'
+      description: Search result type returned by MSP organization search
       enum:
       - orgs
       type: string
@@ -81847,7 +81855,7 @@ components:
       type: array
     mxtunnel_protocol:
       default: udp
-      description: 'enum: `ip`, `udp`'
+      description: Encapsulation protocol used for Mist Tunnel traffic
       enum:
       - ip
       - udp
@@ -82692,7 +82700,7 @@ components:
         type: string
       type: array
     nac_rule_matching_port_type:
-      description: 'enum: `wired`, `wireless`'
+      description: Port attachment type matched by a NAC rule
       enum:
       - wired
       - wireless
@@ -83159,7 +83167,7 @@ components:
           type: string
       type: object
     network_template:
-      description: Network Template
+      description: Network template configuration applied to sites or site groups
       properties:
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
@@ -83859,7 +83867,7 @@ components:
       - ssid
       type: string
     org_id:
-      description: Organization identifier
+      description: Unique identifier of a Mist organization
       examples:
       - a97c1b22-a4e9-411e-9bfd-d8695a0f9e61
       format: uuid
@@ -83903,7 +83911,7 @@ components:
       - unamend
       type: string
     org_list:
-      description: List of organizations
+      description: Organization records returned by a list response
       items:
         $ref: '#/components/schemas/org'
       type: array
@@ -85465,7 +85473,7 @@ components:
       type: object
     org_tickets_count_distinct:
       default: status
-      description: 'enum: `status`, `type`'
+      description: Distinct field used when counting organization tickets
       enum:
       - status
       - type
@@ -85501,7 +85509,7 @@ components:
       type: string
     org_tunnel_type_count:
       default: wxtunnel
-      description: 'enum: `wan`, `wxtunnel`'
+      description: Tunnel type used when counting organization tunnels
       enum:
       - wan
       - wxtunnel
@@ -85651,7 +85659,7 @@ components:
       - vlan
       type: string
     orggroup:
-      description: MSP organization group
+      description: MSP organization group containing related organizations
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
@@ -85675,7 +85683,7 @@ components:
       - name
       type: object
     orggroup_id:
-      description: Organization group identifier
+      description: Unique identifier of an MSP organization group
       examples:
       - 832b1d74-9531-409b-ae37-4d7f3edbde92
       format: uuid
@@ -86077,7 +86085,7 @@ components:
       type: string
     privilege_msp:
       additionalProperties: false
-      description: Privileges settings
+      description: MSP privilege scope and role settings
       properties:
         org_id:
           description: If `scope`==`org`, organization ID this MSP privilege applies
@@ -86125,7 +86133,7 @@ components:
       type: string
     privilege_org:
       additionalProperties: false
-      description: Privileges settings
+      description: Organization privilege scope and role settings
       properties:
         org_id:
           description: If `scope`==`org`, organization ID this privilege applies to
@@ -86204,7 +86212,7 @@ components:
           description: Trusted host or subnet entries allowed by the Protect RE policy
       type: object
     protect_re_allowed_service:
-      description: 'enum: `icmp`, `ssh`'
+      description: Services allowed through protect-RE filters
       enum:
       - icmp
       - ssh
@@ -87069,7 +87077,7 @@ components:
       - hcaptcha
       type: string
     recover:
-      description: Password recovery request
+      description: Password recovery request submitted for an administrator account
       properties:
         email:
           description: Admin email address requesting password recovery
@@ -87175,7 +87183,7 @@ components:
       type: object
     remote_syslog_content:
       additionalProperties: false
-      description: Syslog content selector
+      description: Syslog message content selector for remote logging
       properties:
         facility:
           $ref: '#/components/schemas/remote_syslog_facility'
@@ -87415,7 +87423,7 @@ components:
       type: array
     resolution:
       default: default
-      description: 'enum: `default`, `fine`'
+      description: Location resolution mode for map or placement calculations
       enum:
       - default
       - fine
@@ -87747,7 +87755,7 @@ components:
       type: string
     response_auto_placement_info:
       additionalProperties: false
-      description: Autoplacement status response
+      description: Auto-placement status response with progress and validation details
       properties:
         end_time:
           description: Timestamp when autoplacement completed or was manually stopped
@@ -87827,7 +87835,7 @@ components:
       type: array
     response_autoplacement:
       additionalProperties: false
-      description: Autoplacement start response
+      description: Auto-placement start response returned after scheduling the run
       properties:
         devices:
           $ref: '#/components/schemas/response_autoplacement_devices'
@@ -93306,7 +93314,7 @@ components:
       - integer
       - 'null'
     rx_rate:
-      description: RX Rate, Mbps
+      description: Receive data rate reported for a wireless or mesh link, in Mbps
       format: float
       readOnly: true
       type:
@@ -93640,7 +93648,7 @@ components:
           type: integer
       type: object
     search_org_devices_mxtunnel_status:
-      description: 'enum: `down`, `up`'
+      description: Mist Tunnel status filter for organization device search
       enum:
       - down
       - up
@@ -93667,7 +93675,7 @@ components:
       - timestamp
       type: string
     search_site_devices_mxtunnel_status:
-      description: 'enum: `down`, `up`'
+      description: Mist Tunnel status filter for site device search
       enum:
       - down
       - up
@@ -95117,7 +95125,7 @@ components:
       - ssid
       type: string
     site_id:
-      description: Site identifier
+      description: Unique identifier of a Mist site
       examples:
       - 441a1214-6928-442a-8e92-e1d34b8ec6a6
       format: uuid
@@ -96489,7 +96497,7 @@ components:
       - switch
       type: string
     site_sle_impacted_aps_scope_parameters:
-      description: 'enum: `site`'
+      description: Scope parameter value for impacted AP SLE queries
       enum:
       - site
       type: string
@@ -96508,7 +96516,7 @@ components:
       - switch
       type: string
     site_sle_impacted_gateways_scope_parameters:
-      description: 'enum: `site`'
+      description: Scope parameter value for impacted gateway SLE queries
       enum:
       - site
       type: string
@@ -96520,12 +96528,12 @@ components:
       - switch
       type: string
     site_sle_impacted_switches_scope_parameters:
-      description: 'enum: `site`'
+      description: Scope parameter value for impacted switch SLE queries
       enum:
       - site
       type: string
     site_sle_impacted_users_scope_parameter:
-      description: 'enum: `ap`, `site`'
+      description: Scope parameter value for impacted user SLE queries
       enum:
       - ap
       - site
@@ -96595,7 +96603,7 @@ components:
       type: array
     site_system_events_count_distinct:
       default: type
-      description: 'enum: `type`'
+      description: Distinct field used when counting site system events
       enum:
       - type
       type: string
@@ -96825,7 +96833,7 @@ components:
       - name
       type: object
     sitegroup_id:
-      description: Site group identifier
+      description: Unique identifier of a Mist site group
       examples:
       - 3c708be3-9422-4695-b729-babdbd2f7615
       format: uuid
@@ -96842,7 +96850,7 @@ components:
         $ref: '#/components/schemas/sitegroup'
       type: array
     sites:
-      description: List of sites
+      description: Site records returned by a list response
       items:
         $ref: '#/components/schemas/site'
       type: array
@@ -98356,7 +98364,7 @@ components:
       type: string
     snmp_config_v2c_config:
       additionalProperties: false
-      description: SNMPv2c community configuration
+      description: SNMPv2c community configuration entry
       properties:
         authorization:
           description: Access level for the SNMPv2c community
@@ -98673,7 +98681,7 @@ components:
       type: array
     snmpv3_config_notify_items:
       additionalProperties: false
-      description: SNMPv3 notification definition
+      description: SNMPv3 notification definition for traps or informs
       properties:
         name:
           description: Identifier for this SNMPv3 notification definition
@@ -102027,7 +102035,7 @@ components:
       type: object
     stats_gateway_port:
       additionalProperties: false
-      description: Port statistics
+      description: Gateway port statistics record returned by stats APIs
       properties:
         active:
           description: Indicates if interface is active/inactive
@@ -103339,7 +103347,7 @@ components:
       type: array
       uniqueItems: true
     stats_orgs:
-      description: Organization statistics summaries
+      description: Organization statistics summaries returned by stats APIs
       items:
         $ref: '#/components/schemas/stats_org'
       type: array
@@ -104156,7 +104164,7 @@ components:
       type: object
     stats_switch_port:
       additionalProperties: false
-      description: Switch port statistics
+      description: Switch port statistics record returned by stats APIs
       properties:
         active:
           description: Indicates if interface is active/inactive
@@ -105427,7 +105435,7 @@ components:
         $ref: '#/components/schemas/stats_zone'
       type: array
     strings:
-      description: Unique string values
+      description: Unique string values returned or accepted by this schema
       items:
         type: string
       type: array
@@ -106011,13 +106019,13 @@ components:
       type: array
       uniqueItems: true
     switch_metric_scope:
-      description: 'enum: `site`, `switch`'
+      description: Scope level used when querying switch metrics
       enum:
       - site
       - switch
       type: string
     switch_metric_type:
-      description: 'enum: `active_ports_summary`'
+      description: Switch metric type requested for active port summaries
       enum:
       - active_ports_summary
       type: string
@@ -106056,7 +106064,7 @@ components:
       type: array
     switch_mgmt:
       additionalProperties: false
-      description: Switch Management settings
+      description: Switch management-plane access and proxy settings
       properties:
         ap_affinity_threshold:
           default: 10
@@ -106446,7 +106454,7 @@ components:
       type: object
     switch_port_usage:
       additionalProperties: false
-      description: Junos port usages
+      description: Junos switch port usage template and authentication settings
       properties:
         all_networks:
           default: false
@@ -107503,7 +107511,7 @@ components:
           type: integer
       type: object
     synthetictest_protocol:
-      description: 'enum: `ping`, `traceroute`'
+      description: Protocol used by a synthetic test probe
       enum:
       - ping
       - traceroute
@@ -107624,7 +107632,7 @@ components:
       - read
       type: string
     template:
-      description: Template
+      description: WLAN template configuration applied across sites or site groups
       properties:
         applies:
           $ref: '#/components/schemas/template_applies'
@@ -107826,7 +107834,7 @@ components:
       - to
       type: object
     ticket:
-      description: Support Ticket
+      description: Support ticket record with status, comments, and metadata
       properties:
         case_number:
           description: Support case number associated with this ticket
@@ -108012,7 +108020,7 @@ components:
       - '12:00'
       type: string
     timestamp:
-      description: Epoch (seconds)
+      description: Epoch timestamp, in seconds
       format: double
       readOnly: true
       type: number
@@ -108789,7 +108797,7 @@ components:
       type: object
     tunnel_type:
       default: wxtunnel
-      description: 'enum: `wan`, `wxtunnel`'
+      description: Tunnel category, either WAN tunnel or WxLAN tunnel
       enum:
       - wan
       - wxtunnel
@@ -108836,7 +108844,7 @@ components:
       type: object
     tunterm_dhcpd_type:
       default: relay
-      description: 'enum: `relay`'
+      description: DHCP handling mode for tunnel termination
       enum:
       - relay
       type: string
@@ -108889,7 +108897,7 @@ components:
       type: string
     tunterm_port_config:
       additionalProperties: false
-      description: Ethernet port configurations
+      description: Ethernet port configuration for tunnel termination interfaces
       properties:
         downstream_ports:
           $ref: '#/components/schemas/tunterm_port_config_downstream_ports'
@@ -108980,7 +108988,7 @@ components:
       - integer
       - 'null'
     tx_rate:
-      description: TX Rate, Mbps
+      description: Transmit data rate reported for a wireless or mesh link, in Mbps
       format: float
       readOnly: true
       type:
@@ -110346,7 +110354,7 @@ components:
           type: string
       type: object
     utils_ping:
-      description: Ping utility request
+      description: Request body for running a ping utility command
       properties:
         count:
           default: 10
@@ -110883,7 +110891,7 @@ components:
           type: string
       type: object
     utils_traceroute:
-      description: Traceroute utility request
+      description: Request body for running a traceroute utility command
       properties:
         host:
           description: Destination IP address, IPv6 address, or hostname for traceroute
@@ -110964,13 +110972,13 @@ components:
           type: integer
       type: object
     uuids:
-      description: UUID string values
+      description: UUID string values used as identifiers
       items:
         format: uuid
         type: string
       type: array
     var_source:
-      description: 'enum: `deviceprofile`, `site`'
+      description: Source level where a variable is defined
       enum:
       - deviceprofile
       - site
@@ -111642,7 +111650,7 @@ components:
       type: object
     vrrp_group:
       additionalProperties: false
-      description: Junos VRRP group
+      description: Junos VRRP group authentication and network settings
       properties:
         auth_key:
           description: If `auth_type`==`md5`, authentication key used by the VRRP
@@ -114420,7 +114428,7 @@ components:
       - zone_id
       type: object
     webhook_zone_event_trigger:
-      description: 'enum: `enter`, `exit`'
+      description: Zone transition direction, either enter or exit
       enum:
       - enter
       - exit
@@ -118046,7 +118054,7 @@ components:
         $ref: '#/components/schemas/wxlan_tag'
       type: array
     wxlan_tunnel:
-      description: WxLAN tunnel configuration
+      description: WxLAN tunnel configuration for L2TPv3 or DMVPN connectivity
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
@@ -118321,7 +118329,7 @@ components:
       - zone
       type: string
     zone_type:
-      description: 'enum: `rssizones`, `zones`'
+      description: Zone collection type, either regular zones or RSSI zones
       enum:
       - rssizones
       - zones
