@@ -114698,7 +114698,7 @@ components:
       type: string
     wlan_auth:
       additionalProperties: false
-      description: Authentication wlan settings
+      description: WLAN client authentication settings
       properties:
         anticlog_threshold:
           default: 16
@@ -114727,19 +114727,22 @@ components:
           type: boolean
         key_idx:
           default: 1
-          description: When `type`==`wep`
+          description: When `type`==`wep`, index of the WEP key used as the default transmit key
           maximum: 4
           minimum: 1
           type: integer
         keys:
+          description: When `type`==`wep`, WEP keys configured for this WLAN
           $ref: '#/components/schemas/wlan_auth_keys'
         multi_psk_only:
           default: false
           description: When `type`==`psk`, whether to only use multi_psk
           type: boolean
         owe:
+          description: When `type`==`open`, Opportunistic Wireless Encryption mode for this WLAN
           $ref: '#/components/schemas/wlan_auth_owe'
         pairwise:
+          description: When `type`==`psk` or `type`==`eap`, pairwise cipher suites allowed for this WLAN
           $ref: '#/components/schemas/wlan_auth_pairwise'
         private_wlan:
           default: false
@@ -114756,6 +114759,7 @@ components:
           - string
           - 'null'
         type:
+          description: Authentication mode used by this WLAN
           $ref: '#/components/schemas/wlan_auth_type'
         wep_as_secondary_auth:
           default: false
