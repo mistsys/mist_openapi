@@ -94105,69 +94105,81 @@ components:
         type: string
       type: array
     shell_node:
+      description: Request body for creating a shell session on a specific HA node
       properties:
         node:
+          description: HA cluster node on which to create the shell session
           $ref: '#/components/schemas/ha_cluster_node_enum'
       type: object
     simple_alert:
       additionalProperties: false
-      description: Set of heuristic rules will be enabled when marvis subscription
-        is not available. It triggers when, in a Z minute window, there are more than
-        Y distinct client encountering over X failures
+      description: Heuristic alert thresholds used when a Marvis subscription is unavailable
       properties:
         arp_failure:
+          description: Thresholds for ARP failure heuristic alerts
           $ref: '#/components/schemas/simple_alert_arp_failure'
         dhcp_failure:
+          description: Thresholds for DHCP failure heuristic alerts
           $ref: '#/components/schemas/simple_alert_dhcp_failure'
         dns_failure:
+          description: Thresholds for DNS failure heuristic alerts
           $ref: '#/components/schemas/simple_alert_dns_failure'
       type: object
     simple_alert_arp_failure:
       additionalProperties: false
+      description: Thresholds for ARP failure heuristic alerts
       properties:
         client_count:
           default: 10
+          description: Number of distinct clients that must encounter ARP failures before alerting
           type: integer
         duration:
           default: 20
-          description: failing within minutes
+          description: Time window in minutes for evaluating ARP failures
           maximum: 60
           minimum: 5
           type: integer
         incident_count:
           default: 10
+          description: Number of ARP failure incidents required within the duration window
           type: integer
       type: object
     simple_alert_dhcp_failure:
       additionalProperties: false
+      description: Thresholds for DHCP failure heuristic alerts
       properties:
         client_count:
           default: 10
+          description: Number of distinct clients that must encounter DHCP failures before alerting
           type: integer
         duration:
           default: 10
-          description: failing within minutes
+          description: Time window in minutes for evaluating DHCP failures
           maximum: 60
           minimum: 5
           type: integer
         incident_count:
           default: 20
+          description: Number of DHCP failure incidents required within the duration window
           type: integer
       type: object
     simple_alert_dns_failure:
       additionalProperties: false
+      description: Thresholds for DNS failure heuristic alerts
       properties:
         client_count:
           default: 20
+          description: Number of distinct clients that must encounter DNS failures before alerting
           type: integer
         duration:
           default: 10
-          description: failing within minutes
+          description: Time window in minutes for evaluating DNS failures
           maximum: 60
           minimum: 5
           type: integer
         incident_count:
           default: 30
+          description: Number of DNS failure incidents required within the duration window
           type: integer
       type: object
     site:
