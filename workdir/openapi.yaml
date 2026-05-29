@@ -102219,24 +102219,34 @@ components:
       type: object
     stats_mxedge_oob_ip_stat:
       additionalProperties: false
+      description: Observed out-of-band management IP settings for a Mist Edge
       properties:
         dns:
+          description: Out-of-band management DNS servers
           $ref: '#/components/schemas/strings'
         gateway:
+          description: IPv4 default gateway for out-of-band management
           type: string
         gateway6:
+          description: IPv6 default gateway for out-of-band management
           type: string
         ip:
+          description: Out-of-band management IPv4 address
           type: string
         ip6:
+          description: Out-of-band management IPv6 address
           type: string
         netmask:
+          description: IPv4 netmask for the out-of-band management interface
           type: string
         netmask6:
+          description: IPv6 prefix length for the out-of-band management interface
           type: string
         type:
+          description: IPv4 address assignment mode for out-of-band management
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type'
         type8:
+          description: IPv6 address assignment mode for out-of-band management
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type6'
       type: object
     stats_mxedge_port_stat:
@@ -102397,33 +102407,43 @@ components:
       type: array
     stats_mxedge_tunterm_ip_config:
       additionalProperties: false
+      description: Tunnel termination IP configuration reported by a Mist Edge
       properties:
         gateway:
+          description: IPv4 default gateway for tunnel termination traffic
           examples:
           - 192.168.11.1
           type: string
         ip:
+          description: Tunnel termination IPv4 address used by the Mist Edge
           examples:
           - 192.168.11.91
           type: string
         netmask:
+          description: IPv4 netmask for the tunnel termination address
           examples:
           - 255.255.255.0
           type: string
       type: object
     stats_mxedge_tunterm_port_config:
       additionalProperties: false
+      description: Tunnel termination port role configuration reported by a Mist Edge
       properties:
         downstream_ports:
+          description: Ports configured for downstream tunnel termination traffic
           $ref: '#/components/schemas/stats_mxedge_tunterm_port_config_downstream_ports'
         separate_upstream_downstream:
+          description: Whether separate port sets are used for upstream and downstream
+            tunnel termination traffic
           examples:
           - false
           type: boolean
         upstream_ports:
+          description: Ports configured for upstream tunnel termination traffic
           $ref: '#/components/schemas/stats_mxedge_tunterm_port_config_upstream_ports'
       type: object
     stats_mxedge_tunterm_port_config_downstream_ports:
+      description: Downstream tunnel termination port identifiers
       examples:
       - - '0'
         - '1'
@@ -102431,6 +102451,7 @@ components:
         type: string
       type: array
     stats_mxedge_tunterm_port_config_upstream_ports:
+      description: Upstream tunnel termination port identifiers
       examples:
       - - '0'
         - '1'
@@ -102439,8 +102460,10 @@ components:
       type: array
     stats_mxedge_tunterm_stat:
       additionalProperties: false
+      description: Tunnel termination monitoring status reported by a Mist Edge
       properties:
         monitoring_failed:
+          description: Whether tunnel termination monitoring is currently failing
           examples:
           - false
           type: boolean
