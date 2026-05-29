@@ -86797,17 +86797,22 @@ components:
       type: string
     recaptcha:
       additionalProperties: false
+      description: CAPTCHA settings returned for admin registration
       properties:
         flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
+          description: CAPTCHA provider used for registration, such as Google reCAPTCHA
+            or hCaptcha
         required:
+          description: Whether CAPTCHA verification is required for registration
           type: boolean
         sitekey:
+          description: Public site key used to render the selected CAPTCHA provider
           type: string
       type: object
     recaptcha_flavor:
       default: google
-      description: 'flavor of the captcha. enum: `google`, `hcaptcha`'
+      description: 'CAPTCHA provider flavor. enum: `google`, `hcaptcha`'
       enum:
       - google
       - hcaptcha
@@ -86815,17 +86820,20 @@ components:
       - hcaptcha
       type: string
     recover:
+      description: Password recovery request
       properties:
         email:
+          description: Admin email address requesting password recovery
           examples:
           - test@mistsys.com
           maxLength: 64
           type: string
         recaptcha:
-          description: See https://www.google.com/recaptcha/
+          description: CAPTCHA verification token submitted with the recovery request
           type: string
         recaptcha_flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
+          description: CAPTCHA provider flavor used for recovery verification
       required:
       - email
       type: object
