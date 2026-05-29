@@ -113428,8 +113428,10 @@ components:
       description: Sample of the `site-sle` webhook payload.
       properties:
         events:
+          description: Site SLE score events included in this webhook delivery
           $ref: '#/components/schemas/webhook_site_sle_events'
         topic:
+          description: Webhook topic name for site SLE score deliveries
           $ref: '#/components/schemas/webhook_site_sle_topic'
       required:
       - events
@@ -113437,28 +113439,37 @@ components:
       type: object
     webhook_site_sle_event:
       additionalProperties: false
+      description: Site-level Wi-Fi SLE score snapshot
       properties:
         org_id:
+          description: Organization associated with the site SLE score event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the SLE score event
           $ref: '#/components/schemas/site_id'
         sle:
+          description: Service-level experience scores reported for the site
           $ref: '#/components/schemas/webhook_site_sle_event_sle'
         timestamp:
+          description: Time when the site SLE scores were reported, in epoch seconds
           $ref: '#/components/schemas/timestamp'
       type: object
     webhook_site_sle_event_sle:
       additionalProperties: false
+      description: Wi-Fi SLE scores reported by a site SLE webhook event
       properties:
         ap-availability:
+          description: Wireless AP availability SLE score for the site
           examples:
           - 0.6
           type: number
         successful-connect:
+          description: Connection success SLE score for the site
           examples:
           - 0.7
           type: number
         time-to-connect:
+          description: Client connection-time SLE score for the site
           examples:
           - 0.9
           type: number
