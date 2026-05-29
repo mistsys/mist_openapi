@@ -90014,40 +90014,56 @@ components:
       type: array
     response_pcap_ap:
       additionalProperties: false
+      description: AP radio settings used for a packet capture
       properties:
         band:
+          description: Radio band used for the AP packet capture
           type: integer
         bandwidth:
+          description: Channel bandwidth used for the AP packet capture, in MHz
           type: integer
         channel:
+          description: Radio channel used for the AP packet capture
           type: integer
         tcpdump_expression:
+          description: Tcpdump filter expression applied to the AP packet capture, or
+            null when no filter is applied
           type:
           - string
           - 'null'
       type: object
     response_pcap_bucket_config:
       additionalProperties: false
+      description: Result of a custom packet capture bucket setup or verification operation
       properties:
         bucket:
+          description: Custom bucket name used for packet capture storage
           type: string
         detail:
+          description: Status or error detail returned for the bucket operation
           type: string
       type: object
     response_pcap_search:
       additionalProperties: false
+      description: Paginated response for packet capture search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the packet capture search window
           type: integer
         limit:
+          description: Maximum number of packet capture records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of packet capture search results
           type: string
         results:
+          description: Packet capture records matching the search filters
           $ref: '#/components/schemas/response_pcap_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the packet capture search window
           type: integer
         total:
+          description: Number of packet capture records matching the search filters across all pages
           type: integer
       required:
       - end
@@ -90057,20 +90073,26 @@ components:
       type: object
     response_pcap_search_item:
       additionalProperties: false
+      description: Packet capture record returned by organization or site packet capture search
       properties:
         ap_macs:
+          description: AP MAC addresses associated with the packet capture
           $ref: '#/components/schemas/strings'
         aps:
+          description: AP MAC addresses included in the packet capture
           $ref: '#/components/schemas/response_pcap_search_item_aps'
         duration:
+          description: Packet capture duration in seconds
           examples:
           - 600
           type: number
         format:
+          description: Output format requested for the packet capture
           examples:
           - stream
           type: string
         id:
+          description: Unique identifier for the packet capture
           $ref: '#/components/schemas/id'
         last_seen:
           description: Last seen timestamp of the capture
@@ -90078,6 +90100,7 @@ components:
           - 1693482149.417
           type: number
         max_num_packets:
+          description: Maximum number of packets requested for the capture
           examples:
           - 1024
           type: number
@@ -90087,22 +90110,30 @@ components:
             type: string
           type: array
         org_id:
+          description: Organization associated with the packet capture
           $ref: '#/components/schemas/org_id'
         pcap_aps:
+          description: Per-AP radio capture settings keyed by AP MAC address
           $ref: '#/components/schemas/response_pcap_search_item_pcap_aps'
         pcap_url:
+          description: URL for downloading the generated PCAP file
           type: string
         site_id:
+          description: Site associated with the packet capture, when the capture is site-scoped
           $ref: '#/components/schemas/site_id'
         termination_reason:
+          description: Reason the packet capture session ended
           examples:
           - default
           type: string
         timestamp:
+          description: Epoch timestamp, in seconds, when the packet capture record was created
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Packet capture type represented by this record
           type: string
         url:
+          description: Link for accessing the packet capture output or stream
           type: string
       required:
       - timestamp
@@ -90110,16 +90141,19 @@ components:
       - url
       type: object
     response_pcap_search_item_ap:
+      description: AP MAC address included in a packet capture
       examples:
       - 5c5b35000010
       type: string
     response_pcap_search_item_aps:
+      description: AP MAC addresses included in a packet capture
       items:
         $ref: '#/components/schemas/response_pcap_search_item_ap'
       type: array
     response_pcap_search_item_pcap_aps:
       additionalProperties:
         $ref: '#/components/schemas/response_pcap_search_item_pcap_aps_item'
+      description: Per-AP radio capture settings keyed by AP MAC address
       examples:
       - 5c5b35000010:
           band: '6'
@@ -90129,19 +90163,26 @@ components:
       type: object
     response_pcap_search_item_pcap_aps_item:
       additionalProperties: false
+      description: AP radio settings captured for a packet capture record
       properties:
         band:
+          description: Radio band used for this AP capture
           type: string
         bandwidth:
+          description: Channel bandwidth used for this AP capture, in MHz
           type: string
         channel:
+          description: Radio channel used for this AP capture
           type: integer
         tcpdump_expression:
+          description: Tcpdump filter expression applied to this AP capture, or null
+            when no filter is applied
           type:
           - string
           - 'null'
       type: object
     response_pcap_search_results:
+      description: Packet capture records returned by search
       items:
         $ref: '#/components/schemas/response_pcap_search_item'
       type: array
