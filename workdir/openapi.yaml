@@ -103844,21 +103844,24 @@ components:
       type: object
     stats_unconnected_client:
       additionalProperties: false
-      description: Unconnected clients statistics
+      description: Location statistics for an unconnected Wi-Fi client observed by
+        an AP
       properties:
         ap_mac:
           description: MAC address of the AP that heard the client
           type: string
         last_seen:
+          description: Time when Mist last observed the unconnected client, in epoch
+            seconds
           $ref: '#/components/schemas/last_seen'
         mac:
-          description: MAC address of the (unconnected) client
+          description: Unconnected client MAC address observed by an AP
           type: string
         manufacture:
           description: Device manufacture, through fingerprinting or OUI
           type: string
         map_id:
-          description: Map_id of the client (if known), or null
+          description: Map identifier for the unconnected client's location, if known
           format: uuid
           type:
           - string
@@ -103867,11 +103870,13 @@ components:
           description: Client RSSI observed by the AP that heard the client (in dBm)
           type: integer
         x:
-          description: X (in pixels) of user location on the map (if known)
+          description: Horizontal map coordinate of the unconnected client location,
+            in pixels, if known
           format: double
           type: number
         y:
-          description: Y (in pixels) of user location on the map (if known)
+          description: Vertical map coordinate of the unconnected client location,
+            in pixels, if known
           format: double
           type: number
       required:
@@ -103882,64 +103887,83 @@ components:
       - manufacture
       type: object
     stats_unconnected_clients:
+      description: Unconnected Wi-Fi client location statistics returned by the request
       items:
         $ref: '#/components/schemas/stats_unconnected_client'
       type: array
     stats_wan_client:
       additionalProperties: false
+      description: WAN client record returned by WAN client search
       properties:
         dhcp_expire_time:
+          description: DHCP lease expiration time for the WAN client, in epoch seconds
           type: number
         dhcp_start_time:
+          description: DHCP lease start time for the WAN client, in epoch seconds
           type: number
         hostname:
+          description: Observed hostnames for the WAN client during the search window
           $ref: '#/components/schemas/stats_wan_client_hostname'
         ip:
+          description: Observed IP addresses for the WAN client during the search
+            window
           $ref: '#/components/schemas/stats_wan_client_ip'
         ip_src:
+          description: Source used to learn the WAN client IP address, such as dhcp
           examples:
           - dhcp
           type: string
         last_hostname:
+          description: Most recent hostname observed for the WAN client
           examples:
           - sonoszp
           type: string
         last_ip:
+          description: Most recent IP address observed for the WAN client
           examples:
           - 192.168.1.139
           type: string
         mfg:
+          description: Manufacturer inferred for the WAN client
           examples:
           - Sonos
           type: string
         network:
+          description: Mist network name associated with the WAN client
           examples:
           - lan
           type: string
         org_id:
+          description: Owning organization identifier for the WAN client record
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site identifier associated with the WAN client record
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the WAN client record was observed, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         wcid:
+          description: WAN client identifier associated with the record
           examples:
           - 8bbe7389-212b-c65d-2208-00fab2017936
           type: string
       type: object
     stats_wan_client_hostname:
+      description: Hostnames observed for a WAN client
       items:
         examples:
         - sonoszp
         type: string
       type: array
     stats_wan_client_ip:
+      description: IP addresses observed for a WAN client
       items:
         examples:
         - 192.168.1.139
         type: string
       type: array
     stats_wan_clients:
+      description: WAN client records returned by the search response
       items:
         $ref: '#/components/schemas/stats_wan_client'
       type: array
