@@ -112104,36 +112104,49 @@ components:
       description: Sample of the `discovered-raw-rssi` webhook payload.
       properties:
         events:
+          description: Discovered raw RSSI event records included in this webhook
+            delivery
           $ref: '#/components/schemas/webhook_discovered_raw_rssi_events'
         topic:
+          description: Webhook topic name for discovered raw RSSI deliveries
           $ref: '#/components/schemas/webhook_discovered_raw_rssi_topic'
       required:
       - topic
       type: object
     webhook_discovered_raw_rssi_event:
       additionalProperties: false
+      description: Raw RSSI sample reported for a passive BLE device packet
       properties:
         ap_loc:
+          description: Location coordinates of the reporting AP when available, updated
+            about once per minute per client
           $ref: '#/components/schemas/webhook_discovered_raw_rssi_event_ap_loc'
         beam:
           description: Antenna index, from 1-8, clock-wise starting from the LED
           type: integer
         device_id:
-          description: Device id of the reporting AP
+          description: Identifier of the AP that reported the raw RSSI sample
           format: uuid
           type: string
         ibeacon_major:
+          description: iBeacon major value decoded from the packet when present
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
+          description: iBeacon minor value decoded from the packet when present
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
+          description: iBeacon UUID decoded from the packet when present
           $ref: '#/components/schemas/ibeacon_uuid'
         is_asset:
+          description: Whether the advertising MAC address is recognized as an asset
           type: boolean
         mac:
-          description: MAC of the asset/ beacon
+          description: Client MAC address for the passive BLE device or beacon that
+            emitted the packet
           type: string
         map_id:
+          description: Map associated with the reporting AP when location context
+            is available
           format: uuid
           type: string
         mfg_company_id:
@@ -112143,15 +112156,20 @@ components:
           description: 'BLE manufacturing data in hex byte-string format (ie: "112233AABBCC")'
           type: string
         org_id:
+          description: Organization associated with the raw RSSI sample
           $ref: '#/components/schemas/org_id'
         rssi:
-          description: Signal strength
+          description: Received signal strength of the packet at the reporting AP,
+            in dBm
           type: number
         service_packets:
+          description: BLE service data packets decoded from the advertised payload
           $ref: '#/components/schemas/service_packets'
         site_id:
+          description: Site associated with the raw RSSI sample
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the raw RSSI sample was observed, in epoch seconds
           $ref: '#/components/schemas/timestamp'
       required:
       - beam
