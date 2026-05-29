@@ -105116,10 +105116,11 @@ components:
     switch_dhcpd_config:
       additionalProperties:
         $ref: '#/components/schemas/switch_dhcpd_config_property'
+      description: Switch DHCP server or relay configuration keyed by network name
       properties:
         enabled:
           default: false
-          description: If set to `true`, enable the DHCP server
+          description: Whether switch DHCP server or relay configuration is enabled
           type: boolean
       type: object
     switch_dhcpd_config_dns_servers:
@@ -105159,15 +105160,22 @@ components:
       type: object
     switch_dhcpd_config_property:
       additionalProperties: false
-      description: the Property key is the network name. In case of DHCP relay, it's
+      description: DHCP server or relay configuration for one switch network. The
+        property key is the network name. In case of DHCP relay, it's
         common for many networks to use the same dhcp relay, comma-separated network
         names can be used here (e.g. "net1,net2")
       properties:
         dns_servers:
+          description: If `type`==`server` or `type6`==`server`, DNS servers advertised
+            to DHCP clients
           $ref: '#/components/schemas/switch_dhcpd_config_dns_servers'
         dns_suffix:
+          description: If `type`==`server` or `type6`==`server`, DNS search suffixes
+            advertised to DHCP clients
           $ref: '#/components/schemas/switch_dhcpd_config_dns_suffix'
         fixed_bindings:
+          description: If `type`==`server` or `type6`==`server`, fixed client bindings
+            for DHCP service
           $ref: '#/components/schemas/switch_dhcpd_config_fixed_bindings'
         gateway:
           description: If `type`==`server` - optional, `ip` will be used if not provided
@@ -105175,22 +105183,26 @@ components:
           - 192.168.70.1
           type: string
         ip_end:
-          description: If `type`==`server`
+          description: If `type`==`server`, ending IPv4 address for the DHCP lease
+            pool
           examples:
           - 192.168.70.200
           type: string
         ip_end6:
-          description: If `type6`==`server`
+          description: If `type6`==`server`, ending IPv6 address for the DHCP lease
+            pool
           examples:
           - 2607:f8b0:4005:808::ff
           type: string
         ip_start:
-          description: If `type`==`server`
+          description: If `type`==`server`, starting IPv4 address for the DHCP lease
+            pool
           examples:
           - 192.168.70.100
           type: string
         ip_start6:
-          description: If `type6`==`server`
+          description: If `type6`==`server`, starting IPv6 address for the DHCP lease
+            pool
           examples:
           - 2607:f8b0:4005:808::2
           type: string
@@ -105202,6 +105214,8 @@ components:
           minimum: 3600
           type: integer
         options:
+          description: If `type`==`server` or `type6`==`server`, custom DHCP options
+            advertised to clients
           $ref: '#/components/schemas/switch_dhcpd_config_options'
         server_id_override:
           default: false
@@ -105211,14 +105225,20 @@ components:
             \ in DHCP responses with its own IP address."
           type: boolean
         servers:
+          description: If `type`==`relay`, upstream IPv4 DHCP servers
           $ref: '#/components/schemas/dhcpd_config_servers'
         servers6:
+          description: If `type6`==`relay`, upstream IPv6 DHCP servers
           $ref: '#/components/schemas/dhcpd_config_servers6'
         type:
+          description: IPv4 DHCP mode for this switch network
           $ref: '#/components/schemas/switch_dhcpd_config_type'
         type6:
+          description: IPv6 DHCP mode for this switch network
           $ref: '#/components/schemas/switch_dhcpd_config_type6'
         vendor_encapsulated:
+          description: If `type`==`server` or `type6`==`server`, vendor-encapsulated
+            DHCP options advertised to clients
           $ref: '#/components/schemas/switch_dhcpd_config_vendor_options'
       type: object
     switch_dhcpd_config_type:
