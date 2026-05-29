@@ -105276,13 +105276,19 @@ components:
       description: Switch IOT port configuration
       properties:
         alarm_class:
+          description: Alarm severity class raised for input-triggered switch IOT
+            port events
           $ref: '#/components/schemas/switch_iot_port_alarm_class'
         enabled:
           default: false
+          description: Whether this switch IOT port is enabled
           type: boolean
         input_src:
+          description: Only for `OUT` ports. Input port that triggers this output
+            port
           $ref: '#/components/schemas/switch_iot_port_input_src'
         name:
+          description: Display name for the switch IOT port
           type: string
       type: object
     switch_iot_port_alarm_class:
