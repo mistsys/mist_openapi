@@ -105529,11 +105529,13 @@ components:
         Mist Cloud. Value in range 1-65535
     switch_mist_nac:
       additionalProperties: false
-      description: Enable mist_nac to use RadSec
+      description: Mist NAC RadSec settings for a switch
       properties:
         enabled:
+          description: Whether Mist NAC RadSec is enabled for the switch
           type: boolean
         network:
+          description: Switch network used for Mist NAC RadSec connectivity
           type: string
       type: object
     switch_network:
@@ -105559,6 +105561,8 @@ components:
             in port_usage'
           type: boolean
         isolation_vlan_id:
+          description: Required when `isolation`==`true`. Unique VLAN ID used for
+            client isolation
           examples:
           - '3070'
           type: string
@@ -105571,6 +105575,7 @@ components:
             are used
           type: string
         vlan_id:
+          description: VLAN identifier for this switch network
           $ref: '#/components/schemas/vlan_id_with_variable'
       required:
       - vlan_id
@@ -105587,8 +105592,12 @@ components:
         \ IP has to be set separately (if desired): key parameter = `re1`"
       properties:
         gateway:
+          description: Default gateway for the out-of-band management interface when
+            `type`==`static`
           type: string
         ip:
+          description: Static IPv4 address for the out-of-band management interface
+            when `type`==`static`
           type: string
         netmask:
           description: Used only if `subnet` is not specified in `networks`
@@ -105597,6 +105606,7 @@ components:
           description: Optional, the network to be used for mgmt
           type: string
         type:
+          description: IP assignment mode for the out-of-band management interface
           $ref: '#/components/schemas/ip_type'
         use_mgmt_vrf:
           default: false
@@ -105612,6 +105622,7 @@ components:
     switch_ospf_config:
       properties:
         areas:
+          description: OSPF areas configured on the switch
           $ref: '#/components/schemas/switch_ospf_config_areas'
         enabled:
           default: false
@@ -105626,6 +105637,7 @@ components:
             and can be applied to all networks in all areas if not explicitly specified
           type: string
         reference_bandwidth:
+          description: Reference bandwidth used for OSPF cost calculation
           $ref: '#/components/schemas/switch_ospf_config_reference_bandwidth'
     switch_ospf_config_area:
       properties:
