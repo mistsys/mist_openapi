@@ -93209,44 +93209,59 @@ components:
       type: array
     search_webhook_delivery:
       additionalProperties: false
+      description: Paginated response for webhook delivery searches
       properties:
         end:
+          description: Upper bound timestamp of the webhook delivery search window, in epoch seconds
           examples:
           - 1688035193
           type: integer
         limit:
+          description: Maximum number of webhook delivery records returned by this page
           examples:
           - 10
           type: integer
         next:
+          description: URL for the next page of webhook delivery records, when more results are available
           type: string
         results:
+          description: Webhook delivery records returned by the search response
           $ref: '#/components/schemas/search_webhook_delivery_results'
         start:
+          description: Lower bound timestamp of the webhook delivery search window, in epoch seconds
           examples:
           - 1687948793
           type: integer
         total:
+          description: Count of webhook delivery records matching the search
           type: integer
       type: object
     search_webhook_delivery_results:
+      description: Webhook delivery records returned by a search response
       items:
         $ref: '#/components/schemas/webhook_delivery'
       type: array
     search_wired_client:
       additionalProperties: false
+      description: Paginated response for wired client searches
       properties:
         end:
+          description: Upper bound timestamp of the wired client search window, in epoch seconds
           type: number
         limit:
+          description: Maximum number of wired client records returned by this page
           type: integer
         next:
+          description: URL for the next page of wired client records, when more results are available
           type: string
         results:
+          description: Wired client records returned by the search response
           $ref: '#/components/schemas/search_wired_client_results'
         start:
+          description: Lower bound timestamp of the wired client search window, in epoch seconds
           type: number
         total:
+          description: Count of wired client records matching the search
           type: integer
       required:
       - end
@@ -93256,24 +93271,32 @@ components:
       - total
       type: object
     search_wired_client_results:
+      description: Wired client records returned by a search response
       items:
         $ref: '#/components/schemas/wired_client_response'
       type: array
       uniqueItems: true
     search_wireless_client_session:
       additionalProperties: false
+      description: Paginated response for wireless client session searches
       properties:
         end:
+          description: Upper bound timestamp of the wireless client session search window, in epoch seconds
           type: number
         limit:
+          description: Maximum number of wireless client session records returned by this page
           type: integer
         next:
+          description: URL for the next page of wireless client session records, when more results are available
           type: string
         results:
+          description: Wireless client session records returned by the search response
           $ref: '#/components/schemas/search_wireless_client_session_results'
         start:
+          description: Lower bound timestamp of the wireless client session search window, in epoch seconds
           type: number
         total:
+          description: Count of wireless client session records matching the search
           type: integer
       required:
       - end
@@ -93283,6 +93306,7 @@ components:
       - total
       type: object
     search_wireless_client_session_results:
+      description: Wireless client session records returned by a search response
       items:
         $ref: '#/components/schemas/wireless_client_session'
       type: array
