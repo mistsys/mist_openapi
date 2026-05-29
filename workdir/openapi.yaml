@@ -101720,59 +101720,68 @@ components:
           type: integer
     stats_gateway_vpn_peer:
       additionalProperties: false
+      description: VPN peer path statistics reported by a gateway
       properties:
         is_active:
-          description: Redundancy status of the associated interface
+          description: Whether this VPN peer path is the active redundant path
           type: boolean
         jitter:
-          description: Jitter in milliseconds
+          description: Last sampled VPN peer jitter, in milliseconds
           minimum: 0
           type: number
         last_seen:
+          description: Time when this VPN peer was last observed, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         latency:
-          description: Latency in milliseconds
+          description: Last sampled VPN peer latency, in milliseconds
           minimum: 0
           type: number
         loss:
-          description: Packet loss in percentage
+          description: Packet loss observed for the VPN peer, as a percentage
           maximum: 100
           minimum: 0
           type: number
         mos:
-          description: Mean Opinion Score, a measure of the quality of the VPN link
+          description: Mean Opinion Score for VPN link quality, from 0 to 5
           maximum: 5
           minimum: 0
           type: number
         mtu:
+          description: Maximum transmission unit for the VPN peer path, in bytes
           type: integer
         peer_mac:
-          description: Peer router mac address
+          description: Peer router MAC address for the VPN link
           minLength: 1
           type: string
         peer_port_id:
-          description: Peer router device interface
+          description: Peer router interface identifier for the VPN link
           minLength: 1
           type: string
         peer_router_name:
+          description: Peer router name reported for the VPN link
           minLength: 1
           type: string
         peer_site_id:
+          description: Site identifier for the peer side of the VPN link
           $ref: '#/components/schemas/site_id'
         port_id:
-          description: Router device interface
+          description: Local router interface identifier for the VPN link
           minLength: 1
           type: string
         router_name:
+          description: Local router name reported for the VPN link
           minLength: 1
           type: string
         type:
-          description: '`ipsec`for SRX, `svr` for 128T'
+          description: VPN implementation type for the peer, such as `ipsec` for
+            SRX or `svr` for SSR
           minLength: 1
           type: string
         up:
+          description: Whether the VPN peer is currently up
           type: boolean
         uptime:
+          description: Gateway-reported VPN peer uptime value, in seconds
           type: integer
       type: object
     stats_gateway_vpn_peers:
