@@ -100457,28 +100457,43 @@ components:
       uniqueItems: true
     stats_call:
       additionalProperties: false
+      description: Statistics record for a detected collaboration call, such as Zoom
+        or Teams
       properties:
         app:
+          description: Third-party collaboration application that reported the call
+            statistics
           type: string
         audio_quality:
+          description: Quality score reported for the call audio stream
           type: integer
         end_time:
+          description: Time when the call ended, in epoch seconds
           type: integer
         mac:
+          description: Client MAC address associated with the call statistics record
           type: string
         meeting_id:
+          description: Collaboration meeting identifier reported for the call
           type: string
         org_id:
+          description: Owning organization identifier for the call statistics record
           $ref: '#/components/schemas/org_id'
         rating:
+          description: Overall call rating reported by the collaboration application,
+            when available
           type: integer
         screen_share_quality:
+          description: Quality score reported for screen sharing during the call
           type: integer
         site_id:
+          description: Associated site identifier for the call statistics record
           $ref: '#/components/schemas/site_id'
         start_time:
+          description: Time when the call started, in epoch seconds
           type: integer
         video_quality:
+          description: Quality score reported for the call video stream
           type: integer
       type: object
     stats_calls:
