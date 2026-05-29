@@ -92726,38 +92726,47 @@ components:
       - updating
       type: string
     rssi_zone:
-      description: RSSI Zone
+      description: RSSI-based zone configuration for a site
       properties:
         created_time:
+          description: Timestamp when the RSSI zone was created
           $ref: '#/components/schemas/created_time'
         devices:
+          description: AP devices and RSSI thresholds that define the zone
           $ref: '#/components/schemas/rssi_zone_devices'
         for_site:
+          description: Whether the RSSI zone is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique value identifying the RSSI zone
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Timestamp when the RSSI zone was last modified
           $ref: '#/components/schemas/modified_time'
         name:
-          description: The name of the zone
+          description: Display name of the RSSI zone
           examples:
           - zone name
           type: string
         org_id:
+          description: Organization identifier for the RSSI zone
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Identifier of the site containing the RSSI zone
           $ref: '#/components/schemas/site_id'
       required:
       - devices
       type: object
     rssi_zone_device:
       additionalProperties: false
+      description: AP device and RSSI threshold used by an RSSI zone
       properties:
         device_id:
+          description: Identifier of the AP device used by this RSSI zone
           $ref: '#/components/schemas/device_id'
         rssi:
-          description: RSSI threshold
+          description: Minimum RSSI threshold for considering the device inside the zone
           examples:
           - 0
           type: integer
@@ -92773,6 +92782,7 @@ components:
       type: array
       uniqueItems: true
     rssi_zones:
+      description: RSSI zone configurations returned by list operations
       items:
         $ref: '#/components/schemas/rssi_zone'
       type: array
