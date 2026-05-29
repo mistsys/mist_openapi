@@ -86154,8 +86154,8 @@ components:
         $ref: '#/components/schemas/psk'
       type: array
     psk_macs:
-      description: If `usage`==`macs`, this list contains N number of client mac addresses
-        or mac patterns(1122*) or both. This list is capped at 5000
+      description: If `usage`==`macs`, this list contains client MAC addresses,
+        MAC patterns such as `1122*`, or both. This list is capped at 5000 entries
       examples:
       - - 112233abcedf
         - aabbcc*
@@ -86268,13 +86268,14 @@ components:
       type: string
     psk_portal_image:
       additionalProperties: false
+      description: PSK portal image upload payload
       properties:
         file:
           contentMediaType: application/octet-stream
-          description: Binary file
+          description: Image binary payload to upload for the PSK portal
           type: string
         json:
-          description: JSON string describing the upload
+          description: Metadata JSON string describing the PSK portal image upload
           type: string
       type: object
     psk_portal_list:
@@ -86283,77 +86284,91 @@ components:
       type: array
     psk_portal_passphrase_rules:
       additionalProperties: false
+      description: Passphrase generation rules for PSKs created through a portal
       properties:
         alphabets_enabled:
           default: true
+          description: Whether generated passphrases may include alphabetic characters
           type: boolean
         length:
+          description: Fixed generated passphrase length used when min and max length
+            are not both valid
           maximum: 63
           minimum: 8
           type: integer
         max_length:
-          description: "For valid `max_length` and `min_length`, passphrase size is\
-            \ set randomly from that range.\n  - if `max_length` and/or `min_length`\
-            \ are invalid, passphrase size is equal to `length` parameter\n  - if\
-            \ `length` is not set or is invalid, default passphrase size is 8.\n \
-            \ - valid `max_length`, `min_length`, `length` should be an integer between\
-            \ 8 to 63. Also, `max_length` > `min_length`"
+          description: Maximum generated passphrase length when paired with a valid
+            `min_length`. If `max_length` or `min_length` is invalid, the portal uses
+            `length`; if `length` is unset or invalid, it uses 8. Valid values are
+            integers from 8 through 63, and `max_length` must be greater than `min_length`
           maximum: 63
           minimum: 8
           type: integer
         min_length:
-          description: "Ror valid `max_length` and `min_length`, passphrase size is\
-            \ set randomly from that range.\n  - if `max_length` and/or `min_length`\
-            \ are invalid, passphrase size is equal to `length` parameter\n  - if\
-            \ `length` is not set or is invalid, default passphrase size is 8.\n \
-            \ - valid `max_length`, `min_length`, `length` should be an integer between\
-            \ 8 to 63. Also, `max_length` > `min_length`"
+          description: Minimum generated passphrase length when paired with a valid
+            `max_length`. If `max_length` or `min_length` is invalid, the portal uses
+            `length`; if `length` is unset or invalid, it uses 8. Valid values are
+            integers from 8 through 63, and `max_length` must be greater than `min_length`
           maximum: 63
           minimum: 8
           type: integer
         numerics_enabled:
           default: true
+          description: Whether generated passphrases may include numeric characters
           type: boolean
         symbols:
+          description: Allowed symbol characters for generated passphrases
           examples:
           - ()[]{}_%@#&$
           type: string
         symbols_enabled:
           default: true
+          description: Whether generated passphrases may include symbols
           type: boolean
       type: object
     psk_portal_required_fields:
-      description: what information to ask for (email is required by default)
+      description: User information fields requested by the portal; email is required
+        by default
       items:
         type: string
       type: array
     psk_portal_sso:
       additionalProperties: false
-      description: If `auth`==`sso`
+      description: Single sign-on settings used when `auth`==`sso`
       properties:
         allowed_roles:
           $ref: '#/components/schemas/psk_portal_sso_allowed_roles'
+          description: SSO roles allowed to access the PSK portal; if empty, any
+            role is permitted
         idp_cert:
+          description: Identity provider signing certificate in PEM format
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/psk_portal_sso_idp_sign_algo'
+          description: SAML assertion signing algorithm expected from the identity
+            provider
         idp_sso_url:
+          description: Identity provider SSO URL for SAML login
           type: string
         issuer:
+          description: SAML issuer value for the identity provider
           type: string
         nameid_format:
+          description: SAML NameID format used for the portal login
           type: string
         role_mapping:
           additionalProperties:
             type: string
-          description: Property key is the role name, property value is the SSO Attribute
+          description: Maps PSK portal role names to SSO attribute values
           type: object
         use_sso_role_for_psk_role:
-          description: If enabled, the `role` above will be ignored
+          description: Whether to use SSO role mapping for the PSK role and ignore
+            the portal-level `role` field
           type: boolean
       type: object
     psk_portal_sso_allowed_roles:
-      description: Allowed roles for accessing psk portal, if none, any role is permitted
+      description: SSO roles allowed to access the PSK portal; if empty, any role
+        is permitted
       items:
         type: string
       type: array
@@ -86368,17 +86383,22 @@ components:
       - sha512
       type: string
     psk_portal_template:
+      description: Portal UI customization payload
       properties:
         portal_template:
           $ref: '#/components/schemas/psk_portal_template_setting'
+          description: Template settings for customizing the PSK portal UI
       type: object
     psk_portal_template_setting:
       additionalProperties: false
+      description: Custom UI settings for the PSK portal template
       properties:
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
+          description: Logo and text alignment for the PSK portal template
         color:
           default: '#1074bc'
+          description: Primary hex color used by the portal template
           type: string
         logo:
           description: Custom logo with "data:image/png;base64," format. default null,
@@ -86399,17 +86419,20 @@ components:
           type: string
         tosError:
           default: Please review and accept the Terms of Service
-          description: Terror message for not accepting tos
+          description: Error message shown when the user has not accepted the Terms
+            of Service
           type: string
         tosLink:
           default: Terms of Service
+          description: Terms of Service link label displayed in the portal footer
           type: string
         tosText:
           default: << provide your Terms of Service here >>
-          description: terms and service text displayed in footer if tos is enabled
+          description: Terms of Service text displayed in the footer when Terms are
+            enabled
           type: string
         tosUrl:
-          description: customized url for defining terms of service
+          description: Custom URL for the Terms of Service policy
           examples:
           - https://company.com/wifi-policy
           type: string
@@ -86442,9 +86465,11 @@ components:
       uniqueItems: true
     psks_import_file:
       additionalProperties: false
+      description: Multipart upload payload for importing PSKs
       properties:
         file:
           contentMediaType: application/octet-stream
+          description: Uploaded CSV or binary file containing PSKs to import
           type: string
       type: object
     push_policy_push_window:
