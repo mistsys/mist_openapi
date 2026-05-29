@@ -90792,18 +90792,25 @@ components:
       type: array
     response_self_audit_logs:
       additionalProperties: false
+      description: Paginated response for audit logs for the current admin across organizations
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the self audit log search window
           type: integer
         limit:
+          description: Maximum number of self audit log entries returned in this page
           type: integer
         page:
+          description: Current page number returned for self audit log results
           type: integer
         results:
+          description: Audit log entries for the current admin matching the filters
           $ref: '#/components/schemas/response_self_audit_logs_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the self audit log search window
           type: integer
         total:
+          description: Number of self audit log entries matching the filters across all pages
           type: integer
       required:
       - end
@@ -90814,16 +90821,20 @@ components:
       - total
       type: object
     response_self_audit_logs_results:
+      description: Audit log entries returned for the current admin
       items:
         $ref: '#/components/schemas/audit_log'
       type: array
       uniqueItems: true
     response_self_oauth_link_failure:
       additionalProperties: false
+      description: OAuth2 account-linking failure response
       properties:
         error:
+          description: OAuth2 error code returned during account linking
           type: string
         error_description:
+          description: Human-readable description of the OAuth2 account-linking failure
           type: string
       required:
       - error
@@ -90831,10 +90842,13 @@ components:
       type: object
     response_self_oauth_link_success:
       additionalProperties: false
+      description: OAuth2 account-linking success response
       properties:
         action:
+          description: Completed OAuth2 account-linking action
           type: string
         id:
+          description: Linked OAuth2 account identifier returned by the provider
           $ref: '#/components/schemas/id'
       required:
       - action
@@ -90842,10 +90856,13 @@ components:
       type: object
     response_self_oauth_url:
       additionalProperties: false
+      description: OAuth2 authorization URL response for linking the current Mist account
       properties:
         authorization_url:
+          description: OAuth2 provider authorization URL used to link the Mist account
           type: string
         linked:
+          description: Whether the Mist account is already linked with this OAuth2 provider
           type: boolean
       required:
       - linked
@@ -90853,13 +90870,16 @@ components:
       type: object
     response_self_subscription:
       additionalProperties: false
+      description: Subscription record visible to the current account
       properties:
         org_id:
+          description: Organization associated with this subscription record
           $ref: '#/components/schemas/org_id'
       required:
       - org_id
       type: object
     response_self_subscriptions:
+      description: Subscription records visible to the current account
       items:
         $ref: '#/components/schemas/response_self_subscription'
       type: array
