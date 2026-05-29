@@ -100709,6 +100709,7 @@ components:
       maxItems: 10
       type: array
     stats_assets:
+      description: Asset statistics returned by the request
       items:
         $ref: '#/components/schemas/stats_asset'
       type: array
@@ -100810,14 +100811,17 @@ components:
           type: integer
       type: object
     stats_calls:
+      description: Collaboration call statistics returned by search
       items:
         $ref: '#/components/schemas/stats_call'
       type: array
     stats_client:
+      description: Client statistics record for a wireless or wired client
       oneOf:
       - $ref: '#/components/schemas/stats_wireless_client'
       - $ref: '#/components/schemas/stats_wired_client'
     stats_client_any_of:
+      description: Client statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_client'
       type: array
@@ -100929,6 +100933,7 @@ components:
           type: integer
       type: object
     stats_device:
+      description: Device statistics record for an AP, switch, or gateway
       discriminator:
         mapping:
           ap: '#/components/schemas/stats_ap'
@@ -101278,6 +101283,7 @@ components:
           type: integer
       type: object
     stats_devices:
+      description: Device statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_device'
       type: array
@@ -102106,6 +102112,7 @@ components:
       type: array
     stats_gateway_wan_tunnel:
       additionalProperties: false
+      description: WAN tunnel statistics reported by a gateway
       properties:
         auth_algo:
           description: Authentication algorithm negotiated for the tunnel
@@ -102360,6 +102367,7 @@ components:
     stats_mxedge_cpu_stat_cpus:
       additionalProperties:
         $ref: '#/components/schemas/cpu_stat'
+      description: Per-core CPU utilization statistics keyed by CPU name
       examples:
       - cpu0:
           idle: 89
@@ -102705,6 +102713,7 @@ components:
       type: object
     stats_mxedge_service_stat:
       additionalProperties: false
+      description: Runtime and package state for one Mist Edge service
       properties:
         ext_ip:
           description: "External IP from ep-terminator\u2019s point of view. valid\
@@ -102749,6 +102758,7 @@ components:
           uptime: 76261
       type: object
     stats_mxedge_services:
+      description: Mist Edge service names enabled or running on the appliance
       examples:
       - - tunterm
       items:
@@ -102818,6 +102828,7 @@ components:
           type: boolean
       type: object
     stats_mxedges:
+      description: Mist Edge statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_mxedge'
       type: array
@@ -103232,6 +103243,7 @@ components:
       - signal_level
       type: object
     stats_sdkclients:
+      description: SDK client statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_sdkclient'
       type: array
@@ -103382,6 +103394,7 @@ components:
       - tzoffset
       type: object
     stats_sites:
+      description: Site statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_site'
       type: array
@@ -104108,6 +104121,7 @@ components:
       - gateway
       type: string
     stats_switch_ports:
+      description: Switch port statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_switch_port'
       type: array
@@ -104277,6 +104291,7 @@ components:
       type: array
     stats_wan_tunnel:
       additionalProperties: false
+      description: WAN tunnel statistics record returned by tunnel search
       properties:
         auth_algo:
           description: Authentication algorithm negotiated for the tunnel
@@ -104692,6 +104707,7 @@ components:
         $ref: '#/components/schemas/stats_wireless_client_zone'
       type: array
     stats_wireless_clients:
+      description: Wireless client statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_wireless_client'
       type: array
@@ -105128,10 +105144,12 @@ components:
           type: number
       type: object
     stats_zones:
+      description: Zone statistics records returned by a stats response
       items:
         $ref: '#/components/schemas/stats_zone'
       type: array
     strings:
+      description: Unique string values
       items:
         type: string
       type: array
@@ -105305,6 +105323,7 @@ components:
       type: object
     switch_auto_upgrade_container:
       additionalProperties: false
+      description: Wrapper for switch firmware auto-upgrade settings
       properties:
         auto_upgrade:
           description: Switch firmware auto-upgrade configuration
@@ -105369,10 +105388,12 @@ components:
       - $ref: '#/components/schemas/switch_bgp_config_hold_time_zero'
       - $ref: '#/components/schemas/switch_bgp_config_hold_time_integer'
     switch_bgp_config_hold_time_integer:
+      description: BGP hold time value from 3 to 65535 seconds
       maximum: 65535
       minimum: 3
       type: integer
     switch_bgp_config_hold_time_zero:
+      description: BGP hold time value of 0
       enum:
       - 0
       type: integer
@@ -106756,6 +106777,7 @@ components:
       type: object
     switch_stp_config:
       additionalProperties: false
+      description: Switch spanning-tree protocol configuration
       properties:
         bridge_priority:
           default: 32k
@@ -106779,6 +106801,7 @@ components:
       type: object
     switch_virtual_chassis_member:
       additionalProperties: false
+      description: Virtual Chassis member identified by MAC address and role
       properties:
         mac:
           description: Virtual Chassis member MAC address; for FPC0 this matches
