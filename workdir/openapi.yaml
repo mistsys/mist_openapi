@@ -108371,52 +108371,69 @@ components:
       - integer
       - 'null'
     ui_settings:
-      description: UI Settings
+      description: Site UI settings databoard
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Time when the databoard was created, in epoch seconds
         defaultScopeId:
+          description: Scope identifier used by default for this databoard
           examples:
           - 67970e46-4e12-11e6-9188-0242ad112847
           type: string
         defaultScopeType:
+          description: Scope type used by default for this databoard
           examples:
           - site
           type: string
         defaultTimeRange:
+          description: Time range used by default for this databoard
           $ref: '#/components/schemas/ui_settings_default_time_range'
         description:
+          description: Text describing the databoard
           examples:
           - Description of the databoard
           type: string
         for_site:
+          description: Whether this databoard is scoped to a site
           examples:
           - true
           readOnly: true
           type: boolean
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for the databoard
         isCustomDataboard:
+          description: Whether this databoard is custom-created
           type: boolean
         isScopeLinked:
+          description: Whether tile scopes are linked to the databoard default scope
           type: boolean
         isTimeRangeLinked:
+          description: Whether tile time ranges are linked to the databoard default
+            time range
           type: boolean
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Time when the databoard was last modified, in epoch seconds
         name:
+          description: Display name of the databoard
           examples:
           - New Databoard
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization that owns the databoard
         purpose:
+          description: UI surface or purpose for this databoard
           examples:
           - databoard
           type: string
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site associated with this databoard
         tiles:
+          description: Configured tiles for this databoard
           $ref: '#/components/schemas/ui_settings_tiles'
       required:
       - description
