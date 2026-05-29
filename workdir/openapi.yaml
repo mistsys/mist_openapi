@@ -90886,19 +90886,24 @@ components:
       uniqueItems: true
     response_set_devices_map:
       additionalProperties: false
+      description: Result of assigning APs to a site map
       properties:
         locked:
+          description: AP MAC addresses that were locked and not moved to the requested map
           $ref: '#/components/schemas/response_set_devices_map_locked'
         moved:
+          description: AP MAC addresses successfully associated with the requested map
           $ref: '#/components/schemas/response_set_devices_map_moved'
       type: object
     response_set_devices_map_locked:
+      description: AP MAC addresses that were locked during map assignment
       items:
         examples:
         - 5c5b35584a6f
         type: string
       type: array
     response_set_devices_map_moved:
+      description: AP MAC addresses moved during map assignment
       items:
         examples:
         - 5c5b35000001
@@ -90906,8 +90911,10 @@ components:
       type: array
     response_site_device_upgrade:
       additionalProperties: false
+      description: Site device upgrade job details
       properties:
         canary_phases:
+          description: Canary deployment phase percentages configured for the upgrade
           $ref: '#/components/schemas/response_site_device_upgrade_canary_phases'
         current_phase:
           description: Current canary or rrm phase in progress
@@ -90921,11 +90928,13 @@ components:
             running version
           type: boolean
         id:
+          description: Unique identifier for the site device upgrade job
           $ref: '#/components/schemas/id'
         max_failure_percentage:
           description: Percentage of failures allowed
           type: integer
         max_failures:
+          description: Per-phase failure thresholds configured for a canary upgrade
           $ref: '#/components/schemas/upgrade_devices_max_failures'
         p2p_cluster_size:
           default: 10
@@ -90942,16 +90951,20 @@ components:
           description: Firmware download start time in epoch
           type: integer
         status:
+          description: Current status of the site device upgrade job
           $ref: '#/components/schemas/upgrade_device_status'
         strategy:
+          description: Device upgrade strategy used by this job
           $ref: '#/components/schemas/upgrade_device_strategy'
         target_version:
           description: Version to upgrade to
           minLength: 1
           type: string
         targets:
+          description: Device targets grouped by upgrade and download status
           $ref: '#/components/schemas/upgrade_devices_targets'
         upgrade_plan:
+          description: Phase-to-device upgrade plan for non-big-bang strategies
           $ref: '#/components/schemas/upgrade_devices_plans'
       required:
       - id
@@ -90968,13 +90981,16 @@ components:
         type: integer
       type: array
     response_site_device_upgrades:
+      description: Site device upgrade jobs returned by list operations
       items:
         $ref: '#/components/schemas/response_site_device_upgrades_item'
       type: array
     response_site_device_upgrades_item:
       additionalProperties: false
+      description: Site device upgrade job summary
       properties:
         counts:
+          description: Device counts grouped by upgrade status for this job
           $ref: '#/components/schemas/upgrade_site_devices_counts'
         current_phase:
           description: Current canary or rrm phase in progress
@@ -90987,11 +91003,13 @@ components:
             running version
           type: boolean
         id:
+          description: Unique identifier for the site device upgrade job
           $ref: '#/components/schemas/id'
         max_failure_percentage:
           description: Percentage of failures allowed
           type: integer
         max_failures:
+          description: Per-phase failure thresholds configured for a canary upgrade
           $ref: '#/components/schemas/upgrade_devices_max_failures'
         reboot_at:
           description: reboot start time in epoch
@@ -91000,8 +91018,10 @@ components:
           description: Firmware download start time in epoch
           type: integer
         status:
+          description: Current status of the site device upgrade job
           $ref: '#/components/schemas/upgrade_device_status'
         strategy:
+          description: Device upgrade strategy used by this job
           $ref: '#/components/schemas/upgrade_device_strategy'
         target_version:
           description: Version to upgrade to
