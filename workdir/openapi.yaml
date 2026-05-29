@@ -111689,54 +111689,74 @@ components:
       description: Sample of the `client-latency` webhook payload.
       properties:
         events:
+          description: Client latency summary events included in this webhook delivery
           $ref: '#/components/schemas/webhook_client_latency_events'
         topic:
+          description: Webhook topic name for client latency deliveries
           $ref: '#/components/schemas/webhook_client_latency_topic'
       type: object
     webhook_client_latency_event:
       additionalProperties: false
+      description: Site-level client latency metrics for authentication, DHCP, and
+        DNS operations
       properties:
         avg_auth:
+          description: Average authentication latency observed during the reporting
+            interval
           examples:
           - 0.17170219
           type: number
         avg_dhcp:
+          description: Average DHCP latency observed during the reporting interval
           examples:
           - 0.017828934
           type: number
         avg_dns:
+          description: Average DNS latency observed during the reporting interval
           examples:
           - 0.024532124
           type: number
         max_auth:
+          description: Maximum authentication latency observed during the reporting
+            interval
           examples:
           - 0.18170219
           type: number
         max_dhcp:
+          description: Maximum DHCP latency observed during the reporting interval
           examples:
           - 0.027828934
           type: number
         max_dns:
+          description: Maximum DNS latency observed during the reporting interval
           examples:
           - 0.022532124
           type: number
         min_auth:
+          description: Minimum authentication latency observed during the reporting
+            interval
           examples:
           - 0.16050219
           type: number
         min_dhcp:
+          description: Minimum DHCP latency observed during the reporting interval
           examples:
           - 0.015828934
           type: number
         min_dns:
+          description: Minimum DNS latency observed during the reporting interval
           examples:
           - 0.029532124
           type: number
         org_id:
+          description: Organization associated with the client latency metrics
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the client latency metrics
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the client latency metrics were reported, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
       type: object
     webhook_client_latency_events:
