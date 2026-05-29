@@ -117009,44 +117009,58 @@ components:
         $ref: '#/components/schemas/wlan'
       type: array
     wxlan_rule:
-      description: WXlan
+      description: WxLAN policy rule controlling traffic between WxLAN tags
       properties:
         action:
+          description: Allow or block behavior applied by this WxLAN rule
           $ref: '#/components/schemas/wxlan_rule_action'
         apply_tags:
+          description: WxLAN tag identifiers applied when this rule matches
           $ref: '#/components/schemas/wxlan_rule_apply_tags'
         blocked_apps:
+          description: Application keys always blocked by this rule, regardless of the rule action
           $ref: '#/components/schemas/wxlan_rule_blocked_apps'
         created_time:
+          description: Time when this WxLAN rule was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         dst_allow_wxtags:
+          description: Destination WxLAN tag identifiers explicitly allowed by this rule
           $ref: '#/components/schemas/wxlan_rule_dst_allow_wxtags'
         dst_deny_wxtags:
+          description: Destination WxLAN tag identifiers explicitly denied by this rule
           $ref: '#/components/schemas/wxlan_rule_dst_deny_wxtags'
         dst_wxtags:
+          description: Destination WxLAN tag identifiers matched by this rule
           $ref: '#/components/schemas/wxlan_rule_dst_wxtags'
         enabled:
           default: true
+          description: Whether this WxLAN rule is enabled
           type: boolean
         for_site:
+          description: Whether this WxLAN rule is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier for this WxLAN rule
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when this WxLAN rule was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         order:
-          description: Order how rules would be looked up, > 0 and bigger order got
-            matched first, -1 means LAST, uniqueness not checked
+          description: Lookup priority for WxLAN rules; larger positive values match
+            first, and -1 means LAST. Uniqueness is not checked
           examples:
           - 1
           minimum: -1
           type: integer
         org_id:
+          description: Owning organization associated with this WxLAN rule
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Mist site associated with this WxLAN rule, when site-scoped
           $ref: '#/components/schemas/site_id'
         src_wxtags:
+          description: Source WxLAN tag identifiers that must match for this rule to apply
           $ref: '#/components/schemas/wxlan_rule_src_wxtags'
         template_id:
           description: Only for Org Level WxRule
