@@ -84568,6 +84568,7 @@ components:
       type: array
     org_setting_mist_nac:
       additionalProperties: false
+      description: Organization-level Mist NAC configuration
       properties:
         allow_teap_machine_auth_only:
           default: false
@@ -84577,6 +84578,7 @@ components:
           type: boolean
         cacerts:
           $ref: '#/components/schemas/cacerts'
+          description: CA certificates trusted by Mist NAC for certificate-based authentication
         default_idp_id:
           description: use this IDP when no explicit realm present in the incoming
             username/CN OR when no IDP is explicitly mapped to the incoming realm.
@@ -84604,18 +84606,28 @@ components:
           type: boolean
         fingerprinting:
           $ref: '#/components/schemas/org_setting_mist_nac_fingerprinting'
+          description: Client fingerprinting and CoA settings used by Mist NAC
         idp_machine_cert_lookup_field:
           $ref: '#/components/schemas/idp_machine_cert_lookup_field'
+          description: Client certificate field used to look up machine groups in identity
+            providers
         idp_user_cert_lookup_field:
           $ref: '#/components/schemas/idp_user_cert_lookup_field'
+          description: Client certificate field used to look up user groups in identity
+            providers
         idps:
           $ref: '#/components/schemas/org_setting_mist_nac_idps'
+          description: Identity provider mappings used by Mist NAC realm matching
         mdm:
           $ref: '#/components/schemas/org_setting_mist_nac_mdm'
+          description: Mobile Device Management CoA settings for Mist NAC
         server_cert:
           $ref: '#/components/schemas/org_setting_mist_nac_server_cert'
+          description: RADIUS server certificate presented by Mist NAC during EAP-TLS
         use_ip_version:
           $ref: '#/components/schemas/org_setting_mist_nac_ip_version'
+          description: IP version used by NAS devices and Mist Edge proxies to reach
+            Mist NAC
         use_ssl_port:
           default: false
           description: By default, NAS devices (switches/aps) and proxies(mxedge)
@@ -84637,7 +84649,7 @@ components:
       type: object
     org_setting_mist_nac_fingerprinting:
       additionalProperties: false
-      description: Allows customer to enable client fingerprinting for policy enforcement
+      description: Client fingerprinting settings used for Mist NAC policy enforcement
       properties:
         enabled:
           default: false
@@ -84655,6 +84667,8 @@ components:
           type: boolean
         wireless_coa_type:
           $ref: '#/components/schemas/org_setting_mist_nac_fingerprinting_wireless_coa'
+          description: Change of Authorization action sent to wireless clients when
+            fingerprints change
       type: object
     org_setting_mist_nac_fingerprinting_wireless_coa:
       description: 'enum: `reauth`, `disconnect`'
@@ -84664,13 +84678,19 @@ components:
       type: string
     org_setting_mist_nac_idp:
       additionalProperties: false
+      description: Mist NAC identity provider realm mapping
       properties:
         exclude_realms:
           $ref: '#/components/schemas/org_setting_mist_nac_idp_exclude_realms'
+          description: When the IDP is `mxedge_proxy` type, realms excluded from proxying
+            in addition to other valid home realms in this org
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier of the identity provider referenced by this
+            Mist NAC mapping
         user_realms:
           $ref: '#/components/schemas/org_setting_mist_nac_idp_user_realms'
+          description: User realms that select this identity provider
       type: object
     org_setting_mist_nac_idp_exclude_realms:
       description: When the IDP of mxedge_proxy type, exclude the following realms
@@ -84687,6 +84707,7 @@ components:
         type: string
       type: array
     org_setting_mist_nac_idps:
+      description: Identity provider realm mappings used by Mist NAC
       items:
         $ref: '#/components/schemas/org_setting_mist_nac_idp'
       type: array
@@ -84704,22 +84725,25 @@ components:
       properties:
         coa_type:
           $ref: '#/components/schemas/nac_coa_type'
+          description: Change of Authorization action sent for MDM posture changes
       type: object
     org_setting_mist_nac_server_cert:
       additionalProperties: false
-      description: radius server cert to be presented in EAP TLS
+      description: RADIUS server certificate presented by Mist NAC during EAP-TLS
       properties:
         cert:
+          description: PEM-encoded RADIUS server certificate presented during EAP-TLS
           examples:
           - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
             CERTIFICATE-----'
           type: string
         key:
+          description: Private key paired with the Mist NAC RADIUS server certificate
           examples:
           - '-----BEGIN PRI...'
           type: string
         password:
-          description: private key password (optional)
+          description: Optional password for the private key
           type: string
       type: object
     org_setting_password_policy:
