@@ -88271,18 +88271,25 @@ components:
       type: object
     response_device_events_search:
       additionalProperties: false
+      description: Paginated response for device or system event search results
       properties:
         end:
+          description: Epoch timestamp for the end of the event search window
           type: integer
         limit:
+          description: Maximum number of event records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of event records
           type: string
         results:
+          description: Device or system event records matching the search filters
           $ref: '#/components/schemas/device_events'
         start:
+          description: Epoch timestamp for the start of the event search window
           type: integer
         total:
+          description: Number of event records matching the search filters across all pages
           type: integer
       required:
       - results
@@ -88293,20 +88300,28 @@ components:
       type: object
     response_device_metrics:
       additionalProperties: false
+      description: Time-series insight metric response for a device
       properties:
         end:
+          description: Epoch timestamp for the end of the metric query window
           type: integer
         interval:
+          description: Aggregation interval in seconds for each metric sample
           type: integer
         limit:
+          description: Maximum number of metric samples returned in this page
           type: integer
         page:
+          description: Returned page number for paginated metric samples
           type: integer
         results:
+          description: Metric values for the requested insight metric, aligned by position with the `rt` timestamps
           $ref: '#/components/schemas/response_device_metrics_results'
         rt:
+          description: Timestamps for the metric samples, aligned by position with the `results` values
           $ref: '#/components/schemas/strings'
         start:
+          description: Epoch timestamp for the start of the metric query window
           type: integer
       required:
       - end
