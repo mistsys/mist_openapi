@@ -90648,20 +90648,22 @@ components:
       uniqueItems: true
     response_running_spectrum_analysis:
       additionalProperties: false
+      description: Running spectrum analysis session for a site
       properties:
         band:
-          description: Band on which the spectrum analysis is running (e.g., 24, 5,
-            6)
+          description: Radio band currently being scanned by spectrum analysis, such
+            as 24, 5, or 6
           type: string
         device_id:
           description: Device ID of the AP that is running spectrum analysis
           format: uuid
           type: string
         duration:
-          description: Duration of the spectrum analysis in seconds
+          description: Length of the running spectrum analysis session, in seconds
           type: integer
         format:
-          description: Format of the spectrum analysis data (e.g., json, stream)
+          description: Output format for the running spectrum analysis data, such
+            as json or stream
           type: string
         started_time:
           description: Timestamp when the spectrum analysis was started
@@ -98193,9 +98195,11 @@ components:
         $ref: '#/components/schemas/snmpv3_config_target_param'
       type: array
     spectrum_analysis:
+      description: Request parameters for starting AP spectrum analysis at a site
       properties:
         band:
           $ref: '#/components/schemas/spectrum_analysis_band'
+          description: Radio band to scan during spectrum analysis
         channels:
           description: Optional list of channels to scan. If not specified, all supported
             channels will be scanned
@@ -98213,12 +98217,13 @@ components:
           type: string
         duration:
           default: 300
-          description: Duration of the spectrum analysis in seconds
+          description: Length of the spectrum analysis run, in seconds
           maximum: 600
           minimum: 60
           type: integer
         format:
           $ref: '#/components/schemas/spectrum_analysis_format'
+          description: Output format for the spectrum analysis results
       required:
       - band
       type: object
