@@ -89494,48 +89494,62 @@ components:
       type: object
     response_mxedge_events_search:
       additionalProperties: false
+      description: Search response for Mist Edge event records
       properties:
         end:
+          description: Epoch timestamp for the end of the Mist Edge event search window
           examples:
           - 1694708579
           type: integer
         limit:
+          description: Maximum number of Mist Edge event records returned in this page
           examples:
           - 10
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of Mist Edge event records
           type: string
         page:
+          description: Returned page number for Mist Edge event records
           examples:
           - 3
           type: integer
         results:
+          description: Mist Edge event records matching the search filters
           $ref: '#/components/schemas/mxedge_events'
         start:
+          description: Epoch timestamp for the start of the Mist Edge event search window
           examples:
           - 1694622179
           type: integer
       type: object
     response_mxedge_search:
       additionalProperties: false
+      description: Search response for Mist Edge records
       properties:
         end:
+          description: Epoch timestamp for the end of the Mist Edge search window
           examples:
           - 1694708579
           type: integer
         limit:
+          description: Maximum number of Mist Edge records returned in this page
           examples:
           - 10
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of Mist Edge records
           type: string
         results:
+          description: Mist Edge records matching the search filters
           $ref: '#/components/schemas/response_mxedge_search_results'
         start:
+          description: Epoch timestamp for the start of the Mist Edge search window
           examples:
           - 1694622179
           type: integer
         total:
+          description: Number of Mist Edge records matching the search filters across all pages
           examples:
           - 2
           type: integer
@@ -89546,22 +89560,29 @@ components:
       type: array
     response_mxedge_upgrade:
       additionalProperties: false
+      description: Mist Edge upgrade details response
       properties:
         channel:
+          description: Upgrade channel used to select Mist Edge package versions
           minLength: 1
           type: string
         counts:
+          description: Per-status counts of Mist Edge targets in this upgrade
           $ref: '#/components/schemas/mxedge_upgrade_response_counts'
         id:
+          description: Upgrade identifier for this Mist Edge upgrade request
           $ref: '#/components/schemas/id'
         status:
+          description: Current status of the Mist Edge upgrade
           minLength: 1
           type: string
         strategy:
+          description: Rollout strategy used for the Mist Edge upgrade
           minLength: 1
           type: string
         versions:
           additionalProperties: true
+          description: Per-service target versions for this Mist Edge upgrade
           type: object
       required:
       - status
@@ -89572,6 +89593,7 @@ components:
       - counts
       type: object
     response_mxedge_upgrades:
+      description: Mist Edge upgrade records returned by list upgrade operations
       items:
         $ref: '#/components/schemas/response_mxedge_upgrade'
       type: array
