@@ -104270,65 +104270,82 @@ components:
       type: object
     stats_wireless_client_airwatch:
       additionalProperties: false
-      description: Information if airwatch enabled
+      description: AirWatch authorization information reported for a wireless client
       properties:
         authorized:
+          description: Whether the wireless client is authorized by AirWatch
           type: boolean
       required:
       - authorized
       type: object
     stats_wireless_client_rssi_zone:
       additionalProperties: false
+      description: RSSI zone currently containing a wireless client
       properties:
         id:
+          description: RSSI zone identifier that currently contains the wireless client
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the wireless client entered the RSSI zone, in epoch
+            seconds
           type: number
       type: object
     stats_wireless_client_rssi_zones:
-      description: "List of rssizone_id\u2019s where client is in and since when (if\
-        \ known)"
+      description: RSSI zone memberships for the wireless client, including when each
+        membership began
       items:
         $ref: '#/components/schemas/stats_wireless_client_rssi_zone'
       type: array
     stats_wireless_client_vbeacon:
       additionalProperties: false
+      description: Virtual beacon currently associated with a wireless client
       properties:
         id:
+          description: Virtual beacon identifier currently associated with the wireless
+            client
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the wireless client began matching the virtual beacon,
+            in epoch seconds
           type: number
       type: object
     stats_wireless_client_vbeacons:
-      description: "List of beacon_id\u2019s where the client is in and since when\
-        \ (if known)"
+      description: Virtual beacon associations for the wireless client, including
+        when each began
       items:
         $ref: '#/components/schemas/stats_wireless_client_vbeacon'
       type: array
     stats_wireless_client_wxrule_usage:
       additionalProperties: false
+      description: WxLAN rule usage counter for one wireless tag
       properties:
         tag_id:
+          description: WxLAN tag identifier for this rule usage entry
           format: uuid
           type: string
         usage:
+          description: Count recorded for this WxLAN rule usage entry
           type: integer
       type: object
     stats_wireless_client_wxrule_usages:
-      description: Current WxlanRule usage per tag_id
+      description: Current WxLAN rule usage counters keyed by wireless tag
       items:
         $ref: '#/components/schemas/stats_wireless_client_wxrule_usage'
       type: array
     stats_wireless_client_zone:
       additionalProperties: false
+      description: Zone currently containing a wireless client
       properties:
         id:
+          description: Zone identifier that currently contains the wireless client
           $ref: '#/components/schemas/id'
         since:
+          description: Time when the wireless client entered the zone, in epoch seconds
           type: number
       type: object
     stats_wireless_client_zones:
-      description: "List of zone_id\u2019s where client is in and since when (if known)"
+      description: Zone memberships for the wireless client, including when each membership
+        began
       items:
         $ref: '#/components/schemas/stats_wireless_client_zone'
       type: array
