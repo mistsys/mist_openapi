@@ -110674,23 +110674,33 @@ components:
         type: integer
       type: array
     vpn:
+      description: Organization VPN overlay configuration
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Epoch timestamp when the VPN configuration was created
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier of the VPN configuration
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Epoch timestamp when the VPN configuration was last modified
         name:
+          description: Display name of the VPN configuration
           minLength: 1
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization that owns the VPN configuration
         path_selection:
+          description: Path selection settings used when `type`==`hub_spoke`
           $ref: '#/components/schemas/vpn_path_selection'
         paths:
+          description: VPN path definitions keyed by VPN name for `hub_spoke` mode
+            or interface name for `mesh` mode
           $ref: '#/components/schemas/vpn_paths'
         type:
+          description: VPN topology mode for this configuration
           $ref: '#/components/schemas/vpn_mode'
       required:
       - name
@@ -110705,26 +110715,32 @@ components:
       type: string
     vpn_path:
       additionalProperties: false
+      description: VPN path settings used by an organization VPN
       properties:
         bfd_profile:
+          description: BFD profile used for this VPN path
           $ref: '#/components/schemas/vpn_path_bfd_profile'
         bfd_use_tunnel_mode:
           default: false
           description: If `type`==`mesh` and for SSR only, whether to use tunnel mode
           type: boolean
         ip:
-          description: If different from the wan port
+          description: Source IP address for this VPN path, if different from the
+            WAN port IP
           type: string
         peer_paths:
+          description: Peer path preferences used when `type`==`mesh`
           $ref: '#/components/schemas/vpn_path_peer_paths'
         pod:
           default: 1
+          description: Grouping index used to place this VPN path into a pod
           examples:
           - 2
           maximum: 128
           minimum: 1
           type: integer
         traffic_shaping:
+          description: Traffic shaping settings applied to this VPN path
           $ref: '#/components/schemas/vpn_path_traffic_shaping'
       type: object
     vpn_path_bfd_profile:
@@ -110737,20 +110753,22 @@ components:
     vpn_path_peer_paths:
       additionalProperties:
         $ref: '#/components/schemas/vpn_path_peer_paths_peer'
-      description: If `type`==`mesh`, Property key is the Peer Interface name
+      description: If `type`==`mesh`, property key is the peer interface name
       type: object
     vpn_path_peer_paths_peer:
       additionalProperties: false
-      description: Preference indicates which outgoing wan should be preferred
+      description: Peer path preference settings for mesh VPN routing
       properties:
         preference:
+          description: Lower numeric value makes this outgoing WAN path more preferred
           type: integer
       type: object
     vpn_path_selection:
       additionalProperties: false
-      description: Only if `type`==`hub_spoke`
+      description: Only if `type`==`hub_spoke`; path selection behavior for VPN paths
       properties:
         strategy:
+          description: Path selection strategy for a hub-and-spoke VPN
           $ref: '#/components/schemas/vpn_path_selection_strategy'
       type: object
     vpn_path_selection_strategy:
@@ -110763,12 +110781,18 @@ components:
       type: string
     vpn_path_traffic_shaping:
       additionalProperties: false
+      description: Traffic shaping settings for a VPN path
       properties:
         class_percentage:
+          description: Bandwidth percentages for high, medium, low, and best-effort
+            traffic classes
           $ref: '#/components/schemas/vpn_path_traffic_shaping_class_percentage'
         enabled:
+          description: Whether traffic shaping is enabled for this VPN path
           type: boolean
         max_tx_kbps:
+          description: Maximum transmit rate for this VPN path, in Kbps; `null` means
+            no explicit limit
           type:
           - integer
           - 'null'
