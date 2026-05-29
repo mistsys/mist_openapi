@@ -92873,44 +92873,54 @@ components:
       minLength: 1
       type: string
     sdk_invite_sms:
+      description: Request body for sending an SDK invite by SMS
       properties:
         number:
+          description: Destination phone number for the SDK invite SMS
           type: string
       required:
       - number
       type: object
     sdkinvite:
-      description: SDK invite
+      description: SDK invite configuration used to onboard mobile SDK clients to an organization
       properties:
         created_time:
+          description: Timestamp when the SDK invite was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         enabled:
           default: true
+          description: Whether the SDK invite can currently be used
           type: boolean
         expire_time:
+          description: Expiration time for the SDK invite, in epoch seconds
           type: integer
         id:
+          description: Unique value identifying the SDK invite
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Timestamp when the SDK invite was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Name, will show up in mobile
+          description: Display name shown for the SDK invite in the mobile experience
           type: string
         org_id:
+          description: Organization identifier associated with the SDK invite
           $ref: '#/components/schemas/org_id'
         quota:
-          description: Number of time this invite can be used
+          description: Number of times this SDK invite can be used
           type: integer
         quota_limited:
           default: false
-          description: Whether quota limiting is enabled
+          description: Whether use of the SDK invite is limited by the quota value
           type: boolean
         site_id:
+          description: Site identifier associated with the SDK invite, when scoped to a site
           $ref: '#/components/schemas/site_id'
       required:
       - name
       type: object
     sdkinvite_list:
+      description: SDK invite configurations returned by list operations
       items:
         $ref: '#/components/schemas/sdkinvite'
       type: array
