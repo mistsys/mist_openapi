@@ -99797,11 +99797,14 @@ components:
       type: object
     stats_ap_l2tp_stat:
       additionalProperties: false
+      description: L2TP tunnel status reported by an AP
       properties:
         sessions:
           $ref: '#/components/schemas/stats_ap_l2tp_stat_sessions'
+          description: L2TP session entries for this tunnel
         state:
           $ref: '#/components/schemas/l2tp_state'
+          description: L2TP tunnel state reported by the AP
         uptime:
           description: Tunnel uptime, in seconds
           examples:
@@ -99822,10 +99825,10 @@ components:
       type: object
     stats_ap_l2tp_stat_session:
       additionalProperties: false
+      description: L2TP tunnel session reported by an AP
       properties:
         local_sid:
-          description: Remote sessions id (dynamically unless Tunnel is said to be
-            static)
+          description: Local L2TP session identifier for this tunnel session
           examples:
           - 31
           readOnly: true
@@ -99833,7 +99836,7 @@ components:
           - integer
           - 'null'
         remote_id:
-          description: WxlanTunnel Remote ID (user-configured)
+          description: User-configured remote identifier for the WxLAN tunnel
           examples:
           - vpn1
           readOnly: true
@@ -99841,8 +99844,7 @@ components:
           - string
           - 'null'
         remote_sid:
-          description: Remote sessions id (dynamically unless Tunnel is said to be
-            static)
+          description: Remote L2TP session identifier for this tunnel session
           examples:
           - 13
           readOnly: true
@@ -99851,9 +99853,10 @@ components:
           - 'null'
         state:
           $ref: '#/components/schemas/l2tp_state'
+          description: L2TP session state reported by the AP
       type: object
     stats_ap_l2tp_stat_sessions:
-      description: List of sessions
+      description: L2TP tunnel sessions reported by an AP
       items:
         $ref: '#/components/schemas/stats_ap_l2tp_stat_session'
       type: array
@@ -99864,6 +99867,7 @@ components:
         neighbor is displayed.
       properties:
         chassis_id:
+          description: LLDP neighbor chassis identifier
           readOnly: true
           type:
           - string
@@ -99882,6 +99886,7 @@ components:
           - 'null'
         mgmt_addrs:
           $ref: '#/components/schemas/stats_ap_lldp_stat_mgmt_addrs'
+          description: Management IP addresses advertised by the LLDP neighbor
         port_desc:
           description: "Port description, e.g. \u201C2/20\u201D, \u201CPort 2 on Switch0\u201D"
           examples:
@@ -99891,7 +99896,7 @@ components:
           - string
           - 'null'
         port_id:
-          description: Port identifier
+          description: LLDP neighbor port identifier
           examples:
           - ge-0/0/4
           readOnly: true
@@ -99923,7 +99928,7 @@ components:
           description: In mW, total Power needed incl Peripherals
           type: integer
         power_opmode:
-          description: Constrained mode
+          description: Power operating mode negotiated through LLDP
           type: string
         power_request_count:
           description: "Number of negotiations, if it keeps increasing, we don\u2019\
@@ -99940,8 +99945,10 @@ components:
           - 'null'
         power_src:
           $ref: '#/components/schemas/stats_ap_lldp_stat_power_src'
+          description: Primary AP power source reported through LLDP
         power_srcs:
           $ref: '#/components/schemas/stats_ap_lldp_stat_power_srcs'
+          description: AP power sources reported through LLDP
         system_desc:
           description: Description provided by switch
           examples:
@@ -99962,7 +99969,7 @@ components:
           - 'null'
       type: object
     stats_ap_lldp_stat_mgmt_addrs:
-      description: List of management IP addresses (IPv4 and IPv6)
+      description: Management IP addresses advertised by an LLDP neighbor
       items:
         type: string
       type: array
@@ -99971,7 +99978,7 @@ components:
         802.3bt / MULTI-PD / LLDP / ? (unknown)).
       type: string
     stats_ap_lldp_stat_power_srcs:
-      description: List of management IP addresses (IPv4 and IPv6)
+      description: Power sources reported through LLDP for an AP
       items:
         $ref: '#/components/schemas/stats_ap_lldp_stat_power_src'
       type: array
