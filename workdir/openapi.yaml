@@ -113846,70 +113846,90 @@ components:
           type: integer
       type: object
     wired_client_dhcp_client_options:
+      description: DHCP options observed for a wired client
       items:
         $ref: '#/components/schemas/dhcp_client_option'
       type: array
     wired_client_response:
       additionalProperties: false
+      description: Wired client record returned by a wired client search
       properties:
         auth_method:
+          description: Method used to authenticate the wired client
           examples:
           - mac_auth
           type: string
         auth_state:
+          description: State reported for wired client authentication
           examples:
           - authenticated
           type: string
         device_mac:
+          description: MAC addresses of switches or gateways where the wired client was observed
           $ref: '#/components/schemas/wired_client_response_device_mac'
         device_mac_port:
+          description: Per-port switch or gateway observations for the wired client
           $ref: '#/components/schemas/wired_client_response_device_mac_port'
         dhcp_client_identifier:
+          description: Identifier value reported by the wired client in DHCP
           examples:
           - MAC address 00155df6d500
           type: string
         dhcp_client_options:
+          description: DHCP options observed from the wired client
           $ref: '#/components/schemas/wired_client_dhcp_client_options'
         dhcp_fqdn:
+          description: Fully qualified domain name reported by the wired client through DHCP
           examples:
           - ITS-VMMT0-D1N02.mgthub.local
           type: string
         dhcp_hostname:
+          description: Hostname reported by the wired client through DHCP
           examples:
           - ITS-VMMT0-D1N02
           type: string
         dhcp_request_params:
+          description: Parameter request list advertised by the wired client in DHCP
           examples:
           - 1 3 6 15 31 33 43 44 46 47 119 121 249 252
           type: string
         dhcp_vendor_class_identifier:
+          description: Vendor class identifier reported by the wired client in DHCP
           examples:
           - MSFT 5.0
           type: string
         ip:
+          description: Client IP addresses observed for the wired client
           $ref: '#/components/schemas/wired_client_response_ip'
         mac:
+          description: Client MAC address for the wired client record
           readOnly: true
           type: string
         org_id:
+          description: Owning organization associated with the wired client record
           $ref: '#/components/schemas/org_id'
         port_id:
+          description: Switch or gateway port identifiers where the wired client was observed
           $ref: '#/components/schemas/wired_client_response_port_id'
         site_id:
+          description: Mist site associated with the wired client record
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the wired client record was observed, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         vlan:
+          description: Client VLAN identifiers observed for the wired client
           $ref: '#/components/schemas/wired_client_response_vlan'
       type: object
     wired_client_response_device_mac:
-      description: MAC Address of the switch the client is connected to
+      description: Switch or gateway MAC addresses where the wired client was observed
       items:
         readOnly: true
         type: string
       readOnly: true
       type: array
     wired_client_response_device_mac_port:
+      description: Per-port switch or gateway observations for a wired client
       items:
         $ref: '#/components/schemas/wired_client_response_device_mac_port_item'
       readOnly: true
@@ -113917,25 +113937,33 @@ components:
       uniqueItems: true
     wired_client_response_device_mac_port_item:
       additionalProperties: false
+      description: Switch or gateway port observation for a wired client
       properties:
         device_mac:
+          description: Switch or gateway MAC address for this wired client observation
           minLength: 1
           type: string
         ip:
+          description: Client IP address observed for this port entry
           readOnly: true
           type: string
         port_id:
+          description: Interface identifier where the wired client was observed
           readOnly: true
           type: string
         port_parent:
+          description: Parent interface or port group associated with this port entry
           type: string
         start:
+          description: Time when this wired client observation began
           readOnly: true
           type: string
         vlan:
+          description: Client VLAN identifier observed for this port entry
           readOnly: true
           type: integer
         when:
+          description: Time when this wired client port entry was recorded
           readOnly: true
           type: string
       readOnly: true
