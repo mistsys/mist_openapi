@@ -105660,17 +105660,20 @@ components:
       - 100000
     switch_port_config_overwrite:
       additionalProperties: false
-      description: Switch port config
+      description: Switch port configuration overrides
       properties:
         description:
+          description: Administrative description applied to the switch port override
           type: string
         disabled:
           default: false
           description: Whether the port is disabled
           type: boolean
         duplex:
+          description: Link duplex mode override for the switch port
           $ref: '#/components/schemas/switch_port_usage_duplex_overwrite'
         mac_limit:
+          description: MAC address learning limit override for the switch port
           $ref: '#/components/schemas/switch_port_usage_mac_limit_overwrite'
         poe_disabled:
           default: false
@@ -105684,6 +105687,7 @@ components:
           description: Native network/vlan for untagged traffic
           type: string
         speed:
+          description: Link speed override for the switch port
           $ref: '#/components/schemas/switch_port_usage_speed_overwrite'
       type: object
     switch_port_config_overwrites:
@@ -105799,12 +105803,19 @@ components:
       type: array
     switch_port_mirroring_property:
       additionalProperties: false
+      description: Input and output settings for one switch port mirroring session
       properties:
         input_networks_ingress:
+          description: At least one mirror input source should be specified. Networks
+            whose ingress traffic is mirrored
           $ref: '#/components/schemas/switch_port_mirroring_ingress_networks'
         input_port_ids_egress:
+          description: At least one mirror input source should be specified. Switch
+            ports whose egress traffic is mirrored
           $ref: '#/components/schemas/switch_port_mirroring_egress_port_ids'
         input_port_ids_ingress:
+          description: At least one mirror input source should be specified. Switch
+            ports whose ingress traffic is mirrored
           $ref: '#/components/schemas/switch_port_mirroring_ingress_port_ids'
         output_ip_address:
           description: Exactly one of the `output_ip_address`, `output_port_id` or
