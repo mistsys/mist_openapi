@@ -116649,6 +116649,7 @@ components:
           description: Label for Sponsor auth button
           type: string
         authLabel:
+          description: Localized heading text displayed above portal authentication options
           type: string
         backLink:
           description: Label of the link to go back to /logon
@@ -116667,26 +116668,34 @@ components:
           description: Label for cancel confirmation code submission using email auth
           type: string
         emailCodeCancel:
+          description: Localized link text for requesting help when the email access code was not received
           type: string
         emailCodeError:
+          description: Localized error message shown when the alternate email address for access-code delivery is invalid
           type: string
         emailCodeFieldLabel:
+          description: Localized label for the email access-code input field
           type: string
         emailCodeMessage:
+          description: Localized instructional text shown before entering the email access code
           type: string
         emailCodeSubmit:
+          description: Localized button label for submitting the email access code
           type: string
         emailCodeTitle:
+          description: Localized title shown on the email access-code entry page
           type: string
         emailError:
           description: Error message when email not provided
           type: string
         emailFieldLabel:
+          description: Localized label for the email address input field
           type: string
         emailLabel:
           description: Localized label displayed for the email input field
           type: string
         emailMessage:
+          description: Localized instructional text explaining email access-code delivery
           type: string
         emailSubmit:
           description: Label for confirmation code submit button using email auth
@@ -116698,25 +116707,25 @@ components:
           description: Error message when field1 not provided
           type: string
         field1Label:
-          description: Label of field1
+          description: Localized label for custom field 1 input
           type: string
         field2Error:
           description: Error message when field2 not provided
           type: string
         field2Label:
-          description: Label of field2
+          description: Localized label for custom field 2 input
           type: string
         field3Error:
           description: Error message when field3 not provided
           type: string
         field3Label:
-          description: Label of field3
+          description: Localized label for custom field 3 input
           type: string
         field4Error:
           description: Error message when field4 not provided
           type: string
         field4Label:
-          description: Label of field4
+          description: Localized label for custom field 4 input
           type: string
         marketingPolicyLink:
           description: label of the link to go to /marketing_policy
@@ -116728,9 +116737,10 @@ components:
           description: label for marketing optin
           type: string
         marketingPolicyOptInText:
-          description: marketing policy text
+          description: Localized text of the marketing policy opt-in content
           type: string
         message:
+          description: Localized main message displayed on the guest portal sign-in page
           type: string
         nameError:
           description: Error message when name not provided
@@ -116742,6 +116752,7 @@ components:
           description: Label for Do Not Store My Personal Information
           type: string
         pageTitle:
+          description: Localized browser or page title shown for the guest portal
           type: string
         passphraseCancel:
           description: Label for the Passphrase cancel button
@@ -116750,9 +116761,10 @@ components:
           description: Error message when invalid passphrase is provided
           type: string
         passphraseLabel:
-          description: Passphrase
+          description: Localized label for the passphrase input field
           type: string
         passphraseMessage:
+          description: Localized instructional text shown on the passphrase sign-in page
           type: string
         passphraseSubmit:
           description: Label for the Passphrase submit button
@@ -116779,8 +116791,10 @@ components:
           description: Label of the button to signin
           type: string
         smsCarrierDefault:
+          description: Localized default option text shown in the SMS carrier selector
           type: string
         smsCarrierError:
+          description: Localized error message shown when no mobile carrier is selected
           type: string
         smsCarrierFieldLabel:
           description: Label for mobile carrier drop-down list
@@ -116792,17 +116806,22 @@ components:
           description: Error message when confirmation code is invalid
           type: string
         smsCodeFieldLabel:
+          description: Localized label for the SMS confirmation-code input field
           type: string
         smsCodeMessage:
+          description: Localized instructional text shown before entering the SMS access code
           type: string
         smsCodeSubmit:
           description: Label for confirmation code submit button
           type: string
         smsCodeTitle:
+          description: Localized title shown on the SMS access-code entry page
           type: string
         smsCountryFieldLabel:
+          description: Localized label for the SMS country-code input field
           type: string
         smsCountryFormat:
+          description: Localized example country code format shown for SMS authentication
           type: string
         smsHaveAccessCode:
           description: Label for checkbox to specify that the user has access code
@@ -116815,13 +116834,16 @@ components:
           description: Label for canceling mobile details for SMS auth
           type: string
         smsNumberError:
+          description: Localized error message shown when the mobile number is invalid
           type: string
         smsNumberFieldLabel:
           description: Label for field to provide mobile number
           type: string
         smsNumberFormat:
+          description: Localized example mobile number format shown for SMS authentication
           type: string
         smsNumberMessage:
+          description: Localized instructional text explaining SMS access-code delivery
           type: string
         smsNumberSubmit:
           description: Label for submit button for code generation
@@ -116830,28 +116852,37 @@ components:
           description: Title for phone number details
           type: string
         smsUsernameFormat:
+          description: Localized example username format shown for SMS authentication
           type: string
         sponsorBackLink:
+          description: Localized link text for returning to edit the sponsor request form
           type: string
         sponsorCancel:
+          description: Localized button label for canceling sponsor authentication
           type: string
         sponsorEmail:
           description: Label for Sponsor Email
           type: string
         sponsorEmailError:
+          description: Localized error message shown when the sponsor email address is invalid
           type: string
         sponsorInfoApproved:
+          description: Localized status message prefix shown when a sponsor approves the request
           type: string
         sponsorInfoDenied:
+          description: Localized status message prefix shown when a sponsor denies the request
           type: string
         sponsorInfoPending:
+          description: Localized status message prefix shown after a sponsor notification is sent
           type: string
         sponsorName:
           description: Label for Sponsor Name
           type: string
         sponsorNameError:
+          description: Localized error message shown when the sponsor name is missing
           type: string
         sponsorNotePending:
+          description: Localized additional status text shown while sponsor approval is pending
           type: string
         sponsorRequestAccess:
           description: Submit button label request Wifi Access and notify sponsor
@@ -116870,8 +116901,10 @@ components:
           description: Submit button label to notify sponsor about guest request
           type: string
         sponsorsError:
+          description: Localized error message shown when no sponsor is selected
           type: string
         sponsorsFieldLabel:
+          description: Localized label for the sponsor selection field
           type: string
         tosAcceptLabel:
           description: Prefix of the label of the link to go to tos
