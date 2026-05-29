@@ -117147,13 +117147,17 @@ components:
         \ ], this matches vendor attributes and will be dynamically evaluated"
       properties:
         created_time:
+          description: Time when this WxLAN tag was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         for_site:
+          description: Whether this WxLAN tag is scoped to a site
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier for this WxLAN tag
           $ref: '#/components/schemas/id'
         last_ips:
+          description: Most recent IP addresses observed for this WxLAN tag
           $ref: '#/components/schemas/wxlan_tag_last_ips'
         mac:
           description: If `type`==`client`, Client MAC Address
@@ -117161,33 +117165,45 @@ components:
           - string
           - 'null'
         match:
+          description: Required if `type`==`match`; attribute compared against `values`
           $ref: '#/components/schemas/wxlan_tag_match'
         modified_time:
+          description: Time when this WxLAN tag was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
-          description: The name
+          description: Display name of the WxLAN tag
           type: string
         op:
+          description: Required if `type`==`match`; whether `values` are inclusive or exclusive matches
           $ref: '#/components/schemas/wxlan_tag_operation'
         org_id:
+          description: Owning organization associated with this WxLAN tag
           $ref: '#/components/schemas/org_id'
         resource_mac:
+          description: MAC address of the discovered resource associated with this tag, when applicable
           type:
           - string
           - 'null'
         services:
+          description: Names of services associated with this WxLAN tag
           $ref: '#/components/schemas/strings'
         site_id:
+          description: Mist site associated with this WxLAN tag, when site-scoped
           $ref: '#/components/schemas/site_id'
         specs:
+          description: Traffic match specifications used when `type`==`spec`
           $ref: '#/components/schemas/wxlan_tag_specs'
         subnet:
+          description: CIDR subnet associated with this WxLAN tag when `type`==`subnet`
           type: string
         type:
+          description: Kind of WxLAN tag and how it is populated
           $ref: '#/components/schemas/wxlan_tag_type'
         values:
+          description: Comparison values for the selected `match` attribute when `type`==`match`
           $ref: '#/components/schemas/wxlan_tag_values'
         vlan_id:
+          description: Identifier of the VLAN associated with this WxLAN tag when `type`==`vlan`
           $ref: '#/components/schemas/wxlan_tag_vlan_id'
       required:
       - type
@@ -117230,6 +117246,7 @@ components:
       type: string
     wxlan_tag_spec:
       additionalProperties: false
+      description: Traffic match specification used by a WxLAN tag
       properties:
         port_range:
           default: '0'
@@ -117241,6 +117258,7 @@ components:
             is between 1-254
           type: string
         subnets:
+          description: Destination subnets or IP addresses matched by this WxLAN tag spec
           $ref: '#/components/schemas/wxlan_tag_spec_subnets'
       type: object
     wxlan_tag_spec_subnets:
