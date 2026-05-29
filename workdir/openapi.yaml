@@ -99401,13 +99401,16 @@ components:
       type: object
     stats_ap_ble:
       additionalProperties: false
+      description: BLE beacon and traffic statistics reported by an AP
       properties:
         beacon_enabled:
+          description: Whether Mist BLE beacon transmission is enabled
           readOnly: true
           type:
           - boolean
           - 'null'
         beacon_rate:
+          description: Mist BLE beacon transmit rate, in beacons per second
           examples:
           - 3
           readOnly: true
@@ -99415,6 +99418,7 @@ components:
           - integer
           - 'null'
         eddystone_uid_enabled:
+          description: Whether Eddystone-UID beacon transmission is enabled
           examples:
           - false
           readOnly: true
@@ -99422,6 +99426,7 @@ components:
           - boolean
           - 'null'
         eddystone_uid_freq_msec:
+          description: Interval for Eddystone-UID advertisements, in milliseconds
           examples:
           - 2000
           readOnly: true
@@ -99429,6 +99434,7 @@ components:
           - integer
           - 'null'
         eddystone_uid_instance:
+          description: Eddystone-UID instance value broadcast by the AP
           examples:
           - 5c5b35000001
           readOnly: true
@@ -99436,6 +99442,7 @@ components:
           - string
           - 'null'
         eddystone_uid_namespace:
+          description: Eddystone-UID namespace value broadcast by the AP
           examples:
           - 2818e3868dec25629ede
           readOnly: true
@@ -99443,6 +99450,7 @@ components:
           - string
           - 'null'
         eddystone_url_enabled:
+          description: Whether Eddystone-URL beacon transmission is enabled
           examples:
           - true
           readOnly: true
@@ -99450,7 +99458,7 @@ components:
           - boolean
           - 'null'
         eddystone_url_freq_msec:
-          description: Frequency (msec) of data emit by Eddystone-UID beacon
+          description: Interval for Eddystone-URL advertisements, in milliseconds
           examples:
           - 100
           readOnly: true
@@ -99458,6 +99466,7 @@ components:
           - integer
           - 'null'
         eddystone_url_url:
+          description: URL broadcast by the Eddystone-URL beacon
           examples:
           - https://www.abc.com
           readOnly: true
@@ -99465,6 +99474,7 @@ components:
           - string
           - 'null'
         ibeacon_enabled:
+          description: Whether iBeacon transmission is enabled
           examples:
           - true
           readOnly: true
@@ -99472,6 +99482,7 @@ components:
           - boolean
           - 'null'
         ibeacon_freq_msec:
+          description: Interval for iBeacon advertisements, in milliseconds
           examples:
           - 2000
           readOnly: true
@@ -99480,11 +99491,15 @@ components:
           - 'null'
         ibeacon_major:
           $ref: '#/components/schemas/ibeacon_major'
+          description: Major value broadcast in iBeacon advertisements
         ibeacon_minor:
           $ref: '#/components/schemas/ibeacon_minor'
+          description: Minor value broadcast in iBeacon advertisements
         ibeacon_uuid:
           $ref: '#/components/schemas/ibeacon_uuid'
+          description: UUID value broadcast in iBeacon advertisements
         major:
+          description: Reported iBeacon major value for BLE statistics
           examples:
           - 12345
           readOnly: true
@@ -99493,7 +99508,9 @@ components:
           - 'null'
         minors:
           $ref: '#/components/schemas/integers'
+          description: Reported iBeacon minor values for BLE statistics
         power:
+          description: BLE transmit power setting reported by the AP
           examples:
           - 10
           readOnly: true
@@ -99502,12 +99519,16 @@ components:
           - 'null'
         rx_bytes:
           $ref: '#/components/schemas/rx_bytes'
+          description: BLE bytes received by the AP
         rx_pkts:
           $ref: '#/components/schemas/rx_pkts'
+          description: BLE packets received by the AP
         tx_bytes:
           $ref: '#/components/schemas/tx_bytes'
+          description: BLE bytes transmitted by the AP
         tx_pkts:
           $ref: '#/components/schemas/tx_pkts'
+          description: BLE packets transmitted by the AP
         tx_resets:
           description: Resets due to tx hung
           examples:
@@ -99517,6 +99538,7 @@ components:
           - integer
           - 'null'
         uuid:
+          description: Beacon UUID reported by BLE statistics
           examples:
           - ada72f8f-1643-e5c6-94db-f2a5636f1a64
           format: uuid
