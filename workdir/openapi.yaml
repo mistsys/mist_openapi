@@ -91652,8 +91652,10 @@ components:
       type: array
     response_two_factor_json:
       additionalProperties: false
+      description: Response body containing a generated two-factor authentication secret
       properties:
         two_factor_secret:
+          description: Generated secret key used to enroll a two-factor authentication app
           examples:
           - NRMTSTRWNBVECY3GJVYEY3DDJFRGSNCZGJUDO4RVN5FDM3DUMJSA
           format: password
@@ -91664,8 +91666,10 @@ components:
       type: string
     response_upgrade_id:
       additionalProperties: false
+      description: Response containing an upgrade job identifier
       properties:
         upgrade_id:
+          description: Unique value identifying the queued upgrade job
           examples:
           - 4316c116-0acb-4c43-8f06-6723154e741e
           format: uuid
@@ -91675,6 +91679,7 @@ components:
       type: object
     response_upgrade_org_devices:
       additionalProperties: false
+      description: Organization AP upgrade job details
       properties:
         enable_p2p:
           description: Whether to allow local AP-to-AP FW upgrade
@@ -91684,15 +91689,18 @@ components:
             running version
           type: boolean
         id:
+          description: Unique value identifying the organization upgrade job
           $ref: '#/components/schemas/id'
         strategy:
+          description: Execution strategy used for the organization upgrade job
           $ref: '#/components/schemas/upgrade_device_strategy'
         target_version:
-          description: Version to upgrade to
+          description: Firmware version targeted by the organization AP upgrade
           examples:
           - 0.14.29411
           type: string
         upgrades:
+          description: Per-site upgrade jobs created for the organization upgrade
           $ref: '#/components/schemas/upgrade_org_devices_upgrade_infos'
       type: object
     response_verify_token_success:
@@ -106688,27 +106696,36 @@ components:
       type: array
     upgrade_org_devices_upgrade:
       additionalProperties: false
+      description: Upgrade entry for a single site within an organization upgrade job
       properties:
         site_id:
+          description: Identifier of the site for this upgrade entry
           $ref: '#/components/schemas/site_id'
         upgrade:
+          description: Site-level job details for this upgrade entry
           $ref: '#/components/schemas/upgrade_org_devices_upgrade_info'
       type: object
     upgrade_org_devices_upgrade_info:
       additionalProperties: false
+      description: Site-level upgrade job details within an organization upgrade
       properties:
         id:
+          description: Unique value identifying the site-level upgrade job
           $ref: '#/components/schemas/id'
         start_time:
+          description: Epoch timestamp, in seconds, when the site-level upgrade starts
           examples:
           - 1717658765
           type: integer
         status:
+          description: Current status of the site-level upgrade job
           $ref: '#/components/schemas/upgrade_device_status'
         targets:
+          description: Device targets grouped by upgrade state
           $ref: '#/components/schemas/upgrade_devices_targets'
       type: object
     upgrade_org_devices_upgrade_infos:
+      description: Per-site upgrade entries created for an organization device upgrade
       items:
         $ref: '#/components/schemas/upgrade_org_devices_upgrade'
       type: array
