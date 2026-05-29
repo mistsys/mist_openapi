@@ -90570,54 +90570,69 @@ components:
       type: array
     response_router_ssr_register_cmd:
       additionalProperties: false
+      description: SSR registration token and commands used to register the router with Mist
       properties:
         conductor_cmd:
+          description: Command to run in the SSR conductor CLI for Mist registration
           type: string
         registration_code:
+          description: Registration token used by the SSR registration commands
           type: string
         router_shell_cmd:
+          description: Shell command to run on the SSR router for Mist registration
           type: string
       type: object
     response_rrm_channel_scores:
       additionalProperties: false
+      description: Response containing RRM channel score records
       properties:
         results:
+          description: Per-channel RRM score records for the requested band
           $ref: '#/components/schemas/response_rrm_channel_scores_results'
       required:
       - results
       type: object
     response_rrm_channel_scores_results:
+      description: RRM channel score records returned for a band
       items:
         $ref: '#/components/schemas/rrm_channel_score'
       type: array
       uniqueItems: true
     response_rrm_consideration:
       additionalProperties: false
+      description: Response containing current RRM considerations for an AP radio band
       properties:
         results:
+          description: Channel consideration metrics used by RRM for the AP radio band
           $ref: '#/components/schemas/response_rrm_consideration_results'
       required:
       - results
       type: object
     response_rrm_consideration_results:
+      description: RRM channel consideration records returned for an AP radio band
       items:
         $ref: '#/components/schemas/rrm_consideration'
       type: array
       uniqueItems: true
     response_rrm_neighbors:
       additionalProperties: false
+      description: Paginated response for current RRM neighbor observations
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the RRM neighbor observation window
           type: integer
         limit:
+          description: Maximum number of RRM neighbor records returned in this page
           type: integer
         next:
           description: Link to query next set of results. value is null if no next
             page exists.
           type: string
         results:
+          description: RRM neighbor records observed for the requested site and band
           $ref: '#/components/schemas/response_rrm_neighbors_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the RRM neighbor observation window
           type: integer
       required:
       - end
@@ -90626,6 +90641,7 @@ components:
       - start
       type: object
     response_rrm_neighbors_results:
+      description: RRM neighbor records returned for the requested site and band
       items:
         $ref: '#/components/schemas/rrm_neighbors'
       type: array
