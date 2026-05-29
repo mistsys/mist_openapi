@@ -106930,52 +106930,69 @@ components:
       type: string
     tacacs:
       additionalProperties: false
+      description: TACACS+ settings for switch management authentication and accounting
       properties:
         acct_servers:
+          description: TACACS+ accounting servers used for switch management sessions
           $ref: '#/components/schemas/tacacs_acct_servers'
         default_role:
+          description: Default switch-management role to use for TACACS+ logins
           $ref: '#/components/schemas/tacacs_default_role'
         enabled:
+          description: Whether TACACS+ is enabled for switch management authentication
           type: boolean
         network:
-          description: Which network the TACACS server resides
+          description: Source network used for connectivity to the TACACS+ servers
           type: string
         tacplus_servers:
+          description: TACACS+ authentication servers used for switch management logins
           $ref: '#/components/schemas/tacacs_auth_servers'
       type: object
     tacacs_acct_server:
       additionalProperties: false
+      description: TACACS+ accounting server settings
       properties:
         host:
+          description: Address or hostname of the TACACS+ accounting server
           type: string
         port:
+          description: TCP port used by the TACACS+ accounting server
           type: string
         secret:
+          description: Shared secret used with this TACACS+ accounting server
           format: password
           type: string
         timeout:
           default: 10
+          description: TACACS+ accounting server timeout, in seconds
           type: integer
       type: object
     tacacs_acct_servers:
+      description: List of TACACS+ accounting servers
       items:
         $ref: '#/components/schemas/tacacs_acct_server'
       type: array
     tacacs_auth_server:
       additionalProperties: false
+      description: TACACS+ authentication server settings
       properties:
         host:
+          description: Address or hostname of the TACACS+ authentication server
           type: string
         port:
+          description: TCP port used by the TACACS+ authentication server
           type: string
         secret:
+          description: Shared secret used with this TACACS+ authentication server
           format: password
           type: string
         timeout:
           default: 10
+          description: TACACS+ authentication server timeout, in seconds
           type: integer
       type: object
     tacacs_auth_servers:
+      description: List of TACACS+ authentication servers
       items:
         $ref: '#/components/schemas/tacacs_auth_server'
       type: array
