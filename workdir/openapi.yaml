@@ -63435,7 +63435,8 @@ components:
       properties:
         secintel:
           $ref: '#/components/schemas/account_skyatp_data_secintel'
-          description: SecIntel feed configuration provided by Sky ATP
+          description: Juniper SecIntel threat feed configuration provided by Sky
+            ATP
         secintel_allowlist_url:
           description: URL for the Sky ATP SecIntel allowlist
           examples:
@@ -83846,7 +83847,8 @@ components:
           type: string
         secintel:
           $ref: '#/components/schemas/service_policy_secintel'
-          description: SecIntel settings applied by this service policy
+          description: Juniper SecIntel threat intelligence settings applied by this
+            service policy
         services:
           $ref: '#/components/schemas/strings'
           description: Application services or groups matched by this policy
