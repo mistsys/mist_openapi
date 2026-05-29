@@ -85468,10 +85468,12 @@ components:
       properties:
         include_loopback:
           default: false
+          description: Whether loopback interfaces are included in this OSPF area
           type: boolean
         networks:
           additionalProperties:
             $ref: '#/components/schemas/ospf_areas_network'
+          description: OSPF network settings keyed by network name
           examples:
           - corp:
               auth_keys:
@@ -85487,6 +85489,7 @@ components:
           type: object
         type:
           $ref: '#/components/schemas/ospf_area_type'
+          description: Area type for this OSPF area
       type: object
     ospf_area_network_auth_type:
       default: none
@@ -85544,33 +85547,41 @@ components:
           type: string
         auth_type:
           $ref: '#/components/schemas/ospf_area_network_auth_type'
+          description: Authentication method used by this OSPF network
         bfd_minimum_interval:
+          description: Minimum BFD interval for this OSPF network, in milliseconds
           examples:
           - 500
           maximum: 255000
           minimum: 1
           type: integer
         dead_interval:
+          description: OSPF dead interval for this network, in seconds
           examples:
           - 40
           maximum: 65535
           minimum: 1
           type: integer
         export_policy:
+          description: Routing policy used to export routes from this OSPF network
           examples:
           - export_policy
           type: string
         hello_interval:
+          description: OSPF hello interval for this network, in seconds
           maximum: 255
           minimum: 1
           type: integer
         import_policy:
+          description: Routing policy used to import routes for this OSPF network
           examples:
           - import_policy
           type: string
         interface_type:
           $ref: '#/components/schemas/ospf_area_network_interface_type'
+          description: OSPF interface type used for this network
         metric:
+          description: OSPF metric assigned to this network
           examples:
           - 10000
           maximum: 65535
@@ -85602,24 +85613,31 @@ components:
       type: string
     ospf_peer_stats_search_result:
       additionalProperties: false
+      description: Paginated OSPF peer statistics search result
       properties:
         end:
+          description: Query end timestamp for the OSPF peer statistics search
           examples:
           - 1711035686
           type: integer
         limit:
+          description: Maximum number of OSPF peer statistics returned per page
           examples:
           - 10
           type: integer
         next:
+          description: URL for the next page of OSPF peer statistics, when available
           type: string
         results:
           $ref: '#/components/schemas/ospf_peer_stats_search_results'
+          description: OSPF peer statistic records returned for the current page
         start:
+          description: Query start timestamp for the OSPF peer statistics search
           examples:
           - 1710949286
           type: integer
         total:
+          description: Number of OSPF peer statistic records matching the search
           examples:
           - 232
           type: integer
