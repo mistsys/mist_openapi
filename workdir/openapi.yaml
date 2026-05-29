@@ -100628,64 +100628,87 @@ components:
       - $ref: '#/components/schemas/stats_gateway'
     stats_device_other:
       additionalProperties: false
+      description: Statistics for a third-party or other device tracked by Mist
       properties:
         cached_stats:
+          description: Whether the response was served from cached vendor statistics
           type: boolean
         config_status:
+          description: Synchronization status of the other device configuration in
+            Mist
           examples:
           - synced
           type: string
         connected_devices:
+          description: LLDP neighbor devices discovered from the other device
           $ref: '#/components/schemas/stats_device_other_connected_devices'
         interfaces:
+          description: Network interface statistics reported for the other device
           $ref: '#/components/schemas/stats_device_other_interfaces'
         last_config:
+          description: Timestamp of the last configuration update reported for the
+            other device, in epoch seconds
           examples:
           - 1675392788
           type: integer
         last_seen:
+          description: Time when Mist last observed the other device, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         lldp_enabled:
+          description: Whether LLDP is enabled on the other device
           type: boolean
         mac:
+          description: Other device MAC address reported in the statistics response
           examples:
           - 5c5b35000018
           type: string
         status:
+          description: Connectivity status reported for the other device, such as
+            online
           examples:
           - online
           type: string
         uptime:
+          description: Elapsed time since the other device last booted, in seconds
           examples:
           - 20296
           type: integer
         vendor:
+          description: Device vendor name, such as Cradlepoint
           examples:
           - cradlepoint
           type: string
         vendor_specific:
+          description: Additional statistics returned by the device vendor
           $ref: '#/components/schemas/stats_device_other_vendor_specific'
         version:
+          description: Vendor software version reported for the other device
           examples:
           - 7.22.70
           type: string
       type: object
     stats_device_other_connected_device:
       additionalProperties: false
+      description: LLDP neighbor device discovered from an other-device statistics
+        record
       properties:
         mac:
+          description: Connected device MAC address learned from LLDP
           examples:
           - 020001abcdef
           type: string
         name:
+          description: LLDP system name reported for the connected device
           examples:
           - DNT-NTR-GWE
           type: string
         port_id:
+          description: LLDP port identifier reported for the connected device
           examples:
           - ge-0/0/1
           type: string
         type:
+          description: Detected Mist device type for the connected neighbor
           examples:
           - gateway
           type: string
