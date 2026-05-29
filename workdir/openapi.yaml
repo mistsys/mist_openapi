@@ -96315,20 +96315,27 @@ components:
       type: array
     sle_classifier:
       additionalProperties: false
+      description: Time-series classifier detail for an SLE metric
       properties:
         impact:
           $ref: '#/components/schemas/sle_classifier_impact'
+          description: Counts of affected APs and users for this classifier
         interval:
+          description: Sample interval in seconds for classifier time-series data
           type: number
         name:
+          description: Classifier name for the SLE metric
           minLength: 1
           type: string
         samples:
           $ref: '#/components/schemas/sle_classifier_samples'
+          description: Time-series sample arrays for the classifier
         x_label:
+          description: Label for the classifier sample x-axis
           minLength: 1
           type: string
         y_label:
+          description: Label for the classifier sample y-axis
           minLength: 1
           type: string
       required:
@@ -96340,14 +96347,19 @@ components:
       type: object
     sle_classifier_impact:
       additionalProperties: false
+      description: AP and user impact counts for an SLE classifier
       properties:
         num_aps:
+          description: Number of APs affected by degraded SLE experience
           type: number
         num_users:
+          description: Number of users affected by degraded SLE experience
           type: number
         total_aps:
+          description: Total number of APs considered for the classifier
           type: number
         total_users:
+          description: Total number of users considered for the classifier
           type: number
       required:
       - num_users
@@ -96357,46 +96369,60 @@ components:
       type: object
     sle_classifier_samples:
       additionalProperties: false
+      description: Per-interval sample arrays for an SLE classifier
       properties:
         degraded:
           $ref: '#/components/schemas/sle_classifier_samples_degraded'
+          description: Per-interval degraded SLE values for the classifier
         duration:
           $ref: '#/components/schemas/sle_classifier_samples_duration'
+          description: Per-interval observation durations for the classifier
         total:
           $ref: '#/components/schemas/sle_classifier_samples_total'
+          description: Per-interval total SLE values for the classifier
       required:
       - duration
       - total
       - degraded
       type: object
     sle_classifier_samples_degraded:
+      description: Per-interval degraded SLE values for a classifier
       items:
         $ref: '#/components/schemas/number_or_null'
       type: array
     sle_classifier_samples_duration:
+      description: Per-interval observation durations for a classifier
       items:
         type: number
       type: array
     sle_classifier_samples_total:
+      description: Per-interval total SLE values for a classifier
       items:
         $ref: '#/components/schemas/number_or_null'
       type: array
     sle_classifier_summary:
       additionalProperties: false
       deprecated: true
+      description: Deprecated SLE classifier summary response
       properties:
         classifier:
           $ref: '#/components/schemas/sle_classifier'
+          description: Requested SLE classifier detail for the metric
         end:
+          description: Last timestamp in the classifier summary window
           type: number
         failures:
           $ref: '#/components/schemas/sle_classifier_summary_failures'
+          description: Failure records included in the classifier summary
         impact:
           $ref: '#/components/schemas/sle_classifier_summary_impact'
+          description: AP and user impact counts for the classifier summary window
         metric:
+          description: SLE metric name summarized by this response
           minLength: 1
           type: string
         start:
+          description: First timestamp in the classifier summary window
           type: number
       required:
       - start
@@ -96407,20 +96433,26 @@ components:
       - failures
       type: object
     sle_classifier_summary_failures:
+      description: Failure records included in a deprecated classifier summary
       items:
         additionalProperties: true
         type: object
       type: array
     sle_classifier_summary_impact:
       additionalProperties: false
+      description: AP and user impact counts for a classifier summary window
       properties:
         num_aps:
+          description: Number of APs affected by degraded SLE experience
           type: number
         num_users:
+          description: Number of users affected by degraded SLE experience
           type: number
         total_aps:
+          description: Total number of APs considered in the summary window
           type: number
         total_users:
+          description: Total number of users considered in the summary window
           type: number
       required:
       - num_users
@@ -96430,15 +96462,20 @@ components:
       type: object
     sle_classifier_summary_trend:
       additionalProperties: false
+      description: Time-series trend response for an SLE classifier
       properties:
         classifier:
           $ref: '#/components/schemas/sle_trend_classifier'
+          description: Requested SLE classifier trend detail for the metric
         end:
+          description: Last timestamp in the classifier trend window
           type: number
         metric:
+          description: SLE metric name represented by the trend
           minLength: 1
           type: string
         start:
+          description: First timestamp in the classifier trend window
           type: number
       required:
       - start
@@ -96448,20 +96485,27 @@ components:
       type: object
     sle_histogram:
       additionalProperties: false
+      description: Histogram response for an SLE metric
       properties:
         data:
           $ref: '#/components/schemas/sle_histogram_data'
+          description: Histogram buckets for the SLE metric
         end:
+          description: Last timestamp in the histogram window
           type: number
         metric:
+          description: SLE metric name represented by the histogram
           minLength: 1
           type: string
         start:
+          description: First timestamp in the histogram window
           type: number
         x_label:
+          description: Label for the histogram x-axis
           minLength: 1
           type: string
         y_label:
+          description: Label for the histogram y-axis
           minLength: 1
           type: string
       required:
@@ -96473,21 +96517,26 @@ components:
       - y_label
       type: object
     sle_histogram_data:
+      description: Histogram buckets for an SLE metric
       items:
         $ref: '#/components/schemas/sle_histogram_data_item'
       type: array
       uniqueItems: true
     sle_histogram_data_item:
       additionalProperties: false
+      description: Single bucket in an SLE histogram
       properties:
         range:
           $ref: '#/components/schemas/sle_histogram_data_item_range'
+          description: Boundary values for this histogram bucket
         value:
+          description: Measured amount for this histogram bucket
           type: number
       required:
       - value
       type: object
     sle_histogram_data_item_range:
+      description: Lower and upper boundary values for an SLE histogram bucket
       items:
         type:
         - number
@@ -96495,28 +96544,40 @@ components:
       type: array
     sle_impact_summary:
       additionalProperties: false
+      description: SLE impact summary grouped by client, device, AP, WLAN, and band
+        dimensions
       properties:
         ap:
           $ref: '#/components/schemas/sle_impact_summary_ap'
+          description: Impact rows grouped by AP
         band:
           $ref: '#/components/schemas/sle_impact_summary_band'
+          description: Impact rows grouped by radio band
         classifier:
+          description: Requested SLE classifier filter applied to the impact summary
           type: string
         device_os:
           $ref: '#/components/schemas/sle_impact_summary_device_os'
+          description: Impact rows grouped by client device OS
         device_type:
           $ref: '#/components/schemas/sle_impact_summary_device_type'
+          description: Impact rows grouped by client device type
         end:
+          description: Last timestamp in the impact summary window
           type: number
         failure:
+          description: Requested SLE failure filter applied to the impact summary
           type: string
         metric:
+          description: SLE metric name summarized by this response
           minLength: 1
           type: string
         start:
+          description: First timestamp in the impact summary window
           type: number
         wlan:
           $ref: '#/components/schemas/sle_impact_summary_wlan'
+          description: Impact rows grouped by WLAN
       required:
       - start
       - end
@@ -96530,24 +96591,31 @@ components:
       - band
       type: object
     sle_impact_summary_ap:
+      description: Impact summary rows grouped by AP
       items:
         $ref: '#/components/schemas/sle_impact_summary_ap_item'
       type: array
       uniqueItems: true
     sle_impact_summary_ap_item:
       additionalProperties: false
+      description: SLE impact summary row for an AP
       properties:
         ap_mac:
+          description: MAC address of the AP represented by this impact row
           minLength: 1
           type: string
         degraded:
+          description: Portion of the SLE total that was degraded for this AP
           type: number
         duration:
+          description: Observation time represented by this AP impact row
           type: number
         name:
+          description: Display name for the AP impact row
           minLength: 1
           type: string
         total:
+          description: Overall SLE total measured for this AP impact row
           type: number
       required:
       - ap_mac
@@ -96557,24 +96625,31 @@ components:
       - total
       type: object
     sle_impact_summary_band:
+      description: Impact summary rows grouped by radio band
       items:
         $ref: '#/components/schemas/sle_impact_summary_band_item'
       type: array
       uniqueItems: true
     sle_impact_summary_band_item:
       additionalProperties: false
+      description: SLE impact summary row for a radio band
       properties:
         band:
+          description: Radio band represented by this impact row
           minLength: 1
           type: string
         degraded:
+          description: Portion of the SLE total that was degraded for this radio band
           type: number
         duration:
+          description: Observation time represented by this radio-band impact row
           type: number
         name:
+          description: Display name for the radio-band impact row
           minLength: 1
           type: string
         total:
+          description: Overall SLE total measured for this radio-band impact row
           type: number
       required:
       - band
@@ -96584,23 +96659,30 @@ components:
       - total
       type: object
     sle_impact_summary_device_os:
+      description: Impact summary rows grouped by client device OS
       items:
         $ref: '#/components/schemas/sle_impact_summary_device_os_item'
       type: array
       uniqueItems: true
     sle_impact_summary_device_os_item:
       additionalProperties: false
+      description: SLE impact summary row for a client device OS
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this device OS
           type: number
         device_os:
+          description: Client device OS represented by this impact row
           type: string
         duration:
+          description: Observation time represented by this device-OS impact row
           type: number
         name:
+          description: Display name for the device-OS impact row
           minLength: 1
           type: string
         total:
+          description: Overall SLE total measured for this device-OS impact row
           type: number
       required:
       - device_os
@@ -96610,23 +96692,31 @@ components:
       - total
       type: object
     sle_impact_summary_device_type:
+      description: Impact summary rows grouped by client device type
       items:
         $ref: '#/components/schemas/sle_impact_summary_device_type_item'
       type: array
       uniqueItems: true
     sle_impact_summary_device_type_item:
       additionalProperties: false
+      description: SLE impact summary row for a client device type
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this device
+            type
           type: number
         device_type:
+          description: Client device type represented by this impact row
           type: string
         duration:
+          description: Observation time represented by this device-type impact row
           type: number
         name:
+          description: Display name for the device-type impact row
           minLength: 1
           type: string
         total:
+          description: Overall SLE total measured for this device-type impact row
           type: number
       required:
       - device_type
@@ -96636,23 +96726,30 @@ components:
       - total
       type: object
     sle_impact_summary_wlan:
+      description: Impact summary rows grouped by WLAN
       items:
         $ref: '#/components/schemas/sle_impact_summary_wlan_item'
       type: array
       uniqueItems: true
     sle_impact_summary_wlan_item:
       additionalProperties: false
+      description: SLE impact summary row for a WLAN
       properties:
         degraded:
+          description: Portion of the SLE total that was degraded for this WLAN
           type: number
         duration:
+          description: Observation time represented by this WLAN impact row
           type: number
         name:
+          description: Display name for the WLAN impact row
           minLength: 1
           type: string
         total:
+          description: Overall SLE total measured for this WLAN impact row
           type: number
         wlan_id:
+          description: Identifier of the WLAN represented by this impact row
           minLength: 1
           type: string
       required:
