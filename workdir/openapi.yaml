@@ -90669,16 +90669,22 @@ components:
       type: object
     response_search:
       additionalProperties: false
+      description: Paginated response for MSP organization search results
       properties:
         limit:
+          description: Maximum number of MSP search results returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of MSP search results
           type: string
         page:
+          description: Current page number returned for the MSP search results
           type: integer
         results:
+          description: MSP search result entries matching the query
           $ref: '#/components/schemas/response_search_results'
         total:
+          description: Number of MSP search results matching the query across all pages
           type: integer
       required:
       - limit
@@ -90688,28 +90694,39 @@ components:
       type: object
     response_search_bgps:
       additionalProperties: false
+      description: Paginated response for BGP peer statistics search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the BGP statistics search window
           type: number
         limit:
+          description: Maximum number of BGP peer statistics records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of BGP peer statistics results
           type: string
         results:
+          description: BGP peer statistics records matching the search filters
           $ref: '#/components/schemas/response_bgp_search_list_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the BGP statistics search window
           type: number
         total:
+          description: Number of BGP peer statistics records matching the search filters across all pages
           type: integer
       type: object
     response_search_item:
       additionalProperties: false
+      description: MSP search result entry
       properties:
         id:
+          description: Unique identifier for the matching MSP search result
           $ref: '#/components/schemas/id'
         text:
+          description: Display text for the MSP search result
           type: string
         type:
+          description: Category of MSP search result, such as `orgs`
           type: string
       required:
       - id
@@ -90717,43 +90734,59 @@ components:
       - type
       type: object
     response_search_results:
+      description: MSP search result entries returned by search
       items:
         $ref: '#/components/schemas/response_search_item'
       type: array
       uniqueItems: true
     response_search_var:
       additionalProperties: false
+      description: Paginated response for organization variable search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the variable search window
           type: integer
         limit:
+          description: Maximum number of variable records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of variable search results
           type: string
         results:
+          description: Organization variable records matching the search filters
           $ref: '#/components/schemas/response_search_var_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the variable search window
           type: integer
         total:
+          description: Number of variable records matching the search filters across all pages
           type: integer
       type: object
     response_search_var_item:
       additionalProperties: false
+      description: Organization variable record returned by search
       properties:
         created_time:
+          description: Timestamp when the organization variable was created
           $ref: '#/components/schemas/created_time'
         modified_time:
+          description: Timestamp when the organization variable was last modified
           $ref: '#/components/schemas/modified_time'
         org_id:
+          description: Organization associated with the variable
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the variable, when the source is site-scoped
           $ref: '#/components/schemas/site_id'
         src:
+          description: Source scope for the variable, such as `site` or `deviceprofile`
           type: string
         var:
+          description: Name of the variable matched by the search
           type: string
       type: object
     response_search_var_results:
+      description: Organization variable records returned by search
       items:
         $ref: '#/components/schemas/response_search_var_item'
       type: array
