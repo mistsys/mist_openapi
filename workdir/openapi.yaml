@@ -105890,8 +105890,12 @@ components:
           description: Only if `mode`!=`dynamic`. Whether the port is disabled
           type: boolean
         duplex:
+          description: Only if `mode`!=`dynamic`. Link duplex mode for this port
+            usage
           $ref: '#/components/schemas/switch_port_usage_duplex'
         dynamic_vlan_networks:
+          description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. Networks
+            or VLANs that RADIUS can return for dynamic VLAN assignment
           $ref: '#/components/schemas/switch_port_usage_dynamic_vlan_networks'
         enable_mac_auth:
           default: false
@@ -105931,14 +105935,21 @@ components:
             over dot1x.
           type: boolean
         mac_auth_protocol:
+          description: Only if `mode`!=`dynamic` and `enable_mac_auth`==`true`. MAC
+            authentication protocol to use; ignored if Mist NAC is enabled
           $ref: '#/components/schemas/switch_port_usage_mac_auth_protocol'
         mac_limit:
+          description: Only if `mode`!=`dynamic`. Maximum number of MAC addresses
+            allowed on the port; 0 means unlimited
           $ref: '#/components/schemas/switch_port_usage_mac_limit'
         mode:
+          description: Switching mode for this port usage
           $ref: '#/components/schemas/switch_port_usage_mode'
         mtu:
+          description: Only if `mode`!=`dynamic`. MTU for ports using this port usage
           $ref: '#/components/schemas/switch_port_usage_mtu'
         networks:
+          description: Only if `mode`==`trunk`. Network or VLAN names to trunk
           $ref: '#/components/schemas/switch_port_usage_networks'
         persist_mac:
           default: false
@@ -105956,18 +105967,28 @@ components:
             keeps PoE state across reboots
           type: boolean
         poe_priority:
+          description: Only if `mode`!=`dynamic`. PoE priority for ports using this
+            port usage
           $ref: '#/components/schemas/poe_priority'
         port_auth:
+          description: Only if `mode`!=`dynamic`. 802.1X authentication mode for
+            this port usage
           $ref: '#/components/schemas/switch_port_usage_dot1x'
         port_network:
           description: Only if `mode`!=`dynamic`. Native network/vlan for untagged
             traffic
           type: string
         reauth_interval:
+          description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. RADIUS
+            reauthentication interval for clients on the port
           $ref: '#/components/schemas/switch_port_usage_reauth_interval'
         reset_default_when:
+          description: Only if `mode`==`dynamic`. Condition that resets a dynamic
+            port to the default port usage
           $ref: '#/components/schemas/switch_port_usage_dynamic_reset_default_when'
         rules:
+          description: Only if `mode`==`dynamic`. Dynamic matching rules that select
+            the port usage to apply
           $ref: '#/components/schemas/switch_port_usage_dynamic_rules'
         server_fail_network:
           description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. Sets server
@@ -105982,8 +106003,11 @@ components:
           - string
           - 'null'
         speed:
+          description: Only if `mode`!=`dynamic`. Link speed for this port usage
           $ref: '#/components/schemas/switch_port_usage_speed'
         storm_control:
+          description: Only if `mode`!=`dynamic`. Storm-control settings for this
+            port usage
           $ref: '#/components/schemas/switch_port_usage_storm_control'
         stp_disable:
           default: false
@@ -106064,13 +106088,17 @@ components:
       type: string
     switch_port_usage_dynamic_rule:
       additionalProperties: false
+      description: Dynamic port usage rule evaluated against LLDP, RADIUS, or peer
+        MAC attributes
       properties:
         description:
           description: Optional description of the rule
           type: string
         equals:
+          description: Exact value that the selected source attribute must match
           type: string
         equals_any:
+          description: List of values where any match satisfies this dynamic rule
           $ref: '#/components/schemas/switch_port_usage_dynamic_rule_equals_any'
         expression:
           description: '"[0:3]":"abcdef" -> "abc"
@@ -106080,9 +106108,10 @@ components:
             "split(-)[1][0:3]: "a1234-b5678-c90" -> "b56"'
           type: string
         src:
+          description: Source attribute evaluated by this dynamic rule
           $ref: '#/components/schemas/switch_port_usage_dynamic_rule_src'
         usage:
-          description: '`port_usage` name'
+          description: Port usage name to apply when this dynamic rule matches
           type: string
       required:
       - src
