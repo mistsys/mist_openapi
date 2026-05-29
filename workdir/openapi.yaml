@@ -93398,25 +93398,34 @@ components:
         \ can search for the when and where the violation occurs."
       properties:
         created_time:
+          description: Timestamp when the security policy was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique value identifying the security policy
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Timestamp when the security policy was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the security policy
           type: string
         org_id:
+          description: Organization identifier associated with the security policy
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site identifier associated with the security policy, when scoped to a site
           $ref: '#/components/schemas/site_id'
         wlans:
+          description: WLAN configurations audited by this security policy
           $ref: '#/components/schemas/secpolicy_wlans'
       type: object
     secpolicy_list:
+      description: Security policies returned by list operations
       items:
         $ref: '#/components/schemas/secpolicy'
       type: array
     secpolicy_wlans:
+      description: WLAN configurations audited by a security policy
       items:
         $ref: '#/components/schemas/wlan'
       type: array
