@@ -111278,45 +111278,58 @@ components:
       type: object
     webhook_alarm_event:
       additionalProperties: false
+      description: Alarm event delivered inside an `alarms` webhook payload
       properties:
         aps:
+          description: Representative AP MAC addresses related to this alarm event
           $ref: '#/components/schemas/webhook_alarm_event_aps'
         bssids:
+          description: Representative BSSIDs related to this alarm event
           $ref: '#/components/schemas/webhook_alarm_event_bssids'
         count:
-          description: If present, represents number of events of given type occurred
-            in current interval, default=1
+          description: If present, number of events of this type that occurred in
+            the current interval; defaults to 1
           readOnly: true
           type: integer
         event_id:
-          description: Event id
+          description: Unique identifier for this alarm webhook event
           format: uuid
           readOnly: true
           type: string
         for_site:
+          description: Whether this alarm event is scoped to a site rather than only
+            to the organization
           readOnly: true
           type: boolean
         id:
+          description: Unique identifier of the alarm associated with this event
           $ref: '#/components/schemas/id'
         last_seen:
+          description: Time when the most recent incident in the alarm window was
+            seen, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         node:
+          description: HA cluster node associated with this alarm event when applicable
           $ref: '#/components/schemas/ha_cluster_node_enum'
         org_id:
+          description: Organization associated with this alarm event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with this alarm event
           $ref: '#/components/schemas/site_id'
         ssids:
+          description: Representative wireless SSIDs related to this alarm event
           $ref: '#/components/schemas/webhook_alarm_event_ssids'
         timestamp:
+          description: Time when this alarm event was raised, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
-          description: Event type
+          description: Alarm type key for this event
           readOnly: true
           type: string
         update:
-          description: If presents, represents that this is an update to event with
-            given id sent earlier. default=false
+          description: Whether this payload updates an alarm event that was sent
+            earlier; defaults to false
           readOnly: true
           type: boolean
       required:
@@ -111327,16 +111340,21 @@ components:
       - type
       type: object
     webhook_alarm_event_aps:
+      description: Representative AP MAC address samples included for an alarm webhook
+        event
       items:
         type: string
       readOnly: true
       type: array
     webhook_alarm_event_bssids:
+      description: Representative BSSID samples included for an alarm webhook event
       items:
         type: string
       readOnly: true
       type: array
     webhook_alarm_event_ssids:
+      description: Representative wireless SSID samples included for an alarm webhook
+        event
       items:
         type: string
       readOnly: true
@@ -111353,8 +111371,10 @@ components:
         \ under \"fields\" array of /alarm_defs response object."
       properties:
         events:
+          description: Alarm events included in this webhook delivery
           $ref: '#/components/schemas/webhook_alarms_events'
         topic:
+          description: Webhook topic name for alarm event deliveries
           $ref: '#/components/schemas/webhook_alarms_topic'
       required:
       - events
