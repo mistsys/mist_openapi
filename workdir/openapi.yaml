@@ -64245,7 +64245,7 @@ components:
           description: Switch MAC addresses related to this alarm
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the alarm was raised, in epoch seconds
+          description: Time when the alarm was raised, in epoch seconds
         type:
           description: Key-name of the alarm type
           examples:
@@ -64515,7 +64515,7 @@ components:
           type: number
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when this anomaly data point was recorded, in epoch
+          description: Time when this anomaly data point was recorded, in epoch
             seconds
       required:
       - timestamp
@@ -67035,7 +67035,7 @@ components:
           description: Associated site identifier for this audit log entry
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the audited action occurred
+          description: Time when the audited action occurred
       required:
       - admin_id
       - admin_name
@@ -67547,7 +67547,7 @@ components:
           description: Current state of the BGP session
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when these BGP peer stats were sampled
+          description: Time when these BGP peer stats were sampled
         tx_pkts:
           $ref: '#/components/schemas/tx_pkts'
           description: Packets sent to this BGP neighbor
@@ -67635,7 +67635,7 @@ components:
           description: Current state of the BGP session
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when these BGP peer stats were sampled
+          description: Time when these BGP peer stats were sampled
         tx_pkts:
           $ref: '#/components/schemas/tx_pkts'
           description: Packets sent to this BGP neighbor
@@ -68217,7 +68217,7 @@ components:
           type: number
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when this call troubleshooting sample was recorded
+          description: Time when this call troubleshooting sample was recorded
         video_in:
           $ref: '#/components/schemas/call_troubleshoot_summary_data'
           description: Troubleshooting metrics for the inbound video stream
@@ -69438,7 +69438,7 @@ components:
           description: Wireless SSIDs used by the NAC client during the query duration
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the NAC client record was observed
+          description: Time when the NAC client record was observed
         type:
           $ref: '#/components/schemas/nac_access_type'
           description: Network access type for the NAC client
@@ -69617,7 +69617,7 @@ components:
             duration
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the wireless client record was observed
+          description: Time when the wireless client record was observed
         username:
           $ref: '#/components/schemas/client_wireless_username'
           description: User identities associated with the wireless client during
@@ -71217,7 +71217,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the NAC event occurred
+          description: Time when the NAC event occurred
         type:
           description: NAC event type key
           examples:
@@ -71820,7 +71820,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the device event occurred
+          description: Time when the device event occurred
         type:
           description: Device event type key
           type: string
@@ -73220,7 +73220,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the discovered switch data was observed
+          description: Time when the discovered switch data was observed
         vendor:
           description: Switch vendor reported for the discovered switch
           type: string
@@ -73682,7 +73682,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the roaming event occurred
+          description: Time when the roaming event occurred
         type:
           $ref: '#/components/schemas/event_fastroam_type'
           description: Fast-roam result category for the event
@@ -73730,7 +73730,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the other-device event occurred
+          description: Time when the other-device event occurred
         type:
           description: Event type for the other-device event
           examples:
@@ -73780,7 +73780,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the client event occurred
+          description: Time when the client event occurred
         type:
           description: Event type, e.g. MARVIS_EVENT_CLIENT_FBT_FAILURE
           type: string
@@ -73855,7 +73855,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the rogue event was observed
+          description: Time when the rogue event was observed
       required:
       - ssid
       - bssid
@@ -73897,7 +73897,7 @@ components:
           type: integer
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the SkyATP event occurred
+          description: Time when the SkyATP event occurred
         type:
           description: SkyATP event type, such as `cc`, `fs`, or `mw`
           readOnly: true
@@ -74580,7 +74580,7 @@ components:
           description: Site associated with the fingerprint record
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the fingerprint record was observed
+          description: Time when the fingerprint record was observed
       type: object
     fingerprint_search_result:
       additionalProperties: false
@@ -74667,7 +74667,7 @@ components:
           - 'null'
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the firmware update status was last updated
+          description: Time when the firmware update status was last updated
         will_retry:
           description: Whether the firmware update process will retry after the current
             status
@@ -78525,7 +78525,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the last trouble code was reported
+          description: Time when the last trouble code was reported
       type: object
     last_username:
       description: If dot1x authentication, the username used during the latest authentication.
@@ -78907,7 +78907,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the log event occurred
+          description: Time when the log event occurred
       required:
       - message
       - org_id
@@ -80859,7 +80859,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the Mist Edge event occurred
+          description: Time when the Mist Edge event occurred
         to_version:
           description: Service version after an upgrade-related event
           type: string
@@ -81839,7 +81839,7 @@ components:
           description: Wireless network SSID used for the NAC session
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the NAC event occurred
+          description: Time when the NAC event occurred
         type:
           $ref: '#/components/schemas/nac_event_type'
           description: NAC event type code
@@ -83631,7 +83631,7 @@ components:
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when the organization event occurred
+          description: Time when the organization event occurred
         type:
           description: Event type code for this organization event
           examples:
@@ -107563,7 +107563,7 @@ components:
           type: number
         timestamp:
           $ref: '#/components/schemas/timestamp'
-          description: Timestamp when this call troubleshooting sample was recorded
+          description: Time when this call troubleshooting sample was recorded
         video_in:
           $ref: '#/components/schemas/call_troubleshoot_data'
           description: Troubleshooting metrics for the inbound video stream
