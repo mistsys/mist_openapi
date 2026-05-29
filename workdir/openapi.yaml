@@ -88448,18 +88448,25 @@ components:
       type: object
     response_discovered_switch_metrics:
       additionalProperties: false
+      description: Paginated response for discovered switch metric search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the metric search window
           type: number
         limit:
+          description: Maximum number of discovered switch metric records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of discovered switch metric records
           type: string
         results:
+          description: Discovered switch metric records matching the search filters
           $ref: '#/components/schemas/response_discovered_switch_metrics_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the metric search window
           type: number
         total:
+          description: Number of discovered switch metric records matching the search filters across all pages
           type: integer
       required:
       - results
@@ -88474,18 +88481,25 @@ components:
       type: array
     response_discovered_switches:
       additionalProperties: false
+      description: Paginated response for discovered switch search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the discovered switch search window
           type: number
         limit:
+          description: Maximum number of discovered switch records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of discovered switch records
           type: string
         results:
+          description: Discovered switch records matching the search filters
           $ref: '#/components/schemas/response_discovered_switches_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the discovered switch search window
           type: number
         total:
+          description: Number of discovered switch records matching the search filters across all pages
           type: integer
       required:
       - end
