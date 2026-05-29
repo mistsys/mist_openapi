@@ -114974,6 +114974,7 @@ components:
           - string
           - 'null'
         legacy:
+          description: If `template`==`custom`, legacy 802.11 data rates allowed on this WLAN
           $ref: '#/components/schemas/wlan_datarates_legacy'
         min_rssi:
           default: 0
@@ -114982,6 +114983,7 @@ components:
           - -70
           type: integer
         template:
+          description: Data rate template used to derive WLAN rate settings
           $ref: '#/components/schemas/wlan_datarates_template'
         vht:
           description: If `template`==`custom`. MCS bitmasks for 4 streams (16-bit
@@ -115064,6 +115066,7 @@ components:
       properties:
         enabled:
           default: false
+          description: Whether DNS server rewrite by RADIUS group is enabled for this WLAN
           type: boolean
         radius_groups:
           additionalProperties:
