@@ -112199,12 +112199,15 @@ components:
       description: Sample of the `guest-authorizations` webhook payload.
       properties:
         events:
+          description: Guest authorization events included in this webhook delivery
           $ref: '#/components/schemas/webhook_guest_authorizations_events'
         topic:
+          description: Webhook topic name for guest authorization deliveries
           $ref: '#/components/schemas/webhook_guest_authorizations_topic'
       type: object
     webhook_guest_authorizations_event:
       additionalProperties: false
+      description: Guest portal authorization event with registration and WLAN context
       properties:
         ap:
           description: MAC address of the AP handling the guest authorization
@@ -112239,12 +112242,12 @@ components:
           - ac2316eca70a
           type: string
         company:
-          description: Company name provided by the guest during registration
+          description: Guest company name provided during registration
           examples:
           - MIST
           type: string
         email:
-          description: Email address provided by the guest during registration
+          description: Guest email address provided during registration
           examples:
           - abcd@abcd.com
           type: string
@@ -112269,7 +112272,7 @@ components:
           - field4 value
           type: string
         mobile:
-          description: Mobile phone number provided by the guest during registration
+          description: Guest mobile phone number provided during registration
           examples:
           - +0123456789
           type: string
@@ -112279,8 +112282,10 @@ components:
           - Dr Strange
           type: string
         org_id:
+          description: Organization associated with the guest authorization event
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site associated with the guest authorization event
           $ref: '#/components/schemas/site_id'
         sms_gateway:
           description: SMS provider used for text-message authentication
@@ -112293,7 +112298,7 @@ components:
           - sponsor@gmail.com
           type: string
         ssid:
-          description: SSID on which the guest was authorized
+          description: WLAN SSID on which the guest was authorized
           examples:
           - Portal Auth
           type: string
