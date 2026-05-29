@@ -108485,83 +108485,107 @@ components:
       type: array
     ui_settings_tile:
       additionalProperties: false
+      description: Tile shown on a site UI databoard
       properties:
         chartBand:
+          description: Band or category filter applied to the tile chart
           examples:
           - 2.4 ghz
           type: string
         chartColor:
+          description: Hex color used to render the tile chart
           examples:
           - '#00B4AD'
           type: string
         chartDirection:
+          description: Traffic direction displayed by the tile chart
           examples:
           - tx + rx
           type: string
         chartRankBy:
+          description: Ranking field used by the tile chart
           type: string
         chartType:
+          description: Visualization chart type for this tile
           examples:
           - timeSeries
           type: string
         colspan:
+          description: Number of grid columns spanned by this tile
           examples:
           - 5
           type: integer
         column:
+          description: Grid column where this tile starts
           examples:
           - 1
           type: integer
         hideEmptyRows:
+          description: Whether empty rows are hidden in this tile
           type: boolean
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for this databoard tile
         metric:
+          description: Selected measurement configuration displayed by this tile
           $ref: '#/components/schemas/ui_settings_tile_metric'
         name:
+          description: Display name of this databoard tile
           examples:
           - New Analysis
           type: string
         row:
+          description: Grid row where this tile starts
           examples:
           - 1
           type: integer
         rowspan:
+          description: Number of grid rows spanned by this tile
           examples:
           - 2
           type: integer
         scopeId:
+          description: Identifier of the scope used by this tile
           examples:
           - e0c767834b4c
           type: string
         scopeType:
+          description: Type of scope used by this tile
           examples:
           - client
           type: string
         sortedColumnIds:
+          description: Column identifiers that define the tile sort order
           $ref: '#/components/schemas/ui_settings_tile_sorted_columns_ids'
         timeRange:
+          description: Time range override for this tile
           $ref: '#/components/schemas/ui_settings_tile_time_range'
         trendType:
+          description: Rendering style for trend data in this tile
           examples:
           - line
           type: string
         vizType:
+          description: Display visualization type used by this tile
           examples:
           - averageTimeSeriesChart
           type: string
       type: object
     ui_settings_tile_metric:
       additionalProperties: false
+      description: Metric selected for a site UI databoard tile
       properties:
         apiName:
+          description: Metric API name requested by this tile
           examples:
           - client_dhcp_latency
           type: string
       type: object
     ui_settings_tile_sorted_columns_id:
+      description: Identifier of a table column used for tile sorting
       type: string
     ui_settings_tile_sorted_columns_ids:
+      description: Ordered tile table column identifiers used for sorting
       items:
         $ref: '#/components/schemas/ui_settings_tile_sorted_columns_id'
       type: array
@@ -108606,6 +108630,7 @@ components:
           type: boolean
       type: object
     ui_settings_tiles:
+      description: List of tiles in a site UI databoard
       items:
         $ref: '#/components/schemas/ui_settings_tile'
       type: array
