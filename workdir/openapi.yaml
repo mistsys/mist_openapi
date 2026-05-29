@@ -81922,6 +81922,8 @@ components:
       readOnly: true
       type: array
     nac_client_ap:
+      description: AP MAC addresses observed for the NAC client during the selected
+        time range
       examples:
       - - 5c5b35bf16bb
         - d4dc090041b4
@@ -82045,6 +82047,7 @@ components:
           type: string
       type: object
     nac_client_event_idp_role:
+      description: Identity provider roles or groups returned for a NAC client event
       examples:
       - - itsuperusers
         - vip
@@ -82060,6 +82063,7 @@ components:
         type: string
       type: array
     nac_client_events:
+      description: List of NAC authentication events
       items:
         $ref: '#/components/schemas/nac_client_event'
       type: array
@@ -82136,6 +82140,7 @@ components:
           type: string
       type: object
     nac_crl_files:
+      description: List of uploaded NAC CRL file metadata
       items:
         $ref: '#/components/schemas/nac_crl_file'
       type: array
@@ -82534,6 +82539,7 @@ components:
       - marvis_client
       type: string
     nac_portals:
+      description: List of NAC portal configurations
       items:
         $ref: '#/components/schemas/nac_portal'
       type: array
@@ -82670,6 +82676,7 @@ components:
         type: string
       type: array
     nac_rule_matching_nactags:
+      description: NAC tag identifiers used as rule-matching criteria
       examples:
       - - 041d5d36-716c-4cfb-4988-3857c6aa14a2
         - a809a97f-d599-f812-eb8c-c3f84aabf6ba
@@ -82690,6 +82697,7 @@ components:
       - wireless
       type: string
     nac_rule_matching_port_types:
+      description: Wired or wireless access types used as NAC rule-matching criteria
       examples:
       - - wired
       items:
@@ -82721,6 +82729,7 @@ components:
         type: string
       type: array
     nac_rules:
+      description: List of NAC authentication policy rules
       items:
         $ref: '#/components/schemas/nac_rule'
       type: array
@@ -82915,6 +82924,7 @@ components:
         type: string
       type: array
     nac_tags:
+      description: List of NAC tags
       items:
         $ref: '#/components/schemas/nac_tag'
       type: array
@@ -83042,6 +83052,7 @@ components:
       type: object
     network_internet_access_destination_nat_property:
       additionalProperties: false
+      description: Direct-internet destination NAT rule target settings
       properties:
         internal_ip:
           description: The Destination NAT destination IP Address. Must be an IP (i.e.
@@ -83075,6 +83086,7 @@ components:
       type: object
     network_internet_access_static_nat_property:
       additionalProperties: false
+      description: Direct-internet static NAT rule target settings
       properties:
         internal_ip:
           description: The Static NAT destination IP Address. Must be an IP Address
@@ -83113,6 +83125,7 @@ components:
       type: object
     network_multicast_group:
       additionalProperties: false
+      description: Multicast group rendezvous point mapping
       properties:
         rp_ip:
           description: RP (rendezvous point) IP Address
@@ -83255,6 +83268,7 @@ components:
         type: string
       type: array
     network_templates:
+      description: List of network templates
       items:
         $ref: '#/components/schemas/network_template'
       type: array
@@ -83267,6 +83281,7 @@ components:
           description: IP addresses or subnets assigned to this tenant in the network
       type: object
     network_tenant_addresses:
+      description: IP addresses or subnets assigned to a network tenant
       items:
         description: The user/tenant IP Address (i.e. "192.168.70.30"), an Subnet
           (i.e. "192.168.70.0/24") or a Variable (i.e. "{{myvar}}")
@@ -83371,6 +83386,7 @@ components:
       type: object
     network_vpn_access_destination_nat_property:
       additionalProperties: false
+      description: VPN access destination NAT rule target settings
       properties:
         internal_ip:
           description: The Destination NAT destination IP Address. Must be an IP (i.e.
@@ -83397,6 +83413,7 @@ components:
       type: object
     network_vpn_access_static_nat_property:
       additionalProperties: false
+      description: VPN access static NAT rule target settings
       properties:
         internal_ip:
           description: The Static NAT destination IP Address. Must be an IP Address
@@ -83411,6 +83428,7 @@ components:
           type: string
       type: object
     networks:
+      description: List of organization network definitions
       items:
         $ref: '#/components/schemas/network'
       type: array
@@ -83428,6 +83446,7 @@ components:
           type: string
         type: array
     note_string:
+      description: Request body containing a note value
       properties:
         note:
           description: Some text note describing the intent
@@ -83451,10 +83470,12 @@ components:
         type: string
       type: array
     number_or_null:
+      description: Numeric value or null
       oneOf:
       - type: number
       - type: 'null'
     oauth_account_errors:
+      description: Read-only OAuth account error messages
       examples:
       - - OAuth token refresh failed, please re-link your account
         - API daily rate limit reached for your account
@@ -83511,6 +83532,7 @@ components:
       type: object
     optic_port_config_port:
       additionalProperties: false
+      description: Per-interface optic port override settings
       properties:
         channelized:
           default: false
