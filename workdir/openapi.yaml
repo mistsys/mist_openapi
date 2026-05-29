@@ -62835,6 +62835,8 @@ components:
       description: Example response
   schemas:
     aamw_profile:
+      description: Advanced Anti Malware profile that controls Sky ATP file verdict
+        handling
       properties:
         categories:
           $ref: '#/components/schemas/aamw_profile_categories'
@@ -62882,11 +62884,13 @@ components:
       - permit
       type: string
     aamw_profile_categories:
+      description: File category rules included in an Advanced Anti Malware profile
       items:
         $ref: '#/components/schemas/aamw_profile_category'
       type: array
     aamw_profile_category:
       additionalProperties: false
+      description: File category rule for Advanced Anti Malware inspection
       properties:
         category:
           $ref: '#/components/schemas/aamw_profile_category_category'
@@ -62914,10 +62918,12 @@ components:
       - script
       type: string
     aamw_profiles:
+      description: List of Advanced Anti Malware profiles
       items:
         $ref: '#/components/schemas/aamw_profile'
       type: array
     account_cradlepoint_config:
+      description: Cradlepoint account credentials and LLDP integration settings
       properties:
         cp_api_id:
           description: Cradlepoint API ID used by Mist for the integration
@@ -62989,6 +62995,7 @@ components:
       - smartgroup_name
       type: object
     account_jse_config:
+      description: Juniper Security Exchange account credentials used for integration
       properties:
         cloud_name:
           description: JSE cloud hostname used for the integration
@@ -63013,6 +63020,7 @@ components:
       type: object
     account_jse_info:
       additionalProperties: false
+      description: Linked Juniper Security Exchange account information
       properties:
         cloud_name:
           description: JSE cloud hostname configured for the integration
@@ -63029,6 +63037,7 @@ components:
           type: string
       type: object
     account_juniper_config:
+      description: Juniper account credentials used to link the integration
       properties:
         password:
           description: Authentication password for the Juniper account
@@ -63046,6 +63055,7 @@ components:
       - password
       type: object
     account_juniper_info:
+      description: Linked Juniper account information returned by the integration
       properties:
         accounts:
           $ref: '#/components/schemas/juniper_accounts'
@@ -63053,6 +63063,7 @@ components:
       type: object
     account_mobicontrol_config:
       additionalProperties: false
+      description: MobiControl account credentials used for OAuth application linking
       properties:
         client_id:
           description: Customer account Client ID
@@ -63078,6 +63089,8 @@ components:
       - password
       type: object
     account_oauth_add:
+      description: Account configuration payload for adding a supported OAuth-linked
+        application
       oneOf:
       - $ref: '#/components/schemas/account_jamf_config'
       - $ref: '#/components/schemas/account_vmware_config'
@@ -63109,6 +63122,7 @@ components:
       type: object
     account_oauth_info:
       additionalProperties: false
+      description: OAuth-linked application account status and authorization details
       properties:
         accounts:
           $ref: '#/components/schemas/account_oauth_info_accounts'
@@ -63307,6 +63321,7 @@ components:
       type: object
     account_oauth_info_account_region:
       additionalProperties: false
+      description: Prisma Access region bandwidth allocation for a linked OAuth account
       properties:
         aggregate_region:
           description: Bandwidth Aggregate region for this region
@@ -63333,6 +63348,7 @@ components:
       type: object
     account_oauth_info_account_service_connection:
       additionalProperties: false
+      description: Prisma Access service connection region for a linked OAuth account
       properties:
         region:
           description: Prisma Access region where this service connection is provisioned
@@ -63406,6 +63422,7 @@ components:
       - www.amerskyatp.com
       type: string
     account_skyatp_config:
+      description: Sky ATP account credentials and realm settings used for integration
       properties:
         cloud_name:
           $ref: '#/components/schemas/account_skyatp_cloud_name'
@@ -63432,6 +63449,7 @@ components:
       - password
       type: object
     account_skyatp_data:
+      description: Sky ATP SecIntel feed data and generated list URLs
       properties:
         secintel:
           $ref: '#/components/schemas/account_skyatp_data_secintel'
@@ -63463,6 +63481,7 @@ components:
       type: object
     account_skyatp_info:
       additionalProperties: false
+      description: Linked Sky ATP account and realm information
       properties:
         cloud_name:
           $ref: '#/components/schemas/account_skyatp_cloud_name'
@@ -63480,6 +63499,8 @@ components:
       type: object
     account_vmware_config:
       additionalProperties: false
+      description: VMware account credentials and webhook settings for OAuth application
+        linking
       properties:
         client_id:
           description: Customer account Client ID
@@ -63579,6 +63600,7 @@ components:
           type: string
       type: object
     acl_policies:
+      description: List of ACL policy definitions
       items:
         $ref: '#/components/schemas/acl_policy'
       type: array
@@ -63604,6 +63626,7 @@ components:
       type: object
     acl_policy_action:
       additionalProperties: false
+      description: Action applied to traffic that matches a destination ACL tag
       properties:
         action:
           $ref: '#/components/schemas/allow_deny'
@@ -63693,6 +63716,8 @@ components:
       type: array
     acl_tag_spec:
       additionalProperties: false
+      description: Layer 4 protocol and destination-port match constraint for an
+        ACL tag
       properties:
         port_range:
           default: '0'
@@ -63757,10 +63782,12 @@ components:
       description: List or Comma separated list of additional VLAN IDs (on the LAN
         side or from other WLANs) should we be forwarding bonjour queries/responses
     additional_vlan_ids_array:
+      description: Additional VLAN IDs represented as an array
       items:
         $ref: '#/components/schemas/vlan_id_with_variable'
       type: array
     admin:
+      description: Mist administrator account or organization API token details
       properties:
         admin_id:
           $ref: '#/components/schemas/admin_id'
@@ -63867,6 +63894,7 @@ components:
       readOnly: true
       type: string
     admin_invite:
+      description: Administrator invitation and initial registration payload
       properties:
         account_only:
           default: false
@@ -64062,10 +64090,13 @@ components:
       format: uuid
       type: string
     admin_privilege_sitegroup_ids:
+      description: Site group identifiers granted by an admin privilege when scope
+        is `sitegroup`
       items:
         $ref: '#/components/schemas/sitegroup_id'
       type: array
     admin_privilege_view:
+      description: UI view name allowed by a custom admin role
       enum:
       - lobby_admin
       - location
@@ -64104,17 +64135,20 @@ components:
       type: array
       uniqueItems: true
     admin_tags:
+      description: Read-only tags associated with an administrator account
       items:
         type: string
       readOnly: true
       type: array
     admins:
+      description: List of Mist administrator accounts
       items:
         $ref: '#/components/schemas/admin'
       type: array
       uniqueItems: true
     aggregate_route:
       additionalProperties: false
+      description: Aggregate route configuration for a network or routing instance
       properties:
         discard:
           default: false
