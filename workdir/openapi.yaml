@@ -64297,6 +64297,7 @@ components:
       - count
       type: object
     alarm_ack:
+      description: Request body for acknowledging or unacknowledging alarms
       properties:
         alarm_ids:
           $ref: '#/components/schemas/alarm_ack_alarm_ids'
@@ -64310,6 +64311,7 @@ components:
       - alarm_ids
       type: object
     alarm_ack_alarm_ids:
+      description: Alarm identifiers included in an alarm acknowledgement request
       examples:
       - - ccb8c94d-ca56-4075-932f-1f2ab444ff2c
         - 98ff4a3d-ec9b-4138-a42e-54fc3335179d
@@ -64367,12 +64369,14 @@ components:
         type: string
       type: array
     alarm_ids:
+      description: List of alarm identifiers
       items:
         format: uuid
         type: string
       type: array
     alarm_search_result:
       additionalProperties: false
+      description: Paginated response returned by an alarm search
       properties:
         component:
           description: Alarm component matched by the search result
@@ -64418,6 +64422,7 @@ components:
       - results
       type: object
     alarm_search_results:
+      description: Alarm records returned by an alarm search response
       items:
         $ref: '#/components/schemas/alarm'
       type: array
@@ -64499,6 +64504,7 @@ components:
       type: object
     alarm_template_rule:
       additionalProperties: false
+      description: Per-alarm enablement and delivery override in an alarm template
       properties:
         delivery:
           $ref: '#/components/schemas/delivery'
@@ -64509,10 +64515,13 @@ components:
           type: boolean
       type: object
     alarm_templates:
+      description: List of alarm templates
       items:
         $ref: '#/components/schemas/alarm_template'
       type: array
     alarms:
+      description: Alarm identifiers and optional note used for bulk alarm state
+        changes
       properties:
         alarm_ids:
           $ref: '#/components/schemas/alarm_ids'
@@ -64559,6 +64568,7 @@ components:
       - events
       type: object
     anomaly_events:
+      description: Event names associated with an anomaly record
       items:
         readOnly: true
         type: string
@@ -64614,6 +64624,7 @@ components:
       type: object
     ap_airista:
       additionalProperties: false
+      description: Airista RTLS integration settings for an AP
       properties:
         enabled:
           default: false
@@ -64636,6 +64647,7 @@ components:
       type: object
     ap_centrak:
       additionalProperties: false
+      description: CenTrak integration settings for an AP
       properties:
         enabled:
           default: false
@@ -64643,6 +64655,7 @@ components:
           type: boolean
       type: object
     ap_channel_band24_channel:
+      description: Supported 2.4 GHz channel numbers for a channel-width group
       items:
         examples:
         - 1
@@ -64679,6 +64692,7 @@ components:
         - 11
       type: object
     ap_channel_band5_channel:
+      description: Supported 5 GHz channel numbers for a channel-width group
       items:
         examples:
         - 36
@@ -64810,6 +64824,7 @@ components:
         - 165
       type: object
     ap_channel_band6_channel:
+      description: Supported 6 GHz channel numbers for a channel-width group
       items:
         examples:
         - 1
@@ -65072,6 +65087,7 @@ components:
       type: object
     ap_client_bridge:
       additionalProperties: false
+      description: AP client bridge mode configuration
       properties:
         auth:
           $ref: '#/components/schemas/ap_client_bridge_auth'
@@ -65091,6 +65107,7 @@ components:
       type: object
     ap_client_bridge_auth:
       additionalProperties: false
+      description: Authentication settings for the AP client bridge uplink
       properties:
         psk:
           description: Pre-shared key used when `type`==`psk` for client bridge authentication
@@ -65115,6 +65132,7 @@ components:
       type: string
     ap_esl_config:
       additionalProperties: false
+      description: Electronic shelf label integration settings for an AP
       properties:
         cacert:
           description: Only if `type`==`imagotag` or `type`==`native`
@@ -65169,6 +65187,7 @@ components:
       - imagotag
       type: string
     ap_import_json:
+      description: AP device records supplied in a JSON import payload
       items:
         $ref: '#/components/schemas/device_ap'
       type: array
@@ -65931,6 +65950,7 @@ components:
         type: string
       type: array
     ap_radio_macs:
+      description: Access point radio MAC records supplied in an import payload
       items:
         $ref: '#/components/schemas/ap_radio_mac'
       minItems: 1
@@ -66444,6 +66464,7 @@ components:
         type: integer
       type: array
     ap_template:
+      description: Access point template configuration
       properties:
         ap_matching:
           $ref: '#/components/schemas/ap_template_matching'
@@ -66476,6 +66497,7 @@ components:
       type: object
     ap_template_matching:
       additionalProperties: false
+      description: Rules that select which AP template port configuration applies
       properties:
         enabled:
           description: Whether AP matching is enabled for this AP template
@@ -66487,6 +66509,7 @@ components:
       type: object
     ap_template_matching_rule:
       additionalProperties: false
+      description: Model and name match criteria for an AP template port configuration
       properties:
         match_model:
           description: Access point model matched by this AP template rule
@@ -66503,12 +66526,14 @@ components:
           type: object
       type: object
     ap_template_matching_rules:
+      description: Ordered AP template matching rules
       items:
         $ref: '#/components/schemas/ap_template_matching_rule'
       type: array
       uniqueItems: true
     ap_template_wifi:
       additionalProperties: false
+      description: Wi-Fi behavior settings applied by an AP template
       properties:
         cisco_enabled:
           description: Whether Cisco-specific Wi-Fi compatibility behavior is enabled
@@ -66556,6 +66581,7 @@ components:
           type: boolean
       type: object
     ap_templates:
+      description: List of AP templates
       items:
         $ref: '#/components/schemas/ap_template'
       type: array
@@ -66677,6 +66703,7 @@ components:
       type: string
     api_usage:
       additionalProperties: false
+      description: API rate-limit usage status for the current user or API token
       properties:
         request_limit:
           default: 5000
