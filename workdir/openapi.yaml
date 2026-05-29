@@ -87131,29 +87131,35 @@ components:
         $ref: '#/components/schemas/remote_syslog_user'
       type: array
     replace_device:
+      description: Request payload for replacing an inventory device with a claimed,
+        unassigned device
       properties:
         discard:
           $ref: '#/components/schemas/replace_device_discard'
+          description: Existing device attributes that should not be copied to the
+            replacement device
         inventory_mac:
-          description: MAC Address of the inventory that will be replacing the old
-            one. It has to be claimed and unassigned
+          description: MAC address of the claimed, unassigned inventory device that
+            will replace the old device
           examples:
           - 5c5b35000301
           type: string
         mac:
-          description: MAC Address of the device to replace
+          description: Device MAC address being replaced
           examples:
           - 5c5b35000101
           type: string
         site_id:
-          description: Site_id of the device to be replaced
+          description: Site containing the device being replaced
           examples:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           type: string
         tunterm_port_config:
           $ref: '#/components/schemas/tunterm_port_config'
+          description: Tunnel termination Ethernet port configuration for a Mist Edge
+            replacement
     replace_device_discard:
-      description: "Attributes that you don\u2019t want to copy"
+      description: Attributes that should not be copied to the replacement device
       items:
         type: string
       type: array
