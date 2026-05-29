@@ -101243,10 +101243,13 @@ components:
       type: object
     stats_gateway_mac_table_stats:
       additionalProperties: false
+      description: Gateway MAC table utilization counters
       properties:
         mac_table_count:
+          description: Number of MAC table entries currently learned by the gateway
           type: integer
         max_mac_entries_supported:
+          description: Maximum MAC table entries supported by the gateway
           type: integer
       type: object
     stats_gateway_module_stat:
@@ -101599,60 +101602,86 @@ components:
       type: array
     stats_gateway_service_status:
       additionalProperties: false
+      description: Gateway security service installation and runtime status
       properties:
         appid_install_result:
+          description: Installation result reported for the AppID package
           type: string
         appid_install_timestamp:
+          description: Installation time reported for the AppID package
           type: string
         appid_status:
+          description: Operational status of the AppID service on the gateway
           type: string
         appid_version:
+          description: Installed AppID package version number
           type: integer
         ewf_status:
+          description: Enhanced Web Filtering service status reported by the gateway
           type: string
         idp_install_result:
+          description: Installation result reported for the intrusion detection and
+            prevention package
           type: string
         idp_install_timestamp:
+          description: Installation time reported for the intrusion detection and
+            prevention package
           type: string
         idp_policy:
+          description: Intrusion detection and prevention policy applied to the gateway
           type: string
         idp_status:
+          description: Intrusion detection and prevention service status reported
+            by the gateway
           type: string
         idp_update_timestamp:
+          description: Last update time reported for the intrusion detection and prevention
+            package
           type: string
       type: object
     stats_gateway_spu:
+      description: Services Processing Unit statistics reported by a gateway
       items:
         $ref: '#/components/schemas/stats_gateway_spu_item'
       type: array
     stats_gateway_spu_item:
       additionalProperties: false
+      description: Services Processing Unit resource and session counters
       properties:
         spu_cpu:
+          description: CPU utilization reported for the Services Processing Unit
           examples:
           - 3670632
           type: integer
         spu_current_session:
+          description: Current session count handled by the Services Processing Unit
           examples:
           - 215
           type: integer
         spu_max_session:
+          description: Maximum sessions supported by the Services Processing Unit
           examples:
           - 131072
           type: integer
         spu_memory:
+          description: Memory utilization reported for the Services Processing Unit
           examples:
           - 46
           type: integer
         spu_pending_session:
+          description: Pending session count on the Services Processing Unit
           examples:
           - 0
           type: integer
         spu_uptime:
+          description: Elapsed time since the Services Processing Unit started, in
+            seconds
           examples:
           - 0
           type: integer
         spu_valid_session:
+          description: Valid session count currently tracked by the Services Processing
+            Unit
           type: integer
     stats_gateway_vpn_peer:
       additionalProperties: false
