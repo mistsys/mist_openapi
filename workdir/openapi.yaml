@@ -102012,9 +102012,10 @@ components:
       type: array
     stats_mxedge_cpu_stat:
       additionalProperties: false
-      description: CPU/core stats list
+      description: Aggregate and per-core CPU utilization statistics for a Mist Edge
       properties:
         cpus:
+          description: Per-core CPU utilization statistics keyed by CPU name
           $ref: '#/components/schemas/stats_mxedge_cpu_stat_cpus'
         idle:
           description: Percentage of Idle, Idle/(Idle + Busy) since last sampling
@@ -102092,20 +102093,22 @@ components:
       type: object
     stats_mxedge_ip_stat:
       additionalProperties: false
-      description: IP stats
+      description: IP address statistics reported by a Mist Edge
       properties:
         ip:
+          description: Primary IPv4 address reported for the Mist Edge
           examples:
           - 192.168.1.244
           type: string
         ip6:
+          description: Primary IPv6 address reported for the Mist Edge
           examples:
           - fd4e:c615:b27d:5555::45
           type: string
         ips:
           additionalProperties:
             type: string
-          description: Property key is the interface name. IPs for each net interface
+          description: Interface IP addresses keyed by interface name
           examples:
           - ens18: 92.168.1.244/24,fd4e:c615:b27d:5555::45/128,fd4e:c615:b27d:5555:20c:29ff:fe44:af25/64,fe80::104c:ffff:fee0:caf8/64
           type: object
@@ -102113,30 +102116,33 @@ components:
           additionalProperties:
             description: MAC addresses for each net interface
             type: string
-          description: Property key is the interface name. MAC for each net interface
+          description: Interface MAC addresses keyed by interface name
           examples:
           - ens18: e4434b217044
           type: object
         netmask:
+          description: IPv4 netmask reported for the primary Mist Edge address
           examples:
           - 255.255.255.0
           type: string
         netmask6:
+          description: IPv6 prefix length reported for the primary Mist Edge address
           examples:
           - /128
           type: string
       type: object
     stats_mxedge_lag_stat:
       additionalProperties: false
+      description: Link aggregation group status for a Mist Edge
       properties:
         active_ports:
+          description: Ports currently active in the link aggregation group
           $ref: '#/components/schemas/stats_mxedge__active_ports'
       type: object
     stats_mxedge_lag_stats:
       additionalProperties:
         $ref: '#/components/schemas/stats_mxedge_lag_stat'
-      description: Stat for LAG (Link Aggregation Group). Property key is the LAG
-        name
+      description: Link aggregation group statistics keyed by LAG name
       examples:
       - lacp0:
           active_ports:
@@ -102145,7 +102151,7 @@ components:
       type: object
     stats_mxedge_memory_stat:
       additionalProperties: false
-      description: Memory usage
+      description: Memory usage counters reported by a Mist Edge
       properties:
         active:
           description: The amount of memory, in kilobytes, that has been used more
@@ -102200,12 +102206,13 @@ components:
           - 1022357504
           type: integer
         total:
-          description: Total amount of usable RAM, in kilobytes, which is physical
+          description: Usable RAM total, in kilobytes, which is physical
             RAM minus a number of reserved bits and the kernel binary code
           examples:
           - 8365957120
           type: integer
         usage:
+          description: Memory utilization percentage reported by the Mist Edge
           examples:
           - 48
           type: integer
