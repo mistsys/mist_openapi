@@ -91400,54 +91400,74 @@ components:
       type: object
     response_switch_metrics:
       additionalProperties: false
+      description: Switch metrics returned for the requested site or switch scope
       properties:
         active_ports_summary:
+          description: Summary metric for active switch ports
           $ref: '#/components/schemas/response_switch_metrics_active_ports_summary'
         config_success:
+          description: Configuration success metric for switches in the requested scope
           $ref: '#/components/schemas/response_switch_metrics_config_success'
         version_compliance:
+          description: Software version compliance metric for switches in the requested scope
           $ref: '#/components/schemas/response_switch_metrics_version_compliance'
       type: object
     response_switch_metrics_active_ports_summary:
       additionalProperties: false
+      description: Active-port summary metric for switches in the requested scope
       properties:
         details:
+          description: Port counts used to calculate the active-port summary metric
           $ref: '#/components/schemas/switch_metrics_active_ports_summary_details'
         score:
+          description: Reported metric score for active switch ports
           type: integer
         total_switch_count:
+          description: Number of switches included in the active-port summary metric
           type: integer
       type: object
     response_switch_metrics_config_success:
       additionalProperties: false
+      description: Configuration success metric for switches in the requested scope
       properties:
         details:
+          description: Configuration success counts used to calculate the metric
           $ref: '#/components/schemas/response_switch_metrics_config_success_details'
         score:
+          description: Reported metric score for switch configuration success
           type: integer
         total_switch_count:
+          description: Number of switches included in the configuration success metric
           type: integer
       type: object
     response_switch_metrics_config_success_details:
       additionalProperties: false
+      description: Detail values for the switch configuration success metric
       properties:
         config_success_count:
+          description: Number of switches with successful configuration status
           type: integer
       type: object
     response_switch_metrics_version_compliance:
       additionalProperties: false
+      description: Version compliance metric for switches in the requested scope
       properties:
         details:
+          description: Version groupings used to calculate the compliance metric
           $ref: '#/components/schemas/response_switch_metrics_version_compliance_details'
         score:
+          description: Reported metric score for switch software version compliance
           type: integer
         total_switch_count:
+          description: Number of switches included in the version compliance metric
           type: integer
       type: object
     response_switch_metrics_version_compliance_details:
       additionalProperties: false
+      description: Detail values for the switch software version compliance metric
       properties:
         major_versions:
+          description: Software version groupings found among the evaluated switches
           $ref: '#/components/schemas/switch_metrics_compliance_major_versions'
       type: object
     response_switch_port_search:
@@ -103295,25 +103315,34 @@ components:
       type: string
     switch_metrics_active_ports_summary_details:
       additionalProperties: false
+      description: Port counts used by the active-port switch metric
       properties:
         active_port_count:
+          description: Number of active ports observed across evaluated switches
           type: integer
         total_port_count:
+          description: Total number of ports evaluated for the active-port metric
           type: integer
       type: object
     switch_metrics_compliance_major_version:
       additionalProperties: false
+      description: Version compliance grouping for one switch model
       properties:
         major_count:
+          description: Number of switches in this software version grouping
           type: integer
         major_version:
+          description: Software version represented by this compliance grouping
           type: string
         model:
+          description: Switch model represented by this compliance grouping
           type: string
         system_names:
+          description: Switch system names included in this compliance grouping
           $ref: '#/components/schemas/strings'
       type: object
     switch_metrics_compliance_major_versions:
+      description: Software version compliance groupings by switch model and version
       items:
         $ref: '#/components/schemas/switch_metrics_compliance_major_version'
       type: array
