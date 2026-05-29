@@ -91036,18 +91036,25 @@ components:
       type: object
     response_site_search:
       additionalProperties: false
+      description: Paginated response for organization site search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the site search window
           type: integer
         limit:
+          description: Maximum number of site records returned in this page
           type: integer
         next:
+          description: URL for retrieving the next page of site search results
           type: string
         results:
+          description: Site records matching the organization search filters
           $ref: '#/components/schemas/response_site_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the site search window
           type: integer
         total:
+          description: Number of site records matching the search filters across all pages
           type: integer
       required:
       - results
@@ -91058,36 +91065,49 @@ components:
       type: object
     response_site_search_item:
       additionalProperties: false
+      description: Site record returned by organization site search
       properties:
         auto_upgrade_enabled:
+          description: Whether automatic firmware upgrade is enabled for the site
           type: boolean
         auto_upgrade_version:
+          description: Desired automatic firmware upgrade version track for the site
           readOnly: true
           type: string
         country_code:
+          description: Country code configured for the site, or null if unset
           readOnly: true
           type:
           - string
           - 'null'
         honeypot_enabled:
+          description: Whether honeypot detection is enabled for the site
           type: boolean
         id:
+          description: Unique identifier for the site search result
           $ref: '#/components/schemas/id'
         name:
+          description: Display name of the site
           readOnly: true
           type: string
         org_id:
+          description: Organization that owns the site
           $ref: '#/components/schemas/org_id'
         site_id:
+          description: Site identifier for this search result
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Epoch timestamp, in seconds, for this site search result
           $ref: '#/components/schemas/timestamp'
         timezone:
+          description: Time zone configured for the site
           readOnly: true
           type: string
         vna_enabled:
+          description: Whether Virtual Network Assistant is enabled for the site
           type: boolean
         wifi_enabled:
+          description: Whether Wi-Fi service is enabled for the site
           type: boolean
       required:
       - honeypot_enabled
@@ -91103,6 +91123,7 @@ components:
       - auto_upgrade_enabled
       type: object
     response_site_search_results:
+      description: Site records returned by organization site search
       items:
         $ref: '#/components/schemas/response_site_search_item'
       type: array
