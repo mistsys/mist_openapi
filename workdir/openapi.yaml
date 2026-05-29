@@ -104092,15 +104092,21 @@ components:
       uniqueItems: true
     stats_wireless_client:
       additionalProperties: false
+      description: Wireless client connection, traffic, and location statistics
       properties:
         accuracy:
           description: Estimated client location accuracy, in meter
           type: integer
         airespace_ifname:
+          description: RADIUS Airespace interface name reported for the wireless client,
+            when available
           type: string
         airwatch:
+          description: Mobile device management authorization information from AirWatch
+            for the wireless client
           $ref: '#/components/schemas/stats_wireless_client_airwatch'
         annotation:
+          description: User-visible annotation label applied to the wireless client
           type: string
         ap_id:
           description: AP ID the client is connected to
@@ -104110,13 +104116,17 @@ components:
           description: AP the client is connected to
           type: string
         assoc_time:
+          description: Time when the wireless client associated to the AP, in epoch
+            seconds
           type: integer
         band:
+          description: Wi-Fi radio band used by the wireless client connection
           $ref: '#/components/schemas/dot11_band'
         bssid:
+          description: AP radio BSSID serving the wireless client connection
           type: string
         channel:
-          description: Current channel
+          description: Radio channel used by the wireless client connection
           type: integer
         dual_band:
           description: "Whether the client is dual_band capable (determined by whether\
@@ -104127,29 +104137,35 @@ components:
             \ / Windows Mobile or CE \u2026"
           type: string
         group:
+          description: Client group label reported for the wireless client
           type: string
         guest:
+          description: Portal guest details for the wireless client
           $ref: '#/components/schemas/guest'
         hostname:
-          description: Hostname that we learned from sniffing DHCP
+          description: DHCP hostname learned for the wireless client
           type: string
         idle_time:
           description: How long, in seconds, has the client been idle (since the last
             RX packet)
           type: number
         ip:
+          description: Current IP address reported for the wireless client
           type: string
         is_guest:
           default: false
           description: Whether this is a guest
           type: boolean
         key_mgmt:
-          description: E.g. WPA2-PSK/CCMP
+          description: Security key-management and cipher suite used by the wireless
+            client
           type: string
         last_seen:
+          description: Time when Mist last observed the wireless client, in epoch
+            seconds
           $ref: '#/components/schemas/last_seen'
         mac:
-          description: Client mac
+          description: Wireless client MAC address observed by Mist
           type: string
         manufacture:
           description: Device manufacture, through fingerprinting or OUI
@@ -104171,43 +104187,58 @@ components:
           description: "If it\u2019s currently in power-save mode"
           type: boolean
         proto:
+          description: 802.11 protocol amendment used by the wireless client
           $ref: '#/components/schemas/dot11_proto'
         psk_id:
           description: PSK id (if multi-psk is used)
           format: uuid
           type: string
         rssi:
-          description: Signal strength
+          description: Received signal strength indicator for the wireless client,
+            in dBm
           type: number
         rssizones:
+          description: RSSI zone memberships for the wireless client
           $ref: '#/components/schemas/stats_wireless_client_rssi_zones'
         rx_bps:
+          description: Receive throughput for the wireless client, in bits per second
           $ref: '#/components/schemas/rx_bps'
         rx_bytes:
+          description: Total bytes received by the wireless client connection
           $ref: '#/components/schemas/rx_bytes'
         rx_pkts:
+          description: Total packets received by the wireless client connection
           $ref: '#/components/schemas/rx_pkts'
         rx_rate:
+          description: Receive PHY rate for the wireless client connection, in Mbps
           $ref: '#/components/schemas/rx_rate'
         rx_retries:
+          description: Receive retry count for the wireless client connection
           $ref: '#/components/schemas/rx_retries'
         site_id:
+          description: Site identifier associated with the wireless client statistics
+            record
           $ref: '#/components/schemas/site_id'
         snr:
-          description: Signal over noise
+          description: Signal-to-noise ratio for the wireless client connection
           type: number
         ssid:
-          description: SSID the client is connected to
+          description: Wireless SSID used by the client connection
           type: string
         tx_bps:
+          description: Transmit throughput for the wireless client, in bits per second
           $ref: '#/components/schemas/tx_bps'
         tx_bytes:
+          description: Total bytes transmitted by the wireless client connection
           $ref: '#/components/schemas/tx_bytes'
         tx_pkts:
+          description: Total packets transmitted by the wireless client connection
           $ref: '#/components/schemas/tx_pkts'
         tx_rate:
+          description: Transmit PHY rate for the wireless client connection, in Mbps
           $ref: '#/components/schemas/tx_rate'
         tx_retries:
+          description: Transmit retry count for the wireless client connection
           $ref: '#/components/schemas/tx_retries'
         type:
           description: "Client\u2019s type, regular / vip / resource / blocked (if\
@@ -104217,10 +104248,11 @@ components:
           description: How long, in seconds, has the client been connected
           type: number
         username:
-          description: Username that we learned from 802.1X exchange or Per_user PSK
-            or User Portal
+          description: User identity learned from 802.1X, per-user PSK, or user portal
+            authentication
           type: string
         vbeacons:
+          description: Virtual beacon associations for the wireless client
           $ref: '#/components/schemas/stats_wireless_client_vbeacons'
         vlan_id:
           description: VLAN id, could be empty (from older AP)
@@ -104235,6 +104267,7 @@ components:
           format: uuid
           type: string
         wxrule_usage:
+          description: WxLAN rule usage counters for the wireless client
           $ref: '#/components/schemas/stats_wireless_client_wxrule_usages'
         x:
           description: Estimated client location in pixels
@@ -104253,6 +104286,7 @@ components:
           format: double
           type: number
         zones:
+          description: Zone memberships for the wireless client
           $ref: '#/components/schemas/stats_wireless_client_zones'
       required:
       - ap_id
