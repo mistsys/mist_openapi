@@ -95613,46 +95613,60 @@ components:
       type: object
     site_setting_juniper_srx:
       additionalProperties: false
+      description: Site-level Juniper SRX integration settings
       properties:
         auto_upgrade:
           $ref: '#/components/schemas/juniper_srx_auto_upgrade'
+          description: SRX auto-upgrade settings applied when SRX devices are onboarded
         gateways:
           $ref: '#/components/schemas/site_setting_juniper_srx_gateways'
+          description: SRX gateways integrated with this site
         send_mist_nac_user_info:
+          description: Whether Mist NAC user information is sent to Juniper SRX gateways
           type: boolean
       type: object
     site_setting_juniper_srx_gateway:
       additionalProperties: false
+      description: Juniper SRX gateway API connection settings
       properties:
         api_key:
+          description: Authentication key used to access the Juniper SRX gateway API
           examples:
           - 5abf7c8a-1a1c-4398-ba2d-b0c297094d1a
           type: string
         api_password:
+          description: Authentication password used to access the Juniper SRX gateway
+            API
           examples:
           - abc@123
           type: string
         api_url:
+          description: Base URL for the Juniper SRX gateway API
           examples:
           - https://23.43.12.78:8443
           type: string
       type: object
     site_setting_juniper_srx_gateways:
+      description: Juniper SRX gateways integrated with a site
       items:
         $ref: '#/components/schemas/site_setting_juniper_srx_gateway'
       type: array
     site_setting_mxedge:
       additionalProperties: false
-      description: Site Mist Edges form a cluster of RadSec Proxy servers
+      description: Service settings for the site Mist Edge cluster
       properties:
         mist_das:
           $ref: '#/components/schemas/mxedge_das'
+          description: DAS service settings for the site Mist Edge cluster
         mist_nac:
           $ref: '#/components/schemas/mxcluster_nac'
+          description: RADIUS settings for Mist NAC on the site Mist Edge cluster
         mist_nacedge:
           $ref: '#/components/schemas/mist_nacedge'
+          description: NAC Edge service settings for the site Mist Edge cluster
         radsec:
           $ref: '#/components/schemas/mxcluster_radsec'
+          description: TLS-secured RADIUS proxy settings for the site Mist Edge cluster
       type: object
     site_setting_ntp_servers:
       description: List of NTP servers
@@ -95661,63 +95675,80 @@ components:
       type: array
     site_setting_paloalto_network_gateway:
       additionalProperties: false
+      description: Palo Alto Networks gateway API connection settings
       properties:
         api_key:
+          description: Authentication key used to access the Palo Alto Networks gateway
+            API
           examples:
           - 5abf7c8a-1a1c-4398-ba2d-b0c297094d1a
           type: string
         api_url:
+          description: Base URL for the Palo Alto Networks gateway API
           examples:
           - https://23.43.12.78:8443
           type: string
       type: object
     site_setting_paloalto_networks:
       additionalProperties: false
+      description: Palo Alto Networks integration settings for the site
       properties:
         gateways:
           $ref: '#/components/schemas/site_setting_paloalto_networks_gateways'
+          description: Palo Alto Networks gateways integrated with this site
         send_mist_nac_user_info:
           default: false
+          description: Whether Mist NAC user information is sent to Palo Alto Networks
+            gateways
           type: boolean
       type: object
     site_setting_paloalto_networks_gateways:
+      description: Palo Alto Networks gateways integrated with a site
       items:
         $ref: '#/components/schemas/site_setting_paloalto_network_gateway'
       type: array
     site_setting_rtsa:
       additionalProperties: false
-      description: Managed mobility
+      description: Managed mobility and asset tracking settings
       properties:
         app_waking:
           default: false
+          description: Whether app wake-up support is enabled for managed mobility
           type: boolean
         disable_dead_reckoning:
+          description: Whether dead reckoning is disabled for managed mobility
           type: boolean
         disable_pressure_sensor:
           default: false
+          description: Whether pressure sensor use is disabled for managed mobility
           type: boolean
         enabled:
+          description: Whether managed mobility features are enabled
           type: boolean
         track_asset:
           default: false
-          description: Asset tracking related
+          description: Whether BLE asset tracking is enabled for managed mobility
           type: boolean
       type: object
     site_setting_skyatp:
       additionalProperties: false
+      description: Sky ATP threat intelligence settings for the site
       properties:
         enabled:
+          description: Whether Sky ATP is enabled for the site
           type: boolean
         send_ip_mac_mapping:
           default: false
-          description: Whether to send IP-MAC mapping to SkyATP
+          description: Whether IP-to-MAC mappings are sent to Sky ATP
           type: boolean
       type: object
     site_setting_srx_app:
       additionalProperties: false
+      description: Juniper SRX application visibility settings for the site
       properties:
         enabled:
           default: false
+          description: Whether Juniper SRX application visibility is enabled
           type: boolean
       type: object
     site_setting_ssh_keys:
@@ -95730,14 +95761,18 @@ components:
       type: array
     site_setting_status_portal:
       additionalProperties: false
+      description: End-user status portal settings for the site
       properties:
         enabled:
           default: false
+          description: Whether the site status portal is enabled
           type: boolean
         hostnames:
           $ref: '#/components/schemas/site_setting_status_portal_hostnames'
+          description: Portal hostnames served by the site status portal
       type: object
     site_setting_status_portal_hostnames:
+      description: Hostnames served by the site status portal
       items:
         examples:
         - my.misty.com
@@ -95749,32 +95784,43 @@ components:
       - $ref: '#/components/schemas/switch_auto_upgrade_container'
     site_setting_tunterm_multicast_config:
       additionalProperties: false
+      description: Multicast forwarding settings for tunnel termination at the site
       properties:
         mdns:
           $ref: '#/components/schemas/site_setting_tunterm_multicast_config_mdns'
+          description: Multicast DNS forwarding settings for tunneled VLANs
         multicast_all:
           default: false
+          description: Whether all multicast traffic is forwarded through tunnel termination
           type: boolean
         ssdp:
           $ref: '#/components/schemas/site_setting_tunterm_multicast_config_ssdp'
+          description: Simple Service Discovery Protocol forwarding settings for tunneled
+            VLANs
       type: object
     site_setting_tunterm_multicast_config_mdns:
       additionalProperties: false
+      description: mDNS multicast forwarding settings for tunneled VLANs
       properties:
         enabled:
           default: false
+          description: Whether mDNS multicast forwarding is enabled
           type: boolean
         vlan_ids:
           $ref: '#/components/schemas/mxedge_tunterm_multicast_config_mdns_vlan_ids'
+          description: VLAN IDs where mDNS multicast forwarding is enabled
       type: object
     site_setting_tunterm_multicast_config_ssdp:
       additionalProperties: false
+      description: SSDP multicast forwarding settings for tunneled VLANs
       properties:
         enabled:
           default: false
+          description: Whether SSDP multicast forwarding is enabled
           type: boolean
         vlan_ids:
           $ref: '#/components/schemas/mxedge_tunterm_multicast_config_ssdp_vlan_ids'
+          description: VLAN IDs where SSDP multicast forwarding is enabled
       type: object
     site_setting_vna:
       additionalProperties: false
@@ -95792,16 +95838,20 @@ components:
       type: object
     site_setting_wan_vna:
       additionalProperties: false
+      description: WAN Virtual Network Assistant settings for the site
       properties:
         enabled:
           default: false
+          description: Whether WAN VNA is enabled for the site
           type: boolean
       type: object
     site_setting_wired_vna:
       additionalProperties: false
+      description: Wired Virtual Network Assistant settings for the site
       properties:
         enabled:
           default: false
+          description: Whether Wired VNA is enabled for the site
           type: boolean
       type: object
     site_sitegroup_ids:
