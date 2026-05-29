@@ -102627,39 +102627,56 @@ components:
       type: string
     stats_org:
       additionalProperties: false
-      description: Org statistics
+      description: Organization statistics summary returned by the org stats endpoint
       properties:
         alarmtemplate_id:
+          description: Organization-level alarm template identifier used as the default
+            for sites
           format: uuid
           type: string
         allow_mist:
+          description: Whether Mist support access is allowed for this organization
           type: boolean
         created_time:
+          description: Time when the organization was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier of the organization
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Time when the organization was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         msp_id:
+          description: Managed service provider identifier associated with the organization
           $ref: '#/components/schemas/msp_id'
         name:
+          description: Display name of the organization
           type: string
         num_devices:
+          description: Total number of devices in the organization
           type: integer
         num_devices_connected:
+          description: Number of organization devices currently connected to Mist
           type: integer
         num_devices_disconnected:
+          description: Number of organization devices currently disconnected from
+            Mist
           type: integer
         num_inventory:
+          description: Number of devices in the organization's inventory
           type: integer
         num_sites:
+          description: Number of sites in the organization
           type: integer
         orggroup_ids:
+          description: Organization group identifiers that include this organization
           $ref: '#/components/schemas/stats_org_orggroup_ids'
         session_expiry:
+          description: Admin session lifetime for the organization, in minutes
           format: int64
           type: integer
         sle:
+          description: Service level expectation summaries for the organization
           $ref: '#/components/schemas/stats_org_sles'
       required:
       - orggroup_ids
@@ -102679,37 +102696,47 @@ components:
       - sle
       type: object
     stats_org_orggroup_ids:
+      description: Organization group identifiers associated with an organization
+        stats record
       items:
         format: uuid
         type: string
       type: array
     stats_org_sle:
       additionalProperties: false
+      description: Organization SLE summary for a service path
       properties:
         path:
+          description: SLE path represented by this organization summary
           type: string
         user_minutes:
+          description: User-minute totals for this SLE path
           $ref: '#/components/schemas/stats_org_sle_user_minutes'
       required:
       - path
       type: object
     stats_org_sle_user_minutes:
       additionalProperties: false
+      description: User-minute totals for an organization SLE summary
       properties:
         ok:
+          description: User minutes that met the SLE target
           type: number
         total:
+          description: Observed total user minutes for the SLE path
           type: number
       required:
       - total
       - ok
       type: object
     stats_org_sles:
+      description: Service level expectation summaries for an organization
       items:
         $ref: '#/components/schemas/stats_org_sle'
       type: array
       uniqueItems: true
     stats_orgs:
+      description: Organization statistics summaries
       items:
         $ref: '#/components/schemas/stats_org'
       type: array
