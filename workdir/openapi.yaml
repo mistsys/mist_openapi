@@ -102251,83 +102251,119 @@ components:
       type: object
     stats_mxedge_port_stat:
       additionalProperties: false
+      description: Mist Edge port traffic and link status statistics
       properties:
         full_duplex:
+          description: Whether the port is operating in full-duplex mode
           type: boolean
         lacp:
+          description: Link aggregation control protocol state and packet counters
+            for the port
           $ref: '#/components/schemas/stats_mxedge_port_stat_lacp'
         lldp_stats:
+          description: LLDP neighbor information learned on the port
           $ref: '#/components/schemas/stats_mxedge_port_stat_lldp_stats'
         mac:
+          description: Mist Edge port MAC address reported by Mist
           type: string
         rx_bytes:
+          description: Total bytes received on the port
           $ref: '#/components/schemas/rx_bytes'
         rx_errors:
+          description: Number of receive errors observed on the port
           type: integer
         rx_pkts:
+          description: Total packets received on the port
           $ref: '#/components/schemas/rx_pkts'
         sfp:
+          description: Transceiver details reported for the SFP module on the port
           $ref: '#/components/schemas/stats_mxedge_port_stat_sfp'
         speed:
+          description: Current link speed of the port, in Mbps
           type: integer
         state:
+          description: Forwarding or operational state reported for the port
           type: string
         tx_bytes:
+          description: Total bytes transmitted from the port
           $ref: '#/components/schemas/tx_bytes'
         tx_errors:
+          description: Number of transmit errors observed on the port
           type: integer
         tx_pkts:
+          description: Total packets transmitted from the port
           $ref: '#/components/schemas/tx_pkts'
         up:
+          description: Whether the Mist Edge port link is up
           type: boolean
       type: object
     stats_mxedge_port_stat_lacp:
       additionalProperties: false
+      description: LACP state and counters for a Mist Edge port
       properties:
         mux_state:
+          description: LACP multiplexer state reported for the port
           type: string
         rx_lacpdu:
+          description: Number of LACPDUs received on the port
           type: integer
         rx_state:
+          description: LACP receive state reported for the port
           type: string
         tx_lacpdu:
+          description: Number of LACPDUs transmitted from the port
           type: integer
       type: object
     stats_mxedge_port_stat_lldp_stats:
       additionalProperties: false
+      description: LLDP neighbor information reported for a Mist Edge port
       properties:
         chassis_id:
+          description: LLDP chassis identifier advertised by the neighbor
           type: string
         mgmt_addr:
+          description: Management address advertised by the LLDP neighbor
           type: string
         port_desc:
+          description: Port description advertised by the LLDP neighbor
           type: string
         port_id:
+          description: Port identifier advertised by the LLDP neighbor
           type: string
         system_desc:
+          description: System description advertised by the LLDP neighbor
           type: string
         system_name:
+          description: System name advertised by the LLDP neighbor
           type: string
       type: object
     stats_mxedge_port_stat_sfp:
       additionalProperties: false
+      description: SFP transceiver details reported for a Mist Edge port
       properties:
         codes:
+          description: Transceiver capability codes reported by the SFP module
           type: string
         mbps:
+          description: Nominal transceiver speed, in Mbps
           type: integer
         part_no:
+          description: Manufacturer part number reported by the SFP module
           type: string
         serial_no:
+          description: Manufacturer serial number reported by the SFP module
           type: string
         type:
+          description: Transceiver type code reported by the SFP module
           type: integer
         vendor:
+          description: Manufacturer name reported by the SFP module
           type: string
       type: object
     stats_mxedge_port_stats:
       additionalProperties:
         $ref: '#/components/schemas/stats_mxedge_port_stat'
+      description: Mist Edge port statistics keyed by port name
       examples:
       - port0:
           full_duplex: true
