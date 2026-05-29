@@ -89437,12 +89437,16 @@ components:
       uniqueItems: true
     response_mobile_verify_secret:
       additionalProperties: false
+      description: Mobile SDK invite verification response
       properties:
         name:
+          description: Organization display name associated with the verified SDK invite
           type: string
         org_id:
+          description: Organization identifier associated with the verified SDK invite
           $ref: '#/components/schemas/org_id'
         secret:
+          description: Device-specific secret returned for mobile SDK activation
           format: password
           type: string
       required:
@@ -89452,24 +89456,32 @@ components:
       type: object
     response_msp_inventory_device:
       additionalProperties: false
+      description: Inventory device record returned by MSP device MAC lookup
       properties:
         for_site:
+          description: Whether this inventory device is associated with a site
           readOnly: true
           type: boolean
         mac:
+          description: Device MAC address for the inventory device
           readOnly: true
           type: string
         model:
+          description: Device model for the inventory device
           readOnly: true
           type: string
         org_id:
+          description: Organization that owns this inventory device
           $ref: '#/components/schemas/org_id'
         serial:
+          description: Device serial number for the inventory device
           readOnly: true
           type: string
         site_id:
+          description: Site identifier for the inventory device
           $ref: '#/components/schemas/site_id'
         type:
+          description: Device type for the inventory device
           readOnly: true
           type: string
       required:
