@@ -66939,6 +66939,7 @@ components:
       - name
       type: object
     asset_filters:
+      description: List of BLE asset filters
       items:
         $ref: '#/components/schemas/asset_filter'
       type: array
@@ -67039,11 +67040,13 @@ components:
         $ref: '#/components/schemas/asset_zone'
       type: array
     assets:
+      description: List of named BLE asset records
       items:
         $ref: '#/components/schemas/asset'
       type: array
     assets_import_file:
       additionalProperties: false
+      description: CSV file upload payload for importing BLE assets
       properties:
         file:
           contentMediaType: application/octet-stream
@@ -67051,6 +67054,7 @@ components:
           type: string
       type: object
     assets_import_json:
+      description: BLE asset records supplied in a JSON import payload
       examples:
       - - mac: a31eb04e1c38
           name: Expensive Instrument
@@ -67062,6 +67066,7 @@ components:
       type: array
       uniqueItems: true
     assets_of_interest:
+      description: BLE beacons that matched named assets or asset filters
       items:
         $ref: '#/components/schemas/asset_of_interest'
       type: array
@@ -67121,6 +67126,7 @@ components:
       type: object
     auto_map_assignment:
       additionalProperties: false
+      description: Request options for validating or starting automatic AP map assignment
       properties:
         dryrun:
           default: false
@@ -67135,6 +67141,7 @@ components:
       type: object
     auto_map_assignment_request:
       additionalProperties: false
+      description: Request body for accepting or clearing pending map assignments
       properties:
         map_ids:
           description: Optional list of specific map IDs to apply/clear. If not provided
@@ -67145,6 +67152,7 @@ components:
           type: array
       type: object
     auto_orient:
+      description: Request options for validating or starting AP auto-orientation
       properties:
         dryrun:
           description: Set to `true` to perform an invalid AP check and provide an
@@ -67170,6 +67178,7 @@ components:
         type: string
       type: array
     auto_placement:
+      description: Request options for validating or starting AP auto-placement
       properties:
         dryrun:
           default: false
@@ -67290,6 +67299,7 @@ components:
       minItems: 1
       type: array
     avprofiles:
+      description: List of antivirus scanning profiles
       items:
         $ref: '#/components/schemas/avprofile'
       type: array
@@ -67371,6 +67381,7 @@ components:
       - ibeacon
       type: string
     beacons:
+      description: List of beacon configuration records
       items:
         $ref: '#/components/schemas/beacon'
       type: array
@@ -67645,6 +67656,7 @@ components:
       type: array
     bgp_stats:
       additionalProperties: false
+      description: BGP peer statistics reported by a network device
       properties:
         evpn_overlay:
           description: If this is created for evpn overlay
@@ -67739,6 +67751,7 @@ components:
       type: string
     binary_stream:
       additionalProperties: false
+      description: Binary file upload payload
       properties:
         file:
           contentMediaType: application/octet-stream
@@ -68110,6 +68123,7 @@ components:
           type: number
       type: object
     call_troubleshoot_summaries:
+      description: List of call troubleshooting summary records
       items:
         $ref: '#/components/schemas/call_troubleshoot_summary'
       type: array
@@ -68460,6 +68474,7 @@ components:
           type: number
       type: object
     call_troubleshoots:
+      description: List of call troubleshooting detail records
       items:
         $ref: '#/components/schemas/troubleshoot_call_item'
       type: array
@@ -68574,6 +68589,8 @@ components:
       type: string
     capture_gateway_gateways:
       additionalProperties: false
+      description: Gateway-specific packet capture settings keyed under a gateway
+        MAC address
       properties:
         ports:
           $ref: '#/components/schemas/capture_gateway_gateways_ports'
@@ -68581,6 +68598,7 @@ components:
       type: object
     capture_gateway_gateways_port:
       additionalProperties: false
+      description: Per-port tcpdump filter for a gateway packet capture
       properties:
         tcpdump_expression:
           description: tcpdump expression per port
@@ -68600,6 +68618,7 @@ components:
       type: string
     capture_max_pkt_length:
       default: 512
+      description: Maximum bytes captured from each packet, or null to use the default
       examples:
       - 128
       maximum: 2048
@@ -68766,6 +68785,7 @@ components:
       - integer
       - 'null'
     capture_org:
+      description: Packet capture request payload for organization-level captures
       oneOf:
       - $ref: '#/components/schemas/capture_mxedge'
     capture_radiotap:
@@ -69065,6 +69085,7 @@ components:
       - scan
       type: string
     capture_site:
+      description: Packet capture request payload for site-level captures
       discriminator:
         mapping:
           client: '#/components/schemas/capture_client'
@@ -69139,6 +69160,7 @@ components:
       type: object
     capture_switch_ports_tcpdump_expression:
       additionalProperties: false
+      description: Per-port tcpdump filter for a switch packet capture
       properties:
         tcpdump_expression:
           description: tcpdump expression, port specific if specified under ports
@@ -69150,6 +69172,8 @@ components:
       type: object
     capture_switch_switches:
       additionalProperties: false
+      description: Switch-specific packet capture settings keyed under a switch MAC
+        address
       properties:
         ports:
           $ref: '#/components/schemas/capture_switch_ports'
@@ -69315,6 +69339,7 @@ components:
       - license
       type: string
     clear_dot1x_session:
+      description: Request body for clearing dot1x sessions on switch ports
       properties:
         ports:
           $ref: '#/components/schemas/clear_dot1x_session_ports'
@@ -69330,6 +69355,7 @@ components:
         type: string
       type: array
     clear_policy_hit_count:
+      description: Request body for clearing hit counters on an application policy
       properties:
         policy_name:
           description: Application policy name whose hit counters should be cleared
@@ -69338,6 +69364,7 @@ components:
       - policy_name
       type: object
     client_cert_serial_numbers:
+      description: Client certificate serial numbers targeted by a certificate operation
       examples:
       - serial_numbers:
         - 13 00 13 03 23 EE D5 84 01
