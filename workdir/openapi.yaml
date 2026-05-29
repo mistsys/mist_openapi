@@ -93009,42 +93009,53 @@ components:
       type: array
       uniqueItems: true
     sdktemplate:
-      description: SDK Template
+      description: Visual customization template for the mobile SDK experience
       properties:
         bg_image:
+          description: Background image URL displayed by the SDK template
           type: string
         btn_flr_bgcolor:
+          description: Floor button background color used by the SDK template, as a hex color
           type: string
         created_time:
+          description: Timestamp when the SDK template was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         default:
-          description: Whether this is the default template when there are multiple
-            templates
+          description: Whether this template is the default among available SDK templates
           type: boolean
         for_site:
+          description: Whether the SDK template is scoped to a site
           readOnly: true
           type: boolean
         header_txt:
+          description: Header text displayed by the SDK template
           type: string
         id:
+          description: Unique value identifying the SDK template
           $ref: '#/components/schemas/id'
         modified_time:
+          description: Timestamp when the SDK template was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Name for identification purpose
+          description: Display name used to identify the SDK template
           type: string
         org_id:
+          description: Organization identifier associated with the SDK template
           $ref: '#/components/schemas/org_id'
         search_txtcolor:
+          description: Text color used for search controls in the SDK template, as a hex color
           type: string
         site_id:
+          description: Site identifier associated with the SDK template, when scoped to a site
           $ref: '#/components/schemas/site_id'
         welcome_msg:
+          description: Welcome message displayed by the SDK template
           type: string
       required:
       - name
       type: object
     sdktemplates:
+      description: SDK visual customization templates returned by list operations
       items:
         $ref: '#/components/schemas/sdktemplate'
       type: array
