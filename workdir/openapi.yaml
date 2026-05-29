@@ -88395,18 +88395,25 @@ components:
       type: object
     response_device_search:
       additionalProperties: false
+      description: Paginated response for organization or site device search results
       properties:
         end:
+          description: Epoch timestamp for the end of the device search window
           type: integer
         limit:
+          description: Maximum number of device records returned in this page
           type: integer
         next:
+          description: Pagination cursor or URL for retrieving the next page of device records
           type: string
         results:
+          description: AP, switch, or gateway records matching the device search filters
           $ref: '#/components/schemas/response_device_search_results'
         start:
+          description: Epoch timestamp for the start of the device search window
           type: integer
         total:
+          description: Number of device records matching the search filters across all pages
           type: integer
       required:
       - end
@@ -88427,10 +88434,13 @@ components:
       - $ref: '#/components/schemas/gateway_search'
     response_device_upgrade:
       additionalProperties: false
+      description: Single-device upgrade status response
       properties:
         status:
+          description: Current status of the requested device upgrade
           $ref: '#/components/schemas/upgrade_info_status'
         timestamp:
+          description: Epoch timestamp when the device upgrade status was reported
           $ref: '#/components/schemas/timestamp'
       required:
       - timestamp
