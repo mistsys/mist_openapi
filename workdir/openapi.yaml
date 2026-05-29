@@ -104509,71 +104509,86 @@ components:
       type: array
     stats_zone:
       additionalProperties: false
-      description: Zone statistics
+      description: Zone statistics and occupancy counts for a site map zone
       properties:
         assets_wait:
+          description: BLE asset wait-time summary for the zone
           $ref: '#/components/schemas/stats_zone_assets_waits'
         clients_wait:
+          description: Wi-Fi client wait-time summary for the zone
           $ref: '#/components/schemas/stats_zone_clients_waits'
         created_time:
+          description: Time when the zone was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         discovered_assets_wait:
+          description: Discovered BLE asset wait-time summary for the zone
           $ref: '#/components/schemas/stats_zone_discovered_assets_waits'
         id:
+          description: Unique identifier of the zone
           $ref: '#/components/schemas/id'
         map_id:
-          description: Map_id of the zone
+          description: Map identifier for the zone
           examples:
           - 123449d4-d12f-4feb-b40f-5be0e2ae1234
           format: uuid
           type: string
         modified_time:
+          description: Time when the zone was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
-          description: Name of the zone
+          description: Display name of the zone
           examples:
           - Zone A
           type: string
         num_assets:
-          description: Number of assets
+          description: Number of BLE assets currently counted in the zone
           examples:
           - 0
           type: integer
         num_clients:
-          description: Number of Wi-Fi clients (unconnected + connected)
+          description: Number of Wi-Fi clients currently counted in the zone, including
+            connected and unconnected clients
           examples:
           - 80
           type: integer
         num_discovered_assets:
-          description: Number of discoveredassets
+          description: Number of discovered BLE assets currently counted in the zone
           examples:
           - 0
           type: integer
         num_sdkclients:
-          description: Number of sdk clients
+          description: Number of SDK clients currently counted in the zone
           examples:
           - 10
           type: integer
         num_unconnected_clients:
-          description: Number of unconnected Wi-Fi clients
+          description: Number of unconnected Wi-Fi clients currently counted in the
+            zone
           examples:
           - 80
           type: integer
         occupancy_limit:
+          description: Configured occupancy limit for the zone
           examples:
           - 4
           type: integer
         org_id:
+          description: Organization identifier associated with the zone
           $ref: '#/components/schemas/org_id'
         sdkclients_wait:
+          description: SDK client wait-time summary for the zone
           $ref: '#/components/schemas/stats_zone_sdkclients_waits'
         site_id:
+          description: Site identifier associated with the zone
           $ref: '#/components/schemas/site_id'
         unconnected_clients_wait:
+          description: Unconnected Wi-Fi client wait-time summary for the zone
           $ref: '#/components/schemas/stats_zone_unconnected_clients_waits'
         vertices:
+          description: Zone polygon vertices in map pixel coordinates
           $ref: '#/components/schemas/zone_vertices'
         vertices_m:
+          description: Zone polygon vertices in meters
           $ref: '#/components/schemas/zone_vertices_m'
       required:
       - id
@@ -104632,37 +104647,43 @@ components:
       type: object
     stats_zone_details:
       additionalProperties: false
-      description: Zone details statistics
+      description: Detailed zone statistics and occupants for a site map zone
       properties:
         assets:
+          description: BLE asset identifiers currently in the zone
           $ref: '#/components/schemas/stats_zone_details_assets'
         client_waits:
+          description: Wi-Fi client wait-time summary for the zone
           $ref: '#/components/schemas/stats_zone_details_client_waits'
         clients:
+          description: Wi-Fi client MAC addresses currently in the zone
           $ref: '#/components/schemas/stats_zone_details_clients'
         id:
+          description: Unique identifier of the zone
           $ref: '#/components/schemas/id'
         map_id:
-          description: Map_id of the zone
+          description: Map identifier for the zone
           examples:
           - 63eda950-c6da-11e4-a628-60f81dd250cc
           format: uuid
           type: string
         name:
-          description: Name of the zone
+          description: Display name of the zone
           examples:
           - Board Room
           type: string
         num_clients:
+          description: Number of Wi-Fi clients currently counted in the zone
           examples:
           - 80
           type: integer
         num_sdkclients:
-          description: SDK client wait time right now
+          description: Number of SDK clients currently counted in the zone
           examples:
           - 0
           type: integer
         sdkclients:
+          description: SDK client identifiers currently in the zone
           $ref: '#/components/schemas/stats_zone_details_sdkclients'
       required:
       - client_waits
