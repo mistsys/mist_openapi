@@ -107650,7 +107650,7 @@ components:
       type: string
     tunnel_config_auto_provision:
       additionalProperties: false
-      description: Auto Provisioning configuration for the tunne. This takes precedence
+      description: Auto-provisioning configuration for the tunnel. This takes precedence
         over the `primary` and `secondary` nodes.
       properties:
         enabled:
@@ -107658,10 +107658,13 @@ components:
             and `secondary` nodes will be ignored.
           type: boolean
         latlng:
+          description: Geographic coordinate override used for tunnel POP selection
           $ref: '#/components/schemas/tunnel_config_auto_provision_lat_lng'
         primary:
+          description: Main auto-provisioned tunnel endpoint settings
           $ref: '#/components/schemas/tunnel_config_auto_provision_node'
         provider:
+          description: Tunnel provider used for automatic endpoint provisioning
           $ref: '#/components/schemas/tunnel_config_auto_provision_provider'
         region:
           description: API override for POP selection in the case user wants to override
@@ -107669,6 +107672,7 @@ components:
             use the specified peer location.
           type: string
         secondary:
+          description: Backup auto-provisioned tunnel endpoint settings
           $ref: '#/components/schemas/tunnel_config_auto_provision_node'
         service_connection:
           description: if `provider`==`prisma-ipsec`. By default, we'll use the location
@@ -107686,14 +107690,16 @@ components:
       type: object
     tunnel_config_auto_provision_lat_lng:
       additionalProperties: false
-      description: API override for POP selection
+      description: Geographic coordinate override for tunnel POP selection
       properties:
         lat:
+          description: Geographic latitude used for POP selection override
           examples:
           - 37.295833
           format: double
           type: number
         lng:
+          description: Geographic longitude used for POP selection override
           examples:
           - -122.032946
           format: double
@@ -107703,10 +107709,14 @@ components:
       - lng
       type: object
     tunnel_config_auto_provision_node:
+      description: Auto-provisioned tunnel endpoint settings
       properties:
         probe_ips:
+          description: Probe IP addresses used to monitor auto-provisioned tunnel
+            reachability
           $ref: '#/components/schemas/strings'
         wan_names:
+          description: WAN interface names used by the auto-provisioned tunnel endpoint
           $ref: '#/components/schemas/tunnel_config_auto_provision_node_wan_names'
     tunnel_config_auto_provision_node_wan_names:
       description: Optional, only needed if `vars_only`==`false`
