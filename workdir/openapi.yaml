@@ -94974,26 +94974,34 @@ components:
       - vpn_path
       type: string
     site_setting:
-      description: Site Settings
+      description: Configuration settings applied at the site level
       properties:
         acl_policies:
           $ref: '#/components/schemas/acl_policies'
+          description: Access control policies configured for the site
         acl_tags:
           $ref: '#/components/schemas/acl_tags'
+          description: Access control tag definitions available to site policies
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+          description: Additional CLI configuration commands applied through the site
+            setting
         allow_mist:
           default: false
           description: whether to allow Mist to look at this org
           type: boolean
         analytic:
           $ref: '#/components/schemas/site_setting_analytic'
+          description: Advanced analytics configuration for the site
         ap_matching:
           $ref: '#/components/schemas/site_setting_ap_matching'
+          description: Rules that apply model-specific AP port configuration
         ap_port_config:
           $ref: '#/components/schemas/site_setting_ap_port_config'
+          description: Ethernet port configuration overrides for APs at the site
         ap_synthetic_test:
           $ref: '#/components/schemas/site_setting_ap_synthetic_test'
+          description: Synthetic test configuration for APs at the site
         ap_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for AP devices
@@ -95008,12 +95016,16 @@ components:
           - 'null'
         auto_placement:
           $ref: '#/components/schemas/site_setting_auto_placement'
+          description: Automatic AP placement settings for the site
         auto_upgrade:
           $ref: '#/components/schemas/site_setting_auto_upgrade'
+          description: Automatic AP firmware upgrade settings for the site
         auto_upgrade_esl:
           $ref: '#/components/schemas/site_setting_auto_upgrade_esl'
+          description: Automatic ESL firmware upgrade settings for the site
         auto_upgrade_linecard:
           default: true
+          description: Whether line cards are included in automatic switch upgrades
           type: boolean
         bgp_neighbor_updown_threshold:
           description: enable threshold-based bgp neighbor down delivery.
@@ -95024,22 +95036,27 @@ components:
           - integer
           - 'null'
         blacklist_url:
+          description: Read-only URL for the site blacklist file
           examples:
           - https://papi.s3.amazonaws.com/blacklist/xxx...
           readOnly: true
           type: string
         ble_config:
           $ref: '#/components/schemas/ble_config'
+          description: Bluetooth Low Energy configuration applied to APs at the site
         config_auto_revert:
           default: false
           description: Whether to enable ap auto config revert
           type: boolean
         config_push_policy:
           $ref: '#/components/schemas/site_setting_config_push_policy'
+          description: Policy controlling how site configuration pushes are applied
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Timestamp when the site settings were created
         critical_url_monitoring:
           $ref: '#/components/schemas/site_setting_critical_url_monitoring'
+          description: Monitoring configuration for critical URLs at the site
         device_updown_threshold:
           default: 0
           description: By default, device_updown_threshold, if set, will apply to
@@ -95054,34 +95071,49 @@ components:
           - 'null'
         dhcp_snooping:
           $ref: '#/components/schemas/dhcp_snooping'
+          description: Layer 2 DHCP snooping settings for the site
         disabled_system_defined_port_usages:
           $ref: '#/components/schemas/site_setting_disabled_system_defined_port_usages'
+          description: System-defined switch port usages disabled for the site
         dns_servers:
           $ref: '#/components/schemas/dns_servers'
+          description: Name server addresses configured for the site
         dns_suffix:
           $ref: '#/components/schemas/dns_suffix'
+          description: Search suffixes used for DNS lookups at the site
         enable_unii_4:
           default: false
+          description: Whether UNII-4 channels are enabled for the site
           type: boolean
         engagement:
           $ref: '#/components/schemas/site_engagement'
+          description: Dwell-time analytics rules for the site
         evpn_options:
           $ref: '#/components/schemas/evpn_options'
+          description: Fabric EVPN options for the site
         extra_routes:
           $ref: '#/components/schemas/extra_routes'
+          description: Additional IPv4 routes configured for the site
         extra_routes6:
           $ref: '#/components/schemas/extra_routes6'
+          description: Additional IPv6 routes configured for the site
         flags:
           $ref: '#/components/schemas/site_setting_flags'
+          description: Feature flags enabled for the site
         for_site:
+          description: Whether this settings object is scoped to a site
           readOnly: true
           type: boolean
         gateway:
           $ref: '#/components/schemas/gateway_template'
+          description: Template settings applied to site gateways
         gateway_additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
+          description: Additional CLI configuration commands applied to gateways at
+            the site
         gateway_mgmt:
           $ref: '#/components/schemas/gateway_mgmt'
+          description: Management access settings for gateways at the site
         gateway_tunnel_updown_threshold:
           description: enable threshold-based gateway tunnel (secure edge tunnels)
             up-down delivery.
@@ -95105,52 +95137,75 @@ components:
           - 'null'
         id:
           $ref: '#/components/schemas/id'
+          description: Unique value identifying the site settings object
         iotproxy:
           $ref: '#/components/schemas/iotproxy'
+          description: Proxy settings for IoT traffic at the site
         juniper_srx:
           $ref: '#/components/schemas/site_setting_juniper_srx'
+          description: SRX integration settings for the site
         led:
           $ref: '#/components/schemas/ap_led'
+          description: AP LED behavior configured for the site
         marvis:
           $ref: '#/components/schemas/marvis'
+          description: AI assistant settings for Marvis at the site
         mist_nac:
           $ref: '#/components/schemas/switch_mist_nac'
+          description: Network access control settings for switches at the site
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the site settings were last modified
         mxedge:
           $ref: '#/components/schemas/site_setting_mxedge'
+          description: Site Mist Edge service settings
         mxedge_mgmt:
           $ref: '#/components/schemas/mxedge_mgmt'
+          description: Mist Edge management access settings for the site
         mxtunnels:
           $ref: '#/components/schemas/site_mxtunnel'
+          description: Site Mist Tunnel configuration
         networks:
           $ref: '#/components/schemas/switch_networks'
+          description: Switch network definitions configured for the site
         ntp_servers:
           $ref: '#/components/schemas/site_setting_ntp_servers'
+          description: Time synchronization server addresses configured for the site
         occupancy:
           $ref: '#/components/schemas/site_occupancy_analytics'
+          description: Analytics settings for site occupancy
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Identifier of the org that owns the site settings
         ospf_areas:
           $ref: '#/components/schemas/ospf_areas'
+          description: Routing area settings for OSPF on site switches
         paloalto_networks:
           $ref: '#/components/schemas/site_setting_paloalto_networks'
+          description: Firewall integration settings for Palo Alto Networks at the
+            site
         persist_config_on_device:
           default: false
           description: Whether to store the config on AP
           type: boolean
         port_mirroring:
           $ref: '#/components/schemas/switch_port_mirroring'
+          description: Switch port mirroring settings for the site
         port_usages:
           $ref: '#/components/schemas/switch_port_usages'
+          description: Switch port usage profiles available at the site
         proxy:
           $ref: '#/components/schemas/proxy'
+          description: Network proxy settings for devices at the site
         radio_config:
           $ref: '#/components/schemas/ap_radio'
+          description: AP radio configuration for the site
         radius_config:
           $ref: '#/components/schemas/switch_radius_config'
+          description: Switch RADIUS configuration for the site
         remote_syslog:
           $ref: '#/components/schemas/remote_syslog'
+          description: Syslog forwarding settings for devices at the site
         remove_existing_configs:
           default: false
           description: By default, only the configuration generated by Mist is cleaned
@@ -95165,34 +95220,49 @@ components:
           type: boolean
         rogue:
           $ref: '#/components/schemas/site_rogue'
+          description: AP threat detection settings for the site
         routing_policies:
           $ref: '#/components/schemas/sw_routing_policies'
+          description: Switch routing policy definitions for the site
         rtsa:
           $ref: '#/components/schemas/site_setting_rtsa'
+          description: Managed mobility and asset tracking settings for the site
         simple_alert:
           $ref: '#/components/schemas/simple_alert'
+          description: Threshold alert settings for the site
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Identifier of the site these settings apply to
         skyatp:
           $ref: '#/components/schemas/site_setting_skyatp'
+          description: Threat intelligence settings from Sky ATP for the site
         sle_thresholds:
           $ref: '#/components/schemas/sle_thresholds'
+          description: Service level expectation threshold settings for the site
         snmp_config:
           $ref: '#/components/schemas/snmp_config'
+          description: Management polling settings for SNMP on site devices
         srx_app:
           $ref: '#/components/schemas/site_setting_srx_app'
+          description: Juniper SRX application visibility settings for the site
         ssh_keys:
           $ref: '#/components/schemas/site_setting_ssh_keys'
+          description: Public SSH keys configured for the site
         ssr:
           $ref: '#/components/schemas/setting_ssr'
+          description: Session Smart Router settings for the site
         status_portal:
           $ref: '#/components/schemas/site_setting_status_portal'
+          description: End-user status portal settings for the site
         switch:
           $ref: '#/components/schemas/site_setting_switch'
+          description: Site-level switch feature configuration
         switch_matching:
           $ref: '#/components/schemas/switch_matching'
+          description: Rules for matching switches to model-specific settings
         switch_mgmt:
           $ref: '#/components/schemas/switch_mgmt'
+          description: Management access settings for switches at the site
         switch_updown_threshold:
           default: 0
           description: Enable threshold-based device down delivery for Switch devices
@@ -95207,6 +95277,7 @@ components:
           - 'null'
         synthetic_test:
           $ref: '#/components/schemas/synthetictest_config'
+          description: Active monitoring test configuration for the site
         track_anonymous_devices:
           default: false
           description: "Whether to track anonymous BLE assets (requires \u2018track_asset\u2019\
@@ -95214,13 +95285,17 @@ components:
           type: boolean
         tunterm_monitoring:
           $ref: '#/components/schemas/tunterm_monitoring'
+          description: Tunnel termination monitoring settings for the site
         tunterm_monitoring_disabled:
           default: false
+          description: Whether tunnel termination monitoring is disabled for the site
           type: boolean
         tunterm_multicast_config:
           $ref: '#/components/schemas/site_setting_tunterm_multicast_config'
+          description: Multicast settings for tunnel termination at the site
         uplink_port_config:
           $ref: '#/components/schemas/ap_uplink_port_config'
+          description: AP uplink port configuration for the site
         uses_description_from_port_usage:
           default: false
           description: by default, we only honor description provided in port_config.
@@ -95228,10 +95303,13 @@ components:
           type: boolean
         vars:
           $ref: '#/components/schemas/vars'
+          description: Template variables defined for the site
         vars_annotations:
           $ref: '#/components/schemas/vars_annotations'
+          description: Metadata annotations for site template variables
         vna:
           $ref: '#/components/schemas/site_setting_vna'
+          description: Virtual Network Assistant settings for the site
         vpn_path_updown_threshold:
           description: enable threshold-based vpn path down delivery.
           examples:
@@ -95250,32 +95328,45 @@ components:
           - 'null'
         vrf_config:
           $ref: '#/components/schemas/vrf_config'
+          description: Routing instance configuration for the site
         vrf_instances:
           $ref: '#/components/schemas/switch_vrf_instances'
+          description: Switch VRF instances configured for the site
         vrrp_groups:
           $ref: '#/components/schemas/site_setting_vrrp_groups'
+          description: High-availability VRRP group settings for the site
         vs_instance:
           $ref: '#/components/schemas/vs_instance'
+          description: EX9200 virtual switch instance definitions for the site
         wan_vna:
           $ref: '#/components/schemas/site_setting_wan_vna'
+          description: Virtual Network Assistant settings for WAN experiences at the
+            site
         watched_station_url:
+          description: Read-only URL for the watched station list file
           examples:
           - https://papi.s3.amazonaws.com/watched_station/xxx...
           readOnly: true
           type: string
         whitelist_url:
+          description: Read-only URL for the site whitelist file
           examples:
           - https://papi.s3.amazonaws.com/whitelist/xxx...
           readOnly: true
           type: string
         wids:
           $ref: '#/components/schemas/site_wids'
+          description: Wireless intrusion detection settings for the site
         wifi:
           $ref: '#/components/schemas/site_wifi'
+          description: Wireless LAN configuration settings for the site
         wired_vna:
           $ref: '#/components/schemas/site_setting_wired_vna'
+          description: Virtual Network Assistant settings for wired experiences at
+            the site
         zone_occupancy_alert:
           $ref: '#/components/schemas/site_zone_occupancy_alert'
+          description: Occupancy alert settings for site zones
       type: object
     site_setting_analytic:
       additionalProperties: false
