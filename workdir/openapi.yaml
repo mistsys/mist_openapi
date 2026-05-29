@@ -90189,48 +90189,70 @@ components:
       uniqueItems: true
     response_pcap_start:
       additionalProperties: false
+      description: Packet capture session created by a start request
       properties:
         ap_count:
+          description: Number of APs targeted by the packet capture
           type: integer
         aps:
+          description: AP MAC addresses targeted by the packet capture
           $ref: '#/components/schemas/strings'
         client_mac:
+          description: Client MAC address filter applied to the packet capture, or null
+            when no client filter is used
           type:
           - string
           - 'null'
         duration:
+          description: Packet capture duration in seconds
           type: number
         enabled:
+          description: Whether the packet capture session is enabled after the start request
           type: boolean
         expiry:
+          description: Epoch timestamp, in seconds, when the capture session expires
           type: number
         format:
+          description: Output format for packet capture data
           type: string
         id:
+          description: Unique identifier for the packet capture session
           $ref: '#/components/schemas/id'
         include_mcast:
+          description: Whether multicast traffic is included in the packet capture
           type: boolean
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           type: integer
         num_packets:
+          description: Maximum number of packets to capture; use 0 for unlimited
           type: integer
         org_id:
+          description: Organization associated with the packet capture session
           $ref: '#/components/schemas/org_id'
         raw:
+          description: Whether raw packet data is included in the capture output
           type: boolean
         site_id:
+          description: Site associated with the packet capture session, when site-scoped
           $ref: '#/components/schemas/site_id'
         ssid:
+          description: Wireless network SSID filter applied to the packet capture, or
+            null when no SSID filter is used
           type:
           - string
           - 'null'
         tcpdump_parser_expression:
+          description: Tcpdump parser expression applied to the packet capture, or null
+            when no parser expression is used
           type:
           - string
           - 'null'
         timestamp:
+          description: Epoch timestamp, in seconds, when the packet capture session was created
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Packet capture type requested by the start operation
           type: string
       required:
       - timestamp
@@ -90241,39 +90263,52 @@ components:
       type: object
     response_pcap_status:
       additionalProperties: false
+      description: Current status of a packet capture session
       properties:
         ap_mac:
+          description: AP MAC address targeted by the packet capture, or null when no
+            single AP filter is set
           type:
           - string
           - 'null'
         aps:
+          description: AP MAC addresses targeted by the packet capture
           $ref: '#/components/schemas/response_pcap_status_aps'
         client_mac:
+          description: Client MAC address filter applied to the packet capture, or null
+            when no client filter is used
           examples:
           - 60a10a773412
           type:
           - string
           - 'null'
         duration:
+          description: Configured packet capture duration, in seconds
           examples:
           - 300
           type: integer
         enabled:
+          description: Whether the packet capture session is currently enabled
           type: boolean
         expiry:
-          description: Expiry time of the capture session, in epoch seconds
+          description: Epoch timestamp, in seconds, when the capture session expires
           examples:
           - 1695838060.309526
           type: number
         failed:
+          description: AP MAC addresses where capture configuration failed
           $ref: '#/components/schemas/response_pcap_status_failed'
         format:
+          description: Output format for packet capture data
           $ref: '#/components/schemas/capture_mxedge_format'
         gateways:
+          description: Gateway devices included in the packet capture session
           $ref: '#/components/schemas/response_pcap_status_gateways'
         id:
+          description: Unique identifier for the packet capture session
           $ref: '#/components/schemas/id'
         includes_mcast:
+          description: Whether multicast traffic is included in the packet capture
           type: boolean
         invalid_mxedges:
           additionalProperties: true
@@ -90285,6 +90320,7 @@ components:
           - 1000
           type: integer
         max_pkt_len:
+          description: Maximum number of bytes captured from each packet
           examples:
           - 512
           type: integer
@@ -90292,45 +90328,57 @@ components:
           description: Number of Mist Edges in the capture session
           type: integer
         mxedges:
+          description: Mist Edge capture settings keyed by Mist Edge ID
           $ref: '#/components/schemas/response_pcap_status_mxedges'
         num_packets:
           description: total number of packets captured by all AP, not applicable
             for type [client, new_assoc]
           type: integer
         ok:
+          description: AP MAC addresses successfully configured for packet capture
           $ref: '#/components/schemas/response_pcap_status_ok'
         org_id:
+          description: Organization associated with the packet capture session
           $ref: '#/components/schemas/org_id'
         pcap_aps:
+          description: Per-AP radio capture settings keyed by AP MAC address
           $ref: '#/components/schemas/response_pcap_status_pcap_aps'
         radiotap_tcpdump_expression:
           description: When `type`==`radiotap`, radiotap_tcpdump_expression expression
             provided by the user
           type: string
         raw:
+          description: Whether raw packet data is included in the capture output
           type: boolean
         scan_tcpdump_expression:
           description: When `type`==`scan`, scan_tcpdump_expression provided by the
             user
           type: string
         site_id:
+          description: Site associated with the packet capture session, when site-scoped
           $ref: '#/components/schemas/site_id'
         ssid:
+          description: Wireless network SSID filter applied to the packet capture, or
+            null when no SSID filter is used
           type:
           - string
           - 'null'
         started_time:
+          description: Epoch timestamp, in seconds, when the capture session started
           examples:
           - 1435080709
           type: integer
         switches:
+          description: Switch devices included in the packet capture session
           $ref: '#/components/schemas/response_pcap_status_switches'
         tcpdump_expression:
           description: tcpdump expression provided by the user (common)
           type: string
         timestamp:
+          description: Epoch timestamp, in seconds, when the packet capture status was reported
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Packet capture type for the current session
           $ref: '#/components/schemas/pcap_type'
         tzsp_host:
           description: Required if `format`==`tzsp`. Remote host accessible to mxedges
@@ -90380,6 +90428,7 @@ components:
       type: object
     response_pcap_status_mxedges_item:
       additionalProperties: false
+      description: Mist Edge interface settings for a packet capture
       properties:
         interfaces:
           additionalProperties:
@@ -90396,6 +90445,7 @@ components:
     response_pcap_status_pcap_aps:
       additionalProperties:
         $ref: '#/components/schemas/response_pcap_ap'
+      description: Per-AP radio capture settings keyed by AP MAC address
       examples:
       - 5c5b35000010:
           band: 6
