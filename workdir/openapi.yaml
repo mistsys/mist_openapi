@@ -87316,9 +87316,12 @@ components:
       type: string
     response_auto_map_assignment:
       additionalProperties: false
+      description: Auto map assignment start response
       properties:
         devices:
           $ref: '#/components/schemas/response_auto_map_assignment_devices'
+          description: Per-device validation results for auto map assignment, keyed
+            by device MAC address
         estimated_runtime:
           description: Estimated runtime for the process in seconds
           type: integer
@@ -87383,6 +87386,7 @@ components:
       type: object
     response_auto_map_assignment_info:
       additionalProperties: false
+      description: Auto map assignment status response
       properties:
         est_time_left:
           description: Only when `status`==`in_progress`, estimated seconds remaining
@@ -87392,6 +87396,7 @@ components:
           type: number
         status:
           $ref: '#/components/schemas/response_auto_map_assignment_info_status'
+          description: Current auto map assignment processing state
         stop_time:
           description: Only when `status`==`completed`, Unix timestamp when auto map
             assignment stopped
@@ -87416,9 +87421,12 @@ components:
       type: string
     response_auto_orientation:
       additionalProperties: false
+      description: Auto orientation start response
       properties:
         devices:
           $ref: '#/components/schemas/response_auto_orientation_devices'
+          description: Per-device validation results for auto orientation, keyed by
+            device MAC address
         estimated_runtime:
           description: Estimated runtime for the process in seconds
           type: integer
@@ -87450,11 +87458,12 @@ components:
     response_auto_orientation_devices:
       additionalProperties:
         $ref: '#/components/schemas/response_auto_orientation_device'
-      description: Contains the validation status of each device. The Property Key
-        is the device MAC Address.
+      description: Contains the validation status of each device. The property key
+        is the device MAC address.
       type: object
     response_auto_orientation_info:
       additionalProperties: false
+      description: Auto orientation status response
       properties:
         est_time_left:
           description: Only when `status`==`inprogress`, estimate of the time to completion
@@ -87465,6 +87474,7 @@ components:
           type: number
         status:
           $ref: '#/components/schemas/response_auto_orientation_info_status'
+          description: Current auto orientation processing state
         stop_time:
           description: Timestamp when auto orient completed or was manually stopped
           type: number
@@ -87482,6 +87492,7 @@ components:
       type: string
     response_auto_placement_info:
       additionalProperties: false
+      description: Autoplacement status response
       properties:
         end_time:
           description: Timestamp when autoplacement completed or was manually stopped
@@ -87495,14 +87506,18 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/auto_placement_info_status'
+          description: Current autoplacement processing state
       type: object
     response_auto_zone:
       additionalProperties: false
+      description: Auto zones status and suggested zone response
       properties:
         status:
           $ref: '#/components/schemas/response_auto_zone_status'
+          description: Current auto zones service state for the map
         zones:
           $ref: '#/components/schemas/response_auto_zone_zones'
+          description: Suggested zones awaiting review for the map
       type: object
     response_auto_zone_status:
       description: "The status for the auto zones service for a given map. enum:\n\
@@ -87519,42 +87534,50 @@ components:
       type: string
     response_auto_zone_zone:
       additionalProperties: false
-      description: A list of suggested zones to review and accept for a given map
+      description: Suggested zone returned by the auto zones service
       properties:
         name:
-          description: The name of the suggested zone
+          description: Human-readable name of the suggested zone
           examples:
           - zone1
           type: string
         vertices:
           $ref: '#/components/schemas/response_auto_zone_zone_vertices'
+          description: Polygon vertices defining the suggested zone on the map image
       type: object
     response_auto_zone_zone_vertex:
       additionalProperties: false
+      description: Pixel coordinate for a suggested zone vertex
       properties:
         x:
+          description: Horizontal pixel coordinate of the vertex
           examples:
           - 10
           type: integer
         y:
+          description: Vertical pixel coordinate of the vertex
           examples:
           - 42
           type: integer
       type: object
     response_auto_zone_zone_vertices:
-      description: A list of of points comprising the zones map location in pixels
+      description: List of points comprising the suggested zone polygon in map pixels
       items:
         $ref: '#/components/schemas/response_auto_zone_zone_vertex'
       type: array
     response_auto_zone_zones:
+      description: Suggested zones returned by the auto zones service
       items:
         $ref: '#/components/schemas/response_auto_zone_zone'
       type: array
     response_autoplacement:
       additionalProperties: false
+      description: Autoplacement start response
       properties:
         devices:
           $ref: '#/components/schemas/response_autoplacement_devices'
+          description: Per-device validation results for autoplacement, keyed by AP
+            MAC address
         estimated_runtime:
           description: Estimated runtime for the process in seconds.
           readOnly: true
@@ -87591,7 +87614,7 @@ components:
     response_autoplacement_devices:
       additionalProperties:
         $ref: '#/components/schemas/response_autoplacement_device'
-      description: Property key is the AP MAC Address. Contains the validation status
+      description: Property key is the AP MAC address. Contains the validation status
         of each device.
       readOnly: true
       type: object
