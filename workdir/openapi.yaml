@@ -105013,8 +105013,10 @@ components:
       type: object
     switch_bgp_config:
       additionalProperties: false
+      description: Switch BGP configuration for a routing instance
       properties:
         auth_key:
+          description: Authentication key used for BGP neighbor sessions, when configured
           type: string
         bfd_minimum_interval:
           description: Minimum interval in milliseconds for BFD hello packets. A neighbor
@@ -105028,18 +105030,24 @@ components:
             the `routing_policies` property.
           type: string
         hold_time:
+          description: Default BGP hold time for switch BGP sessions
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
         import_policy:
           description: Import policy must match one of the policy names defined in
             the `routing_policies` property.
           type: string
         local_as:
+          description: Local BGP Autonomous System (AS) number for the switch
           $ref: '#/components/schemas/bgp_as'
         neighbors:
+          description: BGP neighbor settings keyed by neighbor IP address
           $ref: '#/components/schemas/switch_bgp_config_neighbors'
         networks:
+          description: Network names used to add BGP groups to the corresponding
+            VRFs
           $ref: '#/components/schemas/switch_bgp_config_networks'
         type:
+          description: BGP session type for this switch BGP configuration
           $ref: '#/components/schemas/switch_bgp_config_type'
       required:
       - type
@@ -105062,18 +105070,21 @@ components:
       type: integer
     switch_bgp_config_neighbor:
       additionalProperties: false
+      description: Per-neighbor switch BGP session settings
       properties:
         export_policy:
           description: Export policy must match one of the policy names defined in
             the `routing_policies` property.
           type: string
         hold_time:
+          description: BGP hold time for this neighbor
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
         import_policy:
           description: Import policy must match one of the policy names defined in
             the `routing_policies` property.
           type: string
         multihop_ttl:
+          description: Time-to-live value for multihop BGP sessions to this neighbor
           maximum: 255
           minimum: 1
           type: integer
@@ -105088,7 +105099,7 @@ components:
     switch_bgp_config_neighbors:
       additionalProperties:
         $ref: '#/components/schemas/switch_bgp_config_neighbor'
-      description: Property key is the BGP Neighbor IP Address.
+      description: Switch BGP neighbor settings keyed by neighbor IP address
       type: object
     switch_bgp_config_networks:
       description: List of network names for BGP configuration. When a network is
