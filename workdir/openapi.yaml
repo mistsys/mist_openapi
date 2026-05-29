@@ -103721,29 +103721,38 @@ components:
       type: array
     stats_switch_vc_setup_info:
       additionalProperties: false
+      description: Virtual Chassis setup request and status details reported by a
+        switch
       properties:
         config_type:
+          description: Provisioning mode used for the Virtual Chassis setup
           examples:
           - nonprovisioned
           readOnly: true
           type: string
         current_stats:
+          description: Status currently reported for the Virtual Chassis setup workflow
           examples:
           - VCSETUP_WAITING
           readOnly: true
           type: string
         err_missing_dev_id_fpc:
+          description: Whether the Virtual Chassis setup is missing a device ID for
+            an FPC member
           readOnly: true
           type: boolean
         last_update:
+          description: Most recent update time for the Virtual Chassis setup status
           format: double
           readOnly: true
           type: number
         request_time:
+          description: Time when the Virtual Chassis setup request was submitted
           format: double
           readOnly: true
           type: number
         request_type:
+          description: Virtual Chassis setup request type
           examples:
           - vc_create
           readOnly: true
