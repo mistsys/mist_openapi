@@ -91472,24 +91472,31 @@ components:
       type: object
     response_switch_port_search:
       additionalProperties: false
+      description: Paginated response for switch and gateway port statistics search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the port statistics reporting window
           examples:
           - 1513177200
           type: integer
         limit:
+          description: Maximum number of port statistics records returned in this page
           examples:
           - 10
           type: integer
         next:
+          description: URL for retrieving the next page of switch and gateway port statistics results
           type: string
         results:
+          description: Switch and gateway port statistics records matching the search filters
           $ref: '#/components/schemas/response_switch_port_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the port statistics reporting window
           examples:
           - 1511967600
           type: integer
         total:
+          description: Number of port statistics records matching the search filters across all pages
           examples:
           - 100
           type: integer
@@ -91499,6 +91506,7 @@ components:
       - results
       type: object
     response_switch_port_search_results:
+      description: Switch and gateway port statistics records returned by search
       items:
         $ref: '#/components/schemas/stats_switch_port'
       type: array
