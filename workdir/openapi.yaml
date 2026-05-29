@@ -113515,8 +113515,11 @@ components:
         \ identifier)."
       properties:
         events:
+          description: Connected Wi-Fi raw packet events included in this webhook
+            delivery
           $ref: '#/components/schemas/webhook_wifi_conn_raw_events'
         topic:
+          description: Webhook topic name for connected Wi-Fi raw packet deliveries
           $ref: '#/components/schemas/webhook_wifi_conn_raw_topic'
       required:
       - events
@@ -113524,24 +113527,38 @@ components:
       type: object
     webhook_wifi_conn_raw_event:
       additionalProperties: false
+      description: Raw packet observation for a connected Wi-Fi client
       properties:
         ap_id:
+          description: AP MAC address that reported the connected client packet
           type: string
         ap_loc:
+          description: Location coordinates of the reporting AP when available, updated
+            about once per minute per client
           $ref: '#/components/schemas/webhook_wifi_conn_raw_event_ap_loc'
         client_id:
+          description: Client MAC address that emitted the connected Wi-Fi packet
           type: string
         connected_site:
+          description: Whether the client is connected to the reporting site
           type: boolean
         extended_info_list:
+          description: Extended telemetry packets decoded from the connected Wi-Fi
+            client payload
           $ref: '#/components/schemas/webhook_wifi_conn_raw_event_extended_info_list'
         map_id:
+          description: Map associated with the reporting AP when location context
+            is available
           $ref: '#/components/schemas/id'
         org_id:
+          description: Organization associated with the connected Wi-Fi raw event
           $ref: '#/components/schemas/org_id'
         packets:
+          description: RSSI packet observations reported for the connected Wi-Fi
+            client
           $ref: '#/components/schemas/webhook_wifi_conn_raw_event_packets'
         site_id:
+          description: Site associated with the connected Wi-Fi raw event
           $ref: '#/components/schemas/site_id'
       type: object
     webhook_wifi_conn_raw_event_ap_loc:
@@ -113552,12 +113569,16 @@ components:
       type: array
     webhook_wifi_conn_raw_event_extended_info:
       additionalProperties: false
+      description: Extended telemetry details decoded from a connected Wi-Fi packet
       properties:
         frame_ctrl:
+          description: IEEE 802.11 frame control value from the telemetry packet
           type: integer
         payload:
+          description: Raw telemetry payload carried by the connected Wi-Fi packet
           type: string
         sequence_ctrl:
+          description: IEEE 802.11 sequence control value from the telemetry packet
           type: integer
       type: object
     webhook_wifi_conn_raw_event_extended_info_list:
@@ -113568,10 +113589,14 @@ components:
       type: array
     webhook_wifi_conn_raw_event_packet:
       additionalProperties: false
+      description: RSSI observation for a connected Wi-Fi client packet
       properties:
         band:
+          description: Radio band on which the connected Wi-Fi packet was observed
           type: string
         rssi:
+          description: Received signal strength of the connected Wi-Fi packet at
+            the reporting AP, in dBm
           type: integer
       type: object
     webhook_wifi_conn_raw_event_packets:
