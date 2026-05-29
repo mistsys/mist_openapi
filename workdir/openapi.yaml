@@ -105454,10 +105454,8 @@ components:
       properties:
         ap_affinity_threshold:
           default: 10
-          description: AP_affinity_threshold ap_affinity_threshold can be added as
-            a field under site/setting. By default, this value is set to 12. If the
-            field is set in both site/setting and org/setting, the value from site/setting
-            will be used.
+          description: AP affinity threshold for switch management. If set in both
+            site settings and organization settings, the site setting value is used.
           type: integer
         cli_banner:
           description: Set Banners for switches. Allows markup formatting
@@ -105480,21 +105478,28 @@ components:
           description: Enable to provide the FQDN with DHCP option 81
           type: boolean
         disable_oob_down_alarm:
+          description: Whether to suppress alarms when the switch out-of-band management
+            interface is down
           type: boolean
         fips_enabled:
           default: false
+          description: Whether FIPS mode is enabled on the switch
           type: boolean
         local_accounts:
+          description: Local switch user accounts keyed by username
           $ref: '#/components/schemas/config_switch_local_accounts'
         mxedge_proxy_host:
           description: IP Address or FQDN of the Mist Edge used to proxy the switch
             management traffic to the Mist Cloud
           type: string
         mxedge_proxy_port:
+          description: Mist Edge proxy port used for switch management traffic
           $ref: '#/components/schemas/switch_mgmt_mxedge_proxy_port'
         protect_re:
+          description: Control-plane protection settings for the switch
           $ref: '#/components/schemas/protect_re'
         radius:
+          description: Management authentication settings using RADIUS
           $ref: '#/components/schemas/switch_radius'
         remove_existing_configs:
           default: false
@@ -105503,12 +105508,14 @@ components:
             will be removed.
           type: boolean
         root_password:
+          description: Root password for local switch access
           format: password
           type: string
         tacacs:
+          description: Management authentication settings using TACACS+
           $ref: '#/components/schemas/tacacs'
         use_mxedge_proxy:
-          description: To use mxedge as proxy
+          description: Whether to use Mist Edge as a proxy for switch management traffic
           type: boolean
       type: object
     switch_mgmt_mxedge_proxy_port:
