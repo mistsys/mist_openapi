@@ -100970,59 +100970,82 @@ components:
       type: array
     stats_gateway:
       additionalProperties: false
-      description: Gateway statistics
+      description: Gateway statistics reported by Mist for a site or organization
+        stats response
       properties:
         ap_redundancy:
+          description: AP redundancy statistics associated with the gateway
           $ref: '#/components/schemas/ap_redundancy'
         arp_table_stats:
+          description: ARP table utilization statistics for the gateway
           $ref: '#/components/schemas/arp_table_stats'
         auto_upgrade_stat:
+          description: Automatic firmware upgrade status for the gateway
           $ref: '#/components/schemas/stats_ap_auto_upgrade'
         bgp_peers:
+          description: BGP peer statistics reported by the gateway
           $ref: '#/components/schemas/bgp_peers'
         cert_expiry:
+          description: Time when the gateway certificate expires, in epoch seconds
           format: int64
           type: integer
         cluster_config:
+          description: High-availability cluster configuration and health for the
+            gateway
           $ref: '#/components/schemas/stats_cluster_config'
         cluster_stat:
+          description: High-availability cluster state summary for the gateway
           $ref: '#/components/schemas/stats_gateway_cluster'
         conductor_name:
+          description: SSR conductor name associated with the gateway, when applicable
           readOnly: true
           type: string
         config_status:
+          description: Configuration synchronization status reported for the gateway
           readOnly: true
           type: string
         config_timestamp:
+          description: Time when the gateway configuration status was last updated,
+            in epoch seconds
           type: integer
         config_version:
+          description: Currently applied configuration version for the gateway
           type: integer
         cpu2_stat:
+          description: Processor utilization statistics for the secondary HA node
           $ref: '#/components/schemas/cpu_stat'
         cpu_stat:
+          description: Processor utilization statistics for the gateway or primary
+            HA node
           $ref: '#/components/schemas/cpu_stat'
         created_time:
+          description: Time when the gateway record was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         deviceprofile_id:
+          description: Applied device profile identifier for the gateway, when present
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         deviceprofile_name:
+          description: Applied device profile name for the gateway
           type: string
         dhcpd2_stat:
+          description: Lease pool statistics from the secondary-node DHCP service
           $ref: '#/components/schemas/dhcpd_stat'
         dhcpd_stat:
+          description: Lease pool statistics from the gateway DHCP service
           $ref: '#/components/schemas/dhcpd_stat'
         evpntopo_id:
+          description: Associated EVPN topology identifier for the gateway, when present
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         ext_ip:
-          description: IP address
+          description: Public IP address observed for the gateway
           examples:
           - 66.129.234.224
           readOnly: true
@@ -101030,25 +101053,31 @@ components:
           - string
           - 'null'
         fwupdate:
+          description: Firmware update status for the gateway
           $ref: '#/components/schemas/fwupdate_stat'
         has_pcap:
+          description: Whether packet capture is available for the gateway
           readOnly: true
           type:
           - boolean
           - 'null'
         hostname:
-          description: Hostname reported by the device
+          description: Device-reported hostname for the gateway
           examples:
           - sj1
           type: string
         id:
+          description: Unique identifier of the gateway record
           $ref: '#/components/schemas/id'
         if2_stat:
+          description: Interface traffic statistics for the secondary HA node
           $ref: '#/components/schemas/if_stat'
         if_stat:
+          description: Interface traffic statistics for the gateway or primary HA
+            node
           $ref: '#/components/schemas/if_stat'
         ip:
-          description: IP address
+          description: Management IP address reported for the gateway
           examples:
           - 10.2.11.137
           readOnly: true
@@ -101056,44 +101085,55 @@ components:
           - string
           - 'null'
         ip2_stat:
+          description: Layer 3 address statistics for the secondary HA node
           $ref: '#/components/schemas/ip_stat'
         ip_stat:
+          description: Layer 3 address statistics for the gateway or primary HA node
           $ref: '#/components/schemas/ip_stat'
         is_ha:
+          description: Whether the gateway is part of an HA cluster
           readOnly: true
           type:
           - boolean
           - 'null'
         last_seen:
+          description: Time when Mist last observed the gateway, in epoch seconds
           $ref: '#/components/schemas/last_seen'
         mac:
-          description: Device mac
+          description: Gateway MAC address reported by Mist
           examples:
           - dc38e1dbf3cd
           type: string
         mac_table_stats:
+          description: Layer 2 MAC table utilization statistics for the gateway
           $ref: '#/components/schemas/stats_gateway_mac_table_stats'
         map_id:
-          description: Serial Number
+          description: Placement map identifier associated with the gateway, when
+            present
           format: uuid
           readOnly: true
           type:
           - string
           - 'null'
         memory2_stat:
+          description: Secondary-node memory utilization statistics for the gateway
           $ref: '#/components/schemas/memory_stat'
         memory_stat:
+          description: Utilization statistics for gateway memory
           $ref: '#/components/schemas/memory_stat'
         model:
-          description: Device model
+          description: Gateway model name reported by Mist
           examples:
           - SRX320
           type: string
         modified_time:
+          description: Time when the gateway record was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         module2_stat:
+          description: Hardware module statistics for the secondary HA node
           $ref: '#/components/schemas/stats_gateway_module_stat'
         module_stat:
+          description: Hardware module statistics for the gateway or primary HA node
           $ref: '#/components/schemas/stats_gateway_module_stat'
         name:
           description: Device name if configured
@@ -101102,15 +101142,19 @@ components:
           readOnly: true
           type: string
         node_name:
+          description: HA node name for the gateway, such as node0 or node1
           examples:
           - node0
           readOnly: true
           type: string
         org_id:
+          description: Owning organization identifier for the gateway statistics record
           $ref: '#/components/schemas/org_id'
         ports:
+          description: Port statistics reported by the gateway
           $ref: '#/components/schemas/stats_gateway_ports'
         route_summary_stats:
+          description: Route table summary statistics for the gateway
           $ref: '#/components/schemas/route_summary_stats'
         router_name:
           description: Device name if configured
@@ -101119,38 +101163,52 @@ components:
           readOnly: true
           type: string
         serial:
-          description: Serial Number
+          description: Gateway serial number reported by Mist
           examples:
           - TC3714190003
           readOnly: true
           type: string
         service2_stat:
+          description: System service statistics for the secondary HA node
           $ref: '#/components/schemas/service_stat'
         service_stat:
+          description: System service statistics for the gateway or primary HA node
           $ref: '#/components/schemas/service_stat'
         service_status:
+          description: Security service status reported by the gateway
           $ref: '#/components/schemas/stats_gateway_service_status'
         site_id:
+          description: Associated site identifier for the gateway statistics record
           $ref: '#/components/schemas/site_id'
         spu2_stat:
+          description: Secondary-node Services Processing Unit statistics for the
+            gateway
           $ref: '#/components/schemas/stats_gateway_spu'
         spu_stat:
+          description: Services Processing Unit statistics for the gateway or primary
+            HA node
           $ref: '#/components/schemas/stats_gateway_spu'
         status:
+          description: Connection status reported for the gateway, such as connected
           examples:
           - connected
           readOnly: true
           type: string
         tag_id:
+          description: Numeric inventory tag identifier associated with the gateway
           type: integer
         tag_uuid:
+          description: Inventory tag UUID associated with the gateway
           format: uuid
           type: string
         tunnels:
+          description: WAN tunnel statistics for the gateway
           $ref: '#/components/schemas/stats_gateway_wan_tunnels'
         type:
+          description: Device type discriminator for gateway statistics
           $ref: '#/components/schemas/const_device_type_gateway'
         uptime:
+          description: Elapsed time since the gateway last booted, in seconds
           examples:
           - 3671219
           readOnly: true
@@ -101158,6 +101216,7 @@ components:
           - number
           - 'null'
         version:
+          description: Software version running on the gateway
           examples:
           - 18.4R1.8
           readOnly: true
@@ -101165,6 +101224,7 @@ components:
           - string
           - 'null'
         vpn_peers:
+          description: Remote VPN peer statistics for the gateway
           $ref: '#/components/schemas/stats_gateway_vpn_peers'
       required:
       - mac
@@ -101172,8 +101232,10 @@ components:
       type: object
     stats_gateway_cluster:
       additionalProperties: false
+      description: High-availability cluster state reported by a gateway
       properties:
         state:
+          description: Current HA cluster state for the gateway
           readOnly: true
           type:
           - string
