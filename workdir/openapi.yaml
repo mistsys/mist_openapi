@@ -106460,6 +106460,7 @@ components:
       description: Required for preprovisioned Virtual Chassis
       properties:
         members:
+          description: Virtual Chassis members and their expected roles
           $ref: '#/components/schemas/switch_virtual_chassis_members'
         preprovisioned:
           default: false
@@ -106470,13 +106471,16 @@ components:
       additionalProperties: false
       properties:
         mac:
-          description: fpc0, same as the mac of device_id
+          description: Virtual Chassis member MAC address; for FPC0 this matches
+            the device ID MAC
           examples:
           - aff827549235
           type: string
         member_id:
+          description: Virtual Chassis member identifier
           type: integer
         vc_role:
+          description: Role of this member in the Virtual Chassis
           $ref: '#/components/schemas/switch_virtual_chassis_member_vc_role'
       required:
       - mac
@@ -106498,6 +106502,7 @@ components:
       type: array
     switch_vrf_instance:
       additionalProperties: false
+      description: Switch VRF instance routing and network membership settings
       examples:
       - extra_routes:
           0.0.0.0/0:
@@ -106506,20 +106511,29 @@ components:
         - guest
       properties:
         aggregate_routes:
+          description: IPv4 aggregate routes configured for this VRF instance
           $ref: '#/components/schemas/aggregate_routes'
         aggregate_routes6:
+          description: IPv6 aggregate routes configured for this VRF instance
           $ref: '#/components/schemas/aggregate_routes6'
         evpn_auto_loopback_subnet:
+          description: IPv4 subnet used for automatic EVPN loopback addresses in
+            this VRF instance
           examples:
           - 100.101.0.0/24
           type: string
         evpn_auto_loopback_subnet6:
+          description: IPv6 subnet used for automatic EVPN loopback addresses in
+            this VRF instance
           type: string
         extra_routes:
+          description: Additional IPv4 static routes configured for this VRF instance
           $ref: '#/components/schemas/vrf_extra_routes'
         extra_routes6:
+          description: Additional IPv6 static routes configured for this VRF instance
           $ref: '#/components/schemas/vrf_extra_routes6'
         networks:
+          description: Names of switch networks included in this VRF instance
           $ref: '#/components/schemas/strings'
       type: object
     switch_vrf_instances:
