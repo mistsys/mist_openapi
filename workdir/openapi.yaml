@@ -95463,6 +95463,7 @@ components:
       description: AP Synthetic Test configuration
       properties:
         additional_vlan_ids:
+          description: VLAN IDs, beyond the client VLAN, where Bonjour queries and responses are forwarded
           $ref: '#/components/schemas/additional_vlan_ids'
           description: VLAN IDs included in addition to the default VLAN set for AP
             synthetic tests
@@ -114853,6 +114854,7 @@ components:
       description: Bonjour gateway wlan settings
       properties:
         additional_vlan_ids:
+          description: VLAN IDs, beyond the client VLAN, where Bonjour queries and responses are forwarded
           $ref: '#/components/schemas/additional_vlan_ids'
         enabled:
           default: false
@@ -114872,6 +114874,7 @@ components:
       type: object
     wlan_bonjour_service_properties:
       additionalProperties: false
+      description: Bonjour service discovery settings for one advertised service
       properties:
         disable_local:
           default: false
@@ -114879,8 +114882,10 @@ components:
             on the same WLAN
           type: boolean
         radius_groups:
+          description: RADIUS groups allowed to discover this Bonjour service, when restricted
           $ref: '#/components/schemas/wlan_bonjour_service_properties_radius_groups'
         scope:
+          description: Discovery scope for this Bonjour service on the WLAN
           $ref: '#/components/schemas/wlan_bonjour_service_properties_scope'
       type: object
     wlan_bonjour_service_properties_radius_groups:
@@ -114904,13 +114909,17 @@ components:
         in order to work. See CWA: https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/115732-central-web-auth-00.html'
       properties:
         allowed_hostnames:
+          description: Hostnames allowed for Cisco CWA client access before authorization
           $ref: '#/components/schemas/wlan_cisco_cwa_allowed_hostnames'
         allowed_subnets:
+          description: CIDR subnets allowed for Cisco CWA client access before authorization
           $ref: '#/components/schemas/wlan_cisco_cwa_allowed_subnets'
         blocked_subnets:
+          description: CIDR subnets blocked for Cisco CWA client access
           $ref: '#/components/schemas/wlan_cisco_cwa_blocked_subnets'
         enabled:
           default: false
+          description: Whether Cisco CWA is enabled for this WLAN
           type: boolean
       type: object
     wlan_cisco_cwa_allowed_hostnames:
