@@ -111904,21 +111904,24 @@ components:
       type: string
     webhook_delivery:
       additionalProperties: false
+      description: Record of a webhook delivery attempt and the destination response
       properties:
         error:
-          description: Error message, if there is one
+          description: Message returned for a failed delivery attempt, when available
           type: string
         id:
+          description: Unique identifier of the webhook delivery attempt
           $ref: '#/components/schemas/id'
         org_id:
+          description: Organization associated with the webhook delivery attempt
           $ref: '#/components/schemas/org_id'
         req_headers:
-          description: HTTP request headers
+          description: HTTP headers sent with the webhook delivery request
           examples:
           - '{\"Content-Type\":[\"application/json\"],\"User-Agent\":[\"Mist-webhook\"]}'
           type: string
         req_payload:
-          description: HTTP request payload
+          description: JSON payload sent in the webhook delivery request
           examples:
           - '{\"topic\":\"audits\",\"events\":[{\"admin_name\":\"John Doe john.doe@juniper.net\",\"after\":\"{\\"radio_config\\":
             {\\"band_24\\": {\\"disabled\\": false, \\"allow_rrm_disable\\": false,
@@ -111933,31 +111936,39 @@ components:
             Chrome/112.0.0.0 Safari/537.36\"}]}'
           type: string
         req_url:
-          description: HTTP request URL
+          description: Destination URL used for the webhook delivery request
           examples:
           - https://example.com
           type: string
         resp_body:
-          description: HTTP response body
+          description: Response body returned by the webhook destination
           examples:
           - Ok
           type: string
         resp_headers:
-          description: HTTP response headers
+          description: Response headers returned by the webhook destination
           type: string
         site_id:
+          description: Site associated with the webhook delivery attempt, when applicable
           $ref: '#/components/schemas/site_id'
         status:
+          description: Delivery result for the webhook request
           $ref: '#/components/schemas/webhook_delivery_status'
         status_code:
+          description: HTTP status code returned by the webhook destination
           examples:
           - 200
           type: integer
         timestamp:
+          description: Time when the webhook delivery attempt occurred, in epoch
+            seconds
           $ref: '#/components/schemas/timestamp'
         topic:
+          description: Webhook topic delivered in this request
           $ref: '#/components/schemas/webhook_delivery_topic'
         webhook_id:
+          description: Unique identifier of the configured webhook used for this
+            delivery attempt
           examples:
           - 7a11b901-f719-4c91-8aef-deb8699a6364
           format: uuid
