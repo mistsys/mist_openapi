@@ -83684,6 +83684,7 @@ components:
       maximum: 10
       type: array
     org_apitokens:
+      description: List of organization API tokens
       items:
         $ref: '#/components/schemas/org_apitoken'
       type: array
@@ -83729,6 +83730,7 @@ components:
       type: string
     org_crl_import_file:
       additionalProperties: false
+      description: Multipart upload payload for importing an organization CRL file
       properties:
         file:
           contentMediaType: application/octet-stream
@@ -83753,6 +83755,7 @@ components:
       - name
       type: object
     org_devices:
+      description: List of organization device identifiers
       items:
         $ref: '#/components/schemas/org_device'
       type: array
@@ -83855,6 +83858,7 @@ components:
       - ssid
       type: string
     org_id:
+      description: Organization identifier
       examples:
       - a97c1b22-a4e9-411e-9bfd-d8695a0f9e61
       format: uuid
@@ -83898,6 +83902,7 @@ components:
       - unamend
       type: string
     org_list:
+      description: List of organizations
       items:
         $ref: '#/components/schemas/org'
       type: array
@@ -84003,6 +84008,7 @@ components:
       - user_id
       type: string
     org_service_policies:
+      description: List of organization-level service policies
       items:
         $ref: '#/components/schemas/org_service_policy'
       type: array
@@ -84286,6 +84292,7 @@ components:
       type: object
     org_setting_api_policy:
       additionalProperties: false
+      description: Organization API response policy for hiding secrets and passwords
       properties:
         no_reveal:
           default: false
@@ -84405,6 +84412,8 @@ components:
       - mac
       type: string
     org_setting_auto_device_naming_rules:
+      description: Automatic device naming rules, or null when automatic naming is
+        not configured
       items:
         $ref: '#/components/schemas/org_setting_auto_device_naming_rule'
       type:
@@ -84422,6 +84431,8 @@ components:
           description: Assignment rules evaluated for automatic device profile selection
       type: object
     org_setting_auto_deviceprofile_assignment_rules:
+      description: Automatic device profile assignment rules, or null when automatic
+        assignment is not configured
       items:
         $ref: '#/components/schemas/org_setting_auto_assignment_rule'
       type:
@@ -84439,6 +84450,8 @@ components:
           description: Assignment rules evaluated for automatic site selection
       type: object
     org_setting_auto_site_assignment_rules:
+      description: Automatic site assignment rules, or null when automatic assignment
+        is not configured
       items:
         $ref: '#/components/schemas/org_setting_auto_assignment_rule'
       type:
@@ -84615,6 +84628,7 @@ components:
       type: object
     org_setting_gateway_mgmt_overlay_ip:
       additionalProperties: false
+      description: Overlay IP configuration used for gateway management traffic
       properties:
         ip:
           description: When it's going overlay, a routable IP to overlay will be required
@@ -84652,6 +84666,7 @@ components:
       type: array
     org_setting_jcloud:
       additionalProperties: false
+      description: JCloud integration settings for this Mist organization
       properties:
         org_apitoken:
           description: JCloud organization API token used by this Mist organization
@@ -85071,6 +85086,8 @@ components:
       type: object
     org_setting_security:
       additionalProperties: false
+      description: Organization security controls for local SSH and FIPS zeroize
+        access
       properties:
         disable_local_ssh:
           description: Whether to disable local SSH (by default, local SSH is enabled
@@ -85096,6 +85113,7 @@ components:
       type: object
     org_setting_switch_mgmt:
       additionalProperties: false
+      description: Organization-level switch management settings
       properties:
         ap_affinity_threshold:
           default: 12
@@ -85531,6 +85549,7 @@ components:
           description: Configured tiles for the databoard
       type: object
     org_ui_settings_list:
+      description: List of organization UI databoards
       items:
         $ref: '#/components/schemas/org_ui_settings'
       type: array
@@ -85654,20 +85673,24 @@ components:
       - name
       type: object
     orggroup_id:
+      description: Organization group identifier
       examples:
       - 832b1d74-9531-409b-ae37-4d7f3edbde92
       format: uuid
       type: string
     orggroup_ids:
+      description: List of organization group identifiers
       items:
         format: uuid
         type: string
       type: array
     orggroup_list:
+      description: List of MSP organization groups
       items:
         $ref: '#/components/schemas/orggroup'
       type: array
     orggroup_org_ids:
+      description: List of organization identifiers included in an organization group
       items:
         format: uuid
         type: string
@@ -85854,11 +85877,13 @@ components:
           type: integer
       type: object
     ospf_peer_stats_search_results:
+      description: List of OSPF peer statistic records
       items:
         $ref: '#/components/schemas/ospf_peer_stats_search_results_items'
       type: array
     ospf_peer_stats_search_results_items:
       additionalProperties: false
+      description: OSPF peer statistic record reported by a router
       properties:
         dead_time:
           description: Seconds remaining before the neighbor is considered inactive
@@ -85980,6 +86005,7 @@ components:
       type: string
     pma_dashboard:
       additionalProperties: false
+      description: PMA dashboard metadata and redirect URL
       properties:
         description:
           description: Human-readable summary of the PMA dashboard
@@ -86216,12 +86242,14 @@ components:
       - udp
       type: string
     protect_re_custom_subnet:
+      description: Source subnets matched by a custom Protect RE ACL
       items:
         examples:
         - 10.1.2.0/24
         type: string
       type: array
     protect_re_customs:
+      description: Custom Protect RE ACL entries
       items:
         $ref: '#/components/schemas/protect_re_custom'
       type: array
@@ -86353,6 +86381,7 @@ components:
           description: PSK IDs to delete
       type: object
     psk_id_list_psk_id:
+      description: PSK identifiers included in a delete request
       examples:
       - - 0039c16c-ca87-4d3f-bb94-b97c58199f18
         - 6562cc8e-5893-418a-acaa-4d7c1af8084f
@@ -86361,6 +86390,7 @@ components:
         type: string
       type: array
     psk_list:
+      description: List of personal PSK configurations
       items:
         $ref: '#/components/schemas/psk'
       type: array
@@ -86491,6 +86521,7 @@ components:
           type: string
       type: object
     psk_portal_list:
+      description: List of PSK portal configurations
       items:
         $ref: '#/components/schemas/psk_portal'
       type: array
@@ -86671,6 +86702,7 @@ components:
         minimum: 1
         type: integer
     psks:
+      description: List of personal PSK configurations
       items:
         $ref: '#/components/schemas/psk'
       type: array
@@ -86788,6 +86820,7 @@ components:
       - secret
       type: object
     radius_acct_servers:
+      description: List of RADIUS accounting servers
       items:
         $ref: '#/components/schemas/radius_acct_server'
       type: array
@@ -86843,6 +86876,7 @@ components:
       - secret
       type: object
     radius_auth_servers:
+      description: List of RADIUS authentication servers
       items:
         $ref: '#/components/schemas/radius_auth_server'
       type: array
