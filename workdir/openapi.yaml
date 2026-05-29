@@ -98929,17 +98929,22 @@ components:
       type: string
     stats_ap:
       additionalProperties: false
-      description: AP statistics
+      description: AP runtime statistics, placement data, and inventory metadata
       properties:
         antenna_select:
           $ref: '#/components/schemas/antenna_select'
+          description: Selectable antenna mode reported for the AP
         auto_placement:
           $ref: '#/components/schemas/stats_ap_auto_placement'
+          description: Auto placement result and status for the AP
         auto_upgrade_stat:
           $ref: '#/components/schemas/stats_ap_auto_upgrade'
+          description: Automatic firmware upgrade status for the AP
         ble_stat:
           $ref: '#/components/schemas/stats_ap_ble'
+          description: BLE radio and beacon statistics reported by the AP
         cert_expiry:
+          description: Certificate expiry timestamp for the AP, in epoch seconds
           examples:
           - 1534534392
           readOnly: true
@@ -98947,23 +98952,27 @@ components:
           - number
           - 'null'
         config_reverted:
+          description: Whether the AP configuration was reverted by the device
           readOnly: true
           type:
           - boolean
           - 'null'
         cpu_system:
+          description: CPU system utilization reported by the AP
           format: int64
           readOnly: true
           type:
           - integer
           - 'null'
         cpu_user:
+          description: CPU user utilization reported by the AP
           format: int32
           readOnly: true
           type:
           - integer
           - 'null'
         cpu_util:
+          description: Total CPU utilization reported by the AP
           format: int32
           readOnly: true
           type:
@@ -98971,7 +98980,9 @@ components:
           - 'null'
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Time when the AP record was created, in epoch seconds
         deviceprofile_id:
+          description: Device profile identifier applied to the AP, when present
           format: uuid
           readOnly: true
           type:
@@ -98979,9 +98990,12 @@ components:
           - 'null'
         env_stat:
           $ref: '#/components/schemas/stats_ap_env_stat'
+          description: Environmental sensor readings reported by the AP
         esl_stat:
           $ref: '#/components/schemas/stats_ap_esl_stat'
+          description: Electronic shelf label dongle status reported by the AP
         evpntopo_id:
+          description: EVPN topology identifier associated with the AP, when present
           format: uuid
           readOnly: true
           type:
@@ -98989,7 +99003,9 @@ components:
           - 'null'
         expiring_certs:
           $ref: '#/components/schemas/stats_ap_expiring_certs'
+          description: Certificates on the AP that are expiring within 30 days
         ext_ip:
+          description: Public IP address observed for the AP
           examples:
           - 73.92.124.103
           readOnly: true
@@ -98998,20 +99014,27 @@ components:
           - 'null'
         fwupdate:
           $ref: '#/components/schemas/fwupdate_stat'
+          description: Firmware update status for the AP
         gps_stat:
           $ref: '#/components/schemas/stats_ap_gps_stat'
+          description: GPS location data reported for the AP
         hw_rev:
+          description: Hardware revision reported by the AP
           readOnly: true
           type:
           - string
           - 'null'
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for the AP
         inactive_wired_vlans:
           $ref: '#/components/schemas/integers'
+          description: Wired VLAN identifiers currently inactive on the AP
         iot_stat:
           $ref: '#/components/schemas/stats_ap_iot_stat'
+          description: IoT input statistics reported by the AP
         ip:
+          description: Management IP address currently reported by the AP
           examples:
           - 10.2.9.159
           readOnly: true
@@ -99020,8 +99043,10 @@ components:
           - 'null'
         ip_config:
           $ref: '#/components/schemas/ap_ip_config'
+          description: IP configuration applied to the AP management interface
         ip_stat:
           $ref: '#/components/schemas/ip_stat'
+          description: Read-only IP addressing status reported by the AP
         l2tp_stat:
           additionalProperties:
             $ref: '#/components/schemas/stats_ap_l2tp_stat'
@@ -99029,15 +99054,23 @@ components:
           type: object
         last_seen:
           $ref: '#/components/schemas/last_seen'
+          description: Time when the AP was last seen by Mist, in epoch seconds
         last_trouble:
           $ref: '#/components/schemas/last_trouble'
+          description: Most recent AP trouble indicator and timestamp
         led:
           $ref: '#/components/schemas/ap_led'
+          description: Light indicator state for the AP
         lldp_stat:
           $ref: '#/components/schemas/stats_ap_lldp_stat'
+          description: Primary LLDP neighbor and power negotiation details for the
+            AP
         lldp_stats:
           $ref: '#/components/schemas/stats_ap_lldp_stats'
+          description: Per-port LLDP neighbor and power negotiation details for the
+            AP
         locating:
+          description: Whether AP locating mode is currently active
           examples:
           - false
           readOnly: true
@@ -99054,7 +99087,7 @@ components:
           - boolean
           - 'null'
         mac:
-          description: Device mac
+          description: AP MAC address reported by Mist
           examples:
           - 5c5b35000010
           readOnly: true
@@ -99062,6 +99095,7 @@ components:
           - string
           - 'null'
         map_id:
+          description: Map identifier where the AP is placed, when available
           examples:
           - 63eda950-c6da-11e4-a628-60f81dd250cc
           format: uuid
@@ -99070,12 +99104,14 @@ components:
           - string
           - 'null'
         mem_total_kb:
+          description: Total memory available on the AP, in kilobytes
           format: int64
           readOnly: true
           type:
           - integer
           - 'null'
         mem_used_kb:
+          description: Memory currently used on the AP, in kilobytes
           format: int64
           readOnly: true
           type:
@@ -99088,8 +99124,9 @@ components:
           type: object
         mesh_uplink:
           $ref: '#/components/schemas/ap_stat_mesh_uplink'
+          description: Mesh uplink status for the AP
         model:
-          description: Device model
+          description: AP model identifier reported by Mist
           examples:
           - AP200
           readOnly: true
@@ -99098,7 +99135,9 @@ components:
           - 'null'
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Time when the AP record was last modified, in epoch seconds
         mount:
+          description: Orientation configured for the AP mount
           examples:
           - faceup
           readOnly: true
@@ -99106,6 +99145,7 @@ components:
           - string
           - 'null'
         name:
+          description: Display name of the AP
           examples:
           - conference room
           readOnly: true
@@ -99113,6 +99153,7 @@ components:
           - string
           - 'null'
         notes:
+          description: Free-form notes configured on the AP record
           readOnly: true
           type:
           - string
@@ -99128,6 +99169,7 @@ components:
           type: integer
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization identifier that owns the AP
         port_stat:
           additionalProperties:
             $ref: '#/components/schemas/stats_ap_port_stat'
@@ -99146,7 +99188,7 @@ components:
           - integer
           - 'null'
         power_constrained:
-          description: Whether insufficient power
+          description: Whether the AP is operating with insufficient power
           examples:
           - false
           readOnly: true
@@ -99154,7 +99196,7 @@ components:
           - boolean
           - 'null'
         power_opmode:
-          description: Constrained mode
+          description: Operating mode used while AP power is constrained
           examples:
           - '[20] 6GHz(2x2) 5GHz(4x4) 2.4GHz(2x2).'
           readOnly: true
@@ -99171,16 +99213,21 @@ components:
           - 'null'
         radio_config:
           $ref: '#/components/schemas/stats_ap_radio_config'
+          description: Radio configuration currently applied to the AP
         radio_stat:
           $ref: '#/components/schemas/stats_ap_radio_stat'
+          description: Radio statistics reported by AP bands
         rx_bps:
           $ref: '#/components/schemas/rx_bps'
+          description: Receive throughput for AP traffic, in bits per second
         rx_bytes:
           $ref: '#/components/schemas/rx_bytes'
+          description: Total bytes received by the AP since connection
         rx_pkts:
           $ref: '#/components/schemas/rx_pkts'
+          description: Total packets received by the AP since connection
         serial:
-          description: Serial Number
+          description: Device serial number for the AP
           examples:
           - FXLH2015170017
           readOnly: true
@@ -99189,21 +99236,28 @@ components:
           - 'null'
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site identifier where the AP is assigned
         status:
+          description: Connection status reported for the AP
           readOnly: true
           type:
           - string
           - 'null'
         switch_redundancy:
           $ref: '#/components/schemas/stats_ap_switch_redundancy'
+          description: Switch redundancy status reported for the AP
         tx_bps:
           $ref: '#/components/schemas/tx_bps'
+          description: Transmit throughput for AP traffic, in bits per second
         tx_bytes:
           $ref: '#/components/schemas/tx_bytes'
+          description: Total bytes transmitted by the AP since connection
         tx_pkts:
           $ref: '#/components/schemas/tx_pkts'
+          description: Total packets transmitted by the AP since connection
         type:
           $ref: '#/components/schemas/const_device_type_ap'
+          description: Device type for this statistics record
         uptime:
           description: How long, in seconds, has the device been up (or rebooted)
           examples:
@@ -99214,7 +99268,9 @@ components:
           - 'null'
         usb_stat:
           $ref: '#/components/schemas/stats_ap_usb_stat'
+          description: USB peripheral status reported by the AP
         version:
+          description: Firmware version running on the AP
           examples:
           - 0.14.12345
           readOnly: true
@@ -99222,6 +99278,7 @@ components:
           - string
           - 'null'
         x:
+          description: Map X coordinate of the AP placement, in pixels
           examples:
           - 53.5
           format: double
@@ -99230,6 +99287,7 @@ components:
           - number
           - 'null'
         y:
+          description: Map Y coordinate of the AP placement, in pixels
           examples:
           - 173.1
           format: double
