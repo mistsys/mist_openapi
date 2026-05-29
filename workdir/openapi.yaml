@@ -94183,7 +94183,7 @@ components:
           type: integer
       type: object
     site:
-      description: Site
+      description: Site configuration and metadata within an organization
       properties:
         address:
           description: full address of the site
@@ -94215,6 +94215,7 @@ components:
           - US
           type: string
         created_time:
+          description: Timestamp when the site was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         gatewaytemplate_id:
           description: Gateway Template ID, used by gateways
@@ -94225,12 +94226,16 @@ components:
           - string
           - 'null'
         id:
+          description: Unique value identifying the site
           $ref: '#/components/schemas/id'
         latlng:
+          description: Latitude and longitude for the site location
           $ref: '#/components/schemas/lat_lng'
         modified_time:
+          description: Timestamp when the site was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         name:
+          description: Display name of the site
           examples:
           - Mist Office
           type: string
@@ -94248,6 +94253,7 @@ components:
           - string
           - 'null'
         org_id:
+          description: Organization identifier associated with the site
           $ref: '#/components/schemas/org_id'
         rftemplate_id:
           description: RF Template ID, this takes precedence over Site Settings
@@ -94266,7 +94272,7 @@ components:
           - string
           - 'null'
         secpolicy_id:
-          description: SecPolicy ID
+          description: Security policy identifier applied to this site
           examples:
           - 3bcd0beb-5d0a-4cbd-92c1-14aea91e98ef
           format: uuid
@@ -94274,21 +94280,23 @@ components:
           - string
           - 'null'
         sitegroup_ids:
+          description: Site group identifiers for groups that include this site
           $ref: '#/components/schemas/site_sitegroup_ids'
         sitetemplate_id:
-          description: Site Template ID
+          description: Site template identifier applied to this site
           format: uuid
           type:
           - string
           - 'null'
         timezone:
           default: UTC
-          description: Timezone the site is at
+          description: IANA time zone name for the site
           examples:
           - America/Los_Angeles
           type: string
         tzoffset:
           default: 0
+          description: Time zone offset value derived from the site's timezone
           type: integer
       required:
       - name
@@ -95621,7 +95629,7 @@ components:
           type: boolean
       type: object
     site_sitegroup_ids:
-      description: Sitegroups this site belongs to
+      description: Site group identifiers for groups this site belongs to
       items:
         format: uuid
         type: string
