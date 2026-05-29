@@ -88232,30 +88232,39 @@ components:
       type: array
     response_detail_string:
       additionalProperties: false
+      description: Response containing a human-readable detail message
       properties:
         detail:
+          description: Human-readable detail message returned by the API
           type: string
       type: object
     response_device_bios_upgrade:
       additionalProperties: false
+      description: Device BIOS upgrade status response
       properties:
         status:
+          description: Current BIOS upgrade status for the device
           type: string
         timestamp:
+          description: Epoch timestamp when the BIOS upgrade status was reported
           $ref: '#/components/schemas/timestamp'
       type: object
     response_device_config_cli:
       additionalProperties: false
+      description: Device configuration rendered as CLI commands
       properties:
         cli:
+          description: Command lines generated for the device configuration in CLI syntax
           $ref: '#/components/schemas/strings'
       required:
       - cli
       type: object
     response_device_config_cmd:
       additionalProperties: false
+      description: Device configuration command response
       properties:
         cmd:
+          description: Configuration command returned for the device
           type: string
       required:
       - cmd
