@@ -109512,11 +109512,14 @@ components:
           $ref: '#/components/schemas/uuids'
       type: object
     username_password:
+      description: Credential payload used to validate an identity provider login
       properties:
         password:
+          description: Credential password used for the validation attempt
           format: password
           type: string
         username:
+          description: Credential username used for the validation attempt
           type: string
       type: object
     utils_bounce_port:
