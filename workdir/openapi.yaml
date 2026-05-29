@@ -117318,11 +117318,13 @@ components:
         $ref: '#/components/schemas/wxlan_tag'
       type: array
     wxlan_tunnel:
-      description: WxLAn Tunnel
+      description: WxLAN tunnel configuration
       properties:
         created_time:
+          description: Time when this WxLAN tunnel was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         dmvpn:
+          description: Settings for Dynamic Multipoint VPN on this WxLAN tunnel
           $ref: '#/components/schemas/wxlan_tunnel_dmvpn'
         for_mgmt:
           default: false
@@ -117330,6 +117332,7 @@ components:
             tunnel cannot be used by wxlan rule or by wlan
           type: boolean
         for_site:
+          description: Whether this WxLAN tunnel is scoped to a site
           readOnly: true
           type: boolean
         hello_interval:
@@ -117341,6 +117344,7 @@ components:
           type: integer
         hello_retries:
           default: 7
+          description: Number of missed hello messages before the AP tries another tunnel peer
           maximum: 30
           minimum: 2
           type: integer
@@ -117352,8 +117356,10 @@ components:
             \ * %M: MAC (e.g. 5c5b350e0060)"
           type: string
         id:
+          description: Unique identifier for this WxLAN tunnel
           $ref: '#/components/schemas/id'
         ipsec:
+          description: Security settings for IPsec on this WxLAN tunnel; requires DMVPN to be enabled
           $ref: '#/components/schemas/wxlan_tunnel_ipsec'
         is_static:
           default: false
@@ -117361,6 +117367,7 @@ components:
             \ As the session configurations are not compatible, cannot be toggled."
           type: boolean
         modified_time:
+          description: Time when this WxLAN tunnel was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         mtu:
           default: 0
@@ -117372,19 +117379,23 @@ components:
           description: The name of the tunnel
           type: string
         org_id:
+          description: Owning organization associated with this WxLAN tunnel
           $ref: '#/components/schemas/org_id'
         peers:
+          description: Remote peer IP addresses or hostnames for this tunnel
           $ref: '#/components/schemas/wxlan_tunnel_peers'
         router_id:
           description: Optional, overwrite the router-id in SCCRQ control message,
             default is "" or null, can also be an IPv4 address
           type: string
         secret:
-          description: "Secret, \u2018\u2019 if no auth is used"
+          description: "Shared secret used for tunnel authentication, \u2018\u2019 if no auth is used"
           type: string
         sessions:
+          description: L2TPv3 sessions established for this tunnel
           $ref: '#/components/schemas/wxlan_tunnel_sessions'
         site_id:
+          description: Mist site associated with this WxLAN tunnel, when site-scoped
           $ref: '#/components/schemas/site_id'
         udp_port:
           description: UDP port if `use_udp`==`true`
@@ -117411,6 +117422,7 @@ components:
             \ default 600"
           type: integer
         host_routes:
+          description: IPv4 DMVPN peer host routes to which traffic is forwarded
           $ref: '#/components/schemas/wxlan_tunnel_dmvpn_host_routes'
       type: object
     wxlan_tunnel_dmvpn_host_routes:
@@ -117428,7 +117440,7 @@ components:
           description: Whether ipsec is enabled, requires DMVPN be enabled
           type: boolean
         psk:
-          description: IPSec pre-shared key
+          description: Pre-shared key used for IPsec on this WxLAN tunnel
           type: string
       required:
       - psk
@@ -117440,6 +117452,7 @@ components:
       type: array
     wxlan_tunnel_session:
       additionalProperties: false
+      description: L2TPv3 session established inside a WxLAN tunnel
       properties:
         ap_as_session_id:
           description: If `use_ap_as_session_ids`==`true`, only apmac is supported
@@ -117449,11 +117462,13 @@ components:
           description: Optional, user-specified string for display purpose
           type: string
         enable_cookie:
+          description: Whether L2TPv3 cookie support is enabled for this session
           type: boolean
         ethertype:
+          description: Frame type carried by this tunnel session
           $ref: '#/components/schemas/wxlan_tunnel_session_ethertype'
         local_session_id:
-          description: 1-2147483647
+          description: Identifier for the local L2TPv3 session, from 1 to 2147483647
           maximum: 2147483647
           minimum: 1
           type: integer
@@ -117467,7 +117482,7 @@ components:
           description: Remote-id of the session, has to be unique in the same tunnel
           type: string
         remote_session_id:
-          description: 1-2147483647
+          description: Identifier for the remote L2TPv3 session, from 1 to 2147483647
           maximum: 2147483647
           minimum: 1
           type: integer
