@@ -112806,8 +112806,10 @@ components:
       description: Sample of the `minis-application` webhook payload.
       properties:
         events:
+          description: Minis application test events included in this webhook delivery
           $ref: '#/components/schemas/webhook_minis_application_events'
         topic:
+          description: Webhook topic name for Minis application test deliveries
           $ref: '#/components/schemas/webhook_minis_application_topic'
       required:
       - events
@@ -112815,17 +112817,19 @@ components:
       type: object
     webhook_minis_application_event:
       additionalProperties: false
+      description: Marvis Minis application synthetic test result
       properties:
         device_mac:
           description: MAC address of the device
           type: string
         ip:
-          description: IP address test was performed to
+          description: Destination IP address used for the application test
           type: string
         latency:
-          description: latency in milliseconds
+          description: Application test latency measured in milliseconds
           type: integer
         org_id:
+          description: Organization associated with the Minis application test result
           $ref: '#/components/schemas/org_id'
         probe_name:
           description: Name of the probe
@@ -112833,11 +112837,12 @@ components:
           - connectivitycheck.gstatic.com
           type: string
         probe_type:
-          description: Type of probe
+          description: Probe category used for the Minis application test
           examples:
           - application
           type: string
         site_id:
+          description: Site associated with the Minis application test result
           $ref: '#/components/schemas/site_id'
         src_ip:
           description: Source IP address of the test
@@ -112846,11 +112851,14 @@ components:
           description: Whether the test was successful
           type: boolean
         test_type:
+          description: Synthetic test type used for the Minis application result
           $ref: '#/components/schemas/synthetictest_config_custom_probe_type'
         timestamp:
+          description: Time when the Minis application test result was reported,
+            in epoch seconds
           $ref: '#/components/schemas/timestamp'
         vlan:
-          description: VLAN ID used for the test
+          description: Network VLAN ID used for the application test
           examples:
           - 12
           type: integer
@@ -112869,8 +112877,10 @@ components:
       description: Sample of the `minis-reachability` webhook payload.
       properties:
         events:
+          description: Minis reachability test events included in this webhook delivery
           $ref: '#/components/schemas/webhook_minis_reachability_events'
         topic:
+          description: Webhook topic name for Minis reachability test deliveries
           $ref: '#/components/schemas/webhook_minis_reachability_topic'
       required:
       - events
@@ -112878,6 +112888,7 @@ components:
       type: object
     webhook_minis_reachability_event:
       additionalProperties: false
+      description: Marvis Minis reachability synthetic test result
       properties:
         avg_latency:
           description: Average latency in milliseconds
@@ -112889,7 +112900,7 @@ components:
           - 7cb68d8f0440
           type: string
         loss_percentage:
-          description: Packet loss percentage
+          description: Percentage of packets lost during the reachability test
           format: double
           type: number
         max_latency:
@@ -112901,6 +112912,7 @@ components:
           format: double
           type: number
         org_id:
+          description: Organization associated with the Minis reachability test result
           $ref: '#/components/schemas/org_id'
         probe_name:
           description: Name of the probe
@@ -112913,16 +112925,17 @@ components:
           - google.com
           type: string
         probe_type:
-          description: Type of probe
+          description: Probe category used for the Minis reachability test
           examples:
           - reachability
           type: string
         protocol:
-          description: Protocol used for the test
+          description: Network protocol used for the reachability test
           examples:
           - icmp
           type: string
         site_id:
+          description: Site associated with the Minis reachability test result
           $ref: '#/components/schemas/site_id'
         test_type:
           description: Type of test performed
@@ -112930,9 +112943,11 @@ components:
           - ping
           type: string
         timestamp:
+          description: Time when the Minis reachability test result was reported,
+            in epoch seconds
           $ref: '#/components/schemas/timestamp'
         vlan:
-          description: VLAN ID used for the test
+          description: Network VLAN ID used for the reachability test
           examples:
           - 12
           type: integer
