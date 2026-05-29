@@ -100401,31 +100401,43 @@ components:
       type: array
     stats_beacon:
       additionalProperties: false
+      description: BLE beacon runtime statistics and placement data
       properties:
         battery_voltage:
           description: Battery voltage, in mV
           type: number
         eddystone_instance:
+          description: Eddystone-UID instance value advertised by the beacon
           type: string
         eddystone_namespace:
+          description: Eddystone-UID namespace value advertised by the beacon
           type: string
         last_seen:
           $ref: '#/components/schemas/last_seen'
+          description: Time when the beacon was last observed, in epoch seconds
         mac:
+          description: Beacon MAC address observed by Mist
           type: string
         map_id:
+          description: Map identifier where the beacon is placed
           format: uuid
           type: string
         name:
+          description: Display name of the beacon
           type: string
         power:
+          description: Transmit power configured for the beacon
           type: integer
         type:
+          description: Advertisement protocol type used by the beacon, such as iBeacon
+            or Eddystone
           type: string
         x:
+          description: Map X coordinate of the beacon placement, in pixels
           format: double
           type: number
         y:
+          description: Map Y coordinate of the beacon placement, in pixels
           format: double
           type: number
       required:
@@ -100438,7 +100450,7 @@ components:
       - y
       type: object
     stats_beacons:
-      description: Beacon statistics
+      description: BLE beacon statistics returned by the request
       items:
         $ref: '#/components/schemas/stats_beacon'
       type: array
