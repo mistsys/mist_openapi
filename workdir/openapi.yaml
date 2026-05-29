@@ -98696,73 +98696,98 @@ components:
         type: string
       type: array
     sso_role_msp:
-      description: SSO Role response
+      description: MSP SSO role definition
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Time when this MSP SSO role was created, in epoch seconds
         for_site:
+          description: Whether this MSP SSO role is scoped for site-level access
           readOnly: true
           type: boolean
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for this MSP SSO role
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Time when this MSP SSO role was last modified, in epoch seconds
         msp_id:
           $ref: '#/components/schemas/msp_id'
+          description: Owning MSP identifier for this SSO role
         name:
+          description: Display name of the MSP SSO role
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization identifier associated with this MSP SSO role,
+            when applicable
         privileges:
           $ref: '#/components/schemas/sso_role_msp_privileges'
+          description: Access privileges granted by this MSP SSO role
       required:
       - name
       - privileges
       type: object
     sso_role_msp_privileges:
+      description: Access privileges granted by an MSP SSO role
       items:
         $ref: '#/components/schemas/privilege_msp'
       minItems: 1
       type: array
       uniqueItems: true
     sso_role_org:
-      description: SSO Role response
+      description: Organization SSO role definition
       properties:
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Time when this organization SSO role was created, in epoch
+            seconds
         for_site:
+          description: Whether this organization SSO role is scoped for site-level
+            access
           readOnly: true
           type: boolean
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier for this organization SSO role
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Time when this organization SSO role was last modified, in
+            epoch seconds
         msp_id:
           $ref: '#/components/schemas/msp_id'
+          description: Managing MSP identifier for this organization SSO role, when
+            applicable
         name:
+          description: Display name of the organization SSO role
           type: string
         org_id:
+          description: Owning organization identifier for this SSO role
           examples:
           - 60f6bfdb-2f45-4022-8e2a-e00d977953fe
           format: uuid
           type: string
         privileges:
           $ref: '#/components/schemas/sso_role_org_privileges'
+          description: Access privileges granted by this organization SSO role
       required:
       - name
       - privileges
       type: object
     sso_role_org_privileges:
+      description: Access privileges granted by an organization SSO role
       items:
         $ref: '#/components/schemas/privilege_org'
       minItems: 1
       type: array
       uniqueItems: true
     sso_roles_msp:
+      description: MSP SSO roles returned by the request
       items:
         $ref: '#/components/schemas/sso_role_msp'
       type: array
     sso_roles_org:
+      description: Organization SSO roles returned by the request
       items:
         $ref: '#/components/schemas/sso_role_org'
       type: array
