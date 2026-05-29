@@ -109349,18 +109349,23 @@ components:
         type: string
       type: array
     user_apitoken:
-      description: User API Token
+      description: User API token metadata
       properties:
         created_time:
+          description: Time when this user API token was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         id:
+          description: Unique identifier for this user API token
           $ref: '#/components/schemas/id'
         key:
+          description: Secret API token value returned for this token
           examples:
           - 1qkb...QQCL
           readOnly: true
           type: string
         last_used:
+          description: Time when this user API token was last used, in epoch seconds;
+            null if never used
           examples:
           - 1690115110
           readOnly: true
@@ -109368,39 +109373,48 @@ components:
           - integer
           - 'null'
         name:
-          description: Name of the token
+          description: Display label for this user API token
           examples:
           - org_token_xyz
           type: string
       type: object
     user_apitokens:
+      description: List of user API tokens
       items:
         $ref: '#/components/schemas/user_apitoken'
       type: array
     user_mac:
+      description: Organization user MAC entry
       properties:
         id:
+          description: Unique identifier for this user MAC entry
           $ref: '#/components/schemas/id'
         labels:
+          description: Applied labels for this user MAC entry
           $ref: '#/components/schemas/user_mac_labels'
         mac:
-          description: Only non-local-admin MAC is accepted
+          description: Client MAC address for this entry. Only non-local-admin MAC
+            addresses are accepted
           examples:
           - 5684dae9ac8b
           type: string
         name:
+          description: Display name for this user MAC entry
           examples:
           - Printer2
           type: string
         notes:
+          description: Free-form notes about this user MAC entry
           examples:
           - mac address refers to Canon printers
           type: string
         radius_group:
+          description: RADIUS group associated with this user MAC entry
           examples:
           - VIP
           type: string
         vlan:
+          description: Network VLAN value associated with this user MAC entry
           examples:
           - '30'
           type: string
@@ -109409,21 +109423,27 @@ components:
       type: object
     user_mac_import:
       additionalProperties: false
+      description: Result of importing user MAC entries
       properties:
         added:
+          description: MAC addresses added by the import
           $ref: '#/components/schemas/user_mac_import_added'
         errors:
+          description: Import error messages for user MAC entries
           $ref: '#/components/schemas/user_mac_import_errors'
         updated:
+          description: MAC addresses updated by the import
           $ref: '#/components/schemas/user_mac_import_updated'
       type: object
     user_mac_import_added:
+      description: MAC addresses added during a user MAC import
       examples:
       - - 921b638445cd
       items:
         type: string
       type: array
     user_mac_import_errors:
+      description: Error messages returned during a user MAC import
       examples:
       - - 921b638445ce - mac invalid
         - 921b638445cf - mac already provided
@@ -109431,6 +109451,7 @@ components:
         type: string
       type: array
     user_mac_import_updated:
+      description: MAC addresses updated during a user MAC import
       examples:
       - - 721b638445ef
         - 721b638445ee
@@ -109438,6 +109459,7 @@ components:
         type: string
       type: array
     user_mac_labels:
+      description: Labels applied to a user MAC entry
       examples:
       - - byod
         - flr1
@@ -109445,6 +109467,7 @@ components:
         type: string
       type: array
     user_macs:
+      description: List of user MAC entries
       items:
         $ref: '#/components/schemas/user_mac'
       type: array
@@ -109453,34 +109476,39 @@ components:
       description: User MACs count response
       properties:
         end:
-          description: End timestamp
+          description: Query end timestamp for user MAC counts
           type: integer
         limit:
-          description: Number of results to return
+          description: Maximum number of distinct count results to return
           type: integer
         results:
-          description: List of user MAC entries
+          description: User MAC entries returned by the count query
           items:
             $ref: '#/components/schemas/user_mac'
           type: array
         start:
-          description: Start timestamp
+          description: Query start timestamp for user MAC counts
           type: integer
         total:
-          description: Total number of results
+          description: Overall number of user MAC count results
           type: integer
       type: object
     user_macs_update:
       additionalProperties: false
+      description: Result of a bulk user MAC update
       properties:
         errors:
+          description: Update errors reported for user MAC entries
           $ref: '#/components/schemas/strings'
         updated:
+          description: User MAC entry IDs updated by the request
           $ref: '#/components/schemas/uuids'
       type: object
     usermacs_id:
+      description: Request body for deleting multiple user MAC entries
       properties:
         usermac_ids:
+          description: User MAC entry IDs to delete
           $ref: '#/components/schemas/uuids'
       type: object
     username_password:
