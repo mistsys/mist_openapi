@@ -105311,8 +105311,10 @@ components:
       description: Defines custom switch configuration based on different criteria
       properties:
         enable:
+          description: Whether custom switch matching rules are enabled
           type: boolean
         rules:
+          description: Switch matching rules evaluated to apply custom configuration
           $ref: '#/components/schemas/switch_matching_rules'
       type: object
     switch_matching_rule:
@@ -105329,6 +105331,8 @@ components:
         match_name[0:3]: abc
       properties:
         additional_config_cmds:
+          description: Additional Junos CLI commands applied when this matching rule
+            matches
           $ref: '#/components/schemas/additional_config_cmds'
         default_port_usage:
           default: default
@@ -105336,6 +105340,8 @@ components:
             assigned. Default: `default` to preserve default behavior'
           type: string
         ip_config:
+          description: In-band management IP configuration applied when this matching
+            rule matches
           $ref: '#/components/schemas/switch_matching_rule_ip_config'
         name:
           description: 'Rule name. WARNING: the name `default` is reserved and can
@@ -105344,14 +105350,23 @@ components:
           minLength: 1
           type: string
         oob_ip_config:
+          description: Out-of-band management IP configuration applied when this matching
+            rule matches
           $ref: '#/components/schemas/switch_matching_rule_oob_ip_config'
         port_config:
+          description: Per-port wired configuration applied when this matching rule
+            matches
           $ref: '#/components/schemas/wired_port_config'
         port_mirroring:
+          description: Port mirroring configuration applied when this matching rule
+            matches
           $ref: '#/components/schemas/switch_port_mirroring'
         stp_config:
+          description: Spanning Tree Protocol configuration applied when this matching
+            rule matches
           $ref: '#/components/schemas/switch_stp_config'
         switch_mgmt:
+          description: Management-plane settings applied when this matching rule matches
           $ref: '#/components/schemas/switch_mgmt'
       type: object
     switch_matching_rule_ip_config:
@@ -105362,6 +105377,7 @@ components:
           description: VLAN Name for the management interface
           type: string
         type:
+          description: IP assignment mode for in-band switch management
           $ref: '#/components/schemas/ip_type'
       type: object
     switch_matching_rule_oob_ip_config:
@@ -105369,6 +105385,7 @@ components:
       description: Out-of-Band Management interface configuration
       properties:
         type:
+          description: IP assignment mode for out-of-band switch management
           $ref: '#/components/schemas/ip_type'
         use_mgmt_vrf:
           default: false
@@ -105382,6 +105399,7 @@ components:
           type: boolean
       type: object
     switch_matching_rules:
+      description: Ordered switch matching rules for conditional configuration
       items:
         $ref: '#/components/schemas/switch_matching_rule'
       type: array
