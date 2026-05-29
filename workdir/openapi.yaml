@@ -87809,18 +87809,25 @@ components:
       type: object
     response_client_events_search:
       additionalProperties: false
+      description: Paginated client event search response
       properties:
         end:
+          description: Search window end timestamp for client events, in epoch seconds
           type: integer
         limit:
+          description: Maximum number of client event results requested
           type: integer
         next:
+          description: URL for the next page of client event results
           type: string
         results:
           $ref: '#/components/schemas/response_client_events_search_results'
+          description: Client event records returned for this page
         start:
+          description: Search window start timestamp for client events, in epoch seconds
           type: integer
         total:
+          description: Number of client event records matching the search
           type: integer
       required:
       - start
@@ -87830,52 +87837,70 @@ components:
       - results
       type: object
     response_client_events_search_results:
+      description: Client event records returned by a search response
       items:
         $ref: '#/components/schemas/events_client'
       type: array
       uniqueItems: true
     response_client_nac_search:
       additionalProperties: false
+      description: Paginated NAC client search response
       properties:
         end:
+          description: Search window end timestamp for NAC clients, in epoch seconds
           examples:
           - 1513362753
           type: integer
         limit:
+          description: Maximum number of NAC client results requested
           examples:
           - 3
           type: integer
         next:
+          description: URL for the next page of NAC client results
           type: string
         results:
           $ref: '#/components/schemas/response_client_nac_search_results'
+          description: NAC client records returned for this page
         start:
+          description: Search window start timestamp for NAC clients, in epoch seconds
           examples:
           - 1513276353
           type: integer
         total:
+          description: Number of NAC client records matching the search
           examples:
           - 2
           type: integer
       type: object
     response_client_nac_search_results:
+      description: NAC client records returned by a search response
       items:
         $ref: '#/components/schemas/client_nac'
       type: array
     response_client_search:
       additionalProperties: false
+      description: Paginated wireless client search response
       properties:
         end:
+          description: Search window end timestamp for wireless clients, in epoch
+            seconds
           type: number
         limit:
+          description: Maximum number of wireless client results requested
           type: integer
         next:
+          description: URL for the next page of wireless client results
           type: string
         results:
           $ref: '#/components/schemas/response_client_search_results'
+          description: Wireless client records returned for this page
         start:
+          description: Search window start timestamp for wireless clients, in epoch
+            seconds
           type: number
         total:
+          description: Number of wireless client records matching the search
           type: integer
       required:
       - start
@@ -87885,24 +87910,34 @@ components:
       - results
       type: object
     response_client_search_results:
+      description: Wireless client records returned by a search response
       items:
         $ref: '#/components/schemas/client_wireless'
       type: array
       uniqueItems: true
     response_client_sessions_search:
       additionalProperties: false
+      description: Paginated wireless client session search response
       properties:
         end:
+          description: Search window end timestamp for wireless client sessions, in
+            epoch seconds
           type: integer
         limit:
+          description: Maximum number of wireless client session results requested
           type: integer
         next:
+          description: URL for the next page of wireless client session results
           type: string
         results:
           $ref: '#/components/schemas/response_client_sessions_search_results'
+          description: Wireless client session records returned for this page
         start:
+          description: Search window start timestamp for wireless client sessions,
+            in epoch seconds
           type: integer
         total:
+          description: Number of wireless client session records matching the search
           type: integer
       required:
       - end
@@ -87913,40 +87948,54 @@ components:
       type: object
     response_client_sessions_search_item:
       additionalProperties: false
+      description: Wireless client session record
       properties:
         ap:
+          description: Access point MAC address associated with the client session
           readOnly: true
           type: string
         band:
+          description: Radio band used by the client session
           readOnly: true
           type: string
         client_manufacture:
+          description: Manufacturer reported for the client device
           readOnly: true
           type: string
         connect:
+          description: Epoch timestamp when the client session connected
           readOnly: true
           type: number
         disconnect:
+          description: Epoch timestamp when the client session disconnected
           readOnly: true
           type: number
         duration:
+          description: Length of the client session, in seconds
           readOnly: true
           type: number
         mac:
+          description: Client MAC address for the session
           readOnly: true
           type: string
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization associated with the client session
         site_id:
           $ref: '#/components/schemas/site_id'
+          description: Site associated with the client session
         ssid:
+          description: WLAN SSID used by the client session
           readOnly: true
           type: string
         tags:
           $ref: '#/components/schemas/response_client_sessions_search_item_tags'
+          description: Event or classification tags attached to the client session
         timestamp:
           $ref: '#/components/schemas/timestamp'
+          description: Epoch timestamp when the client session record was observed
         wlan_id:
+          description: WLAN identifier associated with the client session
           format: uuid
           type: string
       required:
@@ -87964,11 +88013,13 @@ components:
       - wlan_id
       type: object
     response_client_sessions_search_item_tags:
+      description: Tags attached to a wireless client session
       items:
         type: string
       readOnly: true
       type: array
     response_client_sessions_search_results:
+      description: Wireless client session records returned by a search response
       items:
         $ref: '#/components/schemas/response_client_sessions_search_item'
       type: array
