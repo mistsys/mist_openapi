@@ -112348,34 +112348,45 @@ components:
       type: object
     webhook_location_asset_event:
       additionalProperties: false
+      description: Asset location update with map coordinates and optional BLE beacon
+        metadata
       properties:
         battery_voltage:
+          description: Battery voltage value reported by the asset tag
           examples:
           - 3370
           type: integer
         eddystone_uid_instance:
+          description: Eddystone UID instance value advertised by the asset tag
           examples:
           - 5c5b35000001
           type: string
         eddystone_uid_namespace:
+          description: Eddystone UID namespace value advertised by the asset tag
           examples:
           - 2818e3868dec25629ede
           type: string
         eddystone_url_url:
+          description: Eddystone URL advertised by the asset tag
           examples:
           - https://www.abc.com
           type: string
         ibeacon_major:
+          description: iBeacon major value advertised by the asset tag when present
           $ref: '#/components/schemas/ibeacon_major'
         ibeacon_minor:
+          description: iBeacon minor value advertised by the asset tag when present
           $ref: '#/components/schemas/ibeacon_minor'
         ibeacon_uuid:
+          description: iBeacon UUID advertised by the asset tag when present
           $ref: '#/components/schemas/ibeacon_uuid'
         mac:
+          description: Asset MAC address used as the location identifier
           examples:
           - 7fc2936fd243
           type: string
         map_id:
+          description: Map where the asset location was calculated
           examples:
           - 845a23bf-bed9-e43c-4c86-6fa474be7ae5
           format: uuid
@@ -112392,20 +112403,23 @@ components:
           - 648520a1020000
           type: string
         site_id:
+          description: Site associated with the asset location event
           $ref: '#/components/schemas/site_id'
         timestamp:
+          description: Time when the asset location was calculated, in epoch seconds
           $ref: '#/components/schemas/timestamp'
         type:
+          description: Location object type for the asset event; defaults to `asset`
           default: asset
           type: string
         x:
-          description: x, in meter
+          description: Horizontal map coordinate of the asset position, in meters
           examples:
           - 13.5
           format: double
           type: number
         y:
-          description: y, in meter
+          description: Vertical map coordinate of the asset position, in meters
           examples:
           - 3.2
           format: double
