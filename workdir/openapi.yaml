@@ -89660,14 +89660,19 @@ components:
       type: object
     response_org_inventory_change:
       additionalProperties: false
+      description: Result of an organization inventory assignment or deletion operation
       properties:
         error:
+          description: Device identifiers that failed during the inventory operation
           $ref: '#/components/schemas/strings'
         op:
+          description: Inventory operation applied to the requested device identifiers
           $ref: '#/components/schemas/response_org_inventory_change_op'
         reason:
+          description: Failure reasons corresponding to entries in the error list
           $ref: '#/components/schemas/strings'
         success:
+          description: Device identifiers successfully processed by the inventory operation
           $ref: '#/components/schemas/strings'
       required:
       - error
@@ -89686,21 +89691,28 @@ components:
       type: string
     response_org_search:
       additionalProperties: false
+      description: Paginated response for MSP organization search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the organization search window
           readOnly: true
           type: number
         limit:
+          description: Maximum number of organization records returned in this page
           readOnly: true
           type: integer
         next:
+          description: URL for retrieving the next page of organization search results
           type: string
         results:
+          description: Organization records matching the MSP search filters
           $ref: '#/components/schemas/response_org_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the organization search window
           readOnly: true
           type: number
         total:
+          description: Number of organization records matching the search filters across all pages
           readOnly: true
           type: integer
       required:
@@ -89712,49 +89724,64 @@ components:
       type: object
     response_org_search_item:
       additionalProperties: false
+      description: Organization record returned by MSP organization search
       properties:
         msp_id:
+          description: MSP that owns or manages this organization
           $ref: '#/components/schemas/msp_id'
         name:
-          description: org name
+          description: Display name of the organization
           readOnly: true
           type: string
         num_aps:
+          description: Number of APs in the organization
           readOnly: true
           type: integer
         num_gateways:
+          description: Number of gateways in the organization
           readOnly: true
           type: integer
         num_sites:
+          description: Number of sites in the organization
           readOnly: true
           type: integer
         num_switches:
+          description: Number of switches in the organization
           readOnly: true
           type: integer
         num_unassigned_aps:
+          description: Number of APs in organization inventory that are not assigned to a site
           readOnly: true
           type: integer
         org_id:
+          description: Organization identifier for this search result
           $ref: '#/components/schemas/org_id'
         sub_ana_entitled:
+          description: Number of SUB-ANA subscriptions entitled for the organization
           readOnly: true
           type: integer
         sub_ana_required:
+          description: Number of SUB-ANA subscriptions required by the organization
           readOnly: true
           type: integer
         sub_ast_entitled:
+          description: Number of SUB-AST subscriptions entitled for the organization
           readOnly: true
           type: integer
         sub_ast_required:
+          description: Number of SUB-AST subscriptions required by the organization
           readOnly: true
           type: integer
         sub_eng_entitled:
+          description: Number of SUB-ENG subscriptions entitled for the organization
           readOnly: true
           type: integer
         sub_eng_required:
+          description: Number of SUB-ENG subscriptions required by the organization
           readOnly: true
           type: integer
         sub_ex12_required:
+          description: Number of SUB-EX12 subscriptions required by the organization
           readOnly: true
           type: integer
         sub_insufficient:
@@ -89762,36 +89789,44 @@ components:
           readOnly: true
           type: boolean
         sub_man_entitled:
+          description: Number of SUB-MAN subscriptions entitled for the organization
           readOnly: true
           type: integer
         sub_man_required:
+          description: Number of SUB-MAN subscriptions required by the organization
           readOnly: true
           type: integer
         sub_me_entitled:
+          description: Number of SUB-ME subscriptions entitled for the organization
           readOnly: true
           type: integer
         sub_vna_entitled:
+          description: Number of SUB-VNA subscriptions entitled for the organization
           readOnly: true
           type: integer
         sub_vna_required:
+          description: Number of SUB-VNA subscriptions required by the organization
           readOnly: true
           type: integer
         timestamp:
+          description: Epoch timestamp, in seconds, when the organization search data was sampled
           $ref: '#/components/schemas/timestamp'
         trial_enabled:
           description: If this org is under trial period
           readOnly: true
           type: boolean
         usage_types:
+          description: Subscription usage types enabled for the organization
           $ref: '#/components/schemas/response_org_search_item_usage_types'
       type: object
     response_org_search_item_usage_types:
-      description: a list of types that enabled by usage
+      description: Subscription usage type codes enabled for an organization
       items:
         type: string
       readOnly: true
       type: array
     response_org_search_results:
+      description: Organization records returned by MSP organization search
       items:
         $ref: '#/components/schemas/response_org_search_item'
       type: array
