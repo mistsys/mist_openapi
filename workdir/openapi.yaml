@@ -98801,18 +98801,22 @@ components:
       properties:
         disabled:
           default: false
+          description: Whether the SSR proxy configuration is disabled
           examples:
           - true
           type: boolean
         url:
+          description: Proxy URL that SSR devices use to reach Mist
           examples:
           - https://proxy.corp.com:8080/
           type: string
       type: object
     ssr_upgrade:
+      description: Request to upgrade a single SSR device
       properties:
         channel:
           $ref: '#/components/schemas/ssr_upgrade_channel'
+          description: Firmware release channel to use for the SSR upgrade
         reboot_at:
           description: Reboot start time in epoch seconds, default is start_time,
             -1 disables reboot
@@ -98838,11 +98842,14 @@ components:
       - stable
       type: string
     ssr_upgrade_multi:
+      description: Request to upgrade multiple SSR devices
       properties:
         channel:
           $ref: '#/components/schemas/ssr_upgrade_channel'
+          description: Firmware release channel to use for the SSR upgrade
         device_ids:
           $ref: '#/components/schemas/ssr_upgrade_multi_device_ids'
+          description: SSR device identifiers targeted by the upgrade
         reboot_at:
           description: Reboot start time in epoch seconds, default is start_time,
             -1 disables reboot
@@ -98853,6 +98860,7 @@ components:
           type: integer
         strategy:
           $ref: '#/components/schemas/ssr_upgrade_strategy'
+          description: Upgrade rollout strategy for the targeted SSR devices
         version:
           description: 128T firmware version to upgrade (e.g. 5.3.0-93)
           minLength: 1
@@ -98876,16 +98884,21 @@ components:
       type: string
     ssr_version:
       additionalProperties: false
+      description: SSR firmware version available for upgrade
       properties:
         default:
+          description: Whether this is the default SSR firmware version for its channel
           readOnly: true
           type: boolean
         package:
+          description: Firmware package name for this SSR version
           readOnly: true
           type: string
         tags:
           $ref: '#/components/schemas/strings'
+          description: Metadata labels associated with this SSR firmware version
         version:
+          description: Firmware version string available for SSR upgrades
           readOnly: true
           type: string
       required:
@@ -98901,6 +98914,7 @@ components:
       - stable
       type: string
     ssr_versions:
+      description: SSR firmware versions available for upgrade
       items:
         $ref: '#/components/schemas/ssr_version'
       type: array
