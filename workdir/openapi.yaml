@@ -102929,94 +102929,129 @@ components:
       type: array
     stats_site:
       additionalProperties: false
-      description: Site statistics
+      description: Site metadata and aggregate device/client counts returned by organization
+        site stats endpoints
       properties:
         address:
+          description: Configured physical address for the site
           type: string
         alarmtemplate_id:
+          description: Alarm template applied to the site, when one overrides the
+            organization-level alarm template
           format: uuid
           type:
           - string
           - 'null'
         analyticEnabled:
+          description: Whether analytics features are enabled for the site
           type: boolean
         aptemplate_id:
+          description: AP template applied to access points in the site, when configured
           format: uuid
           type:
           - string
           - 'null'
         country_code:
+          description: Two-letter country code used for site configuration generation
           type: string
         created_time:
+          description: Time when the site was created, in epoch seconds
           $ref: '#/components/schemas/created_time'
         engagementEnabled:
+          description: Whether engagement features are enabled for the site
           type: boolean
         gatewaytemplate_id:
+          description: Gateway template applied to gateways in the site, when configured
           format: uuid
           type:
           - string
           - 'null'
         id:
+          description: Unique identifier for the site
           $ref: '#/components/schemas/id'
         lat:
+          description: Geographic latitude coordinate for the site location
           type: number
         latlng:
+          description: Latitude and longitude for the site location
           $ref: '#/components/schemas/lat_lng'
         lng:
+          description: Longitude coordinate for the site location
           type: number
         modified_time:
+          description: Time when the site was last modified, in epoch seconds
           $ref: '#/components/schemas/modified_time'
         msp_id:
+          description: Managing MSP identifier for the site, when applicable
           $ref: '#/components/schemas/msp_id'
         name:
+          description: Display name of the site
           type: string
         networktemplate_id:
+          description: Network template applied to the site, when configured
           format: uuid
           type:
           - string
           - 'null'
         notes:
+          description: Free-form notes configured for the site
           type: string
         num_ap:
+          description: Number of access points in the site
           type: integer
         num_ap_connected:
+          description: Number of access points currently connected in the site
           type: integer
         num_clients:
+          description: Number of clients currently counted in the site
           type: integer
         num_devices:
+          description: Number of managed devices in the site
           type: integer
         num_devices_connected:
+          description: Number of managed devices currently connected in the site
           type: integer
         num_gateway:
+          description: Number of gateways in the site
           type: integer
         num_gateway_connected:
+          description: Number of gateways currently connected in the site
           type: integer
         num_switch:
+          description: Number of switches in the site
           type: integer
         num_switch_connected:
+          description: Number of switches currently connected in the site
           type: integer
         org_id:
+          description: Owning organization identifier for the site
           $ref: '#/components/schemas/org_id'
         rftemplate_id:
+          description: RF template applied to the site, when configured
           format: uuid
           type:
           - string
           - 'null'
         secpolicy_id:
+          description: Security policy applied to the site, when configured
           format: uuid
           type:
           - string
           - 'null'
         sitegroup_ids:
+          description: Site group identifiers for groups that include this site
           $ref: '#/components/schemas/site_stats_sitegroup_ids'
         sitetemplate_id:
+          description: Site template applied to the site, when configured
           format: uuid
           type:
           - string
           - 'null'
         timezone:
+          description: IANA time zone name for the site
           type: string
         tzoffset:
+          description: Time zone offset value derived from the site's timezone
           type: integer
       required:
       - country_code
