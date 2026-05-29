@@ -84447,13 +84447,13 @@ components:
       additionalProperties: false
       properties:
         org_apitoken:
-          description: JCloud Org Token
+          description: JCloud organization API token used by this Mist organization
           type: string
         org_apitoken_name:
-          description: JCloud Org Token Name
+          description: Display name for the JCloud organization API token
           type: string
         org_id:
-          description: JCloud Org ID
+          description: JCloud organization identifier linked to this Mist organization
           type: string
       type: object
     org_setting_jcloud_ra:
@@ -107144,12 +107144,12 @@ components:
     test_sms_global:
       properties:
         smsglobal_api_key:
-          description: SMSGlobal api key
+          description: SMSGlobal API key used to send the test SMS
           examples:
           - '123456'
           type: string
         smsglobal_api_secret:
-          description: SMSGlobal api secret
+          description: SMSGlobal API secret used to send the test SMS
           examples:
           - abcdef
           format: password
@@ -107167,12 +107167,12 @@ components:
     test_telstra:
       properties:
         telstra_client_id:
-          description: Telstra client id
+          description: Telstra client identifier used to send the test SMS
           examples:
           - '123456'
           type: string
         telstra_client_secret:
-          description: Telstra client secret
+          description: Telstra client secret used to send the test SMS
           examples:
           - abcdef
           format: password
@@ -107200,12 +107200,12 @@ components:
           - '+19999999999'
           type: string
         twilio_auth_token:
-          description: Auth Token associated with twilio account
+          description: Twilio Auth Token used to send the test SMS
           examples:
           - 2135be04736a1a0a314bce432d61721a
           type: string
         twilio_sid:
-          description: Twilio Account SID
+          description: Twilio account SID used to send the test SMS
           examples:
           - AC5f4366878d193fb4865ab151739999eb
           type: string
@@ -114570,14 +114570,14 @@ components:
           type: boolean
         password:
           default: ''
-          description: Password for the AirWatch integration account
+          description: AirWatch integration account password for this WLAN
           examples:
           - user1
           format: password
           type: string
         username:
           default: ''
-          description: Username for the AirWatch integration account
+          description: AirWatch integration account username for this WLAN
           examples:
           - test123
           type: string
