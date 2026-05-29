@@ -86163,77 +86163,98 @@ components:
         type: string
       type: array
     psk_portal:
+      description: Self-service portal configuration for issuing personal PSKs
       properties:
         auth:
           $ref: '#/components/schemas/psk_portal_auth'
+          description: Portal access method, such as SSO or sponsor approval
         bg_image_url:
+          description: URL of the background image used by the PSK portal
           type: string
         cleanup_psk:
           default: false
-          description: Used to cleanup exited psk when portal delete or ssid changed
+          description: Whether to clean up existing PSKs when the portal is deleted
+            or its SSID changes
           type: boolean
         created_time:
           $ref: '#/components/schemas/created_time'
+          description: Epoch timestamp when the PSK portal was created
         expire_time:
-          description: unit min
+          description: PSK lifetime, in minutes, for keys created through this portal
           type: integer
         expiry_notification_time:
-          description: Number of days before psk is expired. Used as to when to start
-            sending reminder notification when the psk is about to expire
+          description: Number of days before PSK expiration to start sending reminder
+            notifications
           type: integer
         hide_psks_created_by_other_admins:
           default: false
-          description: Only if `type`==`admin`
+          description: Only if `type`==`admin`, hide PSKs created by other PSK
+            admins
           type: boolean
         id:
           $ref: '#/components/schemas/id'
+          description: Unique identifier of the PSK portal
         max_usage:
           default: 0
-          description: '`max_usage`==`0` means unlimited'
+          description: Maximum concurrent clients for each PSK created through this
+            portal; `0` means unlimited
           type: integer
         modified_time:
           $ref: '#/components/schemas/modified_time'
+          description: Epoch timestamp when the PSK portal was last modified
         name:
+          description: Display name of the PSK portal
           type: string
         notification_renew_url:
-          description: Optional, will include the link in the notification email the
-            customer can either provide their own url or use the one generate from
-            mist, or do a url shorterner against either
+          description: Optional renewal URL included in notification emails. Use a
+            custom URL, a Mist-generated URL, or a shortened URL pointing to either
           examples:
           - https://custom-sso/url
           format: url
           type: string
         notify_expiry:
-          description: If set to true, reminder notification will be sent when psk
-            is about to expire
+          description: Whether to send reminder notifications before PSKs created
+            through this portal expire
           type: boolean
         notify_on_create_or_edit:
           default: false
+          description: Whether to send notifications when a PSK is created or edited
+            through this portal
           type: boolean
         org_id:
           $ref: '#/components/schemas/org_id'
+          description: Organization that owns the PSK portal
         passphrase_rules:
           $ref: '#/components/schemas/psk_portal_passphrase_rules'
+          description: Generation rules for PSK passphrases created through this portal
         required_fields:
           $ref: '#/components/schemas/psk_portal_required_fields'
+          description: User information fields requested by the portal when generating
+            a PSK
         role:
+          description: Client role assigned to PSKs created through this portal
           type: string
         ssid:
-          description: intended SSID
+          description: WLAN SSID for PSKs created through this portal
           type: string
         sso:
           $ref: '#/components/schemas/psk_portal_sso'
+          description: Single sign-on configuration used when `auth`==`sso`
         template_url:
-          description: UI customization
+          description: URL of the UI customization template for this portal
           type: string
         thumbnail_url:
+          description: URL of the thumbnail image used by the PSK portal
           type: string
         type:
           $ref: '#/components/schemas/psk_portal_type'
+          description: Portal mode for personal PSK onboarding, either admin or BYOD
         ui_url:
+          description: Public URL where users access the PSK portal
           type: string
         vlan_id:
           $ref: '#/components/schemas/vlan_id_with_variable'
+          description: VLAN ID returned for clients using PSKs from this portal
       required:
       - name
       - ssid
