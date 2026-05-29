@@ -115969,8 +115969,10 @@ components:
       - unspecified
       type: string
     wlan_portal_template:
+      description: Guest portal template payload for a WLAN
       properties:
         portal_template:
+          description: Template settings that define guest portal text, layout, and localization
           $ref: '#/components/schemas/wlan_portal_template_setting'
       type: object
     wlan_portal_template_setting:
