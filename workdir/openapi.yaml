@@ -93312,21 +93312,26 @@ components:
       type: array
       uniqueItems: true
     search_wxtag_apps:
+      description: Applications that can be referenced by WxTag rules
       items:
         $ref: '#/components/schemas/search_wxtag_apps_item'
       type: array
     search_wxtag_apps_item:
       additionalProperties: false
+      description: Application metadata available for WxTag matching
       properties:
         group:
+          description: Application category group containing this WxTag app
           examples:
           - Emails
           type: string
         key:
+          description: Stable application key used in WxTag configuration
           examples:
           - gmail
           type: string
         name:
+          description: Display name of the application
           examples:
           - Gmail - web/app
           type: string
