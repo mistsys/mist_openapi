@@ -86479,9 +86479,12 @@ components:
       properties:
         enabled:
           default: false
+          description: Whether configuration pushes are limited to the configured
+            push window
           type: boolean
         hours:
           $ref: '#/components/schemas/hours'
+          description: Day-of-week hour ranges when configuration pushes are allowed
       type: object
     radio_band_24_usage:
       description: 'enum: `24`, `5`, `6`, `auto`'
