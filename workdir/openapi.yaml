@@ -108636,35 +108636,41 @@ components:
       type: array
       uniqueItems: true
     upgrade_bios:
+      description: BIOS upgrade request for a single device
       properties:
         reboot:
           default: false
-          description: Reboot device immediately after upgrade is completed
+          description: Whether to restart the device immediately after the upgrade
+            completes
           type: boolean
         version:
-          description: Specific bios version
+          description: BIOS version to install on the device
           examples:
           - CDEN_P_EX1_00.20.01.00
           type: string
       type: object
     upgrade_bios_multi:
+      description: BIOS upgrade request for multiple devices
       properties:
         device_ids:
+          description: Specific device IDs to include in the BIOS upgrade
           $ref: '#/components/schemas/upgrade_bios_multi_device_ids'
         models:
+          description: Device models to include in the BIOS upgrade
           $ref: '#/components/schemas/upgrade_bios_multi_models'
         reboot:
           default: false
-          description: Reboot device immediately after upgrade is completed
+          description: Whether to restart the selected devices immediately after the
+            upgrade completes
           type: boolean
         version:
-          description: Specific bios version
+          description: BIOS version to install on the selected devices
           examples:
           - CDEN_P_EX1_00.15.01.00
           type: string
       type: object
     upgrade_bios_multi_device_ids:
-      description: List of device id to upgrade bios
+      description: Device IDs selected for a multi-device BIOS upgrade
       items:
         examples:
         - 00000000-0000-0000-1000-5c5b35584a6f
@@ -108672,7 +108678,7 @@ components:
         type: string
       type: array
     upgrade_bios_multi_models:
-      description: List of device model to upgrade bios
+      description: Device models selected for a multi-device BIOS upgrade
       items:
         examples:
         - EX4400-48T
@@ -108862,35 +108868,41 @@ components:
         type: string
       type: array
     upgrade_fpga:
+      description: FPGA upgrade request for a single device
       properties:
         reboot:
           default: false
-          description: Reboot device immediately after upgrade is completed
+          description: Whether to restart the device immediately after the upgrade
+            completes
           type: boolean
         version:
-          description: Specific fpga version
+          description: FPGA version to install on the device
           examples:
           - REV37
           type: string
       type: object
     upgrade_fpga_multi:
+      description: FPGA upgrade request for multiple devices
       properties:
         device_ids:
+          description: Specific device IDs to include in the FPGA upgrade
           $ref: '#/components/schemas/upgrade_fpga_multi_device_ids'
         models:
+          description: Device models to include in the FPGA upgrade
           $ref: '#/components/schemas/upgrade_fpga_multi_models'
         reboot:
           default: false
-          description: Reboot device immediately after upgrade is completed
+          description: Whether to restart the selected devices immediately after the
+            upgrade completes
           type: boolean
         version:
-          description: Specific FPGA version
+          description: FPGA version to install on the selected devices
           examples:
           - REV37
           type: string
       type: object
     upgrade_fpga_multi_device_ids:
-      description: List of device id to upgrade bios
+      description: Device IDs selected for a multi-device FPGA upgrade
       items:
         examples:
         - 00000000-0000-0000-1000-5c5b35584a6f
@@ -108898,7 +108910,7 @@ components:
         type: string
       type: array
     upgrade_fpga_multi_models:
-      description: List of device model to upgrade bios
+      description: Device models selected for a multi-device FPGA upgrade
       items:
         examples:
         - EX4400-48T
