@@ -84777,23 +84777,27 @@ components:
       type: object
     org_setting_pcap:
       additionalProperties: false
+      description: Packet capture export settings for the organization
       properties:
         bucket:
+          description: Storage bucket name used for organization packet capture files
           examples:
           - myorg_pcap
           type: string
         max_pkt_len:
           default: 128
-          description: Max_len of non-management packets to capture
+          description: Maximum length of non-management packets to capture, in bytes
           examples:
           - 128
           maximum: 128
           type: integer
       type: object
     org_setting_scep:
+      description: Mist SCEP settings for certificate enrollment
       properties:
         cert_providers:
           $ref: '#/components/schemas/org_setting_scep_cert_providers'
+          description: Certificate providers enabled for Mist SCEP
         enable:
           description: Whether SCEP is enabled for this org
           type: boolean
@@ -84816,28 +84820,35 @@ components:
       type: array
     org_setting_scep_response:
       additionalProperties: false
+      description: Read-only Mist SCEP settings returned for the organization
       properties:
         cert_providers:
           $ref: '#/components/schemas/org_setting_scep_cert_providers'
+          description: Certificate providers configured for Mist SCEP
         enabled:
+          description: Whether Mist SCEP is enabled for this organization
           readOnly: true
           type: boolean
         intune_scep_url:
+          description: Intune SCEP enrollment URL for this organization
           examples:
           - https://scep.mistsys.com/api/v1/incoming/intune/:org_id/scep
           readOnly: true
           type: string
         jamf_access_token:
+          description: Access token used by Jamf to call Mist SCEP
           examples:
           - 1Z4QqEnCt05Jjt3TV5LgPJ4V_WL_RWnJ7dqVMLYHj81=
           readOnly: true
           type: string
         jamf_scep_url:
+          description: Jamf SCEP enrollment URL for this organization
           examples:
           - https://scep.mistsys.com/api/v1/incoming/intune/:org_id/scep
           readOnly: true
           type: string
         jamf_webhook_url:
+          description: Jamf webhook URL for SCEP status callbacks
           examples:
           - https://scep.mistsys.com/api/v1/webhook/jamf/:org_id/scep
           readOnly: true
@@ -84866,9 +84877,11 @@ components:
       type: object
     org_setting_switch:
       additionalProperties: false
+      description: Organization-level switch defaults
       properties:
         auto_upgrade:
           $ref: '#/components/schemas/switch_auto_upgrade'
+          description: Auto-upgrade defaults for switches in this organization
       type: object
     org_setting_switch_mgmt:
       additionalProperties: false
@@ -84888,13 +84901,16 @@ components:
       type: array
     org_setting_vpn_options:
       additionalProperties: false
+      description: Organization VPN behavior options
       properties:
         as_base:
+          description: Base BGP autonomous system number used for generated VPN configurations
           maximum: 2147483647
           minimum: 1
           type: integer
         enable_ipv6:
           default: false
+          description: Whether IPv6 is enabled for organization VPN configuration
           type: boolean
         st_subnet:
           default: 10.224.0.0/12
@@ -84904,23 +84920,29 @@ components:
       type: object
     org_setting_wan_pma:
       additionalProperties: false
+      description: PMA feature settings for WAN Assurance
       properties:
         enabled:
           default: false
+          description: Whether PMA is enabled for WAN Assurance
           type: boolean
       type: object
     org_setting_wired_pma:
       additionalProperties: false
+      description: PMA feature settings for Wired Assurance
       properties:
         enabled:
           default: false
+          description: Whether PMA is enabled for Wired Assurance
           type: boolean
       type: object
     org_setting_wireless_pma:
       additionalProperties: false
+      description: PMA feature settings for Wireless Assurance
       properties:
         enabled:
           default: true
+          description: Whether PMA is enabled for Wireless Assurance
           type: boolean
       type: object
     org_site_sle_type:
