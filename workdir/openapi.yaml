@@ -94884,10 +94884,11 @@ components:
       type: string
     site_rogue:
       additionalProperties: false
-      description: Rogue site settings
+      description: Rogue AP detection settings for a site
       properties:
         allowed_vlan_ids:
           $ref: '#/components/schemas/vlan_ids'
+          description: VLAN IDs allowed by the rogue detection policy
         enabled:
           default: false
           description: Whether rogue detection is enabled
@@ -94927,8 +94928,10 @@ components:
           type: integer
         whitelisted_bssids:
           $ref: '#/components/schemas/site_rogue_whitelisted_bssids'
+          description: BSSID values or wildcard patterns excluded from rogue detection
         whitelisted_ssids:
           $ref: '#/components/schemas/site_rogue_whitelisted_ssids'
+          description: SSID names excluded from rogue detection
       type: object
     site_rogue_events_count_distinct:
       default: bssid
@@ -94940,15 +94943,14 @@ components:
       - type
       type: string
     site_rogue_whitelisted_bssids:
-      description: 'list of BSSIDs to whitelist. Ex: "cc-:8e-:6f-:d4-:bf-:16", "cc-8e-6f-d4-bf-16",
-        "cc-73-*", "cc:82:*"'
+      description: BSSID values or wildcard patterns excluded from rogue detection
       examples:
       - - NeighborSSID
       items:
         type: string
       type: array
     site_rogue_whitelisted_ssids:
-      description: List of SSIDs to whitelist
+      description: SSID names excluded from rogue detection
       examples:
       - - cc:8e:6f:d4:bf:16
         - cc-8e-6f-d4-bf-16
