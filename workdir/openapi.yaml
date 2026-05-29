@@ -109963,22 +109963,22 @@ components:
       - service
       type: object
     utils_show_arp:
+      description: ARP table lookup request for device command output
       properties:
         duration:
           default: 0
-          description: Duration in sec for which refresh is enabled. Should be set
-            only if interval is configured to non-zero value.
+          description: Refresh duration in seconds; set only when `interval` is nonzero
           maximum: 300
           minimum: 0
           type: integer
         interval:
           default: 0
-          description: Rate at which output will refresh
+          description: Refresh interval in seconds for repeated command output
           maximum: 10
           minimum: 0
           type: integer
         ip:
-          description: IP Address
+          description: Address filter for the ARP table lookup
           examples:
           - 192.168.30.7
           type: string
@@ -109986,22 +109986,25 @@ components:
           $ref: '#/components/schemas/ha_cluster_node_enum'
           description: HA cluster node to run the command on, required for Gateways
         port_id:
-          description: Device Port ID
+          description: Device port identifier filter for the ARP table lookup
           examples:
           - ge-0/0/0.0
           type: string
         vrf:
-          description: VRF Name
+          description: Routing instance or VRF filter for the ARP table lookup
           examples:
           - guest
           type: string
       type: object
     utils_show_bgp_summary:
+      description: BGP summary command request
       properties:
         node:
+          description: HA cluster node on which to show the BGP summary
           $ref: '#/components/schemas/ha_cluster_node_enum'
       type: object
     utils_show_dhcp_leases:
+      description: DHCP leases command request
       properties:
         network:
           description: DHCP network for the leases, returns full table if not specified
@@ -110009,63 +110012,66 @@ components:
           - guest
           type: string
         node:
+          description: HA cluster node on which to show DHCP leases
           $ref: '#/components/schemas/ha_cluster_node_enum'
       required:
       - network
       type: object
     utils_show_dot1x:
+      description: 802.1X table lookup request for device command output
       properties:
         duration:
           default: 0
-          description: Duration in sec for which refresh is enabled. Should be set
-            only if interval is configured to non-zero value.
+          description: Refresh duration in seconds; set only when `interval` is nonzero
           maximum: 300
           minimum: 0
           type: integer
         interval:
           default: 0
-          description: Rate at which output will refresh
+          description: Refresh interval in seconds for repeated command output
           maximum: 10
           minimum: 0
           type: integer
         port_id:
-          description: Device Port ID
+          description: Device port identifier filter for the 802.1X table lookup
           examples:
           - ge-0/0/0.0
           type: string
       type: object
     utils_show_evpn_database:
+      description: EVPN database lookup request for device command output
       properties:
         duration:
           default: 0
-          description: Duration in sec for which refresh is enabled. Should be set
-            only if interval is configured to non-zero value.
+          description: Refresh duration in seconds; set only when `interval` is nonzero
           maximum: 300
           minimum: 0
           type: integer
         interval:
           default: 0
-          description: Rate at which output will refresh
+          description: Refresh interval in seconds for repeated command output
           maximum: 10
           minimum: 0
           type: integer
         mac:
-          description: Client mac filter
+          description: Client MAC address filter for the EVPN database lookup
           examples:
           - f8c1165c6400
           type: string
         port_id:
-          description: Interface name
+          description: Interface identifier filter for the EVPN database lookup
           examples:
           - ge-0/0/0.0
           type: string
       type: object
     utils_show_forwarding_table:
+      description: Forwarding table lookup request for device command output
       properties:
         node:
+          description: HA cluster node on which to show the forwarding table
           $ref: '#/components/schemas/ha_cluster_node_enum'
         prefix:
-          description: can be ip, ipv6 prefix
+          description: IPv4 or IPv6 prefix filter for forwarding table entries
           examples:
           - 3.1.1.0/24
           type: string
@@ -110095,100 +110101,109 @@ components:
           - branch1-wifi-mgt
           type: string
         vrf:
-          description: VRF Name
+          description: Routing instance or VRF filter for forwarding table entries
           examples:
           - guest
           type: string
       type: object
     utils_show_ospf_database:
+      description: OSPF database command request for SSR and SRX devices
       properties:
         node:
+          description: HA cluster node on which to show the OSPF database
           $ref: '#/components/schemas/ha_cluster_node_enum'
         self_originate:
           default: false
-          description: Show originating info, default is false
+          description: Whether to show only self-originated OSPF database entries
           type: boolean
         vrf:
-          description: VRF name
+          description: Routing instance or VRF filter for OSPF database output
           examples:
           - lan
           type: string
       type: object
     utils_show_ospf_interfaces:
+      description: OSPF interfaces command request for SSR and SRX devices
       properties:
         node:
+          description: HA cluster node on which to show OSPF interfaces
           $ref: '#/components/schemas/ha_cluster_node_enum'
         port_id:
-          description: Network interface
+          description: Network interface filter for OSPF interface output
           examples:
           - ge-0/0/3
           type: string
         vrf:
-          description: VRF name
+          description: Routing instance or VRF filter for OSPF interface output
           examples:
           - lan
           type: string
       type: object
     utils_show_ospf_neighbors:
+      description: OSPF neighbors command request for SSR and SRX devices
       properties:
         neighbor:
-          description: Neighbor IP Address
+          description: OSPF neighbor IP address filter
           examples:
           - 10.1.1.1
           type: string
         node:
+          description: HA cluster node on which to show OSPF neighbors
           $ref: '#/components/schemas/ha_cluster_node_enum'
         port_id:
-          description: Network interface
+          description: Network interface filter for OSPF neighbor output
           examples:
           - ge-0/0/3
           type: string
         vrf:
-          description: VRF name
+          description: Routing instance or VRF filter for OSPF neighbor output
           examples:
           - lan
           type: string
       type: object
     utils_show_ospf_summary:
+      description: OSPF summary command request for SSR and SRX devices
       properties:
         node:
+          description: HA cluster node on which to show the OSPF summary
           $ref: '#/components/schemas/ha_cluster_node_enum'
         vrf:
-          description: VRF name
+          description: Routing instance or VRF filter for OSPF summary output
           examples:
           - lan
           type: string
       type: object
     utils_show_route:
+      description: Route table lookup request for device command output
       properties:
         duration:
           default: 0
-          description: Duration in sec for which refresh is enabled. Should be set
-            only if interval is configured to non-zero value.
+          description: Refresh duration in seconds; set only when `interval` is nonzero
           maximum: 300
           minimum: 0
           type: integer
         interval:
           default: 0
-          description: Rate at which output will refresh
+          description: Refresh interval in seconds for repeated command output
           maximum: 10
           minimum: 0
           type: integer
         neighbor:
-          description: IP of the neighbor
+          description: BGP neighbor IP address filter for received or advertised routes
           examples:
           - 192.168.4.1
           type: string
         node:
+          description: HA cluster node on which to show routes
           $ref: '#/components/schemas/ha_cluster_node'
         prefix:
-          description: can be ip, ipv6 prefix
+          description: IPv4 or IPv6 prefix filter for route entries
           examples:
           - 192.168.0.5/30
           type: string
         protocol:
           $ref: '#/components/schemas/utils_show_route_protocol'
-          description: (optional) Supported only for bgp
+          description: Routing protocol filter for route entries
         route:
           description: "if neighbor is specified, received / advertised; if not specified,\
             \ both will be shown\n  * for SSR, show bgp neighbors 10.250.18.202 received-routes/advertised-routes\n\
@@ -110198,7 +110213,7 @@ components:
           - advertised
           type: string
         vrf:
-          description: VRF name
+          description: Routing instance or VRF filter for route entries
           examples:
           - default
           type: string
@@ -110215,18 +110230,22 @@ components:
       - static
       type: string
     utils_show_service_path:
-      description: The exact service name for which to display the service path
+      description: Service path lookup request for SSR devices
       properties:
         node:
+          description: HA cluster node on which to show the service path
           $ref: '#/components/schemas/ha_cluster_node_enum'
         service_name:
+          description: Exact service name for which to display the service path
           examples:
           - any
           type: string
       type: object
     utils_show_session:
+      description: Active session lookup request for device command output
       properties:
         node:
+          description: HA cluster node on which to show active sessions
           $ref: '#/components/schemas/ha_cluster_node_enum'
         service_name:
           description: The exact service name for which to display the active sessions
@@ -110234,19 +110253,21 @@ components:
           - any
           type: string
         session_id:
-          description: Show session details by session_id
+          description: Identifier of the session to show in detail
           type: string
       type: object
     utils_traceroute:
+      description: Traceroute utility request
       properties:
         host:
-          description: can be ip, ipv6, hostname
+          description: Destination IP address, IPv6 address, or hostname for traceroute
           type: string
         network:
           default: internal
-          description: For SSR, optional, the source to initiate traceroute from
+          description: For SSR, source network from which to initiate traceroute
           type: string
         node:
+          description: HA cluster node from which to run traceroute
           $ref: '#/components/schemas/ha_cluster_node_enum'
         port:
           default: 33434
@@ -110254,6 +110275,7 @@ components:
             to use
           type: integer
         protocol:
+          description: Transport protocol to use for traceroute
           $ref: '#/components/schemas/utils_traceroute_protocol'
         timeout:
           default: 60
@@ -110262,11 +110284,11 @@ components:
           type: integer
         use_ipv6:
           default: false
-          description: applicable when host is hostname
+          description: Whether to resolve hostname targets over IPv6
           type: boolean
         vrf:
-          description: For SRX, optional, the source to initiate traceroute from.
-            by default, master VRF/RI is assumed
+          description: For SRX, routing instance or VRF from which to initiate traceroute;
+            master VRF/RI is used by default
           type: string
       type: object
     utils_traceroute_protocol:
@@ -110277,17 +110299,19 @@ components:
       - udp
       type: string
     utils_tunterm_bounce_port:
+      description: Request to bounce Mist Edge TunTerm data ports
       properties:
         hold_time:
           description: In milli seconds, hold time between multiple port bounces
           type: integer
         ports:
+          description: TunTerm data ports to bounce
           $ref: '#/components/schemas/utils_tunterm_bounce_port_ports'
       required:
       - ports
       type: object
     utils_tunterm_bounce_port_ports:
-      description: List of ports to bounce
+      description: TunTerm data port identifiers to bounce
       items:
         type: string
       type: array
