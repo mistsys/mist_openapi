@@ -91795,49 +91795,62 @@ components:
       type: object
     response_zone_search:
       additionalProperties: false
+      description: Paginated response for site zone visit search results
       properties:
         end:
+          description: Epoch timestamp, in seconds, for the end of the zone visit search window
           examples:
           - 1541705289.769911
           type: number
         limit:
+          description: Maximum number of zone visit records returned in this page
           examples:
           - 1
           type: integer
         next:
+          description: URL for retrieving the next page of zone visit search results
           examples:
           - /api/v1/sites/67970e46-4e12-11e6-9188-0242ac110007/zones/visits/search?limit=2&end=1541705247.000&scope_id=85fbba9e-4e12-11e6-9188-0242ac110007&user_type=asset&start=1541618889.77
           type: string
         results:
+          description: Zone visit records matching the search filters
           $ref: '#/components/schemas/response_zone_search_results'
         start:
+          description: Epoch timestamp, in seconds, for the start of the zone visit search window
           examples:
           - 1541618889.769886
           type: number
         total:
+          description: Number of zone visit records matching the search filters across all pages
           examples:
           - 5892
           type: integer
       type: object
     response_zone_search_item:
       additionalProperties: false
+      description: Zone visit record for a client, asset, or SDK client
       properties:
         enter:
+          description: Epoch timestamp, in seconds, when the zone visit started
           examples:
           - 1541705254
           type: integer
         scope:
+          description: Zone scope represented by this visit record
           examples:
           - map
           type: string
         timestamp:
+          description: Time when the zone visit event was recorded
           $ref: '#/components/schemas/timestamp'
         user:
+          description: Client, asset, or SDK client identifier for the visit
           examples:
           - c4b301c81166
           type: string
       type: object
     response_zone_search_results:
+      description: Zone visit records returned by search
       items:
         $ref: '#/components/schemas/response_zone_search_item'
       type: array
