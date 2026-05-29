@@ -96761,67 +96761,95 @@ components:
       type: object
     sle_impacted_applications:
       additionalProperties: false
+      description: Paginated list of applications impacted by an SLE metric
       properties:
         apps:
           $ref: '#/components/schemas/sle_impacted_applications_apps'
+          description: Impacted application rows returned for the SLE query
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         end:
+          description: Last timestamp in the impacted applications window
           type: integer
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         limit:
+          description: Maximum number of impacted application rows returned per page
           type: string
         metric:
+          description: SLE metric name used for the impacted applications query
           type: string
         page:
+          description: Current page number for impacted application results
           type: integer
         start:
+          description: First timestamp in the impacted applications window
           type: integer
         total_count:
+          description: Number of impacted application rows matching the query
           type: integer
       type: object
     sle_impacted_applications_app:
       additionalProperties: false
+      description: SLE impact row for an application
       properties:
         app:
+          description: Identifier of the application represented by this impacted row
           type: string
         degraded:
+          description: Portion of the SLE total that was degraded for this application
           type: integer
         duration:
+          description: Observation time represented by this application impact row
           type: integer
         name:
+          description: Display name for the application impact row
           type: string
         threshold:
+          description: SLE threshold value used for this application
           type: integer
         total:
+          description: Overall SLE total measured for this application impact row
           type: integer
       type: object
     sle_impacted_applications_apps:
+      description: Impacted application rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_applications_app'
       type: array
     sle_impacted_aps:
       additionalProperties: false
+      description: Paginated list of APs impacted by an SLE metric
       properties:
         aps:
           $ref: '#/components/schemas/sle_impacted_aps_aps'
+          description: Impacted access point rows returned for the SLE query
         classifier:
+          description: Requested SLE classifier filter applied to the query
           type: string
         end:
+          description: Last timestamp in the impacted APs window
           type: number
         failure:
+          description: Requested SLE failure filter applied to the query
           type: string
         limit:
+          description: Maximum number of impacted AP rows returned per page
           type: number
         metric:
+          description: SLE metric name used for the impacted APs query
           minLength: 1
           type: string
         page:
+          description: Current page number for impacted AP results
           type: number
         start:
+          description: First timestamp in the impacted APs window
           type: number
         total_count:
+          description: Number of impacted AP rows matching the query
           type: number
       required:
       - start
@@ -96836,18 +96864,24 @@ components:
       type: object
     sle_impacted_aps_ap:
       additionalProperties: false
+      description: SLE impact row for an AP
       properties:
         ap_mac:
+          description: MAC address of the AP represented by this impacted row
           minLength: 1
           type: string
         degraded:
+          description: Portion of the SLE total that was degraded for this AP
           type: number
         duration:
+          description: Observation time represented by this AP impact row
           type: number
         name:
+          description: Display name for the AP impact row
           minLength: 1
           type: string
         total:
+          description: Overall SLE total measured for this AP impact row
           type: number
       required:
       - ap_mac
@@ -96857,6 +96891,7 @@ components:
       - total
       type: object
     sle_impacted_aps_aps:
+      description: Impacted AP rows returned for an SLE query
       items:
         $ref: '#/components/schemas/sle_impacted_aps_ap'
       type: array
