@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2604.1.4] - 2026-06-01
 
 - Improved query parameter descriptions across many endpoints: added enum values, clarified `distinct` grouping fields, and standardized filter descriptions for device, client, NAC, inventory, and event search/count operations
+- Clarified authentication documentation: API Token is the preferred method for automation, Basic Auth is deprecated and planned for removal in September 2026, and the login session flow uses the `X-CSRFToken` header after `/api/v1/login`
 - Updated query parameters:
   - Removed invalid `timestamp` query parameter from 
     - `GET /api/v1/orgs/{org_id}/devices/events/count`

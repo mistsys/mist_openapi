@@ -3034,7 +3034,6 @@ paths:
         \ etc) \n2. login with email/password, generate the token, and use /login/two_factor\
         \ with the token"
       operationId: login
-      security: []
       requestBody:
         content:
           application/json:
@@ -3055,6 +3054,7 @@ paths:
           $ref: '#/components/responses/LoginSuccess'
         '400':
           $ref: '#/components/responses/LoginFailure'
+      security: []
       summary: login
       tags:
       - Admins Login
@@ -3062,7 +3062,6 @@ paths:
     post:
       description: Login Lookup
       operationId: lookup
-      security: []
       requestBody:
         content:
           application/json:
@@ -3086,6 +3085,7 @@ paths:
           description: User does not exist
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: lookup
       tags:
       - Admins Lookup
@@ -3112,7 +3112,6 @@ paths:
     get:
       description: Obtain Authorization URL for Login
       operationId: getOauth2AuthorizationUrlForLogin
-      security: []
       parameters:
       - description: Callback URL used after completing the OAuth login flow
         in: query
@@ -3134,6 +3133,7 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: getOauth2AuthorizationUrlForLogin
       tags:
       - Admins Login - OAuth2
@@ -3149,7 +3149,6 @@ paths:
     post:
       description: Login via OAuth2
       operationId: loginOauth2
-      security: []
       requestBody:
         content:
           application/json:
@@ -3173,6 +3172,7 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: loginOauth2
       tags:
       - Admins Login - OAuth2
@@ -3180,7 +3180,6 @@ paths:
     post:
       description: Send 2FA Code
       operationId: twoFactor
-      security: []
       requestBody:
         content:
           application/json:
@@ -3203,6 +3202,7 @@ paths:
           description: The user doesn't have 2FA enabled
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: twoFactor
       tags:
       - Admins Login
@@ -118963,21 +118963,30 @@ components:
       name: Authorization
       type: apiKey
     basicAuth:
-      description: "Deprecated legacy authentication method. Basic Auth remains available\
-        \ only for existing integrations and is planned for removal in September 2026.\
-        \ Do not use Basic Auth for new integrations; use API Token authentication\
-        \ for automation or the login session flow with `X-CSRFToken` for browser\
-        \ sessions."
+      description: Deprecated legacy authentication method. Basic Auth remains available
+        only for existing integrations and is planned for removal in September 2026.
+        Do not use Basic Auth for new integrations; use API Token authentication for
+        automation or the login session flow with `X-CSRFToken` for browser sessions.
       scheme: basic
       type: http
       x-deprecated: true
     csrfToken:
-      description: "Session-based authentication for browser or login/password flows.\
-        \ After a successful [Login]($e/Admins%20Login/login) request, Mist returns\
-        \ a `csrftoken` cookie. Send that value in the `X-CSRFToken` header on later\
-        \ API requests that use the login session.\n\n**Format**:\n```\nX-CSRFToken:\
-        \ vwvBuq9qkqaKh7lu8tNc0gkvBfEaLAmx\n```\n\nFor automation, API Token authentication\
-        \ is preferred."
+      description: 'Session-based authentication for browser or login/password flows.
+        After a successful [Login]($e/Admins%20Login/login) request, Mist returns
+        a `csrftoken` cookie. Send that value in the `X-CSRFToken` header on later
+        API requests that use the login session.
+
+
+        **Format**:
+
+        ```
+
+        X-CSRFToken: vwvBuq9qkqaKh7lu8tNc0gkvBfEaLAmx
+
+        ```
+
+
+        For automation, API Token authentication is preferred.'
       in: header
       name: X-CSRFToken
       type: apiKey
