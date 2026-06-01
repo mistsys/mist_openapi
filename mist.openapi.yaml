@@ -25833,7 +25833,7 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/device_event_type'
-      - description: Filter alarm results by type code
+      - description: Filter results by event type code
         in: query
         name: type_code
         schema:
@@ -35941,7 +35941,7 @@ paths:
       parameters:
       - description: 'Field used to group application statistics count results. enum:
           `ap`, `app`, `category`, `device_mac`, `port_id`, `service`, `src_ip`, `ssid`,
-          `wcid`, `wlan_id app`'
+          `wcid`, `wlan_id`'
         in: query
         name: distinct
         schema:
