@@ -508,7 +508,7 @@ tags:
     Mist UI that allows customers to configure Secure Cloud Connectors.
 
 
-    With JSE, users can establish a tunnel via IPSEC protocol and use application
+    With JSE, users can establish a tunnel via IPSec  protocol and use application
     policy and traffic steering to send traffic from a WAN edge device to JSE. Mist
     also provides insights and telemetry for the secure edge connection, which is
     helpful for troubleshooting and monitoring data.'
@@ -1188,7 +1188,7 @@ tags:
     Mist UI that allows customers to configure Secure Cloud Connectors.
 
 
-    With JSE, users can establish a tunnel via IPSEC protocol and use application
+    With JSE, users can establish a tunnel via IPSec  protocol and use application
     policy and traffic steering to send traffic from a WAN edge device to JSE. Mist
     also provides insights and telemetry for the secure edge connection, which is
     helpful for troubleshooting and monitoring data.'

@@ -65,8 +65,8 @@ TERMINOLOGY_RULES: dict[str, list[tuple[str, str]]] = {
         ("radius server", r"\bradius server\b"),
         ("radius auth", r"\bradius auth\b"),
     ],
-    "IPsec": [
-        ("IPSec", r"\bIPSec\b"),
+    "IPSec": [
+        ("IPSEC", r"\bIPSEC\b"),
         ("ipsec", r"\bipsec\b"),
     ],
     "Mist Edge": [
