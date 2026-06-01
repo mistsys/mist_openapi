@@ -11891,7 +11891,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Unassign Org MxEdge from Site
+      description: Unassign Org Mist Edge from Site
       operationId: unassignOrgMxEdgeFromSite
       requestBody:
         content:
@@ -12119,7 +12119,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/mxedges/{mxedge_id}:
     delete:
-      description: Delete Org MxEdge
+      description: Delete Org Mist Edge
       operationId: deleteOrgMxEdge
       responses:
         '200':
@@ -12241,7 +12241,7 @@ paths:
         minimum: 1
         type: integer
     post:
-      description: Attach up to 3 images to a mxedge
+      description: Attach up to 3 images to a Mist Edge
       operationId: addOrgMxEdgeImage
       requestBody:
         content:
