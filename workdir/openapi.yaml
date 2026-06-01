@@ -23862,7 +23862,9 @@ paths:
   /api/v1/sites/{site_id}/alarms/search:
     get:
       description: Search alarms for a site with filters for alarm group, severity,
-        type, acknowledgement state, acknowledgement admin, and time range. Use [Search Org Alarms]($e/Orgs%20Alarms/searchOrgAlarms) to search alarms across the organization.
+        type, acknowledgement state, acknowledgement admin, and time range. Use [Search
+        Org Alarms]($e/Orgs%20Alarms/searchOrgAlarms) to search alarms across the
+        organization.
       operationId: searchSiteAlarms
       parameters:
       - $ref: '#/components/parameters/alarm_group'
@@ -24870,8 +24872,9 @@ paths:
   /api/v1/sites/{site_id}/clients/count:
     get:
       description: Count wireless clients for a site, optionally grouped by the `distinct`
-        field and filtered by client attributes and time range. Use [Count Org Wireless Clients]($e/Orgs%20Clients%20-%20Wireless/countOrgWirelessClients) to count wireless clients across
-        the organization.
+        field and filtered by client attributes and time range. Use [Count Org Wireless
+        Clients]($e/Orgs%20Clients%20-%20Wireless/countOrgWirelessClients) to count
+        wireless clients across the organization.
       operationId: countSiteWirelessClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `device`,
@@ -25035,8 +25038,9 @@ paths:
   /api/v1/sites/{site_id}/clients/events/search:
     get:
       description: Search wireless client events for a site with filters for event
-        type, AP, SSID, WLAN, radio band, and time range. Use [Search Org Wireless Client Events]($e/Orgs%20Clients%20-%20Wireless/searchOrgWirelessClientEvents) to search wireless client
-        events across the organization.
+        type, AP, SSID, WLAN, radio band, and time range. Use [Search Org Wireless
+        Client Events]($e/Orgs%20Clients%20-%20Wireless/searchOrgWirelessClientEvents)
+        to search wireless client events across the organization.
       operationId: searchSiteWirelessClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
@@ -25096,8 +25100,8 @@ paths:
       description: Search wireless clients connected to a site with filters for client
         identity, AP, SSID, VLAN, radio band, and time range. Fuzzy matching with
         `*` is supported on `mac`, `hostname`, `device`, `os`, and `model`, for example
-        `/clients/search?device=Mac*&hostname=jerry`. Use [Search Org Wireless Clients]($e/Orgs%20Clients%20-%20Wireless/searchOrgWirelessClients) to search wireless clients across
-        the organization.
+        `/clients/search?device=Mac*&hostname=jerry`. Use [Search Org Wireless Clients]($e/Orgs%20Clients%20-%20Wireless/searchOrgWirelessClients)
+        to search wireless clients across the organization.
       operationId: searchSiteWirelessClients
       parameters:
       - description: Filter results by AP MAC address
@@ -25275,8 +25279,9 @@ paths:
   /api/v1/sites/{site_id}/clients/sessions/search:
     get:
       description: Search wireless client sessions for a site with filters for AP,
-        SSID, WLAN, client attributes, PSK, and time range. Use [Search Org Wireless Client Sessions]($e/Orgs%20Clients%20-%20Wireless/searchOrgWirelessClientSessions) to search wireless client
-        sessions across the organization.
+        SSID, WLAN, client attributes, PSK, and time range. Use [Search Org Wireless
+        Client Sessions]($e/Orgs%20Clients%20-%20Wireless/searchOrgWirelessClientSessions)
+        to search wireless client sessions across the organization.
       operationId: searchSiteWirelessClientSessions
       parameters:
       - description: Filter results by AP MAC address
@@ -25717,7 +25722,9 @@ paths:
   /api/v1/sites/{site_id}/devices/count:
     get:
       description: Count devices for a site, optionally grouped by the `distinct`
-        field and filtered by device inventory attributes and time range. Use [Count Org Devices]($e/Orgs%20Devices/countOrgDevices) to count devices across the organization.
+        field and filtered by device inventory attributes and time range. Use [Count
+        Org Devices]($e/Orgs%20Devices/countOrgDevices) to count devices across the
+        organization.
       operationId: countSiteDevices
       parameters:
       - description: 'Field used to group this count response. enum: `hostname`, `lldp_mgmt_addr`,
@@ -25807,8 +25814,9 @@ paths:
   /api/v1/sites/{site_id}/devices/events/count:
     get:
       description: Count device events for a site, optionally grouped by the `distinct`
-        field and filtered by event attributes and time range. Use [Count Org Device Events]($e/Orgs%20Devices/countOrgDeviceEvents) to count device events
-        across the organization.
+        field and filtered by event attributes and time range. Use [Count Org Device
+        Events]($e/Orgs%20Devices/countOrgDeviceEvents) to count device events across
+        the organization.
       operationId: countSiteDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `mac`, `model`,
@@ -25853,8 +25861,8 @@ paths:
   /api/v1/sites/{site_id}/devices/events/search:
     get:
       description: Search device events for a site with filters for MAC address, model,
-        event type, message text, and time range. Use [Search Org Device Events]($e/Orgs%20Devices/searchOrgDeviceEvents) to search device events across
-        the organization.
+        event type, message text, and time range. Use [Search Org Device Events]($e/Orgs%20Devices/searchOrgDeviceEvents)
+        to search device events across the organization.
       operationId: searchSiteDeviceEvents
       parameters:
       - description: Filter results by MAC address
@@ -26240,10 +26248,10 @@ paths:
       - Utilities LAN
   /api/v1/sites/{site_id}/devices/search:
     get:
-      description: Search devices in a site with filters for device type,
-        identifiers, model, software version, radio settings, LLDP details, and other
-        inventory attributes. Use [Search Org Devices]($e/Orgs%20Devices/searchOrgDevices)
-        to search devices across the organization.
+      description: Search devices in a site with filters for device type, identifiers,
+        model, software version, radio settings, LLDP details, and other inventory
+        attributes. Use [Search Org Devices]($e/Orgs%20Devices/searchOrgDevices) to
+        search devices across the organization.
       operationId: searchSiteDevices
       parameters:
       - description: When `type`==`ap`, Channel of band_24
@@ -26641,8 +26649,8 @@ paths:
   /api/v1/sites/{site_id}/devices/versions:
     get:
       description: List firmware versions available for devices in a site, optionally
-        filtered by device type and model. Use [List Org Available Device Versions]($e/Utilities%20Upgrade/listOrgAvailableDeviceVersions) to retrieve available device versions
-        across the organization.
+        filtered by device type and model. Use [List Org Available Device Versions]($e/Utilities%20Upgrade/listOrgAvailableDeviceVersions)
+        to retrieve available device versions across the organization.
       operationId: listSiteAvailableDeviceVersions
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
@@ -29741,8 +29749,8 @@ paths:
   /api/v1/sites/{site_id}/guests/count:
     get:
       description: Count authorized guest records for a site, optionally grouped by
-        the `distinct` field and filtered by time range. Use [Count Org Guest Authorizations]($e/Orgs%20Guests/countOrgGuestAuthorizations) to count authorized guest records
-        across the organization.
+        the `distinct` field and filtered by time range. Use [Count Org Guest Authorizations]($e/Orgs%20Guests/countOrgGuestAuthorizations)
+        to count authorized guest records across the organization.
       operationId: countSiteGuestAuthorizations
       parameters:
       - description: 'Field used to group this count response. enum: `auth_method`,
@@ -29813,8 +29821,8 @@ paths:
   /api/v1/sites/{site_id}/guests/search:
     get:
       description: Search authorized guest records for a site with filters for WLAN,
-        SSID, authentication method, and time range. Use [Search Org Guest Authorization]($e/Orgs%20Guests/searchOrgGuestAuthorization) to search authorized guest records
-        across the organization.
+        SSID, authentication method, and time range. Use [Search Org Guest Authorization]($e/Orgs%20Guests/searchOrgGuestAuthorization)
+        to search authorized guest records across the organization.
       operationId: searchSiteGuestAuthorization
       parameters:
       - description: Filter results by WLAN identifier
@@ -31700,8 +31708,9 @@ paths:
   /api/v1/sites/{site_id}/mxedges/events/search:
     get:
       description: Search Mist Edge events for a site with filters for Mist Edge,
-        Mist Edge cluster, event type, service, component, and time range. Use [Search Org Mist Edge Events]($e/Orgs%20MxEdges/searchOrgMistEdgeEvents) to search Mist Edge events
-        across the organization.
+        Mist Edge cluster, event type, service, component, and time range. Use [Search
+        Org Mist Edge Events]($e/Orgs%20MxEdges/searchOrgMistEdgeEvents) to search
+        Mist Edge events across the organization.
       operationId: searchSiteMistEdgeEvents
       parameters:
       - description: Filter results by Mist Edge identifier
@@ -31751,8 +31760,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/mxedges/upgrade:
     get:
-      description: List Mist Edge upgrade operations for a site. Use [List Org Mist Edge Upgrades]($e/Utilities%20Upgrade/listOrgMxEdgeUpgrades) to retrieve Mist Edge upgrade
-        operations across the organization.
+      description: List Mist Edge upgrade operations for a site. Use [List Org Mist
+        Edge Upgrades]($e/Utilities%20Upgrade/listOrgMxEdgeUpgrades) to retrieve Mist
+        Edge upgrade operations across the organization.
       operationId: listSiteMxEdgeUpgrades
       responses:
         '200':
@@ -32150,8 +32160,9 @@ paths:
   /api/v1/sites/{site_id}/nac_clients/events/count:
     get:
       description: Count NAC client events for a site, optionally grouped by the `distinct`
-        field and filtered by event type and time range. Use [Count Org NAC Client Events]($e/Orgs%20Clients%20-%20NAC/countOrgNacClientEvents) to count NAC client
-        events across the organization.
+        field and filtered by event type and time range. Use [Count Org NAC Client
+        Events]($e/Orgs%20Clients%20-%20NAC/countOrgNacClientEvents) to count NAC
+        client events across the organization.
       operationId: countSiteNacClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
@@ -32333,8 +32344,9 @@ paths:
   /api/v1/sites/{site_id}/nac_clients/search:
     get:
       description: Search NAC clients for a site with filters for authentication,
-        endpoint posture, identity, network, NAC rule, and time attributes. Use [Search Org NAC Clients]($e/Orgs%20Clients%20-%20NAC/searchOrgNacClients) to search NAC clients across
-        the organization.
+        endpoint posture, identity, network, NAC rule, and time attributes. Use [Search
+        Org NAC Clients]($e/Orgs%20Clients%20-%20NAC/searchOrgNacClients) to search
+        NAC clients across the organization.
       operationId: searchSiteNacClients
       parameters:
       - description: MAC address of the AP the client is/was connected to
@@ -32592,8 +32604,9 @@ paths:
   /api/v1/sites/{site_id}/otherdevices:
     get:
       description: List third-party devices in a site, such as devices discovered
-        or tracked outside the managed Mist device inventory. Use [List Org Other Devices]($e/Orgs%20Devices%20-%20Others/listOrgOtherDevices) to retrieve third-party devices
-        across the organization.
+        or tracked outside the managed Mist device inventory. Use [List Org Other
+        Devices]($e/Orgs%20Devices%20-%20Others/listOrgOtherDevices) to retrieve third-party
+        devices across the organization.
       operationId: listSiteOtherDevices
       parameters:
       - description: Filter results by vendor
@@ -32644,8 +32657,9 @@ paths:
   /api/v1/sites/{site_id}/otherdevices/events/count:
     get:
       description: Count third-party device events for a site, optionally grouped
-        by the `distinct` field and filtered by event type and time range. Use [Count Org Other Device Events]($e/Orgs%20Devices%20-%20Others/countOrgOtherDeviceEvents) to count third-party
-        device events across the organization.
+        by the `distinct` field and filtered by event type and time range. Use [Count
+        Org Other Device Events]($e/Orgs%20Devices%20-%20Others/countOrgOtherDeviceEvents)
+        to count third-party device events across the organization.
       operationId: countSiteOtherDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `mac`, `site_id`,
@@ -32680,8 +32694,9 @@ paths:
   /api/v1/sites/{site_id}/otherdevices/events/search:
     get:
       description: Search third-party device events for a site with filters for device
-        identifiers, model, vendor, event type, and time range. Use [Search Org Other Device Events]($e/Orgs%20Devices%20-%20Others/searchOrgOtherDeviceEvents) to search third-party
-        device events across the organization.
+        identifiers, model, vendor, event type, and time range. Use [Search Org Other
+        Device Events]($e/Orgs%20Devices%20-%20Others/searchOrgOtherDeviceEvents)
+        to search third-party device events across the organization.
       operationId: searchSiteOtherDeviceEvents
       parameters:
       - description: Filter results by MAC address
@@ -35972,8 +35987,8 @@ paths:
   /api/v1/sites/{site_id}/stats/assets:
     get:
       description: List asset statistics for a site over the requested time range.
-        Use [List Org Asset Stats]($e/Orgs%20Stats%20-%20Assets/listOrgAssetsStats) to retrieve
-        asset statistics across the organization.
+        Use [List Org Asset Stats]($e/Orgs%20Stats%20-%20Assets/listOrgAssetsStats)
+        to retrieve asset statistics across the organization.
       operationId: listSiteAssetsStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -36033,8 +36048,8 @@ paths:
   /api/v1/sites/{site_id}/stats/assets/search:
     get:
       description: Search asset statistics for a site with filters for asset identifiers,
-        device, map, beacon, AP, RSSI, and time range. Use [Search Org Assets]($e/Orgs%20Stats%20-%20Assets/searchOrgAssets) to search asset statistics across
-        the organization.
+        device, map, beacon, AP, RSSI, and time range. Use [Search Org Assets]($e/Orgs%20Stats%20-%20Assets/searchOrgAssets)
+        to search asset statistics across the organization.
       operationId: searchSiteAssets
       parameters:
       - description: Filter results by MAC address
@@ -36219,8 +36234,8 @@ paths:
   /api/v1/sites/{site_id}/stats/bgp_peers/count:
     get:
       description: Count BGP peer statistics for a site, optionally grouped by the
-        `distinct` field and filtered by peer state. Use [Count Org BGP Stats]($e/Orgs%20Stats%20-%20BGP%20Peers/countOrgBgpStats) to count BGP peer statistics
-        across the organization.
+        `distinct` field and filtered by peer state. Use [Count Org BGP Stats]($e/Orgs%20Stats%20-%20BGP%20Peers/countOrgBgpStats)
+        to count BGP peer statistics across the organization.
       operationId: countSiteBgpStats
       parameters:
       - description: Filter peer results by state
@@ -36608,8 +36623,9 @@ paths:
   /api/v1/sites/{site_id}/stats/devices:
     get:
       description: List device statistics for a site, including high-level status
-        and performance fields over the requested time range. Use [List Org Device Stats]($e/Orgs%20Stats%20-%20Devices/listOrgDevicesStats) to retrieve device statistics
-        across the organization.
+        and performance fields over the requested time range. Use [List Org Device
+        Stats]($e/Orgs%20Stats%20-%20Devices/listOrgDevicesStats) to retrieve device
+        statistics across the organization.
       operationId: listSiteDevicesStats
       parameters:
       - description: Filter results by type
@@ -37083,8 +37099,8 @@ paths:
   /api/v1/sites/{site_id}/stats/mxedges:
     get:
       description: List Mist Edge statistics for a site over the requested time range.
-        Use [List Org Mist Edge Stats]($e/Orgs%20Stats%20-%20MxEdges/listOrgMxEdgesStats) to
-        retrieve Mist Edge statistics across the organization.
+        Use [List Org Mist Edge Stats]($e/Orgs%20Stats%20-%20MxEdges/listOrgMxEdgesStats)
+        to retrieve Mist Edge statistics across the organization.
       operationId: listSiteMxEdgesStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -37140,8 +37156,8 @@ paths:
   /api/v1/sites/{site_id}/stats/ospf_peers/count:
     get:
       description: Count OSPF peer statistics for a site, optionally grouped by the
-        `distinct` field and filtered by time range. Use [Count Org OSPF Stats]($e/Orgs%20Stats%20-%20Ospf/countOrgOspfStats) to count OSPF peer statistics
-        across the organization.
+        `distinct` field and filtered by time range. Use [Count Org OSPF Stats]($e/Orgs%20Stats%20-%20Ospf/countOrgOspfStats)
+        to count OSPF peer statistics across the organization.
       operationId: countSiteOspfStats
       parameters:
       - description: 'Field used to group this count response. enum: `site_id`, `org_id`,
@@ -38354,8 +38370,9 @@ paths:
   /api/v1/sites/{site_id}/wan_client/events/count:
     get:
       description: Count WAN client events for a site, optionally grouped by the `distinct`
-        field and filtered by event type and time range. Use [Count Org WAN Client Events]($e/Orgs%20Clients%20-%20Wan/countOrgWanClientEvents) to count WAN client
-        events across the organization.
+        field and filtered by event type and time range. Use [Count Org WAN Client
+        Events]($e/Orgs%20Clients%20-%20Wan/countOrgWanClientEvents) to count WAN
+        client events across the organization.
       operationId: countSiteWanClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `hostname`, `ip`,
@@ -38425,8 +38442,9 @@ paths:
   /api/v1/sites/{site_id}/wan_clients/events/search:
     get:
       description: Search WAN client events for a site with filters for client identity,
-        manufacturer, NAC rule, event type, and time range. Use [Search Org WAN Client Events]($e/Orgs%20Clients%20-%20Wan/searchOrgWanClientEvents) to search WAN client
-        events across the organization.
+        manufacturer, NAC rule, event type, and time range. Use [Search Org WAN Client
+        Events]($e/Orgs%20Clients%20-%20Wan/searchOrgWanClientEvents) to search WAN
+        client events across the organization.
       operationId: searchSiteWanClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
@@ -38480,8 +38498,9 @@ paths:
   /api/v1/sites/{site_id}/wan_clients/search:
     get:
       description: Search WAN clients for a site with filters for hostname, IP address,
-        source IP, MAC address, manufacturer, network, and time range. Use [Search Org WAN Clients]($e/Orgs%20Clients%20-%20Wan/searchOrgWanClients) to search WAN clients across
-        the organization.
+        source IP, MAC address, manufacturer, network, and time range. Use [Search
+        Org WAN Clients]($e/Orgs%20Clients%20-%20Wan/searchOrgWanClients) to search
+        WAN clients across the organization.
       operationId: searchSiteWanClients
       parameters:
       - $ref: '#/components/parameters/partial_filter_hostname_client'
@@ -39033,8 +39052,8 @@ paths:
     get:
       description: Count wired clients for a site, optionally grouped by the `distinct`
         field and filtered by MAC address, switch port, VLAN, and time range. Use
-        [Count Org Wired Clients]($e/Orgs%20Clients%20-%20Wired/countOrgWiredClients) to
-        count wired clients across the organization.
+        [Count Org Wired Clients]($e/Orgs%20Clients%20-%20Wired/countOrgWiredClients)
+        to count wired clients across the organization.
       operationId: countSiteWiredClients
       parameters:
       - description: 'Field used to group this count response. enum: `mac`, `port_id`,
