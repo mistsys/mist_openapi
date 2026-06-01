@@ -24379,7 +24379,8 @@ paths:
       - Sites Asset Filters
   /api/v1/sites/{site_id}/assets:
     get:
-      description: Get List of Site Assets
+      description: List assets for a site. Use `listOrgAssets` (`GET /api/v1/orgs/{org_id}/assets`)
+        to retrieve assets across the organization.
       operationId: listSiteAssets
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -26046,7 +26047,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/devices/last_config/search:
     get:
-      description: Search Device Last Configs
+      description: Search last known device configuration records for a site with
+        filters for device type, MAC address, name, software version, certificate
+        expiry, and time range. Use `searchOrgDeviceLastConfigs` (`GET /api/v1/orgs/{org_id}/devices/last_config/search`)
+        to search last known device configuration records across the organization.
       operationId: searchSiteDeviceLastConfigs
       parameters:
       - description: 'Duration for expiring cert queries (format: 2d/3h/172800 seconds)'
@@ -26486,7 +26490,9 @@ paths:
       - Utilities Location
   /api/v1/sites/{site_id}/devices/upgrade:
     get:
-      description: Get all upgrades for site
+      description: List device upgrade operations for a site, optionally filtered
+        by upgrade status. Use `listOrgDeviceUpgrades` (`GET /api/v1/orgs/{org_id}/devices/upgrade`)
+        to retrieve device upgrade operations across the organization.
       operationId: listSiteDeviceUpgrades
       parameters:
       - description: 'Filter results by status. enum: `cancelled`, `completed`, `created`,
@@ -26642,7 +26648,10 @@ paths:
       - Utilities LAN
   /api/v1/sites/{site_id}/devices/versions:
     get:
-      description: Get List of Available Device Versions
+      description: List firmware versions available for devices in a site, optionally
+        filtered by device type and model. Use `listOrgAvailableDeviceVersions` (`GET
+        /api/v1/orgs/{org_id}/devices/versions`) to retrieve available device versions
+        across the organization.
       operationId: listSiteAvailableDeviceVersions
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
@@ -31754,7 +31763,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/mxedges/upgrade:
     get:
-      description: Get List of Site Mist Edge Upgrades
+      description: List Mist Edge upgrade operations for a site. Use `listOrgMxEdgeUpgrades`
+        (`GET /api/v1/orgs/{org_id}/mxedges/upgrade`) to retrieve Mist Edge upgrade
+        operations across the organization.
       operationId: listSiteMxEdgeUpgrades
       responses:
         '200':
@@ -32733,7 +32744,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/pcaps:
     get:
-      description: Get List of Site Packet Captures
+      description: List packet captures for a site, optionally filtered by client
+        MAC address and time range. Use `listOrgPacketCaptures` (`GET /api/v1/orgs/{org_id}/pcaps`)
+        to retrieve packet captures across the organization.
       operationId: listSitePacketCaptures
       parameters:
       - description: Optional client mac filter
