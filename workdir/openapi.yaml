@@ -3798,7 +3798,9 @@ paths:
           examples:
           - Added new site
           type: string
-      - description: Sort order
+      - description: >-
+          Field used to sort results; a leading `-` indicates descending order. enum:
+          `-timestamp`, `admin_id`, `site_id`, `timestamp`
         in: query
         name: sort
         schema:
@@ -4191,7 +4193,8 @@ paths:
       description: Search in MSP Orgs
       operationId: searchMspOrgGroup
       parameters:
-      - description: Orgs
+      - description: >-
+          MSP search result type to return. enum: `orgs`
         example: orgs
         in: query
         name: type
@@ -5430,7 +5433,9 @@ paths:
       description: Get List of Org Alarms Currently Suppressed
       operationId: listOrgSuppressedAlarms
       parameters:
-      - description: Returns both scopes if not specified
+      - description: >-
+          Scope filter for alarm template suppressions; if omitted, both organization and site
+          scopes are returned. enum: `org`, `site`
         in: query
         name: scope
         schema:
@@ -7052,7 +7057,10 @@ paths:
           examples:
           - 5c5b53010101
           type: string
-      - description: Key Management Protocol, e.g. WPA2-PSK, WPA3-SAE, WPA2-Enterprise
+      - description: >-
+          Key management protocol used to filter client events. enum: `WPA2-PSK`, `WPA2-PSK/CCMP`,
+          `WPA2-PSK-FT`, `WPA2-PSK-SHA256`, `WPA3-EAP-SHA256`, `WPA3-EAP-SHA256/CCMP`,
+          `WPA3-EAP-FT/GCMP256`, `WPA3-SAE-FT`, `WPA3-SAE-PSK`
         in: query
         name: key_mgmt
         schema:
@@ -8517,7 +8525,8 @@ paths:
         name: mxedge_ids
         schema:
           type: string
-      - description: When `type`==`ap`, MxTunnel status, up / down.
+      - description: >-
+          When `type`==`ap`, Mist Tunnel status used to filter results. enum: `down`, `up`
         in: query
         name: mxtunnel_status
         schema:
@@ -8865,7 +8874,8 @@ paths:
       description: Get List of the existing Org EVPN topologies
       operationId: listOrgEvpnTopologies
       parameters:
-      - description: Filter for org/site level EVPN Toplogies
+      - description: >-
+          Filter for org/site level EVPN topologies. enum: `any`, `false`, `true`
         in: query
         name: for_site
         schema:
@@ -10533,7 +10543,10 @@ paths:
       description: Count devices purchased from the accounts associated with the Org
       operationId: countOrgJsiAssetsAndContracts
       parameters:
-      - description: Distinct attributes to count
+      - description: >-
+          Field used to group this count response. enum: `account_id`, `claimed`, `has_support`,
+          `eol_time`, `eos_time`, `version_time`, `model`, `sku`, `status`, `type`, `version`,
+          `warranty_type`
         in: query
         name: distinct
         schema:
@@ -10596,12 +10609,18 @@ paths:
           examples:
           - EX2300
           type: string
-      - description: Device status
+      - description: >-
+          Device status. enum: `all`, `connected`, `disconnected`
         in: query
         name: status
         schema:
           $ref: '#/components/schemas/device_status'
-      - description: Device warranty type
+      - description: >-
+          Device warranty type used to filter Juniper Support Insight inventory. enum: `Standard
+          Hardware Warranty`, `Enhanced Hardware Warranty`, `Dead On Arrival Warranty`, `Limited
+          Lifetime Warranty`, `Software Warranty`, `Limited Lifetime Warranty for WLA`,
+          `Warranty-JCPO EOL (DOA Not Included)`, `MIST Enhanced Hardware Warranty`, `MIST
+          Standard Warranty`, `Determine Lifetime warranty`
         in: query
         name: warranty_type
         schema:
@@ -11027,7 +11046,9 @@ paths:
           examples:
           - Created a new site
           type: string
-      - description: Sort order
+      - description: >-
+          Field used to sort results; a leading `-` indicates descending order. enum:
+          `-timestamp`, `admin_id`, `site_id`, `timestamp`
         in: query
         name: sort
         schema:
@@ -11142,7 +11163,9 @@ paths:
           examples:
           - Created a new site
           type: string
-      - description: Sort order
+      - description: >-
+          Field used to sort results; a leading `-` indicates descending order. enum:
+          `-timestamp`, `admin_id`, `site_id`, `timestamp`
         in: query
         name: sort
         schema:
@@ -11541,7 +11564,8 @@ paths:
       description: Get List of Org MxEdges
       operationId: listOrgMxEdges
       parameters:
-      - description: Filter for org/site level mist edges
+      - description: >-
+          Filter for org/site level Mist Edges. enum: `any`, `false`, `true`
         in: query
         name: for_site
         schema:
@@ -12132,7 +12156,8 @@ paths:
       description: Get Mist Edge Upgrade Information
       operationId: getOrgMxEdgeUpgradeInfo
       parameters:
-      - description: Upgrade channel to follow, stable (default) / beta / alpha
+      - description: >-
+          Upgrade channel used to filter available versions. enum: `alpha`, `beta`, `stable`
         in: query
         name: channel
         schema:
@@ -12654,7 +12679,12 @@ paths:
       description: Count by Distinct Attributes of NAC Clients
       operationId: countOrgNacClients
       parameters:
-      - description: NAC Policy Rule ID, if matched
+      - description: >-
+          Field used to group this count response. enum: `ap`, `auth_type`, `device_mac`,
+          `edr_managed`, `edr_provider`, `edr_status`, `family`, `hostname`, `idp_id`, `mfg`,
+          `mdm_compliance`, `mdm_managed`, `mdm_provider`, `model`, `mxedge_id`,
+          `nacrule_matched`, `nacrule_name`, `nacrule_id`, `nas_ip`, `nas_vendor`, `os`,
+          `site_id`, `ssid`, `status`, `type`, `usermac_label`, `username`, `vlan`
         in: query
         name: distinct
         schema:
@@ -12977,12 +13007,16 @@ paths:
         name: edr_managed
         schema:
           type: boolean
-      - description: EDR provider of client's organization
+      - description: >-
+          EDR provider used to filter NAC clients. enum: `crowdstrike`, `sentinelone`
         in: query
         name: edr_provider
         schema:
           $ref: '#/components/schemas/edr_provider'
-      - description: EDR Status of the NAC client
+      - description: >-
+          EDR status used to filter NAC clients. enum: `sentinelone_healthy`,
+          `sentinelone_infected`, `crowdstrike_low`, `crowdstrike_medium`, `crowdstrike_high`,
+          `crowdstrike_critical`, `crowdstrike_informational`
         in: query
         name: edr_status
         schema:
@@ -13057,8 +13091,9 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Connection status of client i.e "permitted", "denied, "session_started",
-          "session_stopped"
+      - description: >-
+          Client connection status used to filter results. enum: `permitted`, `session_started`,
+          `session_stopped`, `denied`
         in: query
         name: status
         schema:
@@ -13582,9 +13617,10 @@ paths:
       description: Get List of Org NAC Tags
       operationId: listOrgNacTags
       parameters:
-      - description: 'Type of NAC Tag. enum: `egress_vlan_names`, `gbp_tag`, `match`,
-          `radius_attrs`, `radius_group`, `radius_vendor_attrs`, `session_timeout`,
-          `username_attr`, `vlan`'
+      - description: >-
+          Type of NAC Tag. enum: `egress_vlan_names`, `gbp_tag`, `match`, `radius_attrs`,
+          `radius_group`, `radius_vendor_attrs`, `redirect_nacportal_id`, `session_timeout`,
+          `username_attr`, `vlan`
         in: query
         name: type
         schema:
@@ -19550,7 +19586,8 @@ paths:
       description: Get List of Org MxEdge Stats
       operationId: listOrgMxEdgesStats
       parameters:
-      - description: Filter for site level mist edges
+      - description: >-
+          Filter for site level Mist Edges. enum: `any`, `true`, `false`
         in: query
         name: for_site
         schema:
@@ -19872,17 +19909,23 @@ paths:
           examples:
           - 1000000000
           type: integer
-      - description: If `up`==`true`
+      - description: >-
+          STP state used to filter port results when `up`==`true`. enum: `""`, `blocking`,
+          `disabled`, `forwarding`, `learning`, `listening`
         in: query
         name: stp_state
         schema:
           $ref: '#/components/schemas/port_stp_state'
-      - description: If `up`==`true`
+      - description: >-
+          STP role used to filter port results when `up`==`true`. enum: `""`, `alternate`,
+          `backup`, `designated`, `disabled`, `root`, `root-prevented`
         in: query
         name: stp_role
         schema:
           $ref: '#/components/schemas/port_stp_role'
-      - description: If `up`==`true` && has Authenticator role
+      - description: >-
+          Authentication state used to filter port results when `up`==`true` and the port has an
+          authenticator role. enum: `""`, `authenticated`, `authenticating`, `held`, `init`
         in: query
         name: auth_state
         schema:
@@ -19942,7 +19985,9 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/search_org_sw_or_gw_ports_type'
-      - description: If `up`==`true` && has Authenticator role
+      - description: >-
+          Authentication state used to filter port results when `up`==`true` and the port has an
+          authenticator role. enum: `""`, `authenticated`, `authenticating`, `held`, `init`
         in: query
         name: auth_state
         schema:
@@ -20009,7 +20054,8 @@ paths:
         name: poe_on
         schema:
           type: boolean
-      - description: PoE priority.
+      - description: >-
+          PoE priority used to filter switch port results. enum: `low`, `high`
         in: query
         name: poe_priority
         schema:
@@ -20029,12 +20075,16 @@ paths:
         name: speed
         schema:
           type: integer
-      - description: If `up`==`true`
+      - description: >-
+          STP state used to filter port results when `up`==`true`. enum: `""`, `blocking`,
+          `disabled`, `forwarding`, `learning`, `listening`
         in: query
         name: stp_state
         schema:
           $ref: '#/components/schemas/port_stp_state'
-      - description: If `up`==`true`
+      - description: >-
+          STP role used to filter port results when `up`==`true`. enum: `""`, `alternate`,
+          `backup`, `designated`, `disabled`, `root`, `root-prevented`
         in: query
         name: stp_role
         schema:
@@ -20102,11 +20152,11 @@ paths:
       description: Count by Distinct Attributes of Mist Tunnels Stats
       operationId: countOrgTunnelsStats
       parameters:
-      - description: "- If `type`==`wxtunnel`: wxtunnel_id / ap / remote_ip / remote_port\
-          \ / state / mxedge_id / mxcluster_id / site_id / peer_mxedge_id; default\
-          \ is wxtunnel_id \n- If `type`==`wan`: mac / site_id / node / peer_ip /\
-          \ peer_host/ ip / tunnel_name / protocol / auth_algo / encrypt_algo / ike_version\
-          \ / last_event / up"
+      - description: >-
+          Field used to group tunnel statistics count results. enum: `ap`, `auth_algo`,
+          `encrypt_algo`, `ike_version`, `ip`, `last_event`, `mac`, `mxcluster_id`, `mxedge_id`,
+          `node`, `peer_host`, `peer_ip`, `peer_mxedge_id`, `protocol`, `remote_ip`,
+          `remote_port`, `site_id`, `state`, `tunnel_name`, `up`, `wxtunnel_id`
         in: query
         name: distinct
         schema:
@@ -20827,7 +20877,9 @@ paths:
           type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
-      - description: When troubleshooting site, type of network to troubleshoot
+      - description: >-
+          When troubleshooting site, type of network to troubleshoot. enum: `wan`, `wired`,
+          `wireless`
         in: query
         name: type
         schema:
@@ -21760,12 +21812,15 @@ paths:
         name: status_code
         schema:
           type: integer
-      - description: Webhook delivery status
+      - description: >-
+          Webhook delivery status used to filter results. enum: `failure`, `success`
         in: query
         name: status
         schema:
           $ref: '#/components/schemas/webhook_delivery_status'
-      - description: Webhook topic
+      - description: >-
+          Webhook topic used to filter results. enum: `alarms`, `audits`, `device-updowns`,
+          `occupancy-alerts`, `ping`
         in: query
         name: topic
         schema:
@@ -21827,12 +21882,15 @@ paths:
         name: status_code
         schema:
           type: integer
-      - description: Webhook delivery status
+      - description: >-
+          Webhook delivery status used to filter results. enum: `failure`, `success`
         in: query
         name: status
         schema:
           $ref: '#/components/schemas/webhook_delivery_status'
-      - description: Webhook topic
+      - description: >-
+          Webhook topic used to filter results. enum: `alarms`, `audits`, `device-updowns`,
+          `occupancy-alerts`, `ping`
         in: query
         name: topic
         schema:
@@ -21942,7 +22000,8 @@ paths:
         name: auth_method
         schema:
           type: string
-      - description: source from where the client was learned (lldp, mac)
+      - description: >-
+          Source from which the client was learned. enum: `lldp`, `mac`
         in: query
         name: source
         schema:
@@ -23269,7 +23328,9 @@ paths:
           examples:
           - Created a new site
           type: string
-      - description: Sort order
+      - description: >-
+          Field used to sort results; a leading `-` indicates descending order. enum:
+          `-timestamp`, `admin_id`, `site_id`, `timestamp`
         in: query
         name: sort
         schema:
@@ -23382,7 +23443,9 @@ paths:
       description: Generate Secret Key for 2FA verification
       operationId: generateSecretFor2faVerification
       parameters:
-      - description: If `by`==`qrcode`, returns the secret as a qrcode image
+      - description: >-
+          Secret response format. If `by`==`qrcode`, returns the secret as a QR code image. enum:
+          `qrcode`
         in: query
         name: by
         schema:
@@ -23704,7 +23767,8 @@ paths:
       description: Count by Distinct Attributes of Site Alarms
       operationId: countSiteAlarms
       parameters:
-      - description: Group by and count the alarms by some distinct field
+      - description: >-
+          Field used to group this count response. enum: `acked`, `group`, `severity`, `type`
         in: query
         name: distinct
         schema:
@@ -24331,8 +24395,9 @@ paths:
         ```"
       operationId: importSiteAssets
       parameters:
-      - description: API will replace the assets with same mac if provided `upsert`==`True`,
-          otherwise will report in errors in response.
+      - description: >-
+          Whether to replace existing assets with the same MAC address during import. enum:
+          `False`, `True`
         in: query
         name: upsert
         schema:
@@ -26198,7 +26263,8 @@ paths:
         name: mxedge_ids
         schema:
           type: string
-      - description: When `type`==`ap`, MxTunnel status, up / down.
+      - description: >-
+          When `type`==`ap`, Mist Tunnel status used to filter results. enum: `down`, `up`
         in: query
         name: mxtunnel_status
         schema:
@@ -26256,12 +26322,15 @@ paths:
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
-      - description: Sort options
+      - description: >-
+          Field used to sort results; a leading `-` indicates descending order. enum: `mac`,
+          `model`, `sku`, `timestamp`
         in: query
         name: sort
         schema:
           $ref: '#/components/schemas/search_site_devices_sort'
-      - description: Sort options in reverse order
+      - description: >-
+          Field used to sort results in descending order. enum: `mac`, `model`, `sku`, `timestamp`
         in: query
         name: desc_sort
         schema:
@@ -29275,7 +29344,8 @@ paths:
       description: List Roaming Events data
       operationId: listSiteRoamingEvents
       parameters:
-      - description: Event type
+      - description: >-
+          Event type used to filter results. enum: `fail`, `none`, `success`
         in: query
         name: type
         schema:
@@ -29979,7 +30049,8 @@ paths:
         name: family
         schema:
           type: string
-      - description: Whether client is wired or wireless
+      - description: >-
+          Filter results by client type. enum: `wireless`, `wired`, `vty`
         example: wired
         in: query
         name: client_type
@@ -31865,7 +31936,12 @@ paths:
       description: Count by Distinct Attributes of NAC Clients
       operationId: countSiteNacClients
       parameters:
-      - description: NAC Policy Rule ID, if matched
+      - description: >-
+          Field used to group this count response. enum: `ap`, `auth_type`, `device_mac`,
+          `edr_managed`, `edr_provider`, `edr_status`, `family`, `hostname`, `idp_id`, `mfg`,
+          `mdm_compliance`, `mdm_managed`, `mdm_provider`, `model`, `mxedge_id`,
+          `nacrule_matched`, `nacrule_name`, `nacrule_id`, `nas_ip`, `nas_vendor`, `os`, `ssid`,
+          `status`, `type`, `usermac_label`, `username`, `vlan`
         in: query
         name: distinct
         schema:
@@ -32181,12 +32257,16 @@ paths:
         name: edr_managed
         schema:
           type: boolean
-      - description: EDR provider of client's organization
+      - description: >-
+          EDR provider used to filter NAC clients. enum: `crowdstrike`, `sentinelone`
         in: query
         name: edr_provider
         schema:
           $ref: '#/components/schemas/edr_provider'
-      - description: EDR Status of the NAC client
+      - description: >-
+          EDR status used to filter NAC clients. enum: `sentinelone_healthy`,
+          `sentinelone_infected`, `crowdstrike_low`, `crowdstrike_medium`, `crowdstrike_high`,
+          `crowdstrike_critical`, `crowdstrike_informational`
         in: query
         name: edr_status
         schema:
@@ -32261,8 +32341,9 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Connection status of client i.e "permitted", "denied, "session_started",
-          "session_stopped"
+      - description: >-
+          Client connection status used to filter results. enum: `permitted`, `session_started`,
+          `session_stopped`, `denied`
         in: query
         name: status
         schema:
@@ -35727,8 +35808,9 @@ paths:
       description: Count by Distinct Attributes of Applications
       operationId: countSiteApps
       parameters:
-      - description: Default for wireless devices is `ap`. Default for wired devices
-          is `device_mac`
+      - description: >-
+          Field used to group application statistics count results. enum: `ap`, `app`, `category`,
+          `device_mac`, `port_id`, `service`, `src_ip`, `ssid`, `wcid`, `wlan_id app`
         in: query
         name: distinct
         schema:
@@ -36506,12 +36588,15 @@ paths:
       description: Search Discovered Switch Metrics
       operationId: searchSiteDiscoveredSwitchesMetrics
       parameters:
-      - description: Metric scope
+      - description: >-
+          Filter results by scope. enum: `site`, `switch`
         in: query
         name: scope
         schema:
           $ref: '#/components/schemas/discovered_switches_metric_scope'
-      - description: Metric type
+      - description: >-
+          Metric type. enum: `inactive_wired_vlans`, `poe_compliance`, `switch_ap_affinity`,
+          `version_compliance`
         in: query
         name: type
         schema:
@@ -37140,17 +37225,23 @@ paths:
           examples:
           - 1000000000
           type: integer
-      - description: If `up`==`true`
+      - description: >-
+          STP state used to filter port results when `up`==`true`. enum: `""`, `blocking`,
+          `disabled`, `forwarding`, `learning`, `listening`
         in: query
         name: stp_state
         schema:
           $ref: '#/components/schemas/port_stp_state'
-      - description: If `up`==`true`
+      - description: >-
+          STP role used to filter port results when `up`==`true`. enum: `""`, `alternate`,
+          `backup`, `designated`, `disabled`, `root`, `root-prevented`
         in: query
         name: stp_role
         schema:
           $ref: '#/components/schemas/port_stp_role'
-      - description: If `up`==`true` && has Authenticator role
+      - description: >-
+          Authentication state used to filter port results when `up`==`true` and the port has an
+          authenticator role. enum: `""`, `authenticated`, `authenticating`, `held`, `init`
         in: query
         name: auth_state
         schema:
@@ -37202,7 +37293,9 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/search_org_sw_or_gw_ports_type'
-      - description: If `up`==`true` && has Authenticator role
+      - description: >-
+          Authentication state used to filter port results when `up`==`true` and the port has an
+          authenticator role. enum: `""`, `authenticated`, `authenticating`, `held`, `init`
         in: query
         name: auth_state
         schema:
@@ -37269,7 +37362,8 @@ paths:
         name: poe_on
         schema:
           type: boolean
-      - description: PoE priority.
+      - description: >-
+          PoE priority used to filter switch port results. enum: `low`, `high`
         in: query
         name: poe_priority
         schema:
@@ -37289,12 +37383,16 @@ paths:
         name: speed
         schema:
           type: integer
-      - description: If `up`==`true`
+      - description: >-
+          STP state used to filter port results when `up`==`true`. enum: `""`, `blocking`,
+          `disabled`, `forwarding`, `learning`, `listening`
         in: query
         name: stp_state
         schema:
           $ref: '#/components/schemas/port_stp_state'
-      - description: If `up`==`true`
+      - description: >-
+          STP role used to filter port results when `up`==`true`. enum: `""`, `alternate`,
+          `backup`, `designated`, `disabled`, `root`, `root-prevented`
         in: query
         name: stp_role
         schema:
@@ -37654,12 +37752,15 @@ paths:
           examples:
           - test failed
           type: string
-      - description: Synthetic test type
+      - description: >-
+          Synthetic test type used to filter results. enum: `arp`, `curl`, `dhcp`, `dhcp6`, `dns`,
+          `lan_connectivity`, `radius`, `speedtest`
         in: query
         name: type
         schema:
           $ref: '#/components/schemas/synthetictest_type'
-      - description: Connectivity protocol
+      - description: >-
+          Connectivity protocol used to filter synthetic test results. enum: `ping`, `traceroute`
         in: query
         name: protocol
         schema:
@@ -38629,12 +38730,15 @@ paths:
           examples:
           - 200
           type: integer
-      - description: Webhook delivery status
+      - description: >-
+          Webhook delivery status used to filter results. enum: `failure`, `success`
         in: query
         name: status
         schema:
           $ref: '#/components/schemas/webhook_delivery_status'
-      - description: Webhook topic
+      - description: >-
+          Webhook topic used to filter results. enum: `alarms`, `audits`, `device-updowns`,
+          `occupancy-alerts`, `ping`
         in: query
         name: topic
         schema:
@@ -38700,12 +38804,15 @@ paths:
           examples:
           - 200
           type: integer
-      - description: Webhook delivery status
+      - description: >-
+          Webhook delivery status used to filter results. enum: `failure`, `success`
         in: query
         name: status
         schema:
           $ref: '#/components/schemas/webhook_delivery_status'
-      - description: Webhook topic
+      - description: >-
+          Webhook topic used to filter results. enum: `alarms`, `audits`, `device-updowns`,
+          `occupancy-alerts`, `ping`
         in: query
         name: topic
         schema:
@@ -38852,7 +38959,8 @@ paths:
           examples:
           - ge-1/1/1
           type: string
-      - description: source from where the client was learned (lldp, mac)
+      - description: >-
+          Source from which the client was learned. enum: `lldp`, `mac`
         in: query
         name: source
         schema:
@@ -40498,7 +40606,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/site_zone_count_distinct'
-      - description: User type
+      - description: >-
+          Filter results by user type. enum: `asset`, `client`, `sdkclient`
         in: query
         name: user_type
         schema:
@@ -40517,7 +40626,8 @@ paths:
           examples:
           - 8bfc2490-d726-3587-038d-cb2e71bd2330
           type: string
-      - description: Scope
+      - description: >-
+          Filter results by scope. enum: `map`, `rssizone`, `site`, `zone`
         in: query
         name: scope
         schema:
@@ -40550,7 +40660,8 @@ paths:
       description: Search Zone Sessions
       operationId: searchSiteZoneSessions
       parameters:
-      - description: User type, client (default) / sdkclient / asset
+      - description: >-
+          Filter results by user type. enum: `asset`, `client`, `sdkclient`
         in: query
         name: user_type
         schema:
@@ -40569,7 +40680,8 @@ paths:
           examples:
           - 8bfc2490-d726-3587-038d-cb2e71bd2330
           type: string
-      - description: Scope
+      - description: >-
+          Filter results by scope. enum: `map`, `rssizone`, `site`, `zone`
         in: query
         name: scope
         schema:
