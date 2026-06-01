@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2604.1.4] - 2026-06-01
+
+- Improved query parameter descriptions across many endpoints: added enum values, clarified `distinct` grouping fields, and standardized filter descriptions for device, client, NAC, inventory, and event search/count operations
+- Updated query parameters:
+  - Removed invalid `timestamp` query parameter from 
+    - `GET /api/v1/orgs/{org_id}/devices/events/count`
+    - `GET /api/v1/orgs/{org_id}/devices/events/search`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/count`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/events/count`
+    - `GET /api/v1/sites/{site_id}/devices/events/search`
+    - `GET /api/v1/sites/{site_id}/nac_clients/count`
+    - `GET /api/v1/sites/{site_id}/nac_clients/events/count`
+    - `GET /api/v1/sites/{site_id}/services/events/count`
+  - Removed invalid `text` query parameter from `GET /api/v1/orgs/{org_id}/devices/events/search`
+  - Added `mac` query parameter to `GET /api/v1/orgs/{org_id}/nac_clients/events/count`
+  - Added `ip` query parameter to `GET /api/v1/orgs/{org_id}/wired_clients/search`
+
 ## [2604.1.3] - 2026-05-29
 
 - Improved numerous schema and response descriptions for clarity and better developer/LLM guidance (OSPF, RADIUS, RadSec, PSK, WLAN, WxLAN, webhooks, stats, NAC, Mist Edge, gateway, and more)
