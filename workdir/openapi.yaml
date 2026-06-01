@@ -8068,7 +8068,7 @@ paths:
           examples:
           - ge-0/0/1
           type: string
-      - description: LLDP management ip address
+      - description: LLDP management IP address
         in: query
         name: lldp_mgmt_addr
         schema:
@@ -8467,7 +8467,7 @@ paths:
         name: last_hostname
         schema:
           type: string
-      - description: When `type`==`ap`, LLDP management ip address
+      - description: When `type`==`ap`, LLDP management IP address
         in: query
         name: lldp_mgmt_addr
         schema:
@@ -26074,7 +26074,7 @@ paths:
         name: last_hostname
         schema:
           type: string
-      - description: When `type`==`ap`, LLDP management ip address
+      - description: When `type`==`ap`, LLDP management IP address
         in: query
         name: lldp_mgmt_addr
         schema:
@@ -28189,7 +28189,7 @@ paths:
         : \"/sites/{site_id}/devices/{device_id}/cmd\"\n}\n```\n\n#### Example output\
         \ from ws stream\n```\n===== ================== =================== ==============\
         \ =============== =========== ========= ===========\nVrf   Device Interface\
-        \   Network Interface   Interface Up   IP Address      OSPF Type   Area ID\
+        \   Network Interface   Interface Up   IP address      OSPF Type   Area ID\
         \   Area Type\n===== ================== =================== ==============\
         \ =============== =========== ========= ===========\n      net1          \
         \     g1                          True   172.16.1.2/24   Broadcast   0.0.0.0\
@@ -56125,7 +56125,7 @@ components:
         - '*london*'
         type: string
     partial_filter_ip_client:
-      description: Partial / full Client IP Address. Use `prefix*` for prefix search
+      description: Partial / full Client IP address. Use `prefix*` for prefix search
         or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*` match
         `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
       in: query
@@ -56137,7 +56137,7 @@ components:
         - '*100.10.*'
         type: string
     partial_filter_ip_device:
-      description: Partial / full Device IP Address. Use `prefix*` for prefix search
+      description: Partial / full Device IP address. Use `prefix*` for prefix search
         or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*` match
         `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported
       in: query
@@ -63374,7 +63374,7 @@ components:
         auto_probe_subnet:
           description: Required If `enable_probe`==`true`. This field will accept
             an IPv4 cidr and an IP address will be picked from this range to be used
-            as tunnel probe source ip address and as well as BGP neighbour IP address.
+            as tunnel probe source IP address and as well as BGP neighbour IP address.
             The subnet should be big enough for num_devices * num_tunnel * 2
           examples:
           - 11.0.0.0/8
@@ -69777,7 +69777,7 @@ components:
         type: string
       type: array
     client_wireless_ip:
-      description: List if the ip addresses detected for this client
+      description: List if the IP addresses detected for this client
       examples:
       - - 10.5.23.43
         - 192.168.0.2
@@ -72296,7 +72296,7 @@ components:
     device_search_radius_stats:
       additionalProperties:
         $ref: '#/components/schemas/device_search_radius_stat'
-      description: Property key is the RADIUS server IP Address
+      description: Property key is the RADIUS server IP address
       type: object
     device_status:
       default: all
@@ -74474,7 +74474,7 @@ components:
     evpn_topology_switch_config_other_ip_configs:
       additionalProperties:
         $ref: '#/components/schemas/junos_other_ip_config'
-      description: Additional IP Addresses configured on the switch. Property key
+      description: Additional IP addresses configured on the switch. Property key
         is the port network name
       type: object
     evpn_topology_switch_config_vrf_config:
@@ -75609,7 +75609,7 @@ components:
             interfaces such as vme, em0, or fxp0
         gateway:
           description: Except for out-of_band interface (vme/em0/fxp0). Interface
-            Default Gateway IP Address (i.e. "192.168.1.1") or a Variable (i.e. "{{myvar}}")
+            Default Gateway IP address (i.e. "192.168.1.1") or a Variable (i.e. "{{myvar}}")
           examples:
           - 192.168.1.1
           type: string
@@ -75621,7 +75621,7 @@ components:
           - 2001:db8::1
           type: string
         ip:
-          description: Interface IP Address (i.e. "192.168.1.8") or a Variable (i.e.
+          description: Interface IP address (i.e. "192.168.1.8") or a Variable (i.e.
             "{{myvar}}")
           examples:
           - 192.168.1.8
@@ -78661,7 +78661,7 @@ components:
       - /C=US/O=MyCorp/CN=john@mycorp.net/emailAddress=john@mycorp.net
       type: string
     last_client_ip:
-      description: The last known IP Address for the client
+      description: The last known IP address for the client
       examples:
       - 10.100.0.157
       type: string
@@ -79106,7 +79106,7 @@ components:
           - string
           - 'null'
         src_ip:
-          description: sender source ip address
+          description: sender source IP address
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
@@ -82104,7 +82104,7 @@ components:
         $ref: '#/components/schemas/nac_client_event'
       type: array
     nac_client_ip:
-      description: The known IP Addresses used by the client for the specified duration
+      description: The known IP addresses used by the client for the specified duration
       examples:
       - - 10.100.0.157
       items:
@@ -83093,7 +83093,7 @@ components:
       description: Direct-internet destination NAT rule target settings
       properties:
         internal_ip:
-          description: The Destination NAT destination IP Address. Must be an IP (i.e.
+          description: The Destination NAT destination IP address. Must be an IP (i.e.
             "192.168.70.30") or a Variable (i.e. "{{myvar}}")
           examples:
           - 192.168.70.30
@@ -83104,7 +83104,7 @@ components:
           - web server
           type: string
         port:
-          description: The Destination NAT destination IP Address. Must be a Port
+          description: The Destination NAT destination IP address. Must be a Port
             (i.e. "443") or a Variable (i.e. "{{myvar}}")
           examples:
           - '443'
@@ -83119,7 +83119,7 @@ components:
     network_internet_access_static_nat:
       additionalProperties:
         $ref: '#/components/schemas/network_internet_access_static_nat_property'
-      description: Property key may be an External IP Address (i.e. "63.16.0.3"),
+      description: Property key may be an External IP address (i.e. "63.16.0.3"),
         a CIDR (i.e. "63.16.0.12/20") or a Variable (i.e. "{{myvar}}")
       type: object
     network_internet_access_static_nat_property:
@@ -83127,7 +83127,7 @@ components:
       description: Direct-internet static NAT rule target settings
       properties:
         internal_ip:
-          description: The Static NAT destination IP Address. Must be an IP Address
+          description: The Static NAT destination IP address. Must be an IP address
             (i.e. "192.168.70.3") or a Variable (i.e. "{{myvar}}")
           examples:
           - 192.168.70.3
@@ -83166,7 +83166,7 @@ components:
       description: Multicast group rendezvous point mapping
       properties:
         rp_ip:
-          description: RP (rendezvous point) IP Address
+          description: RP (rendezvous point) IP address
           type: string
       type: object
     network_multicast_groups:
@@ -83321,7 +83321,7 @@ components:
     network_tenant_addresses:
       description: IP addresses or subnets assigned to a network tenant
       items:
-        description: The user/tenant IP Address (i.e. "192.168.70.30"), an Subnet
+        description: The user/tenant IP address (i.e. "192.168.70.30"), an Subnet
           (i.e. "192.168.70.0/24") or a Variable (i.e. "{{myvar}}")
         examples:
         - 192.168.70.30
@@ -83427,7 +83427,7 @@ components:
       description: VPN access destination NAT rule target settings
       properties:
         internal_ip:
-          description: The Destination NAT destination IP Address. Must be an IP (i.e.
+          description: The Destination NAT destination IP address. Must be an IP (i.e.
             "192.168.70.30") or a Variable (i.e. "{{myvar}}")
           examples:
           - 192.168.70.30
@@ -83446,7 +83446,7 @@ components:
     network_vpn_access_static_nat:
       additionalProperties:
         $ref: '#/components/schemas/network_vpn_access_static_nat_property'
-      description: Property key may be an External IP Address (i.e. "63.16.0.3"),
+      description: Property key may be an External IP address (i.e. "63.16.0.3"),
         a CIDR (i.e. "63.16.0.12/20") or a Variable (i.e. "{{myvar}}")
       type: object
     network_vpn_access_static_nat_property:
@@ -83454,7 +83454,7 @@ components:
       description: VPN access static NAT rule target settings
       properties:
         internal_ip:
-          description: The Static NAT destination IP Address. Must be an IP Address
+          description: The Static NAT destination IP address. Must be an IP address
             (i.e. "192.168.70.3") or a Variable (i.e. "{{myvar}}")
           examples:
           - 192.168.70.3
@@ -83471,7 +83471,7 @@ components:
         $ref: '#/components/schemas/network'
       type: array
     next_hop_via:
-      description: Next-hop IP Address. Can be a single IP address or an array of
+      description: Next-hop IP address. Can be a single IP address or an array of
         IP addresses for ECMP (Equal-Cost Multi-Path) load balancing across multiple
         next-hops.
       examples:
@@ -99174,7 +99174,7 @@ components:
         type: string
       type: array
     sso_ldap_server_hosts:
-      description: If `idp_type`==`ldap`, list of LDAP/LDAPS server IP Addresses or
+      description: If `idp_type`==`ldap`, list of LDAP/LDAPS server IP addresses or
         Hostnames
       examples:
       - - hostname
@@ -106151,7 +106151,7 @@ components:
           $ref: '#/components/schemas/config_switch_local_accounts'
           description: Local switch user accounts keyed by username
         mxedge_proxy_host:
-          description: IP Address or FQDN of the Mist Edge used to proxy the switch
+          description: IP address or FQDN of the Mist Edge used to proxy the switch
             management traffic to the Mist Cloud
           type: string
         mxedge_proxy_port:
@@ -108538,7 +108538,7 @@ components:
     tunnel_config_node_hosts:
       description: Remote gateway host addresses for a tunnel node
       items:
-        description: IP Address of the remote host
+        description: IP address of the remote host
         type: string
       type: array
     tunnel_config_node_internal_ips:
@@ -118066,7 +118066,7 @@ components:
       type: object
     wxlan_tag_spec_subnets:
       default: []
-      description: Matched destination subnets and/or IP Addresses
+      description: Matched destination subnets and/or IP addresses
       examples:
       - - 0.0.0.0/0
       items:
