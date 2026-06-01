@@ -116175,6 +116175,7 @@ components:
           type:
           - string
           - 'null'
+          format: password
         amazon_email_domains:
           $ref: '#/components/schemas/wlan_portal_amazon_email_domains'
           description: Optional if `amazon_enabled`==`true`. Email domains allowed
@@ -116209,6 +116210,7 @@ components:
           type:
           - string
           - 'null'
+          format: password
         azure_enabled:
           default: false
           description: Whether Azure Active Directory is enabled as a login method
@@ -116297,6 +116299,7 @@ components:
           type:
           - string
           - 'null'
+          format: password
         facebook_email_domains:
           $ref: '#/components/schemas/wlan_portal_facebook_email_domains'
           description: Optional if `facebook_enabled`==`true`. Email domains allowed
@@ -116341,6 +116344,7 @@ components:
           type:
           - string
           - 'null'
+          format: password
         google_email_domains:
           $ref: '#/components/schemas/wlan_portal_google_email_domains'
           description: Optional if `google_enabled`==`true`. Email domains allowed
@@ -116382,6 +116386,7 @@ components:
           type:
           - string
           - 'null'
+          format: password
         microsoft_email_domains:
           $ref: '#/components/schemas/wlan_portal_microsoft_email_domains'
           description: Optional if `microsoft_enabled`==`true`. Email domains allowed
@@ -116566,6 +116571,7 @@ components:
           type:
           - string
           - 'null'
+          format: password
         twilio_phone_number:
           description: Required if `sms_provider`==`twilio`, Twilio phone number associated
             with the account. See example for accepted format.
