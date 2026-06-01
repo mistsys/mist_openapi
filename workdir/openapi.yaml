@@ -7561,7 +7561,8 @@ paths:
       parameters:
       - in: query
         description: >-
-          Filter results by type. enum: `ap`, `gateway`, `switch`
+          Filter results by one device profile type. Use a single value; comma-separated
+          values are not supported. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -8298,22 +8299,6 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
-      - description: >-
-          Filter results by event message text
-        in: query
-        name: text
-        schema:
-          examples:
-          - Device connected
-          type: string
-      - description: >-
-          Filter results by event timestamp
-        in: query
-        name: timestamp
-        schema:
-          examples:
-          - '1703003296'
-          type: string
       - $ref: '#/components/parameters/device_event_type'
       - description: Return last/recent event for passed in field
         in: query
@@ -9971,7 +9956,9 @@ paths:
           examples:
           - 5c5b350e0001
           type: string
-      - description: Site id if assigned, null if not assigned
+      - description: >-
+          Filter results by one site identifier. Use a single value; comma-separated
+          values are not supported
         in: query
         name: site_id
         schema:
@@ -10613,7 +10600,8 @@ paths:
       - $ref: '#/components/parameters/page'
       - in: query
         description: >-
-          Filter results by device model
+          Filter results by one or more device models. Supports comma-separated
+          values
         name: model
         schema:
           examples:
@@ -11146,7 +11134,9 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Admin name or email
+      - description: >-
+          Filter results by one or more administrator names or email addresses. Supports
+          comma-separated values
         in: query
         name: admin_name
         schema:
@@ -11154,7 +11144,8 @@ paths:
           - John Doe
           type: string
       - description: >-
-          Filter results by message text
+          Filter results by one or more message text values. Supports comma-separated
+          values
         in: query
         name: message
         schema:
@@ -11214,7 +11205,8 @@ paths:
           type: string
       - in: query
         description: >-
-          Filter audit log results by administrator name
+          Filter audit log results by one or more administrator names. Supports comma-separated
+          values
         name: admin_name
         schema:
           examples:
@@ -11273,7 +11265,9 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Admin name or email
+      - description: >-
+          Filter results by one or more administrator names or email addresses. Supports
+          comma-separated values
         in: query
         name: admin_name
         schema:
@@ -11281,7 +11275,8 @@ paths:
           - John Doe
           type: string
       - description: >-
-          Filter results by message text
+          Filter results by one or more message text values. Supports comma-separated
+          values
         in: query
         name: message
         schema:
@@ -13053,7 +13048,8 @@ paths:
         schema:
           type: string
       - description: >-
-          Filter results by site identifier
+          Filter results by one site identifier. Use a single value; comma-separated
+          values are not supported
         in: query
         name: site_id
         schema:
@@ -13071,16 +13067,12 @@ paths:
         schema:
           type: boolean
       - description: >-
-          Filter results by MAC address
+          Filter results by one MAC address. Use a single value; comma-separated
+          values are not supported
         in: query
         name: mac
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: Labels derived from usermac entry
         in: query
         name: usermac_label
@@ -13176,7 +13168,18 @@ paths:
         name: idp_id
         schema:
           type: string
-      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - description: Partial / full Client MAC address. Use a single value; comma-separated
+          values are not supported. Use `prefix*` for prefix search or `*substring*`
+          for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
+          Suffix-only wildcards (e.g. `*bccddeeff`) are not supported
+        in: query
+        name: mac
+        schema:
+          examples:
+          - aabbccddeeff
+          - aabbcc*
+          - '*bbcc*'
+          type: string
       - description: MDM compliance of client i.e "compliant", "not compliant"
         in: query
         name: mdm_compliance
@@ -13253,11 +13256,6 @@ paths:
         name: text
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: Client type i.e. "wireless", "wired" etc.
         in: query
         name: type
@@ -13280,7 +13278,9 @@ paths:
         name: vlan
         schema:
           type: string
-      - description: Site id if assigned, null if not assigned
+      - description: >-
+          Filter results by one site identifier. Use a single value; comma-separated
+          values are not supported
         in: query
         name: site_id
         schema:
@@ -19736,10 +19736,16 @@ paths:
       parameters:
       - in: query
         description: >-
-          Filter results by type
+          Filter results by one device type. Use a single value; comma-separated
+          values are not supported. enum: `all`, `ap`, `gateway`, `switch`
         name: type
         schema:
-          $ref: '#/components/schemas/device_type_with_all'
+          enum:
+          - all
+          - ap
+          - gateway
+          - switch
+          type: string
       - in: query
         description: >-
           Filter results by status. enum: `all`, `connected`, `disconnected`
@@ -22320,24 +22326,40 @@ paths:
         name: site_id
         schema:
           type: string
-      - description: Device mac (Gateway/Switch) where the client has connected to
+      - description: >-
+          Filter results by one or more gateway or switch MAC addresses where the
+          client has connected. Supports comma-separated values
         in: query
         name: device_mac
         schema:
           type: string
       - $ref: '#/components/parameters/partial_filter_mac_client'
-      - description: Port id where the client has connected to
+      - description: >-
+          Filter results by one or more port identifiers where the client has connected.
+          Supports comma-separated values
         in: query
         name: port_id
         schema:
           type: string
       - description: >-
-          Filter results by VLAN ID
+          Filter results by one or more VLAN IDs. Supports comma-separated values
         in: query
         name: vlan
         schema:
-          type: integer
-      - $ref: '#/components/parameters/ip'
+          examples:
+          - '1'
+          - 1,2
+          type: string
+      - description: >-
+          Filter results by one or more IPv4 addresses. Supports comma-separated
+          values
+        in: query
+        name: ip
+        schema:
+          examples:
+          - 192.168.1.1
+          - 192.168.1.1,192.168.1.2
+          type: string
       - description: >-
           Filter results by manufacturer
         in: query
