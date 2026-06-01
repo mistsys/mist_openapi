@@ -3011,6 +3011,7 @@ paths:
       description: '**Note**: another call to ```GET /api/v1/self``` is required to
         see the new set of privileges'
       operationId: verifyAdminInvite
+      security: []
       responses:
         '200':
           $ref: '#/components/responses/OK'
@@ -22967,6 +22968,7 @@ paths:
 
         An email will also be sent to the user with a link to https://manage.mist.com/verify/recover?token=:token'
       operationId: recoverPassword
+      security: []
       requestBody:
         content:
           application/json:
@@ -23004,6 +23006,7 @@ paths:
         With correct verification, the user will be authenticated. UI can then prompt
         for new password'
       operationId: verifyRecoverPassword
+      security: []
       responses:
         '200':
           $ref: '#/components/responses/OK'
@@ -23040,6 +23043,7 @@ paths:
         ```json\n{\n  \"flavor\": \"hcaptcha\",\n  \"required\": true,\n  \"sitekey\"\
         : \"6LdAewsTAAAAAE25XKQhPEQ2FiMTft-WrZXQ5NUd\"\n}\"\n```"
       operationId: registerNewAdmin
+      security: []
       requestBody:
         content:
           application/json:
@@ -23115,6 +23119,7 @@ paths:
     post:
       description: Verify registration
       operationId: verifyRegistration
+      security: []
       responses:
         '200':
           $ref: '#/components/responses/VerifyRegisterTokenSuccess'
