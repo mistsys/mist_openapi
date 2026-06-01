@@ -23091,6 +23091,7 @@ paths:
     get:
       description: Get Registration Information
       operationId: getAdminRegistrationInfo
+      security: []
       parameters:
       - description: 'Filter login settings by reCAPTCHA flavor. enum: `google`, `hcaptcha`'
         in: query
