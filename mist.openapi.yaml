@@ -118971,14 +118971,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
-    basicAuth:
-      description: Deprecated legacy authentication method. Basic Auth remains available
-        only for existing integrations and is planned for removal in September 2026.
-        Do not use Basic Auth for new integrations; use API Token authentication for
-        automation or the login session flow with `X-CSRFToken` for browser sessions.
-      scheme: basic
-      type: http
-      x-deprecated: true
     csrfToken:
       description: 'Session-based authentication for browser or login/password flows.
         After a successful [Login](/#operations/login) request, Mist returns a `csrftoken`
