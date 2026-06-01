@@ -431,4 +431,3 @@ All notable changes to this project will be documented in this file.
   - Added `inactive_vlan_strs`
 - Updated `/api/v1/sites/{site_id}/stats/ports/search`
   - Added `poe_priority`
-  
