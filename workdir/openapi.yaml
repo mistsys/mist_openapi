@@ -8241,14 +8241,6 @@ paths:
           examples:
           - Device connected
           type: string
-      - description: >-
-          Filter results by event timestamp
-        in: query
-        name: timestamp
-        schema:
-          examples:
-          - '1703003296'
-          type: string
       - $ref: '#/components/parameters/device_event_type'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -10295,7 +10287,8 @@ paths:
       - $ref: '#/components/parameters/partial_filter_mac'
       - $ref: '#/components/parameters/partial_filter_model'
       - $ref: '#/components/parameters/partial_filter_name'
-      - description: Site id if assigned, null if not assigned
+      - description: >-
+          Filter inventory results by site identifier
         in: query
         name: site_id
         schema:
@@ -11885,7 +11878,7 @@ paths:
         schema:
           type: string
       - description: >-
-          Filter results by sort
+          Field used to sort results
         in: query
         name: sort
         schema:
@@ -12864,12 +12857,8 @@ paths:
         name: last_username
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
-      - description: Site id if assigned, null if not assigned
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -18563,12 +18552,14 @@ paths:
         name: asset_enabled
         schema:
           type: boolean
-      - description: If Auto Upgrade feature is enabled
+      - description: >-
+          Filter results by whether automatic upgrades are enabled
         in: query
         name: auto_upgrade_enabled
         schema:
           type: boolean
-      - description: If Auto Upgrade feature is enabled
+      - description: >-
+          Filter results by automatic upgrade version
         in: query
         name: auto_upgrade_version
         schema:
@@ -26220,12 +26211,6 @@ paths:
         name: text
         schema:
           type: string
-      - description: >-
-          Filter results by event timestamp
-        in: query
-        name: timestamp
-        schema:
-          type: string
       - $ref: '#/components/parameters/device_event_type'
       - description: Return last/recent event for passed in field
         example: port_id
@@ -32453,11 +32438,6 @@ paths:
         name: last_username
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: AP MAC connected to by client
         in: query
         name: last_ap
@@ -32649,12 +32629,6 @@ paths:
         name: mac
         schema:
           type: string
-      - description: >-
-          Filter results by event timestamp
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: Labels derived from usermac entry
         in: query
         name: usermac_label
@@ -32832,11 +32806,6 @@ paths:
         name: text
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: Client type i.e. "wireless", "wired" etc.
         in: query
         name: type
@@ -34436,11 +34405,6 @@ paths:
         name: version
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: >-
           Filter results by MAC address
         in: query
@@ -34529,11 +34493,6 @@ paths:
         name: version
         schema:
           type: string
-      - description: Start time, in epoch
-        in: query
-        name: timestamp
-        schema:
-          type: number
       - description: >-
           Filter results by MAC address
         in: query
