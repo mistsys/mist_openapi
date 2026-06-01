@@ -2208,6 +2208,8 @@ paths:
       operationId: listInstallerDeviceProfiles
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -5224,6 +5226,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter alarm results by whether the alarm has been acknowledged
         name: acked
         schema:
           type: boolean
@@ -7515,6 +7519,8 @@ paths:
       operationId: listOrgDeviceProfiles
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -8106,6 +8112,8 @@ paths:
           - 10.4.2.3
           type: string
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -8229,6 +8237,8 @@ paths:
           - AP43
           type: string
       - in: query
+        description: >-
+          Filter results by device type
         name: device_type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
@@ -8293,6 +8303,8 @@ paths:
       operationId: countOrgDeviceLastConfigs
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -8330,6 +8342,8 @@ paths:
       operationId: searchOrgDeviceLastConfigs
       parameters:
       - in: query
+        description: >-
+          Filter results by device type. enum: `ap`, `gateway`, `switch`, `mxedge`
         name: device_type
         schema:
           $ref: '#/components/schemas/last_config_device_type'
@@ -8732,6 +8746,8 @@ paths:
       operationId: listOrgAvailableDeviceVersions
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -9772,6 +9788,8 @@ paths:
       operationId: getOrgSitesSle
       parameters:
       - in: query
+        description: >-
+          Filter insights by SLE name. enum: `wan`, `wifi`, `wired`
         name: sle
         schema:
           $ref: '#/components/schemas/org_site_sle_type'
@@ -9871,6 +9889,8 @@ paths:
           - AP43
           type: string
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type'
@@ -10023,6 +10043,8 @@ paths:
         schema:
           $ref: '#/components/schemas/inventory_count_distinct'
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -10042,6 +10064,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by status. enum: `connected`, `disconnected`
         name: status
         schema:
           $ref: '#/components/schemas/device_status_filter'
@@ -10203,6 +10227,8 @@ paths:
       operationId: searchOrgInventory
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -10509,12 +10535,16 @@ paths:
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           examples:
           - AP43
           type: string
       - in: query
+        description: >-
+          Filter results by device serial number
         name: serial
         schema:
           examples:
@@ -11089,6 +11119,8 @@ paths:
         schema:
           $ref: '#/components/schemas/org_logs_count_distinct'
       - in: query
+        description: >-
+          Filter audit log results by administrator identifier
         name: admin_id
         schema:
           examples:
@@ -11096,12 +11128,16 @@ paths:
           format: uuid
           type: string
       - in: query
+        description: >-
+          Filter audit log results by administrator name
         name: admin_name
         schema:
           examples:
           - John Doe
           type: string
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           examples:
@@ -11109,6 +11145,8 @@ paths:
           format: uuid
           type: string
       - in: query
+        description: >-
+          Filter log results by message text
         name: message
         schema:
           examples:
@@ -14646,22 +14684,32 @@ paths:
       operationId: listOrgOtherDevices
       parameters:
       - in: query
+        description: >-
+          Filter results by vendor
         name: vendor
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by device serial number
         name: serial
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by name
         name: name
         schema:
           type: string
@@ -15203,14 +15251,20 @@ paths:
       operationId: searchOrgPskPortalLogs
       parameters:
       - in: query
+        description: >-
+          Filter PSK portal log results by PSK name
         name: psk_name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter PSK portal log results by PSK identifier
         name: psk_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter PSK portal log results by PSK portal identifier
         name: pskportal_id
         schema:
           type: string
@@ -15221,10 +15275,14 @@ paths:
           format: uuid
           type: string
       - in: query
+        description: >-
+          Filter audit log results by administrator name
         name: admin_name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter audit log results by administrator identifier
         name: admin_id
         schema:
           type: string
@@ -15436,15 +15494,21 @@ paths:
       operationId: listOrgPsks
       parameters:
       - example: psk_name
+        description: >-
+          Filter results by name
         in: query
         name: name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by SSID
         name: ssid
         schema:
           type: string
       - in: query
+        description: >-
+          Filter PSK results by role
         name: role
         schema:
           type: string
@@ -19338,58 +19402,86 @@ paths:
       operationId: searchOrgAssets
       parameters:
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by reporting device name
         name: device_name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by name
         name: name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by map identifier
         name: map_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by iBeacon UUID
         name: ibeacon_uuid
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by iBeacon major value
         name: ibeacon_major
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by iBeacon minor value
         name: ibeacon_minor
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by Eddystone UID namespace
         name: eddystone_uid_namespace
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by Eddystone UID instance
         name: eddystone_uid_instance
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by Eddystone URL
         name: eddystone_url
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by reporting AP MAC address
         name: ap_mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter asset results by beam value
         name: beam
         schema:
           type: integer
       - in: query
+        description: >-
+          Filter asset results by RSSI value
         name: rssi
         schema:
           type: integer
@@ -19423,6 +19515,8 @@ paths:
       operationId: countOrgBgpStats
       parameters:
       - in: query
+        description: >-
+          Filter peer results by state
         name: state
         schema:
           examples:
@@ -19461,18 +19555,26 @@ paths:
       operationId: searchOrgBgpStats
       parameters:
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by neighbor MAC address
         name: neighbor_mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by VRF name
         name: vrf_name
         schema:
           type: string
@@ -19509,18 +19611,26 @@ paths:
       operationId: listOrgDevicesStats
       parameters:
       - in: query
+        description: >-
+          Filter results by type
         name: type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
       - in: query
+        description: >-
+          Filter results by status. enum: `all`, `connected`, `disconnected`
         name: status
         schema:
           $ref: '#/components/schemas/device_status'
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
@@ -19621,6 +19731,8 @@ paths:
       operationId: getOrgMxEdgeStats
       parameters:
       - in: query
+        description: >-
+          Filter results by whether the object is scoped to a site
         name: for_site
         schema:
           default: false
@@ -19685,18 +19797,26 @@ paths:
       operationId: searchOrgOspfStats
       parameters:
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by VRF name
         name: vrf_name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by peer IP address
         name: peer_ip
         schema:
           type: string
@@ -20162,6 +20282,8 @@ paths:
         schema:
           $ref: '#/components/schemas/org_tunnel_count_distinct'
       - in: query
+        description: >-
+          Filter results by type. enum: `wan`, `wxtunnel`
         name: type
         schema:
           $ref: '#/components/schemas/org_tunnel_type_count'
@@ -20251,6 +20373,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
@@ -20320,6 +20444,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by type. enum: `wan`, `wxtunnel`
         name: type
         schema:
           $ref: '#/components/schemas/tunnel_type'
@@ -20386,10 +20512,14 @@ paths:
       operationId: searchOrgPeerPathStats
       parameters:
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
@@ -21326,14 +21456,20 @@ paths:
       operationId: searchOrgVars
       parameters:
       - in: query
+        description: >-
+          Filter results by site identifier
         name: site_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter variable results by variable name
         name: var
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by source. enum: `deviceprofile`, `site`
         name: src
         schema:
           $ref: '#/components/schemas/var_source'
@@ -21805,10 +21941,14 @@ paths:
       operationId: countOrgWebhooksDeliveries
       parameters:
       - in: query
+        description: >-
+          Filter webhook delivery results by error message
         name: error
         schema:
           type: string
       - in: query
+        description: >-
+          Filter webhook delivery results by HTTP status code
         name: status_code
         schema:
           type: integer
@@ -21875,10 +22015,14 @@ paths:
       operationId: searchOrgWebhooksDeliveries
       parameters:
       - in: query
+        description: >-
+          Filter webhook delivery results by error message
         name: error
         schema:
           type: string
       - in: query
+        description: >-
+          Filter webhook delivery results by HTTP status code
         name: status_code
         schema:
           type: integer
@@ -23051,6 +23195,8 @@ paths:
       operationId: getAdminRegistrationInfo
       parameters:
       - in: query
+        description: >-
+          Filter login settings by reCAPTCHA flavor. enum: `google`, `hcaptcha`
         name: recaptcha_flavor
         schema:
           $ref: '#/components/schemas/recaptcha_flavor'
@@ -23362,6 +23508,8 @@ paths:
       operationId: getOauth2UrlForLinking
       parameters:
       - in: query
+        description: >-
+          Callback URL to forward to after the OAuth login flow
         name: forward
         schema:
           examples:
@@ -23780,6 +23928,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter alarm results by whether the alarm has been acknowledged
         name: acked
         schema:
           type: boolean
@@ -23844,6 +23994,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter alarm results by whether the alarm has been acknowledged
         name: acked
         schema:
           type: boolean
@@ -24841,31 +24993,45 @@ paths:
         schema:
           $ref: '#/components/schemas/site_clients_count_distinct'
       - in: query
+        description: >-
+          Filter results by SSID
         name: ssid
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by AP MAC address
         name: ap
         schema:
           type: string
       - $ref: '#/components/parameters/ip'
       - in: query
+        description: >-
+          Filter client results by VLAN ID
         name: vlan
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by hostname
         name: hostname
         schema:
           type: string
       - in: query
+        description: >-
+          Filter client results by operating system
         name: os
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           type: string
       - in: query
+        description: >-
+          Filter client results by device type
         name: device
         schema:
           type: string
@@ -25381,14 +25547,20 @@ paths:
       - $ref: '#/components/parameters/dot11_proto'
       - $ref: '#/components/parameters/dot11_band'
       - in: query
+        description: >-
+          Filter available versions by release channel
         name: channel
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by WLAN identifier
         name: wlan_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by SSID
         name: ssid
         schema:
           type: string
@@ -25476,6 +25648,8 @@ paths:
       operationId: listSiteDevices
       parameters:
       - in: query
+        description: >-
+          Filter results by type
         name: type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
@@ -25586,6 +25760,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
@@ -25617,6 +25793,8 @@ paths:
       operationId: searchSiteDeviceConfigHistory
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -25664,46 +25842,68 @@ paths:
         schema:
           $ref: '#/components/schemas/site_devices_count_distinct'
       - in: query
+        description: >-
+          Filter results by hostname
         name: hostname
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by software version
         name: version
         schema:
           type: string
       - in: query
+        description: >-
+          Filter AP results by Mist Tunnel status
         name: mxtunnel_status
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by Mist Edge identifier
         name: mxedge_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter AP results by LLDP system name
         name: lldp_system_name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter AP results by LLDP system description
         name: lldp_system_desc
         schema:
           type: string
       - in: query
+        description: >-
+          Filter AP results by LLDP port identifier
         name: lldp_port_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter AP results by LLDP management IP address
         name: lldp_mgmt_addr
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by map identifier
         name: map_id
         schema:
           type: string
@@ -25742,11 +25942,15 @@ paths:
         schema:
           $ref: '#/components/schemas/site_device_events_count_distinct'
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           type: string
       - $ref: '#/components/parameters/device_event_type'
       - in: query
+        description: >-
+          Filter alarm results by type code
         name: type_code
         schema:
           type: string
@@ -25975,18 +26179,26 @@ paths:
           - 2d
           type: string
       - in: query
+        description: >-
+          Filter results by device type. enum: `ap`, `gateway`, `switch`, `mxedge`
         name: device_type
         schema:
           $ref: '#/components/schemas/last_config_device_type'
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by software version
         name: version
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by name
         name: name
         schema:
           type: string
@@ -26401,6 +26613,9 @@ paths:
       operationId: listSiteDeviceUpgrades
       parameters:
       - in: query
+        description: >-
+          Filter results by status. enum: `cancelled`, `completed`, `created`, `downloaded`,
+          `downloading`, `failed`, `queued`, `upgrading`
         name: status
         schema:
           $ref: '#/components/schemas/upgrade_device_status'
@@ -26555,6 +26770,8 @@ paths:
       operationId: listSiteAvailableDeviceVersions
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `ap`, `gateway`, `switch`
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
@@ -29720,15 +29937,21 @@ paths:
       operationId: searchSiteGuestAuthorization
       parameters:
       - example: 00000000-0000-0000-0000-000000000000
+        description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
           type: string
       - in: query
+        description: >-
+          Filter guest results by authentication method
         name: auth_method
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by SSID
         name: ssid
         schema:
           type: string
@@ -30386,6 +30609,8 @@ paths:
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by type. enum: `asset`, `client`, `sdkclient`
         name: type
         schema:
           $ref: '#/components/schemas/rf_client_type'
@@ -32497,22 +32722,32 @@ paths:
       operationId: listSiteOtherDevices
       parameters:
       - in: query
+        description: >-
+          Filter results by vendor
         name: vendor
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by device serial number
         name: serial
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           type: string
       - in: query
+        description: >-
+          Filter results by name
         name: name
         schema:
           type: string
@@ -32894,10 +33129,14 @@ paths:
       operationId: listSitePsks
       parameters:
       - in: query
+        description: >-
+          Filter results by SSID
         name: ssid
         schema:
           type: string
       - in: query
+        description: >-
+          Filter PSK results by role
         name: role
         schema:
           type: string
@@ -34991,10 +35230,16 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Additional response fields to include, as a comma-separated list or `*` for all fields.
+          enum: `ap`, `band`, `chassis`, `client`, `device_os`, `device_type`, `gateway`,
+          `gateway_zones`, `interface`, `mxedge`, `peer_path`, `server`, `switch`, `vlan`, `wlan`
         name: fields
         schema:
           $ref: '#/components/schemas/site_sle_impact_summary_fields_parameter'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35047,6 +35292,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35095,6 +35342,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35143,6 +35392,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35191,6 +35442,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35239,6 +35492,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35287,6 +35542,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35335,6 +35592,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35383,6 +35642,8 @@ paths:
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - in: query
+        description: >-
+          Filter SLE impact results by classifier
         name: classifier
         schema:
           type: string
@@ -35921,84 +36182,112 @@ paths:
       operationId: searchSiteAssets
       parameters:
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           examples:
           - '001122334455'
           type: string
       - in: query
+        description: >-
+          Filter results by map identifier
         name: map_id
         schema:
           examples:
           - b069b358-4c97-5319-1f8c-7c5ca64d6ab1
           type: string
       - in: query
+        description: >-
+          Filter asset results by iBeacon UUID
         name: ibeacon_uuid
         schema:
           examples:
           - 3ce2ef69-4414-469d-9d55-3ec7fcc38520
           type: string
       - in: query
+        description: >-
+          Filter asset results by iBeacon major value
         name: ibeacon_major
         schema:
           examples:
           - 1
           type: integer
       - in: query
+        description: >-
+          Filter asset results by iBeacon minor value
         name: ibeacon_minor
         schema:
           examples:
           - 1
           type: integer
       - in: query
+        description: >-
+          Filter asset results by Eddystone UID namespace
         name: eddystone_uid_namespace
         schema:
           examples:
           - 1234567890abcdef1234567890abcdef
           type: string
       - in: query
+        description: >-
+          Filter asset results by Eddystone UID instance
         name: eddystone_uid_instance
         schema:
           examples:
           - 1234567890abcdef1234567890abcdef
           type: string
       - in: query
+        description: >-
+          Filter asset results by Eddystone URL
         name: eddystone_url
         schema:
           examples:
           - https://example.com
           type: string
       - in: query
+        description: >-
+          Filter asset results by reporting device name
         name: device_name
         schema:
           examples:
           - Device Name
           type: string
       - in: query
+        description: >-
+          Select how the value should be returned
         name: by
         schema:
           examples:
           - mac
           type: string
       - in: query
+        description: >-
+          Filter results by name
         name: name
         schema:
           examples:
           - Asset Name
           type: string
       - in: query
+        description: >-
+          Filter asset results by reporting AP MAC address
         name: ap_mac
         schema:
           examples:
           - '001122334455'
           type: string
       - in: query
+        description: >-
+          Filter asset results by beam value
         name: beam
         schema:
           examples:
           - '0'
           type: string
       - in: query
+        description: >-
+          Filter asset results by RSSI value
         name: rssi
         schema:
           type: string
@@ -36091,6 +36380,8 @@ paths:
       operationId: countSiteBgpStats
       parameters:
       - in: query
+        description: >-
+          Filter peer results by state
         name: state
         schema:
           examples:
@@ -36129,14 +36420,20 @@ paths:
       operationId: searchSiteBgpStats
       parameters:
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by neighbor MAC address
         name: neighbor_mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by VRF name
         name: vrf_name
         schema:
           type: string
@@ -36236,6 +36533,8 @@ paths:
           minimum: 1
           type: integer
       - in: query
+        description: >-
+          Filter application statistics by application name
         name: app
         schema:
           examples:
@@ -36406,6 +36705,8 @@ paths:
       operationId: listSiteWirelessClientsStats
       parameters:
       - in: query
+        description: >-
+          Filter results by whether the client is wired
         name: wired
         schema:
           default: false
@@ -36440,6 +36741,8 @@ paths:
       operationId: getSiteWirelessClientStats
       parameters:
       - in: query
+        description: >-
+          Filter results by whether the client is wired
         name: wired
         schema:
           default: false
@@ -36471,10 +36774,14 @@ paths:
       operationId: listSiteDevicesStats
       parameters:
       - in: query
+        description: >-
+          Filter results by type
         name: type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
       - in: query
+        description: >-
+          Filter results by status. enum: `all`, `connected`, `disconnected`
         name: status
         schema:
           $ref: '#/components/schemas/stat_device_status_filter'
@@ -36703,36 +37010,48 @@ paths:
       operationId: searchSiteDiscoveredSwitches
       parameters:
       - in: query
+        description: >-
+          Filter results by whether the device is adopted
         name: adopted
         schema:
           examples:
           - true
           type: boolean
       - in: query
+        description: >-
+          Filter discovered switch results by system name
         name: system_name
         schema:
           examples:
           - switch1.example.com
           type: string
       - in: query
+        description: >-
+          Filter results by hostname
         name: hostname
         schema:
           examples:
           - switch1
           type: string
       - in: query
+        description: >-
+          Filter results by vendor
         name: vendor
         schema:
           examples:
           - Cisco
           type: string
       - in: query
+        description: >-
+          Filter results by device model
         name: model
         schema:
           examples:
           - WS-C3850-24P
           type: string
       - in: query
+        description: >-
+          Filter results by software version
         name: version
         schema:
           examples:
@@ -37029,14 +37348,20 @@ paths:
       operationId: searchSiteOspfStats
       parameters:
       - in: query
+        description: >-
+          Filter results by MAC address
         name: mac
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by VRF name
         name: vrf_name
         schema:
           type: string
       - in: query
+        description: >-
+          Filter peer results by peer IP address
         name: peer_ip
         schema:
           type: string
@@ -37528,10 +37853,14 @@ paths:
       operationId: getSiteSwitchesMetrics
       parameters:
       - in: query
+        description: >-
+          Filter results by type. enum: `active_ports_summary`
         name: type
         schema:
           $ref: '#/components/schemas/switch_metric_type'
       - in: query
+        description: >-
+          Filter results by scope. enum: `site`, `switch`
         name: scope
         schema:
           $ref: '#/components/schemas/switch_metric_scope'
@@ -37588,12 +37917,16 @@ paths:
       operationId: listSiteZonesStats
       parameters:
       - in: query
+        description: >-
+          Filter results by map identifier
         name: map_id
         schema:
           examples:
           - 00000000-0000-0000-0000-000000000000
           type: string
       - in: query
+        description: >-
+          Filter results by minimum duration
         name: min_duration
         schema:
           examples:
@@ -38719,12 +39052,16 @@ paths:
       operationId: countSiteWebhooksDeliveries
       parameters:
       - in: query
+        description: >-
+          Filter webhook delivery results by error message
         name: error
         schema:
           examples:
           - Webhook delivery failed
           type: string
       - in: query
+        description: >-
+          Filter webhook delivery results by HTTP status code
         name: status_code
         schema:
           examples:
@@ -38793,12 +39130,16 @@ paths:
       operationId: searchSiteWebhooksDeliveries
       parameters:
       - in: query
+        description: >-
+          Filter webhook delivery results by error message
         name: error
         schema:
           examples:
           - Webhook delivery failed
           type: string
       - in: query
+        description: >-
+          Filter webhook delivery results by HTTP status code
         name: status_code
         schema:
           examples:
