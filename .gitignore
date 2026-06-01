@@ -7,3 +7,5 @@ converter.js
 tmp/
 workdir/*.bak
 venv/
+workdir/description_issues_report.txt
+workdir/description_issues.json

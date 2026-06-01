@@ -7,3 +7,11 @@ mist.references.yaml
 *.bak
 spec_referencies.yaml
 mist.openapi copy.yaml
+description_issues_report.txt
+description_issues.json
+mist.postman_usage.json
+spec_references.yaml
+duplicate_schemas_report.json
+duplicate_schemas_report.md
+description_coherence_report.md
+description_coherence_report.json
