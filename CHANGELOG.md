@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 - Improved query parameter descriptions across many endpoints: added enum values, clarified `distinct` grouping fields, and standardized filter descriptions for device, client, NAC, inventory, and event search/count operations
 - Clarified authentication documentation: API Token is the preferred method for automation, Basic Auth is deprecated and planned for removal in September 2026, and the login session flow uses the `X-CSRFToken` header after `/api/v1/login`
+  - Marked public login and account flow endpoints as unauthenticated where appropriate:
+    - `POST /api/v1/login`
+    - `POST /api/v1/login/lookup`
+    - `GET /api/v1/login/oauth/{provider}`
+    - `POST /api/v1/login/oauth/{provider}`
+    - `POST /api/v1/login/two_factor`
+    - `POST /api/v1/invite/verify/{token}`
+    - `POST /api/v1/recover`
+    - `POST /api/v1/recover/verify/{token}`
+    - `POST /api/v1/register`
+    - `GET /api/v1/register/recaptcha`
+    - `POST /api/v1/register/verify/{token}`
 - Updated query parameters:
   - Removed invalid `timestamp` query parameter from 
     - `GET /api/v1/orgs/{org_id}/devices/events/count`
