@@ -114906,7 +114906,7 @@ components:
         band:
           deprecated: true
           description: '`band` is deprecated and kept for backward compatibility.
-            Use bands instead'
+            Use `bands` instead'
           type: string
         band_steer:
           default: false
@@ -115875,7 +115875,7 @@ components:
         default_vlan_id:
           $ref: '#/components/schemas/wlan_dynamic_vlan_default_vlan_id_deprecated'
           description: Deprecated default VLAN ID used when no RADIUS VLAN match is
-            returned
+            returned. Please use `default_vlan_ids` instead, which can support VLAN pools.
         default_vlan_ids:
           $ref: '#/components/schemas/wlan_dynamic_vlan_default_vlan_ids'
           description: Fallback VLAN IDs, ranges, or variables used when no RADIUS
