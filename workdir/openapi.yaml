@@ -23799,7 +23799,9 @@ paths:
       - Sites Alarms
   /api/v1/sites/{site_id}/alarms/count:
     get:
-      description: Count by Distinct Attributes of Site Alarms
+      description: Count alarms for a site, optionally grouped by the `distinct` field
+        and filtered by time range. Use `countOrgAlarms` (`GET /api/v1/orgs/{org_id}/alarms/count`)
+        to count alarms across the organization.
       operationId: countSiteAlarms
       parameters:
       - description: 'Field used to group this count response. enum: `acked`, `group`,
@@ -23859,7 +23861,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/alarms/search:
     get:
-      description: Search Site Alarms
+      description: Search alarms for a site with filters for alarm group, severity,
+        type, acknowledgement state, acknowledgement admin, and time range. Use `searchOrgAlarms`
+        (`GET /api/v1/orgs/{org_id}/alarms/search`) to search alarms across the organization.
       operationId: searchSiteAlarms
       parameters:
       - $ref: '#/components/parameters/alarm_group'
@@ -29461,7 +29465,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/events/system/count:
     get:
-      description: Count by Distinct Attributes of System Events
+      description: Count system events for a site, optionally grouped by the `distinct`
+        field and filtered by time range. Use `countOrgSystemEvents` (`GET /api/v1/orgs/{org_id}/events/system/count`)
+        to count system events across the organization.
       operationId: countSiteSystemEvents
       parameters:
       - description: 'Field used to group this count response. enum: `type`'
@@ -29494,7 +29500,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/events/system/search:
     get:
-      description: Search Site System Events
+      description: Search system events for a site with time range, sorting, and pagination
+        controls. Use `searchOrgSystemEvents` (`GET /api/v1/orgs/{org_id}/events/system/search`)
+        to search system events across the organization.
       operationId: searchSiteSystemEvents
       parameters:
       - $ref: '#/components/parameters/system_event_type'
@@ -29732,7 +29740,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/guests/count:
     get:
-      description: Count by Distinct Attributes of Authorized Guest
+      description: Count authorized guest records for a site, optionally grouped by
+        the `distinct` field and filtered by time range. Use `countOrgGuestAuthorizations`
+        (`GET /api/v1/orgs/{org_id}/guests/count`) to count authorized guest records
+        across the organization.
       operationId: countSiteGuestAuthorizations
       parameters:
       - description: 'Field used to group this count response. enum: `auth_method`,
@@ -29802,7 +29813,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/guests/search:
     get:
-      description: Search Authorized Guest
+      description: Search authorized guest records for a site with filters for WLAN,
+        SSID, authentication method, and time range. Use `searchOrgGuestAuthorization`
+        (`GET /api/v1/orgs/{org_id}/guests/search`) to search authorized guest records
+        across the organization.
       operationId: searchSiteGuestAuthorization
       parameters:
       - description: Filter results by WLAN identifier
@@ -31612,7 +31626,8 @@ paths:
       - Sites Map Stacks
   /api/v1/sites/{site_id}/mxedges:
     get:
-      description: Get List of Site Mist Edges
+      description: List Mist Edges for a site. Use `listOrgMxEdges` (`GET /api/v1/orgs/{org_id}/mxedges`)
+        to retrieve Mist Edges across the organization.
       operationId: listSiteMxEdges
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -31686,7 +31701,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/mxedges/events/search:
     get:
-      description: Search Site Mist Edge Events
+      description: Search Mist Edge events for a site with filters for Mist Edge,
+        Mist Edge cluster, event type, service, component, and time range. Use `searchOrgMistEdgeEvents`
+        (`GET /api/v1/orgs/{org_id}/mxedges/events/search`) to search Mist Edge events
+        across the organization.
       operationId: searchSiteMistEdgeEvents
       parameters:
       - description: Filter results by Mist Edge identifier
@@ -32577,7 +32595,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/otherdevices:
     get:
-      description: Get List of Site other devices (3rd party devices)
+      description: List third-party devices in a site, such as devices discovered
+        or tracked outside the managed Mist device inventory. Use `listOrgOtherDevices`
+        (`GET /api/v1/orgs/{org_id}/otherdevices`) to retrieve third-party devices
+        across the organization.
       operationId: listSiteOtherDevices
       parameters:
       - description: Filter results by vendor
@@ -32627,7 +32648,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/otherdevices/events/count:
     get:
-      description: Count by Distinct Attributes of Site OtherDevices Events
+      description: Count third-party device events for a site, optionally grouped
+        by the `distinct` field and filtered by event type and time range. Use `countOrgOtherDeviceEvents`
+        (`GET /api/v1/orgs/{org_id}/otherdevices/events/count`) to count third-party
+        device events across the organization.
       operationId: countSiteOtherDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `mac`, `site_id`,
@@ -32661,7 +32685,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/otherdevices/events/search:
     get:
-      description: Search Site OtherDevices Events
+      description: Search third-party device events for a site with filters for device
+        identifiers, model, vendor, event type, and time range. Use `searchOrgOtherDeviceEvents`
+        (`GET /api/v1/orgs/{org_id}/otherdevices/events/search`) to search third-party
+        device events across the organization.
       operationId: searchSiteOtherDeviceEvents
       parameters:
       - description: Filter results by MAC address
@@ -35949,7 +35976,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/assets:
     get:
-      description: Get List of Site Assets Stats
+      description: List asset statistics for a site over the requested time range.
+        Use `listOrgAssetsStats` (`GET /api/v1/orgs/{org_id}/stats/assets`) to retrieve
+        asset statistics across the organization.
       operationId: listSiteAssetsStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -36008,7 +36037,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/assets/search:
     get:
-      description: Assets Search
+      description: Search asset statistics for a site with filters for asset identifiers,
+        device, map, beacon, AP, RSSI, and time range. Use `searchOrgAssets` (`GET
+        /api/v1/orgs/{org_id}/stats/assets/search`) to search asset statistics across
+        the organization.
       operationId: searchSiteAssets
       parameters:
       - description: Filter results by MAC address
@@ -36192,7 +36224,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/bgp_peers/count:
     get:
-      description: Count by Distinct Attributes of BGP Stats
+      description: Count BGP peer statistics for a site, optionally grouped by the
+        `distinct` field and filtered by peer state. Use `countOrgBgpStats` (`GET
+        /api/v1/orgs/{org_id}/stats/bgp_peers/count`) to count BGP peer statistics
+        across the organization.
       operationId: countSiteBgpStats
       parameters:
       - description: Filter peer results by state
@@ -36230,7 +36265,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/bgp_peers/search:
     get:
-      description: Search BGP Stats
+      description: Search BGP peer statistics for a site with filters for device,
+        neighbor, VRF, and time range. Use `searchOrgBgpStats` (`GET /api/v1/orgs/{org_id}/stats/bgp_peers/search`)
+        to search BGP peer statistics across the organization.
       operationId: searchSiteBgpStats
       parameters:
       - description: Filter results by MAC address
@@ -36577,7 +36614,10 @@ paths:
     - $ref: '#/components/parameters/client_mac'
   /api/v1/sites/{site_id}/stats/devices:
     get:
-      description: Get List of Site Devices Stats
+      description: List device statistics for a site, including high-level status
+        and performance fields over the requested time range. Use `listOrgDevicesStats`
+        (`GET /api/v1/orgs/{org_id}/stats/devices`) to retrieve device statistics
+        across the organization.
       operationId: listSiteDevicesStats
       parameters:
       - description: Filter results by type
@@ -37050,7 +37090,9 @@ paths:
     - $ref: '#/components/parameters/map_id'
   /api/v1/sites/{site_id}/stats/mxedges:
     get:
-      description: Get List of Site MxEdges Stats
+      description: List Mist Edge statistics for a site over the requested time range.
+        Use `listOrgMxEdgesStats` (`GET /api/v1/orgs/{org_id}/stats/mxedges`) to
+        retrieve Mist Edge statistics across the organization.
       operationId: listSiteMxEdgesStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -37105,7 +37147,10 @@ paths:
     - $ref: '#/components/parameters/mxedge_id'
   /api/v1/sites/{site_id}/stats/ospf_peers/count:
     get:
-      description: Count by Distinct Attributes of OSPF peers stats
+      description: Count OSPF peer statistics for a site, optionally grouped by the
+        `distinct` field and filtered by time range. Use `countOrgOspfStats` (`GET
+        /api/v1/orgs/{org_id}/stats/ospf_peers/count`) to count OSPF peer statistics
+        across the organization.
       operationId: countSiteOspfStats
       parameters:
       - description: 'Field used to group this count response. enum: `site_id`, `org_id`,
@@ -37139,7 +37184,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/ospf_peers/search:
     get:
-      description: Search OSPF Neighbor Stats
+      description: Search OSPF peer statistics for a site with filters for device,
+        VRF, peer IP, and time range. Use `searchOrgOspfStats` (`GET /api/v1/orgs/{org_id}/stats/ospf_peers/search`)
+        to search OSPF peer statistics across the organization.
       operationId: searchSiteOspfStats
       parameters:
       - description: Filter results by MAC address
@@ -37182,7 +37229,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/ports/count:
     get:
-      description: Count by Distinct Attributes of Switch/Gateway Ports
+      description: Count switch and gateway port statistics for a site, optionally
+        grouped by the `distinct` field and filtered by port, neighbor, PoE, STP,
+        traffic, and time attributes. Use `countOrgSwOrGwPorts` (`GET /api/v1/orgs/{org_id}/stats/ports/count`)
+        to count switch and gateway port statistics across the organization.
       operationId: countSiteSwOrGwPorts
       parameters:
       - description: 'Field used to group this count response. enum: `full_duplex`,
@@ -37391,15 +37441,15 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/stats/ports/search:
     get:
-      description: 'Search Switch / Gateway Ports Stats for a specific site.
+      description: 'Search switch and gateway port statistics for a site.
 
-        Returns a list of switch/gateway ports stats that match the search criteria.
+        Returns ports that match the search criteria, including current or most recent
+        port status and statistics within the hour.
 
 
-        The response provide current/last port status and statistics within the hour.
-
-        Traffic information (Tx/Rx) are cumulative counters since the last device
-        reboot.'
+        Traffic information (Tx/Rx) is reported as cumulative counters since the last
+        device reboot. Use `searchOrgSwOrGwPorts` (`GET /api/v1/orgs/{org_id}/stats/ports/search`)
+        to search switch and gateway port statistics across the organization.'
       operationId: searchSiteSwOrGwPorts
       parameters:
       - description: 'Type of device. enum: `switch`, `gateway`, `all`'
@@ -38312,7 +38362,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/wan_client/events/count:
     get:
-      description: Count by Distinct Attributes of Site WAN Client-Events
+      description: Count WAN client events for a site, optionally grouped by the `distinct`
+        field and filtered by event type and time range. Use `countOrgWanClientEvents`
+        (`GET /api/v1/orgs/{org_id}/wan_client/events/count`) to count WAN client
+        events across the organization.
       operationId: countSiteWanClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `hostname`, `ip`,
@@ -38346,7 +38399,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/wan_clients/count:
     get:
-      description: Count by Distinct Attributes of Site WAN Clients
+      description: Count WAN clients for a site, optionally grouped by the `distinct`
+        field and filtered by time range. Use `countOrgWanClients` (`GET /api/v1/orgs/{org_id}/wan_clients/count`)
+        to count WAN clients across the organization.
       operationId: countSiteWanClients
       parameters:
       - description: 'Field used to group this count response. enum: `hostname`, `ip`,
@@ -38379,7 +38434,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/wan_clients/events/search:
     get:
-      description: Search Site WAN Client Events
+      description: Search WAN client events for a site with filters for client identity,
+        manufacturer, NAC rule, event type, and time range. Use `searchOrgWanClientEvents`
+        (`GET /api/v1/orgs/{org_id}/wan_clients/events/search`) to search WAN client
+        events across the organization.
       operationId: searchSiteWanClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
@@ -38432,7 +38490,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/wan_clients/search:
     get:
-      description: Search Site WAN Clients
+      description: Search WAN clients for a site with filters for hostname, IP address,
+        source IP, MAC address, manufacturer, network, and time range. Use `searchOrgWanClients`
+        (`GET /api/v1/orgs/{org_id}/wan_clients/search`) to search WAN clients across
+        the organization.
       operationId: searchSiteWanClients
       parameters:
       - $ref: '#/components/parameters/partial_filter_hostname_client'
