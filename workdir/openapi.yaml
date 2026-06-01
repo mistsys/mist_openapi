@@ -781,7 +781,7 @@ tags:
     network infrastructure.
 
 
-    It includes settings such as radius and ntp servers, shared elements like iot
+    It includes settings such as RADIUS and ntp servers, shared elements like iot
     or corporate networks, and port profiles for specific devices.
 
 
@@ -821,7 +821,7 @@ tags:
     via authenticated sso login.
 
 
-    Mist supports three methods of Org PSKs lookup: * local * radius * cloud'
+    Mist supports three methods of Org PSKs lookup: * local * RADIUS * cloud'
   name: Orgs Psks
 - description: 'PSK Self-Service Portals are for
 
@@ -985,7 +985,7 @@ tags:
     one or multiple endpoint MAC addresses, but the use of the User MACs provides
     additional features:
 
-    * possibility to assign specific attributes, like a Name, a Radius Group, a VLAN
+    * possibility to assign specific attributes, like a Name, a RADIUS Group, a VLAN
     ID, ...
 
     * possibility to assign one or multiple Tags (Labels) to a User MAC
@@ -1247,7 +1247,7 @@ tags:
 
 
     They can be assigned to a specific site and configured to provide tunneling and
-    radius proxy services for the access points (APs) in that site.
+    RADIUS proxy services for the access points (APs) in that site.
 
 
     These Mist Edges allow for the extension of user vlans from the corporate network
@@ -12817,7 +12817,7 @@ paths:
         name: idp_username
         schema:
           type: string
-      - description: Radius attributes returned by NAC to NAS derive
+      - description: RADIUS attributes returned by NAC to NAS derive
         in: query
         name: resp_attrs
         schema:
@@ -12872,7 +12872,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific VLAN ID in radius requests
+      - description: Vendor specific VLAN ID in RADIUS requests
         in: query
         name: ingress_vlan
         schema:
@@ -12996,7 +12996,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific VLAN ID in radius requests
+      - description: Vendor specific VLAN ID in RADIUS requests
         in: query
         name: ingress_vlan
         schema:
@@ -26625,9 +26625,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
     post:
-      description: "Ping test from the AP to confirm 'reachability' of the Radius\
+      description: "Ping test from the AP to confirm 'reachability' of the RADIUS\
         \ server. \n\nUtilize Juniper EX switch(to which an AP is connected to) radius\
-        \ test capabilities to get details on the Radius Server 'availability'.\n\n\
+        \ test capabilities to get details on the RADIUS Server 'availability'.\n\n\
         \n\n#### Subscribe to Device Command outputs\n\n`WS /api-ws/v1/stream`\n\n\
         \n```json\n{\n    \"subscribe\": \"/sites/{site_id}/devices/{device_id}/cmd\"\
         \n}\n```\n\n#### Example output from ws stream\n\n```json\n{\n  \"event\"\
@@ -31956,7 +31956,7 @@ paths:
         name: idp_username
         schema:
           type: string
-      - description: Radius attributes returned by NAC to NAS Devive
+      - description: RADIUS attributes returned by NAC to NAS Devive
         in: query
         name: resp_attrs
         schema:
@@ -32009,7 +32009,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific VLAN ID in radius requests
+      - description: Vendor specific VLAN ID in RADIUS requests
         in: query
         name: ingress_vlan
         schema:
@@ -32133,7 +32133,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific VLAN ID in radius requests
+      - description: Vendor specific VLAN ID in RADIUS requests
         in: query
         name: ingress_vlan
         schema:
@@ -72267,7 +72267,7 @@ components:
         $ref: '#/components/schemas/device_other'
       type: array
     device_search_radius_filter_status:
-      description: 'Status of the device search radius filter. enum: `up`, `down`,
+      description: 'Status of the device search RADIUS filter. enum: `up`, `down`,
         `unreachable`'
       enum:
       - up
@@ -78433,7 +78433,7 @@ components:
           - string
           - 'null'
         server_reject_network:
-          description: Only if `port_auth`==`dot1x` when radius server reject / fails
+          description: Only if `port_auth`==`dot1x` when RADIUS server reject / fails
           type:
           - string
           - 'null'
@@ -80763,7 +80763,7 @@ components:
       type: array
     mxcluster_radsec_server_selection:
       default: ordered
-      description: 'When ordered, Mist Edge will prefer and go back to the first radius
+      description: 'When ordered, Mist Edge will prefer and go back to the first RADIUS
         server if possible. enum: `ordered`, `unordered`'
       enum:
       - ordered
@@ -86824,7 +86824,7 @@ components:
         minimum: 1
         type: integer
       - type: string
-      description: Radius Auth Port, value from 1 to 65535, default is 1813
+      description: RADIUS Auth Port, value from 1 to 65535, default is 1813
     radius_acct_server:
       additionalProperties: false
       description: RADIUS accounting server settings
@@ -86876,7 +86876,7 @@ components:
         minimum: 1
         type: integer
       - type: string
-      description: Radius Auth Port, value from 1 to 65535, default is 1812
+      description: RADIUS Auth Port, value from 1 to 65535, default is 1812
     radius_auth_server:
       additionalProperties: false
       description: RADIUS authentication server settings
@@ -86932,7 +86932,7 @@ components:
         minimum: 1
         type: integer
       - type: string
-      description: Radius CoA Port, value from 1 to 65535, default is 3799
+      description: RADIUS CoA Port, value from 1 to 65535, default is 3799
     radius_config:
       additionalProperties: false
       description: Junos RADIUS authentication and accounting configuration
@@ -86941,7 +86941,7 @@ components:
           default: 0
           description: How frequently should interim accounting be reported, 60-65535.
             default is 0 (use one specified in Access-Accept request from RADIUS Server).
-            Very frequent messages can affect the performance of the radius server,
+            Very frequent messages can affect the performance of the RADIUS server,
             600 and up is recommended when enabled
           maximum: 65535
           minimum: 0
@@ -87467,7 +87467,7 @@ components:
       - fine
       type: string
     resp_attrs:
-      description: List of Radius AVP returned by the Authentication Server
+      description: List of RADIUS AVP returned by the Authentication Server
       examples:
       - - Tunnel-Type=VLAN
         - Tunnel-Medium-Type=IEEE-802
@@ -99210,7 +99210,7 @@ components:
           format: uuid
           type: string
         operator_name:
-          description: Operator name as Radius attribute while proxying
+          description: Operator name as RADIUS attribute while proxying
           type: string
         proxy_hosts:
           $ref: '#/components/schemas/sso_mxedge_proxy_proxy_hosts'
@@ -100014,13 +100014,13 @@ components:
       description: Circular uncertainty area for an AP auto placement result
       properties:
         radius:
-          description: The radius representing placement uncertainty, measured in
+          description: The RADIUS representing placement uncertainty, measured in
             pixels
           examples:
           - 2.1
           type: number
         radius_m:
-          description: The radius representing placement uncertainty, measured in
+          description: The RADIUS representing placement uncertainty, measured in
             meters
           type: number
         x:
@@ -106660,7 +106660,7 @@ components:
           - string
           - 'null'
         server_reject_network:
-          description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. When radius
+          description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. When RADIUS
             server reject / fails
           type:
           - string
@@ -106977,7 +106977,7 @@ components:
           default: 0
           description: How frequently should interim accounting be reported, 60-65535.
             default is 0 (use one specified in Access-Accept request from RADIUS Server).
-            Very frequent messages can affect the performance of the radius server,
+            Very frequent messages can affect the performance of the RADIUS server,
             600 and up is recommended when enabled
           maximum: 65535
           minimum: 0
@@ -106993,11 +106993,11 @@ components:
           description: RADIUS authentication servers used by this switch configuration
         auth_servers_retries:
           default: 3
-          description: Radius auth session retries
+          description: RADIUS auth session retries
           type: integer
         auth_servers_timeout:
           default: 5
-          description: Radius auth session timeout
+          description: RADIUS auth session timeout
           type: integer
         coa_enabled:
           default: false
@@ -114817,7 +114817,7 @@ components:
           default: 0
           description: How frequently should interim accounting be reported, 60-65535.
             default is 0 (use one specified in Access-Accept request from RADIUS Server).
-            Very frequent messages can affect the performance of the radius server,
+            Very frequent messages can affect the performance of the RADIUS server,
             600 and up is recommended when enabled
           examples:
           - 0
@@ -114888,7 +114888,7 @@ components:
           - 'null'
         auth_servers_retries:
           default: 2
-          description: "Radius auth session retries. Following fast timers are set\
+          description: "RADIUS auth session retries. Following fast timers are set\
             \ if \"fast_dot1x_timers\" knob is enabled. \u2018retries\u2019 are set\
             \ to value of auth_servers_retries. \u2018max-requests\u2019 is also set\
             \ when setting auth_servers_retries and is set to default value to 3."
@@ -114897,7 +114897,7 @@ components:
           type: integer
         auth_servers_timeout:
           default: 5
-          description: "Radius auth session timeout. Following fast timers are set\
+          description: "RADIUS auth session timeout. Following fast timers are set\
             \ if \"fast_dot1x_timers\" knob is enabled. \u2018quite-period\u2019 \
             \ and \u2018transmit-period\u2019 are set to half the value of auth_servers_timeout.\
             \ \u2018supplicant-timeout\u2019 is also set when setting auth_servers_timeout\
@@ -115832,7 +115832,7 @@ components:
       - 'null'
     wlan_dynamic_psk:
       additionalProperties: false
-      description: "For dynamic PSK where we get per_user PSK from Radius. dynamic_psk\
+      description: "For dynamic PSK where we get per_user PSK from RADIUS. dynamic_psk\
         \ allows PSK to be selected at runtime depending on context (wlan/site/user/...)\
         \ thus following configurations are assumed (currently)\n  * PSK will come\
         \ from RADIUS server\n  * AP sends client MAC as username and password (i.e.\
@@ -116063,7 +116063,7 @@ components:
           default: 0
           description: How frequently should interim accounting be reported, 60-65535.
             default is 0 (use one specified in Access-Accept request from Server).
-            Very frequent messages can affect the performance of the radius server,
+            Very frequent messages can affect the performance of the RADIUS server,
             600 and up is recommended when enabled.
           examples:
           - 60
@@ -116072,7 +116072,7 @@ components:
           type: integer
         auth_servers_retries:
           default: 2
-          description: Radius auth session retries. Following fast timers are set
+          description: RADIUS auth session retries. Following fast timers are set
             if `fast_dot1x_timers` knob is enabled. "retries" are set to value of
             `auth_servers_timeout`. "max-requests" is also set when setting `auth_servers_retries`
             is set to default value to 3.
@@ -116083,7 +116083,7 @@ components:
           type: integer
         auth_servers_timeout:
           default: 5
-          description: Radius auth session timeout. Following fast timers are set
+          description: RADIUS auth session timeout. Following fast timers are set
             if `fast_dot1x_timers` knob is enabled. "quite-period" and "transmit-period"
             are set to half the value of `auth_servers_timeout`. "supplicant-timeout"
             is also set when setting `auth_servers_timeout` is set to default value
