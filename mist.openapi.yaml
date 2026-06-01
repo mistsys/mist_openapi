@@ -3012,8 +3012,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/token'
     post:
-      description: '**Note**: another call to ```GET /api/v1/self``` is required to
-        see the new set of privileges'
+      description: Accept an administrator invite using the invite verification token
+        from the invite email. This public endpoint does not require authentication.
+        After a successful verification, call [Get Self](/#operations/getSelf) to
+        refresh the authenticated admin profile and retrieve the newly granted privileges.
       operationId: verifyAdminInvite
       responses:
         '200':
@@ -3028,6 +3030,7 @@ paths:
           $ref: '#/components/responses/InviteVerifyNotFound'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: verifyAdminInvite
       tags:
       - Admins
@@ -22967,9 +22970,11 @@ paths:
       - Orgs WxTunnels
   /api/v1/recover:
     post:
-      description: 'Recover Password
-
-        An email will also be sent to the user with a link to https://manage.mist.com/verify/recover?token=:token'
+      description: Start password recovery for an administrator account. This public
+        endpoint does not require authentication. When the request is accepted, Mist
+        sends an email containing a recovery link such as `https://manage.mist.com/verify/recover?token=:token`.
+        If CAPTCHA is required, include the CAPTCHA response token and provider flavor
+        in the request body.
       operationId: recoverPassword
       requestBody:
         content:
@@ -22996,6 +23001,7 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: recoverPassword
       tags:
       - Admins Recover Password
@@ -23003,10 +23009,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/token'
     post:
-      description: 'Verify Recover Password
-
-        With correct verification, the user will be authenticated. UI can then prompt
-        for new password'
+      description: Verify a password recovery token from the recovery email. This
+        public endpoint does not require authentication. When the token is valid,
+        the user is authenticated for the recovery flow so the client can prompt for
+        and submit a new password.
       operationId: verifyRecoverPassword
       responses:
         '200':
@@ -23021,28 +23027,24 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: verifyRecoverPassword
       tags:
       - Admins Recover Password
   /api/v1/register:
     post:
-      description: "Register a new admin and his/her org\nAn email will also be sent\
-        \ to the user with a link to `/verify/register?token={token}`\n\n### reCAPTCHA\n\
-        Google reCAPTCHA is the choice to prevent bot registration\n\nIt needs this\
-        \ \n\n&lt;script src='https://www.google.com/recaptcha/api.js' &gt;&lt;/script&gt;\n\
-        \nand this &lt;div&gt; in the desired place\n```html\n<div class=\"g-recaptcha\"\
-        \ data_sitekey=\"6LdAewsTAAAAAE25XKQhPEQ2FiMTft-WrZXQ5NUd\"></div>\n```\n\n\
-        Use GET /api/v1/register/recaptcha to read the current setting.\nResponse\
-        \ example:\n```json\n{    \n  \"flavor\": \"google\",\n  \"required\": true,\
-        \    \n  \"sitekey\": \"6LdAewsTAAAAAE25XKQhPEQ2FiMTft-WrZXQ5NUd\"\n}\n```\n\
-        \n### hCaptcha\nAlternative to reCAPTCHA is hCaptcha to prevent bot registration\n\
-        \nIt needs this script\n\n&lt;script src='https://js.hcaptcha.com/1/api.js'\
-        \ async defer &gt;&lt;/script&gt;\n\nand this &lt;div&gt; in the desired place\n\
-        ```html\n<div class=\"h-recaptcha\" data_sitekey=\"6LdAewsTAAAAAE25XKQhPEQ2FiMTft-WrZXQ5NUd\"\
-        ></div>\n```\n\nUse GET /api/v1/register/recaptcha?recaptcha_flavor=hcaptcha\
-        \ to read the current setting for hcaptcha with reply.\nResponse example:\n\
-        ```json\n{\n  \"flavor\": \"hcaptcha\",\n  \"required\": true,\n  \"sitekey\"\
-        : \"6LdAewsTAAAAAE25XKQhPEQ2FiMTft-WrZXQ5NUd\"\n}\"\n```"
+      description: 'Register a new administrator account and initial organization.
+        This public endpoint does not require authentication. Mist sends a verification
+        email containing a link such as `/verify/register?token={token}`; use [Verify
+        Registration](/#operations/verifyRegistration) to complete registration with
+        that token.
+
+
+        Use [Get Registration Information](/#operations/getAdminRegistrationInfo)
+        before submitting this request to determine whether CAPTCHA is required, which
+        CAPTCHA provider to render, and which public site key to use. If CAPTCHA is
+        required, include the provider response token in `recaptcha` and the provider
+        name in `recaptcha_flavor`.'
       operationId: registerNewAdmin
       requestBody:
         content:
@@ -23084,12 +23086,16 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: registerNewAdmin
       tags:
       - Admins
   /api/v1/register/recaptcha:
     get:
-      description: Get Registration Information
+      description: Return the public CAPTCHA settings required for administrator registration.
+        This public endpoint does not require authentication. Use the returned `flavor`,
+        `required`, and `sitekey` values to render the correct CAPTCHA challenge before
+        calling [Register New Admin](/#operations/registerNewAdmin).
       operationId: getAdminRegistrationInfo
       parameters:
       - description: 'Filter login settings by reCAPTCHA flavor. enum: `google`, `hcaptcha`'
@@ -23110,6 +23116,7 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: getAdminRegistrationInfo
       tags:
       - Admins
@@ -23117,7 +23124,11 @@ paths:
     parameters:
     - $ref: '#/components/parameters/token'
     post:
-      description: Verify registration
+      description: Verify a new administrator registration using the token from the
+        registration email. This public endpoint does not require authentication.
+        A successful verification creates a login session and may also apply a pending
+        invitation; the response indicates whether an invitation could not be applied
+        automatically.
       operationId: verifyRegistration
       responses:
         '200':
@@ -23132,6 +23143,7 @@ paths:
           $ref: '#/components/responses/VerifyRegisterTokenInvalid'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security: []
       summary: verifyRegistration
       tags:
       - Admins
