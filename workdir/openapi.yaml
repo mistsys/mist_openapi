@@ -11530,7 +11530,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create MxEdge
+      description: Create Org Mist Edge
       operationId: createOrgMxEdge
       requestBody:
         content:
@@ -11594,7 +11594,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Assign Org MxEdge to Site
+      description: Assign Org Mist Edge to Site
       operationId: assignOrgMxEdgeToSite
       requestBody:
         content:
