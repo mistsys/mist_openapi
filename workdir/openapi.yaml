@@ -3832,6 +3832,9 @@ paths:
       operationId: countMspAuditLogs
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `admin_id`, `admin_name`, `message`,
+          `org_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/msp_logs_count_distinct'
@@ -4626,6 +4629,8 @@ paths:
       operationId: countMspsMarvisActions
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `org_id`, `status`
         name: distinct
         schema:
           $ref: '#/components/schemas/msp_marvis_suggestions_count_distinct'
@@ -4680,6 +4685,8 @@ paths:
       operationId: countMspTickets
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `org_id`, `status`, `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/msp_tickets_count_distinct'
@@ -5154,6 +5161,8 @@ paths:
       operationId: countOrgAlarms
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response
         name: distinct
         schema:
           examples:
@@ -6877,6 +6886,9 @@ paths:
       operationId: countOrgWirelessClients
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `device`, `hostname`, `ip`, `mac`,
+          `model`, `os`, `ssid`, `vlan`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_clients_count_distinct'
@@ -6953,6 +6965,9 @@ paths:
       operationId: countOrgWirelessClientEvents
       parameters:
       - example: type
+        description: >-
+          Field used to group this count response. enum: `band`, `channel`, `proto`, `ssid`,
+          `type`, `wlan_id`
         in: query
         name: distinct
         schema:
@@ -7203,6 +7218,9 @@ paths:
       operationId: countOrgWirelessClientsSessions
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `device`, `hostname`, `ip`,
+          `model`, `os`, `ssid`, `vlan`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_client_sessions_count_distinct'
@@ -7985,6 +8003,10 @@ paths:
       operationId: countOrgDevices
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `hostname`, `ip`, `lldp_mgmt_addr`,
+          `lldp_port_id`, `lldp_system_desc`, `lldp_system_name`, `mac`, `model`, `mxedge_id`,
+          `mxtunnel_status`, `site_id`, `version`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_devices_count_distinct'
@@ -8107,6 +8129,9 @@ paths:
       operationId: countOrgDeviceEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `apfw`, `model`, `org_id`,
+          `site_id`, `text`, `timestamp`, `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_devices_events_count_distinct'
@@ -8264,6 +8289,8 @@ paths:
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `name`, `site_id`, `version`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_devices_last_configs_count_distinct'
@@ -8775,6 +8802,8 @@ paths:
       operationId: countOrgSystemEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response
         name: distinct
         schema:
           examples:
@@ -9433,6 +9462,8 @@ paths:
       operationId: countOrgGuestAuthorizations
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `auth_method`, `company`, `ssid`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_guests_count_distinct'
@@ -9975,6 +10006,9 @@ paths:
       operationId: countOrgInventory
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `model`, `status`, `site_id`, `sku`,
+          `version`
         name: distinct
         schema:
           $ref: '#/components/schemas/inventory_count_distinct'
@@ -11027,6 +11061,9 @@ paths:
       operationId: countOrgAuditLogs
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `admin_id`, `admin_name`, `message`,
+          `site_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_logs_count_distinct'
@@ -11664,6 +11701,9 @@ paths:
       operationId: countOrgMxEdges
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `distro`, `model`, `mxcluster_id`,
+          `site_id`, `tunterm_version`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_mxedge_count_distinct'
@@ -11735,6 +11775,9 @@ paths:
       operationId: countOrgSiteMxEdgeEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mxcluster_id`, `mxedge_id`, `package`,
+          `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_mxedge_events_count_distinct'
@@ -12726,6 +12769,9 @@ paths:
       operationId: countOrgNacClientEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `auth_type`, `dryrun_nacrule_id`,
+          `mac`, `nacrule_id`, `nas_vendor`, `ssid`, `type`, `username`, `vlan`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_nac_client_events_count_distinct'
@@ -14642,6 +14688,8 @@ paths:
       operationId: countOrgOtherDeviceEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `site_id`, `type`, `vendor`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_otherdevices_events_count_distinct'
@@ -15085,6 +15133,9 @@ paths:
       operationId: countOrgPskPortalLogs
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `admin_id`, `admin_name`, `psk_id`,
+          `psk_name`, `pskportal_id`, `user_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_psk_portal_logs_count_distinct'
@@ -18240,6 +18291,11 @@ paths:
       operationId: countOrgSites
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `analytic_enabled`, `app_waking`,
+          `asset_enabled`, `auto_upgrade_enabled`, `auto_upgrade_version`, `country_code`,
+          `honeypot_enabled`, `id`, `locate_unconnected`, `mesh_enabled`, `name`,
+          `remote_syslog_enabled`, `rogue_enabled`, `rtsa_enabled`, `vna_enabled`, `wifi_enabled`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_sites_count_distinct'
@@ -19215,6 +19271,9 @@ paths:
       operationId: countOrgAssetsByDistanceField
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ibeacon_major`, `ibeacon_minor`,
+          `ibeacon_uuid`, `mac`, `map_id`, `site_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_asset_count_distinct'
@@ -19334,6 +19393,8 @@ paths:
           - established
           type: string
       - in: query
+        description: >-
+          Field used to group this count response
         name: distinct
         schema:
           examples:
@@ -19552,6 +19613,9 @@ paths:
       operationId: countOrgOspfStats
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `site_id`, `org_id`, `mac`, `peer_ip`,
+          `port_id`, `state`, `vrf_name`
         name: distinct
         schema:
           $ref: '#/components/schemas/ospf_peer_stats_count_distinct'
@@ -19652,6 +19716,10 @@ paths:
       operationId: countOrgSwOrGwPorts
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `full_duplex`, `mac`, `neighbor_mac`,
+          `neighbor_port_desc`, `neighbor_system_name`, `poe_disabled`, `poe_mode`, `poe_on`,
+          `port_id`, `port_mac`, `speed`, `up`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_ports_count_distinct'
@@ -20235,6 +20303,8 @@ paths:
       operationId: countOrgPeerPathStats
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response
         name: distinct
         schema:
           type: string
@@ -20556,6 +20626,8 @@ paths:
       operationId: countOrgTickets
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `status`, `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_tickets_count_distinct'
@@ -21377,6 +21449,8 @@ paths:
       operationId: countOrgWanClientEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `hostname`, `ip`, `mac`, `mfg`, `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_wan_clients_events_count_distinct'
@@ -21409,6 +21483,8 @@ paths:
       operationId: countOrgWanClients
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `hostname`, `ip`, `mac`, `mfg`, `network`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_wan_clients_count_distinct'
@@ -21695,6 +21771,9 @@ paths:
         schema:
           $ref: '#/components/schemas/webhook_delivery_topic'
       - in: query
+        description: >-
+          Field used to group this count response. enum: `status`, `status_code`, `topic`,
+          `webhook_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/webhook_delivery_distinct'
@@ -21816,6 +21895,9 @@ paths:
       operationId: countOrgWiredClients
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `device_mac`, `mac`, `port_id`,
+          `site_id`, `type`, `vlan`
         name: distinct
         schema:
           $ref: '#/components/schemas/org_wired_clients_count_distinct'
@@ -24686,6 +24768,9 @@ paths:
       operationId: countSiteWirelessClients
       parameters:
       - example: hostname
+        description: >-
+          Field used to group this count response. enum: `ap`, `device`, `hostname`, `ip`,
+          `model`, `os`, `ssid`, `vlan`
         in: query
         name: distinct
         schema:
@@ -24780,6 +24865,9 @@ paths:
       operationId: countSiteWirelessClientEvents
       parameters:
       - example: type
+        description: >-
+          Field used to group this count response. enum: `band`, `channel`, `proto`, `ssid`,
+          `type`, `wlan_id`
         in: query
         name: distinct
         schema:
@@ -24999,6 +25087,9 @@ paths:
       operationId: countSiteWirelessClientSessions
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `client_family`,
+          `client_manufacture`, `client_model`, `client_os`, `mac`, `ssid`, `wlan_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_client_sessions_count_distinct'
@@ -25424,6 +25515,8 @@ paths:
       operationId: countSiteDeviceConfigHistory
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response
         name: distinct
         schema:
           type: string
@@ -25498,6 +25591,10 @@ paths:
       operationId: countSiteDevices
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `hostname`, `lldp_mgmt_addr`,
+          `lldp_port_id`, `lldp_system_desc`, `lldp_system_name`, `map_id`, `model`, `mxedge_id`,
+          `mxtunnel_status`, `version`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_devices_count_distinct'
@@ -25574,6 +25671,8 @@ paths:
       operationId: countSiteDeviceEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `model`, `type`, `type_code`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_device_events_count_distinct'
@@ -25771,6 +25870,8 @@ paths:
       operationId: countSiteDeviceLastConfig
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `name`, `site_id`, `version`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_device_last_config_count_distinct'
@@ -29207,6 +29308,8 @@ paths:
       operationId: countSiteSystemEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_system_events_count_distinct'
@@ -29477,6 +29580,8 @@ paths:
       operationId: countSiteGuestAuthorizations
       parameters:
       - example: auth_method
+        description: >-
+          Field used to group this count response. enum: `auth_method`, `company`, `ssid`
         in: query
         name: distinct
         schema:
@@ -29836,6 +29941,8 @@ paths:
       operationId: countSiteClientFingerprints
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `family`, `model`, `os`, `os_type`
         name: distinct
         schema:
           $ref: '#/components/schemas/fingerprints_count_distinct'
@@ -31374,6 +31481,9 @@ paths:
       operationId: countSiteMxEdgeEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mxcluster_id`, `mxedge_id`, `package`,
+          `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_mxedge_events_count_distinct'
@@ -31865,6 +31975,9 @@ paths:
       operationId: countSiteNacClientEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `auth_type`, `dryrun_nacrule_id`,
+          `mac`, `nacrule_id`, `nas_vendor`, `ssid`, `type`, `username`, `vlan`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_nac_client_events_count_distinct'
@@ -32348,6 +32461,8 @@ paths:
       operationId: countSiteOtherDeviceEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `site_id`, `type`, `vendor`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_other_device_events_count_distinct'
@@ -33115,6 +33230,8 @@ paths:
       operationId: countSiteRogueEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `ap`, `bssid`, `ssid`, `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_rogue_events_count_distinct'
@@ -33687,6 +33804,9 @@ paths:
       operationId: countSiteServicePathEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `model`, `policy`, `port_id`,
+          `site_id`, `type`, `vpn_name`, `vpn_path`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_service_events_count_distinct'
@@ -34468,6 +34588,9 @@ paths:
       operationId: countSiteSkyatpEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `device_mac`, `mac`, `threat_level`,
+          `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_sky_atp_events_count_distinct'
@@ -35684,6 +35807,10 @@ paths:
       operationId: countSiteAssets
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `by`, `device_name`,
+          `eddystone_uid_instance`, `eddystone_uid_namespace`, `eddystone_url`, `ibeacon_major`,
+          `ibeacon_minor`, `ibeacon_uuid`, `mac`, `map_id`, `name`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_assets_count_distinct'
@@ -35888,6 +36015,8 @@ paths:
           - established
           type: string
       - in: query
+        description: >-
+          Field used to group this count response
         name: distinct
         schema:
           examples:
@@ -36010,6 +36139,8 @@ paths:
       operationId: countSiteCalls
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`
         name: distinct
         schema:
           $ref: '#/components/schemas/count_site_calls_distinct'
@@ -36415,6 +36546,9 @@ paths:
       operationId: countSiteDiscoveredSwitches
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mgmt_addr`, `model`, `system_name`,
+          `version`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_discovered_switches_count_distinct'
@@ -36775,6 +36909,9 @@ paths:
       operationId: countSiteOspfStats
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `site_id`, `org_id`, `mac`, `peer_ip`,
+          `port_id`, `state`, `vrf_name`
         name: distinct
         schema:
           $ref: '#/components/schemas/ospf_peer_stats_count_distinct'
@@ -36847,6 +36984,10 @@ paths:
       operationId: countSiteSwOrGwPorts
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `full_duplex`, `mac`, `neighbor_mac`,
+          `neighbor_port_desc`, `neighbor_system_name`, `poe_disabled`, `poe_mode`, `poe_on`,
+          `port_id`, `port_mac`, `speed`, `up`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_ports_count_distinct'
@@ -37959,6 +38100,8 @@ paths:
       operationId: countSiteWanClientEvents
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `hostname`, `ip`, `mac`, `mfg`, `type`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_wan_client_events_distinct'
@@ -37991,6 +38134,8 @@ paths:
       operationId: countSiteWanClients
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `hostname`, `ip`, `mac`, `mfg`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_wan_clients_count_distinct'
@@ -38171,6 +38316,9 @@ paths:
           - primary
           type: string
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `path_type`, `peer_mac`,
+          `peer_port_id`, `policy`, `port_id`, `tenant`
         name: distinct
         schema:
           $ref: '#/components/schemas/wan_usages_count_distinct'
@@ -38492,6 +38640,9 @@ paths:
         schema:
           $ref: '#/components/schemas/webhook_delivery_topic'
       - in: query
+        description: >-
+          Field used to group this count response. enum: `status`, `status_code`, `topic`,
+          `webhook_id`
         name: distinct
         schema:
           $ref: '#/components/schemas/webhook_delivery_distinct'
@@ -38613,6 +38764,8 @@ paths:
       operationId: countSiteWiredClients
       parameters:
       - in: query
+        description: >-
+          Field used to group this count response. enum: `mac`, `port_id`, `vlan`
         name: distinct
         schema:
           $ref: '#/components/schemas/site_wired_clients_count_distinct'
@@ -40339,6 +40492,8 @@ paths:
       operationId: countSiteZoneSessions
       parameters:
       - example: scope_id
+        description: >-
+          Field used to group this count response. enum: `scope`, `scope_id`, `user`, `user_type`
         in: query
         name: distinct
         schema:
