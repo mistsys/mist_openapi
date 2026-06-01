@@ -24865,7 +24865,10 @@ paths:
       - Sites Auto Map Assignment
   /api/v1/sites/{site_id}/clients/count:
     get:
-      description: Count by Distinct Attributes of Clients
+      description: Count wireless clients for a site, optionally grouped by the `distinct`
+        field and filtered by client attributes and time range. Use `countOrgWirelessClients`
+        (`GET /api/v1/orgs/{org_id}/clients/count`) to count wireless clients across
+        the organization.
       operationId: countSiteWirelessClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `device`,
@@ -24968,7 +24971,10 @@ paths:
       - Utilities Wi-Fi
   /api/v1/sites/{site_id}/clients/events/count:
     get:
-      description: Count by Distinct Attributes of Client-Events
+      description: Count wireless client events for a site, optionally grouped by
+        the `distinct` field and filtered by event attributes and time range. Use
+        `countOrgWirelessClientEvents` (`GET /api/v1/orgs/{org_id}/clients/events/count`)
+        to count wireless client events across the organization.
       operationId: countSiteWirelessClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `band`, `channel`,
@@ -25025,7 +25031,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/clients/events/search:
     get:
-      description: Get Site Clients Events
+      description: Search wireless client events for a site with filters for event
+        type, AP, SSID, WLAN, radio band, and time range. Use `searchOrgWirelessClientEvents`
+        (`GET /api/v1/orgs/{org_id}/clients/events/search`) to search wireless client
+        events across the organization.
       operationId: searchSiteWirelessClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
@@ -25082,9 +25091,12 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/clients/search:
     get:
-      description: "Search Wireless Clients\n\n**NOTE**: fuzzy logic can be used with\
-        \ \u2018*\u2019, supported filters: mac, hostname, device, os, model. E.g.\
-        \ /clients/search?device=Mac*&hostname=jerry"
+      description: Search wireless clients connected to a site with filters for client
+        identity, AP, SSID, VLAN, radio band, and time range. Fuzzy matching with
+        `*` is supported on `mac`, `hostname`, `device`, `os`, and `model`, for example
+        `/clients/search?device=Mac*&hostname=jerry`. Use `searchOrgWirelessClients`
+        (`GET /api/v1/orgs/{org_id}/clients/search`) to search wireless clients across
+        the organization.
       operationId: searchSiteWirelessClients
       parameters:
       - description: Filter results by AP MAC address
@@ -25189,7 +25201,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/clients/sessions/count:
     get:
-      description: Count by Distinct Attributes of Client Sessions
+      description: Count wireless client sessions for a site, optionally grouped by
+        the `distinct` field and filtered by AP, SSID, WLAN, client attributes, and
+        time range. Use `countOrgWirelessClientsSessions` (`GET /api/v1/orgs/{org_id}/clients/sessions/count`)
+        to count wireless client sessions across the organization.
       operationId: countSiteWirelessClientSessions
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `client_family`,
@@ -25258,7 +25273,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/clients/sessions/search:
     get:
-      description: Search Client Sessions
+      description: Search wireless client sessions for a site with filters for AP,
+        SSID, WLAN, client attributes, PSK, and time range. Use `searchOrgWirelessClientSessions`
+        (`GET /api/v1/orgs/{org_id}/clients/sessions/search`) to search wireless client
+        sessions across the organization.
       operationId: searchSiteWirelessClientSessions
       parameters:
       - description: Filter results by AP MAC address
@@ -25515,7 +25533,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/devices:
     get:
-      description: Get list of devices on the site.
+      description: List devices in a site. Use `listOrgDevices` (`GET /api/v1/orgs/{org_id}/devices`)
+        to retrieve devices across the organization, or `searchOrgDevices` when filters
+        are needed.
       operationId: listSiteDevices
       parameters:
       - description: Filter results by type
@@ -25696,8 +25716,9 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/devices/count:
     get:
-      description: Counts the number of entries in ap events history for distinct
-        field with given filters
+      description: Count devices for a site, optionally grouped by the `distinct`
+        field and filtered by device inventory attributes and time range. Use `countOrgDevices`
+        (`GET /api/v1/orgs/{org_id}/devices/count`) to count devices across the organization.
       operationId: countSiteDevices
       parameters:
       - description: 'Field used to group this count response. enum: `hostname`, `lldp_mgmt_addr`,
@@ -25786,8 +25807,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/devices/events/count:
     get:
-      description: Counts the number of entries in ap events history for distinct
-        field with given filters
+      description: Count device events for a site, optionally grouped by the `distinct`
+        field and filtered by event attributes and time range. Use `countOrgDeviceEvents`
+        (`GET /api/v1/orgs/{org_id}/devices/events/count`) to count device events
+        across the organization.
       operationId: countSiteDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `mac`, `model`,
@@ -25831,7 +25854,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/devices/events/search:
     get:
-      description: Search Devices Events
+      description: Search device events for a site with filters for MAC address, model,
+        event type, message text, and time range. Use `searchOrgDeviceEvents` (`GET
+        /api/v1/orgs/{org_id}/devices/events/search`) to search device events across
+        the organization.
       operationId: searchSiteDeviceEvents
       parameters:
       - description: Filter results by MAC address
@@ -26214,7 +26240,10 @@ paths:
       - Utilities LAN
   /api/v1/sites/{site_id}/devices/search:
     get:
-      description: Search Device
+      description: Search devices in a site with filters for device type,
+        identifiers, model, software version, radio settings, LLDP details, and other
+        inventory attributes. Use `searchOrgDevices` (`GET /api/v1/orgs/{org_id}/devices/search`)
+        to search devices across the organization.
       operationId: searchSiteDevices
       parameters:
       - description: When `type`==`ap`, Channel of band_24
@@ -31992,7 +32021,10 @@ paths:
       - Utilities MxEdge
   /api/v1/sites/{site_id}/nac_clients/count:
     get:
-      description: Count by Distinct Attributes of NAC Clients
+      description: Count NAC clients for a site, optionally grouped by the `distinct`
+        field and filtered by authentication, identity, endpoint, network, and time
+        attributes. Use `countOrgNacClients` (`GET /api/v1/orgs/{org_id}/nac_clients/count`)
+        to count NAC clients across the organization.
       operationId: countSiteNacClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
@@ -32101,7 +32133,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/nac_clients/events/count:
     get:
-      description: Count by Distinct Attributes of NAC Client-Events
+      description: Count NAC client events for a site, optionally grouped by the `distinct`
+        field and filtered by event type and time range. Use `countOrgNacClientEvents`
+        (`GET /api/v1/orgs/{org_id}/nac_clients/events/count`) to count NAC client
+        events across the organization.
       operationId: countSiteNacClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
@@ -32136,7 +32171,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/nac_clients/events/search:
     get:
-      description: Search NAC Client Events
+      description: Search NAC client events for a site with filters for authentication,
+        NAC rule, identity provider, RADIUS, network, endpoint, and time attributes.
+        Use `searchOrgNacClientEvents` (`GET /api/v1/orgs/{org_id}/nac_clients/events/search`)
+        to search NAC client events across the organization.
       operationId: searchSiteNacClientEvents
       parameters:
       - $ref: '#/components/parameters/nac_event_type'
@@ -32279,7 +32317,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/nac_clients/search:
     get:
-      description: Search Site NAC Clients
+      description: Search NAC clients for a site with filters for authentication,
+        endpoint posture, identity, network, NAC rule, and time attributes. Use `searchOrgNacClients`
+        (`GET /api/v1/orgs/{org_id}/nac_clients/search`) to search NAC clients across
+        the organization.
       operationId: searchSiteNacClients
       parameters:
       - description: MAC address of the AP the client is/was connected to
@@ -38941,7 +38982,10 @@ paths:
       - Sites Webhooks
   /api/v1/sites/{site_id}/wired_clients/count:
     get:
-      description: Count by Distinct Attributes of Clients
+      description: Count wired clients for a site, optionally grouped by the `distinct`
+        field and filtered by MAC address, switch port, VLAN, and time range. Use
+        `countOrgWiredClients` (`GET /api/v1/orgs/{org_id}/wired_clients/count`) to
+        count wired clients across the organization.
       operationId: countSiteWiredClients
       parameters:
       - description: 'Field used to group this count response. enum: `mac`, `port_id`,
@@ -39002,7 +39046,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/wired_clients/search:
     get:
-      description: Search Wired Clients
+      description: Search wired clients for a site with filters for device MAC address,
+        client MAC address, IP address, switch port, VLAN, manufacturer, DHCP attributes,
+        NAC rule, and time range. Use `searchOrgWiredClients` (`GET /api/v1/orgs/{org_id}/wired_clients/search`)
+        to search wired clients across the organization.
       operationId: searchSiteWiredClients
       parameters:
       - description: Filter results by device MAC address
