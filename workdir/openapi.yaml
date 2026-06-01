@@ -1993,7 +1993,7 @@ paths:
       - Constants Definitions
   /api/v1/const/mxedge_events:
     get:
-      description: Get List of available MX Edge Events
+      description: Get List of available Mist Edge Events
       operationId: listMxEdgeEventsDefinitions
       responses:
         '200':
@@ -11358,7 +11358,7 @@ paths:
       - Orgs NAC IDP
   /api/v1/orgs/{org_id}/mxclusters:
     get:
-      description: Get List of Org MxEdge Clusters
+      description: Get List of Org Mist Edge Clusters
       operationId: listOrgMxEdgeClusters
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -11440,7 +11440,7 @@ paths:
       tags:
       - Orgs MxClusters
     get:
-      description: Get Org MxEdge Cluster Details
+      description: Get Org Mist Edge Cluster Details
       operationId: getOrgMxEdgeCluster
       responses:
         '200':
@@ -11462,7 +11462,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxcluster_id'
     put:
-      description: Update Org MxEdge Cluster
+      description: Update Org Mist Edge Cluster
       operationId: updateOrgMxEdgeCluster
       requestBody:
         content:
@@ -68667,7 +68667,7 @@ components:
             $ref: '#/components/schemas/capture_mxedge_mxedges'
           description: Dict of Mist Edges to capture on, property key is the Mist
             Edge ID. Property value is a dict of interfaces to capture for the given
-            mxedge (e.g. port1, kni0, lacp0, ipsec, drop, oobm)
+            Mist Edge (e.g. port1, kni0, lacp0, ipsec, drop, oobm)
           type: object
         num_packets:
           default: 1024
@@ -80819,7 +80819,7 @@ components:
       type: array
     mxcluster_tunterm_hosts_selection:
       default: shuffle
-      description: "Ordering of tunterm_hosts for mxedge within the same mxcluster.\
+      description: "Ordering of tunterm_hosts for Mist Edge within the same mxcluster.\
         \ enum:\n  * `shuffle`: the ordering of tunterm_hosts is randomized by the\
         \ device''s MAC\n  * `shuffle-by-site`: shuffle by site_id+tunnel_id (so when\
         \ client connects to a specific Tunnel, it will go to the same (order of)\
@@ -81607,8 +81607,8 @@ components:
           type: boolean
       type: object
     mxedge_upgrade_multi_mxedge_ids:
-      description: List of mxedge IDs to upgrade. If not specified, it means all the
-        org mxedges.
+      description: List of Mist Edge IDs to upgrade. If not specified, it means all the
+        org Mist Edges.
       items:
         format: uuid
         type: string
@@ -84864,7 +84864,7 @@ components:
             geo IP of the originating site. For strict GDPR compliance NAC POD failover
             would only happen between the PODs located within the EU environment,
             and no authentication would take place outside of EU. This is an org setting
-            that is applicable to WLANs, switch templates, mxedge clusters that have
+            that is applicable to WLANs, switch templates, Mist Edge clusters that have
             mist_nac enabled
           type: boolean
         fingerprinting:
@@ -87041,8 +87041,8 @@ components:
       - type: string
       description: RadSec idle timeout in seconds. Default is 60
     radsec_mxcluster_ids:
-      description: To use Org mxedges when this WLAN does not use mxtunnel, specify
-        their mxcluster_ids. Org mxedge(s) identified by mxcluster_ids
+      description: To use Org Mist Edges when this WLAN does not use mxtunnel, specify
+        their mxcluster_ids. Org Mist Edge(s) identified by mxcluster_ids
       items:
         examples:
         - 572586b7-f97b-a22b-526c-8b97a3f609c4
@@ -87052,7 +87052,7 @@ components:
     radsec_proxy_hosts:
       description: Default is site.mxedge.radsec.proxy_hosts which must be a superset
         of all `wlans[*].radsec.proxy_hosts`. When `radsec.proxy_hosts` are not used,
-        tunnel peers (org or site mxedges) are used irrespective of `use_site_mxedge`
+        tunnel peers (org or site Mist Edges) are used irrespective of `use_site_mxedge`
       items:
         examples:
         - mxedge1.local
@@ -90829,7 +90829,7 @@ components:
           $ref: '#/components/schemas/pcap_type'
           description: Packet capture type for the current session
         tzsp_host:
-          description: Required if `format`==`tzsp`. Remote host accessible to mxedges
+          description: Required if `format`==`tzsp`. Remote host accessible to Mist Edges
             over the network for receiving the captured packets.
           examples:
           - 192.168.1.2
