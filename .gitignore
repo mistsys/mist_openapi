@@ -7,3 +7,10 @@ converter.js
 tmp/
 workdir/*.bak
 venv/
+workdir/description_issues_report.txt
+workdir/description_issues.json
+workdir/description_coherence_report.json
+workdir/description_coherence_report.md
+workdir/duplicate_schemas_report.json
+workdir/duplicate_schemas_report.md
+workdir/find_duplicate_schemas.py
