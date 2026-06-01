@@ -808,7 +808,7 @@ tags:
 
 
     It provides a simple and comprehensive way to onboard client devices without relying
-    on client mac addresses.
+    on client MAC addresses.
 
 
     Each psk has its own key name, which can be used for user-level accountability,
@@ -1268,7 +1268,7 @@ tags:
 
 
     It provides a simple and comprehensive way to onboard client devices without relying
-    on client mac addresses.
+    on client MAC addresses.
 
 
     Each psk has its own key name, which can be used for user-level accountability,
@@ -15387,7 +15387,7 @@ paths:
 
 
         When `usage`==`macs`, corresponding "macs" field will hold a list consisting
-        of client mac addresses (["xx:xx:xx:xx:xx",...]) or mac patterns(["xx:xx:*","xx*",...])
+        of client MAC addresses (["xx:xx:xx:xx:xx",...]) or mac patterns(["xx:xx:*","xx*",...])
         or both (["xx:xx:xx:xx:xx:xx", "xx:*", ...]). This list is capped at 5000'
       operationId: createOrgPsk
       parameters:
@@ -19719,7 +19719,7 @@ paths:
           examples:
           - ge-2/0/39
           type: string
-      - description: Interface mac address
+      - description: Interface MAC address
         in: query
         name: port_mac
         schema:
@@ -19951,7 +19951,7 @@ paths:
         name: port_id
         schema:
           type: string
-      - description: Interface mac address
+      - description: Interface MAC address
         in: query
         name: port_mac
         schema:
@@ -21063,7 +21063,7 @@ paths:
                   - label2
                   - label3
                   mac: 721b638445ef
-                  notes: mac address refers to Canon printers
+                  notes: MAC address refers to Canon printers
                 - labels:
                   - label4
                   mac: 721b638445ee
@@ -32732,7 +32732,7 @@ paths:
 
 
         When `usage`==`macs`, corresponding "macs" field will hold a list consisting
-        of client mac addresses (["xx:xx:xx:xx:xx",...]) or mac patterns(["xx:xx:*","xx*",...])
+        of client MAC addresses (["xx:xx:xx:xx:xx",...]) or mac patterns(["xx:xx:*","xx*",...])
         or both (["xx:xx:xx:xx:xx:xx", "xx:*", ...]). This list is capped at 5000'
       operationId: createSitePsk
       requestBody:
@@ -36914,7 +36914,7 @@ paths:
           examples:
           - ge-2/0/39
           type: string
-      - description: Interface mac address
+      - description: Interface MAC address
         in: query
         name: port_mac
         schema:
@@ -37138,7 +37138,7 @@ paths:
         name: port_id
         schema:
           type: string
-      - description: Interface mac address
+      - description: Interface MAC address
         in: query
         name: port_mac
         schema:
@@ -54765,7 +54765,7 @@ components:
         - flor1
         - bld4
         mac: 921b638445cd
-        notes: mac address refers to Canon printers
+        notes: MAC address refers to Canon printers
         vlan: '30'
     UserMacImportExample:
       value:
@@ -54784,7 +54784,7 @@ components:
         - flor1
         - bld4
         mac: 921b638445cd
-        notes: mac address refers to Canon printers
+        notes: MAC address refers to Canon printers
         vlan: '30'
     UserMacsUpdateExample:
       value:
@@ -78389,7 +78389,7 @@ components:
             to use
         mac_limit:
           default: 0
-          description: Max number of mac addresses, default is 0 for unlimited, otherwise
+          description: Max number of MAC addresses, default is 0 for unlimited, otherwise
             range is 1 or higher, with upper bound constrained by platform
           minimum: 0
           type: integer
@@ -102130,7 +102130,7 @@ components:
           - string
           - 'null'
         mac_count:
-          description: Number of mac addresses in the forwarding table
+          description: Number of MAC addresses in the forwarding table
           readOnly: true
           type: integer
         mac_limit:
@@ -104270,7 +104270,7 @@ components:
           readOnly: true
           type: string
         mac_count:
-          description: Number of mac addresses in the forwarding table
+          description: Number of MAC addresses in the forwarding table
           readOnly: true
           type: integer
         mac_limit:
@@ -105807,7 +105807,7 @@ components:
       additionalProperties:
         $ref: '#/components/schemas/dhcpd_config_fixed_binding'
       description: If `type`==`server` or `type6`==`server`. Property key is the MAC
-        Address. Format is `[0-9a-f]{12}` (e.g. "5684dae9ac8b")
+        address. Format is `[0-9a-f]{12}` (e.g. "5684dae9ac8b")
       examples:
       - 5684dae9ac8b:
           ip: 192.168.70.35
@@ -106832,7 +106832,7 @@ components:
         minimum: 0
         type: integer
       - type: string
-      description: Only if `mode`!=`dynamic`, max number of mac addresses, default
+      description: Only if `mode`!=`dynamic`, max number of MAC addresses, default
         is 0 for unlimited, otherwise range is 1 to 16383 (upper bound constrained
         by platform)
     switch_port_usage_mac_limit_overwrite:
@@ -106842,7 +106842,7 @@ components:
         minimum: 0
         type: integer
       - type: string
-      description: Max number of mac addresses, default is 0 for unlimited, otherwise
+      description: Max number of MAC addresses, default is 0 for unlimited, otherwise
         range is 1 to 16383 (upper bound constrained by platform)
     switch_port_usage_mode:
       description: '`mode`==`dynamic` must only be used if the port usage name is
@@ -110094,7 +110094,7 @@ components:
         notes:
           description: Free-form notes about this user MAC entry
           examples:
-          - mac address refers to Canon printers
+          - MAC address refers to Canon printers
           type: string
         radius_group:
           description: RADIUS group associated with this user MAC entry
