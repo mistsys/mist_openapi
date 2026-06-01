@@ -1787,8 +1787,8 @@ paths:
       description: Generate Default Gateway Config
       operationId: getGatewayDefaultConfig
       parameters:
-      - description: Model the default gateway config is intended (as the default
-          LAN/WAN port can differ)
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         required: true
@@ -2236,21 +2236,24 @@ paths:
       description: Get List of recently claimed devices
       operationId: listInstallerListOfRecentlyClaimedDevices
       parameters:
-      - description: Device Model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           examples:
           - AP43
           type: string
-      - description: Site Name
+      - description: >-
+          Filter results by site name
         in: query
         name: site_name
         schema:
           examples:
           - SJ1
           type: string
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -3115,7 +3118,8 @@ paths:
       description: Obtain Authorization URL for Login
       operationId: getOauth2AuthorizationUrlForLogin
       parameters:
-      - description: Callback URL
+      - description: >-
+          Callback URL used after completing the OAuth login flow
         in: query
         name: forward
         schema:
@@ -3779,7 +3783,8 @@ paths:
       description: Get list of change logs for the current MSP
       operationId: listMspAuditLogs
       parameters:
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -3793,7 +3798,8 @@ paths:
           examples:
           - jsnow
           type: string
-      - description: Message
+      - description: >-
+          Filter results by message text
         in: query
         name: message
         schema:
@@ -4074,7 +4080,8 @@ paths:
       operationId: searchMspOrgs
       parameters:
       - $ref: '#/components/parameters/name'
-      - description: Org id
+      - description: >-
+          Filter results by organization identifier
         in: query
         name: org_id
         schema:
@@ -4203,7 +4210,8 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/msp_search_type'
-      - description: Search string
+      - description: >-
+          Filter results by search string
         in: query
         name: q
         required: true
@@ -5200,7 +5208,8 @@ paths:
       description: Search Org Alarms
       operationId: searchOrgAlarms
       parameters:
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -5210,9 +5219,9 @@ paths:
           type: string
       - $ref: '#/components/parameters/alarm_group'
       - $ref: '#/components/parameters/alarm_severity'
-      - description: Type of the alarm. Accepts multiple values separated by comma.
-          Use [List Alarm Definitions](/#operations/listAlarmDefinitions) to get the
-          list of possible alarm types.
+      - description: >-
+          Filter alarms by alarm type. Accepts multiple values separated by comma. Use [List Alarm
+          Definitions](/#operations/listAlarmDefinitions) to get the list of possible alarm types
         in: query
         name: type
         schema:
@@ -5438,8 +5447,7 @@ paths:
       operationId: listOrgSuppressedAlarms
       parameters:
       - description: >-
-          Scope filter for alarm template suppressions; if omitted, both organization and site
-          scopes are returned. enum: `org`, `site`
+          Filter results by scope. enum: `org`, `site`
         in: query
         name: scope
         schema:
@@ -6864,7 +6872,8 @@ paths:
       description: Get Processing Status for Async Claim
       operationId: GetOrgLicenseAsyncClaimStatus
       parameters:
-      - description: Request license details
+      - description: >-
+          Whether to include license details in the claim status response
         in: query
         name: detail
         schema:
@@ -6903,42 +6912,48 @@ paths:
           $ref: '#/components/schemas/org_clients_count_distinct'
       - $ref: '#/components/parameters/partial_filter_mac_client'
       - $ref: '#/components/parameters/partial_filter_hostname_client'
-      - description: Device type, e.g. Mac, Nvidia, iPhone
+      - description: >-
+          Filter results by device type
         in: query
         name: device
         schema:
           examples:
           - iPhone
           type: string
-      - description: OS, e.g. Sierra, Yosemite, Windows 10
+      - description: >-
+          Filter results by operating system
         in: query
         name: os
         schema:
           examples:
           - Windows 10
           type: string
-      - description: Model, e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           examples:
           - iPhone 8
           type: string
-      - description: AP mac where the client has connected to
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: VLAN
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
           examples:
           - '10'
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
@@ -6982,29 +6997,34 @@ paths:
         schema:
           $ref: '#/components/schemas/site_client_events_count_distinct'
       - $ref: '#/components/parameters/client_event_type'
-      - description: For assoc/disassoc events
+      - description: >-
+          Reason code filter for association and disassociation events
         in: query
         name: reason_code
         schema:
           type: integer
-      - description: SSID Name
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           type: string
       - $ref: '#/components/parameters/dot11_proto'
       - $ref: '#/components/parameters/dot11_band'
-      - description: WLAN ID
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
           type: string
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -7040,21 +7060,24 @@ paths:
       operationId: searchOrgWirelessClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
-      - description: For assoc/disassoc events
+      - description: >-
+          Reason code filter for association and disassociation events
         in: query
         name: reason_code
         schema:
           examples:
           - 7
           type: integer
-      - description: SSID Name
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           examples:
           - MySSID
           type: string
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -7071,7 +7094,8 @@ paths:
           $ref: '#/components/schemas/client_key_mgmt'
       - $ref: '#/components/parameters/dot11_proto'
       - $ref: '#/components/parameters/dot11_band'
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
@@ -7079,7 +7103,8 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: Nacrule_id
+      - description: >-
+          Filter results by NAC rule identifier
         in: query
         name: nacrule_id
         schema:
@@ -7116,7 +7141,8 @@ paths:
       description: Search Org Wireless Clients
       operationId: searchOrgWirelessClients
       parameters:
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -7124,7 +7150,8 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: AP MAC address where the client has connected to
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -7175,7 +7202,8 @@ paths:
           examples:
           - MyPPSK
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
@@ -7193,7 +7221,8 @@ paths:
           - 5c5b530
           type: string
       - $ref: '#/components/parameters/partial_search_username'
-      - description: VLAN
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -7236,7 +7265,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_client_sessions_count_distinct'
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -7251,14 +7281,16 @@ paths:
           examples:
           - iPhone
           type: string
-      - description: E.g. "Apple"
+      - description: >-
+          Filter results by client manufacturer, e.g. "Apple"
         in: query
         name: client_manufacture
         schema:
           examples:
           - Apple
           type: string
-      - description: E.g. "8+", "XS"
+      - description: >-
+          Filter results by client model, e.g. "8+", "XS"
         in: query
         name: client_model
         schema:
@@ -7272,14 +7304,16 @@ paths:
           examples:
           - Windows 10
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           examples:
           - MySSID
           type: string
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
@@ -7314,7 +7348,8 @@ paths:
       description: Search Org Wireless Clients Sessions
       operationId: searchOrgWirelessClientSessions
       parameters:
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -7329,21 +7364,24 @@ paths:
           examples:
           - iPhone
           type: string
-      - description: E.g. "Apple"
+      - description: >-
+          Filter results by client manufacturer, e.g. "Apple"
         in: query
         name: client_manufacture
         schema:
           examples:
           - Apple
           type: string
-      - description: E.g. "8+", "XS"
+      - description: >-
+          Filter results by client model, e.g. "8+", "XS"
         in: query
         name: client_model
         schema:
           examples:
           - iPhone 8
           type: string
-      - description: Username
+      - description: >-
+          Filter results by client username
         in: query
         name: client_username
         schema:
@@ -7357,14 +7395,16 @@ paths:
           examples:
           - Windows 10
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           examples:
           - MySSID
           type: string
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
@@ -7373,7 +7413,8 @@ paths:
           format: uuid
           type: string
       - $ref: '#/components/parameters/psk_id_query'
-      - description: PSK Name
+      - description: >-
+          Filter results by PSK name
         in: query
         name: psk_name
         schema:
@@ -8031,7 +8072,8 @@ paths:
           examples:
           - my-hostname
           type: string
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -8039,7 +8081,8 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
@@ -8055,14 +8098,16 @@ paths:
           examples:
           - 'true'
           type: string
-      - description: AP mac
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: Version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -8083,21 +8128,24 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: LLDP system name
+      - description: >-
+          Filter results by LLDP system name
         in: query
         name: lldp_system_name
         schema:
           examples:
           - my-lldp-system
           type: string
-      - description: LLDP system description
+      - description: >-
+          Filter results by LLDP system description
         in: query
         name: lldp_system_desc
         schema:
           examples:
           - my-lldp-system-description
           type: string
-      - description: LLDP port id
+      - description: >-
+          Filter results by LLDP port identifier
         in: query
         name: lldp_port_id
         schema:
@@ -8151,7 +8199,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_devices_events_count_distinct'
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -8159,35 +8208,40 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: AP mac
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: AP Firmware
+      - description: >-
+          Filter results by AP firmware version
         in: query
         name: apfw
         schema:
           examples:
           - 10.0.0
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           examples:
           - AP43
           type: string
-      - description: Event message
+      - description: >-
+          Filter results by event message text
         in: query
         name: text
         schema:
           examples:
           - Device connected
           type: string
-      - description: Event time
+      - description: >-
+          Filter results by event timestamp
         in: query
         name: timestamp
         schema:
@@ -8222,14 +8276,16 @@ paths:
       description: Search Org Devices Events
       operationId: searchOrgDeviceEvents
       parameters:
-      - description: Device mac
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
@@ -8242,14 +8298,16 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
-      - description: Event message
+      - description: >-
+          Filter results by event message text
         in: query
         name: text
         schema:
           examples:
           - Device connected
           type: string
-      - description: Event time
+      - description: >-
+          Filter results by event timestamp
         in: query
         name: timestamp
         schema:
@@ -8347,21 +8405,24 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/last_config_device_type'
-      - description: Device MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: Devices Name
+      - description: >-
+          Filter results by name
         in: query
         name: name
         schema:
           examples:
           - My AP
           type: string
-      - description: Device Version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -8577,7 +8638,8 @@ paths:
         name: radius_stats
         schema:
           type: string
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -8596,7 +8658,8 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/device_type'
-      - description: Version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -8792,7 +8855,8 @@ paths:
         - ORG_CA_CERT_REGENERATED'
       operationId: searchOrgEvents
       parameters:
-      - description: Event type
+      - description: >-
+          Filter results by type
         in: query
         name: type
         schema:
@@ -9520,21 +9584,24 @@ paths:
       description: Search Authorized Guest
       operationId: searchOrgGuestAuthorization
       parameters:
-      - description: WLAN ID
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
           examples:
           - 00000000-0000-0000-0000-000000000000
           type: string
-      - description: Authentication Method
+      - description: >-
+          Filter results by authentication method
         in: query
         name: auth_method
         schema:
           examples:
           - psk
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
@@ -9874,14 +9941,16 @@ paths:
         \ MAC address to generate the device ID.\n"
       operationId: getOrgInventory
       parameters:
-      - description: Device serial
+      - description: >-
+          Filter results by device serial number
         in: query
         name: serial
         schema:
           examples:
           - FXLH2015150025
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
@@ -9894,7 +9963,8 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type'
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -10048,17 +10118,20 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           type: string
-      - description: Software version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -10244,7 +10317,8 @@ paths:
           format: uuid
           type: string
       - $ref: '#/components/parameters/partial_filter_serial'
-      - description: true / false
+      - description: >-
+          Filter inventory results by whether the device is the Virtual Chassis master
         in: query
         name: master
         schema:
@@ -10406,21 +10480,24 @@ paths:
       parameters:
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           examples:
           - AP43
           type: string
-      - description: Device serial
+      - description: >-
+          Filter results by device serial number
         in: query
         name: serial
         schema:
           examples:
           - FXLH2015150025
           type: string
-      - description: Device MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -10618,21 +10695,24 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           examples:
           - AP43
           type: string
-      - description: Device serial
+      - description: >-
+          Filter results by device serial number
         in: query
         name: serial
         schema:
           examples:
           - FXLH2015150025
           type: string
-      - description: SKU name of the device
+      - description: >-
+          Filter results by SKU
         in: query
         name: sku
         schema:
@@ -10877,12 +10957,14 @@ paths:
         models, versions, and text fields.
       operationId: searchOrgJsiSirt
       parameters:
-      - description: Severity of the SIRT (Critical, High, Medium, Low)
+      - description: >-
+          Filter results by severity
         in: query
         name: severity
         schema:
           type: string
-      - description: JSA number
+      - description: >-
+          Filter results by identifier
         in: query
         name: id
         schema:
@@ -10909,7 +10991,8 @@ paths:
         name: published_before
         schema:
           type: string
-      - description: Models affected by the SIRT
+      - description: >-
+          Filter results by models
         in: query
         name: models
         schema:
@@ -11054,7 +11137,8 @@ paths:
       description: Get List of change logs for the current Org
       operationId: listOrgAuditLogsLegacy
       parameters:
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -11069,7 +11153,8 @@ paths:
           examples:
           - John Doe
           type: string
-      - description: Message
+      - description: >-
+          Filter results by message text
         in: query
         name: message
         schema:
@@ -11179,7 +11264,8 @@ paths:
       description: Get a list of change logs for the current Org
       operationId: listOrgAuditLogs
       parameters:
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -11194,7 +11280,8 @@ paths:
           examples:
           - John Doe
           type: string
-      - description: Message
+      - description: >-
+          Filter results by message text
         in: query
         name: message
         schema:
@@ -11769,7 +11856,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_mxedge_count_distinct'
-      - description: Mist edge id
+      - description: >-
+          Filter results by Mist Edge identifier
         in: query
         name: mxedge_id
         schema:
@@ -11784,7 +11872,8 @@ paths:
         name: mxcluster_id
         schema:
           type: string
-      - description: Model name
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
@@ -11794,12 +11883,14 @@ paths:
         name: distro
         schema:
           type: string
-      - description: tunterm version
+      - description: >-
+          Filter results by tunnel termination version
         in: query
         name: tunterm_version
         schema:
           type: string
-      - description: Sort options, -prefix represents DESC order, default is -last_seen
+      - description: >-
+          Filter results by sort
         in: query
         name: sort
         schema:
@@ -11843,7 +11934,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_mxedge_events_count_distinct'
-      - description: Mist edge id
+      - description: >-
+          Filter results by Mist Edge identifier
         in: query
         name: mxedge_id
         schema:
@@ -11854,7 +11946,8 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/mxedge_event_type'
-      - description: Service running on mist edge(mxagent, tunterm etc)
+      - description: >-
+          Filter results by service name
         in: query
         name: service
         schema:
@@ -11886,7 +11979,8 @@ paths:
       description: Search Org Mist Edge Events
       operationId: searchOrgMistEdgeEvents
       parameters:
-      - description: Mist edge id
+      - description: >-
+          Filter results by Mist Edge identifier
         in: query
         name: mxedge_id
         schema:
@@ -11897,12 +11991,14 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/mxedge_event_type'
-      - description: Service running on mist edge(mxagent, tunterm etc)
+      - description: >-
+          Filter results by service name
         in: query
         name: service
         schema:
           type: string
-      - description: Component like PS1, PS2
+      - description: >-
+          Filter results by component name
         in: query
         name: component
         schema:
@@ -11937,7 +12033,8 @@ paths:
       operationId: searchOrgMxEdges
       parameters:
       - $ref: '#/components/parameters/partial_filter_hostname_device'
-      - description: Mist edge id
+      - description: >-
+          Filter results by Mist Edge identifier
         in: query
         name: mxedge_id
         schema:
@@ -11953,7 +12050,8 @@ paths:
         name: distro
         schema:
           type: string
-      - description: tunterm version
+      - description: >-
+          Filter results by tunnel termination version
         in: query
         name: tunterm_version
         schema:
@@ -12200,7 +12298,8 @@ paths:
         name: channel
         schema:
           $ref: '#/components/schemas/get_org_mxedge_upgrade_info_channel'
-      - description: Distro code name (e.g. `buster`, `bullseye`, ...)
+      - description: >-
+          Filter results by distro
         in: query
         name: distro
         schema:
@@ -12743,7 +12842,8 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: VLAN ID
+      - description: >-
+          Filter results by last VLAN ID
         in: query
         name: last_vlan_id
         schema:
@@ -12758,7 +12858,8 @@ paths:
         name: idp_id
         schema:
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by last SSID
         in: query
         name: last_ssid
         schema:
@@ -12783,7 +12884,8 @@ paths:
         name: last_ap
         schema:
           type: string
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -12900,7 +13002,8 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: Vlan name or ID assigned to the client
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -12910,7 +13013,8 @@ paths:
         name: nas_vendor
         schema:
           type: string
-      - description: BSSID
+      - description: >-
+          Filter results by BSSID
         in: query
         name: bssid
         schema:
@@ -12936,32 +13040,38 @@ paths:
         name: resp_attrs
         schema:
           $ref: '#/components/schemas/resp_attrs'
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: Username presented by the client
+      - description: >-
+          Filter results by username
         in: query
         name: username
         schema:
           type: string
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
           type: string
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           type: string
-      - description: AP random macMAC
+      - description: >-
+          Filter results by whether the client is using a randomized MAC address
         in: query
         name: random_mac
         schema:
           type: boolean
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -13124,7 +13234,8 @@ paths:
         name: os
         schema:
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
@@ -13157,12 +13268,14 @@ paths:
         name: usermac_label
         schema:
           $ref: '#/components/schemas/strings'
-      - description: Username presented by the client
+      - description: >-
+          Filter results by username
         in: query
         name: username
         schema:
           type: string
-      - description: Vlan name or ID assigned to the client
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -13656,14 +13769,15 @@ paths:
       operationId: listOrgNacTags
       parameters:
       - description: >-
-          Type of NAC Tag. enum: `egress_vlan_names`, `gbp_tag`, `match`, `radius_attrs`,
+          Filter results by type. enum: `egress_vlan_names`, `gbp_tag`, `match`, `radius_attrs`,
           `radius_group`, `radius_vendor_attrs`, `redirect_nacportal_id`, `session_timeout`,
           `username_attr`, `vlan`
         in: query
         name: type
         schema:
           $ref: '#/components/schemas/nac_tag_type'
-      - description: Name of NAC Tag
+      - description: >-
+          Filter results by name
         in: query
         name: name
         schema:
@@ -14654,8 +14768,8 @@ paths:
         to phone home to Mist.'
       operationId: getOrgJuniperDevicesCommand
       parameters:
-      - description: Site_id would be used for proxy config check of the site and
-          automatic site assignment
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -14805,12 +14919,14 @@ paths:
       description: Search Org OtherDevices Events
       operationId: searchOrgOtherDeviceEvents
       parameters:
-      - description: Site id
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
           type: string
-      - description: MAC
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -14820,12 +14936,14 @@ paths:
         name: device_mac
         schema:
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           type: string
-      - description: Vendor name
+      - description: >-
+          Filter results by vendor
         in: query
         name: vendor
         schema:
@@ -15268,7 +15386,8 @@ paths:
         name: pskportal_id
         schema:
           type: string
-      - description: audit_id
+      - description: >-
+          Filter results by identifier
         in: query
         name: id
         schema:
@@ -15286,7 +15405,8 @@ paths:
         name: admin_id
         schema:
           type: string
-      - description: Name_id used in SSO
+      - description: >-
+          Filter results by name id
         in: query
         name: name_id
         schema:
@@ -17677,7 +17797,8 @@ paths:
       description: Get Issued Client Certificates
       operationId: listOrgIssuedClientCertificates
       parameters:
-      - description: sso_name_id obtained from NAC Portal
+      - description: >-
+          Filter results by sso name id
         in: query
         name: sso_name_id
         schema:
@@ -17687,7 +17808,8 @@ paths:
         name: serial_number
         schema:
           type: string
-      - description: Device ID
+      - description: >-
+          Filter results by device id
         in: query
         name: device_id
         schema:
@@ -18451,7 +18573,8 @@ paths:
         name: auto_upgrade_version
         schema:
           type: string
-      - description: Site country code
+      - description: >-
+          Filter results by country code
         in: query
         name: country_code
         schema:
@@ -18461,7 +18584,8 @@ paths:
         name: honeypot_enabled
         schema:
           type: boolean
-      - description: Site id
+      - description: >-
+          Filter results by identifier
         in: query
         name: id
         schema:
@@ -19634,7 +19758,8 @@ paths:
         name: mac
         schema:
           type: string
-      - description: EVPN Topology ID
+      - description: >-
+          Filter results by evpntopo id
         in: query
         name: evpntopo_id
         schema:
@@ -19887,7 +20012,8 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -19937,14 +20063,16 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Interface name
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           examples:
           - ge-2/0/39
           type: string
-      - description: Interface MAC address
+      - description: >-
+          Filter results by port MAC address
         in: query
         name: port_mac
         schema:
@@ -19959,70 +20087,80 @@ paths:
           examples:
           - 15.4
           type: number
-      - description: Output packets
+      - description: >-
+          Filter results by transmitted packet count
         in: query
         name: tx_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Input packets
+      - description: >-
+          Filter results by received packet count
         in: query
         name: rx_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Input bytes
+      - description: >-
+          Filter results by received byte count
         in: query
         name: rx_bytes
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Output rate
+      - description: >-
+          Filter results by transmit rate
         in: query
         name: tx_bps
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Input rate
+      - description: >-
+          Filter results by receive rate
         in: query
         name: rx_bps
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Multicast output packets
+      - description: >-
+          Filter results by transmitted multicast packet count
         in: query
         name: tx_mcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Broadcast output packets
+      - description: >-
+          Filter results by transmitted broadcast packet count
         in: query
         name: tx_bcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Multicast input packets
+      - description: >-
+          Filter results by received multicast packet count
         in: query
         name: rx_mcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Broadcast input packets
+      - description: >-
+          Filter results by received broadcast packet count
         in: query
         name: rx_bcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Port speed
+      - description: >-
+          Filter results by port speed
         in: query
         name: speed
         schema:
@@ -20057,7 +20195,8 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -20138,7 +20277,8 @@ paths:
           examples:
           - '123456789012345'
           type: string
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -20180,17 +20320,20 @@ paths:
         name: poe_priority
         schema:
           $ref: '#/components/schemas/poe_priority'
-      - description: Interface name
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           type: string
-      - description: Interface MAC address
+      - description: >-
+          Filter results by port MAC address
         in: query
         name: port_mac
         schema:
           type: string
-      - description: Port speed
+      - description: >-
+          Filter results by port speed
         in: query
         name: speed
         schema:
@@ -20367,7 +20510,8 @@ paths:
         '
       operationId: searchOrgTunnelsStats
       parameters:
-      - description: If `type`==`wxtunnel`
+      - description: >-
+          Filter results by mxcluster id when `type`==`wxtunnel`
         in: query
         name: mxcluster_id
         schema:
@@ -20378,67 +20522,80 @@ paths:
         name: site_id
         schema:
           type: string
-      - description: If `type`==`wxtunnel`
+      - description: >-
+          Filter results by wxtunnel id when `type`==`wxtunnel`
         in: query
         name: wxtunnel_id
         schema:
           type: string
-      - description: If `type`==`wxtunnel`
+      - description: >-
+          Filter results by AP MAC address when `type`==`wxtunnel`
         in: query
         name: ap
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by MAC address when `type`==`wan`
         in: query
         name: mac
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by node when `type`==`wan`
         in: query
         name: node
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by peer ip when `type`==`wan`
         in: query
         name: peer_ip
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by peer host when `type`==`wan`
         in: query
         name: peer_host
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by IP address when `type`==`wan`
         in: query
         name: ip
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by tunnel name when `type`==`wan`
         in: query
         name: tunnel_name
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by protocol when `type`==`wan`
         in: query
         name: protocol
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by auth algo when `type`==`wan`
         in: query
         name: auth_algo
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by encrypt algo when `type`==`wan`
         in: query
         name: encrypt_algo
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by ike version when `type`==`wan`
         in: query
         name: ike_version
         schema:
           type: string
-      - description: If `type`==`wan`
+      - description: >-
+          Filter results by up when `type`==`wan`
         in: query
         name: up
         schema:
@@ -21708,7 +21865,8 @@ paths:
       - $ref: '#/components/parameters/partial_filter_hostname_client'
       - $ref: '#/components/parameters/partial_filter_ip_client'
       - $ref: '#/components/parameters/partial_filter_mfg_client'
-      - description: nacrule_id
+      - description: >-
+          Filter results by NAC rule identifier
         in: query
         name: nacrule_id
         schema:
@@ -21742,7 +21900,8 @@ paths:
       description: Search Org WAN Clients
       operationId: searchOrgWanClients
       parameters:
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -21752,21 +21911,24 @@ paths:
           type: string
       - $ref: '#/components/parameters/partial_filter_hostname_client'
       - $ref: '#/components/parameters/partial_filter_ip_client'
-      - description: IP source
+      - description: >-
+          Filter results by source IP address
         in: query
         name: ip_src
         schema:
           examples:
           - dhcp
           type: string
-      - description: Client MAC address.
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: Manufacture
+      - description: >-
+          Filter results by manufacturer
         in: query
         name: mfg
         schema:
@@ -22134,23 +22296,26 @@ paths:
         Definitions]($e/Constants%20Events/listClientEventsDefinitions)'
       operationId: searchOrgWiredClients
       parameters:
-      - description: Authentication state
+      - description: >-
+          Filter results by auth state
         in: query
         name: auth_state
         schema:
           type: string
-      - description: Authentication method
+      - description: >-
+          Filter results by authentication method
         in: query
         name: auth_method
         schema:
           type: string
       - description: >-
-          Source from which the client was learned. enum: `lldp`, `mac`
+          Filter results by client learning source. enum: `lldp`, `mac`
         in: query
         name: source
         schema:
           $ref: '#/components/schemas/client_info_source'
-      - description: Site ID
+      - description: >-
+          Filter results by site identifier
         in: query
         name: site_id
         schema:
@@ -22166,13 +22331,15 @@ paths:
         name: port_id
         schema:
           type: string
-      - description: VLAN
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
           type: integer
       - $ref: '#/components/parameters/ip'
-      - description: Client manufacturer
+      - description: >-
+          Filter results by manufacturer
         in: query
         name: manufacture
         schema:
@@ -22185,22 +22352,26 @@ paths:
         name: text
         schema:
           type: string
-      - description: nacrule_id
+      - description: >-
+          Filter results by NAC rule identifier
         in: query
         name: nacrule_id
         schema:
           type: string
-      - description: DHCP Hostname
+      - description: >-
+          Filter results by DHCP hostname
         in: query
         name: dhcp_hostname
         schema:
           type: string
-      - description: DHCP FQDN
+      - description: >-
+          Filter results by DHCP FQDN
         in: query
         name: dhcp_fqdn
         schema:
           type: string
-      - description: DHCP Client Identifier
+      - description: >-
+          Filter results by DHCP client identifier
         in: query
         name: dhcp_client_identifier
         schema:
@@ -22210,7 +22381,8 @@ paths:
         name: dhcp_vendor_class_identifier
         schema:
           type: string
-      - description: DHCP Request Parameters
+      - description: >-
+          Filter results by DHCP request parameters
         in: query
         name: dhcp_request_params
         schema:
@@ -23467,7 +23639,8 @@ paths:
         all orgs'
       operationId: listSelfAuditLogs
       parameters:
-      - description: Message
+      - description: >-
+          Filter results by message text
         in: query
         name: message
         schema:
@@ -23978,9 +24151,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/alarm_group'
       - $ref: '#/components/parameters/alarm_severity'
-      - description: Type of the alarm. Accepts multiple values separated by comma.
-          Use [List Alarm Definitions](/#operations/listAlarmDefinitions) to get the
-          list of possible alarm types.
+      - description: >-
+          Filter alarms by alarm type. Accepts multiple values separated by comma. Use [List Alarm
+          Definitions](/#operations/listAlarmDefinitions) to get the list of possible alarm types
         in: query
         name: type
         schema:
@@ -25104,24 +25277,28 @@ paths:
         schema:
           $ref: '#/components/schemas/site_client_events_count_distinct'
       - $ref: '#/components/parameters/client_event_type'
-      - description: For assoc/disassoc events
+      - description: >-
+          Reason code filter for association and disassociation events
         in: query
         name: reason_code
         schema:
           type: integer
-      - description: SSID Name
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           type: string
       - $ref: '#/components/parameters/dot11_proto'
       - $ref: '#/components/parameters/dot11_band'
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
@@ -25154,29 +25331,34 @@ paths:
       operationId: searchSiteWirelessClientEvents
       parameters:
       - $ref: '#/components/parameters/client_event_type'
-      - description: For assoc/disassoc events
+      - description: >-
+          Reason code filter for association and disassociation events
         in: query
         name: reason_code
         schema:
           type: integer
-      - description: SSID Name
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           type: string
       - $ref: '#/components/parameters/dot11_proto'
       - $ref: '#/components/parameters/dot11_band'
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
           type: string
-      - description: nacrule_id
+      - description: >-
+          Filter results by NAC rule identifier
         in: query
         name: nacrule_id
         schema:
@@ -25212,7 +25394,8 @@ paths:
         \ /clients/search?device=Mac*&hostname=jerry"
       operationId: searchSiteWirelessClients
       parameters:
-      - description: AP MAC address of the AP where the client has connected to
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -25263,7 +25446,8 @@ paths:
           examples:
           - MyPPSK
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
@@ -25281,7 +25465,8 @@ paths:
           - 5c5b530
           type: string
       - $ref: '#/components/parameters/partial_search_username'
-      - description: VLAN
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -25324,7 +25509,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/site_client_sessions_count_distinct'
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -25335,12 +25521,14 @@ paths:
         name: client_family
         schema:
           type: string
-      - description: E.g. "Apple"
+      - description: >-
+          Filter results by client manufacturer, e.g. "Apple"
         in: query
         name: client_manufacture
         schema:
           type: string
-      - description: E.g. "8+", "XS"
+      - description: >-
+          Filter results by client model, e.g. "8+", "XS"
         in: query
         name: client_model
         schema:
@@ -25350,12 +25538,14 @@ paths:
         name: client_os
         schema:
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
@@ -25387,7 +25577,8 @@ paths:
       description: Search Client Sessions
       operationId: searchSiteWirelessClientSessions
       parameters:
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
@@ -25398,17 +25589,20 @@ paths:
         name: client_family
         schema:
           type: string
-      - description: E.g. "Apple"
+      - description: >-
+          Filter results by client manufacturer, e.g. "Apple"
         in: query
         name: client_manufacture
         schema:
           type: string
-      - description: E.g. "8+", "XS"
+      - description: >-
+          Filter results by client model, e.g. "8+", "XS"
         in: query
         name: client_model
         schema:
           type: string
-      - description: Username
+      - description: >-
+          Filter results by client username
         in: query
         name: client_username
         schema:
@@ -25418,18 +25612,21 @@ paths:
         name: client_os
         schema:
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: WLAN_id
+      - description: >-
+          Filter results by WLAN identifier
         in: query
         name: wlan_id
         schema:
           type: string
       - $ref: '#/components/parameters/psk_id_query'
-      - description: PSK Name
+      - description: >-
+          Filter results by PSK name
         in: query
         name: psk_name
         schema:
@@ -25539,7 +25736,8 @@ paths:
       description: Get the list of events for a specific client
       operationId: getSiteEventsForClient
       parameters:
-      - description: E.g. MARVIS_EVENT_CLIENT_DHCP_STUCK
+      - description: >-
+          Filter results by type, e.g. MARVIS_EVENT_CLIENT_DHCP_STUCK
         in: query
         name: type
         schema:
@@ -25798,7 +25996,8 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - description: Device MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -25981,22 +26180,26 @@ paths:
       description: Search Devices Events
       operationId: searchSiteDeviceEvents
       parameters:
-      - description: Device mac
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           type: string
-      - description: Event message
+      - description: >-
+          Filter results by event message text
         in: query
         name: text
         schema:
           type: string
-      - description: Event time
+      - description: >-
+          Filter results by event timestamp
         in: query
         name: timestamp
         schema:
@@ -26525,7 +26728,8 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/device_type'
-      - description: Version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -30279,7 +30483,8 @@ paths:
         name: client_type
         schema:
           $ref: '#/components/schemas/nac_access_type'
-      - description: Model name of the client device
+      - description: >-
+          Filter results by device model
         example: ex4100-f-12p
         in: query
         name: model
@@ -30303,7 +30508,8 @@ paths:
         name: os_type
         schema:
           type: string
-      - description: MAC address of the client device
+      - description: >-
+          Filter results by MAC address
         example: d420b080516d
         in: query
         name: mac
@@ -30524,14 +30730,16 @@ paths:
       description: Search IoT Endpoints
       operationId: searchSiteIotEndpoints
       parameters:
-      - description: AP MAC address
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap_mac
         schema:
           examples:
           - 5c5b350e0001
           type: string
-      - description: Device MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -30545,7 +30753,8 @@ paths:
           examples:
           - zigbee
           type: string
-      - description: Manufacturer name
+      - description: >-
+          Filter results by manufacturer
         in: query
         name: mfg
         schema:
@@ -30602,7 +30811,8 @@ paths:
       description: Get Beam Coverage Overview
       operationId: getSiteBeamCoverageOverview
       parameters:
-      - description: Map_id (filter by map_id)
+      - description: >-
+          Filter results by map identifier
         example: 00000000-0000-0000-0000-000000000000
         in: query
         name: map_id
@@ -30614,7 +30824,8 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/rf_client_type'
-      - description: Client_type (as filter. optional)
+      - description: >-
+          Filter results by client type
         in: query
         name: client_type
         schema:
@@ -30652,7 +30863,8 @@ paths:
         as it has to re-learn.'
       operationId: getSiteMachineLearningCurrentStat
       parameters:
-      - description: Map_id (as filter, optional)
+      - description: >-
+          Filter results by map identifier
         example: 00000000-0000-0000-0000-000000000000
         in: query
         name: map_id
@@ -31783,7 +31995,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/site_mxedge_events_count_distinct'
-      - description: Mist edge id
+      - description: >-
+          Filter results by Mist Edge identifier
         in: query
         name: mxedge_id
         schema:
@@ -31794,7 +32007,8 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/mxedge_event_type'
-      - description: Service running on mist edge(mxagent, tunterm etc)
+      - description: >-
+          Filter results by service name
         in: query
         name: service
         schema:
@@ -31826,7 +32040,8 @@ paths:
       description: Search Site Mist Edge Events
       operationId: searchSiteMistEdgeEvents
       parameters:
-      - description: Mist edge id
+      - description: >-
+          Filter results by Mist Edge identifier
         in: query
         name: mxedge_id
         schema:
@@ -31837,12 +32052,14 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/mxedge_event_type'
-      - description: Service running on mist edge(mxagent, tunterm etc)
+      - description: >-
+          Filter results by service name
         in: query
         name: service
         schema:
           type: string
-      - description: Component like PS1, PS2
+      - description: >-
+          Filter results by component name
         in: query
         name: component
         schema:
@@ -32187,7 +32404,8 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: VLAN ID
+      - description: >-
+          Filter results by last VLAN ID
         in: query
         name: last_vlan_id
         schema:
@@ -32202,7 +32420,8 @@ paths:
         name: idp_id
         schema:
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by last SSID
         in: query
         name: last_ssid
         schema:
@@ -32222,7 +32441,8 @@ paths:
         name: last_ap
         schema:
           type: string
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -32339,7 +32559,8 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: VLAN ID
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -32349,7 +32570,8 @@ paths:
         name: nas_vendor
         schema:
           type: string
-      - description: BSSID
+      - description: >-
+          Filter results by BSSID
         in: query
         name: bssid
         schema:
@@ -32375,32 +32597,38 @@ paths:
         name: resp_attrs
         schema:
           $ref: '#/components/schemas/resp_attrs'
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: Username presented by the client
+      - description: >-
+          Filter results by username
         in: query
         name: username
         schema:
           type: string
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           type: string
-      - description: AP random macMAC
+      - description: >-
+          Filter results by whether the client is using a randomized MAC address
         in: query
         name: random_mac
         schema:
           type: boolean
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           type: string
-      - description: Time, in epoch
+      - description: >-
+          Filter results by event timestamp
         in: query
         name: timestamp
         schema:
@@ -32561,7 +32789,8 @@ paths:
         name: os
         schema:
           type: string
-      - description: SSID
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
@@ -32596,12 +32825,14 @@ paths:
         name: usermac_label
         schema:
           $ref: '#/components/schemas/strings'
-      - description: Username presented by the client
+      - description: >-
+          Filter results by username
         in: query
         name: username
         schema:
           type: string
-      - description: Vlan name or ID assigned to the client
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -32810,7 +33041,8 @@ paths:
       description: Search Site OtherDevices Events
       operationId: searchSiteOtherDeviceEvents
       parameters:
-      - description: MAC
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -32820,7 +33052,8 @@ paths:
         name: device_mac
         schema:
           type: string
-      - description: Vendor name
+      - description: >-
+          Filter results by vendor
         in: query
         name: vendor
         schema:
@@ -33556,12 +33789,14 @@ paths:
         schema:
           $ref: '#/components/schemas/site_rogue_events_count_distinct'
       - $ref: '#/components/parameters/rogue_type'
-      - description: SSID of the network detected as threat
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: BSSID of the network detected as threat
+      - description: >-
+          Filter results by BSSID
         in: query
         name: bssid
         schema:
@@ -33572,7 +33807,8 @@ paths:
         name: ap_mac
         schema:
           type: string
-      - description: Channel over which ap_mac heard ssid/bssid pair
+      - description: >-
+          Filter results by channel
         in: query
         name: channel
         schema:
@@ -33611,12 +33847,14 @@ paths:
       operationId: searchSiteRogueEvents
       parameters:
       - $ref: '#/components/parameters/rogue_type'
-      - description: SSID of the network detected as threat
+      - description: >-
+          Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - description: BSSID of the network detected as threat
+      - description: >-
+          Filter results by BSSID
         in: query
         name: bssid
         schema:
@@ -33627,7 +33865,8 @@ paths:
         name: ap_mac
         schema:
           type: string
-      - description: Channel over which ap_mac heard ssid/bssid pair
+      - description: >-
+          Filter results by channel
         in: query
         name: channel
         schema:
@@ -34140,12 +34379,14 @@ paths:
         name: text
         schema:
           type: string
-      - description: Peer name
+      - description: >-
+          Filter results by vpn name
         in: query
         name: vpn_name
         schema:
           type: string
-      - description: Peer path name
+      - description: >-
+          Filter results by vpn path
         in: query
         name: vpn_path
         schema:
@@ -34155,17 +34396,20 @@ paths:
         name: policy
         schema:
           type: string
-      - description: Network interface
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           type: string
-      - description: Device firmware version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -34175,7 +34419,8 @@ paths:
         name: timestamp
         schema:
           type: number
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -34227,12 +34472,14 @@ paths:
         name: peer_mac
         schema:
           type: string
-      - description: Peer name
+      - description: >-
+          Filter results by vpn name
         in: query
         name: vpn_name
         schema:
           type: string
-      - description: Peer path name
+      - description: >-
+          Filter results by vpn path
         in: query
         name: vpn_path
         schema:
@@ -34242,17 +34489,20 @@ paths:
         name: policy
         schema:
           type: string
-      - description: Network interface
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           type: string
-      - description: Device model
+      - description: >-
+          Filter results by device model
         in: query
         name: model
         schema:
           type: string
-      - description: Device firmware version
+      - description: >-
+          Filter results by software version
         in: query
         name: version
         schema:
@@ -34262,7 +34512,8 @@ paths:
         name: timestamp
         schema:
           type: number
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -34919,17 +35170,20 @@ paths:
         name: type
         schema:
           type: string
-      - description: Client MAC
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           type: string
-      - description: Device MAC
+      - description: >-
+          Filter results by device MAC address
         in: query
         name: device_mac
         schema:
           type: string
-      - description: Threat level
+      - description: >-
+          Filter results by threat level
         in: query
         name: threat_level
         schema:
@@ -34967,17 +35221,20 @@ paths:
         name: type
         schema:
           type: string
-      - description: Client MAC
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           type: string
-      - description: Device MAC
+      - description: >-
+          Filter results by device MAC address
         in: query
         name: device_mac
         schema:
           type: string
-      - description: Threat level
+      - description: >-
+          Filter results by threat level
         in: query
         name: threat_level
         schema:
@@ -36083,7 +36340,8 @@ paths:
           examples:
           - '001122334455'
           type: string
-      - description: Application name
+      - description: >-
+          Filter results by application name
         in: query
         name: app
         schema:
@@ -36466,7 +36724,8 @@ paths:
       description: Troubleshoot a call
       operationId: troubleshootSiteCall
       parameters:
-      - description: meeting_id
+      - description: >-
+          Filter results by meeting identifier
         in: query
         name: meeting_id
         required: true
@@ -36474,7 +36733,8 @@ paths:
           examples:
           - 1234567890abcdef
           type: string
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -36566,7 +36826,8 @@ paths:
       description: Search Calls
       operationId: searchSiteCalls
       parameters:
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -36609,14 +36870,16 @@ paths:
       description: Summarized, aggregated stats for the site calls
       operationId: getSiteCallsSummary
       parameters:
-      - description: AP MAC, optional
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap_mac
         schema:
           examples:
           - '001122334455'
           type: string
-      - description: APp name (`zoom` or `teams`). default is both. Optional
+      - description: >-
+          Filter results by application name
         in: query
         name: app
         schema:
@@ -36648,21 +36911,24 @@ paths:
       description: Summary of calls troubleshoot by site
       operationId: listSiteTroubleshootCalls
       parameters:
-      - description: AP MAC
+      - description: >-
+          Filter results by AP MAC address
         in: query
         name: ap
         schema:
           examples:
           - '001122334455'
           type: string
-      - description: meeting_id
+      - description: >-
+          Filter results by meeting identifier
         in: query
         name: meeting_id
         schema:
           examples:
           - 1234567890abcdef
           type: string
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -37408,7 +37674,8 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -37458,14 +37725,16 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Interface name
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           examples:
           - ge-2/0/39
           type: string
-      - description: Interface MAC address
+      - description: >-
+          Filter results by port MAC address
         in: query
         name: port_mac
         schema:
@@ -37480,70 +37749,80 @@ paths:
           examples:
           - 15.4
           type: number
-      - description: Output packets
+      - description: >-
+          Filter results by transmitted packet count
         in: query
         name: tx_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Input packets
+      - description: >-
+          Filter results by received packet count
         in: query
         name: rx_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Input bytes
+      - description: >-
+          Filter results by received byte count
         in: query
         name: rx_bytes
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Output rate
+      - description: >-
+          Filter results by transmit rate
         in: query
         name: tx_bps
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Input rate
+      - description: >-
+          Filter results by receive rate
         in: query
         name: rx_bps
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Multicast output packets
+      - description: >-
+          Filter results by transmitted multicast packet count
         in: query
         name: tx_mcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Broadcast output packets
+      - description: >-
+          Filter results by transmitted broadcast packet count
         in: query
         name: tx_bcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Multicast input packets
+      - description: >-
+          Filter results by received multicast packet count
         in: query
         name: rx_mcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Broadcast input packets
+      - description: >-
+          Filter results by received broadcast packet count
         in: query
         name: rx_bcast_pkts
         schema:
           examples:
           - 1000000
           type: integer
-      - description: Port speed
+      - description: >-
+          Filter results by port speed
         in: query
         name: speed
         schema:
@@ -37651,7 +37930,8 @@ paths:
           examples:
           - '123456789012345'
           type: string
-      - description: Device identifier
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
@@ -37693,17 +37973,20 @@ paths:
         name: poe_priority
         schema:
           $ref: '#/components/schemas/poe_priority'
-      - description: Interface name
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           type: string
-      - description: Interface MAC address
+      - description: >-
+          Filter results by port MAC address
         in: query
         name: port_mac
         schema:
           type: string
-      - description: Port speed
+      - description: >-
+          Filter results by port speed
         in: query
         name: speed
         schema:
@@ -38050,21 +38333,24 @@ paths:
       description: Search Site Synthetic Testing
       operationId: searchSiteSyntheticTest
       parameters:
-      - description: Device MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 5c5b350e0410
           type: string
-      - description: Port_id used to run the test (for SSR only)
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           examples:
           - ge-1/0/1
           type: string
-      - description: VLAN ID
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan_id
         schema:
@@ -38078,7 +38364,8 @@ paths:
           examples:
           - user
           type: string
-      - description: Test failure reason
+      - description: >-
+          Filter results by reason
         in: query
         name: reason
         schema:
@@ -38098,7 +38385,8 @@ paths:
         name: protocol
         schema:
           $ref: '#/components/schemas/synthetictest_protocol'
-      - description: Tenant network in which lan_connectivity test was run
+      - description: >-
+          Filter results by tenant network
         in: query
         name: tenant
         schema:
@@ -38603,21 +38891,24 @@ paths:
       - $ref: '#/components/parameters/client_event_type'
       - $ref: '#/components/parameters/partial_filter_mac_client'
       - $ref: '#/components/parameters/partial_filter_hostname_client'
-      - description: Client IP
+      - description: >-
+          Filter results by IP address
         in: query
         name: ip
         schema:
           examples:
           - 10.4.2.4
           type: string
-      - description: Manufacture
+      - description: >-
+          Filter results by manufacturer
         in: query
         name: mfg
         schema:
           examples:
           - Juniper
           type: string
-      - description: nacrule_id
+      - description: >-
+          Filter results by NAC rule identifier
         in: query
         name: nacrule_id
         schema:
@@ -38655,21 +38946,24 @@ paths:
       parameters:
       - $ref: '#/components/parameters/partial_filter_hostname_client'
       - $ref: '#/components/parameters/partial_filter_ip_client'
-      - description: IP source
+      - description: >-
+          Filter results by source IP address
         in: query
         name: ip_src
         schema:
           examples:
           - dhcp
           type: string
-      - description: Client MAC address.
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 5c5b53010101
           type: string
-      - description: Manufacture
+      - description: >-
+          Filter results by manufacturer
         in: query
         name: mfg
         schema:
@@ -38704,14 +38998,16 @@ paths:
       description: Count Site WAN Usages
       operationId: countSiteWanUsage
       parameters:
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - '001122334455'
           type: string
-      - description: Peer MAC address
+      - description: >-
+          Filter results by peer MAC address
         in: query
         name: peer_mac
         schema:
@@ -38732,17 +39028,20 @@ paths:
           examples:
           - ge-0/0/0
           type: string
-      - description: Policy for the wan path
+      - description: >-
+          Filter results by WAN path policy
         in: query
         name: policy
         schema:
           type: string
-      - description: Tenant network in which the packet is sent
+      - description: >-
+          Filter results by tenant network
         in: query
         name: tenant
         schema:
           type: string
-      - description: path_type of the port
+      - description: >-
+          Filter results by port path type
         in: query
         name: path_type
         schema:
@@ -38783,14 +39082,16 @@ paths:
       description: Search Site WAN Usages
       operationId: searchSiteWanUsage
       parameters:
-      - description: MAC address
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - '001122334455'
           type: string
-      - description: Peer MAC address
+      - description: >-
+          Filter results by peer MAC address
         in: query
         name: peer_mac
         schema:
@@ -38811,19 +39112,22 @@ paths:
           examples:
           - ge-0/0/0
           type: string
-      - description: Policy for the wan path
+      - description: >-
+          Filter results by WAN path policy
         in: query
         name: policy
         schema:
           examples:
           - primary
           type: string
-      - description: Tenant network in which the packet is sent
+      - description: >-
+          Filter results by tenant network
         in: query
         name: tenant
         schema:
           type: string
-      - description: path_type of the port
+      - description: >-
+          Filter results by port path type
         in: query
         name: path_type
         schema:
@@ -39217,28 +39521,32 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/site_wired_clients_count_distinct'
-      - description: Client mac
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 0123456789ab
           type: string
-      - description: Device mac
+      - description: >-
+          Filter results by device MAC address
         in: query
         name: device_mac
         schema:
           examples:
           - 0123456789ab
           type: string
-      - description: Port id
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
           examples:
           - ge-1/1/1
           type: string
-      - description: VLAN
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
@@ -39272,28 +39580,32 @@ paths:
       description: Search Wired Clients
       operationId: searchSiteWiredClients
       parameters:
-      - description: Device mac
+      - description: >-
+          Filter results by device MAC address
         in: query
         name: device_mac
         schema:
           examples:
           - 0123456789ab
           type: string
-      - description: Client mac
+      - description: >-
+          Filter results by MAC address
         in: query
         name: mac
         schema:
           examples:
           - 0123456789ab
           type: string
-      - description: Client ip
+      - description: >-
+          Filter results by IP address
         in: query
         name: ip
         schema:
           examples:
           - 10.3.5.12
           type: string
-      - description: Port id
+      - description: >-
+          Filter results by port identifier
         in: query
         name: port_id
         schema:
@@ -39301,19 +39613,21 @@ paths:
           - ge-1/1/1
           type: string
       - description: >-
-          Source from which the client was learned. enum: `lldp`, `mac`
+          Filter results by client learning source. enum: `lldp`, `mac`
         in: query
         name: source
         schema:
           $ref: '#/components/schemas/client_info_source'
-      - description: VLAN
+      - description: >-
+          Filter results by VLAN ID
         in: query
         name: vlan
         schema:
           examples:
           - '10'
           type: string
-      - description: Manufacture
+      - description: >-
+          Filter results by manufacturer
         in: query
         name: manufacture
         schema:
@@ -39327,28 +39641,32 @@ paths:
           examples:
           - client-hostname
           type: string
-      - description: nacrule_id
+      - description: >-
+          Filter results by NAC rule identifier
         in: query
         name: nacrule_id
         schema:
           examples:
           - 8bfc2490-d726-3587-038d-cb2e71bd2330
           type: string
-      - description: DHCP Hostname
+      - description: >-
+          Filter results by DHCP hostname
         in: query
         name: dhcp_hostname
         schema:
           examples:
           - client-hostname
           type: string
-      - description: DHCP FQDN
+      - description: >-
+          Filter results by DHCP FQDN
         in: query
         name: dhcp_fqdn
         schema:
           examples:
           - client.example.com
           type: string
-      - description: DHCP Client Identifier
+      - description: >-
+          Filter results by DHCP client identifier
         in: query
         name: dhcp_client_identifier
         schema:
@@ -39362,7 +39680,8 @@ paths:
           examples:
           - Juniper-Mist-AP,Juniper-Mist-Client
           type: string
-      - description: DHCP Request Parameters
+      - description: >-
+          Filter results by DHCP request parameters
         in: query
         name: dhcp_request_params
         schema:
