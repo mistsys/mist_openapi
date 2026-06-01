@@ -12632,7 +12632,7 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: Vlan ID
+      - description: VLAN ID
         in: query
         name: last_vlan_id
         schema:
@@ -12872,7 +12872,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific Vlan ID in radius requests
+      - description: Vendor specific VLAN ID in radius requests
         in: query
         name: ingress_vlan
         schema:
@@ -12996,7 +12996,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific Vlan ID in radius requests
+      - description: Vendor specific VLAN ID in radius requests
         in: query
         name: ingress_vlan
         schema:
@@ -31776,7 +31776,7 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: Vlan ID
+      - description: VLAN ID
         in: query
         name: last_vlan_id
         schema:
@@ -31925,7 +31925,7 @@ paths:
         name: auth_type
         schema:
           type: string
-      - description: Vlan ID
+      - description: VLAN ID
         in: query
         name: vlan
         schema:
@@ -32009,7 +32009,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific Vlan ID in radius requests
+      - description: Vendor specific VLAN ID in radius requests
         in: query
         name: ingress_vlan
         schema:
@@ -32133,7 +32133,7 @@ paths:
         name: nas_ip
         schema:
           type: string
-      - description: Vendor specific Vlan ID in radius requests
+      - description: Vendor specific VLAN ID in radius requests
         in: query
         name: ingress_vlan
         schema:
@@ -65340,7 +65340,7 @@ components:
           description: IPv6 address assignment mode for AP management traffic
         vlan_id:
           default: 1
-          description: Management VLAN id, default is 1 (untagged)
+          description: Management VLAN ID, default is 1 (untagged)
           examples:
           - 1
           type: integer
@@ -65483,7 +65483,7 @@ components:
           $ref: '#/components/schemas/radsec'
           description: TLS-secured RADIUS settings for this AP port
         vlan_id:
-          description: "Optional to specify the vlan id for a tunnel if forwarding\
+          description: "Optional to specify the VLAN ID for a tunnel if forwarding\
             \ is for `wxtunnel`, `mxtunnel` or `site_mxedge`.\n  * if vlan_id is not\
             \ specified then it will use first one in vlan_ids[] of the mxtunnel.\n\
             \  * if forwarding == site_mxedge, vlan_ids comes from site_mxedge (`mxtunnels`\
@@ -65495,7 +65495,7 @@ components:
           type: integer
         vlan_ids:
           description: If `forwarding`==`limited`, comma separated list of additional
-            vlan ids allowed on this port
+            VLAN IDs allowed on this port
           examples:
           - 10,20,30
           type: string
@@ -66462,9 +66462,9 @@ components:
         minimum: 1
         type: integer
       - type: string
-      description: Native VLAN id, optional
+      description: Native VLAN ID, optional
     ap_switch_setting_vlan_ids:
-      description: List of VLAN ids
+      description: List of VLAN IDs
       items:
         maximum: 4094
         minimum: 1
@@ -104909,7 +104909,7 @@ components:
           $ref: '#/components/schemas/stats_wireless_client_vbeacons'
           description: Virtual beacon associations for the wireless client
         vlan_id:
-          description: VLAN id, could be empty (from older AP)
+          description: VLAN ID, could be empty (from older AP)
           type: string
         wlan_id:
           description: WLAN ID the client is connected to
@@ -108974,7 +108974,7 @@ components:
         type: string
       type: array
     tunterm_port_config_upstream_port_vlan_id:
-      description: Native VLAN id for upstream ports
+      description: Native VLAN ID for upstream ports
       oneOf:
       - type: string
       - maximum: 4094
@@ -115896,8 +115896,8 @@ components:
             type: string
           description: "Map between vlan_id (as string) to airespace interface names\
             \ (comma-separated) or null for standard mapping\n  * if `dynamic_vlan.type`==`standard`,\
-            \ property key is the Vlan ID and property value is \\\"\\\"\n  * if `dynamic_vlan.type`==`airespace-interface-name`,\
-            \ property key is the Vlan ID and property value is the Airespace Interface\
+            \ property key is the VLAN ID and property value is \\\"\\\"\n  * if `dynamic_vlan.type`==`airespace-interface-name`,\
+            \ property key is the VLAN ID and property value is the Airespace Interface\
             \ Name"
           examples:
           - '131': default
