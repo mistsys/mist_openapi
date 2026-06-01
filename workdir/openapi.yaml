@@ -79,9 +79,7 @@ servers:
   url: https://api.gc7.mist.com
 security:
 - apiToken: []
-- basicAuth: []
-- basicAuth: []
-  csrfToken: []
+- csrfToken: []
 tags:
 - description: 'Admin API calls can be used to create, manage or authenticate Mist
     administrators.
@@ -3036,6 +3034,7 @@ paths:
         \ etc) \n2. login with email/password, generate the token, and use /login/two_factor\
         \ with the token"
       operationId: login
+      security: []
       requestBody:
         content:
           application/json:
@@ -3063,6 +3062,7 @@ paths:
     post:
       description: Login Lookup
       operationId: lookup
+      security: []
       requestBody:
         content:
           application/json:
@@ -3112,6 +3112,7 @@ paths:
     get:
       description: Obtain Authorization URL for Login
       operationId: getOauth2AuthorizationUrlForLogin
+      security: []
       parameters:
       - description: Callback URL used after completing the OAuth login flow
         in: query
@@ -3148,6 +3149,7 @@ paths:
     post:
       description: Login via OAuth2
       operationId: loginOauth2
+      security: []
       requestBody:
         content:
           application/json:
@@ -3178,6 +3180,7 @@ paths:
     post:
       description: Send 2FA Code
       operationId: twoFactor
+      security: []
       requestBody:
         content:
           application/json:
@@ -118949,30 +118952,32 @@ components:
       type: array
   securitySchemes:
     apiToken:
-      description: "Like many other API providers, it\u2019s also possible to generate\
-        \ API Tokens to be used (in HTTP Header) for authentication. An API token\
-        \ ties to a Admin with equal or less privileges.\n\n**Format**:\n  API Token\
-        \ value format is `Token {apitoken}`\n\n**Notes**:\n* an API token generated\
-        \ for a specific admin has the same privilege as the user\n* an API token\
-        \ will be automatically removed if not used for > 90 days\n* SSO admins cannot\
-        \ generate these API tokens. Refer Org level API tokens which can have privileges\
-        \ of a specific Org/Site for more information."
+      description: "Preferred authentication method for automation and integrations.\
+        \ Send the API token in the HTTP `Authorization` header.\n\n**Format**:\n\
+        \  `Authorization: Token {apitoken}`\n\n**Notes**:\n* An API token generated\
+        \ for a specific admin has the same privileges as that admin\n* An API token\
+        \ is automatically removed if it is not used for more than 90 days\n* SSO\
+        \ admins cannot generate admin API tokens. Use organization API tokens when\
+        \ scoped Org/Site privileges are needed."
       in: header
       name: Authorization
       type: apiKey
     basicAuth:
-      description: "While our current UI uses Session / Cookie-based authentication,\
-        \ it\u2019s also possible to do Basic Auth."
+      description: "Deprecated legacy authentication method. Basic Auth remains available\
+        \ only for existing integrations and is planned for removal in September 2026.\
+        \ Do not use Basic Auth for new integrations; use API Token authentication\
+        \ for automation or the login session flow with `X-CSRFToken` for browser\
+        \ sessions."
       scheme: basic
       type: http
+      x-deprecated: true
     csrfToken:
-      description: "This protects the website against [Cross Site Request Forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery),\
-        \ all the POST / PUT / DELETE APIs needs to have CSRF token in the AJAX Request\
-        \ header when using Login/Password authentication (with or without MFA)\n\n\
-        \nThe CSRF Token is sent back by Mist in the Cookies from the Login Response\
-        \ API Call:\n`cookies[csrftoken]` \n\nThe CSRF Token must be added in the\
-        \ HTTP Request Headers:\n```\nX-CSRFToken: vwvBuq9qkqaKh7lu8tNc0gkvBfEaLAmx\n\
-        ```"
+      description: "Session-based authentication for browser or login/password flows.\
+        \ After a successful [Login]($e/Admins%20Login/login) request, Mist returns\
+        \ a `csrftoken` cookie. Send that value in the `X-CSRFToken` header on later\
+        \ API requests that use the login session.\n\n**Format**:\n```\nX-CSRFToken:\
+        \ vwvBuq9qkqaKh7lu8tNc0gkvBfEaLAmx\n```\n\nFor automation, API Token authentication\
+        \ is preferred."
       in: header
       name: X-CSRFToken
       type: apiKey
