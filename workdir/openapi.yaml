@@ -10420,7 +10420,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Add Device to Org Inventory with the device claim codes
+      description: Claim devices into the organization inventory using activation or
+        claim codes.
       operationId: addOrgInventory
       requestBody:
         content:
@@ -10450,7 +10451,9 @@ paths:
       tags:
       - Orgs Inventory
     put:
-      description: Update Org Inventory
+      description: Update inventory assignment for one or more devices, such as assigning
+        them to a site, unassigning them, or deleting inventory records by MAC address
+        or serial number.
       operationId: updateOrgInventoryAssignment
       requestBody:
         content:
@@ -10492,7 +10495,8 @@ paths:
       - Orgs Inventory
   /api/v1/orgs/{org_id}/inventory/count:
     get:
-      description: Count by Distinct Attributes of in the Org Inventory
+      description: Count organization inventory records, optionally grouped by `distinct`
+        and filtered by device type, site, model, version, and status.
       operationId: countOrgInventory
       parameters:
       - description: 'Field used to group this count response. enum: `model`, `status`,
@@ -10552,7 +10556,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create HA Cluster from unassigned Gateways
+      description: Create a gateway HA cluster from unassigned gateway inventory nodes
+        and assign the cluster to the specified site.
       operationId: createOrgGatewayHaCluster
       requestBody:
         content:
@@ -10618,7 +10623,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Reevaluate Auto Assignment
+      description: Re-run organization inventory auto-assignment rules against devices
+        that are eligible for automatic site assignment.
       operationId: reevaluateOrgAutoAssignment
       responses:
         '200':
@@ -10683,7 +10689,9 @@ paths:
       - Orgs Inventory
   /api/v1/orgs/{org_id}/inventory/search:
     get:
-      description: Search in the Org Inventory
+      description: Search organization inventory records with filters for type, MAC
+        address, model, name, site, serial number, Virtual Chassis master state, SKU,
+        version, status, and text.
       operationId: searchOrgInventory
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
