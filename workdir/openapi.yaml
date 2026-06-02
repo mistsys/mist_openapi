@@ -17142,7 +17142,9 @@ paths:
       - Orgs SecIntel Profiles
   /api/v1/orgs/{org_id}/secpolicies:
     get:
-      description: Get List of Org Security Policies
+      description: List organization security policies. Security policies define
+        WLAN configuration baselines used to audit intended wireless settings against
+        actual AP configuration.
       operationId: listOrgSecPolicies
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -17166,7 +17168,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Security Policy
+      description: Create an organization security policy containing WLAN configuration
+        baselines for auditing site and AP configuration compliance.
       operationId: createOrgSecPolicy
       requestBody:
         content:
@@ -17490,7 +17493,8 @@ paths:
       - Orgs Security Policies
   /api/v1/orgs/{org_id}/secpolicies/{secpolicy_id}:
     delete:
-      description: Delete Org Security Policy
+      description: Remove an organization security policy from the set available
+        for assignment and configuration compliance checks.
       operationId: deleteOrgSecPolicy
       responses:
         '200':
@@ -17509,7 +17513,8 @@ paths:
       tags:
       - Orgs Security Policies
     get:
-      description: Get Org Security Policy
+      description: Return an organization security policy, including the WLAN configuration
+        baselines used for compliance auditing.
       operationId: getOrgSecPolicy
       responses:
         '200':
@@ -17531,7 +17536,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/secpolicy_id'
     put:
-      description: Update Org Security Policy
+      description: Update an organization security policy, including its name and
+        WLAN configuration baselines for compliance auditing.
       operationId: updateOrgSecPolicy
       requestBody:
         content:
