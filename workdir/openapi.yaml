@@ -19443,7 +19443,8 @@ paths:
       - Orgs Maps
   /api/v1/orgs/{org_id}/sitetemplates:
     get:
-      description: Get List of Org Site Templates
+      description: List site templates configured in the organization. Site templates
+        contain automatic upgrade settings and variables available to WLAN configuration.
       operationId: listOrgSiteTemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19467,7 +19468,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Site Template
+      description: Create a site template with automatic upgrade settings and template
+        variables available to WLAN configuration.
       operationId: createOrgSiteTemplate
       requestBody:
         content:
@@ -19492,7 +19494,7 @@ paths:
       - Orgs Site Templates
   /api/v1/orgs/{org_id}/sitetemplates/{sitetemplate_id}:
     delete:
-      description: Delete Org Site Template
+      description: Remove a site template from the organization.
       operationId: deleteOrgSiteTemplate
       responses:
         '200':
@@ -19511,7 +19513,8 @@ paths:
       tags:
       - Orgs Site Templates
     get:
-      description: Get Org Site Template
+      description: Return a site template, including automatic upgrade settings and
+        template variables available to WLAN configuration.
       operationId: getOrgSiteTemplate
       responses:
         '200':
@@ -19533,7 +19536,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sitetemplate_id'
     put:
-      description: Update Org Site Template
+      description: Update a site template's automatic upgrade settings and template
+        variables available to WLAN configuration.
       operationId: updateOrgSiteTemplate
       requestBody:
         content:
