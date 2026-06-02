@@ -14215,7 +14215,8 @@ paths:
     - $ref: '#/components/parameters/nacportal_id'
   /api/v1/orgs/{org_id}/nacrules:
     get:
-      description: Get List of Org NAC Rules
+      description: List organization NAC authentication policy rules in evaluation
+        order.
       operationId: listOrgNacRules
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -14239,7 +14240,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org NAC Rule
+      description: Create a NAC authentication policy rule with match and not-match
+        criteria, an allow or block action, optional result tags, and rule priority.
       operationId: createOrgNacRule
       requestBody:
         content:
@@ -14286,7 +14288,8 @@ paths:
       - Orgs NAC Rules
   /api/v1/orgs/{org_id}/nacrules/{nacrule_id}:
     delete:
-      description: Delete Org NAC Rule
+      description: Delete an organization NAC authentication policy rule by rule
+        ID.
       operationId: deleteOrgNacRule
       responses:
         '200':
@@ -14305,7 +14308,8 @@ paths:
       tags:
       - Orgs NAC Rules
     get:
-      description: Get Org NAC Rule
+      description: Retrieve configuration details for a specific NAC authentication
+        policy rule, including action, matching criteria, dry-run state, and priority.
       operationId: getOrgNacRule
       responses:
         '200':
@@ -14327,7 +14331,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/nacrule_id'
     put:
-      description: Update Org NAC Rule
+      description: Update a NAC authentication policy rule, including match and not-match
+        criteria, action, result tags, dry-run state, and priority.
       operationId: updateOrgNacRule
       requestBody:
         content:
