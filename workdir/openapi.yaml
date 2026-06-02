@@ -16507,7 +16507,8 @@ paths:
       - Orgs Psks
   /api/v1/orgs/{org_id}/rftemplates:
     get:
-      description: Get List of Org RF Template
+      description: List organization RF templates used by RRM to apply radio settings
+        across sites.
       operationId: listOrgRfTemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -16531,7 +16532,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org RF Template
+      description: Create an organization RF template with 2.4, 5, and 6 GHz radio
+        settings, country code, scanning behavior, antenna gain, and model-specific
+        overrides.
       operationId: createOrgRfTemplate
       requestBody:
         content:
@@ -16557,7 +16560,8 @@ paths:
       - Orgs RF Templates
   /api/v1/orgs/{org_id}/rftemplates/{rftemplate_id}:
     delete:
-      description: Delete Org RF Template
+      description: Delete an organization RF template by template ID so it can no
+        longer be applied to sites.
       operationId: deleteOrgRfTemplate
       responses:
         '200':
@@ -16576,7 +16580,9 @@ paths:
       tags:
       - Orgs RF Templates
     get:
-      description: Get Org RF Template Details
+      description: Retrieve details for a specific organization RF template, including
+        radio settings, country code, scanning behavior, antenna gain, and model-specific
+        overrides.
       operationId: getOrgRfTemplate
       responses:
         '200':
@@ -16598,7 +16604,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/rftemplate_id'
     put:
-      description: Update Org RF Template
+      description: Update an organization RF template, including radio settings,
+        country code, scanning behavior, antenna gain, and model-specific overrides.
       operationId: updateOrgRfTemplate
       requestBody:
         content:
