@@ -3512,7 +3512,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Claim an Order by Activation Code
+      description: Claim a license order for this MSP by submitting the activation
+        code from the order.
       operationId: claimMspLicense
       requestBody:
         content:
@@ -3541,7 +3542,9 @@ paths:
       - MSPs Licenses
   /api/v1/msps/{msp_id}/insights/{metric}:
     get:
-      description: Get MSP SLEs (all/worst Orgs ...)
+      description: Return MSP-level SLE insight metrics for the selected metric and
+        time range. Depending on the metric, the response can include all organizations
+        or the worst-performing organizations in the MSP.
       operationId: getMspSle
       parameters:
       - description: See [List Insight Metrics]($e/Constants%20Definitions/listInsightMetrics)
@@ -3575,7 +3578,9 @@ paths:
     - $ref: '#/components/parameters/metric'
   /api/v1/msps/{msp_id}/inventory/{device_mac}:
     get:
-      description: Get Inventory By device MAC address
+      description: Return the inventory record for a device MAC address owned by
+        an organization under this MSP, including the owning organization and site
+        when available.
       operationId: getMspInventoryByMac
       responses:
         '200':
@@ -3718,7 +3723,8 @@ paths:
       - MSPs Admins
   /api/v1/msps/{msp_id}/licenses:
     get:
-      description: Get List of Msp Licenses
+      description: Return MSP license entitlement, subscription, amendment, and usage
+        summary information.
       operationId: listMspLicenses
       responses:
         '200':
@@ -3739,7 +3745,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     put:
-      description: Move or Delete MSP Licenses
+      description: Perform an MSP license action, such as amending license quantity
+        to an organization, deleting a subscription, undoing an amendment, or annotating
+        a subscription.
       operationId: moveOrDeleteMspLicenseToAnotherOrg
       requestBody:
         content:
@@ -3779,7 +3787,7 @@ paths:
       - MSPs Licenses
   /api/v1/msps/{msp_id}/logo:
     delete:
-      description: Delete MSP Logo
+      description: Remove the logo configured for an advanced-tier MSP account.
       operationId: deleteMspLogo
       responses:
         '200':
@@ -3800,7 +3808,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Upload Logo (only for advanced msp tier)
+      description: Upload or update the public logo URL for an advanced-tier MSP
+        account.
       operationId: postMspLogo
       requestBody:
         content:
@@ -3825,7 +3834,9 @@ paths:
       - MSPs Logo
   /api/v1/msps/{msp_id}/logs:
     get:
-      description: Get list of change logs for the current MSP
+      description: List audit log entries for configuration and administrative changes
+        within this MSP, with optional filters by site, administrator, message text,
+        and time range.
       operationId: listMspAuditLogs
       parameters:
       - description: Filter results by site identifier
@@ -3880,7 +3891,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/logs/count:
     get:
-      description: Count by Distinct Attributes of Audit Logs.
+      description: Return distinct counts of MSP audit log entries grouped by the
+        requested field, such as administrator, message, or organization.
       operationId: countMspAuditLogs
       parameters:
       - description: 'Field used to group this count response. enum: `admin_id`, `admin_name`,
