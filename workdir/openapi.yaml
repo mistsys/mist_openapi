@@ -15843,7 +15843,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/pskportals:
     get:
-      description: Get List of Org Psk Portals
+      description: List self-service PSK Portal configurations in the organization,
+        including portal mode, SSID, authentication, expiry, and passphrase rules.
       operationId: listOrgPskPortals
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -15867,7 +15868,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Psk Portal
+      description: Create a self-service PSK Portal configuration for issuing personal
+        PSKs, including SSID, BYOD or admin mode, SSO or sponsor authentication,
+        passphrase rules, and expiry settings.
       operationId: createOrgPskPortal
       requestBody:
         content:
@@ -15919,7 +15922,8 @@ paths:
       - Orgs Psk Portals
   /api/v1/orgs/{org_id}/pskportals/logs:
     get:
-      description: Get the list of PSK Portals Logs
+      description: List PSK Portal log entries in the organization for the selected
+        time range.
       operationId: listOrgPskPortalLogs
       parameters:
       - $ref: '#/components/parameters/start'
@@ -15947,7 +15951,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/pskportals/logs/count:
     get:
-      description: Count by Distinct Attributes of PskPortal Logs
+      description: Count PSK Portal log entries across the organization, optionally
+        grouped by `distinct` and filtered by time range.
       operationId: countOrgPskPortalLogs
       parameters:
       - description: 'Field used to group this count response. enum: `admin_id`, `admin_name`,
@@ -15980,7 +15985,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/pskportals/logs/search:
     get:
-      description: Search Org PSK Portal Logs
+      description: Search PSK Portal log entries across the organization with filters
+        for PSK, portal, admin, SSO NameID, and time range.
       operationId: searchOrgPskPortalLogs
       parameters:
       - description: Filter PSK portal log results by PSK name
@@ -16046,7 +16052,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/pskportals/{pskportal_id}:
     delete:
-      description: Delete Org Psk Portal
+      description: Delete a PSK Portal configuration by portal ID, removing the self-service
+        entry point for issuing PSKs through that portal.
       operationId: deleteOrgPskPortal
       responses:
         '200':
@@ -16065,7 +16072,8 @@ paths:
       tags:
       - Orgs Psk Portals
     get:
-      description: Get Org Psk Portal Details
+      description: Retrieve PSK Portal configuration details, including SSID, mode,
+        authentication, SSO, passphrase, expiry, notification, and template URLs.
       operationId: getOrgPskPortal
       responses:
         '200':
@@ -16087,7 +16095,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/pskportal_id'
     put:
-      description: Update Org Psk Portal
+      description: Update a PSK Portal configuration, including SSID, mode, authentication,
+        SSO, passphrase, expiry, notification, and template settings.
       operationId: updateOrgPskPortal
       requestBody:
         content:
@@ -16139,11 +16148,8 @@ paths:
       - Orgs Psk Portals
   /api/v1/orgs/{org_id}/pskportals/{pskportal_id}/portal_image:
     delete:
-      description: 'Delete background image for PskPortal
-
-
-
-        If image is not uploaded or is deleted, PskPortal will use default image.'
+      description: Delete the custom background image for a PSK Portal. If no image
+        is configured, the PSK Portal uses the default background image.
       operationId: deleteOrgPskPortalImage
       responses:
         '200':
@@ -16165,7 +16171,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/pskportal_id'
     post:
-      description: Upload background image for PskPortal
+      description: Upload a custom background image for a PSK Portal.
       operationId: uploadOrgPskPortalImage
       requestBody:
         content:
@@ -16193,7 +16199,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/pskportal_id'
     put:
-      description: Update Org Psk Portal Template
+      description: Update PSK Portal UI template settings, including alignment, color,
+        logo, Powered by visibility, and Terms of Service text.
       operationId: updateOrgPskPortalTemplate
       requestBody:
         content:
