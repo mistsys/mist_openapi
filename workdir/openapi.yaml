@@ -18416,7 +18416,8 @@ paths:
     - $ref: '#/components/parameters/naccrl_id'
   /api/v1/orgs/{org_id}/setting/mist_scep:
     delete:
-      description: Disable Mist SCEP Org setting
+      description: Disable Mist SCEP for the organization and return the updated
+        read-only SCEP settings.
       operationId: disableOrgMistScep
       responses:
         '200':
@@ -18435,7 +18436,9 @@ paths:
       tags:
       - Orgs SCEP
     get:
-      description: Get Mist SCEP Org setting
+      description: Return Mist SCEP settings for the organization, including enabled
+        and suspended status, configured certificate providers, and generated enrollment
+        or webhook URLs.
       operationId: getOrgMistScep
       responses:
         '200':
@@ -18456,7 +18459,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Update Mist SCEP Org setting
+      description: Update Mist SCEP settings for the organization, including enabled
+        state, suspension state, and certificate providers.
       operationId: updateOrgMistScep
       requestBody:
         content:
@@ -18485,7 +18489,9 @@ paths:
       - Orgs SCEP
   /api/v1/orgs/{org_id}/setting/mist_scep/client_certs:
     get:
-      description: Get Issued Client Certificates
+      description: List Mist SCEP client certificates issued for the organization.
+        Results can be filtered by SSO name ID, certificate serial number, or device
+        ID; `serial_number` and `device_id` accept comma-separated values.
       operationId: listOrgIssuedClientCertificates
       parameters:
       - description: Filter results by sso name id
@@ -18531,7 +18537,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Revoke Issued Client Certificates
+      description: Revoke issued Mist SCEP client certificates by certificate serial
+        number.
       operationId: revokeOrgIssuedClientCertificates
       requestBody:
         content:
