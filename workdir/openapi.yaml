@@ -6459,12 +6459,9 @@ paths:
       - Orgs AP Templates
   /api/v1/orgs/{org_id}/assetfilters:
     get:
-      description: "Get List of Org BLE asset filters. \nEach asset filter in the\
-        \ list operates independently. For a filter object to match an asset, all\
-        \ of the filter properties must match (logical \u2018AND\u2019 of each filter\
-        \ property). For example, the \"Visitor Tags\" filter below will match an\
-        \ asset when both the \"ibeacon\\_uuid\" and \"ibeacon_major\" properties\
-        \ match the asset. All non-matching assets are ignored."
+      description: "List organization-level BLE asset filters. Each filter operates\
+        \ independently, and an asset must match all specified filter properties\
+        \ for that filter to apply."
       operationId: listOrgAssetFilters
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6488,10 +6485,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Create Asset Filter\n\nCreates a single BLE asset filter for the\
-        \ given site. Any subset of filter properties can be included in the filter.\
-        \ A matching asset must meet the conditions of all given filter properties\
-        \ (logical \u2018AND\u2019)."
+      description: Create an organization-level BLE asset filter. Any subset of filter
+        properties can be included, and a matching asset must meet all specified
+        conditions.
       operationId: createOrgAssetFilter
       requestBody:
         content:
@@ -6526,7 +6522,7 @@ paths:
       - Orgs Asset Filters
   /api/v1/orgs/{org_id}/assetfilters/{assetfilter_id}:
     delete:
-      description: Deletes an existing BLE asset filter for the given site.
+      description: Delete an organization-level BLE asset filter by filter ID.
       operationId: deleteOrgAssetFilter
       responses:
         '200':
@@ -6545,7 +6541,8 @@ paths:
       tags:
       - Orgs Asset Filters
     get:
-      description: Get Org Asset Filter Details
+      description: Return one organization-level BLE asset filter, including its
+        name, disabled state, and matching criteria.
       operationId: getOrgAssetFilter
       responses:
         '200':
@@ -6567,7 +6564,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/assetfilter_id'
     put:
-      description: Updates an existing BLE asset filter for the given site.
+      description: Update an organization-level BLE asset filter's name, disabled
+        state, or matching criteria.
       operationId: updateOrgAssetFilter
       requestBody:
         content:
@@ -6603,7 +6601,8 @@ paths:
       - Orgs Asset Filters
   /api/v1/orgs/{org_id}/assets:
     get:
-      description: Get List of Org Assets
+      description: List named BLE asset records in this organization, including
+        Bluetooth MAC addresses and optional site, map, or tag metadata.
       operationId: listOrgAssets
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6627,7 +6626,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Asset
+      description: Create a named BLE asset record with a Bluetooth MAC address and
+        optional site, map, or tag metadata.
       operationId: createOrgAsset
       requestBody:
         content:
@@ -6655,8 +6655,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Import Org Assets. \n\nIt can be done via a CSV file or a JSON\
-        \ payload.\n\n#### CSV File Format\n```csv\nname,mac\n\"asset_name\",5c5b53010101\n\
+      description: "Import named BLE assets from a JSON payload or CSV file upload.\
+        \ Each asset record includes at least a name and Bluetooth MAC address.\n\
+        \n#### CSV File Format\n```csv\nname,mac\n\"asset_name\",5c5b53010101\n\
         ```"
       operationId: importOrgAssets
       requestBody:
@@ -6692,7 +6693,8 @@ paths:
       - Orgs Assets
   /api/v1/orgs/{org_id}/assets/{asset_id}:
     delete:
-      description: Delete Org Asset
+      description: Delete a named BLE asset record from this organization by asset
+        ID.
       operationId: deleteOrgAsset
       responses:
         '200':
@@ -6713,7 +6715,8 @@ paths:
       tags:
       - Orgs Assets
     get:
-      description: Get Org Asset Details
+      description: Return one named BLE asset record, including its Bluetooth MAC
+        address and optional site, map, or tag metadata.
       operationId: getOrgAsset
       responses:
         '200':
@@ -6735,7 +6738,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/asset_id'
     put:
-      description: Update Org Asset
+      description: Update a named BLE asset record's name, Bluetooth MAC address,
+        or optional site, map, or tag metadata.
       operationId: updateOrgAsset
       requestBody:
         content:
