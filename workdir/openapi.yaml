@@ -6048,7 +6048,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
     get:
-      description: Get List of Org API Tokens
+      description: List organization API tokens, including display names, scoped
+        privileges, allowed source IPs, creator, and last-use metadata.
       operationId: listOrgApiTokens
       responses:
         '200':
@@ -6069,9 +6070,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Create Org API Token
+      description: 'Create an organization API token with a display name, scoped
+        privileges, and optional source IP restrictions.
 
-        Note that the token key is only available during creation time.'
+        Note that the full token key is only available at creation time.'
       operationId: createOrgApiToken
       requestBody:
         content:
@@ -6096,7 +6098,8 @@ paths:
       - Orgs API Tokens
   /api/v1/orgs/{org_id}/apitokens/{apitoken_id}:
     delete:
-      description: Delete Org API Token
+      description: Delete an organization API token so it can no longer authenticate
+        API requests.
       operationId: deleteOrgApiToken
       responses:
         '200':
@@ -6115,7 +6118,8 @@ paths:
       tags:
       - Orgs API Tokens
     get:
-      description: Get Org API Token
+      description: Return metadata for one organization API token. The full token
+        key is only available at creation time and may only be partially shown afterward.
       operationId: getOrgApiToken
       responses:
         '200':
@@ -6137,7 +6141,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/apitoken_id'
     put:
-      description: Update Org API Token
+      description: Update an organization API token's display name or scoped privileges.
+        Source IP restrictions are defined when the token is created.
       operationId: updateOrgApiToken
       requestBody:
         content:
