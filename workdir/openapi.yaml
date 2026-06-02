@@ -8281,7 +8281,8 @@ paths:
       - Orgs Device Profiles
   /api/v1/orgs/{org_id}/devices:
     get:
-      description: Get List of Org Devices
+      description: List devices in the organization, including APs, switches, gateways,
+        Mist Edges, and other devices managed or monitored by Mist.
       operationId: listOrgDevices
       responses:
         '200':
@@ -8303,7 +8304,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/count:
     get:
-      description: Count by Distinct Attributes of Org Devices
+      description: Count organization device records, optionally grouped by `distinct`
+        and filtered by device identifiers, model, LLDP attributes, Mist Edge, tunnel
+        status, device type, and time range.
       operationId: countOrgDevices
       parameters:
       - description: 'Field used to group this count response. enum: `hostname`, `ip`,
@@ -8431,7 +8434,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/events/count:
     get:
-      description: Count by Distinct Attributes of Org Devices Events
+      description: Count device event records across the organization, optionally grouped
+        by `distinct` and filtered by site, AP, firmware, model, event text, event
+        type, and time range.
       operationId: countOrgDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `apfw`,
@@ -8501,7 +8506,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/events/search:
     get:
-      description: Search Org Devices Events
+      description: Search device event records across the organization with filters
+        for MAC address, model, device type, event text, event type, additional event
+        indices, and time range.
       operationId: searchOrgDeviceEvents
       parameters:
       - description: Filter results by MAC address. Accepts multiple comma-separated
@@ -8585,8 +8592,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/last_config/count:
     get:
-      description: Counts the number of entries in device config history for distinct
-        field with given filters
+      description: Count device config history records across the organization, optionally
+        grouped by `distinct` and filtered by device type and time range.
       operationId: countOrgDeviceLastConfigs
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
@@ -8624,7 +8631,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/last_config/search:
     get:
-      description: Search Device Last Configs
+      description: Search device config history records across the organization with
+        filters for device type, MAC address, name, software version, certificate-expiry
+        duration, and time range.
       operationId: searchOrgDeviceLastConfigs
       parameters:
       - description: 'Filter results by device type. enum: `ap`, `gateway`, `switch`,
@@ -8724,7 +8733,10 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/search:
     get:
-      description: Search Org Devices
+      description: Search organization devices with filters for AP radio attributes,
+        gateway HA attributes, switch EVPN attributes, LLDP data, MAC address, IP
+        address, model, software version, site, Mist Edge, and time range. Set `stats=true`
+        to include device stats in the response.
       operationId: searchOrgDevices
       parameters:
       - description: When `type`==`ap`, Channel of band_24. Accepts multiple comma-separated
@@ -9036,7 +9048,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/summary:
     get:
-      description: Get Org Devices Summary
+      description: Return aggregate organization device counts by device category and
+        assignment state.
       operationId: listOrgDevicesSummary
       responses:
         '200':
@@ -9151,7 +9164,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/devices/versions:
     get:
-      description: Get List of Available Device Versions
+      description: List available firmware versions for organization devices, optionally
+        filtered by device type and model.
       operationId: listOrgAvailableDeviceVersions
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
