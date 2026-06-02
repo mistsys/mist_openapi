@@ -14357,7 +14357,8 @@ paths:
       - Orgs NAC Rules
   /api/v1/orgs/{org_id}/nactags:
     get:
-      description: Get List of Org NAC Tags
+      description: List organization NAC tags, optionally filtering by tag type,
+        name, or match attribute.
       operationId: listOrgNacTags
       parameters:
       - description: 'Filter results by type. enum: `egress_vlan_names`, `gbp_tag`,
@@ -14407,7 +14408,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org NAC Tag
+      description: Create a NAC tag used either as rule-matching criteria or as a
+        result attribute returned when NAC allows access.
       operationId: createOrgNacTag
       requestBody:
         content:
@@ -14432,7 +14434,8 @@ paths:
       - Orgs NAC Tags
   /api/v1/orgs/{org_id}/nactags/{nactag_id}:
     delete:
-      description: Delete Org NAC Tag
+      description: Delete an organization NAC tag by tag ID so it can no longer be
+        used by NAC rules.
       operationId: deleteOrgNacTag
       responses:
         '200':
@@ -14451,7 +14454,9 @@ paths:
       tags:
       - Orgs NAC Tags
     get:
-      description: Get Org NAC Tag
+      description: Retrieve configuration details for a specific NAC tag, including
+        type, match values, RADIUS attributes, VLAN or session results, and portal
+        redirection settings.
       operationId: getOrgNacTag
       responses:
         '200':
@@ -14473,7 +14478,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/nactag_id'
     put:
-      description: Update Org NAC Tag
+      description: Update a NAC tag, including matcher values or result attributes
+        such as RADIUS attributes, VLAN, session timeout, username attribute, or portal
+        redirection.
       operationId: updateOrgNacTag
       requestBody:
         content:
