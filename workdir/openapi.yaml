@@ -5094,7 +5094,8 @@ paths:
       - Orgs Advanced Anti Malware Profiles
   /api/v1/orgs/{org_id}/admins:
     get:
-      description: Get List of people who can manage the Site/Org under the Org
+      description: List administrators that have privileges in this organization
+        hierarchy, including organization, site, or site group scopes.
       operationId: listOrgAdmins
       responses:
         '200':
@@ -5116,7 +5117,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/admins/{admin_id}:
     delete:
-      description: This removes all privileges this admin has against the org
+      description: Remove all privileges this administrator has in the organization
+        hierarchy. This does not delete the administrator account.
       operationId: revokeOrgAdmin
       responses:
         '200':
@@ -5138,7 +5140,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/admin_id'
     put:
-      description: Invite Org Admin
+      description: Update identity fields and privilege assignments for an existing
+        administrator under this organization.
       operationId: updateOrgAdmin
       requestBody:
         content:
