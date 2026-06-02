@@ -4955,7 +4955,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/aamwprofiles:
     get:
-      description: Get List of Advanced Anti Malware Profile (SkyAtp) Profiles
+      description: List organization-level Advanced Anti Malware profiles that define
+        Sky ATP file verdict handling for this organization.
       operationId: listOrgAAMWProfiles
       responses:
         '200':
@@ -4976,7 +4977,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Advanced Anti Malware Profile (SkyAtp) Profiles
+      description: Create an organization-level Advanced Anti Malware profile with
+        Sky ATP verdict threshold, fallback action, file action, and file-category
+        rules.
       operationId: createOrgAAMWProfile
       requestBody:
         content:
@@ -5012,7 +5015,7 @@ paths:
       - Orgs Advanced Anti Malware Profiles
   /api/v1/orgs/{org_id}/aamwprofiles/{aamwprofile_id}:
     delete:
-      description: Delete Advanced Anti Malware Profile (SkyAtp) Profile
+      description: Delete an Advanced Anti Malware profile from this organization.
       operationId: deleteOrgAAMWProfile
       responses:
         '200':
@@ -5031,7 +5034,8 @@ paths:
       tags:
       - Orgs Advanced Anti Malware Profiles
     get:
-      description: Get Advanced Anti Malware Profile (SkyAtp) Profile
+      description: Return an organization Advanced Anti Malware profile, including
+        verdict threshold, actions, and file-category rules.
       operationId: getOrgAAMWProfile
       responses:
         '200':
@@ -5053,7 +5057,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/aamwprofile_id'
     put:
-      description: Update Advanced Anti Malware Profile (SkyAtp) Profile
+      description: Update an organization Advanced Anti Malware profile's Sky ATP
+        verdict threshold, actions, or file-category rules.
       operationId: updateOrgAAMWProfile
       requestBody:
         content:
