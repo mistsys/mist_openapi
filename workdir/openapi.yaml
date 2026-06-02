@@ -18819,7 +18819,7 @@ paths:
       - Orgs Integration SkyATP
   /api/v1/orgs/{org_id}/setting/zscaler/setup:
     delete:
-      description: To delete Zscaler integration
+      description: Remove the Zscaler integration configuration from the organization.
       operationId: deleteOrgZscalerIntegration
       responses:
         '200':
@@ -18838,7 +18838,8 @@ paths:
       tags:
       - Orgs Integration Zscaler
     get:
-      description: To get Zscaler integration
+      description: Return the Zscaler integration configuration, including Zscaler
+        Internet Access cloud name, partner key, and partner administrator username.
       operationId: getOrgZscalerIntegration
       responses:
         '200':
@@ -18859,7 +18860,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: To setup Zscaler integration
+      description: Configure the Zscaler integration with the Zscaler Internet Access
+        cloud name, partner key, and partner administrator credentials used by Mist.
       operationId: setupOrgZscalerIntegration
       requestBody:
         content:
