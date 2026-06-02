@@ -18570,10 +18570,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Provide Customer Bucket Name\n\nSetting up Custom PCAP Bucket\
-        \ Involves the following:\n* provide the bucket name\n* we\u2019ll attempt\
-        \ to write a file MIST_TOKEN\n* you have to verify the ownership of the bucket\
-        \ by providing the content of the MIST_TOKEN"
+      description: Start custom packet capture bucket setup by saving the bucket
+        name and having Mist write a `MIST_TOKEN` file to the bucket. Complete ownership
+        verification with the verify endpoint by submitting the token contents.
       operationId: setOrgCustomBucket
       requestBody:
         content:
@@ -18605,10 +18604,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Verify Customer PCAP Bucket
-
-
-        **Note**: If successful, a "VERIFIED" file will be created in the bucket'
+      description: Verify ownership of a custom packet capture bucket by submitting
+        the token read from the `MIST_TOKEN` file. If verification succeeds, Mist
+        creates a `VERIFIED` file in the bucket.
       operationId: verifyOrgCustomBucket
       requestBody:
         content:
