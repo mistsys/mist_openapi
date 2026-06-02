@@ -3056,10 +3056,11 @@ paths:
       - Admins
   /api/v1/login:
     post:
-      description: "Log in with email/password.\nWhen 2FA is enabled, there are two\
-        \ ways to login:\n1. login with two_factor token (with Google Authenticator,\
-        \ etc) \n2. login with email/password, generate the token, and use /login/two_factor\
-        \ with the token"
+      description: "Authenticate an administrator with email and password. A successful\
+        \ login creates the browser session cookies, including the `csrftoken` value\
+        \ used with the `X-CSRFToken` header on later API requests.\n\nWhen 2FA is\
+        \ enabled, either include the `two_factor` code in this request or submit\
+        \ the first factor here and complete the login with [Two Factor]($e/Admins%20Login/twoFactor)."
       operationId: login
       requestBody:
         content:
@@ -3087,7 +3088,9 @@ paths:
       - Admins Login
   /api/v1/login/lookup:
     post:
-      description: Login Lookup
+      description: Check the login method for an administrator email address. This
+        public lookup is mainly used by UI clients to determine whether the user should
+        continue with local login or be redirected to SSO.
       operationId: lookup
       requestBody:
         content:
@@ -3118,7 +3121,8 @@ paths:
       - Admins Lookup
   /api/v1/login/oauth/{provider}:
     delete:
-      description: Unlink OAuth2 Provider
+      description: Unlink the specified OAuth2 provider from the authenticated administrator
+        account so it can no longer be used for that account's OAuth login.
       operationId: unlinkOauth2Provider
       responses:
         '200':
@@ -3137,7 +3141,9 @@ paths:
       tags:
       - Admins Login - OAuth2
     get:
-      description: Obtain Authorization URL for Login
+      description: Return the provider authorization URL used to start an OAuth2 login
+        or account-linking flow. When `forward` is provided, the provider redirects
+        back to that callback URL after authorization.
       operationId: getOauth2AuthorizationUrlForLogin
       parameters:
       - description: Callback URL used after completing the OAuth login flow
@@ -3174,7 +3180,8 @@ paths:
         - google
         type: string
     post:
-      description: Login via OAuth2
+      description: Complete an OAuth2 login by exchanging the provider authorization
+        code for a Mist administrator session.
       operationId: loginOauth2
       requestBody:
         content:
@@ -3205,7 +3212,8 @@ paths:
       - Admins Login - OAuth2
   /api/v1/login/two_factor:
     post:
-      description: Send 2FA Code
+      description: Complete a two-factor login by submitting the 2FA code after the
+        initial email/password step has created a pending login session.
       operationId: twoFactor
       requestBody:
         content:
@@ -3235,7 +3243,8 @@ paths:
       - Admins Login
   /api/v1/logout:
     post:
-      description: Logout
+      description: End the current authenticated administrator session and invalidate
+        the related login cookies.
       operationId: logout
       responses:
         '200':
@@ -3257,7 +3266,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/secret'
     post:
-      description: Verify secret
+      description: Activate a mobile SDK invite by verifying the invite secret and
+        binding it to the supplied device identifier. The response returns the device-specific
+        secret used by the mobile SDK client.
       operationId: activateSdkInvite
       requestBody:
         content:
