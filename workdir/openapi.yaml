@@ -18180,7 +18180,9 @@ paths:
       - Orgs Integration Cradlepoint
   /api/v1/orgs/{org_id}/setting/jse/info:
     get:
-      description: Retrieves the list of JSE orgs associated with the account.
+      description: Return the JSE organizations associated with the configured account.
+        Use the returned organization names when selecting JSE provider options for
+        secure edge tunnels.
       operationId: getOrgJseInfo
       responses:
         '200':
@@ -18202,7 +18204,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/setting/jse/setup:
     delete:
-      description: Delete JSE Integration
+      description: Remove the JSE integration configuration from the organization.
       operationId: deleteOrgJseIntegration
       responses:
         '200':
@@ -18221,7 +18223,8 @@ paths:
       tags:
       - Orgs Integration JSE
     get:
-      description: Get Org JSE Integration
+      description: Return the JSE integration configuration, including the cloud
+        hostname, integration username, and associated JSE organization names.
       operationId: getOrgJseIntegration
       responses:
         '200':
@@ -18242,10 +18245,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "In JSE UI: \n1. Create custom role with Read access to service_location\
-        \ and RW access to site and IPSec profile APIs. \n2. Create a user with the\
-        \ above custom role. - email: john@abc.com \n3. Activate the user in the JSE\
-        \ account. \n4. Create the service locations on the JSE account."
+      description: Configure the JSE integration with the JSE cloud hostname and
+        integration-user credentials. In JSE, use a custom role with read access to
+        `service_location` and read-write access to site and IPsec profile APIs,
+        then create and activate the integration user and service locations.
       operationId: setupOrgJseIntegration
       requestBody:
         content:
@@ -18278,7 +18281,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Link Juniper Accounts
+      description: Link a Juniper account to the organization using Juniper account
+        credentials. Linked accounts are returned in organization settings and can
+        be used by Juniper integrations.
       operationId: linkOrgToJuniperJuniperAccount
       requestBody:
         content:
@@ -18308,9 +18313,9 @@ paths:
       - Orgs Integration Juniper
   /api/v1/orgs/{org_id}/setting/juniper/unlink_account:
     delete:
-      description: 'Unlink Juniper Customer ID
-
-        `linked_by` field is only required if there are duplicate account_names.'
+      description: Unlink a Juniper customer account from the organization. The `linked_by`
+        field is required only when multiple linked accounts share the same account
+        name.
       operationId: unlinkOrgFromJuniperCustomerId
       requestBody:
         content:
