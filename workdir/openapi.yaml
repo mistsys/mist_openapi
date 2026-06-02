@@ -19992,8 +19992,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Export IDTokens from Mist to import into Conductor to securely
-        allow SSR devices during onboarding
+      description: Export SSR ID tokens for the requested device MAC addresses so
+        they can be imported into Conductor during SSR onboarding.
       operationId: exportOrgSsrIdTokens
       requestBody:
         content:
@@ -20019,7 +20019,9 @@ paths:
       - Orgs Devices - SSR
   /api/v1/orgs/{org_id}/ssr/register_cmd:
     get:
-      description: SSR devices can be managed/adopted by Mist.
+      description: Return the registration token and conductor or router commands
+        used to register SSR routers with Mist. The optional TTL controls token validity,
+        and asset IDs can restrict registration to specific assets.
       operationId: getOrgSsrRegistrationCommands
       parameters:
       - description: Token validity duration in seconds. Defaults to 1 year (31536000
@@ -20057,7 +20059,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/ssr/upgrade:
     get:
-      description: Get List of Org SSR Upgrades
+      description: List SSR firmware upgrade jobs for the organization, including
+        status, rollout strategy, target versions, release channel, and device counts.
       operationId: listOrgSsrUpgrades
       responses:
         '200':
@@ -20078,7 +20081,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Upgrade Org SSRs
+      description: Create an SSR firmware upgrade job for selected devices, with
+        firmware version or channel, rollout strategy, and optional download or reboot
+        timing.
       operationId: upgradeOrgSsrs
       requestBody:
         content:
@@ -20112,7 +20117,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/ssr/upgrade/{upgrade_id}/cancel:
     get:
-      description: Get Specific Org SSR Upgrade
+      description: Return detailed status for an SSR firmware upgrade job, including
+        target device IDs grouped by upgrade status.
       operationId: getOrgSsrUpgrade
       responses:
         '200':
@@ -20134,8 +20140,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
     post:
-      description: "Best effort to cancel an upgrade. Devices which are already upgraded\
-        \ wont be touched\u21B5\n"
+      description: Cancel an SSR firmware upgrade job on a best-effort basis. Devices
+        that have already upgraded are not changed.
       operationId: cancelOrgSsrUpgrade
       responses:
         '200':
@@ -20155,7 +20161,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/ssr/versions:
     get:
-      description: Get available version for SSR
+      description: List SSR firmware versions available for upgrade, optionally filtered
+        by release channel and one or more SSR MAC addresses.
       operationId: listOrgAvailableSsrVersions
       parameters:
       - $ref: '#/components/parameters/ssr_version_channel'
