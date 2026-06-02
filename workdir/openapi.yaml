@@ -2187,7 +2187,8 @@ paths:
       - Constants Definitions
   /api/v1/installer/orgs/{org_id}/alarmtemplates:
     get:
-      description: Get List of alarm templates
+      description: Return alarm templates available to installer workflows in the
+        organization.
       operationId: listInstallerAlarmTemplates
       responses:
         '200':
@@ -2209,7 +2210,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/installer/orgs/{org_id}/deviceprofiles:
     get:
-      description: Get List of Device Profiles
+      description: Return device profiles that installers can use when provisioning
+        recently claimed devices, optionally filtered by device type.
       operationId: listInstallerDeviceProfiles
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
@@ -2237,7 +2239,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/installer/orgs/{org_id}/devices:
     get:
-      description: Get List of recently claimed devices
+      description: Return recently claimed devices visible to installer workflows,
+        with optional filters for model, site name, or site identifier.
       operationId: listInstallerListOfRecentlyClaimedDevices
       parameters:
       - description: Filter results by device model
@@ -2283,8 +2286,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: This mirrors `POST /api/v1/orgs/{org_id}/inventory` (see Inventory
-        API)
+      description: Claim devices into the organization inventory by activation code
+        through the installer workflow.
       operationId: claimInstallerDevices
       requestBody:
         content:
@@ -2315,7 +2318,8 @@ paths:
       - Installer
   /api/v1/installer/orgs/{org_id}/devices/{device_mac}:
     delete:
-      description: Unassign recently claimed devices
+      description: Unassign a recently claimed device from its current site so it
+        can be provisioned again through the installer workflow.
       operationId: unassignInstallerRecentlyClaimedDevice
       responses:
         '200':
@@ -2337,9 +2341,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     put:
-      description: "Provision or Replace a device \n\nIf replacing_mac is in the request\
+      description: "Provision or replace an installer-managed device. \n\nIf replacing_mac is in the request\
         \ payload, other attributes are ignored, we attempt to replace existing device\
-        \ (with mac replacing_mac) with the inventory device being configured. The\
+        \ (with MAC address `replacing_mac`) with the inventory device being configured. The\
         \ replacement device must be in the inventory but not assigned, and the replacing_mac\
         \ device must be assigned to a site, and satisfy grace period requirements.\
         \ The Device replaced will become unassigned."
@@ -2382,8 +2386,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     post:
-      description: "Locate a Device by blinking it\u2019s LED, it\u2019s a persisted\
-        \ state that has to be stopped by calling Stop Locating API"
+      description: Start locating an installer-managed device by blinking its LED.
+        The locate state persists until [Stop Locating Installer Device]($e/Installer/stopInstallerLocateDevice)
+        is called.
       operationId: startInstallerLocateDevice
       responses:
         '200':
@@ -2406,7 +2411,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     post:
-      description: Stop it
+      description: Stop the locate LED state for an installer-managed device.
       operationId: stopInstallerLocateDevice
       responses:
         '200':
@@ -2426,7 +2431,8 @@ paths:
       - Installer
   /api/v1/installer/orgs/{org_id}/devices/{device_mac}/{image_name}:
     delete:
-      description: Delete image
+      description: Remove a previously uploaded image associated with an installer-managed
+        device, such as an installation photo or device placement image.
       operationId: deleteInstallerDeviceImage
       responses:
         '200':
@@ -2449,7 +2455,8 @@ paths:
     - $ref: '#/components/parameters/image_name'
     - $ref: '#/components/parameters/device_mac'
     post:
-      description: Add image
+      description: Upload an image associated with an installer-managed device using
+        `multipart/form-data`.
       operationId: addInstallerDeviceImage
       requestBody:
         content:
@@ -2475,11 +2482,11 @@ paths:
       - Installer
   /api/v1/installer/orgs/{org_id}/devices/{fpc0_mac}/vc:
     get:
-      description: 'Get VC Status
+      description: 'Return Virtual Chassis status for an installer-managed switch,
+        including topology and member statistics.
 
 
-        The API returns a combined view of the VC status which includes topology and
-        stats'
+        The response is a combined view of the Virtual Chassis state.'
       operationId: getInstallerDeviceVirtualChassis
       responses:
         '200':
@@ -2699,7 +2706,8 @@ paths:
       - Installer
   /api/v1/installer/orgs/{org_id}/rftemplates:
     get:
-      description: Get List of RF Templates
+      description: Return RF template names available to installer workflows for site
+        creation or updates.
       operationId: listInstallerRfTemplatesNames
       responses:
         '200':
@@ -2721,7 +2729,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/installer/orgs/{org_id}/sitegroups:
     get:
-      description: Get List of Site Groups
+      description: Return site groups that installers can assign when creating or
+        updating sites.
       operationId: listInstallerSiteGroups
       responses:
         '200':
@@ -2743,7 +2752,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/installer/orgs/{org_id}/sites:
     get:
-      description: Get List of Sites
+      description: Return sites visible to installer workflows for device assignment
+        and map operations.
       operationId: listInstallerSites
       responses:
         '200':
@@ -2768,9 +2778,10 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/site_name'
     put:
-      description: Often the Installers are asked to assign Devices to Sites. The
-        Sites can either be pre-created or created/modified by the Installer. If this
-        is an update, the same grace period also applies.
+      description: Use `site_name` to create a site when it does not exist, or to
+        update installer-editable fields on an existing site. Installers use these
+        sites for device assignment, and grace-period rules also apply when updating
+        an existing site.
       operationId: createOrUpdateInstallerSites
       requestBody:
         content:
@@ -2810,7 +2821,8 @@ paths:
       - Installer
   /api/v1/installer/orgs/{org_id}/sites/{site_name}/maps:
     get:
-      description: Get List of Maps
+      description: Return maps for an installer-managed site, used for floorplan selection
+        and AP placement during provisioning.
       operationId: listInstallerMaps
       responses:
         '200':
@@ -2836,9 +2848,10 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/site_name'
     post:
-      description: Import data from files is a multipart POST which has an file, an
-        optional json, and an optional csv, to create floorplan, assign & place ap
-        if name or mac matches
+      description: Import a site floorplan and optional placement data from multipart
+        files. The request can include an image file, optional JSON, and optional
+        CSV data to create the map and assign or place APs when names or MAC addresses
+        match.
       operationId: importInstallerMap
       requestBody:
         content:
@@ -2863,7 +2876,8 @@ paths:
       - Installer
   /api/v1/installer/orgs/{org_id}/sites/{site_name}/maps/{map_id}:
     delete:
-      description: Delete Map
+      description: Remove a map or floorplan from an installer-managed site. This
+        removes the map used for AP placement, but does not delete the site.
       operationId: deleteInstallerMap
       responses:
         '200':
@@ -2886,7 +2900,8 @@ paths:
     - $ref: '#/components/parameters/site_name'
     - $ref: '#/components/parameters/map_id'
     post:
-      description: Create a MAP
+      description: Define a map or floorplan for an installer-managed site, including
+        metadata used for AP placement and site visualization.
       operationId: createInstallerMap
       requestBody:
         content:
@@ -2963,7 +2978,8 @@ paths:
       tags:
       - Installer
     put:
-      description: Update map
+      description: Modify map or floorplan metadata for an installer-managed site,
+        including dimensions, orientation, and placement-related settings.
       operationId: updateInstallerMap
       requestBody:
         content:
@@ -2989,10 +3005,9 @@ paths:
       - Installer
   /api/v1/installer/sites/{site_name}/optimize:
     get:
-      description: "After installation is considered complete (APs are placed on maps,\
-        \ all powered up), you can trigger an optimize operation where RRM will kick\
-        \ in (and maybe other things in the future) before it\u2019s automatically\
-        \ scheduled."
+      description: Trigger RF optimization after installation is complete, such as
+        after APs have been placed on maps and powered on. This starts RRM before
+        the next automatic optimization schedule.
       operationId: optimizeInstallerRrm
       responses:
         '200':
