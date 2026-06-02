@@ -14809,7 +14809,8 @@ paths:
       - Orgs Networks
   /api/v1/orgs/{org_id}/networktemplates:
     get:
-      description: Get List of Org Network Templates
+      description: List organization network templates that provide switch network,
+        port, management, routing, NAC, and service defaults for sites or site groups.
       operationId: listOrgNetworkTemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -14833,7 +14834,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Update Org Network Templates
+      description: Create an organization network template with network, port usage,
+        switch management, routing, NAC, and service defaults.
       operationId: createOrgNetworkTemplate
       requestBody:
         content:
@@ -14999,7 +15001,8 @@ paths:
       - Orgs Network Templates
   /api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}:
     delete:
-      description: Delete Org Network Template
+      description: Delete an organization network template by template ID so it can
+        no longer be applied to sites or site groups.
       operationId: deleteOrgNetworkTemplate
       responses:
         '200':
@@ -15018,7 +15021,9 @@ paths:
       tags:
       - Orgs Network Templates
     get:
-      description: Get Org Network Templates Details
+      description: Retrieve details for a specific organization network template,
+        including network, port usage, switch management, routing, NAC, and service
+        defaults.
       operationId: getOrgNetworkTemplate
       responses:
         '200':
@@ -15044,7 +15049,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/networktemplate_id'
     put:
-      description: Update Org Network Template
+      description: Update an organization network template, including network, port
+        usage, switch management, routing, NAC, and service defaults.
       operationId: updateOrgNetworkTemplate
       parameters: []
       requestBody:
