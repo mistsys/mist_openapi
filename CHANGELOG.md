@@ -28,7 +28,6 @@ All notable changes to this project will be documented in this file.
     - `GET /api/v1/sites/{site_id}/nac_clients/count`
     - `GET /api/v1/sites/{site_id}/nac_clients/events/count`
     - `GET /api/v1/sites/{site_id}/services/events/count`
-  - Removed invalid `text` query parameter from `GET /api/v1/orgs/{org_id}/devices/events/search`
   - Added `mac` query parameter to `GET /api/v1/orgs/{org_id}/nac_clients/events/count`
   - Added `ip` query parameter to `GET /api/v1/orgs/{org_id}/wired_clients/search`
 
