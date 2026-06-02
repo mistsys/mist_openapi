@@ -9252,7 +9252,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/events/system/count:
     get:
-      description: Count Org System Events
+      description: Count organization system event records, optionally grouped by `distinct`
+        and filtered by time range.
       operationId: countOrgSystemEvents
       parameters:
       - description: Field used to group this count response
@@ -9286,7 +9287,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/events/system/search:
     get:
-      description: Search Org System Events
+      description: Search organization system event records with time range, sorting,
+        and pagination controls.
       operationId: searchOrgSystemEvents
       parameters:
       - $ref: '#/components/parameters/limit'
