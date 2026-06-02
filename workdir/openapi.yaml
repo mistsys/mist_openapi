@@ -5193,7 +5193,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Ack multiple Org Alarms
+      description: Acknowledge multiple organization alarms by alarm ID and optionally
+        attach a note to the acknowledgement.
       operationId: ackOrgMultipleAlarms
       requestBody:
         content:
@@ -5228,11 +5229,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Ack all Org Alarms
-
-
-        **N.B.**: Batch size for multiple alarm ack and unack has to be less or or
-        equal to 1000.'
+      description: 'Acknowledge all alarms in the organization and optionally attach
+        a note. For targeted bulk updates, use [Ack Org Multiple Alarms]($e/Orgs%20Alarms/ackOrgMultipleAlarms)
+        with up to 1000 alarm IDs per request.'
       operationId: ackOrgAllAlarms
       requestBody:
         content:
@@ -5261,7 +5260,8 @@ paths:
       - Orgs Alarms
   /api/v1/orgs/{org_id}/alarms/count:
     get:
-      description: Count by Distinct Attributes of Org Alarms
+      description: Count alarms across the organization, optionally grouped by the
+        `distinct` field and filtered by time range.
       operationId: countOrgAlarms
       parameters:
       - description: Field used to group this count response
@@ -5295,7 +5295,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/alarms/search:
     get:
-      description: Search Org Alarms
+      description: Search alarms across the organization with filters for site, alarm
+        group, severity, type, acknowledgement state, acknowledgement admin, and
+        time range.
       operationId: searchOrgAlarms
       parameters:
       - description: Filter results by site identifier. Accepts multiple comma-separated
@@ -5374,7 +5376,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Unack multiple Org Alarms
+      description: Remove acknowledgement from multiple organization alarms by alarm
+        ID and optionally attach a note.
       operationId: unackOrgMultipleAlarms
       requestBody:
         content:
@@ -5409,11 +5412,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Unack all Org Alarms
-
-
-        **N.B.**: Batch size for multiple alarm ack and unack has to be less or or
-        equal to 1000.'
+      description: 'Remove acknowledgement from all alarms in the organization and
+        optionally attach a note. For targeted bulk updates, use [Unack Org Multiple
+        Alarms]($e/Orgs%20Alarms/unackOrgMultipleAlarms) with up to 1000 alarm IDs
+        per request.'
       operationId: unackOrgAllAlarms
       requestBody:
         content:
@@ -5446,7 +5448,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/alarm_id'
     post:
-      description: Ack Org Alarm
+      description: Acknowledge a single organization alarm and optionally attach
+        a note to the acknowledgement.
       operationId: ackOrgAlarm
       requestBody:
         content:
