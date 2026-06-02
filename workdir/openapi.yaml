@@ -5479,7 +5479,8 @@ paths:
       - Orgs Alarms
   /api/v1/orgs/{org_id}/alarmtemplates:
     get:
-      description: Get List of Org Alarm Templates
+      description: List alarm templates defined for the organization, including default
+        delivery settings and per-alarm rule configuration.
       operationId: listOrgAlarmTemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -5503,11 +5504,14 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Available rules can be found in [List Alarm Definitions#]($e/Events%20Definitions/listAlarmDefinitions)
+      description: 'Create an organization alarm template that defines default delivery
+        settings and per-alarm rule overrides.
+
+        Available rules can be found in [List Alarm Definitions]($e/Events%20Definitions/listAlarmDefinitions)
 
 
-        The delivery dict is only required if different from the template delivery
-        settings.'
+        The `delivery` object is only required when it differs from the template
+        delivery settings.'
       operationId: createOrgAlarmTemplate
       requestBody:
         content:
@@ -5533,7 +5537,8 @@ paths:
       - Orgs Alarm Templates
   /api/v1/orgs/{org_id}/alarmtemplates/suppress:
     delete:
-      description: Un-Suppress Suppressed Alarms
+      description: Remove alarm suppression entries currently configured for this
+        organization.
       operationId: unsuppressOrgSuppressedAlarms
       responses:
         '200':
@@ -5552,7 +5557,8 @@ paths:
       tags:
       - Orgs Alarm Templates
     get:
-      description: Get List of Org Alarms Currently Suppressed
+      description: List alarm suppression entries currently configured for this organization,
+        optionally filtered by organization-wide or site-specific scope.
       operationId: listOrgSuppressedAlarms
       parameters:
       - description: 'Filter results by scope. enum: `org`, `site`'
@@ -5579,8 +5585,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: In certain situations, for example, scheduled maintenance, you
-        may want to suspend alarms to be triggered against Sites for a period of time.
+      description: Create or schedule an alarm suppression window for the organization
+        or selected sites, for example during planned maintenance.
       operationId: suppressOrgAlarm
       requestBody:
         content:
@@ -5623,7 +5629,8 @@ paths:
       - Orgs Alarm Templates
   /api/v1/orgs/{org_id}/alarmtemplates/{alarmtemplate_id}:
     delete:
-      description: Delete Org Alarm Template
+      description: Delete an organization alarm template by template ID from this
+        organization.
       operationId: deleteOrgAlarmTemplate
       responses:
         '200':
@@ -5642,7 +5649,8 @@ paths:
       tags:
       - Orgs Alarm Templates
     get:
-      description: Get Org Alarm Template Details
+      description: Return one organization alarm template, including default delivery
+        settings and per-alarm rule overrides.
       operationId: getOrgAlarmTemplate
       responses:
         '200':
@@ -5664,7 +5672,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/alarmtemplate_id'
     put:
-      description: Update Org Alarm Template
+      description: Update an organization alarm template's default delivery settings
+        or per-alarm rule overrides.
       operationId: updateOrgAlarmTemplate
       requestBody:
         content:
