@@ -6904,7 +6904,8 @@ paths:
       - Orgs Antivirus Profiles
   /api/v1/orgs/{org_id}/cert:
     get:
-      description: Get Org Certificates
+      description: Return the current organization CA certificate and, when available,
+        the pending auto-renewed certificate scheduled to replace it.
       operationId: listOrgCertificates
       responses:
         '200':
@@ -6928,7 +6929,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Replace the current org cert with the pending cert generated previously
+      description: Replace the current organization CA certificate with the pending
+        certificate generated previously.
       operationId: rotateOrgCertificate
       responses:
         '200':
@@ -6950,7 +6952,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Clear Org Certificates
+      description: Clear existing organization certificates and trigger certificate
+        regeneration for the organization.
       operationId: clearOrgCertificates
       responses:
         '200':
@@ -6972,7 +6975,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Claim Org licenses / activation codes
+      description: Claim organization licenses or activation codes, optionally running
+        the claim asynchronously and specifying the claim scope.
       operationId: claimOrgLicense
       requestBody:
         content:
@@ -7003,7 +7007,8 @@ paths:
       - Orgs Licenses
   /api/v1/orgs/{org_id}/claim/status:
     get:
-      description: Get Processing Status for Async Claim
+      description: Return processing status for an asynchronous organization license
+        claim, optionally including per-device license details.
       operationId: GetOrgLicenseAsyncClaimStatus
       parameters:
       - description: Whether to include license details in the claim status response
