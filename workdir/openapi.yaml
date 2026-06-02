@@ -16225,7 +16225,8 @@ paths:
       - Orgs Psk Portals
   /api/v1/orgs/{org_id}/psks:
     get:
-      description: Get List of Org Psks
+      description: List organization personal PSKs for WLAN access, optionally filtering
+        by name, SSID, or role.
       operationId: listOrgPsks
       parameters:
       - description: Filter results by name. Accepts multiple comma-separated values.
@@ -16270,7 +16271,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Create Org PSK
+      description: 'Create an organization personal PSK for WLAN access, including
+        SSID, passphrase, usage mode, optional client MAC binding, role, VLAN, and
+        expiration settings.
 
 
 
@@ -16308,7 +16311,8 @@ paths:
       tags:
       - Orgs Psks
     put:
-      description: Update Multiple PSKs
+      description: Update multiple organization personal PSKs in one request, including
+        passphrase, usage mode, role, VLAN, expiration, and notification settings.
       operationId: updateOrgMultiplePsks
       requestBody:
         content:
@@ -16346,11 +16350,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Delete Org PSK List
+      description: 'Delete one or more organization PSKs by ID.
 
 
-        Delete list of psks on the org. This API accepts single string or list of
-        strings'
+        The request accepts a single PSK ID string or a list of PSK ID strings.'
       operationId: deleteOrgPskList
       requestBody:
         content:
@@ -16377,7 +16380,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Import PSK from CSV file or JSON\n\n##\_CSV File Format\n```\n\
+      description: "Import organization PSKs from a CSV file or JSON payload.\n\n##\_\
+        CSV File Format\n```\n\
         PSK Import CSV File Format:\nname,ssid,passphrase,usage,vlan_id,mac,max_usage,role,expire_time,notify_expiry,expiry_notification_time,notify_on_create_or_edit,email\n\
         Common,warehouse,foryoureyesonly,single,35,a31425f31278,0,student,1618594236\n\
         Justin,reception,visible,multi,1002,200,teacher,1618594236\nCommon2,ssid,1245678-xx,single,35,a31425f31278,0,student,1618594236,true,7,true,admin@test.com\n\
@@ -16409,7 +16413,8 @@ paths:
       - Orgs Psks
   /api/v1/orgs/{org_id}/psks/{psk_id}:
     delete:
-      description: Delete Org PSK
+      description: Delete an organization personal PSK by PSK ID so clients can no
+        longer authenticate with that key.
       operationId: deleteOrgPsk
       responses:
         '200':
@@ -16428,7 +16433,8 @@ paths:
       tags:
       - Orgs Psks
     get:
-      description: Get Org PSK Details
+      description: Retrieve details for an organization personal PSK, including SSID,
+        usage mode, MAC binding, role, VLAN, expiration, and notification settings.
       operationId: getOrgPsk
       responses:
         '200':
@@ -16450,7 +16456,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/psk_id'
     put:
-      description: Update Org PSK
+      description: Update an organization personal PSK, including passphrase, usage
+        mode, MAC binding, role, VLAN, expiration, and notification settings.
       operationId: updateOrgPsk
       requestBody:
         content:
@@ -16479,8 +16486,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/psk_id'
     post:
-      description: "Delete `old_passphrase` from PSK. \nIf successful, response is\
-        \ same as GET, returns the PSK with `old_passphrase` removed."
+      description: "Remove the stored `old_passphrase` from a PSK after rotation.\
+        \ \nIf successful, the response returns the PSK with `old_passphrase` removed."
       operationId: deleteOrgPskOldPassphrase
       responses:
         '200':
