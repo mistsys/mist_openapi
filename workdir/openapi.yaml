@@ -1585,11 +1585,11 @@ tags:
 paths:
   /api/v1/const/alarm_defs:
     get:
-      description: 'Get List of brief definitions of all the supported alarm types.
-        The example field contains an example payload as you would receive in the
-        alarm webhook output.
+      description: 'Return alarm type definitions used by alarm search results, alarm
+        templates, and the `alarm` webhook topic. The `example` field shows representative
+        webhook payload content.
 
-        HA cluster node names will be specified in the `node` field, if applicable.'
+        HA cluster node names are returned in the `node` field, when applicable.'
       operationId: listAlarmDefinitions
       responses:
         '200':
@@ -1609,7 +1609,8 @@ paths:
       - Constants Events
   /api/v1/const/ap_channels:
     get:
-      description: Get List of List of Available channels per country code
+      description: Return supported AP radio channels for the requested country code,
+        based on the regulatory domain used by Mist AP configuration.
       operationId: listApChannels
       parameters:
       - $ref: '#/components/parameters/country_code'
@@ -1631,7 +1632,8 @@ paths:
       - Constants Definitions
   /api/v1/const/ap_esl_versions:
     get:
-      description: Get Available AP ESL Versions
+      description: Return AP firmware versions available for Electronic Shelf Label
+        (ESL) support.
       operationId: listApLEslVersions
       responses:
         '200':
@@ -1651,7 +1653,8 @@ paths:
       - Constants Definitions
   /api/v1/const/ap_led_status:
     get:
-      description: Get List of AP LED definition
+      description: Return AP LED status definitions, including the values used to
+        describe LED behavior.
       operationId: listApLedDefinition
       responses:
         '200':
@@ -1671,9 +1674,8 @@ paths:
       - Constants Definitions
   /api/v1/const/app_categories:
     get:
-      description: Get List of definitions of all the supported Application Categories.
-        The example field contains an example payload as you would receive in the
-        alarm webhook output.
+      description: Return supported application categories used for application identification,
+        traffic classification, and policy matching.
       operationId: listAppCategoryDefinitions
       responses:
         '200':
@@ -1693,9 +1695,8 @@ paths:
       - Constants Definitions
   /api/v1/const/app_subcategories:
     get:
-      description: Get List of definitions of all the supported Application sub-categories.
-        The example field contains an example payload as you would receive in the
-        alarm webhook output.
+      description: Return supported application subcategories used for application
+        identification, traffic classification, and policy matching.
       operationId: listAppSubCategoryDefinitions
       responses:
         '200':
@@ -1715,7 +1716,8 @@ paths:
       - Constants Definitions
   /api/v1/const/applications:
     get:
-      description: Get List of a list of applications that Juniper-Mist Devices recognize
+      description: Return applications recognized by Juniper Mist devices for traffic
+        classification and application analytics.
       operationId: listApplications
       responses:
         '200':
@@ -1735,7 +1737,8 @@ paths:
       - Constants Definitions
   /api/v1/const/client_events:
     get:
-      description: Get List of List of available Client Events
+      description: Return client event definitions used by client event search and
+        count APIs, including event keys and metadata.
       operationId: listClientEventsDefinitions
       responses:
         '200':
@@ -1755,7 +1758,8 @@ paths:
       - Constants Events
   /api/v1/const/countries:
     get:
-      description: Get List of available Country Codes
+      description: Return supported country codes for Mist configuration. Set `extend=true`
+        to include additional country codes when available.
       operationId: listCountryCodes
       parameters:
       - description: Will include more country codes if true
@@ -1782,7 +1786,8 @@ paths:
       - Constants Definitions
   /api/v1/const/default_gateway_config:
     get:
-      description: Generate Default Gateway Config
+      description: Generate the default gateway configuration for the requested model
+        and HA mode.
       operationId: getGatewayDefaultConfig
       parameters:
       - description: Device model for which to generate the default gateway config.
@@ -1818,7 +1823,9 @@ paths:
       - Constants Models
   /api/v1/const/device_events:
     get:
-      description: Get list of available Device Events
+      description: Return device event definitions used by device event search and
+        count APIs and the `device-events` webhook topic, including event keys and
+        metadata.
       operationId: listDeviceEventsDefinitions
       responses:
         '200':
@@ -1838,7 +1845,8 @@ paths:
       - Constants Events
   /api/v1/const/device_models:
     get:
-      description: Get list of AP device models for the Mist Site
+      description: Return AP, Switch and Gateway device models supported by Mist for device inventory,
+        claiming, and configuration workflows.
       operationId: listDeviceModels
       responses:
         '200':
@@ -1858,19 +1866,9 @@ paths:
       - Constants Models
   /api/v1/const/fingerprint_types:
     get:
-      description: 'Get List of supported fingerprint attribute values
-
-        * family
-
-        * model
-
-        * mfg
-
-        * os_type
-
-
-        This information can be used in the [Mist NAC Rules]($h/Orgs%20NAC%20Rules/_overview)
-        `matching` attribute.'
+      description: Return supported client fingerprint attribute values (`family`,
+        `model`, `mfg`, and `os_type`) that can be used in [Mist NAC Rules]($h/Orgs%20NAC%20Rules/_overview)
+        `matching` conditions.
       operationId: listFingerprintTypes
       responses:
         '200':
@@ -1890,7 +1888,7 @@ paths:
       - Constants Definitions
   /api/v1/const/gateway_applications:
     get:
-      description: Get the full list of applications that we recognize
+      description: Return applications recognized by Mist gateways for traffic classification.
       operationId: listGatewayApplications
       responses:
         '200':
@@ -1910,7 +1908,8 @@ paths:
       - Constants Definitions
   /api/v1/const/insight_metrics:
     get:
-      description: List Insight Metrics
+      description: Return supported insight metric names and metadata used by insight
+        and SLE APIs.
       operationId: listInsightMetrics
       responses:
         '200':
@@ -1930,7 +1929,8 @@ paths:
       - Constants Definitions
   /api/v1/const/languages:
     get:
-      description: Get List of Languages
+      description: Return supported language codes for localized Mist configuration
+        and user-facing portals.
       operationId: listSiteLanguages
       responses:
         '200':
@@ -1950,7 +1950,8 @@ paths:
       - Constants Definitions
   /api/v1/const/license_types:
     get:
-      description: Get License Types
+      description: Return Mist license type definitions used by inventory and subscription
+        APIs.
       operationId: listLicenseTypes
       responses:
         '200':
@@ -1970,7 +1971,8 @@ paths:
       - Constants Definitions
   /api/v1/const/marvisclient_versions:
     get:
-      description: Get List of the available Marvis Client Versions.
+      description: Return available Marvis Client application versions for tracking
+        or managing Marvis Client deployments.
       operationId: listMarvisClientVersions
       responses:
         '200':
@@ -1990,7 +1992,8 @@ paths:
       - Constants Definitions
   /api/v1/const/mxedge_events:
     get:
-      description: Get List of available Mist Edge Events
+      description: Return Mist Edge event definitions used by Mist Edge event search
+        and count APIs, and `mexedge-events` webhook topic.
       operationId: listMxEdgeEventsDefinitions
       responses:
         '200':
@@ -2010,7 +2013,8 @@ paths:
       - Constants Events
   /api/v1/const/mxedge_models:
     get:
-      description: Get List of available Mx Edge models
+      description: Return Mist Edge models supported by Mist for inventory and configuration
+        workflows.
       operationId: listMxEdgeModels
       responses:
         '200':
@@ -2030,7 +2034,8 @@ paths:
       - Constants Models
   /api/v1/const/nac_events:
     get:
-      description: Get List of List of available NAC Client Events
+      description: Return NAC client event definitions used by NAC client event search
+        and count APIs, and `nac-events` webhook topic.
       operationId: listNacEventsDefinitions
       responses:
         '200':
@@ -2050,7 +2055,8 @@ paths:
       - Constants Events
   /api/v1/const/otherdevice_events:
     get:
-      description: Supported Events Type
+      description: Return event definitions for other or third-party devices managed
+        or monitored by Mist.
       operationId: listOtherDeviceEventsDefinitions
       responses:
         '200':
@@ -2070,7 +2076,7 @@ paths:
       - Constants Events
   /api/v1/const/otherdevice_models:
     get:
-      description: Supported OtherDevice Models
+      description: Return supported models for other or third-party devices.
       operationId: listSupportedOtherDeviceModels
       responses:
         '200':
@@ -2090,7 +2096,7 @@ paths:
       - Constants Models
   /api/v1/const/states:
     get:
-      description: Get List of ISO States based on country code
+      description: Return ISO state or province codes for the supplied country code.
       operationId: listStates
       parameters:
       - description: Country code, in [two-character]($e/Constants%20Definitions/listCountryCodes)
@@ -2119,7 +2125,7 @@ paths:
       - Constants Definitions
   /api/v1/const/system_events:
     get:
-      description: Get List of List of available System Events
+      description: Return system event definitions used by system event search APIs.
       operationId: listSystemEventsDefinitions
       responses:
         '200':
@@ -2139,7 +2145,8 @@ paths:
       - Constants Events
   /api/v1/const/traffic_types:
     get:
-      description: Get List of identified traffic
+      description: Return traffic type definitions used to classify recognized network
+        traffic.
       operationId: listTrafficTypes
       responses:
         '200':
@@ -2159,7 +2166,8 @@ paths:
       - Constants Definitions
   /api/v1/const/webhook_topics:
     get:
-      description: Get List of the available Webhook Topics.
+      description: Return webhook topic definitions that can be subscribed to in webhook
+        configuration.
       operationId: listWebhookTopics
       responses:
         '200':
