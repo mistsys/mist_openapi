@@ -9071,7 +9071,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/upgrade:
     get:
-      description: Get List of Org multiple devices upgrades
+      description: List organization-level device upgrade jobs, including the site-level
+        upgrade jobs created under each organization upgrade.
       operationId: listOrgDeviceUpgrades
       responses:
         '200':
@@ -9092,7 +9093,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Upgrade Multiple Sites (Only supported for Access Points upgrades)
+      description: Start an organization-level device upgrade job across selected sites.
+        The request selects device type, sites, models, firmware versions, and upgrade
+        strategy; AP-specific and Junos-specific options apply only where supported.
       operationId: upgradeOrgDevices
       requestBody:
         content:
@@ -9117,7 +9120,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/devices/upgrade/{upgrade_id}:
     get:
-      description: Get Multiple Devices Upgrade
+      description: Retrieve details for an organization-level device upgrade job, including
+        per-site upgrade status and device targets.
       operationId: getOrgDeviceUpgrade
       responses:
         '200':
@@ -9143,8 +9147,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
     post:
-      description: Best effort to cancel an upgrade. Devices which are already upgraded
-        wont be touched
+      description: Cancel an organization-level device upgrade job on a best-effort basis.
+        Devices that have already completed the upgrade are not changed.
       operationId: cancelOrgDeviceUpgrade
       responses:
         '200':
