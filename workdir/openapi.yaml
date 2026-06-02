@@ -15681,7 +15681,8 @@ paths:
       - Orgs Devices - Others
   /api/v1/orgs/{org_id}/pcaps:
     get:
-      description: Get List of Org Packet Captures
+      description: List organization packet capture sessions and generated capture
+        files for the selected time range.
       operationId: listOrgPacketCaptures
       parameters:
       - $ref: '#/components/parameters/start'
@@ -15709,7 +15710,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/pcaps/capture:
     delete:
-      description: Stop current Org capture
+      description: Stop the currently running organization packet capture and end
+        its websocket output stream.
       operationId: stopOrgPacketCapture
       responses:
         '200':
@@ -15728,7 +15730,8 @@ paths:
       tags:
       - Utilities PCAPs
     get:
-      description: Get Org Capturing status
+      description: Retrieve the current organization packet capture status, including
+        active capture targets and progress.
       operationId: getOrgCapturingStatus
       responses:
         '200':
@@ -15749,7 +15752,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Initiate a Packet Capture\n\n**NOTE**: For packet captures of\
+      description: "Start an organization-level packet capture for org-level Mist\
+        \ Edges\n\n**NOTE**: For packet captures of\
         \ org level Mist Edges only. Use [Start Site Packet Capture]($e/Utilities%20PCAPs/startSitePacketCapture)\
         \ for site level Mist Edges. \n\nThe output will be available through websocket.\
         \ As there can be multiple commands issued against the same AP at the same\
