@@ -1785,7 +1785,7 @@ paths:
       description: Generate Default Gateway Config
       operationId: getGatewayDefaultConfig
       parameters:
-      - description: Filter results by device model
+      - description: Device model for which to generate the default gateway config.
         in: query
         name: model
         required: true
@@ -5208,7 +5208,6 @@ paths:
           examples:
           - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
-          format: uuid
           type: string
       - description: 'Alarm group used to filter alarm results. enum: `certificate_expiry`,
           `infrastructure`, `marvis`, `security`. The `marvis` group is used to retrieve
@@ -7100,7 +7099,7 @@ paths:
           examples:
           - 0,14
           - 7
-          type: integer
+          type: string
       - description: Filter results by SSID. Accepts multiple comma-separated values.
         in: query
         name: ssid
@@ -8817,13 +8816,10 @@ paths:
         name: node1_mac
         schema:
           type: string
-      - description: When `type`==`ap`, whether the AP is power constrained. Accepts
-          multiple comma-separated boolean values.
+      - description: When `type`==`ap`, whether the AP is power constrained.
         in: query
         name: power_constrained
         schema:
-          examples:
-          - true,false
           type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
@@ -11403,7 +11399,6 @@ paths:
           examples:
           - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
-          format: uuid
           type: string
       - description: Filter results by one or more administrator names or email addresses.
           Supports comma-separated values
@@ -11527,7 +11522,6 @@ paths:
           examples:
           - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
-          format: uuid
           type: string
       - description: Filter results by one or more administrator names or email addresses.
           Supports comma-separated values
@@ -20115,11 +20109,10 @@ paths:
       parameters:
       - description: 'Filter results by one device type. Use a single value; comma-separated
           values are not supported. enum: `all`, `ap`, `gateway`, `switch`'
-        example: ap,switch
         in: query
         name: type
         schema:
-          $ref: '#/components/schemas/device_type_with_all'
+          $ref: '#/components/schemas/device_enum_with_all'
       - description: 'Filter results by status. enum: `all`, `connected`, `disconnected`.
           Accepts multiple comma-separated values.'
         example: disconnected,connected
@@ -57354,16 +57347,6 @@ components:
       name: lldp_system_name
       schema:
         type: string
-    partial_filter_mac:
-      description: Filter by MAC address. Partial matches may use `*` wildcards (e.g.
-        `*5b35*` matches `5c5b350e0001` and `5c5b35000301`).
-      in: query
-      name: mac
-      schema:
-        examples:
-        - 5c5b350e0001
-        - '*5b35*'
-        type: string
     partial_filter_mac_client:
       description: Partial / full Client MAC address. Use `prefix*` for prefix search
         or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match `aabbccddeeff`).
@@ -57425,27 +57408,6 @@ components:
         - AP4*
         - '*P4*'
         type: string
-    partial_filter_name:
-      description: Device name. Always a partial match (e.g. `london` will match `london-1`,
-        `london-2`, `my-london-device`...)
-      in: query
-      name: name
-      schema:
-        examples:
-        - london
-        type: string
-    partial_filter_name_site:
-      description: Partial / full Site name. Case insensitive. Use `prefix*` for prefix
-        search or `*substring*` for contains search (e.g. `my-site*` and `*site*`
-        match `my-site-01`). Suffix-only wildcards (e.g. `*site-01`) are not supported
-      in: query
-      name: name
-      schema:
-        examples:
-        - my-site-01
-        - my-site*
-        - '*site*'
-        type: string
     partial_filter_network:
       description: Partial / full Name of the network the client is/was connected
         to. Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
@@ -57458,36 +57420,6 @@ components:
         - my-corp-network
         - my-corp*
         - '*corp*'
-        type: string
-    partial_filter_serial:
-      description: Device serial number. Partial match allowed with wildcard * (e.g.
-        `*123*` will match `AB123CD`, `12345`, `XY123`)
-      in: query
-      name: serial
-      schema:
-        examples:
-        - AB123CD
-        - '*123*'
-        type: string
-    partial_filter_sku:
-      description: Device SKU. Partial match allowed with wildcard * (e.g. `*2300*`
-        will match `EX2300-F-12P`)
-      in: query
-      name: sku
-      schema:
-        examples:
-        - EX2300-F-12P
-        - '*2300*'
-        type: string
-    partial_filter_version:
-      description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
-        will match `21.2R3-S3.5`)
-      in: query
-      name: version
-      schema:
-        examples:
-        - 21.2R3-S3.5
-        - '*2R3*'
         type: string
     partial_search_username:
       description: Partial / full username. Use `prefix*` for prefix search or `*substring*`
@@ -57832,13 +57764,6 @@ components:
         - 000000ab-00ab-00ab-00ab-0000000000ab
         format: uuid
         type: string
-    vpn_type:
-      description: 'VPN implementation type used to filter the results. enum: `ipsec`,
-        `svr`'
-      in: query
-      name: type
-      schema:
-        $ref: '#/components/schemas/vpn_type'
     webhook_id:
       in: path
       name: webhook_id
@@ -73775,6 +73700,15 @@ components:
       enum:
       - switch
       type: string
+    device_enum_with_all:
+      default: ap
+      description: 'device type. enum: `all`, `ap`, `gateway`, `switch`. Default is `ap`'
+      type: string
+      enum:
+      - all
+      - ap
+      - switch
+      - gateway
     device_type_with_all:
       default: ap
       description: ap, switch, gateway, router, all, default is ap. Supports comma-separated
@@ -91750,7 +91684,9 @@ components:
           description: URL for downloading the generated PCAP file
           type: string
         site_id:
-          $ref: '#/components/schemas/site_id'
+          type:
+          - string
+          - 'null'
           description: Site associated with the packet capture, when the capture is
             site-scoped
         termination_reason:
@@ -91868,7 +91804,9 @@ components:
           description: Whether raw packet data is included in the capture output
           type: boolean
         site_id:
-          $ref: '#/components/schemas/site_id'
+          type:
+          - string
+          - 'null'
           description: Site associated with the packet capture session, when site-scoped
         ssid:
           description: Wireless network SSID filter applied to the packet capture,
