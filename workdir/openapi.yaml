@@ -10084,7 +10084,8 @@ paths:
       - Orgs Guests
   /api/v1/orgs/{org_id}/idpprofiles:
     get:
-      description: Get the list of Org IDP Profiles
+      description: List organization Intrusion Detection and Prevention (IDP) profiles,
+        including their base profile and signature overwrite rules.
       operationId: listOrgIdpProfiles
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -10108,7 +10109,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org IDP Profile
+      description: Create an organization Intrusion Detection and Prevention (IDP)
+        profile with a built-in base profile and optional signature overwrite rules.
       operationId: createOrgIdpProfile
       requestBody:
         content:
@@ -10147,7 +10149,8 @@ paths:
       - Orgs IDP Profiles
   /api/v1/orgs/{org_id}/idpprofiles/{idpprofile_id}:
     delete:
-      description: Delete Org IDP Profile
+      description: Delete an organization Intrusion Detection and Prevention (IDP)
+        profile by profile ID.
       operationId: deleteOrgIdpProfile
       responses:
         '200':
@@ -10166,7 +10169,8 @@ paths:
       tags:
       - Orgs IDP Profiles
     get:
-      description: Get Org IDP Profile
+      description: Retrieve the base profile and signature overwrite rules for a specific
+        organization IDP profile.
       operationId: getOrgIdpProfile
       responses:
         '200':
@@ -10188,7 +10192,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/idpprofile_id'
     put:
-      description: Update Org IDP Profile
+      description: Update an organization IDP profile, including its base profile and
+        signature overwrite rules.
       operationId: updateOrgIdpProfile
       requestBody:
         content:
