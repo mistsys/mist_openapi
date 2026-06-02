@@ -19,17 +19,31 @@ All notable changes to this project will be documented in this file.
     - `GET /api/v1/register/recaptcha`
     - `POST /api/v1/register/verify/{token}`
 - Updated query parameters:
-  - Removed invalid `timestamp` query parameter from 
+  - Removed invalid `timestamp` query parameter from:
     - `GET /api/v1/orgs/{org_id}/devices/events/count`
     - `GET /api/v1/orgs/{org_id}/devices/events/search`
     - `GET /api/v1/orgs/{org_id}/nac_clients/count`
-    - `GET /api/v1/orgs/{org_id}/nac_clients/events/count`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/events/search`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/search`
     - `GET /api/v1/sites/{site_id}/devices/events/search`
     - `GET /api/v1/sites/{site_id}/nac_clients/count`
-    - `GET /api/v1/sites/{site_id}/nac_clients/events/count`
+    - `GET /api/v1/sites/{site_id}/nac_clients/events/search`
+    - `GET /api/v1/sites/{site_id}/nac_clients/search`
     - `GET /api/v1/sites/{site_id}/services/events/count`
-  - Added `mac` query parameter to `GET /api/v1/orgs/{org_id}/nac_clients/events/count`
-  - Added `ip` query parameter to `GET /api/v1/orgs/{org_id}/wired_clients/search`
+    - `GET /api/v1/sites/{site_id}/services/events/search`
+  - Updated query parameter schemas for comma-separated filter support:
+    - `GET /api/v1/orgs/{org_id}/alarms/search`: `site_id`, `group`, `severity`
+    - `GET /api/v1/orgs/{org_id}/clients/events/search`: `type`, `reason_code`, `key_mgmt`, `proto`, `band`
+    - `GET /api/v1/orgs/{org_id}/clients/sessions/search`: `band`
+    - `GET /api/v1/orgs/{org_id}/inventory`: `type`
+    - `GET /api/v1/orgs/{org_id}/inventory/search`: `site_id`, `status`
+    - `GET /api/v1/orgs/{org_id}/logs`: `site_id`
+    - `GET /api/v1/orgs/{org_id}/logs/search`: `site_id`
+    - `GET /api/v1/orgs/{org_id}/nactags`: `type`, `match`
+    - `GET /api/v1/orgs/{org_id}/stats/devices`: `type`, `status`
+    - `GET /api/v1/orgs/{org_id}/stats/ports/search`: `device_type`
+    - `GET /api/v1/orgs/{org_id}/stats/vpn_peers/search`: `type`
+    - `GET /api/v1/orgs/{org_id}/wired_clients/search`: `source`, `vlan`, `ip`
 
 ## [2604.1.3] - 2026-05-29
 
