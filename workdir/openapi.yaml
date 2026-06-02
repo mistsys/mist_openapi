@@ -10933,7 +10933,8 @@ paths:
       - Orgs Admins
   /api/v1/orgs/{org_id}/jsi/devices:
     get:
-      description: Get List of Org devices that connected to JSI
+      description: List organization devices connected to Juniper Support Insights
+        (JSI), optionally filtered by model, serial number, or MAC address.
       operationId: listOrgJsiDevices
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -10979,7 +10980,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/jsi/devices/outbound_ssh_cmd:
     get:
-      description: Adopt JSI devices
+      description: Return the outbound SSH registration command used to onboard Junos
+        devices to Juniper Support Insights (JSI).
       operationId: adoptOrgJsiDevice
       responses:
         '200':
@@ -11004,7 +11006,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     post:
-      description: Create Shell Session
+      description: Create a WebSocket-backed shell session for a JSI-connected device
+        identified by MAC address.
       operationId: createOrgJsiDeviceShellSession
       responses:
         '200':
@@ -11027,7 +11030,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     post:
-      description: Upgrade
+      description: Start a software upgrade for a JSI-connected device identified by
+        MAC address using the requested target version.
       operationId: upgradeOrgJsiDevice
       requestBody:
         content:
