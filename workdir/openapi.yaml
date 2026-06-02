@@ -9542,7 +9542,8 @@ paths:
       - Orgs Reports
   /api/v1/orgs/{org_id}/gatewaytemplates:
     get:
-      description: Get List of Org Gateway Templates
+      description: List organization gateway templates, which provide reusable WAN
+        gateway configuration that can be applied to gateways at sites.
       operationId: listOrgGatewayTemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -9566,7 +9567,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Gateway Template
+      description: Create an organization gateway template with reusable WAN gateway
+        networks, ports, routing, and service-policy configuration.
       operationId: createOrgGatewayTemplate
       requestBody:
         content:
@@ -9710,7 +9712,8 @@ paths:
       - Orgs Gateway Templates
   /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}:
     delete:
-      description: Delete Organization Gateway Template
+      description: Delete an organization gateway template and remove that reusable
+        gateway configuration object from the organization.
       operationId: deleteOrgGatewayTemplate
       responses:
         '200':
@@ -9729,7 +9732,8 @@ paths:
       tags:
       - Orgs Gateway Templates
     get:
-      description: Get Organization Gateway Template details
+      description: Retrieve the configuration stored in a specific organization gateway
+        template.
       operationId: getOrgGatewayTemplate
       responses:
         '200':
@@ -9751,7 +9755,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/gatewaytemplate_id'
     put:
-      description: Update Organization Gateway Template
+      description: Update the configuration stored in an organization gateway template.
       operationId: updateOrgGatewayTemplate
       requestBody:
         content:
