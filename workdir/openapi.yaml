@@ -18056,7 +18056,7 @@ paths:
       - Orgs Setting
   /api/v1/orgs/{org_id}/setting/cradlepoint/setup:
     delete:
-      description: This deletes the Cradlepoint integration in Mist
+      description: Remove the Cradlepoint integration configuration from the organization.
       operationId: deleteOrgCradlepointConnection
       responses:
         '200':
@@ -18075,7 +18075,8 @@ paths:
       tags:
       - Orgs Integration Cradlepoint
     get:
-      description: This tests the Cradlepoint integration in Mist
+      description: Test the current Cradlepoint integration configuration and return
+        whether the most recent integration status is active or inactive.
       operationId: testOrgCradlepointConnection
       responses:
         '200':
@@ -18096,7 +18097,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: This sets up cradlepoint webhooks to send events to Mist
+      description: Configure the Cradlepoint integration by storing Cradlepoint API
+        and ECM credentials and setting up Cradlepoint webhooks to send events to
+        Mist.
       operationId: setupOrgCradlepointConnectionToMist
       requestBody:
         content:
@@ -18120,7 +18123,8 @@ paths:
       tags:
       - Orgs Integration Cradlepoint
     put:
-      description: This updates the Cradlepoint integration settings in Mist
+      description: Update the stored Cradlepoint API and ECM credentials and the
+        LLDP-based device linking option used by Mist.
       operationId: updateOrgCradlepointConnectionToMist
       requestBody:
         content:
@@ -18154,9 +18158,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "This syncs cradlepoint devices with Mist. We\u2019ll also attempt\
-        \ to use the LLDP data from cradlepoint to identify the linkage against Mist\
-        \ Site / Device"
+      description: Trigger a Cradlepoint device synchronization with Mist. When LLDP
+        linking is enabled, Mist also uses Cradlepoint LLDP data to associate routers
+        with Mist sites and devices.
       operationId: syncOrgCradlepointRouters
       responses:
         '200':
