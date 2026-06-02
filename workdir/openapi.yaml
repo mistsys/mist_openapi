@@ -17705,7 +17705,9 @@ paths:
       - Orgs Service Policies
   /api/v1/orgs/{org_id}/services:
     get:
-      description: Get List of Org Services
+      description: List organization service definitions. Services describe applications,
+        application categories, URLs, hostnames, subnets, or custom protocol and port
+        match criteria used by gateway and SSR policies.
       operationId: listOrgServices
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -17729,7 +17731,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create getOrgServices Service
+      description: Create an organization service definition with the match criteria
+        used by gateway and SSR policies, such as applications, URLs, hostnames,
+        subnets, or custom protocol and port rules.
       operationId: createOrgService
       requestBody:
         content:
@@ -17767,7 +17771,8 @@ paths:
       - Orgs Services
   /api/v1/orgs/{org_id}/services/{service_id}:
     delete:
-      description: Delete Org Service
+      description: Remove an organization service definition from the available service
+        catalog.
       operationId: deleteOrgService
       responses:
         '200':
@@ -17786,7 +17791,9 @@ paths:
       tags:
       - Orgs Services
     get:
-      description: Get Org Service
+      description: Return an organization service definition, including its matching
+        mode, match values, traffic classification, and optional SSR path-selection
+        thresholds.
       operationId: getOrgService
       responses:
         '200':
@@ -17808,7 +17815,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/service_id'
     put:
-      description: Update Org Service
+      description: Update an organization service definition, including its matching
+        mode, match values, traffic classification, or optional SSR path-selection
+        thresholds.
       operationId: updateOrgService
       requestBody:
         content:
