@@ -4804,10 +4804,9 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/orgs:
     post:
-      description: Org admin can invite people to manage the org. Furthermore, he
-        can dictate the level of security those accounts are. The check is enforced
-        when the invited admin tries to "accept" the invitation and every time the
-        admin tries to login
+      description: Create a Mist organization with organization-level defaults such
+        as display name, support-access setting, default alarm template, and admin
+        session lifetime.
       operationId: createOrg
       requestBody:
         content:
@@ -4839,7 +4838,9 @@ paths:
       - Orgs
   /api/v1/orgs/{org_id}:
     delete:
-      description: Delete Org
+      description: Delete an organization and its organization-level resources. Use
+        MSP organization assignment endpoints when only changing MSP ownership or
+        association.
       operationId: deleteOrg
       responses:
         '200':
@@ -4858,7 +4859,8 @@ paths:
       tags:
       - Orgs
     get:
-      description: Get Organization information
+      description: Return organization details, including name, MSP ownership, organization
+        group membership, support-access setting, and session settings.
       operationId: getOrg
       responses:
         '200':
@@ -4879,7 +4881,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Update Org
+      description: Update organization-level settings such as display name, support-access
+        setting, organization groups, default alarm template, or admin session lifetime.
       operationId: updateOrg
       requestBody:
         content:
