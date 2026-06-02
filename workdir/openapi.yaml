@@ -12150,7 +12150,8 @@ paths:
       - Orgs MxClusters
   /api/v1/orgs/{org_id}/mxedges:
     get:
-      description: Get List of Org MxEdges
+      description: List Mist Edge appliances in the organization, optionally filtering
+        for org-level, site-level, or all Mist Edges with `for_site`.
       operationId: listOrgMxEdges
       parameters:
       - description: 'Filter for org/site level Mist Edges. enum: `any`, `false`,
@@ -12180,7 +12181,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Mist Edge
+      description: Create a Mist Edge appliance configuration in the organization,
+        including cluster assignment, management, services, and tunnel termination
+        settings.
       operationId: createOrgMxEdge
       requestBody:
         content:
@@ -12310,7 +12313,9 @@ paths:
       - Orgs MxEdges
   /api/v1/orgs/{org_id}/mxedges/count:
     get:
-      description: Count by Distinct Attributes of Org Mist Edges
+      description: Count organization Mist Edge records, optionally grouped by `distinct`
+        and filtered by Mist Edge, cluster, site, model, distro, tunnel termination
+        version, and time range.
       operationId: countOrgMxEdges
       parameters:
       - description: 'Field used to group this count response. enum: `distro`, `model`,
@@ -12383,7 +12388,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/mxedges/events/count:
     get:
-      description: Count by Distinct Attributes of Org Mist Edge Events
+      description: Count Mist Edge event records across the organization, optionally
+        grouped by `distinct` and filtered by Mist Edge, cluster, event type, service,
+        and time range.
       operationId: countOrgSiteMxEdgeEvents
       parameters:
       - description: 'Field used to group this count response. enum: `mxcluster_id`,
@@ -12432,7 +12439,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/mxedges/events/search:
     get:
-      description: Search Org Mist Edge Events
+      description: Search Mist Edge event records across the organization with filters
+        for Mist Edge, cluster, event type, service, component, and time range.
       operationId: searchOrgMistEdgeEvents
       parameters:
       - description: Filter results by Mist Edge identifier
@@ -12482,7 +12490,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/mxedges/search:
     get:
-      description: Search Org Mist Edges
+      description: Search organization Mist Edge records with filters for hostname,
+        Mist Edge, cluster, site, model, distro, tunnel termination version, and time
+        range.
       operationId: searchOrgMxEdges
       parameters:
       - description: Partial / full Device hostname. Use `prefix*` for prefix search
