@@ -19017,7 +19017,8 @@ paths:
       - Orgs Linked Applications
   /api/v1/orgs/{org_id}/sitegroups:
     get:
-      description: Get List of Org Site Groups
+      description: List site groups configured in the organization. A site group
+        collects site IDs so sites can be managed or referenced as a group.
       operationId: listOrgSiteGroups
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19041,7 +19042,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Site Group
+      description: Create a site group in the organization with a display name and
+        optional site membership.
       operationId: createOrgSiteGroup
       requestBody:
         content:
@@ -19071,7 +19073,7 @@ paths:
       - Orgs Sitegroups
   /api/v1/orgs/{org_id}/sitegroups/{sitegroup_id}:
     delete:
-      description: Delete Org Site Group
+      description: Remove a site group from the organization.
       operationId: deleteOrgSiteGroup
       responses:
         '200':
@@ -19090,7 +19092,8 @@ paths:
       tags:
       - Orgs Sitegroups
     get:
-      description: Get Org Site Group
+      description: Return a site group, including its display name and the site IDs
+        included in the group.
       operationId: getOrgSiteGroup
       responses:
         '200':
@@ -19112,7 +19115,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sitegroup_id'
     put:
-      description: Update Org Site Group
+      description: Update the display name used to identify a site group in the organization.
       operationId: updateOrgSiteGroup
       requestBody:
         content:
