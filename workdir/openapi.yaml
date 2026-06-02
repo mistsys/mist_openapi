@@ -18342,7 +18342,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/setting/mist_nac_crls:
     get:
-      description: Returns all uploaded CRL file IDs with names for the orgI
+      description: List uploaded NAC CRL files for the organization, including file
+        IDs, issuer names, upload timestamps, and download URLs.
       operationId: getOrgNacCrl
       responses:
         '200':
@@ -18363,10 +18364,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: The Import NAC Org CRL File endpoint allows users to manually upload
-        a Certificate Revocation List (CRL) file in either PEM or DER format. This
-        is a multipart POST request. We support one file upload per issuer, and re-uploads
-        for the same issuer will overwrite the existing file.
+      description: Upload a NAC Certificate Revocation List (CRL) file in PEM or
+        DER format. This multipart request supports one CRL file per issuer; uploading
+        another file for the same issuer replaces the existing file.
       operationId: importOrgNacCrl
       requestBody:
         content:
@@ -18392,8 +18392,8 @@ paths:
       - Orgs NAC CRL
   /api/v1/orgs/{org_id}/setting/mist_nac_crls/{naccrl_id}:
     delete:
-      description: Delete NAC Org CRL file is a DELETE request to delete CRL file
-        identified by its ID (ID assigned on file upload/creation)
+      description: Delete an uploaded NAC CRL file identified by the file ID assigned
+        when the CRL was uploaded.
       operationId: deleteOrgNacCrl
       responses:
         '200':
