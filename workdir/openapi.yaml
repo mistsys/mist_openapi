@@ -15817,7 +15817,8 @@ paths:
       - Utilities PCAPs
   /api/v1/orgs/{org_id}/pma/dashboards:
     get:
-      description: Get List of premium analytics dashboards for this Org
+      description: List Premium Analytics dashboard metadata and redirect URLs available
+        to the organization.
       operationId: listOrgPmaDashboards
       parameters:
       - $ref: '#/components/parameters/limit'
