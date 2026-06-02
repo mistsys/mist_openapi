@@ -19562,7 +19562,8 @@ paths:
       - Orgs Site Templates
   /api/v1/orgs/{org_id}/ssl_proxy_cert:
     get:
-      description: Get Org SSL proxy Certificates
+      description: Return the PEM-encoded SSL proxy certificate for the organization,
+        used by SSL proxy inspection.
       operationId: getOrgSslProxyCert
       responses:
         '200':
@@ -19584,7 +19585,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/ssoroles:
     get:
-      description: Get List of Org SSO Roles
+      description: List organization SSO role definitions that map identity-provider
+        role assertions to organization, site, or site group privilege scopes.
       operationId: listOrgSsoRoles
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19608,7 +19610,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org SSO Role
+      description: Create an organization SSO role definition with a display name
+        and the privileges granted when the role is matched during SSO.
       operationId: createOrgSsoRole
       requestBody:
         content:
@@ -19649,7 +19652,8 @@ paths:
       - Orgs SSO Roles
   /api/v1/orgs/{org_id}/ssoroles/{ssorole_id}:
     delete:
-      description: Delete Org SSO Role
+      description: Delete an organization SSO role definition so it can no longer
+        grant privileges during SSO.
       operationId: deleteOrgSsoRole
       responses:
         '200':
@@ -19668,7 +19672,8 @@ paths:
       tags:
       - Orgs SSO Roles
     get:
-      description: Get Org SSO Role Details
+      description: Return one organization SSO role definition, including its display
+        name and granted privileges.
       operationId: getOrgSsoRole
       responses:
         '200':
@@ -19690,7 +19695,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/ssorole_id'
     put:
-      description: Update Org SSO Role
+      description: Update an organization SSO role definition, including its display
+        name and granted privileges.
       operationId: updateOrgSsoRole
       requestBody:
         content:
