@@ -3922,7 +3922,9 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/orggroups:
     get:
-      description: Get List of MSP Org Groups
+      description: List organization groups defined under this MSP. Organization
+        groups contain related organization IDs and can be used in MSP privilege
+        assignments.
       operationId: listMspOrgGroups
       responses:
         '200':
@@ -3943,7 +3945,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Create MSP Org Group
+      description: Create an organization group under this MSP with a display name
+        and optional list of member organization IDs.
       operationId: createMspOrgGroup
       requestBody:
         content:
@@ -3975,7 +3978,8 @@ paths:
       - MSPs Org Groups
   /api/v1/msps/{msp_id}/orggroups/{orggroup_id}:
     delete:
-      description: Delete MSP Org Group
+      description: Delete an MSP organization group. This removes the grouping object
+        without deleting the organizations it referenced.
       operationId: deleteMspOrgGroup
       responses:
         '200':
@@ -3994,7 +3998,8 @@ paths:
       tags:
       - MSPs Org Groups
     get:
-      description: Get MSP Org Group Details
+      description: Return the organization group details, including its name and
+        member organization IDs.
       operationId: getMspOrgGroup
       responses:
         '200':
@@ -4016,7 +4021,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/orggroup_id'
     put:
-      description: Update MSP Org Group
+      description: Update an MSP organization group's display name or member organization
+        IDs.
       operationId: updateMspOrgGroup
       requestBody:
         content:
@@ -4042,7 +4048,8 @@ paths:
       - MSPs Org Groups
   /api/v1/msps/{msp_id}/orgs:
     get:
-      description: Get List of MSP Orgs
+      description: List organizations managed by this MSP account, including MSP
+        ownership and organization-group membership metadata.
       operationId: listMspOrgs
       responses:
         '200':
@@ -4063,7 +4070,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Create an Org under MSP
+      description: Create an organization under this MSP, optionally assigning it
+        to organization groups and setting organization-level defaults.
       operationId: createMspOrg
       requestBody:
         content:
@@ -4097,7 +4105,8 @@ paths:
       tags:
       - MSPs Orgs
     put:
-      description: Assign or Unassign Orgs to an MSP account
+      description: Assign existing organizations to this MSP account or unassign
+        organizations from it by providing the desired operation and org IDs.
       operationId: manageMspOrgs
       requestBody:
         content:
@@ -4129,7 +4138,8 @@ paths:
       - MSPs Orgs
   /api/v1/msps/{msp_id}/orgs/search:
     get:
-      description: Search Org in MSP
+      description: Search organizations under this MSP using organization identifiers,
+        names, subscription state, trial state, usage types, and time-based filters.
       operationId: searchMspOrgs
       parameters:
       - $ref: '#/components/parameters/name'
@@ -4185,7 +4195,9 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/orgs/{org_id}:
     delete:
-      description: Delete MSP Org
+      description: Delete an organization managed by this MSP. Use the MSP organization
+        assignment endpoint when only assigning or unassigning organizations from
+        the MSP account.
       operationId: deleteMspOrg
       responses:
         '200':
@@ -4204,7 +4216,8 @@ paths:
       tags:
       - MSPs Orgs
     get:
-      description: Get MSP Org Details
+      description: Return details for one organization managed by this MSP, including
+        MSP ownership, organization groups, support access, and session settings.
       operationId: getMspOrg
       responses:
         '200':
@@ -4226,7 +4239,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Update MSP Org
+      description: Update organization settings for an organization managed by this
+        MSP.
       operationId: updateMspOrg
       requestBody:
         content:
@@ -4251,7 +4265,8 @@ paths:
       - MSPs Orgs
   /api/v1/msps/{msp_id}/search:
     get:
-      description: Search in MSP Orgs
+      description: Search MSP resources by query string. Currently `type=orgs` returns
+        matching organizations in this MSP.
       operationId: searchMspOrgGroup
       parameters:
       - description: 'MSP search result type to return. enum: `orgs`'
