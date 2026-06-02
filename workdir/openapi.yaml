@@ -19872,8 +19872,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sso_id'
     post:
-      description: Delete SSO Admin users by email. This removes SSO-linked admin
-        accounts from the organization.
+      description: Remove SSO-linked organization administrator accounts by email
+        for this SSO profile.
       operationId: deleteOrgSsoAdmins
       requestBody:
         content:
@@ -19909,7 +19909,9 @@ paths:
       - Orgs SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}/failures:
     get:
-      description: Get List of Org SSO Latest Failures
+      description: List recent authentication failures for this organization SSO
+        configuration, including failure details and captured SAML assertion data
+        when available.
       operationId: listOrgSsoLatestFailures
       parameters:
       - $ref: '#/components/parameters/start'
@@ -19938,7 +19940,8 @@ paths:
     - $ref: '#/components/parameters/sso_id'
   /api/v1/orgs/{org_id}/ssos/{sso_id}/metadata:
     get:
-      description: Get Org SAML Metadata
+      description: Return generated SAML service provider metadata for this organization
+        SSO configuration as JSON.
       operationId: getOrgSamlMetadata
       responses:
         '200':
@@ -19961,26 +19964,10 @@ paths:
     - $ref: '#/components/parameters/sso_id'
   /api/v1/orgs/{org_id}/ssos/{sso_id}/metadata.xml:
     get:
-      description: "Download Org SAML Metadata\n\nExample of metadata.xml:\n```xml\n\
-        <?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"\
-        urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\"\
-        \ validUntil=\"2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\
-        >\n    <md:SPSSODescriptor AuthnRequestsSigned=\"false\" WantAssertionsSigned=\"\
-        true\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\"\
-        >\n        <md:SingleLogoutService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\
-        \ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/logout\" />\n       \
-        \ <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>\n\
-        \        <md:AssertionConsumerService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\
-        \ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/login\" index=\"0\" isDefault=\"\
-        true\"/>\n        <md:AttributeConsumingService index=\"0\">\n           \
-        \ <md:ServiceName xml:lang=\"en-US\">Mist</md:ServiceName>\n            <md:RequestedAttribute\
-        \ Name=\"Role\" NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\"\
-        \ isRequired=\"true\"/>\n            <md:RequestedAttribute Name=\"FirstName\"\
-        \ NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\" isRequired=\"\
-        false\"/>\n            <md:RequestedAttribute Name=\"LastName\" NameFormat=\"\
-        urn:oasis:names:tc:SAML:2.0:attrname-format:basic\" isRequired=\"false\"/>\n\
-        \        </md:AttributeConsumingService>\n    </md:SPSSODescriptor>\n</md:EntityDescriptor>\n\
-        ```"
+      description: Download generated SAML service provider metadata XML for this
+        organization SSO configuration. Use this XML to configure the identity provider
+        with Mist service-provider details such as entity ID, ACS URL, logout URL,
+        NameID format, and requested attributes.
       operationId: downloadOrgSamlMetadata
       responses:
         '200':
