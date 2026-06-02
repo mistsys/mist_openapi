@@ -13323,7 +13323,9 @@ paths:
       - Orgs MxTunnels
   /api/v1/orgs/{org_id}/nac_clients/count:
     get:
-      description: Count by Distinct Attributes of NAC Clients
+      description: Count NAC clients across the organization, optionally grouped
+        by `distinct` and filtered by authentication, identity, endpoint, network,
+        site, and time attributes.
       operationId: countOrgNacClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
@@ -13440,7 +13442,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/nac_clients/events/count:
     get:
-      description: Count by Distinct Attributes of NAC Client-Events
+      description: Count NAC client events across the organization, optionally grouped
+        by `distinct` and filtered by event type and time range.
       operationId: countOrgNacClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
@@ -13482,7 +13485,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/nac_clients/events/search:
     get:
-      description: Search NAC Client Events
+      description: Search NAC client authentication event records across the organization
+        with filters for authentication, NAC rule, identity provider, RADIUS, network,
+        endpoint, site, and time attributes.
       operationId: searchOrgNacClientEvents
       parameters:
       - description: See [List Device Events Definitions]($e/Constants%20Events/listNacEventsDefinitions).
@@ -13652,7 +13657,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/nac_clients/search:
     get:
-      description: Search Org NAC Clients
+      description: Search NAC client records across the organization with filters
+        for authentication, endpoint posture, identity, network, NAC rule, site, and
+        time attributes.
       operationId: searchOrgNacClients
       parameters:
       - description: MAC address of the AP the client is/was connected to
