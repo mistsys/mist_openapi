@@ -12918,7 +12918,7 @@ paths:
       - Orgs MxEdges
   /api/v1/orgs/{org_id}/mxedges/{mxedge_id}/image/{image_number}:
     delete:
-      description: Remove MxEdge Image
+      description: Delete a numbered image attachment from a Mist Edge appliance.
       operationId: deleteOrgMxEdgeImage
       responses:
         '200':
@@ -12947,7 +12947,8 @@ paths:
         minimum: 1
         type: integer
     post:
-      description: Attach up to 3 images to a Mist Edge
+      description: Upload and attach an image file to a Mist Edge appliance. A Mist
+        Edge can have up to three image attachments.
       operationId: addOrgMxEdgeImage
       requestBody:
         content:
@@ -12975,9 +12976,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     post:
-      description: In the case where a Mist Edge is replaced, you would need to unregister
-        it. Which disconnects the currently the connected Mist Edge and allow another
-        to register.
+      description: Restart the registration workflow for a Mist Edge replacement
+        by disconnecting the currently registered appliance so another Mist Edge can
+        register.
       operationId: restartOrgMxEdge
       responses:
         '200':
@@ -13000,7 +13001,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     post:
-      description: Bounce TunTerm Data Ports
+      description: Bounce one or more TunTerm data ports on a Mist Edge, optionally
+        setting the hold time between port bounces.
       operationId: bounceOrgMxEdgeDataPorts
       parameters: []
       requestBody:
@@ -13040,7 +13042,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     post:
-      description: "Disconnect AP\u2019s from TunTerm"
+      description: Disconnect specific APs from the Mist Edge TunTerm service by AP
+        MAC address.
       operationId: disconnectOrgMxEdgeTuntermAps
       parameters: []
       requestBody:
@@ -13088,7 +13091,8 @@ paths:
       schema:
         $ref: '#/components/schemas/mxedge_service_action'
     post:
-      description: Control Services on a Mist Edge
+      description: Start, stop, or restart a named Mist Edge service such as `tunterm`,
+        `mxagent`, or `radsecproxy`.
       operationId: controlOrgMxEdgeServices
       responses:
         '200':
@@ -13111,7 +13115,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     post:
-      description: Support / Upload Mist Edge support files
+      description: Trigger upload of support files from a Mist Edge for troubleshooting.
       operationId: uploadOrgMxEdgeSupportFiles
       responses:
         '200':
@@ -13134,9 +13138,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     post:
-      description: In the case where a Mist Edge is replaced, you would need to unregister
-        it. Which disconnects the currently the connected Mist Edge and allow another
-        to register.
+      description: Unregister a Mist Edge during a replacement workflow by disconnecting
+        the currently registered appliance so another Mist Edge can register.
       operationId: unregisterOrgMxEdge
       responses:
         '200':
@@ -13156,7 +13159,8 @@ paths:
       - Orgs MxEdges
   /api/v1/orgs/{org_id}/mxedges/{mxedge_id}/vm_params:
     get:
-      description: Get Mist Edge VM parameters
+      description: Retrieve VM deployment parameters for a Mist Edge, including model,
+        optional name, and base64 user data.
       operationId: getOrgMxEdgeVmParams
       responses:
         '200':
