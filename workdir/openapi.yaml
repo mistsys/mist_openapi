@@ -17005,7 +17005,9 @@ paths:
       - Orgs SDK Templates
   /api/v1/orgs/{org_id}/secintelprofiles:
     get:
-      description: Get List of Sec Intel Profiles
+      description: List organization SecIntel profiles. These profiles define protection
+        levels for SecIntel feed categories such as command-and-control, infected
+        host, and DNS.
       operationId: listOrgSecIntelProfiles
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -17029,7 +17031,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Sec Intel Profiles
+      description: Create an organization SecIntel profile with category-specific
+        protection levels for threat intelligence feeds.
       operationId: createOrgSecIntelProfile
       requestBody:
         content:
@@ -17062,7 +17065,8 @@ paths:
       - Orgs SecIntel Profiles
   /api/v1/orgs/{org_id}/secintelprofiles/{secintelprofile_id}:
     delete:
-      description: Delete Sec Intel Profile
+      description: Remove an organization SecIntel profile from the organization's
+        available threat intelligence profile set.
       operationId: deleteOrgSecIntelProfile
       responses:
         '200':
@@ -17081,7 +17085,8 @@ paths:
       tags:
       - Orgs SecIntel Profiles
     get:
-      description: Get Sec Intel Profile
+      description: Return an organization SecIntel profile, including the protection
+        level configured for each SecIntel feed category.
       operationId: getOrgSecIntelProfile
       responses:
         '200':
@@ -17103,7 +17108,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/secintelprofile_id'
     put:
-      description: Update Sec Intel Profile
+      description: Update an organization SecIntel profile, including its display
+        name and category-specific threat intelligence protection levels.
       operationId: updateOrgSecIntelProfile
       requestBody:
         content:
@@ -17131,7 +17137,7 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: createOrgSecIntelProfile
+      summary: updateOrgSecIntelProfile
       tags:
       - Orgs SecIntel Profiles
   /api/v1/orgs/{org_id}/secpolicies:
