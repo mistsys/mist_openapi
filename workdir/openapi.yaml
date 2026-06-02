@@ -18639,7 +18639,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Update Sky ATP Allowed List
+      description: Update the Sky ATP SecIntel allowlist with domain and IP address
+        entries for the organization.
       operationId: udpateOrgAtpAllowedList
       requestBody:
         content:
@@ -18675,7 +18676,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Update Sky ATP Blocked List
+      description: Update the Sky ATP SecIntel blocklist with domain and IP address
+        entries for the organization.
       operationId: udpateOrgAtpBlockedList
       requestBody:
         content:
@@ -18709,7 +18711,7 @@ paths:
       - Orgs Integration SkyATP
   /api/v1/orgs/{org_id}/setting/skyatp/setup:
     delete:
-      description: Delete SkyATP Integration
+      description: Remove the Sky ATP integration configuration from the organization.
       operationId: deleteOrgSkyAtpIntegration
       responses:
         '200':
@@ -18728,7 +18730,8 @@ paths:
       tags:
       - Orgs Integration SkyATP
     get:
-      description: Get Org SkyATP Integration
+      description: Return the Sky ATP integration configuration, including linked
+        realm information and generated SecIntel allowlist and blocklist URLs.
       operationId: getOrgSkyAtpIntegration
       responses:
         '200':
@@ -18749,16 +18752,11 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: '1. Login to the Sky ATP realm through the Mist UI by providing
-        the realm, username and password.
-
-        2. Sky ATP API is invoked which creates the realm using above details.
-
-        3. Sky ATP by default will provide functionality for Security-Intelligence
-        and Advanced Anti Malware.
-
-        4. SecIntel will provide configuration for CC, DNS Feeds, Infected Host, Blocklists
-        and Allowlists.'
+      description: Configure the Sky ATP integration by linking or creating the Sky
+        ATP realm with the supplied cloud, realm, username, and password. The integration
+        enables Security Intelligence and Advanced Anti-Malware features, with SecIntel
+        configuration for command-and-control, DNS feeds, infected hosts, blocklists,
+        and allowlists.
       operationId: setupOrgAtpIntegration
       requestBody:
         content:
@@ -18789,7 +18787,8 @@ paths:
       tags:
       - Orgs Integration SkyATP
     put:
-      description: Update Sky ATP config
+      description: Update Sky ATP SecIntel feed configuration, including the third-party
+        threat feeds enabled for the organization.
       operationId: udpateOrgAtpIntegration
       requestBody:
         content:
