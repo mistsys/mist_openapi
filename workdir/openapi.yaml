@@ -16634,7 +16634,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sdkclient_id'
     put:
-      description: Update SDK Client
+      description: Update the display name of an SDK client registered in the organization.
       operationId: updateSdkClient
       requestBody:
         content:
@@ -16664,7 +16664,9 @@ paths:
       - Orgs Clients - SDK
   /api/v1/orgs/{org_id}/sdkinvites:
     get:
-      description: Get List of Org SDK Invites
+      description: List SDK invites configured for the organization. SDK invites
+        are used to onboard mobile SDK clients and can define whether an invite is
+        enabled, limited by usage quota, or scoped to a site.
       operationId: listSdkInvites
       responses:
         '200':
@@ -16685,7 +16687,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create SDK Invite
+      description: Create an SDK invite that mobile SDK clients can use to onboard
+        into the organization. The invite can be enabled or disabled, limited by usage
+        quota, and associated with a site.
       operationId: createSdkInvite
       requestBody:
         content:
@@ -16718,7 +16722,8 @@ paths:
       - Orgs SDK Invites
   /api/v1/orgs/{org_id}/sdkinvites/{sdkinvite_id}:
     delete:
-      description: Revoke SDK Invite
+      description: Revoke an SDK invite so it can no longer be used for mobile SDK
+        client onboarding.
       operationId: revokeSdkInvite
       responses:
         '200':
@@ -16737,7 +16742,8 @@ paths:
       tags:
       - Orgs SDK Invites
     get:
-      description: Get SDK Invite Details
+      description: Return the configuration and status of an SDK invite, including
+        enablement, expiration time, usage quota, and site scope.
       operationId: getSdkInvite
       responses:
         '200':
@@ -16759,7 +16765,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sdkinvite_id'
     put:
-      description: Update SDK Invite
+      description: Update an SDK invite's onboarding settings, such as its display
+        name, enabled state, expiration time, quota, or site association.
       operationId: updateSdkInvite
       requestBody:
         content:
@@ -16788,7 +16795,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sdkinvite_id'
     post:
-      description: Send SDK Invite by Email
+      description: Send the SDK invite to a recipient email address so the recipient
+        can onboard a mobile SDK client.
       operationId: sendSdkInviteEmail
       requestBody:
         content:
@@ -16818,7 +16826,8 @@ paths:
       - Orgs SDK Invites
   /api/v1/orgs/{org_id}/sdkinvites/{sdkinvite_id}/qrcode:
     get:
-      description: Revoke SDK Invite
+      description: Download a QR code image for the SDK invite so it can be scanned
+        by a mobile SDK client during onboarding.
       operationId: getSdkInviteQrCode
       responses:
         '200':
@@ -16844,7 +16853,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sdkinvite_id'
     post:
-      description: Send SDK Invite by SMS
+      description: Send the SDK invite to a phone number by SMS so the recipient
+        can onboard a mobile SDK client.
       operationId: sendSdkInviteSms
       requestBody:
         content:
