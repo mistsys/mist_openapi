@@ -19145,7 +19145,8 @@ paths:
       - Orgs Sitegroups
   /api/v1/orgs/{org_id}/sites:
     get:
-      description: Get List of Org Sites
+      description: List sites in the organization. Site records include location
+        metadata, timezone, site group membership, and template or policy associations.
       operationId: listOrgSites
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19169,7 +19170,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Site
+      description: Create a site in the organization with location metadata, timezone,
+        site group membership, and optional template or policy associations.
       operationId: createOrgSite
       requestBody:
         content:
@@ -19214,7 +19216,8 @@ paths:
       - Orgs Sites
   /api/v1/orgs/{org_id}/sites/count:
     get:
-      description: Count by Distinct Attributes of Sites
+      description: Count organization sites grouped by a distinct site attribute,
+        such as country code, site name, feature flags, or enabled services.
       operationId: countOrgSites
       parameters:
       - description: 'Field used to group this count response. enum: `analytic_enabled`,
@@ -19250,7 +19253,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/sites/search:
     get:
-      description: Search Sites
+      description: Search organization sites with filters for feature flags, country
+        code, identifiers, names, upgrade settings, and other site attributes. Supports
+        pagination and sorting.
       operationId: searchOrgSites
       parameters:
       - description: If Advanced Analytic feature is enabled. Accepts multiple comma-separated
