@@ -10232,7 +10232,8 @@ paths:
       - Orgs IDP Profiles
   /api/v1/orgs/{org_id}/insights/sites-sle:
     get:
-      description: Get Org Sites SLE
+      description: Return per-site Service-Level Expectation (SLE) scores for Wi-Fi,
+        wired, or WAN service over the requested time window.
       operationId: getOrgSitesSle
       parameters:
       - description: 'Filter insights by SLE name. enum: `wan`, `wifi`, `wired`'
@@ -10266,7 +10267,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/insights/{metric}:
     get:
-      description: Get Org SLEs (all/worst sites, Mx Edges, ...)
+      description: Return organization-level insight data for the selected metric,
+        such as all or worst sites, Mist Edge insights, or other supported insight
+        metrics, over the requested time window.
       operationId: getOrgSle
       parameters:
       - description: See [List Insight Metrics]($e/Constants%20Definitions/listInsightMetrics)
