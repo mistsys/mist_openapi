@@ -4667,7 +4667,8 @@ paths:
     - $ref: '#/components/parameters/sso_id'
   /api/v1/msps/{msp_id}/stats/licenses:
     get:
-      description: Get List of MSP Licenses
+      description: Return license entitlement, subscription, amendment, and usage
+        statistics for organizations managed by this MSP.
       operationId: listMspOrgLicenses
       responses:
         '200':
@@ -4689,7 +4690,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/stats/orgs:
     get:
-      description: Get List of MSP Orgs Stats
+      description: List organization statistics for organizations managed by this
+        MSP, including device, inventory, site, and SLE summary fields.
       operationId: listMspOrgStats
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -4714,7 +4716,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/suggestion/count:
     get:
-      description: Count by Distinct Attributes of Marvis actions
+      description: Return distinct counts of Marvis actions for this MSP grouped
+        by the requested field, such as organization or status.
       operationId: countMspsMarvisActions
       parameters:
       - description: 'Field used to group this count response. enum: `org_id`, `status`'
@@ -4743,7 +4746,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/tickets:
     get:
-      description: Get List of Tickets of a MSP
+      description: List support tickets associated with this MSP for the requested
+        time range.
       operationId: listMspTickets
       parameters:
       - $ref: '#/components/parameters/start'
@@ -4769,7 +4773,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/tickets/count:
     get:
-      description: Count by Distinct Attributes of tickets
+      description: Return distinct counts of MSP support tickets grouped by the requested
+        field, such as organization, status, or ticket type.
       operationId: countMspTickets
       parameters:
       - description: 'Field used to group this count response. enum: `org_id`, `status`,
