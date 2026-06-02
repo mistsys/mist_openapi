@@ -10865,7 +10865,7 @@ paths:
       - Orgs Admins
   /api/v1/orgs/{org_id}/invites/{invite_id}:
     delete:
-      description: Delete Admin Invite
+      description: Cancel a pending organization admin invite by invite ID.
       operationId: uninviteOrgAdmin
       responses:
         '200':
@@ -10887,7 +10887,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/invite_id'
     put:
-      description: Update Admin Invite
+      description: Update a pending organization admin invite, including invitee identity
+        and requested privileges.
       operationId: updateOrgAdminInvite
       requestBody:
         content:
