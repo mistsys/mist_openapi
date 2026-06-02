@@ -9317,7 +9317,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/evpn_topologies:
     get:
-      description: Get List of the existing Org EVPN topologies
+      description: List EVPN topology records in the organization, optionally filtering
+        for org-level, site-level, or all topologies with `for_site`.
       operationId: listOrgEvpnTopologies
       parameters:
       - description: 'Filter for org/site level EVPN topologies. enum: `any`, `false`,
@@ -9403,7 +9404,7 @@ paths:
       - Orgs EVPN Topologies
   /api/v1/orgs/{org_id}/evpn_topologies/{evpn_topology_id}:
     delete:
-      description: Delete the Org EVPN Topology
+      description: Delete an EVPN topology from the organization by topology ID.
       operationId: deleteOrgEvpnTopology
       responses:
         '200':
@@ -9422,7 +9423,8 @@ paths:
       tags:
       - Orgs EVPN Topologies
     get:
-      description: Get One EVPN Topology Detail
+      description: Retrieve the switch roles, links, and generation options for a specific
+        EVPN topology.
       operationId: getOrgEvpnTopology
       responses:
         '200':
@@ -9444,7 +9446,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/evpn_topology_id'
     put:
-      description: Update the EVPN Topology
+      description: Update an EVPN topology, including switch membership, switch roles,
+        links, and generation options.
       operationId: updateOrgEvpnTopology
       requestBody:
         content:
