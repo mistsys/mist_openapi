@@ -12002,7 +12002,8 @@ paths:
       - Orgs NAC IDP
   /api/v1/orgs/{org_id}/mxclusters:
     get:
-      description: Get List of Org Mist Edge Clusters
+      description: List Mist Edge clusters in the organization, which group one or
+        more Mist Edge devices for tunneling, RadSec, and related edge services.
       operationId: listOrgMxEdgeClusters
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -12026,7 +12027,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create MxCluster
+      description: Create a Mist Edge cluster with tunnel termination, RadSec, NAC,
+        and management settings.
       operationId: createOrgMxEdgeCluster
       requestBody:
         content:
@@ -12065,7 +12067,8 @@ paths:
       - Orgs MxClusters
   /api/v1/orgs/{org_id}/mxclusters/{mxcluster_id}:
     delete:
-      description: Delete Org MXEdge Cluster
+      description: Delete a Mist Edge cluster by cluster ID, removing its cluster
+        configuration from the organization.
       operationId: deleteOrgMxEdgeCluster
       responses:
         '200':
@@ -12084,7 +12087,8 @@ paths:
       tags:
       - Orgs MxClusters
     get:
-      description: Get Org Mist Edge Cluster Details
+      description: Retrieve configuration details for a specific Mist Edge cluster,
+        including tunneling, RadSec, NAC, and management settings.
       operationId: getOrgMxEdgeCluster
       responses:
         '200':
@@ -12106,7 +12110,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxcluster_id'
     put:
-      description: Update Org Mist Edge Cluster
+      description: Update a Mist Edge cluster's tunneling, RadSec, NAC, and management
+        settings.
       operationId: updateOrgMxEdgeCluster
       requestBody:
         content:
