@@ -5203,16 +5203,35 @@ paths:
       description: Search Org Alarms
       operationId: searchOrgAlarms
       parameters:
-      - description: Filter results by site identifier
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: site_id
         schema:
           examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
-      - $ref: '#/components/parameters/alarm_group'
-      - $ref: '#/components/parameters/alarm_severity'
+      - description: 'Alarm group used to filter alarm results. enum: `certificate_expiry`,
+          `infrastructure`, `marvis`, `security`. The `marvis` group is used to retrieve
+          AI-driven network issue detections. Known Marvis alarm types include: `bad_cable`,
+          `bad_wan_uplink`, `dns_failure`, `arp_failure`, `auth_failure`, `dhcp_failure`,
+          `missing_vlan`, `negotiation_mismatch`, `port_flap`. Results include resolution
+          status (`status`, `resolved_time`) and affected entity details. Accepts
+          multiple comma-separated values.'
+        example: security,infrastructure
+        in: query
+        name: group
+        schema:
+          type: string
+      - description: 'Alarm severity used to filter results. enum: `critical`, `info`,
+          `warn`. Accepts multiple comma-separated values.'
+        example: warn,critical
+        in: query
+        name: severity
+        schema:
+          type: string
       - description: Filter alarms by alarm type. Accepts multiple values separated
           by comma. Use [List Alarm Definitions](/#operations/listAlarmDefinitions)
           to get the list of possible alarm types
@@ -6900,8 +6919,32 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_clients_count_distinct'
-      - $ref: '#/components/parameters/partial_filter_mac_client'
-      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - description: Partial / full Client MAC address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
+          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: mac
+        schema:
+          examples:
+          - aabbccddeeff,aabbcc*
+          - aabbccddeeff
+          - aabbcc*
+          - '*bbcc*'
+          type: string
+      - description: Partial / full Client hostname. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
+          `my-everest-client`). Suffix-only wildcards (e.g. `*everest`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: hostname
+        schema:
+          examples:
+          - my-everest-client,my-everest*
+          - my-everest-client
+          - my-everest*
+          - '*everest*'
+          type: string
       - description: Filter results by device type
         in: query
         name: device
@@ -6979,7 +7022,14 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/site_client_events_count_distinct'
-      - $ref: '#/components/parameters/client_event_type'
+      - description: See [List Device Events Definitions](/#operations/listDeviceEventsDefinitions).
+          Accepts multiple comma-separated values.
+        in: query
+        name: type
+        schema:
+          examples:
+          - MARVIS_EVENT_CLIENT_AUTH_FAILURE,CLIENT_DEAUTHENTICATION
+          type: string
       - description: Reason code filter for association and disassociation events
         in: query
         name: reason_code
@@ -7037,37 +7087,64 @@ paths:
       description: Get Org Clients Events
       operationId: searchOrgWirelessClientEvents
       parameters:
-      - $ref: '#/components/parameters/client_event_type'
-      - description: Reason code filter for association and disassociation events
+      - description: See [List Device Events Definitions](/#operations/listDeviceEventsDefinitions).
+          Accepts multiple comma-separated values.
+        in: query
+        name: type
+        schema:
+          examples:
+          - CLIENT_IP_ASSIGNED,CLIENT_DEAUTHENTICATION
+          type: string
+      - description: Reason code filter for association and disassociation events.
+          Accepts multiple comma-separated integer values.
         in: query
         name: reason_code
         schema:
           examples:
+          - 0,14
           - 7
           type: integer
-      - description: Filter results by SSID
+      - description: Filter results by SSID. Accepts multiple comma-separated values.
         in: query
         name: ssid
         schema:
           examples:
+          - Corp,Guest
           - MySSID
           type: string
-      - description: Filter results by AP MAC address
+      - description: Filter results by AP MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: ap
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b53010101
           type: string
       - description: 'Key management protocol used to filter client events. enum:
           `WPA2-PSK`, `WPA2-PSK/CCMP`, `WPA2-PSK-FT`, `WPA2-PSK-SHA256`, `WPA3-EAP-SHA256`,
-          `WPA3-EAP-SHA256/CCMP`, `WPA3-EAP-FT/GCMP256`, `WPA3-SAE-FT`, `WPA3-SAE-PSK`'
+          `WPA3-EAP-SHA256/CCMP`, `WPA3-EAP-FT/GCMP256`, `WPA3-SAE-FT`, `WPA3-SAE-PSK`.
+          Accepts multiple comma-separated values.'
+        example: WPA2-PSK,WPA2-PSK/CCMP
         in: query
         name: key_mgmt
         schema:
-          $ref: '#/components/schemas/client_key_mgmt'
-      - $ref: '#/components/parameters/dot11_proto'
-      - $ref: '#/components/parameters/dot11_band'
+          type: string
+      - description: '802.11 protocol used to filter results. enum: `a`, `ac`, `ax`,
+          `b`, `be`, `g`, `n`. Accepts multiple comma-separated values.'
+        example: ax,ac
+        in: query
+        name: proto
+        schema:
+          type: string
+      - description: '802.11 band used to filter radio results. enum: `24`, `5`, `5-dedicated`,
+          `5-selectable`, `6`, `6-dedicated`, `6-selectable`. Accepts multiple comma-separated
+          values.'
+        example: 6,5
+        in: query
+        name: band
+        schema:
+          type: string
       - description: Filter results by WLAN identifier
         in: query
         name: wlan_id
@@ -7076,11 +7153,13 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: Filter results by NAC rule identifier
+      - description: Filter results by NAC rule identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: nacrule_id
         schema:
           examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
@@ -7134,6 +7213,7 @@ paths:
         name: band
         schema:
           examples:
+          - 5,6
           - '5'
           type: string
       - description: Comma separated list of Device type (e.g. `Mac,iPhone`). Case
@@ -7144,9 +7224,45 @@ paths:
           examples:
           - iPhone
           type: string
-      - $ref: '#/components/parameters/partial_filter_hostname_client'
-      - $ref: '#/components/parameters/partial_filter_ip_client'
-      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - description: Partial / full Client hostname. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
+          `my-everest-client`). Suffix-only wildcards (e.g. `*everest`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: hostname
+        schema:
+          examples:
+          - my-everest-client,my-everest*
+          - my-everest-client
+          - my-everest*
+          - '*everest*'
+          type: string
+      - description: Partial / full Client IP address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*`
+          match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: ip
+        schema:
+          examples:
+          - 10.100.10.54,10.100.10.*
+          - 10.100.10.54
+          - 10.100.10.*
+          - '*100.10.*'
+          type: string
+      - description: Partial / full Client MAC address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
+          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: mac
+        schema:
+          examples:
+          - aabbccddeeff,aabbcc*
+          - aabbccddeeff
+          - aabbcc*
+          - '*bbcc*'
+          type: string
       - description: Only available for clients running the Marvis Client app, model,
           e.g. "MBP 15 late 2013", 6, 6s, "8+ GSM"
         in: query
@@ -7189,7 +7305,19 @@ paths:
           examples:
           - 5c5b530
           type: string
-      - $ref: '#/components/parameters/partial_search_username'
+      - description: Partial / full username. Use `prefix*` for prefix search or `*substring*`
+          for contains search (e.g. `johndoe*` and `*mycorp*` match `johndoe@mycorp.com`).
+          Suffix-only wildcards (e.g. `*mycorp.com`) are not supported. Accepts multiple
+          comma-separated values.
+        in: query
+        name: username
+        schema:
+          examples:
+          - johndoe,johnd*
+          - johndoe
+          - johnd*
+          - '*ohnd*'
+          type: string
       - description: Filter results by VLAN ID
         in: query
         name: vlan
@@ -7317,47 +7445,65 @@ paths:
           examples:
           - 5c5b53010101
           type: string
-      - $ref: '#/components/parameters/dot11_band'
-      - description: E.g. "Mac", "iPhone", "Apple watch"
+      - description: '802.11 band used to filter radio results. enum: `24`, `5`, `5-dedicated`,
+          `5-selectable`, `6`, `6-dedicated`, `6-selectable`. Accepts multiple comma-separated
+          values.'
+        example: 5,6
+        in: query
+        name: band
+        schema:
+          type: string
+      - description: E.g. "Mac", "iPhone", "Apple watch". Accepts multiple comma-separated
+          values.
         in: query
         name: client_family
         schema:
           examples:
+          - Phone/Tablet/Wearable,Monitoring Device
           - iPhone
           type: string
-      - description: Filter results by client manufacturer, e.g. "Apple"
+      - description: Filter results by client manufacturer, e.g. "Apple". Accepts
+          multiple comma-separated values.
         in: query
         name: client_manufacture
         schema:
           examples:
+          - Hewlett Packard Enterprise,Unknown
           - Apple
           type: string
-      - description: Filter results by client model, e.g. "8+", "XS"
+      - description: Filter results by client model, e.g. "8+", "XS". Accepts multiple
+          comma-separated values.
         in: query
         name: client_model
         schema:
           examples:
+          - iPhone 8,Aruba S0U52A
           - iPhone 8
           type: string
-      - description: Filter results by client username
+      - description: Filter results by client username. Accepts multiple comma-separated
+          values.
         in: query
         name: client_username
         schema:
           examples:
+          - john.doe,jane.doe
           - john.doe
           type: string
-      - description: E.g. "Mojave", "Windows 10", "Linux"
+      - description: E.g. "Mojave", "Windows 10", "Linux". Accepts multiple comma-separated
+          values.
         in: query
         name: client_os
         schema:
           examples:
+          - iOS 16.7.16,Unknown
           - Windows 10
           type: string
-      - description: Filter results by SSID
+      - description: Filter results by SSID. Accepts multiple comma-separated values.
         in: query
         name: ssid
         schema:
           examples:
+          - Corp,Guest
           - MySSID
           type: string
       - description: Filter results by WLAN identifier
@@ -7369,11 +7515,13 @@ paths:
           format: uuid
           type: string
       - $ref: '#/components/parameters/psk_id_query'
-      - description: Filter results by PSK name
+      - description: Filter results by PSK name. Accepts multiple comma-separated
+          values.
         in: query
         name: psk_name
         schema:
           examples:
+          - psk-a,psk-b
           - MyPPSK
           type: string
       - $ref: '#/components/parameters/limit'
@@ -8034,11 +8182,13 @@ paths:
           - 7dae216d-7c98-a51b-e068-dd7d477b7216
           format: uuid
           type: string
-      - description: Filter results by device model
+      - description: Filter results by device model. Accepts multiple comma-separated
+          values.
         in: query
         name: model
         schema:
           examples:
+          - AP45,AP47D
           - MR84
           type: string
       - deprecated: true
@@ -8208,21 +8358,27 @@ paths:
       description: Search Org Devices Events
       operationId: searchOrgDeviceEvents
       parameters:
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b53010101
           type: string
-      - description: Filter results by device model
+      - description: Filter results by device model. Accepts multiple comma-separated
+          values.
         in: query
         name: model
         schema:
           examples:
+          - EX4100-48MP,AP17
           - AP43
           type: string
-      - description: Filter results by device type
+      - description: Filter results by device type. Accepts multiple comma-separated
+          values.
+        example: switch,ap
         in: query
         name: device_type
         schema:
@@ -8234,7 +8390,14 @@ paths:
           examples:
           - Device connected
           type: string
-      - $ref: '#/components/parameters/device_event_type'
+      - description: See [List Device Events Definitions](/#operations/listDeviceEventsDefinitions).
+          Accepts multiple comma-separated values.
+        in: query
+        name: type
+        schema:
+          examples:
+          - SW_PORT_DOWN,AP_CONFIGURED
+          type: string
       - description: Return last/recent event for passed in field
         in: query
         name: last_by
@@ -8324,25 +8487,30 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/last_config_device_type'
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b53010101
           type: string
-      - description: Filter results by name
+      - description: Filter results by name. Accepts multiple comma-separated values.
         in: query
         name: name
         schema:
           examples:
+          - name-a,name-b
           - My AP
           type: string
-      - description: Filter results by software version
+      - description: Filter results by software version. Accepts multiple comma-separated
+          values.
         in: query
         name: version
         schema:
           examples:
+          - apfw-0.15.34615-noro-0a3c,apfw-0.15.34436-noro-d810
           - 10.0.0
           type: string
       - description: 'Duration for expiring cert queries (format: 2d/3h/172800 seconds)'
@@ -8413,61 +8581,90 @@ paths:
       description: Search Org Devices
       operationId: searchOrgDevices
       parameters:
-      - description: When `type`==`ap`, Channel of band_24
+      - description: When `type`==`ap`, Channel of band_24. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_24_channel
         schema:
+          examples:
+          - 1,64
           type: integer
-      - description: When `type`==`ap`, Channel of band_5
+      - description: When `type`==`ap`, Channel of band_5. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_5_channel
         schema:
+          examples:
+          - 153,108
           type: integer
-      - description: When `type`==`ap`, Channel of band_6
+      - description: When `type`==`ap`, Channel of band_6. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_6_channel
         schema:
+          examples:
+          - 197,221
           type: integer
-      - description: When `type`==`ap`, Bandwidth of band_24
+      - description: When `type`==`ap`, Bandwidth of band_24. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_24_bandwidth
         schema:
+          examples:
+          - 0,20
           type: integer
-      - description: When `type`==`ap`, Bandwidth of band_5
+      - description: When `type`==`ap`, Bandwidth of band_5. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_5_bandwidth
         schema:
+          examples:
+          - 20,40
           type: integer
-      - description: When `type`==`ap`, Bandwidth of band_6
+      - description: When `type`==`ap`, Bandwidth of band_6. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_6_bandwidth
         schema:
+          examples:
+          - 80,40
           type: integer
-      - description: When `type`==`ap`, Power of band_24
+      - description: When `type`==`ap`, Power of band_24. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_24_power
         schema:
+          examples:
+          - 0,17
           type: integer
-      - description: When `type`==`ap`, Power of band_5
+      - description: When `type`==`ap`, Power of band_5. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_5_power
         schema:
+          examples:
+          - 17,11
           type: integer
-      - description: When `type`==`ap`, Power of band_6
+      - description: When `type`==`ap`, Power of band_6. Accepts multiple comma-separated
+          integer values.
         in: query
         name: band_6_power
         schema:
+          examples:
+          - 14,12
           type: integer
       - description: When `type`==`gateway`, true / false
         in: query
         name: clustered
         schema:
           type: boolean
-      - description: When `type`==`ap`, Port speed of eth0
+      - description: When `type`==`ap`, Port speed of eth0. Accepts multiple comma-separated
+          integer values.
         in: query
         name: eth0_port_speed
         schema:
           examples:
+          - 100,1000
           - 100
           - 1000
           type: integer
@@ -8477,9 +8674,45 @@ paths:
         schema:
           format: uuid
           type: string
-      - $ref: '#/components/parameters/partial_filter_ext_ip'
-      - $ref: '#/components/parameters/partial_filter_hostname_device'
-      - $ref: '#/components/parameters/partial_filter_ip_device'
+      - description: Partial / full Device external ip. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `1.2.3.*` and `*.2.3.*` match
+          `1.2.3.4`). Suffix-only wildcards (e.g. `*.2.3.4`) are not supported. Accepts
+          multiple comma-separated values.
+        in: query
+        name: ext_ip
+        schema:
+          examples:
+          - 1.2.3.4,1.2.3.*
+          - 1.2.3.4
+          - 1.2.3.*
+          - '*2.3.*'
+          type: string
+      - description: Partial / full Device hostname. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `my-london*` and `*london*` match
+          `my-london-1`). Suffix-only wildcards (e.g. `*london-1`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: hostname
+        schema:
+          examples:
+          - my-london-1,my-london*
+          - my-london-1
+          - my-london*
+          - '*london*'
+          type: string
+      - description: Partial / full Device IP address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*`
+          match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: ip
+        schema:
+          examples:
+          - 10.100.10.54,10.100.10.*
+          - 10.100.10.54
+          - 10.100.10.*
+          - '*100.10.*'
+          type: string
       - description: When `type`==`switch` or `type`==`gateway`, last configuration
           status
         in: query
@@ -8488,26 +8721,76 @@ paths:
           examples:
           - success
           type: string
-      - description: Last hostname of the device.
+      - description: Last hostname of the device. Accepts multiple comma-separated
+          values.
         in: query
         name: last_hostname
         schema:
+          examples:
+          - ap-01,ap-02
           type: string
-      - description: When `type`==`ap`, LLDP management IP address
+      - description: When `type`==`ap`, LLDP management IP address. Accepts multiple
+          comma-separated values.
         in: query
         name: lldp_mgmt_addr
         schema:
+          examples:
+          - 192.0.2.10,192.0.2.11
           type: string
-      - $ref: '#/components/parameters/partial_filter_lldp_port_id'
+      - description: When `type`==`ap`, LLDP port id. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `ge-0/0/*` and `*-0/0/*` match
+          `ge-0/0/30`). Suffix-only wildcards (e.g. `*switch-01`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: lldp_port_id
+        schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
+          type: string
       - $ref: '#/components/parameters/partial_filter_lldp_system_desc'
-      - $ref: '#/components/parameters/partial_filter_lldp_system_name'
-      - $ref: '#/components/parameters/partial_filter_mac_device'
-      - $ref: '#/components/parameters/partial_filter_model'
+      - description: When `type`==`ap`, LLDP system name. Use `prefix*` for prefix
+          search or `*substring*` for contains search (e.g. `my-switch*` and `*switch*`
+          match `my-switch-01`). Suffix-only wildcards (e.g. `*switch-01`) are not
+          supported. Accepts multiple comma-separated values.
+        in: query
+        name: lldp_system_name
+        schema:
+          examples:
+          - richmond-hill-switch,Phoenix_Switch
+          type: string
+      - description: Partial / full Device MAC address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `001122*` and `*1122*` match
+          `001122334455`). Suffix-only wildcards (e.g. `*4455`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: mac
+        schema:
+          examples:
+          - aabbccddeeff,aabbcc*
+          - aabbccddeeff
+          - aabbcc*
+          - '*bbcc*'
+          type: string
+      - description: Partial / full Device model. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `AP4*` and `*P4*` match `AP43`).
+          Suffix-only wildcards (e.g. `*43`) are not supported. Accepts multiple comma-separated
+          values.
+        in: query
+        name: model
+        schema:
+          examples:
+          - AP43,AP4*
+          - AP43
+          - AP4*
+          - '*P4*'
+          type: string
       - description: When `type`==`ap`, Mist Edge id, if AP is connecting to a Mist
-          Edge
+          Edge. Accepts multiple comma-separated values.
         in: query
         name: mxedge_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           format: uuid
           type: string
       - description: When `type`==`ap`, Comma separated list of Mist Edge id, if AP
@@ -8537,10 +8820,13 @@ paths:
         name: node1_mac
         schema:
           type: string
-      - description: When `type`==`ap`, whether the AP is power constrained
+      - description: When `type`==`ap`, whether the AP is power constrained. Accepts
+          multiple comma-separated boolean values.
         in: query
         name: power_constrained
         schema:
+          examples:
+          - true,false
           type: boolean
       - description: "When `type`==`switch` or `type`==`gateway`, Key-value pairs\
           \ where the key\nis the RADIUS server address and the value contains authentication\
@@ -8573,10 +8859,13 @@ paths:
         schema:
           type: string
       - $ref: '#/components/parameters/device_type'
-      - description: Filter results by software version
+      - description: Filter results by software version. Accepts multiple comma-separated
+          values.
         in: query
         name: version
         schema:
+          examples:
+          - 0.15.34615,0.14.29967
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -8728,11 +9017,12 @@ paths:
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
       - description: Fetch version for device model, use/combine with `type` as needed
-          (for switch and gateway devices)
+          (for switch and gateway devices). Accepts multiple comma-separated values.
         in: query
         name: model
         schema:
           examples:
+          - AP27,AP27E
           - AP43
           type: string
       responses:
@@ -8768,10 +9058,12 @@ paths:
         - ORG_CA_CERT_REGENERATED'
       operationId: searchOrgEvents
       parameters:
-      - description: Filter results by type
+      - description: Filter results by type. Accepts multiple comma-separated values.
         in: query
         name: type
         schema:
+          examples:
+          - CRADLEPOINT_MAINTENANCE_COMPLETED,CRADLEPOINT_MAINTENANCE_STARTED
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -9848,30 +10140,38 @@ paths:
         \ MAC address to generate the device ID.\n"
       operationId: getOrgInventory
       parameters:
-      - description: Filter results by device serial number
+      - description: Filter results by device serial number. Accepts multiple comma-separated
+          values.
         in: query
         name: serial
         schema:
           examples:
+          - PE3717390301,EY2523AN0523
           - FXLH2015150025
           type: string
-      - description: Filter results by device model
+      - description: Filter results by device model. Accepts multiple comma-separated
+          values.
         in: query
         name: model
         schema:
           examples:
+          - EX4300-48T,EX4100-48MP
           - AP43
           type: string
-      - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
+      - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`. Accepts
+          multiple comma-separated values.'
+        example: switch,ap
         in: query
         name: type
         schema:
-          $ref: '#/components/schemas/device_type'
-      - description: Filter results by MAC address
+          type: string
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b350e0001
           type: string
       - description: Filter results by one site identifier. Use a single value; comma-separated
@@ -9883,11 +10183,13 @@ paths:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - description: Virtual Chassis MAC address
+      - description: Virtual Chassis MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: vc_mac
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b350e0001
           type: string
       - description: To display Virtual Chassis members
@@ -10025,10 +10327,13 @@ paths:
         name: site_id
         schema:
           type: string
-      - description: Filter results by device model
+      - description: Filter results by device model. Accepts multiple comma-separated
+          values.
         in: query
         name: model
         schema:
+          examples:
+          - AP45,BT11
           type: string
       - description: Filter results by software version
         in: query
@@ -10202,18 +10507,61 @@ paths:
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - $ref: '#/components/parameters/partial_filter_mac'
-      - $ref: '#/components/parameters/partial_filter_model'
-      - $ref: '#/components/parameters/partial_filter_name'
-      - description: Filter inventory results by site identifier
+      - description: Filter by MAC address. Partial matches may use `*` wildcards
+          (e.g. `*5b35*` matches `5c5b350e0001` and `5c5b35000301`). Accepts multiple
+          comma-separated values.
+        in: query
+        name: mac
+        schema:
+          examples:
+          - 5c5b350e0001,*5b35*
+          - 5c5b350e0001
+          - '*5b35*'
+          type: string
+      - description: Partial / full Device model. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `AP4*` and `*P4*` match `AP43`).
+          Suffix-only wildcards (e.g. `*43`) are not supported. Accepts multiple comma-separated
+          values.
+        in: query
+        name: model
+        schema:
+          examples:
+          - AP43,AP4*
+          - AP43
+          - AP4*
+          - '*P4*'
+          type: string
+      - description: Device name. Always a partial match (e.g. `london` will match
+          `london-1`, `london-2`, `my-london-device`...). Accepts multiple comma-separated
+          values.
+        in: query
+        name: name
+        schema:
+          examples:
+          - name-a,name-b
+          - london
+          type: string
+      - description: Filter inventory results by site identifier. Accepts multiple
+          comma-separated values.
         in: query
         name: site_id
         schema:
           examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
-      - $ref: '#/components/parameters/partial_filter_serial'
+      - description: Device serial number. Partial match allowed with wildcard * (e.g.
+          `*123*` will match `AB123CD`, `12345`, `XY123`). Accepts multiple comma-separated
+          values.
+        in: query
+        name: serial
+        schema:
+          examples:
+          - AB123CD,*123*
+          - AB123CD
+          - '*123*'
+          type: string
       - description: Filter inventory results by whether the device is the Virtual
           Chassis master
         in: query
@@ -10222,13 +10570,33 @@ paths:
           examples:
           - 'true'
           type: string
-      - $ref: '#/components/parameters/partial_filter_sku'
-      - $ref: '#/components/parameters/partial_filter_version'
-      - description: 'Device status. enum: `connected`, `disconnected`'
+      - description: Device SKU. Partial match allowed with wildcard * (e.g. `*2300*`
+          will match `EX2300-F-12P`). Accepts multiple comma-separated values.
+        in: query
+        name: sku
+        schema:
+          examples:
+          - EX2300-F-12P,*2300*
+          - EX2300-F-12P
+          - '*2300*'
+          type: string
+      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
+          will match `21.2R3-S3.5`). Accepts multiple comma-separated values.
+        in: query
+        name: version
+        schema:
+          examples:
+          - 21.2R3-S3.5,*2R3*
+          - 21.2R3-S3.5
+          - '*2R3*'
+          type: string
+      - description: 'Device status. enum: `connected`, `disconnected`. Accepts multiple
+          comma-separated values.'
+        example: connected,disconnected
         in: query
         name: status
         schema:
-          $ref: '#/components/schemas/device_status_filter'
+          type: string
       - description: Wildcards for name, mac, serial
         in: query
         name: text
@@ -10580,32 +10948,38 @@ paths:
       operationId: searchOrgJsiAssetsAndContracts
       parameters:
       - description: Device claim status, `true` for claimed devices, `false` for
-          all devices
+          all devices. Accepts multiple comma-separated boolean values.
         in: query
         name: claimed
         schema:
           examples:
+          - true,false
           - true
           type: boolean
-      - description: Filter results by device model
+      - description: Filter results by device model. Accepts multiple comma-separated
+          values.
         in: query
         name: model
         schema:
           examples:
+          - QFX10000-36Q,QFX10000-30C
           - AP43
           type: string
-      - description: Filter results by device serial number
+      - description: Filter results by device serial number. Accepts multiple comma-separated
+          values.
         in: query
         name: serial
         schema:
           examples:
+          - ACNP4666,ACNP6969
           - FXLH2015150025
           type: string
-      - description: Filter results by SKU
+      - description: Filter results by SKU. Accepts multiple comma-separated values.
         in: query
         name: sku
         schema:
           examples:
+          - QFX10000-36Q,QFX10000-30C
           - EX2300
           type: string
       - description: 'Device status. enum: `all`, `connected`, `disconnected`'
@@ -10667,11 +11041,13 @@ paths:
           examples:
           - '2025-12-31'
           type: string
-      - description: Indicates if the device is covered under active support contract
+      - description: Indicates if the device is covered under active support contract.
+          Accepts multiple comma-separated boolean values.
         in: query
         name: has_support
         schema:
           examples:
+          - true,false
           - true
           type: boolean
       - description: To get the onboarded devices that are affected by the SIRT ID
@@ -11022,11 +11398,13 @@ paths:
       description: Get List of change logs for the current Org
       operationId: listOrgAuditLogsLegacy
       parameters:
-      - description: Filter results by site identifier
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: site_id
         schema:
           examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
@@ -11144,11 +11522,13 @@ paths:
       description: Get a list of change logs for the current Org
       operationId: listOrgAuditLogs
       parameters:
-      - description: Filter results by site identifier
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: site_id
         schema:
           examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           format: uuid
           type: string
@@ -11900,18 +12280,47 @@ paths:
       description: Search Org Mist Edges
       operationId: searchOrgMxEdges
       parameters:
-      - $ref: '#/components/parameters/partial_filter_hostname_device'
-      - description: Filter results by Mist Edge identifier
+      - description: Partial / full Device hostname. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `my-london*` and `*london*` match
+          `my-london-1`). Suffix-only wildcards (e.g. `*london-1`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: hostname
+        schema:
+          examples:
+          - my-london-1,my-london*
+          - my-london-1
+          - my-london*
+          - '*london*'
+          type: string
+      - description: Filter results by Mist Edge identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: mxedge_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
-      - description: Mist edge cluster id
+      - description: Mist edge cluster id. Accepts multiple comma-separated values.
         in: query
         name: mxcluster_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
-      - $ref: '#/components/parameters/partial_filter_model'
+      - description: Partial / full Device model. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `AP4*` and `*P4*` match `AP43`).
+          Suffix-only wildcards (e.g. `*43`) are not supported. Accepts multiple comma-separated
+          values.
+        in: query
+        name: model
+        schema:
+          examples:
+          - AP43,AP4*
+          - AP43
+          - AP4*
+          - '*P4*'
+          type: string
       - description: Debian code name (buster, bullseye)
         in: query
         name: distro
@@ -12752,10 +13161,13 @@ paths:
         name: last_status
         schema:
           type: string
-      - description: Client type i.e. "wireless", "wired" etc.
+      - description: Client type i.e. "wireless", "wired" etc. Accepts multiple comma-separated
+          values.
         in: query
         name: type
         schema:
+          examples:
+          - wired,wireless
           type: string
       - description: MDM compliance of client i.e "compliant", "not compliant"
         in: query
@@ -12802,7 +13214,14 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/org_nac_client_events_count_distinct'
-      - $ref: '#/components/parameters/nac_event_type'
+      - description: See [List Device Events Definitions](/#operations/listNacEventsDefinitions).
+          Accepts multiple comma-separated values.
+        in: query
+        name: type
+        schema:
+          examples:
+          - NAC_CLIENT_PERMIT,NAC_SESSION_STARTED
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -12830,11 +13249,21 @@ paths:
       description: Search NAC Client Events
       operationId: searchOrgNacClientEvents
       parameters:
-      - $ref: '#/components/parameters/nac_event_type'
-      - description: NAC Policy Rule ID, if matched
+      - description: See [List Device Events Definitions](/#operations/listNacEventsDefinitions).
+          Accepts multiple comma-separated values.
+        in: query
+        name: type
+        schema:
+          examples:
+          - NAC_CLIENT_PERMIT,NAC_SESSION_STARTED
+          type: string
+      - description: NAC Policy Rule ID, if matched. Accepts multiple comma-separated
+          values.
         in: query
         name: nacrule_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           format: uuid
           type: string
       - description: NAC Policy Rule Matched
@@ -12854,15 +13283,21 @@ paths:
         schema:
           type: boolean
       - description: Authentication type, e.g. "eap-tls", "eap-peap", "eap-ttls",
-          "eap-teap", "mab", "psk", "device-auth"
+          "eap-teap", "mab", "psk", "device-auth". Accepts multiple comma-separated
+          values.
         in: query
         name: auth_type
         schema:
+          examples:
+          - mab,eap-tls
           type: string
-      - description: Filter results by VLAN ID
+      - description: Filter results by VLAN ID. Accepts multiple comma-separated integer
+          values.
         in: query
         name: vlan
         schema:
+          examples:
+          - 250,10
           type: integer
       - description: Vendor of NAS device
         in: query
@@ -12900,10 +13335,13 @@ paths:
         name: ssid
         schema:
           type: string
-      - description: Filter results by username
+      - description: Filter results by username. Accepts multiple comma-separated
+          values.
         in: query
         name: username
         schema:
+          examples:
+          - john.doe,jane.doe
           type: string
       - description: Filter results by one site identifier. Use a single value; comma-separated
           values are not supported
@@ -12917,10 +13355,12 @@ paths:
         schema:
           type: string
       - description: Filter results by whether the client is using a randomized MAC
-          address
+          address. Accepts multiple comma-separated boolean values.
         in: query
         name: random_mac
         schema:
+          examples:
+          - true,false
           type: boolean
       - description: Filter results by one MAC address. Use a single value; comma-separated
           values are not supported
@@ -12938,10 +13378,12 @@ paths:
         name: text
         schema:
           type: string
-      - description: IP address of NAS device
+      - description: IP address of NAS device. Accepts multiple comma-separated values.
         in: query
         name: nas_ip
         schema:
+          examples:
+          - 192.0.2.10,192.0.2.11
           type: string
       - description: Vendor specific VLAN ID in RADIUS requests
         in: query
@@ -12983,17 +13425,22 @@ paths:
         schema:
           type: string
       - description: Authentication type, e.g. "eap-tls", "eap-peap", "eap-ttls",
-          "eap-teap", "mab", "psk", "device-auth"
+          "eap-teap", "mab", "psk", "device-auth". Accepts multiple comma-separated
+          values.
         in: query
         name: auth_type
         schema:
+          examples:
+          - mab,eap-tls
           type: string
       - description: Filter by certificate expiry within a specific duration from
-          now (e.g., "7d" for 7 days, "1m" for 1 month)
+          now (e.g., "7d" for 7 days, "1m" for 1 month). Accepts multiple comma-separated
+          values.
         in: query
         name: cert_expiry_duration
         schema:
           examples:
+          - 7d,1m
           - 7d
           - 1m
           type: string
@@ -13015,8 +13462,33 @@ paths:
         name: edr_status
         schema:
           $ref: '#/components/schemas/edr_status'
-      - $ref: '#/components/parameters/partial_filter_family_client'
-      - $ref: '#/components/parameters/partial_filter_hostname_client'
+      - description: Partial / full Client family (e.g. "Phone/Tablet/Wearable", "Access
+          Point"). Use `prefix*` for prefix search or `*substring*` for contains search
+          (e.g. `Surveillance*` and `*urveillance*` match `Surveillance Camera`).
+          Suffix-only wildcards (e.g. `*Camera`) are not supported. Accepts multiple
+          comma-separated values.
+        in: query
+        name: family
+        schema:
+          examples:
+          - Surveillance Camera,Surveillance*
+          - Surveillance Camera
+          - Surveillance*
+          - '*urveillance*'
+          type: string
+      - description: Partial / full Client hostname. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
+          `my-everest-client`). Suffix-only wildcards (e.g. `*everest`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: hostname
+        schema:
+          examples:
+          - my-everest-client,my-everest*
+          - my-everest-client
+          - my-everest*
+          - '*everest*'
+          type: string
       - description: SSO ID, if present and used
         in: query
         name: idp_id
@@ -13050,7 +13522,20 @@ paths:
         name: mdm_managed
         schema:
           type: boolean
-      - $ref: '#/components/parameters/partial_filter_mfg_client'
+      - description: Partial / full Client manufacturer (e.g. "apple", "cisco", "juniper").
+          Use `prefix*` for prefix search or `*substring*` for contains search (e.g.
+          `Raspberry Pi*` and `*Pi*` match `Raspberry Pi Trading Ltd`). Suffix-only
+          wildcards (e.g. `*Ltd`) are not supported. Accepts multiple comma-separated
+          values.
+        in: query
+        name: mfg
+        schema:
+          examples:
+          - Raspberry Pi Trading Ltd,Raspberry Pi*
+          - Raspberry Pi Trading Ltd
+          - Raspberry Pi*
+          - '*Pi*'
+          type: string
       - description: Client model, e.g. "iPhone 12", "MX100"
         in: query
         name: model
@@ -13076,10 +13561,12 @@ paths:
         name: nas_vendor
         schema:
           type: string
-      - description: IP address of NAS device
+      - description: IP address of NAS device. Accepts multiple comma-separated values.
         in: query
         name: nas_ip
         schema:
+          examples:
+          - 192.0.2.10,192.0.2.11
           type: string
       - description: Vendor specific VLAN ID in RADIUS requests
         in: query
@@ -13108,10 +13595,13 @@ paths:
         name: text
         schema:
           type: string
-      - description: Client type i.e. "wireless", "wired" etc.
+      - description: Client type i.e. "wireless", "wired" etc. Accepts multiple comma-separated
+          values.
         in: query
         name: type
         schema:
+          examples:
+          - wired,wireless
           type: string
       - description: Labels derived from usermac entry
         in: query
@@ -13619,24 +14109,30 @@ paths:
       parameters:
       - description: 'Filter results by type. enum: `egress_vlan_names`, `gbp_tag`,
           `match`, `radius_attrs`, `radius_group`, `radius_vendor_attrs`, `redirect_nacportal_id`,
-          `session_timeout`, `username_attr`, `vlan`'
+          `session_timeout`, `username_attr`, `vlan`. Accepts multiple comma-separated
+          values.'
+        example: match,vlan
         in: query
         name: type
         schema:
-          $ref: '#/components/schemas/nac_tag_type'
-      - description: Filter results by name
+          type: string
+      - description: Filter results by name. Accepts multiple comma-separated values.
         in: query
         name: name
         schema:
+          examples:
+          - name-a,name-b
           type: string
       - description: 'if `type`==`match`, Type of NAC Tag. enum: `cert_cn`, `cert_eku`,
           `cert_issuer`, `cert_san`, `cert_serial`, `cert_sub`, `cert_template`, `client_mac`,
           `edr_status`, `gbp_tag`, `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`,
-          `nas_ip`, `radius_group`, `realm`, `ssid`, `user_name`, `usermac_label`'
+          `nas_ip`, `radius_group`, `realm`, `ssid`, `user_name`, `usermac_label`.
+          Accepts multiple comma-separated values.'
+        example: ssid,idp_role
         in: query
         name: match
         schema:
-          $ref: '#/components/schemas/nac_tag_match'
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
       responses:
@@ -15442,21 +15938,26 @@ paths:
       description: Get List of Org Psks
       operationId: listOrgPsks
       parameters:
-      - description: Filter results by name
-        example: psk_name
+      - description: Filter results by name. Accepts multiple comma-separated values.
+        example: psk-a,psk-b
         in: query
         name: name
         schema:
           type: string
-      - description: Filter results by SSID
+      - description: Filter results by SSID. Accepts multiple comma-separated values.
         in: query
         name: ssid
         schema:
+          examples:
+          - Corp,Guest
           type: string
-      - description: Filter PSK results by role
+      - description: Filter PSK results by role. Accepts multiple comma-separated
+          values.
         in: query
         name: role
         schema:
+          examples:
+          - employee,contractor
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
@@ -17628,15 +18129,21 @@ paths:
         name: sso_name_id
         schema:
           type: string
-      - description: Serial Number of the certificate
+      - description: Serial Number of the certificate. Accepts multiple comma-separated
+          values.
         in: query
         name: serial_number
         schema:
+          examples:
+          - 30259366527558158949099094530690907190005860547,445699007254824353311932325964410163058359466645
           type: string
-      - description: Filter results by device id
+      - description: Filter results by device id. Accepts multiple comma-separated
+          values.
         in: query
         name: device_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
       responses:
         '200':
@@ -18372,76 +18879,121 @@ paths:
       description: Search Sites
       operationId: searchOrgSites
       parameters:
-      - description: If Advanced Analytic feature is enabled
+      - description: If Advanced Analytic feature is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: analytic_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
       - description: If App Waking feature is enabled
         in: query
         name: app_waking
         schema:
           type: boolean
-      - description: If Asset Tracking is enabled
+      - description: If Asset Tracking is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: asset_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
       - description: Filter results by whether automatic upgrades are enabled
         in: query
         name: auto_upgrade_enabled
         schema:
           type: boolean
-      - description: Filter results by automatic upgrade version
+      - description: Filter results by automatic upgrade version. Accepts multiple
+          comma-separated values.
         in: query
         name: auto_upgrade_version
         schema:
+          examples:
+          - custom,stable
           type: string
-      - description: Filter results by country code
+      - description: Filter results by country code. Accepts multiple comma-separated
+          values.
         in: query
         name: country_code
         schema:
+          examples:
+          - CA,FR
           type: string
-      - description: If Honeypot detection is enabled
+      - description: If Honeypot detection is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: honeypot_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
-      - description: Filter results by identifier
+      - description: Filter results by identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
-      - description: If unconnected client are located
+      - description: If unconnected client are located. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: locate_unconnected
         schema:
+          examples:
+          - true,false
           type: boolean
-      - description: If Mesh feature is enabled
+      - description: If Mesh feature is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: mesh_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
-      - $ref: '#/components/parameters/partial_filter_name_site'
-      - description: If Rogue detection is enabled
+      - description: Partial / full Site name. Case insensitive. Use `prefix*` for
+          prefix search or `*substring*` for contains search (e.g. `my-site*` and
+          `*site*` match `my-site-01`). Suffix-only wildcards (e.g. `*site-01`) are
+          not supported. Accepts multiple comma-separated values.
+        in: query
+        name: name
+        schema:
+          examples:
+          - my-site-01,my-site*
+          - my-site-01
+          - my-site*
+          - '*site*'
+          type: string
+      - description: If Rogue detection is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: rogue_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
       - description: If Remote Syslog is enabled
         in: query
         name: remote_syslog_enabled
         schema:
           type: boolean
-      - description: If managed mobility feature is enabled
+      - description: If managed mobility feature is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: rtsa_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
-      - description: If Virtual Network Assistant is enabled
+      - description: If Virtual Network Assistant is enabled. Accepts multiple comma-separated
+          boolean values.
         in: query
         name: vna_enabled
         schema:
+          examples:
+          - true,false
           type: boolean
       - description: If Wi-Fi feature is enabled
         in: query
@@ -19351,40 +19903,54 @@ paths:
         name: site_id
         schema:
           type: string
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
       - description: Filter asset results by reporting device name
         in: query
         name: device_name
         schema:
           type: string
-      - description: Filter results by name
+      - description: Filter results by name. Accepts multiple comma-separated values.
         in: query
         name: name
         schema:
+          examples:
+          - name-a,name-b
           type: string
       - description: Filter results by map identifier
         in: query
         name: map_id
         schema:
           type: string
-      - description: Filter asset results by iBeacon UUID
+      - description: Filter asset results by iBeacon UUID. Accepts multiple comma-separated
+          values.
         in: query
         name: ibeacon_uuid
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
-      - description: Filter asset results by iBeacon major value
+      - description: Filter asset results by iBeacon major value. Accepts multiple
+          comma-separated values.
         in: query
         name: ibeacon_major
         schema:
+          examples:
+          - 59788,902
           type: string
-      - description: Filter asset results by iBeacon minor value
+      - description: Filter asset results by iBeacon minor value. Accepts multiple
+          comma-separated values.
         in: query
         name: ibeacon_minor
         schema:
+          examples:
+          - 8385,4432
           type: string
       - description: Filter asset results by Eddystone UID namespace
         in: query
@@ -19401,20 +19967,29 @@ paths:
         name: eddystone_url
         schema:
           type: string
-      - description: Filter asset results by reporting AP MAC address
+      - description: Filter asset results by reporting AP MAC address. Accepts multiple
+          comma-separated values.
         in: query
         name: ap_mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
-      - description: Filter asset results by beam value
+      - description: Filter asset results by beam value. Accepts multiple comma-separated
+          integer values.
         in: query
         name: beam
         schema:
+          examples:
+          - 2,6
           type: integer
-      - description: Filter asset results by RSSI value
+      - description: Filter asset results by RSSI value. Accepts multiple comma-separated
+          integer values.
         in: query
         name: rssi
         schema:
+          examples:
+          - -69,-74
           type: integer
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -19483,10 +20058,13 @@ paths:
       description: Search Org BGP Stats
       operationId: searchOrgBgpStats
       parameters:
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
       - description: Filter peer results by neighbor MAC address
         in: query
@@ -19498,10 +20076,13 @@ paths:
         name: site_id
         schema:
           type: string
-      - description: Filter peer results by VRF name
+      - description: Filter peer results by VRF name. Accepts multiple comma-separated
+          values.
         in: query
         name: vrf_name
         schema:
+          examples:
+          - default,vpn_OrgOverlay
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -19537,29 +20118,33 @@ paths:
       parameters:
       - description: 'Filter results by one device type. Use a single value; comma-separated
           values are not supported. enum: `all`, `ap`, `gateway`, `switch`'
+        example: ap,switch
         in: query
         name: type
         schema:
-          enum:
-          - all
-          - ap
-          - gateway
-          - switch
-          type: string
-      - description: 'Filter results by status. enum: `all`, `connected`, `disconnected`'
+          $ref: '#/components/schemas/device_type_with_all'
+      - description: 'Filter results by status. enum: `all`, `connected`, `disconnected`.
+          Accepts multiple comma-separated values.'
+        example: disconnected,connected
         in: query
         name: status
         schema:
-          $ref: '#/components/schemas/device_status'
-      - description: Filter results by site identifier
+          type: string
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: site_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
       - description: Filter results by evpntopo id
         in: query
@@ -19806,11 +20391,13 @@ paths:
           examples:
           - true
           type: boolean
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b350e0410
           type: string
       - description: Chassis identifier of the chassis type listed
@@ -20017,11 +20604,13 @@ paths:
         reboot.'
       operationId: searchOrgSwOrGwPorts
       parameters:
-      - description: 'Type of device. enum: `switch`, `gateway`, `all`'
+      - description: 'Type of device. enum: `switch`, `gateway`, `all`. Accepts multiple
+          comma-separated values.'
+        example: gateway,switch
         in: query
         name: device_type
         schema:
-          $ref: '#/components/schemas/search_org_sw_or_gw_ports_type'
+          type: string
       - description: 'Authentication state used to filter port results when `up`==`true`
           and the port has an authenticator role. enum: `""`, `authenticated`, `authenticating`,
           `held`, `init`'
@@ -20055,26 +20644,37 @@ paths:
           examples:
           - '123456789012345'
           type: string
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
-      - description: Chassis identifier of the chassis type listed
+      - description: Chassis identifier of the chassis type listed. Accepts multiple
+          comma-separated values.
         in: query
         name: neighbor_mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
-      - description: Description supplied by the system on the interface E.g. "GigabitEthernet2/0/39"
+      - description: Description supplied by the system on the interface E.g. "GigabitEthernet2/0/39".
+          Accepts multiple comma-separated values.
         in: query
         name: neighbor_port_desc
         schema:
+          examples:
+          - ge-0-2,ge-0-1
           type: string
       - description: Name supplied by the system on the interface E.g. neighbor system
-          name E.g. "Kumar-Acc-SW.mist.local"
+          name E.g. "Kumar-Acc-SW.mist.local". Accepts multiple comma-separated values.
         in: query
         name: neighbor_system_name
         schema:
+          examples:
+          - sdwan-newyork,toronto-srx-2_node1
           type: string
       - description: Is the POE configured not be disabled.
         in: query
@@ -20097,15 +20697,21 @@ paths:
         name: poe_priority
         schema:
           $ref: '#/components/schemas/poe_priority'
-      - description: Filter results by port identifier
+      - description: Filter results by port identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: port_id
         schema:
+          examples:
+          - ge-0/0/1,ge-0/0/2
           type: string
-      - description: Filter results by port MAC address
+      - description: Filter results by port MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: port_mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
       - description: Filter results by port speed
         in: query
@@ -20421,17 +21027,26 @@ paths:
       description: Search Org Peer Path Stats
       operationId: searchOrgPeerPathStats
       parameters:
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
           type: string
       - description: Filter results by site identifier
         in: query
         name: site_id
         schema:
           type: string
-      - $ref: '#/components/parameters/vpn_type'
+      - description: 'VPN implementation type used to filter the results. enum: `ipsec`,
+          `svr`. Accepts multiple comma-separated values.'
+        example: svr,ipsec
+        in: query
+        name: type
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -21361,15 +21976,21 @@ paths:
         Example: /api/v1/orgs/{org_id}/vars/search?vars=*'
       operationId: searchOrgVars
       parameters:
-      - description: Filter results by site identifier
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: site_id
         schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
-      - description: Filter variable results by variable name
+      - description: Filter variable results by variable name. Accepts multiple comma-separated
+          values.
         in: query
         name: var
         schema:
+          examples:
+          - guest_end,guest_net
           type: string
       - description: 'Filter results by source. enum: `deviceprofile`, `site`'
         in: query
@@ -21653,8 +22274,32 @@ paths:
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
-      - $ref: '#/components/parameters/partial_filter_hostname_client'
-      - $ref: '#/components/parameters/partial_filter_ip_client'
+      - description: Partial / full Client hostname. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `everest*` and `*rest*` match
+          `my-everest-client`). Suffix-only wildcards (e.g. `*everest`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: hostname
+        schema:
+          examples:
+          - my-everest-client,my-everest*
+          - my-everest-client
+          - my-everest*
+          - '*everest*'
+          type: string
+      - description: Partial / full Client IP address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `10.100.10.*` and `*100.10.*`
+          match `10.100.10.54`). Suffix-only wildcards (e.g. `*.54`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: ip
+        schema:
+          examples:
+          - 10.100.10.54,10.100.10.*
+          - 10.100.10.54
+          - 10.100.10.*
+          - '*100.10.*'
+          type: string
       - description: Filter results by source IP address
         in: query
         name: ip_src
@@ -21662,19 +22307,36 @@ paths:
           examples:
           - dhcp
           type: string
-      - description: Filter results by MAC address
+      - description: Filter results by MAC address. Accepts multiple comma-separated
+          values.
         in: query
         name: mac
         schema:
           examples:
+          - 5c5b53010101,5c5b53020202
           - 5c5b53010101
           type: string
-      - description: Filter results by manufacturer
+      - description: Filter results by manufacturer. Accepts multiple comma-separated
+          values.
         in: query
         name: mfg
         schema:
+          examples:
+          - Unknown,Juniper Networks
           type: string
-      - $ref: '#/components/parameters/partial_filter_network'
+      - description: Partial / full Name of the network the client is/was connected
+          to. Use `prefix*` for prefix search or `*substring*` for contains search
+          (e.g. `my-corp*` and `*corp*` match `my-corp-network`). Suffix-only wildcards
+          (e.g. `*corp`) are not supported. Accepts multiple comma-separated values.
+        in: query
+        name: network
+        schema:
+          examples:
+          - my-corp-network,my-corp*
+          - my-corp-network
+          - my-corp*
+          - '*corp*'
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -22034,16 +22696,21 @@ paths:
         name: auth_state
         schema:
           type: string
-      - description: Filter results by authentication method
+      - description: Filter results by authentication method. Accepts multiple comma-separated
+          values.
         in: query
         name: auth_method
         schema:
+          examples:
+          - server_reject,mac_auth
           type: string
-      - description: 'Filter results by client learning source. enum: `lldp`, `mac`'
+      - description: 'Filter results by client learning source. enum: `lldp`, `mac`.
+          Accepts multiple comma-separated values.'
+        example: lldp,mac
         in: query
         name: source
         schema:
-          $ref: '#/components/schemas/client_info_source'
+          type: string
       - description: Filter results by site identifier
         in: query
         name: site_id
@@ -22055,7 +22722,19 @@ paths:
         name: device_mac
         schema:
           type: string
-      - $ref: '#/components/parameters/partial_filter_mac_client'
+      - description: Partial / full Client MAC address. Use `prefix*` for prefix search
+          or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
+          `aabbccddeeff`). Suffix-only wildcards (e.g. `*bccddeeff`) are not supported.
+          Accepts multiple comma-separated values.
+        in: query
+        name: mac
+        schema:
+          examples:
+          - aabbccddeeff,aabbcc*
+          - aabbccddeeff
+          - aabbcc*
+          - '*bbcc*'
+          type: string
       - description: Filter results by one or more port identifiers where the client
           has connected. Supports comma-separated values
         in: query
@@ -22080,10 +22759,13 @@ paths:
           - 192.168.1.1
           - 192.168.1.1,192.168.1.2
           type: string
-      - description: Filter results by manufacturer
+      - description: Filter results by manufacturer. Accepts multiple comma-separated
+          values.
         in: query
         name: manufacture
         schema:
+          examples:
+          - Unknown,GIFA
           type: string
       - description: Partial / full Client MAC address, hostname or username. Use
           `prefix*` for prefix search or `*substring*` for contains search (e.g. `aabbcc*`
@@ -22098,30 +22780,42 @@ paths:
         name: nacrule_id
         schema:
           type: string
-      - description: Filter results by DHCP hostname
+      - description: Filter results by DHCP hostname. Accepts multiple comma-separated
+          values.
         in: query
         name: dhcp_hostname
         schema:
+          examples:
+          - client-a,client-b
           type: string
       - description: Filter results by DHCP FQDN
         in: query
         name: dhcp_fqdn
         schema:
           type: string
-      - description: Filter results by DHCP client identifier
+      - description: Filter results by DHCP client identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: dhcp_client_identifier
         schema:
+          examples:
+          - MAC address a8f7d982288f,MAC address 5c5b351e120c
           type: string
-      - description: DHCP Vendor Class Identifier
+      - description: DHCP Vendor Class Identifier. Accepts multiple comma-separated
+          values.
         in: query
         name: dhcp_vendor_class_identifier
         schema:
+          examples:
+          - Mist AP34-WW,Mist BT11-WW
           type: string
-      - description: Filter results by DHCP request parameters
+      - description: Filter results by DHCP request parameters. Accepts multiple comma-separated
+          values.
         in: query
         name: dhcp_request_params
         schema:
+          examples:
+          - 1 121 3 6 12 15 28 42 43 180,1 3 6 12 15 28 42 43 180
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
