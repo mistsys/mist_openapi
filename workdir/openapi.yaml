@@ -12618,7 +12618,8 @@ paths:
       - Orgs MxEdges
   /api/v1/orgs/{org_id}/mxedges/upgrade:
     get:
-      description: Get List of Org Mist Edge Upgrades
+      description: List Mist Edge upgrade requests for the organization, including
+        status, rollout strategy, target versions, and per-status target counts.
       operationId: listOrgMxEdgeUpgrades
       responses:
         '200':
@@ -12639,7 +12640,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Upgrade Mist Edges
+      description: Schedule a Mist Edge upgrade for selected Mist Edges, using service
+        target versions or an optional Linux distro upgrade with rollout strategy
+        and canary settings.
       operationId: upgradeOrgMxEdges
       requestBody:
         content:
@@ -12709,7 +12712,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/mxedges/upgrade/{upgrade_id}:
     get:
-      description: Get Mist Edge Upgrade
+      description: Retrieve status, rollout strategy, target versions, and target
+        counts for a specific Mist Edge upgrade request.
       operationId: getOrgMxEdgeUpgrade
       responses:
         '200':
@@ -12731,8 +12735,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
     put:
-      description: Update Mist Edge Upgrade. Only upgrades in `queued` state can be
-        updated.
+      description: Update a queued Mist Edge upgrade request, such as target versions,
+        rollout strategy, start time, or target Mist Edge IDs. Only upgrades in `queued`
+        state can be updated.
       operationId: updateOrgMxEdgeUpgrade
       requestBody:
         content:
@@ -12761,8 +12766,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
     post:
-      description: Cancel Mist Edge Upgrade. Best effort to cancel an upgrade. Devices
-        which are already upgraded won't be touched.
+      description: Cancel a Mist Edge upgrade request on a best-effort basis. Mist
+        Edges that have already been upgraded are not changed.
       operationId: cancelOrgMxEdgeUpgrade
       responses:
         '200':
@@ -12782,7 +12787,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/mxedges/versions:
     get:
-      description: Get Mist Edge Upgrade Information
+      description: Retrieve available Mist Edge package versions by upgrade channel
+        and distro.
       operationId: getOrgMxEdgeUpgradeInfo
       parameters:
       - description: 'Upgrade channel used to filter available versions. enum: `alpha`,
