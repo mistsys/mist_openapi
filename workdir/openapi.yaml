@@ -19737,7 +19737,7 @@ paths:
       - Orgs SSO Roles
   /api/v1/orgs/{org_id}/ssos:
     get:
-      description: Get List of Org SSO Configuration
+      description: List SSO identity provider configurations defined for this organization.
       operationId: listOrgSsos
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19761,7 +19761,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org SSO Configuration
+      description: Create an organization SSO identity provider configuration, including
+        provider settings and role-handling behavior.
       operationId: createOrgSso
       requestBody:
         content:
@@ -19798,7 +19799,8 @@ paths:
       - Orgs SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}:
     delete:
-      description: Delete Org SSO Configuration
+      description: Delete an organization SSO identity provider configuration so
+        it can no longer be used for administrator login.
       operationId: deleteOrgSso
       responses:
         '200':
@@ -19817,7 +19819,8 @@ paths:
       tags:
       - Orgs SSO
     get:
-      description: Get Org SSO Configuration Details
+      description: Return one organization SSO identity provider configuration,
+        including provider settings and generated SSO URLs.
       operationId: getOrgSso
       responses:
         '200':
@@ -19839,7 +19842,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sso_id'
     put:
-      description: Update Org SSO Configuration
+      description: Update an organization SSO identity provider configuration, such
+        as IdP URLs, certificates, issuer, NameID format, and unmatched-role handling.
       operationId: updateOrgSso
       requestBody:
         content:
