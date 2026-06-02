@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2604.1.4] - 2026-06-01
+
+- Improved query parameter descriptions across many endpoints: added enum values, clarified `distinct` grouping fields, and standardized filter descriptions for device, client, NAC, inventory, and event search/count operations
+- Clarified authentication documentation: API Token is the preferred method for automation, Basic Auth was removed from the documented authentication schemes because it is deprecated and planned for removal in September 2026, and the login session flow uses the `X-CSRFToken` header after `/api/v1/login`
+  - Marked public login and account flow endpoints as unauthenticated where appropriate:
+    - `POST /api/v1/login`
+    - `POST /api/v1/login/lookup`
+    - `GET /api/v1/login/oauth/{provider}`
+    - `POST /api/v1/login/oauth/{provider}`
+    - `POST /api/v1/login/two_factor`
+    - `POST /api/v1/invite/verify/{token}`
+    - `POST /api/v1/recover`
+    - `POST /api/v1/recover/verify/{token}`
+    - `POST /api/v1/register`
+    - `GET /api/v1/register/recaptcha`
+    - `POST /api/v1/register/verify/{token}`
+- Updated query parameters:
+  - Removed invalid `timestamp` query parameter from:
+    - `GET /api/v1/orgs/{org_id}/devices/events/count`
+    - `GET /api/v1/orgs/{org_id}/devices/events/search`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/count`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/events/search`
+    - `GET /api/v1/orgs/{org_id}/nac_clients/search`
+    - `GET /api/v1/sites/{site_id}/devices/events/search`
+    - `GET /api/v1/sites/{site_id}/nac_clients/count`
+    - `GET /api/v1/sites/{site_id}/nac_clients/events/search`
+    - `GET /api/v1/sites/{site_id}/nac_clients/search`
+    - `GET /api/v1/sites/{site_id}/services/events/count`
+    - `GET /api/v1/sites/{site_id}/services/events/search`
+  - Updated query parameter schemas for comma-separated filter support:
+    - `GET /api/v1/orgs/{org_id}/alarms/search`: `site_id`, `group`, `severity`
+    - `GET /api/v1/orgs/{org_id}/clients/events/search`: `type`, `reason_code`, `key_mgmt`, `proto`, `band`
+    - `GET /api/v1/orgs/{org_id}/clients/sessions/search`: `band`
+    - `GET /api/v1/orgs/{org_id}/inventory`: `type`
+    - `GET /api/v1/orgs/{org_id}/inventory/search`: `site_id`, `status`
+    - `GET /api/v1/orgs/{org_id}/logs`: `site_id`
+    - `GET /api/v1/orgs/{org_id}/logs/search`: `site_id`
+    - `GET /api/v1/orgs/{org_id}/nactags`: `type`, `match`
+    - `GET /api/v1/orgs/{org_id}/stats/devices`: `type`, `status`
+    - `GET /api/v1/orgs/{org_id}/stats/ports/search`: `device_type`
+    - `GET /api/v1/orgs/{org_id}/stats/vpn_peers/search`: `type`
+    - `GET /api/v1/orgs/{org_id}/wired_clients/search`: `source`, `vlan`, `ip`
+
 ## [2604.1.3] - 2026-05-29
 
 - Improved numerous schema and response descriptions for clarity and better developer/LLM guidance (OSPF, RADIUS, RadSec, PSK, WLAN, WxLAN, webhooks, stats, NAC, Mist Edge, gateway, and more)
@@ -413,4 +456,3 @@ All notable changes to this project will be documented in this file.
   - Added `inactive_vlan_strs`
 - Updated `/api/v1/sites/{site_id}/stats/ports/search`
   - Added `poe_priority`
-  
