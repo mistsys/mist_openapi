@@ -18894,7 +18894,8 @@ paths:
       - Orgs Integration Zscaler
   /api/v1/orgs/{org_id}/setting/{app_name}/link_accounts:
     get:
-      description: Get Org Level OAuth Application Linked Status
+      description: Return linked-account status for the specified organization OAuth
+        application and the authorization URL used to start account linking.
       operationId: getOrgOauthAppLinkedStatus
       parameters:
       - description: Mist portal url to which backend needs to redirect after successful
@@ -18929,7 +18930,8 @@ paths:
       schema:
         $ref: '#/components/schemas/oauth_app_name'
     post:
-      description: Add Jamf, VMware Authorization With Mist Portal
+      description: Add a linked account for the specified OAuth application using
+        the app-specific account configuration payload.
       operationId: addOrgOauthAppAccounts
       requestBody:
         content:
@@ -18954,7 +18956,8 @@ paths:
       - Orgs Linked Applications
   /api/v1/orgs/{org_id}/setting/{app_name}/link_accounts/{account_id}:
     delete:
-      description: Delete Org Level OAuth Application Authorization With Mist Portal
+      description: Remove a linked account authorization for the specified OAuth
+        application and account ID.
       operationId: deleteOrgOauthAppAuthorization
       responses:
         '200':
@@ -18982,11 +18985,9 @@ paths:
         $ref: '#/components/schemas/oauth_app_name'
     - $ref: '#/components/parameters/account_id'
     put:
-      description: 'Update Zoom, Teams, Intune Authorization.
-
-
-        Request Payload, These Field And Values Will Be Specific To Each Of The Third
-        Party Apps Accounts.'
+      description: Update app-specific settings for a linked OAuth application account,
+        such as Zoom or Teams guest redaction settings or a Zoom daily API request
+        quota.
       operationId: updateOrgOauthAppAccount
       requestBody:
         content:
