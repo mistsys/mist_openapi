@@ -11652,7 +11652,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/logs/count:
     get:
-      description: Count by Distinct Attributes of Audit Logs
+      description: Count organization audit log records, optionally grouped by `distinct`
+        and filtered by administrator, site, message text, and time range.
       operationId: countOrgAuditLogs
       parameters:
       - description: 'Field used to group this count response. enum: `admin_id`, `admin_name`,
