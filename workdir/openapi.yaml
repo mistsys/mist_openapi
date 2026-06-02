@@ -17867,7 +17867,9 @@ paths:
       - Orgs Services
   /api/v1/orgs/{org_id}/setting:
     get:
-      description: Get Org Settings
+      description: Return organization-wide settings, including feature flags, automatic
+        device assignment rules, management connectivity, packet capture, security
+        controls, and integration configuration.
       operationId: getOrgSettings
       responses:
         '200':
@@ -17888,7 +17890,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Update Org Settings
+      description: Update organization-wide settings such as automatic device assignment
+        rules, management connectivity, packet capture, password policy, security
+        controls, tags, and integration options.
       operationId: updateOrgSettings
       requestBody:
         content:
@@ -17996,7 +18000,8 @@ paths:
       - Orgs Setting
   /api/v1/orgs/{org_id}/setting/blacklist:
     delete:
-      description: Delete Org Blacklist Station Clients
+      description: Clear the organization wireless client blocklist by removing all
+        blocked client MAC addresses.
       operationId: deleteOrgWirelessClientsBlocklist
       responses:
         '200':
@@ -18017,10 +18022,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Create Org Blacklist Client List. \n\nIf there is already a blacklist,\
-        \ this API will replace it with the new one. \n\nMax number of blacklist clients\
-        \ is 1000. \n\nRetrieve the current blacklisted clients from `blacklist_url`\
-        \ under Org:Setting\n"
+      description: Replace the organization wireless client blocklist with the supplied
+        client MAC addresses. The list can contain up to 1000 MAC addresses; retrieve
+        the current list from the `blacklist_url` field in organization settings.
       operationId: createOrgWirelessClientsBlocklist
       requestBody:
         content:
