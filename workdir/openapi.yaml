@@ -73006,6 +73006,16 @@ components:
           description: Whether to enable LACP on supported AP Ethernet uplinks
           type: boolean
       type: object
+    device_enum_with_all:
+      default: ap
+      description: 'device type. enum: `all`, `ap`, `gateway`, `switch`. Default is
+        `ap`'
+      enum:
+      - all
+      - ap
+      - switch
+      - gateway
+      type: string
     device_event:
       additionalProperties: false
       description: Device event payload returned by search and webhook APIs
@@ -73700,15 +73710,6 @@ components:
       enum:
       - switch
       type: string
-    device_enum_with_all:
-      default: ap
-      description: 'device type. enum: `all`, `ap`, `gateway`, `switch`. Default is `ap`'
-      type: string
-      enum:
-      - all
-      - ap
-      - switch
-      - gateway
     device_type_with_all:
       default: ap
       description: ap, switch, gateway, router, all, default is ap. Supports comma-separated
@@ -91684,11 +91685,11 @@ components:
           description: URL for downloading the generated PCAP file
           type: string
         site_id:
+          description: Site associated with the packet capture, when the capture is
+            site-scoped
           type:
           - string
           - 'null'
-          description: Site associated with the packet capture, when the capture is
-            site-scoped
         termination_reason:
           description: Reason the packet capture session ended
           examples:
@@ -91804,10 +91805,10 @@ components:
           description: Whether raw packet data is included in the capture output
           type: boolean
         site_id:
+          description: Site associated with the packet capture session, when site-scoped
           type:
           - string
           - 'null'
-          description: Site associated with the packet capture session, when site-scoped
         ssid:
           description: Wireless network SSID filter applied to the packet capture,
             or null when no SSID filter is used
