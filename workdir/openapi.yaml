@@ -3297,7 +3297,8 @@ paths:
       - Orgs SDK Invites
   /api/v1/msps:
     post:
-      description: Create MSP account
+      description: Create a managed service provider account that can own organizations,
+        organization groups, admins, licenses, and MSP-level settings.
       operationId: createMsp
       requestBody:
         content:
@@ -3327,8 +3328,8 @@ paths:
       - MSPs
   /api/v1/msps/{msp_id}:
     delete:
-      description: Deleting MSP removes the MSP and OrgGroup under the MSP as well
-        as all privileges associated with them. It does not remove any Org or Admins
+      description: Delete the MSP account and its MSP-level organization groups and
+        privileges. This does not delete any organizations or administrator accounts.
       operationId: deleteMsp
       responses:
         '200':
@@ -3347,7 +3348,8 @@ paths:
       tags:
       - MSPs
     get:
-      description: Get MSP Detail
+      description: Return MSP account details, including the display name, service
+        tier, support-access setting, logo URL, custom URL, and timestamps.
       operationId: getMspDetails
       responses:
         '200':
@@ -3368,7 +3370,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     put:
-      description: Update MSP
+      description: Update editable MSP account settings such as the display name,
+        support-access setting, logo URL, or custom URL.
       operationId: updateMsp
       requestBody:
         content:
@@ -3398,7 +3401,8 @@ paths:
       - MSPs
   /api/v1/msps/{msp_id}/admins:
     get:
-      description: Get List of MSP Admins
+      description: List administrators that have privileges in this MSP hierarchy,
+        including MSP, organization, organization group, site, or site group scopes.
       operationId: listMspAdmins
       responses:
         '200':
@@ -3420,8 +3424,9 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/admins/{admin_id}:
     delete:
-      description: This removes all privileges this admin has against the MSP. This
-        goes deep all the way to the sites
+      description: Remove all privileges this administrator has through the MSP hierarchy,
+        including inherited organization and site access. This does not delete the
+        administrator account.
       operationId: revokeMspAdmin
       responses:
         '200':
@@ -3440,7 +3445,8 @@ paths:
       tags:
       - MSPs Admins
     get:
-      description: Get MSP Admins
+      description: Return administrator details and privilege assignments for one
+        administrator under this MSP.
       operationId: getMspAdmin
       responses:
         '200':
@@ -3462,7 +3468,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/admin_id'
     put:
-      description: Update MSP Admin
+      description: Update identity fields and privilege assignments for an existing
+        administrator under this MSP.
       operationId: updateMspAdmin
       requestBody:
         content:
@@ -3593,7 +3600,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: 'Invite MSP Admin
+      description: 'Send an MSP administrator invitation with the requested identity
+        fields and privilege assignments.
 
 
         **Note**: An email will also be sent to the user with a link to https://manage.mist.com/verify/invite?token=:token'
@@ -3641,7 +3649,8 @@ paths:
       - MSPs Admins
   /api/v1/msps/{msp_id}/invites/{invite_id}:
     delete:
-      description: Delete admin invite
+      description: Cancel a pending MSP administrator invitation before the invitee
+        accepts it.
       operationId: uninviteMspAdmin
       responses:
         '200':
@@ -3663,7 +3672,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/invite_id'
     put:
-      description: Update MSP admin invite
+      description: Update the identity fields or privilege assignments on a pending
+        MSP administrator invitation.
       operationId: updateMspAdminInvite
       requestBody:
         content:
