@@ -9899,7 +9899,8 @@ paths:
       - Orgs Gateway Templates
   /api/v1/orgs/{org_id}/guests:
     get:
-      description: Get List of Org Guest Authorizations
+      description: List guest authorization records across the organization, including
+        WLAN, SSID, authentication method, expiration, and guest identity details.
       operationId: listOrgGuestAuthorizations
       responses:
         '200':
@@ -9921,7 +9922,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/guests/count:
     get:
-      description: Count by Distinct Attributes of Org Authorized Guest
+      description: Count organization guest authorization records, optionally grouped
+        by `distinct` and filtered by time range.
       operationId: countOrgGuestAuthorizations
       parameters:
       - description: 'Field used to group this count response. enum: `auth_method`,
@@ -9954,7 +9956,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/guests/search:
     get:
-      description: Search Authorized Guest
+      description: Search organization guest authorization records with filters for
+        WLAN, SSID, authentication method, and time range.
       operationId: searchOrgGuestAuthorization
       parameters:
       - description: Filter results by WLAN identifier
@@ -10003,7 +10006,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/guests/{guest_mac}:
     delete:
-      description: Delete Guest Authorization
+      description: Delete a guest authorization record by guest MAC address.
       operationId: deleteOrgGuestAuthorization
       responses:
         '200':
@@ -10022,7 +10025,8 @@ paths:
       tags:
       - Orgs Guests
     get:
-      description: Get Guest Authorization
+      description: Retrieve the guest authorization record associated with a guest MAC
+        address.
       operationId: getOrgGuestAuthorization
       responses:
         '200':
@@ -10044,7 +10048,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/guest_mac'
     put:
-      description: Update Guest Authorization
+      description: Update the organization guest authorization record for a guest MAC
+        address, including authorization state, duration, WLAN, and guest identity
+        fields.
       operationId: updateOrgGuestAuthorization
       requestBody:
         content:
