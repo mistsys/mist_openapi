@@ -17563,7 +17563,9 @@ paths:
       - Orgs Security Policies
   /api/v1/orgs/{org_id}/servicepolicies:
     get:
-      description: Get List of Org Service Policies
+      description: List organization-level service policies. Service policies match
+        tenants to services or service groups and define the allow or deny action
+        plus optional inspection controls.
       operationId: listOrgServicePolicies
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -17587,7 +17589,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org Service Policy
+      description: Create an organization-level service policy that matches tenants
+        to services and applies an allow or deny action with optional security inspection
+        settings.
       operationId: createOrgServicePolicy
       requestBody:
         content:
@@ -17621,7 +17625,8 @@ paths:
       - Orgs Service Policies
   /api/v1/orgs/{org_id}/servicepolicies/{servicepolicy_id}:
     delete:
-      description: Delete Org Service Policy
+      description: Remove an organization-level service policy from the available
+        policy set.
       operationId: deleteOrgServicePolicy
       responses:
         '200':
@@ -17640,7 +17645,9 @@ paths:
       tags:
       - Orgs Service Policies
     get:
-      description: Get Org Service Policy Details
+      description: Return an organization-level service policy, including the matched
+        tenants and services, action, local routing, path preference, and inspection
+        settings.
       operationId: getOrgServicePolicy
       responses:
         '200':
@@ -17662,7 +17669,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/servicepolicy_id'
     put:
-      description: Update Org Service Policy
+      description: Update an organization-level service policy, including its tenant
+        and service matches, action, local routing, path preference, or inspection
+        settings.
       operationId: updateOrgServicePolicy
       requestBody:
         content:
