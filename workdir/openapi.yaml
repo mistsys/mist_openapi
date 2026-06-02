@@ -7038,7 +7038,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/clients/count:
     get:
-      description: Count by Distinct Attributes of Org Wireless Clients
+      description: Count wireless client records across the organization, optionally
+        grouped by `distinct` and filtered by client identity, AP, SSID, VLAN, IP,
+        and time range.
       operationId: countOrgWirelessClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `device`,
@@ -7140,7 +7142,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/clients/events/count:
     get:
-      description: Count by Distinct Attributes of Client-Events
+      description: Count wireless client event records across the organization, optionally
+        grouped by event attributes and filtered by event type, WLAN, radio, site,
+        and time range.
       operationId: countOrgWirelessClientEvents
       parameters:
       - description: 'Field used to group this count response. enum: `band`, `channel`,
@@ -7212,7 +7216,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/clients/events/search:
     get:
-      description: Get Org Clients Events
+      description: Search wireless client event records across the organization with
+        filters for event type, reason code, SSID, AP, key management, protocol,
+        band, WLAN, NAC rule, and time range.
       operationId: searchOrgWirelessClientEvents
       parameters:
       - description: See [List Device Events Definitions]($e/Constants%20Events/listDeviceEventsDefinitions).
@@ -7317,7 +7323,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/clients/search:
     get:
-      description: Search Org Wireless Clients
+      description: Search wireless client records across the organization with filters
+        for site, AP, band, device identity, hostname, IP, MAC address, username,
+        SSID, PPSK, VLAN, and time range.
       operationId: searchOrgWirelessClients
       parameters:
       - description: Filter results by site identifier
@@ -7479,7 +7487,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/clients/sessions/count:
     get:
-      description: Count by Distinct Attributes of Org Wireless Clients Sessions
+      description: Count historical wireless client sessions across the organization,
+        optionally grouped by `distinct` and filtered by AP, band, client attributes,
+        SSID, WLAN, and time range.
       operationId: countOrgWirelessClientsSessions
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `device`,
@@ -7563,7 +7573,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/clients/sessions/search:
     get:
-      description: Search Org Wireless Clients Sessions
+      description: Search historical wireless client sessions across the organization
+        with filters for AP, band, client family, manufacturer, model, OS, username,
+        SSID, WLAN, PPSK, and time range.
       operationId: searchOrgWirelessClientSessions
       parameters:
       - description: Filter results by AP MAC address
