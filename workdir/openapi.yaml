@@ -13183,7 +13183,8 @@ paths:
     - $ref: '#/components/parameters/mxedge_id'
   /api/v1/orgs/{org_id}/mxtunnels:
     get:
-      description: Get List of Org MxTunnels
+      description: List organization Mist Tunnel configurations used to carry AP
+        user VLANs to Mist Edge clusters.
       operationId: listOrgMxTunnels
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -13207,7 +13208,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create MxTunnel
+      description: Create an organization Mist Tunnel configuration, including hosting
+        Mist Edge clusters, VLANs, heartbeat settings, and optional IPsec settings.
       operationId: createOrgMxTunnel
       requestBody:
         content:
@@ -13251,7 +13253,8 @@ paths:
       - Orgs MxTunnels
   /api/v1/orgs/{org_id}/mxtunnels/{mxtunnel_id}:
     delete:
-      description: Delete Org MxTunnel
+      description: Delete an organization Mist Tunnel configuration by Mist Tunnel
+        ID.
       operationId: deleteOrgMxTunnel
       responses:
         '200':
@@ -13270,7 +13273,8 @@ paths:
       tags:
       - Orgs MxTunnels
     get:
-      description: Get Org MxTunnel Details
+      description: Retrieve configuration details for a specific organization Mist
+        Tunnel, including cluster, VLAN, heartbeat, IPsec, and preemption settings.
       operationId: getOrgMxTunnel
       responses:
         '200':
@@ -13292,7 +13296,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxtunnel_id'
     put:
-      description: Update Org MxTunnel
+      description: Update an organization Mist Tunnel configuration, including cluster
+        membership, VLANs, heartbeat settings, IPsec, and preemption behavior.
       operationId: updateOrgMxTunnel
       requestBody:
         content:
