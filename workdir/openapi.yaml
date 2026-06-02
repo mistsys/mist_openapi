@@ -4309,7 +4309,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/ssoroles:
     get:
-      description: Get List of MSP SSO Roles
+      description: List MSP SSO role definitions that map identity-provider role
+        assertions to MSP privilege scopes.
       operationId: listMspSsoRoles
       responses:
         '200':
@@ -4330,7 +4331,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Create MSP Role
+      description: Create an MSP SSO role definition with a display name and the
+        MSP privileges granted when the role is matched during SSO.
       operationId: createMspSsoRole
       requestBody:
         content:
@@ -4356,7 +4358,8 @@ paths:
       - MSPs SSO Roles
   /api/v1/msps/{msp_id}/ssoroles/{ssorole_id}:
     delete:
-      description: Delete MSP SSO Roles
+      description: Delete an MSP SSO role definition so it can no longer grant MSP
+        privileges during SSO.
       operationId: deleteMspSsoRole
       responses:
         '200':
@@ -4378,7 +4381,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/ssorole_id'
     put:
-      description: Update SSO Role
+      description: Update an MSP SSO role definition, including its display name
+        and granted MSP privileges.
       operationId: updateMspSsoRole
       requestBody:
         content:
@@ -4404,7 +4408,7 @@ paths:
       - MSPs SSO Roles
   /api/v1/msps/{msp_id}/ssos:
     get:
-      description: List MSP SSO Configs
+      description: List SSO identity provider configurations defined for this MSP.
       operationId: listMspSsos
       responses:
         '200':
@@ -4425,7 +4429,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Create MSP SSO profile
+      description: Create an MSP SSO identity provider configuration, including provider
+        settings and role-handling behavior.
       operationId: createMspSso
       requestBody:
         content:
@@ -4451,7 +4456,8 @@ paths:
       - MSPs SSO
   /api/v1/msps/{msp_id}/ssos/{sso_id}:
     delete:
-      description: Delete MSP SSO Config
+      description: Delete an MSP SSO identity provider configuration so it can no
+        longer be used for administrator login.
       operationId: deleteMspSso
       responses:
         '200':
@@ -4470,7 +4476,8 @@ paths:
       tags:
       - MSPs SSO
     get:
-      description: Get MSP SSO Config
+      description: Return one MSP SSO identity provider configuration, including
+        provider settings and generated SSO URLs.
       operationId: getMspSso
       responses:
         '200':
@@ -4492,7 +4499,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/sso_id'
     put:
-      description: Update MSP SSO config
+      description: Update an MSP SSO identity provider configuration, such as IdP
+        URLs, certificates, issuer, NameID format, and unmatched-role handling.
       operationId: updateMspSso
       requestBody:
         content:
@@ -4532,8 +4540,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/sso_id'
     post:
-      description: Delete MSP SSO Admin users by email. This removes SSO-linked admin
-        accounts from the organization.
+      description: Remove SSO-linked MSP administrator accounts by email for this
+        SSO profile.
       operationId: deleteMspSsoAdmins
       requestBody:
         content:
@@ -4569,7 +4577,8 @@ paths:
       - MSPs SSO
   /api/v1/msps/{msp_id}/ssos/{sso_id}/failures:
     get:
-      description: Get List of MSP SSO Latest Failures
+      description: List recent authentication failures for this MSP SSO configuration,
+        including failure details and captured SAML assertion data when available.
       operationId: listMspSsoLatestFailures
       responses:
         '200':
@@ -4592,7 +4601,8 @@ paths:
     - $ref: '#/components/parameters/sso_id'
   /api/v1/msps/{msp_id}/ssos/{sso_id}/metadata:
     get:
-      description: Get MSP SAML Metadata
+      description: Return generated SAML service provider metadata for this MSP SSO
+        configuration as JSON.
       operationId: getMspSamlMetadata
       responses:
         '200':
@@ -4615,7 +4625,8 @@ paths:
     - $ref: '#/components/parameters/sso_id'
   /api/v1/msps/{msp_id}/ssos/{sso_id}/metadata.xml:
     get:
-      description: "Download MSP SAML Metadata\n\nExample of metadata.xml:\n```xml\n\
+      description: "Download generated SAML service provider metadata XML for this\
+        \ MSP SSO configuration.\n\nExample of metadata.xml:\n```xml\n\
         <?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"\
         urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\"\
         \ validUntil=\"2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\
