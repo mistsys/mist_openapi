@@ -19408,21 +19408,10 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/site_name'
     post:
-      description: 'Import data from files is a multipart POST which has a file, an
-        optional json, and an optional csv, to create floorplan, assign matching inventory
-        to specific site, place ap if name or mac matches
-
-
-        #### Request
-
-
-        ```
-
-        "json": a JSON string describing your upload
-
-        "file": a binary file
-
-        ```'
+      description: Import floorplan data into a site from a multipart upload. The
+        upload includes an Ekahau or iBwave floorplan file, optional import options
+        JSON, and optional AP name-mapping CSV; matching inventory can be assigned
+        to the site and APs placed when names or MAC addresses match.
       operationId: importOrgMapToSite
       requestBody:
         content:
