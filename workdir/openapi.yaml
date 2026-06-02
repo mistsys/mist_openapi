@@ -6176,7 +6176,8 @@ paths:
       - Orgs API Tokens
   /api/v1/orgs/{org_id}/aptemplates:
     get:
-      description: Get List of Org AP Templates
+      description: List organization AP templates that define AP matching rules,
+        port configuration, Wi-Fi, and mesh settings for assignment to sites.
       operationId: listOrgAptemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6200,7 +6201,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org AP Template
+      description: Create an organization AP template with AP matching rules, port
+        configuration, Wi-Fi settings, and mesh settings.
       operationId: createOrgAptemplate
       requestBody:
         content:
@@ -6359,7 +6361,7 @@ paths:
       - Orgs AP Templates
   /api/v1/orgs/{org_id}/aptemplates/{aptemplate_id}:
     delete:
-      description: Delete existing AP Template
+      description: Delete an organization AP template by template ID from this organization.
       operationId: deleteOrgAptemplate
       responses:
         '200':
@@ -6378,7 +6380,8 @@ paths:
       tags:
       - Orgs AP Templates
     get:
-      description: Get AP Template
+      description: Return one organization AP template, including AP matching rules,
+        port configuration, Wi-Fi settings, and mesh settings.
       operationId: getOrgAptemplate
       responses:
         '200':
@@ -6400,7 +6403,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/aptemplate_id'
     put:
-      description: Update AP Template
+      description: Update an organization AP template's AP matching rules, port configuration,
+        Wi-Fi settings, or mesh settings.
       operationId: updateOrgAptemplate
       requestBody:
         content:
