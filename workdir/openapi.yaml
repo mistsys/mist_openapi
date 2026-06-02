@@ -14505,7 +14505,8 @@ paths:
       - Orgs NAC Tags
   /api/v1/orgs/{org_id}/networks:
     get:
-      description: Get List of Org Networks
+      description: List organization-level Layer 3 network definitions used for service
+        routes and gateway or network template configuration.
       operationId: listOrgNetworks
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -14529,7 +14530,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Organization Network
+      description: Create an organization network definition with subnet, gateway,
+        VLAN, access, NAT, multicast, tenant, and VPN access settings.
       operationId: createOrgNetwork
       requestBody:
         content:
@@ -14646,7 +14648,8 @@ paths:
       - Orgs Networks
   /api/v1/orgs/{org_id}/networks/{network_id}:
     delete:
-      description: Delete Organization Network
+      description: Delete an organization network definition by network ID so it
+        can no longer be referenced by gateway or network template configuration.
       operationId: deleteOrgNetwork
       responses:
         '200':
@@ -14665,7 +14668,8 @@ paths:
       tags:
       - Orgs Networks
     get:
-      description: Get Organization Network Details
+      description: Retrieve details for a specific organization network, including
+        subnet, gateway, VLAN, access, NAT, multicast, tenant, and VPN access settings.
       operationId: getOrgNetwork
       responses:
         '200':
@@ -14687,7 +14691,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/network_id'
     put:
-      description: Update Organization Network
+      description: Update an organization network definition, including subnet, gateway,
+        VLAN, access, NAT, multicast, tenant, and VPN access settings.
       operationId: updateOrgNetwork
       requestBody:
         content:
