@@ -7748,7 +7748,8 @@ paths:
       - Orgs
   /api/v1/orgs/{org_id}/crl:
     get:
-      description: Get Org CRL File
+      description: Download the organization certificate revocation list (CRL) file
+        used to identify certificates that should no longer be trusted.
       operationId: getOrgCrlFile
       responses:
         '200':
@@ -7799,7 +7800,8 @@ paths:
       - Orgs Cert
   /api/v1/orgs/{org_id}/deviceprofiles:
     get:
-      description: Get List of Org Device Profiles
+      description: List org-level device profiles, which define reusable AP, switch,
+        or gateway configuration subsets that can be applied to matching devices.
       operationId: listOrgDeviceProfiles
       parameters:
       - description: 'Filter results by one device profile type. Use a single value;
@@ -7829,7 +7831,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Device Profile
+      description: Create an org-level device profile containing reusable AP, switch,
+        or gateway configuration.
       operationId: createOrgDeviceProfile
       requestBody:
         content:
@@ -7984,7 +7987,8 @@ paths:
       - Orgs Device Profiles
   /api/v1/orgs/{org_id}/deviceprofiles/{deviceprofile_id}:
     delete:
-      description: Delete Org Device Profile
+      description: Delete an org-level device profile and remove that reusable device
+        configuration object from the organization.
       operationId: deleteOrgDeviceProfile
       responses:
         '200':
@@ -8003,7 +8007,8 @@ paths:
       tags:
       - Orgs Device Profiles
     get:
-      description: Get Org device Profile Details
+      description: Retrieve the AP, switch, or gateway configuration stored in a specific
+        org-level device profile.
       operationId: getOrgDeviceProfile
       responses:
         '200':
@@ -8025,7 +8030,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/deviceprofile_id'
     put:
-      description: Update Org Device Profile
+      description: Update the AP, switch, or gateway configuration stored in an org-level
+        device profile.
       operationId: updateOrgDeviceProfile
       requestBody:
         content:
