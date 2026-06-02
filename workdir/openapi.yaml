@@ -12247,7 +12247,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Assign Org Mist Edge to Site
+      description: Assign one or more Mist Edge appliances from the organization
+        to a site by Mist Edge ID and site ID.
       operationId: assignOrgMxEdgeToSite
       requestBody:
         content:
@@ -12281,8 +12282,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: For a Mist Edge in default state, it will show a random claim code
-        like `135-546-673` which you can "claim" it into your Org
+      description: Claim one or more Mist Edge appliances into the organization using
+        their claim codes. Claim codes are displayed by unclaimed Mist Edges in the
+        default state.
       operationId: claimOrgMxEdge
       requestBody:
         content:
@@ -12584,7 +12586,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Unassign Org Mist Edge from Site
+      description: Unassign one or more Mist Edge appliances from their current site
+        while keeping them in the organization.
       operationId: unassignOrgMxEdgeFromSite
       requestBody:
         content:
@@ -12813,7 +12816,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/mxedges/{mxedge_id}:
     delete:
-      description: Delete Org Mist Edge
+      description: Delete a Mist Edge appliance record from the organization by Mist
+        Edge ID.
       operationId: deleteOrgMxEdge
       responses:
         '200':
@@ -12832,7 +12836,8 @@ paths:
       tags:
       - Orgs MxEdges
     get:
-      description: Get Org MxEdge details
+      description: Retrieve configuration and registration details for a specific
+        Mist Edge appliance in the organization.
       operationId: getOrgMxEdge
       responses:
         '200':
@@ -12854,7 +12859,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     put:
-      description: Update Org MxEdge
+      description: Update a Mist Edge appliance configuration, including model, name,
+        management IP, services, and tunnel termination settings.
       operationId: updateOrgMxEdge
       requestBody:
         content:
