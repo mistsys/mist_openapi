@@ -8227,6 +8227,13 @@ paths:
         name: device_type
         schema:
           $ref: '#/components/schemas/device_type_with_all'
+      - description: Filter results by event message text
+        in: query
+        name: text
+        schema:
+          examples:
+          - Device connected
+          type: string
       - $ref: '#/components/parameters/device_event_type'
       - description: Return last/recent event for passed in field
         in: query
@@ -25896,6 +25903,8 @@ paths:
         in: query
         name: text
         schema:
+          examples:
+          - Device connected
           type: string
       - $ref: '#/components/parameters/device_event_type'
       - description: Return last/recent event for passed in field
