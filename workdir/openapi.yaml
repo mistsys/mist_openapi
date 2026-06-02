@@ -20191,7 +20191,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats:
     get:
-      description: Get Org Stats
+      description: Return an organization statistics summary, including device,
+        inventory, and site counts, connected and disconnected device counts, organization
+        group membership, and SLE summaries.
       operationId: getOrgStats
       responses:
         '200':
@@ -20213,7 +20215,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/assets:
     get:
-      description: Get List of Org Assets Stats
+      description: List BLE asset location and advertisement statistics for the organization
+        over an optional time window, including map coordinates, RSSI, zones, and
+        iBeacon or Eddystone fields.
       operationId: listOrgAssetsStats
       parameters:
       - $ref: '#/components/parameters/start'
@@ -20241,7 +20245,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/assets/count:
     get:
-      description: Count by Distinct Attributes of Org Assets
+      description: Count organization asset statistics grouped by a distinct asset
+        attribute, such as MAC address, site, map, iBeacon UUID, iBeacon major, or
+        iBeacon minor.
       operationId: countOrgAssetsByDistanceField
       parameters:
       - description: 'Field used to group this count response. enum: `ibeacon_major`,
@@ -20271,7 +20277,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/assets/search:
     get:
-      description: Search for Org Assets
+      description: Search BLE asset statistics with filters for site, MAC address,
+        asset name, map, iBeacon or Eddystone identifiers, reporting AP MAC address,
+        RSSI, beam, and time range. Supports pagination and sorting.
       operationId: searchOrgAssets
       parameters:
       - description: Filter results by site identifier
