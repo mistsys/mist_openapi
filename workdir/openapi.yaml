@@ -6765,7 +6765,8 @@ paths:
       - Orgs Assets
   /api/v1/orgs/{org_id}/avprofiles:
     get:
-      description: Get List of Antivirus Profiles
+      description: List organization antivirus scanning profiles, including inspected
+        protocols, scan limits, whitelist settings, and fallback actions.
       operationId: listOrgAntivirusProfiles
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6789,7 +6790,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create getOrgServices Antivirus Profile
+      description: Create an organization antivirus scanning profile with inspected
+        protocols, maximum file size, whitelist settings, and fallback action.
       operationId: createOrgAntivirusProfile
       requestBody:
         content:
@@ -6824,7 +6826,7 @@ paths:
       - Orgs Antivirus Profiles
   /api/v1/orgs/{org_id}/avprofiles/{avprofile_id}:
     delete:
-      description: DeleteOrgAntivirusProfile
+      description: Delete an organization antivirus scanning profile by profile ID.
       operationId: deleteOrgAntivirusProfile
       responses:
         '200':
@@ -6843,7 +6845,8 @@ paths:
       tags:
       - Orgs Antivirus Profiles
     get:
-      description: Get Org Antivirus Profile
+      description: Return one organization antivirus scanning profile, including
+        inspected protocols, scan limits, whitelist settings, and fallback action.
       operationId: getOrgAntivirusProfile
       responses:
         '200':
@@ -6865,7 +6868,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/avprofile_id'
     put:
-      description: Update Org Antivirus Profile
+      description: Update an organization antivirus scanning profile's inspected
+        protocols, maximum file size, whitelist settings, or fallback action.
       operationId: updateOrgAntivirusProfile
       requestBody:
         content:
