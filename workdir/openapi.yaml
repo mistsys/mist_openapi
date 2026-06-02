@@ -16884,7 +16884,9 @@ paths:
       - Orgs SDK Invites
   /api/v1/orgs/{org_id}/sdktemplates:
     get:
-      description: Get List of Org SDK Templates
+      description: List SDK templates configured for the organization. SDK templates
+        define visual customization for the mobile SDK experience, including branding
+        images, colors, header text, and welcome messages.
       operationId: listSdkTemplates
       responses:
         '200':
@@ -16905,7 +16907,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create SDK Template
+      description: Create an SDK template that defines visual customization for the
+        mobile SDK experience, including branding images, colors, header text, and
+        welcome messages.
       operationId: createSdkTemplate
       requestBody:
         content:
@@ -16931,7 +16935,7 @@ paths:
       - Orgs SDK Templates
   /api/v1/orgs/{org_id}/sdktemplates/{sdktemplate_id}:
     delete:
-      description: Delete SDK Template
+      description: Delete an SDK visual customization template from the organization.
       operationId: deleteSdkTemplate
       responses:
         '200':
@@ -16950,7 +16954,8 @@ paths:
       tags:
       - Orgs SDK Templates
     get:
-      description: Get SDK Template Details
+      description: Return the visual customization settings for an SDK template,
+        including branding text, image URLs, colors, default state, and site scope.
       operationId: getSdkTemplate
       responses:
         '200':
@@ -16972,7 +16977,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sdktemplate_id'
     put:
-      description: Update SDK Template
+      description: Update an SDK template's visual customization settings, such as
+        branding images, colors, header text, welcome message, default state, or site
+        association.
       operationId: updateSdkTemplate
       requestBody:
         content:
