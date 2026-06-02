@@ -13922,7 +13922,8 @@ paths:
       - Orgs Clients - NAC
   /api/v1/orgs/{org_id}/nacportals:
     get:
-      description: List Org NAC Portals
+      description: List NAC portal configurations in the organization for guest portal,
+        guest admin, or Marvis Client onboarding workflows.
       operationId: listOrgNacPortals
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -13946,7 +13947,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create Org NAC Portal
+      description: Create a NAC portal configuration for guest access, guest administration,
+        or Marvis Client certificate onboarding.
       operationId: createOrgNacPortal
       requestBody:
         content:
@@ -13971,7 +13973,7 @@ paths:
       - Orgs NAC Portals
   /api/v1/orgs/{org_id}/nacportals/{nacportal_id}:
     delete:
-      description: Delete Org NAC Portal
+      description: Delete an organization NAC portal configuration by NAC portal ID.
       operationId: deleteOrgNacPortal
       responses:
         '200':
@@ -13990,7 +13992,8 @@ paths:
       tags:
       - Orgs NAC Portals
     get:
-      description: Get Org NAC Portal
+      description: Retrieve configuration details for a specific NAC portal, including
+        portal type, SSID, SSO, guest portal, certificate, and template settings.
       operationId: getOrgNacPortal
       responses:
         '200':
@@ -14012,7 +14015,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/nacportal_id'
     put:
-      description: Update Org NAC Portal
+      description: Update a NAC portal configuration, including portal type, SSID,
+        SSO, guest portal, certificate, and template settings.
       operationId: updateOrgNacPortal
       requestBody:
         content:
@@ -14037,7 +14041,8 @@ paths:
       - Orgs NAC Portals
   /api/v1/orgs/{org_id}/nacportals/{nacportal_id}/failures:
     get:
-      description: Get List of Org NAC Portal SSO Latest Failures
+      description: List recent SAML SSO failures for a NAC portal within a selected
+        time range.
       operationId: listOrgNacPortalSsoLatestFailures
       parameters:
       - $ref: '#/components/parameters/start'
@@ -14066,11 +14071,8 @@ paths:
     - $ref: '#/components/parameters/nacportal_id'
   /api/v1/orgs/{org_id}/nacportals/{nacportal_id}/portal_image:
     delete:
-      description: 'Delete background image for NAC Portal
-
-
-
-        If image is not uploaded or is deleted, NAC Portal will use default image.'
+      description: Delete the custom background image for a NAC portal. If no image
+        is configured, the NAC portal uses the default background image.
       operationId: deleteOrgNacPortalImage
       responses:
         '200':
@@ -14092,7 +14094,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/nacportal_id'
     post:
-      description: Upload background image for NAC Portal
+      description: Upload a custom background image for a NAC portal.
       operationId: uploadOrgNacPortalImage
       requestBody:
         content:
@@ -14120,7 +14122,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/nacportal_id'
     put:
-      description: Update Org NAC Portal Template
+      description: Update visual template settings for a NAC portal, including alignment,
+        primary color, logo, and Powered by visibility.
       operationId: updateOrgNacPortalTemplate
       requestBody:
         content:
@@ -14145,7 +14148,8 @@ paths:
       - Orgs NAC Portals
   /api/v1/orgs/{org_id}/nacportals/{nacportal_id}/saml_metadata:
     get:
-      description: Get Org NAC Portal SAML Metadata
+      description: Retrieve SAML service provider metadata for a NAC portal, including
+        ACS URL, entity ID, logout URL, and metadata XML.
       operationId: getOrgNacPortalSamlMetadata
       responses:
         '200':
@@ -14168,7 +14172,8 @@ paths:
     - $ref: '#/components/parameters/nacportal_id'
   /api/v1/orgs/{org_id}/nacportals/{nacportal_id}/saml_metadata.xml:
     get:
-      description: "Download Org NAC Portal SAML Metadata\n\nExample of metadata.xml:\n\
+      description: "Download NAC portal SAML service provider metadata as an XML document.\n\
+        \nExample of metadata.xml:\n\
         ```xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"\
         urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\"\
         \ validUntil=\"2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\
