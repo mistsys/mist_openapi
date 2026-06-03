@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2604.1.4**
+  description: '> Version: **2604.1.5**
 
     >
 
-    > Date: **June 1, 2026**
+    > Date: **June 3, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2604.1.4
+  version: 2604.1.5
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -1632,8 +1632,8 @@ paths:
       - Constants Definitions
   /api/v1/const/ap_esl_versions:
     get:
-      description: Return Electronic Shelf Label
-        (ESL) firmware versions available per AP model.
+      description: Return Electronic Shelf Label (ESL) firmware versions available
+        per AP model.
       operationId: listApLEslVersions
       responses:
         '200':
@@ -1845,7 +1845,8 @@ paths:
       - Constants Events
   /api/v1/const/device_models:
     get:
-      description: Return AP, Switch and Gateway device models supported by Mist, including their features and capabilities.
+      description: Return AP, Switch and Gateway device models supported by Mist,
+        including their features and capabilities.
       operationId: listDeviceModels
       responses:
         '200':
@@ -2339,12 +2340,12 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     put:
-      description: "Provision or replace an installer-managed device. \n\nIf replacing_mac is in the request\
-        \ payload, other attributes are ignored, we attempt to replace existing device\
-        \ (with MAC address `replacing_mac`) with the inventory device being configured. The\
-        \ replacement device must be in the inventory but not assigned, and the replacing_mac\
-        \ device must be assigned to a site, and satisfy grace period requirements.\
-        \ The Device replaced will become unassigned."
+      description: "Provision or replace an installer-managed device. \n\nIf replacing_mac\
+        \ is in the request payload, other attributes are ignored, we attempt to replace\
+        \ existing device (with MAC address `replacing_mac`) with the inventory device\
+        \ being configured. The replacement device must be in the inventory but not\
+        \ assigned, and the replacing_mac device must be assigned to a site, and satisfy\
+        \ grace period requirements. The Device replaced will become unassigned."
       operationId: provisionInstallerDevices
       requestBody:
         content:
@@ -3054,11 +3055,13 @@ paths:
       - Admins
   /api/v1/login:
     post:
-      description: "Authenticate an administrator with email and password. A successful\
-        \ login creates the browser session cookies, including the `csrftoken` value\
-        \ used with the `X-CSRFToken` header on later API requests.\n\nWhen 2FA is\
-        \ enabled, either include the `two_factor` code in this request or submit\
-        \ the first factor here and complete the login with [Two Factor]($e/Admins%20Login/twoFactor)."
+      description: 'Authenticate an administrator with email and password. A successful
+        login creates the browser session cookies, including the `csrftoken` value
+        used with the `X-CSRFToken` header on later API requests.
+
+
+        When 2FA is enabled, either include the `two_factor` code in this request
+        or submit the first factor here and complete the login with [Two Factor]($e/Admins%20Login/twoFactor).'
       operationId: login
       requestBody:
         content:
@@ -3576,9 +3579,9 @@ paths:
     - $ref: '#/components/parameters/metric'
   /api/v1/msps/{msp_id}/inventory/{device_mac}:
     get:
-      description: Return the inventory record for a device MAC address owned by
-        an organization under this MSP, including the owning organization and site
-        when available.
+      description: Return the inventory record for a device MAC address owned by an
+        organization under this MSP, including the owning organization and site when
+        available.
       operationId: getMspInventoryByMac
       responses:
         '200':
@@ -3806,8 +3809,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Upload or update the public logo URL for an advanced-tier MSP
-        account.
+      description: Upload or update the public logo URL for an advanced-tier MSP account.
       operationId: postMspLogo
       requestBody:
         content:
@@ -3920,9 +3922,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/orggroups:
     get:
-      description: List organization groups defined under this MSP. Organization
-        groups contain related organization IDs and can be used in MSP privilege
-        assignments.
+      description: List organization groups defined under this MSP. Organization groups
+        contain related organization IDs and can be used in MSP privilege assignments.
       operationId: listMspOrgGroups
       responses:
         '200':
@@ -3996,8 +3997,8 @@ paths:
       tags:
       - MSPs Org Groups
     get:
-      description: Return the organization group details, including its name and
-        member organization IDs.
+      description: Return the organization group details, including its name and member
+        organization IDs.
       operationId: getMspOrgGroup
       responses:
         '200':
@@ -4046,8 +4047,8 @@ paths:
       - MSPs Org Groups
   /api/v1/msps/{msp_id}/orgs:
     get:
-      description: List organizations managed by this MSP account, including MSP
-        ownership and organization-group membership metadata.
+      description: List organizations managed by this MSP account, including MSP ownership
+        and organization-group membership metadata.
       operationId: listMspOrgs
       responses:
         '200':
@@ -4103,8 +4104,8 @@ paths:
       tags:
       - MSPs Orgs
     put:
-      description: Assign existing organizations to this MSP account or unassign
-        organizations from it by providing the desired operation and org IDs.
+      description: Assign existing organizations to this MSP account or unassign organizations
+        from it by providing the desired operation and org IDs.
       operationId: manageMspOrgs
       requestBody:
         content:
@@ -4307,8 +4308,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/ssoroles:
     get:
-      description: List MSP SSO role definitions that map identity-provider role
-        assertions to MSP privilege scopes.
+      description: List MSP SSO role definitions that map identity-provider role assertions
+        to MSP privilege scopes.
       operationId: listMspSsoRoles
       responses:
         '200':
@@ -4329,8 +4330,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/msp_id'
     post:
-      description: Create an MSP SSO role definition with a display name and the
-        MSP privileges granted when the role is matched during SSO.
+      description: Create an MSP SSO role definition with a display name and the MSP
+        privileges granted when the role is matched during SSO.
       operationId: createMspSsoRole
       requestBody:
         content:
@@ -4379,8 +4380,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
     - $ref: '#/components/parameters/ssorole_id'
     put:
-      description: Update an MSP SSO role definition, including its display name
-        and granted MSP privileges.
+      description: Update an MSP SSO role definition, including its display name and
+        granted MSP privileges.
       operationId: updateMspSsoRole
       requestBody:
         content:
@@ -4474,8 +4475,8 @@ paths:
       tags:
       - MSPs SSO
     get:
-      description: Return one MSP SSO identity provider configuration, including
-        provider settings and generated SSO URLs.
+      description: Return one MSP SSO identity provider configuration, including provider
+        settings and generated SSO URLs.
       operationId: getMspSso
       responses:
         '200':
@@ -4624,11 +4625,11 @@ paths:
   /api/v1/msps/{msp_id}/ssos/{sso_id}/metadata.xml:
     get:
       description: "Download generated SAML service provider metadata XML for this\
-        \ MSP SSO configuration.\n\nExample of metadata.xml:\n```xml\n\
-        <?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"\
-        urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\"\
-        \ validUntil=\"2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\
-        >\n  <md:SPSSODescriptor AuthnRequestsSigned=\"false\" WantAssertionsSigned=\"\
+        \ MSP SSO configuration.\n\nExample of metadata.xml:\n```xml\n<?xml version=\"\
+        1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\"\
+        \ entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\" validUntil=\"\
+        2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">\n\
+        \  <md:SPSSODescriptor AuthnRequestsSigned=\"false\" WantAssertionsSigned=\"\
         true\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\"\
         >\n      <md:SingleLogoutService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\
         \ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/logout\" />\n      <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>\n\
@@ -4714,8 +4715,8 @@ paths:
     - $ref: '#/components/parameters/msp_id'
   /api/v1/msps/{msp_id}/suggestion/count:
     get:
-      description: Return distinct counts of Marvis actions for this MSP grouped
-        by the requested field, such as organization or status.
+      description: Return distinct counts of Marvis actions for this MSP grouped by
+        the requested field, such as organization or status.
       operationId: countMspsMarvisActions
       parameters:
       - description: 'Field used to group this count response. enum: `org_id`, `status`'
@@ -4838,7 +4839,8 @@ paths:
     delete:
       description: Delete an organization and its organization-level resources. Use
         MSP organization assignment endpoints when only changing MSP ownership or
-        association. This action is only allowed when the Organization Inventory is empty.
+        association. This action is only allowed when the Organization Inventory is
+        empty.
       operationId: deleteOrg
       responses:
         '200':
@@ -5092,8 +5094,8 @@ paths:
       - Orgs Advanced Anti Malware Profiles
   /api/v1/orgs/{org_id}/admins:
     get:
-      description: List administrators that have privileges in this organization
-        hierarchy, including organization, site, or site group scopes.
+      description: List administrators that have privileges in this organization hierarchy,
+        including organization, site, or site group scopes.
       operationId: listOrgAdmins
       responses:
         '200':
@@ -5227,9 +5229,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Acknowledge all alarms in the organization and optionally attach
+      description: Acknowledge all alarms in the organization and optionally attach
         a note. For targeted bulk updates, use [Ack Org Multiple Alarms]($e/Orgs%20Alarms/ackOrgMultipleAlarms)
-        with up to 1000 alarm IDs per request.'
+        with up to 1000 alarm IDs per request.
       operationId: ackOrgAllAlarms
       requestBody:
         content:
@@ -5294,8 +5296,8 @@ paths:
   /api/v1/orgs/{org_id}/alarms/search:
     get:
       description: Search alarms across the organization with filters for site, alarm
-        group, severity, type, acknowledgement state, acknowledgement admin, and
-        time range.
+        group, severity, type, acknowledgement state, acknowledgement admin, and time
+        range.
       operationId: searchOrgAlarms
       parameters:
       - description: Filter results by site identifier. Accepts multiple comma-separated
@@ -5410,10 +5412,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Remove acknowledgement from all alarms in the organization and
+      description: Remove acknowledgement from all alarms in the organization and
         optionally attach a note. For targeted bulk updates, use [Unack Org Multiple
         Alarms]($e/Orgs%20Alarms/unackOrgMultipleAlarms) with up to 1000 alarm IDs
-        per request.'
+        per request.
       operationId: unackOrgAllAlarms
       requestBody:
         content:
@@ -5446,8 +5448,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/alarm_id'
     post:
-      description: Acknowledge a single organization alarm and optionally attach
-        a note to the acknowledgement.
+      description: Acknowledge a single organization alarm and optionally attach a
+        note to the acknowledgement.
       operationId: ackOrgAlarm
       requestBody:
         content:
@@ -5508,10 +5510,12 @@ paths:
         Available rules can be found in [List Alarm Definitions]($e/Events%20Definitions/listAlarmDefinitions)
 
 
-        The `delivery` object is only required when it differs from the template
-        delivery settings.
-        
-        To assign an Alarm template to a site, use the [Update Site]($e/Sites/updateSiteInfo) endpoint and specify the Alarm template ID in the `alarmtemplate_id` field of the request body.'
+        The `delivery` object is only required when it differs from the template delivery
+        settings.
+
+        To assign an Alarm template to a site, use the [Update Site]($e/Sites/updateSiteInfo)
+        endpoint and specify the Alarm template ID in the `alarmtemplate_id` field
+        of the request body.'
       operationId: createOrgAlarmTemplate
       requestBody:
         content:
@@ -6048,8 +6052,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
     get:
-      description: List organization API tokens, including display names, scoped
-        privileges, allowed source IPs, creator, and last-use metadata.
+      description: List organization API tokens, including display names, scoped privileges,
+        allowed source IPs, creator, and last-use metadata.
       operationId: listOrgApiTokens
       responses:
         '200':
@@ -6070,8 +6074,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: 'Create an organization API token with a display name, scoped
-        privileges, and optional source IP restrictions.
+      description: 'Create an organization API token with a display name, scoped privileges,
+        and optional source IP restrictions.
 
         Note that the full token key is only available at creation time.'
       operationId: createOrgApiToken
@@ -6176,8 +6180,8 @@ paths:
       - Orgs API Tokens
   /api/v1/orgs/{org_id}/aptemplates:
     get:
-      description: List organization AP templates that define AP matching rules,
-        port configuration, Wi-Fi, and mesh settings for assignment to sites.
+      description: List organization AP templates that define AP matching rules, port
+        configuration, Wi-Fi, and mesh settings for assignment to sites.
       operationId: listOrgAptemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6459,9 +6463,9 @@ paths:
       - Orgs AP Templates
   /api/v1/orgs/{org_id}/assetfilters:
     get:
-      description: "List organization-level BLE asset filters. Each filter operates\
-        \ independently, and an asset must match all specified filter properties\
-        \ for that filter to apply."
+      description: List organization-level BLE asset filters. Each filter operates
+        independently, and an asset must match all specified filter properties for
+        that filter to apply.
       operationId: listOrgAssetFilters
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6486,8 +6490,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: Create an organization-level BLE asset filter. Any subset of filter
-        properties can be included, and a matching asset must meet all specified
-        conditions.
+        properties can be included, and a matching asset must meet all specified conditions.
       operationId: createOrgAssetFilter
       requestBody:
         content:
@@ -6541,8 +6544,8 @@ paths:
       tags:
       - Orgs Asset Filters
     get:
-      description: Return one organization-level BLE asset filter, including its
-        name, disabled state, and matching criteria.
+      description: Return one organization-level BLE asset filter, including its name,
+        disabled state, and matching criteria.
       operationId: getOrgAssetFilter
       responses:
         '200':
@@ -6601,8 +6604,8 @@ paths:
       - Orgs Asset Filters
   /api/v1/orgs/{org_id}/assets:
     get:
-      description: List named BLE asset records in this organization, including
-        Bluetooth MAC addresses and optional site, map, or tag metadata.
+      description: List named BLE asset records in this organization, including Bluetooth
+        MAC addresses and optional site, map, or tag metadata.
       operationId: listOrgAssets
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -6655,10 +6658,19 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Import named BLE assets from a JSON payload or CSV file upload.\
-        \ Each asset record includes at least a name and Bluetooth MAC address.\n\
-        \n#### CSV File Format\n```csv\nname,mac\n\"asset_name\",5c5b53010101\n\
-        ```"
+      description: 'Import named BLE assets from a JSON payload or CSV file upload.
+        Each asset record includes at least a name and Bluetooth MAC address.
+
+
+        #### CSV File Format
+
+        ```csv
+
+        name,mac
+
+        "asset_name",5c5b53010101
+
+        ```'
       operationId: importOrgAssets
       requestBody:
         content:
@@ -6845,8 +6857,8 @@ paths:
       tags:
       - Orgs Antivirus Profiles
     get:
-      description: Return one organization antivirus scanning profile, including
-        inspected protocols, scan limits, whitelist settings, and fallback action.
+      description: Return one organization antivirus scanning profile, including inspected
+        protocols, scan limits, whitelist settings, and fallback action.
       operationId: getOrgAntivirusProfile
       responses:
         '200':
@@ -6868,8 +6880,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/avprofile_id'
     put:
-      description: Update an organization antivirus scanning profile's inspected
-        protocols, maximum file size, whitelist settings, or fallback action.
+      description: Update an organization antivirus scanning profile's inspected protocols,
+        maximum file size, whitelist settings, or fallback action.
       operationId: updateOrgAntivirusProfile
       requestBody:
         content:
@@ -7217,8 +7229,8 @@ paths:
   /api/v1/orgs/{org_id}/clients/events/search:
     get:
       description: Search wireless client event records across the organization with
-        filters for event type, reason code, SSID, AP, key management, protocol,
-        band, WLAN, NAC rule, and time range.
+        filters for event type, reason code, SSID, AP, key management, protocol, band,
+        WLAN, NAC rule, and time range.
       operationId: searchOrgWirelessClientEvents
       parameters:
       - description: See [List Device Events Definitions]($e/Constants%20Events/listDeviceEventsDefinitions).
@@ -8434,9 +8446,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/events/count:
     get:
-      description: Count device event records across the organization, optionally grouped
-        by `distinct` and filtered by site, AP, firmware, model, event text, event
-        type, and time range.
+      description: Count device event records across the organization, optionally
+        grouped by `distinct` and filtered by site, AP, firmware, model, event text,
+        event type, and time range.
       operationId: countOrgDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `apfw`,
@@ -9048,8 +9060,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/devices/summary:
     get:
-      description: Return aggregate organization device counts by device category and
-        assignment state.
+      description: Return aggregate organization device counts by device category
+        and assignment state.
       operationId: listOrgDevicesSummary
       responses:
         '200':
@@ -9093,9 +9105,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Start an organization-level device upgrade job across selected sites.
-        The request selects device type, sites, models, firmware versions, and upgrade
-        strategy; AP-specific and Junos-specific options apply only where supported.
+      description: Start an organization-level device upgrade job across selected
+        sites. The request selects device type, sites, models, firmware versions,
+        and upgrade strategy; AP-specific and Junos-specific options apply only where
+        supported.
       operationId: upgradeOrgDevices
       requestBody:
         content:
@@ -9120,8 +9133,8 @@ paths:
       - Utilities Upgrade
   /api/v1/orgs/{org_id}/devices/upgrade/{upgrade_id}:
     get:
-      description: Retrieve details for an organization-level device upgrade job, including
-        per-site upgrade status and device targets.
+      description: Retrieve details for an organization-level device upgrade job,
+        including per-site upgrade status and device targets.
       operationId: getOrgDeviceUpgrade
       responses:
         '200':
@@ -9147,8 +9160,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/upgrade_id'
     post:
-      description: Cancel an organization-level device upgrade job on a best-effort basis.
-        Devices that have already completed the upgrade are not changed.
+      description: Cancel an organization-level device upgrade job on a best-effort
+        basis. Devices that have already completed the upgrade are not changed.
       operationId: cancelOrgDeviceUpgrade
       responses:
         '200':
@@ -9252,8 +9265,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/events/system/count:
     get:
-      description: Count organization system event records, optionally grouped by `distinct`
-        and filtered by time range.
+      description: Count organization system event records, optionally grouped by
+        `distinct` and filtered by time range.
       operationId: countOrgSystemEvents
       parameters:
       - description: Field used to group this count response
@@ -9423,8 +9436,8 @@ paths:
       tags:
       - Orgs EVPN Topologies
     get:
-      description: Retrieve the switch roles, links, and generation options for a specific
-        EVPN topology.
+      description: Retrieve the switch roles, links, and generation options for a
+        specific EVPN topology.
       operationId: getOrgEvpnTopology
       responses:
         '200':
@@ -9567,14 +9580,16 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create an organization gateway template with reusable WAN gateway
+      description: 'Create an organization gateway template with reusable WAN gateway
         networks, ports, routing, and service-policy configuration.
-        
 
-        Gateway templates can be applied to multiple sites within the organization to provide consistent
-        gateway configuration across sites. 
 
-        To assign a gateway template to a site, use the [Update Site]($e/Sites/updateSiteInfo) endpoint and specify the gateway template ID in the `gatewaytemplate_id` field of the request body.
+        Gateway templates can be applied to multiple sites within the organization
+        to provide consistent gateway configuration across sites.
+
+        To assign a gateway template to a site, use the [Update Site]($e/Sites/updateSiteInfo)
+        endpoint and specify the gateway template ID in the `gatewaytemplate_id` field
+        of the request body.'
       operationId: createOrgGatewayTemplate
       requestBody:
         content:
@@ -10031,8 +10046,8 @@ paths:
       tags:
       - Orgs Guests
     get:
-      description: Retrieve the guest authorization record associated with a guest MAC
-        address.
+      description: Retrieve the guest authorization record associated with a guest
+        MAC address.
       operationId: getOrgGuestAuthorization
       responses:
         '200':
@@ -10054,8 +10069,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/guest_mac'
     put:
-      description: Update the organization guest authorization record for a guest MAC
-        address, including authorization state, duration, WLAN, and guest identity
+      description: Update the organization guest authorization record for a guest
+        MAC address, including authorization state, duration, WLAN, and guest identity
         fields.
       operationId: updateOrgGuestAuthorization
       requestBody:
@@ -10198,8 +10213,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/idpprofile_id'
     put:
-      description: Update an organization IDP profile, including its base profile and
-        signature overwrite rules.
+      description: Update an organization IDP profile, including its base profile
+        and signature overwrite rules.
       operationId: updateOrgIdpProfile
       requestBody:
         content:
@@ -10426,8 +10441,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Claim devices into the organization inventory using order activation codes or
-        device claim codes.
+      description: Claim devices into the organization inventory using order activation
+        codes or device claim codes.
       operationId: addOrgInventory
       requestBody:
         content:
@@ -11036,8 +11051,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/device_mac'
     post:
-      description: Start a software upgrade for a JSI-connected device identified by
-        MAC address using the requested target version.
+      description: Start a software upgrade for a JSI-connected device identified
+        by MAC address using the requested target version.
       operationId: upgradeOrgJsiDevice
       requestBody:
         content:
@@ -12033,12 +12048,14 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: |-
-        Create a Mist Edge cluster with tunnel termination, RadSec, NAC,
+      description: 'Create a Mist Edge cluster with tunnel termination, RadSec, NAC,
+
         and management settings.
-        
-        
-        **Note**: It is not recommended to combine multiple roles (tunnel termination, RadSec, NAC) on the same Mist Edge cluster
+
+
+
+        **Note**: It is not recommended to combine multiple roles (tunnel termination,
+        RadSec, NAC) on the same Mist Edge cluster'
       operationId: createOrgMxEdgeCluster
       requestBody:
         content:
@@ -12257,8 +12274,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Assign one or more Mist Edge appliances from the organization
-        to a site by Mist Edge ID and site ID.
+      description: Assign one or more Mist Edge appliances from the organization to
+        a site by Mist Edge ID and site ID.
       operationId: assignOrgMxEdgeToSite
       requestBody:
         content:
@@ -12293,7 +12310,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: Claim one or more Mist Edge appliances into the organization using
-        their claim codes. 
+        their claim codes.
       operationId: claimOrgMxEdge
       requestBody:
         content:
@@ -12985,8 +13002,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/mxedge_id'
     post:
-      description: Restart the registration workflow for a Mist Edge replacement
-        by disconnecting the currently registered appliance so another Mist Edge can
+      description: Restart the registration workflow for a Mist Edge replacement by
+        disconnecting the currently registered appliance so another Mist Edge can
         register.
       operationId: restartOrgMxEdge
       responses:
@@ -13192,8 +13209,8 @@ paths:
     - $ref: '#/components/parameters/mxedge_id'
   /api/v1/orgs/{org_id}/mxtunnels:
     get:
-      description: List organization Mist Tunnel configurations used to carry AP
-        user VLANs to Mist Edge clusters.
+      description: List organization Mist Tunnel configurations used to carry AP user
+        VLANs to Mist Edge clusters.
       operationId: listOrgMxTunnels
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -13332,9 +13349,9 @@ paths:
       - Orgs MxTunnels
   /api/v1/orgs/{org_id}/nac_clients/count:
     get:
-      description: Count NAC clients across the organization, optionally grouped
-        by `distinct` and filtered by authentication, identity, endpoint, network,
-        site, and time attributes.
+      description: Count NAC clients across the organization, optionally grouped by
+        `distinct` and filtered by authentication, identity, endpoint, network, site,
+        and time attributes.
       operationId: countOrgNacClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
@@ -14182,15 +14199,14 @@ paths:
   /api/v1/orgs/{org_id}/nacportals/{nacportal_id}/saml_metadata.xml:
     get:
       description: "Download NAC portal SAML service provider metadata as an XML document.\n\
-        \nExample of metadata.xml:\n\
-        ```xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"\
-        urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\"\
-        \ validUntil=\"2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"\
-        >\n    <md:SPSSODescriptor AuthnRequestsSigned=\"false\" WantAssertionsSigned=\"\
-        true\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\"\
-        >\n        <md:SingleLogoutService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\
-        \ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/logout\" />\n       \
-        \ <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>\n\
+        \nExample of metadata.xml:\n```xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"\
+        ?><md:EntityDescriptor xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"\
+        https://api.mist.com/api/v1/saml/5hdF5g/login\" validUntil=\"2027-10-12T21:59:01Z\"\
+        \ xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">\n    <md:SPSSODescriptor\
+        \ AuthnRequestsSigned=\"false\" WantAssertionsSigned=\"true\" protocolSupportEnumeration=\"\
+        urn:oasis:names:tc:SAML:2.0:protocol\">\n        <md:SingleLogoutService Binding=\"\
+        urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\" Location=\"https://api.mist.com/api/v1/saml/5hdF5g/logout\"\
+        \ />\n        <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>\n\
         \        <md:AssertionConsumerService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\
         \ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/login\" index=\"0\" isDefault=\"\
         true\"/>\n        <md:AttributeConsumingService index=\"0\">\n           \
@@ -14297,8 +14313,7 @@ paths:
       - Orgs NAC Rules
   /api/v1/orgs/{org_id}/nacrules/{nacrule_id}:
     delete:
-      description: Delete an organization NAC authentication policy rule by rule
-        ID.
+      description: Delete an organization NAC authentication policy rule by rule ID.
       operationId: deleteOrgNacRule
       responses:
         '200':
@@ -14366,8 +14381,8 @@ paths:
       - Orgs NAC Rules
   /api/v1/orgs/{org_id}/nactags:
     get:
-      description: List organization NAC tags, optionally filtering by tag type,
-        name, or match attribute.
+      description: List organization NAC tags, optionally filtering by tag type, name,
+        or match attribute.
       operationId: listOrgNacTags
       parameters:
       - description: 'Filter results by type. enum: `egress_vlan_names`, `gbp_tag`,
@@ -14539,15 +14554,22 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: |-
-        Create an organization network definition with subnet, gateway,
+      description: 'Create an organization network definition with subnet, gateway,
+
         VLAN, access, NAT, multicast, tenant, and VPN access settings used for service
+
         routes and gateway or network template configuration.
 
 
+
         Networks can be used
-        - in the gateway configuration to define Layer 3 network settings and policies for traffic entering or leaving the gateway through a specific interface, such as a corporate LAN, guest Wi-Fi, or DMZ network.
-        - in the service policies to allow or deny traffic matching the network or to apply specific inspection settings or steering rules.
+
+        - in the gateway configuration to define Layer 3 network settings and policies
+        for traffic entering or leaving the gateway through a specific interface,
+        such as a corporate LAN, guest Wi-Fi, or DMZ network.
+
+        - in the service policies to allow or deny traffic matching the network or
+        to apply specific inspection settings or steering rules.'
       operationId: createOrgNetwork
       requestBody:
         content:
@@ -14664,8 +14686,8 @@ paths:
       - Orgs Networks
   /api/v1/orgs/{org_id}/networks/{network_id}:
     delete:
-      description: Delete an organization network definition by network ID so it
-        can no longer be referenced by gateway or network template configuration.
+      description: Delete an organization network definition by network ID so it can
+        no longer be referenced by gateway or network template configuration.
       operationId: deleteOrgNetwork
       responses:
         '200':
@@ -14826,7 +14848,8 @@ paths:
   /api/v1/orgs/{org_id}/networktemplates:
     get:
       description: List organization network templates that provide switch network,
-        port, management, routing, NAC, and service configuration at the organization level.
+        port, management, routing, NAC, and service configuration at the organization
+        level.
       operationId: listOrgNetworkTemplates
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -14850,14 +14873,17 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create an organization network template with network, port usage,
-        switch management, routing, NAC, and service  configuration at the organization level.
+      description: 'Create an organization network template with network, port usage,
+        switch management, routing, NAC, and service  configuration at the organization
+        level.
 
 
-        Network templates can be applied to multiple sites within the organization to provide consistent
-        network configuration across sites. 
+        Network templates can be applied to multiple sites within the organization
+        to provide consistent network configuration across sites.
 
-        To assign a network template to a site, use the [Update Site]($e/Sites/updateSiteInfo) endpoint and specify the network template ID in the `networktemplate_id` field of the request body.
+        To assign a network template to a site, use the [Update Site]($e/Sites/updateSiteInfo)
+        endpoint and specify the network template ID in the `networktemplate_id` field
+        of the request body.'
       operationId: createOrgNetworkTemplate
       requestBody:
         content:
@@ -15479,8 +15505,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     put:
-      description: Bulk assign or unassign third-party devices to or from a site
-        by MAC address.
+      description: Bulk assign or unassign third-party devices to or from a site by
+        MAC address.
       operationId: updateOrgOtherDevices
       requestBody:
         content:
@@ -15549,9 +15575,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/otherdevices/events/search:
     get:
-      description: Search third-party device events across the organization with
-        filters for site, MAC address, attached device MAC address, model, vendor,
-        event type, and time range.
+      description: Search third-party device events across the organization with filters
+        for site, MAC address, attached device MAC address, model, vendor, event type,
+        and time range.
       operationId: searchOrgOtherDeviceEvents
       parameters:
       - description: Filter results by site identifier
@@ -15775,8 +15801,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: "Start an organization-level packet capture for org-level Mist\
-        \ Edges\n\n**NOTE**: For packet captures of\
-        \ org level Mist Edges only. Use [Start Site Packet Capture]($e/Utilities%20PCAPs/startSitePacketCapture)\
+        \ Edges\n\n**NOTE**: For packet captures of org level Mist Edges only. Use\
+        \ [Start Site Packet Capture]($e/Utilities%20PCAPs/startSitePacketCapture)\
         \ for site level Mist Edges. \n\nThe output will be available through websocket.\
         \ As there can be multiple commands issued against the same AP at the same\
         \ time and the output all goes through the same websocket stream, session\
@@ -15891,8 +15917,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: Create a self-service PSK Portal configuration for issuing personal
-        PSKs, including SSID, BYOD or admin mode, SSO or sponsor authentication,
-        passphrase rules, and expiry settings.
+        PSKs, including SSID, BYOD or admin mode, SSO or sponsor authentication, passphrase
+        rules, and expiry settings.
       operationId: createOrgPskPortal
       requestBody:
         content:
@@ -16376,8 +16402,10 @@ paths:
 
 
         The request accepts a single PSK ID string or a list of PSK ID strings.
-        
-        **Warning**: If no PSK IDs are provided in the request, all organization PSKs will be deleted and clients will no longer be able to authenticate to any SSID with a PSK.'
+
+        **Warning**: If no PSK IDs are provided in the request, all organization PSKs
+        will be deleted and clients will no longer be able to authenticate to any
+        SSID with a PSK.'
       operationId: deleteOrgPskList
       requestBody:
         content:
@@ -16404,9 +16432,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Import organization PSKs from a CSV file or JSON payload.\n\n##\_\
-        CSV File Format\n```\n\
-        PSK Import CSV File Format:\nname,ssid,passphrase,usage,vlan_id,mac,max_usage,role,expire_time,notify_expiry,expiry_notification_time,notify_on_create_or_edit,email\n\
+      description: "Import organization PSKs from a CSV file or JSON payload.\n\n\
+        ##\_CSV File Format\n```\nPSK Import CSV File Format:\nname,ssid,passphrase,usage,vlan_id,mac,max_usage,role,expire_time,notify_expiry,expiry_notification_time,notify_on_create_or_edit,email\n\
         Common,warehouse,foryoureyesonly,single,35,a31425f31278,0,student,1618594236\n\
         Justin,reception,visible,multi,1002,200,teacher,1618594236\nCommon2,ssid,1245678-xx,single,35,a31425f31278,0,student,1618594236,true,7,true,admin@test.com\n\
         ```"
@@ -16556,12 +16583,16 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: |-
-        Create an organization RF template with 2.4, 5, and 6 GHz radio
+      description: 'Create an organization RF template with 2.4, 5, and 6 GHz radio
+
         settings, country code, scanning behavior, antenna gain, and model-specific
+
         overrides.
 
-        To assign a RF template to a site, use the [Update Site]($e/Sites/updateSiteInfo) endpoint and specify the RF template ID in the `rftemplate_id` field of the request body.
+
+        To assign a RF template to a site, use the [Update Site]($e/Sites/updateSiteInfo)
+        endpoint and specify the RF template ID in the `rftemplate_id` field of the
+        request body.'
       operationId: createOrgRfTemplate
       requestBody:
         content:
@@ -16631,8 +16662,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/rftemplate_id'
     put:
-      description: Update an organization RF template, including radio settings,
-        country code, scanning behavior, antenna gain, and model-specific overrides.
+      description: Update an organization RF template, including radio settings, country
+        code, scanning behavior, antenna gain, and model-specific overrides.
       operationId: updateOrgRfTemplate
       requestBody:
         content:
@@ -16691,9 +16722,9 @@ paths:
       - Orgs Clients - SDK
   /api/v1/orgs/{org_id}/sdkinvites:
     get:
-      description: List SDK invites configured for the organization. SDK invites
-        are used to onboard mobile SDK clients and can define whether an invite is
-        enabled, limited by usage quota, or scoped to a site.
+      description: List SDK invites configured for the organization. SDK invites are
+        used to onboard mobile SDK clients and can define whether an invite is enabled,
+        limited by usage quota, or scoped to a site.
       operationId: listSdkInvites
       responses:
         '200':
@@ -16880,8 +16911,8 @@ paths:
     - $ref: '#/components/parameters/org_id'
     - $ref: '#/components/parameters/sdkinvite_id'
     post:
-      description: Send the SDK invite to a phone number by SMS so the recipient
-        can onboard a mobile SDK client.
+      description: Send the SDK invite to a phone number by SMS so the recipient can
+        onboard a mobile SDK client.
       operationId: sendSdkInviteSms
       requestBody:
         content:
@@ -16981,8 +17012,8 @@ paths:
       tags:
       - Orgs SDK Templates
     get:
-      description: Return the visual customization settings for an SDK template,
-        including branding text, image URLs, colors, default state, and site scope.
+      description: Return the visual customization settings for an SDK template, including
+        branding text, image URLs, colors, default state, and site scope.
       operationId: getSdkTemplate
       responses:
         '200':
@@ -17169,9 +17200,9 @@ paths:
       - Orgs SecIntel Profiles
   /api/v1/orgs/{org_id}/secpolicies:
     get:
-      description: List organization security policies. Security policies define
-        WLAN configuration baselines used to audit intended wireless settings against
-        actual AP configuration.
+      description: List organization security policies. Security policies define WLAN
+        configuration baselines used to audit intended wireless settings against actual
+        AP configuration.
       operationId: listOrgSecPolicies
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -17520,8 +17551,8 @@ paths:
       - Orgs Security Policies
   /api/v1/orgs/{org_id}/secpolicies/{secpolicy_id}:
     delete:
-      description: Remove an organization security policy from the set available
-        for assignment and configuration compliance checks.
+      description: Remove an organization security policy from the set available for
+        assignment and configuration compliance checks.
       operationId: deleteOrgSecPolicy
       responses:
         '200':
@@ -17616,13 +17647,16 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: |-
-        Create an organization-level service policy that matches tenants
+      description: 'Create an organization-level service policy that matches tenants
+
         to services and applies an allow or deny action with optional security inspection
+
         settings.
 
 
-        Organization-level service policies can be imported in the gateway templates and gateway policies.
+
+        Organization-level service policies can be imported in the gateway templates
+        and gateway policies.'
       operationId: createOrgServicePolicy
       requestBody:
         content:
@@ -17762,13 +17796,16 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: |-
-        Create an organization service definition with the match criteria
+      description: 'Create an organization service definition with the match criteria
+
         used by gateway and SSR policies, such as applications, URLs, hostnames,
+
         subnets, or custom protocol and port rules.
 
 
-        Services can be user in the service policies to allow or deny traffic matching the service or to apply specific inspection settings or steering rules.
+
+        Services can be user in the service policies to allow or deny traffic matching
+        the service or to apply specific inspection settings or steering rules.'
       operationId: createOrgService
       requestBody:
         content:
@@ -18158,8 +18195,8 @@ paths:
       tags:
       - Orgs Integration Cradlepoint
     put:
-      description: Update the stored Cradlepoint API and ECM credentials and the
-        LLDP-based device linking option used by Mist.
+      description: Update the stored Cradlepoint API and ECM credentials and the LLDP-based
+        device linking option used by Mist.
       operationId: updateOrgCradlepointConnectionToMist
       requestBody:
         content:
@@ -18258,8 +18295,8 @@ paths:
       tags:
       - Orgs Integration JSE
     get:
-      description: Return the JSE integration configuration, including the cloud
-        hostname, integration username, and associated JSE organization names.
+      description: Return the JSE integration configuration, including the cloud hostname,
+        integration username, and associated JSE organization names.
       operationId: getOrgJseIntegration
       responses:
         '200':
@@ -18280,10 +18317,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Configure the JSE integration with the JSE cloud hostname and
-        integration-user credentials. In JSE, use a custom role with read access to
-        `service_location` and read-write access to site and IPsec profile APIs,
-        then create and activate the integration user and service locations.
+      description: Configure the JSE integration with the JSE cloud hostname and integration-user
+        credentials. In JSE, use a custom role with read access to `service_location`
+        and read-write access to site and IPsec profile APIs, then create and activate
+        the integration user and service locations.
       operationId: setupOrgJseIntegration
       requestBody:
         content:
@@ -18399,8 +18436,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Upload a NAC Certificate Revocation List (CRL) file in PEM or
-        DER format. This multipart request supports one CRL file per issuer; uploading
+      description: Upload a NAC Certificate Revocation List (CRL) file in PEM or DER
+        format. This multipart request supports one CRL file per issuer; uploading
         another file for the same issuer replaces the existing file.
       operationId: importOrgNacCrl
       requestBody:
@@ -18451,8 +18488,8 @@ paths:
     - $ref: '#/components/parameters/naccrl_id'
   /api/v1/orgs/{org_id}/setting/mist_scep:
     delete:
-      description: Disable Mist SCEP for the organization and return the updated
-        read-only SCEP settings.
+      description: Disable Mist SCEP for the organization and return the updated read-only
+        SCEP settings.
       operationId: disableOrgMistScep
       responses:
         '200':
@@ -18605,8 +18642,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Start custom packet capture bucket setup by saving the bucket
-        name and having Mist write a `MIST_TOKEN` file to the bucket. Complete ownership
+      description: Start custom packet capture bucket setup by saving the bucket name
+        and having Mist write a `MIST_TOKEN` file to the bucket. Complete ownership
         verification with the verify endpoint by submitting the token contents.
       operationId: setOrgCustomBucket
       requestBody:
@@ -18991,8 +19028,8 @@ paths:
       - Orgs Linked Applications
   /api/v1/orgs/{org_id}/setting/{app_name}/link_accounts/{account_id}:
     delete:
-      description: Remove a linked account authorization for the specified OAuth
-        application and account ID.
+      description: Remove a linked account authorization for the specified OAuth application
+        and account ID.
       operationId: deleteOrgOauthAppAuthorization
       responses:
         '200':
@@ -19052,8 +19089,8 @@ paths:
       - Orgs Linked Applications
   /api/v1/orgs/{org_id}/sitegroups:
     get:
-      description: List site groups configured in the organization. A site group
-        collects site IDs so sites can be managed or referenced as a group.
+      description: List site groups configured in the organization. A site group collects
+        site IDs so sites can be managed or referenced as a group.
       operationId: listOrgSiteGroups
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19180,8 +19217,8 @@ paths:
       - Orgs Sitegroups
   /api/v1/orgs/{org_id}/sites:
     get:
-      description: List sites in the organization. Site records include location
-        metadata, timezone, site group membership, and template or policy associations.
+      description: List sites in the organization. Site records include location metadata,
+        timezone, site group membership, and template or policy associations.
       operationId: listOrgSites
       parameters:
       - $ref: '#/components/parameters/limit'
@@ -19503,11 +19540,14 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: |-
-        Create a site template with automatic upgrade settings and template
+      description: 'Create a site template with automatic upgrade settings and template
+
         variables available to WLAN configuration.
 
-        To assign a Site template to a site, use the [Update Site]($e/Sites/updateSiteInfo) endpoint and specify the Site template ID in the `sitetemplate_id` field of the request body.'
+
+        To assign a Site template to a site, use the [Update Site]($e/Sites/updateSiteInfo)
+        endpoint and specify the Site template ID in the `sitetemplate_id` field of
+        the request body.'''
       operationId: createOrgSiteTemplate
       requestBody:
         content:
@@ -19837,8 +19877,8 @@ paths:
       - Orgs SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}:
     delete:
-      description: Delete an organization SSO identity provider configuration so
-        it can no longer be used for administrator login.
+      description: Delete an organization SSO identity provider configuration so it
+        can no longer be used for administrator login.
       operationId: deleteOrgSso
       responses:
         '200':
@@ -19857,8 +19897,8 @@ paths:
       tags:
       - Orgs SSO
     get:
-      description: Return one organization SSO identity provider configuration,
-        including provider settings and generated SSO URLs.
+      description: Return one organization SSO identity provider configuration, including
+        provider settings and generated SSO URLs.
       operationId: getOrgSso
       responses:
         '200':
@@ -19947,9 +19987,8 @@ paths:
       - Orgs SSO
   /api/v1/orgs/{org_id}/ssos/{sso_id}/failures:
     get:
-      description: List recent authentication failures for this organization SSO
-        configuration, including failure details and captured SAML assertion data
-        when available.
+      description: List recent authentication failures for this organization SSO configuration,
+        including failure details and captured SAML assertion data when available.
       operationId: listOrgSsoLatestFailures
       parameters:
       - $ref: '#/components/parameters/start'
@@ -20002,29 +20041,29 @@ paths:
     - $ref: '#/components/parameters/sso_id'
   /api/v1/orgs/{org_id}/ssos/{sso_id}/metadata.xml:
     get:
-      description: |-
-        Download generated SAML service provider metadata XML for this
-        organization SSO configuration. Use this XML to configure the identity provider
-        with Mist service-provider details such as entity ID, ACS URL, logout URL,
-        NameID format, and requested attributes.
-
-
-        Example of metadata.xml:
-        ```xml
-        <?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://api.mist.com/api/v1/saml/5hdF5g/login\"\ validUntil=\"2027-10-12T21:59:01Z\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">
-            <md:SPSSODescriptor AuthnRequestsSigned=\"false\" WantAssertionsSigned=\"true\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\">
-                <md:SingleLogoutService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/logout\" />
-                <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
-                <md:AssertionConsumerService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\"\ Location=\"https://api.mist.com/api/v1/saml/5hdF5g/login\" index=\"0\" isDefault=\"true\"/>
-                <md:AttributeConsumingService index=\"0\">
-                    <md:ServiceName xml:lang=\"en-US\">Mist</md:ServiceName>
-                    <md:RequestedAttribute\ Name=\"Role\" NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\"\ isRequired=\"true\"/>
-                    <md:RequestedAttribute Name=\"FirstName\"\ NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\" isRequired=\"false\"/>
-                    <md:RequestedAttribute Name=\"LastName\" NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\" isRequired=\"false\"/>
-                </md:AttributeConsumingService>
-            </md:SPSSODescriptor>
-        </md:EntityDescriptor>
-        ```
+      description: "Download generated SAML service provider metadata XML for this\n\
+        organization SSO configuration. Use this XML to configure the identity provider\n\
+        with Mist service-provider details such as entity ID, ACS URL, logout URL,\n\
+        NameID format, and requested attributes.\n\n\nExample of metadata.xml:\n```xml\n\
+        <?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><md:EntityDescriptor xmlns:md=\\\
+        \"urn:oasis:names:tc:SAML:2.0:metadata\\\" entityID=\\\"https://api.mist.com/api/v1/saml/5hdF5g/login\\\
+        \"\\ validUntil=\\\"2027-10-12T21:59:01Z\\\" xmlns:ds=\\\"http://www.w3.org/2000/09/xmldsig#\\\
+        \">\n    <md:SPSSODescriptor AuthnRequestsSigned=\\\"false\\\" WantAssertionsSigned=\\\
+        \"true\\\" protocolSupportEnumeration=\\\"urn:oasis:names:tc:SAML:2.0:protocol\\\
+        \">\n        <md:SingleLogoutService Binding=\\\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\\\
+        \"\\ Location=\\\"https://api.mist.com/api/v1/saml/5hdF5g/logout\\\" />\n\
+        \        <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>\n\
+        \        <md:AssertionConsumerService Binding=\\\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\\\
+        \"\\ Location=\\\"https://api.mist.com/api/v1/saml/5hdF5g/login\\\" index=\\\
+        \"0\\\" isDefault=\\\"true\\\"/>\n        <md:AttributeConsumingService index=\\\
+        \"0\\\">\n            <md:ServiceName xml:lang=\\\"en-US\\\">Mist</md:ServiceName>\n\
+        \            <md:RequestedAttribute\\ Name=\\\"Role\\\" NameFormat=\\\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\\\
+        \"\\ isRequired=\\\"true\\\"/>\n            <md:RequestedAttribute Name=\\\
+        \"FirstName\\\"\\ NameFormat=\\\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\\\
+        \" isRequired=\\\"false\\\"/>\n            <md:RequestedAttribute Name=\\\"\
+        LastName\\\" NameFormat=\\\"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\\\
+        \" isRequired=\\\"false\\\"/>\n        </md:AttributeConsumingService>\n \
+        \   </md:SPSSODescriptor>\n</md:EntityDescriptor>\n```"
       operationId: downloadOrgSamlMetadata
       responses:
         '200':
@@ -20138,9 +20177,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Create an SSR firmware upgrade job for selected devices, with
-        firmware version or channel, rollout strategy, and optional download or reboot
-        timing.
+      description: Create an SSR firmware upgrade job for selected devices, with firmware
+        version or channel, rollout strategy, and optional download or reboot timing.
       operationId: upgradeOrgSsrs
       requestBody:
         content:
@@ -20248,9 +20286,9 @@ paths:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats:
     get:
-      description: Return an organization statistics summary, including device,
-        inventory, and site counts, connected and disconnected device counts, organization
-        group membership, and SLE summaries.
+      description: Return an organization statistics summary, including device, inventory,
+        and site counts, connected and disconnected device counts, organization group
+        membership, and SLE summaries.
       operationId: getOrgStats
       responses:
         '200':
