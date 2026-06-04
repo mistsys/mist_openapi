@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2604.1.5] - 2026-06-03
+- Improved operations descriptions for better clarity and developer/LLM guidance, including more details on supported features, behavior, and use cases for various endpoints.
+
 ## [2604.1.4] - 2026-06-01
 
 - Improved query parameter descriptions across many endpoints: added enum values, clarified `distinct` grouping fields, and standardized filter descriptions for device, client, NAC, inventory, and event search/count operations
