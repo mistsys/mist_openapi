@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2605.1.0] - 2026-06-08
+
+- `GET /api/v1/orgs/{org_id}/inventory`: Added `disconnected_before` query parameter to filter devices that were last disconnected before a given epoch timestamp
+- Added `last_disconnected` field (integer, epoch seconds) to the `inventory` schema and `OrgInventoryExample`
+- `POST /api/v1/orgs/{org_id}/claim`: Updated description to clarify the endpoint is synchronous — all inventory devices are claimed immediately during the request; removed `async` request body parameter
+- Updated `device_type` field description in `claim_activation` request schema to clarify it limits the claim to a specific device type
+- Added `POST /api/v1/orgs/{org_id}/claims`: new async claim endpoint that queues inventory claiming in the background and returns immediately with a `claim_id`; licenses (if `type=all`) are still claimed synchronously
+- Added `GET /api/v1/orgs/{org_id}/claims`: list all async inventory claim jobs for the organization, with optional `detail` parameter for per-device results
+- Added `GET /api/v1/orgs/{org_id}/claims/{claim_id}`: poll the status of a specific async claim job
+- `GET /api/v1/orgs/{org_id}/setting`: Added `src_ips` field to `org_setting_api_policy` schema — optional list of allowed source IP addresses/CIDR subnets (max 10) for org API access
+- `GET /api/v1/orgs/{org_id}/setting`: Added `disable_proactive_monitoring` field to `org_setting_marvis` schema
+- `POST /api/v1/orgs/{org_id}/ssos`: Replaced the nested `openroaming` object with three flat top-level fields: `openroaming_ssids`, `openroaming_wba_client_cert`, and `openroaming_wba_client_key`; marked the `sso_openroaming` schema and its `wba_cert` field as deprecated
+- `GET /api/v1/orgs/{org_id}/mxclusters`: Added `mist_nacedge` field to `mxcluster` schema — NAC Edge survivability settings (new `mxcluster_nacedge` schema) with fields `enabled`, `caching_site_ids`, `nac_edge_hosts`, `auth_ttl`, `default_vlan`, and `default_dot1x_vlan`; requires `mist_nac` to be enabled on the cluster
+- `GET /api/v1/orgs/{org_id}/nactags`: Added path-level description explaining NAC Tags as building blocks for NAC Rules, including classifier vs. result-attribute roles, multi-value OR/AND matching via `match_all`, wildcard operators (`*` prefix, suffix, substring), negation (`!`), and `regex=` prefix for full regular-expression matching
+- `GET /api/v1/orgs/{org_id}/jsi/inventory/search`: Renamed query parameters `eol_after`/`eol_before` to `end_of_sale_after`/`end_of_sale_before`; renamed `eol_time` to `end_of_sale_time` in response schema, `jsi_inventory_count_distinct` enum, and examples; added 18 new customer/contract fields to `js_inventory_item` returned only for onboarded (claimed) devices: `availability`, `contract_end_date`, `contract_reseller`, `contract_start_date`, `contract_type`, `current_contract_flag`, `distributor`, `ia_address`, `ia_country`, `ia_region`, `ia_zip_postal`, `service_contract_no`, `service_contract_type`, `service_decline_flag`, `service_eligible`, `ship_date_calc`, `warranty_end`, `warranty_start`
+- `POST /api/v1/orgs/{org_id}/usermacs/delete`: Added optional `consistency` field (`eventual` (default) / `strong`) to control read consistency after deletion
+- `PUT /api/v1/orgs/{org_id}/usermacs`: Request body now accepts two forms — an array of user MAC objects (asynchronous, `id` required per entry) or a dict with `consistency` and `usermacs` fields (new `user_macs_update_body` schema); `consistency`==`strong` makes the call synchronous and returns `updated`/`errors` lists, `eventual` (default) returns immediately with `{"detail": "batch update in progress"}`; added `detail` field to `user_macs_update` response schema; added `UserMacsUpdateAsyncExample`
+- `POST /api/v1/orgs/{org_id}/usermacs/import`: JSON body now accepts array form (async by default) or dict form with explicit `consistency` control (reuses `user_macs_update_body` schema); CSV multipart upload now accepts optional `consistency` field alongside `file`; added `detail` field to `user_mac_import` response schema; added `UserMacImportAsyncExample`
+- Added `GET /api/v1/orgs/{org_id}/stats/marvisclients/search`: new endpoint to search Marvis Client stats records with filters (`device_id`, `wifi_mac`, `wifi_ip`, `hostname`, `model`, `mfg`, `serial`, `os_type`, `os_version`) and pagination; returns `stats_marvis_clients_search` schema (new)
+- Added `GET /api/v1/orgs/{org_id}/stats/marvisclients/count`: new endpoint to count Marvis Client stats records by a distinct field (default `os_type`); returns standard `response_count`
+- Added `GET /api/v1/orgs/{org_id}/marvisclients/events/search`: new endpoint to search Marvis Client events with filters (`type`, `device_id`, `wifi_mac`, `wifi_ip`, `hostname`, `ssid`, `bssid`, `channel`, `pre_bssid`, `pre_channel`); returns `marvis_client_events_search` schema (new)
+- Added `GET /api/v1/orgs/{org_id}/marvisclients/events/count`: new endpoint to count Marvis Client events by a distinct field (default `type`); returns standard `response_count`
+- Added `GET /api/v1/orgs/{org_id}/insights/marvisclient/{marvisclient_id}/marvisclient-metrics`: new endpoint to retrieve time-series performance metrics (Wi-Fi RSSI, cellular RSSI, battery, CPU, memory) for a specific Marvis Client device; returns `marvis_client_insights` schema (new)
+- New schemas: `marvis_client_event`, `marvis_client_event_neighbor_ap`, `marvis_client_events_search`, `marvis_client_insights`, `stats_marvis_client`, `stats_marvis_client_location`, `stats_marvis_clients_search`
+- `GET /api/v1/orgs/{org_id}/setting/mist_scep/client_certs`: replaced `sso_name_id` query param with `common_name` and `cert_provider`; added `expire_time` and `created_time` filter params; added `limit` and `page` pagination params; changed `created_time` and `expire_time` fields in `issued_client_certificate` schema from datetime strings to integer epoch seconds; added `limit` and `page` fields to `issued_client_certificates_results` schema; updated example
+- `POST /api/v1/sites/{site_id}/wlans` (and WLAN schema): added `enable_ftm` field (boolean, default `false`) to enable FTM (Fine-Time Measurement, 802.11mc), configuring the AP as an FTM Responder (target) to allow clients to perform ranging requests against it; added `smsglobal_sender` field (string, optional) to `wlan_portal` schema for sender's number or sender ID
+- `POST /api/v1/utils/test_smsglobal`: added optional `smsglobal_sender` field to request body and example
+- `GET /api/v1/sites/{site_id}/maps`: added optional `mapstack_id` query parameter (UUID) to filter maps by mapstack
+- `PUT /api/v1/sites/{site_id}/devices/{device_id}` (and AP schemas): added `mqtt_config` field to `device_ap` and `deviceprofile_ap` schemas; new `ap_mqtt` schema with fields `enabled`, `broker_host`, `broker_port`, `broker_proto` (`tcp`/`ssl`), `username`, `password`, `format` (`raw`/`json`); BLE advertisements are forwarded per AssetFilter `mqtt_topic`
+- `PUT /api/v1/sites/{site_id}/devices/{device_id}` (`junos_port_config` schema): added `ae_lacp_passive` field (boolean, default `false`); when `true`, sets LACP to passive mode on the AE interface
+- `PUT /api/v1/sites/{site_id}/setting` (`switch_port_usage` schema): added `server_fail_retry_interval` field (integer, default `120`, range 120-65535); only applicable when `port_auth`==`dot1x`; sets the interval in seconds to retry authentication after a RADIUS server failure
+- `POST /api/v1/sites/{site_id}/assetfilters` (and `asset_filter` schema): added optional `mqtt_topic` field (string); if set, matching BLE advertisements are forwarded to this MQTT topic when MQTT publishing is enabled
+- `GET /api/v1/sites/{site_id}/stats/assets`: added optional `map_id` query parameter (UUID) to filter assets by map; added `battery_percent` field (integer, 1–100%) to `stats_asset` schema for Aruba/HPE asset tags
+- `PUT /api/v1/sites/{site_id}/setting` (`iotproxy_visionline` schema): added `cacerts` field (array of strings); PEM-encoded CA certificates required to verify the Visionline collector's TLS certificate when it uses a self-signed certificate
+- `PUT /api/v1/sites/{site_id}/setting` (`mist_nacedge` schema): added `caching_site_ids` field (array of UUIDs); list of site UUIDs whose auth requests should be cached by NAC Edges assigned to this site
+- Added `GET /api/v1/sites/{site_id}/marvis_configs/search`: search Marvis Config Actions with filters (`mac`, `type`, `src`, `admin_id`, `op`, `port_id`, `vlan_ids`, `reason`); returns paginated `marvis_config_actions_search` (new)
+- Added `GET /api/v1/sites/{site_id}/marvis_configs/count`: count Marvis Config Actions by a distinct field (default `mac`); returns standard `response_count`
+- Added `DELETE /api/v1/sites/{site_id}/marvis_configs/{id}`: delete a Marvis-injected config action
+- Added `POST /api/v1/sites/{site_id}/marvis_configs/{id}/feedback`: submit feedback on a Marvis config action (e.g. mark as `invalid`); request body and response use new `marvis_config_feedback` / `marvis_config_feedback_response` schemas
+- `GET /api/v1/sites/{site_id}/analyze_spectrum` (`response_running_spectrum_analysis` schema): added `width` (integer, channel width in MHz) and `channels` (array of integers, scanned channel numbers)
+- `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis` schema): fixed `channels` items type from `string` to `integer`
+- Added `POST /api/v1/sites/{site_id}/maps/{map_id}/apply_autoplacement`: accept cached autoplacement/auto-orientation values for a map or subset of APs; request body uses new `autoplacement_localization_selector` schema (`for`: `placement`/`orientation`, `macs`: optional list)
+- Updated `POST /api/v1/sites/{site_id}/maps/{map_id}/clear_autoplacement`: updated description and changed request body from `mac_addresses` to `autoplacement_localization_selector` schema (adds `for` field)
+- `POST /api/v1/sites/{site_id}/maps/{map_id}/use_auto_ap_values`: marked as deprecated; replaced by `apply_autoplacement` (accept) and `clear_autoplacement` (reject)
+
 ## [2604.1.5] - 2026-06-03
 - Improved operations descriptions for better clarity and developer/LLM guidance, including more details on supported features, behavior, and use cases for various endpoints.
 
