@@ -74738,6 +74738,7 @@ components:
           $ref: '#/components/schemas/ap_mqtt'
           description: MQTT broker publishing settings for this access point
         name:
+          description: Configured hostname assigned to the access point
           examples:
           - conference room
           type: string
@@ -82983,6 +82984,7 @@ components:
           description: Client telemetry collection settings for Marvis Client
       type: object
     marvis_client_event:
+      additionalProperties: false
       description: A Marvis Client event record
       properties:
         band:
@@ -83046,6 +83048,7 @@ components:
           type: string
       type: object
     marvis_client_event_neighbor_ap:
+      additionalProperties: false
       description: A neighboring AP observed in a Marvis Client event
       properties:
         band:
@@ -83062,6 +83065,7 @@ components:
           type: integer
       type: object
     marvis_client_events_search:
+      additionalProperties: false
       description: Paginated list of Marvis Client events
       properties:
         limit:
@@ -83077,6 +83081,7 @@ components:
           type: integer
       type: object
     marvis_client_insights:
+      additionalProperties: false
       description: Time-series performance metrics for a Marvis Client device
       properties:
         avg_battery:
@@ -83156,6 +83161,7 @@ components:
         $ref: '#/components/schemas/marvis_client'
       type: array
     marvis_config_action:
+      additionalProperties: false
       description: A Marvis-injected config action record
       properties:
         admin_id:
@@ -83203,6 +83209,7 @@ components:
           type: array
       type: object
     marvis_config_actions_search:
+      additionalProperties: false
       description: Paginated list of Marvis config actions
       properties:
         end:
@@ -85731,8 +85738,7 @@ components:
     nac_portal_additional_cacerts:
       description: Optional list of additional CA certificates to be used
       examples:
-      - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-          CERTIFICATE-----'
+      - - '-----BEGIN CERTIFICATE-----\<redacted>\n-----END CERTIFICATE-----'
       items:
         type: string
       type: array
@@ -105974,6 +105980,7 @@ components:
         $ref: '#/components/schemas/stats_gateway_wan_tunnel'
       type: array
     stats_marvis_client:
+      additionalProperties: false
       description: Marvis Client stats record returned by search
       properties:
         battery_charging:
@@ -106061,6 +106068,7 @@ components:
           type: string
       type: object
     stats_marvis_client_location:
+      additionalProperties: false
       description: Last known location fix for a Marvis Client device
       properties:
         map_id:
@@ -106082,6 +106090,7 @@ components:
           type: number
       type: object
     stats_marvis_clients_search:
+      additionalProperties: false
       description: Paginated list of Marvis Client stats records
       properties:
         limit:

@@ -74738,6 +74738,7 @@ components:
           $ref: '#/components/schemas/ap_mqtt'
           description: MQTT broker publishing settings for this access point
         name:
+          description: Configured hostname assigned to the access point
           examples:
           - conference room
           type: string
@@ -82984,6 +82985,7 @@ components:
           description: Client telemetry collection settings for Marvis Client
       type: object
     marvis_client_event:
+      additionalProperties: false
       description: A Marvis Client event record
       properties:
         band:
@@ -83046,8 +83048,8 @@ components:
           description: Device Wi-Fi MAC address
           type: string
       type: object
-      additionalProperties: false
     marvis_client_event_neighbor_ap:
+      additionalProperties: false
       description: A neighboring AP observed in a Marvis Client event
       properties:
         band:
@@ -83063,8 +83065,8 @@ components:
           description: RSSI of the neighboring AP signal, in dBm
           type: integer
       type: object
-      additionalProperties: false
     marvis_client_events_search:
+      additionalProperties: false
       description: Paginated list of Marvis Client events
       properties:
         limit:
@@ -83079,8 +83081,8 @@ components:
           description: Total number of matching results
           type: integer
       type: object
-      additionalProperties: false
     marvis_client_insights:
+      additionalProperties: false
       description: Time-series performance metrics for a Marvis Client device
       properties:
         avg_battery:
@@ -83129,7 +83131,6 @@ components:
           description: Start of the reporting window, in epoch seconds
           type: integer
       type: object
-      additionalProperties: false
     marvis_client_location:
       additionalProperties: false
       description: Location collection settings for Marvis Client
@@ -83161,6 +83162,7 @@ components:
         $ref: '#/components/schemas/marvis_client'
       type: array
     marvis_config_action:
+      additionalProperties: false
       description: A Marvis-injected config action record
       properties:
         admin_id:
@@ -83207,8 +83209,8 @@ components:
             type: integer
           type: array
       type: object
-      additionalProperties: false
     marvis_config_actions_search:
+      additionalProperties: false
       description: Paginated list of Marvis config actions
       properties:
         end:
@@ -83229,7 +83231,6 @@ components:
           description: Total number of matching results
           type: integer
       type: object
-      additionalProperties: false
     marvis_config_feedback:
       additionalProperties: false
       description: Feedback submission for a Marvis config action
@@ -85738,8 +85739,7 @@ components:
     nac_portal_additional_cacerts:
       description: Optional list of additional CA certificates to be used
       examples:
-      - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-          CERTIFICATE-----'
+      - - '-----BEGIN CERTIFICATE-----\<redacted>\n-----END CERTIFICATE-----'
       items:
         type: string
       type: array
@@ -105985,6 +105985,7 @@ components:
         $ref: '#/components/schemas/stats_gateway_wan_tunnel'
       type: array
     stats_marvis_client:
+      additionalProperties: false
       description: Marvis Client stats record returned by search
       properties:
         battery_charging:
@@ -106071,8 +106072,8 @@ components:
           description: SSID the device is connected to
           type: string
       type: object
-      additionalProperties: false
     stats_marvis_client_location:
+      additionalProperties: false
       description: Last known location fix for a Marvis Client device
       properties:
         map_id:
@@ -106093,8 +106094,8 @@ components:
           description: Y coordinate on the floor-plan map, in pixels
           type: number
       type: object
-      additionalProperties: false
     stats_marvis_clients_search:
+      additionalProperties: false
       description: Paginated list of Marvis Client stats records
       properties:
         limit:
@@ -106109,7 +106110,6 @@ components:
           description: Total number of matching results
           type: integer
       type: object
-      additionalProperties: false
     stats_mxedge:
       additionalProperties: false
       description: Statistics for a Mist Edge appliance returned by stats endpoints
