@@ -10362,15 +10362,10 @@ paths:
       - Orgs IDP Profiles
   /api/v1/orgs/{org_id}/insights/marvisclient/{marvisclient_id}/marvisclient-metrics:
     get:
-      description: 'Return time-series metrics for a specific Marvis Client device.
-
-
+      description: Return time-series metrics for a specific Marvis Client device.
         For the full list of supported metric field names and example values, refer
-        to
-
-        [List Insight Metrics]($e/Constants%20Definitions/listInsightMetrics) under
-
-        `/api/v1/const/insight_metrics`.'
+        to [List Insight Metrics]($e/Constants%20Definitions/listInsightMetrics) under
+        `/api/v1/const/insight_metrics`.
       operationId: getOrgMarvisClientInsights
       parameters:
       - $ref: '#/components/parameters/duration'
@@ -22719,21 +22714,14 @@ paths:
       tags:
       - Orgs User MACs
     put:
-      description: "Update Multiple Org User MACs. Accepts two request body forms:\n\
-        \  * **Array form** (asynchronous by default): a JSON array of user MAC objects\
-        \ where\n    `id` is required for each entry. Consistency is eventual unless\
-        \ the dict form is used.\n  * **Dict form**: a JSON object with an optional\
-        \ `consistency` field and a `usermacs`\n    array. Setting `consistency`==`strong`\
-        \ makes the request synchronous and returns\n    per-entry `updated` and `errors`\
-        \ lists; `eventual` (default) returns immediately\n    with a status message."
+      description: Update Multiple Org User MACs. Accepts a JSON array of user MAC
+        objects where `id` is required for each entry.
       operationId: updateOrgMultipleUserMacs
       requestBody:
         content:
           application/json:
             schema:
-              oneOf:
-              - $ref: '#/components/schemas/user_macs'
-              - $ref: '#/components/schemas/user_macs_update_body'
+              $ref: '#/components/schemas/user_macs'
       responses:
         '200':
           $ref: '#/components/responses/UserMacsUpdate'
@@ -22818,11 +22806,8 @@ paths:
         \ Array form** (asynchronous by default):\n```json\n[\n  {\"mac\": \"921b638445cd\"\
         , \"labels\": [\"label1\"], \"vlan\": \"vlan-1\"},\n  {\"mac\": \"721b638445ef\"\
         , \"labels\": [\"label2\", \"label3\"], \"notes\": \"mac address refers to\
-        \ Canon printers\"}\n]\n```\n\n**JSON \u2014 Dict form** (with explicit `consistency`\
-        \ control):\n```json\n{\n  \"consistency\": \"strong\",\n  \"usermacs\": [\n\
-        \    {\"mac\": \"921b638445cd\", \"labels\": [\"label1\"], \"vlan\": \"vlan-1\"\
-        }\n  ]\n}\n```\n\n**CSV upload**: multipart/form-data with `file` field and\
-        \ optional `consistency` field.\n\n### CSV file format\n```csv\nmac,labels,vlan,notes,name,radius_group\n\
+        \ Canon printers\"}\n]\n```\n\n**CSV upload**: multipart/form-data with `file`\
+        \ field.\n\n### CSV file format\n```csv\nmac,labels,vlan,notes,name,radius_group\n\
         921b638445cd,\"bldg1,flor1\",vlan-100\n721b638445ef,\"bldg2,flor2\",vlan-101,Canon\
         \ Printers\n721b638445ee,\"bldg3,flor3\",vlan-102,Printer2,VIP\n921b638445ce,\"\
         bldg4,flor4\",vlan-103\n921b638445cf,\"bldg5,flor5\",vlan-104\n```"
@@ -22852,29 +22837,11 @@ paths:
                   mac: 921b638445ce
                 - mac: 921b638445cf
                   vlan: vlan-100
-              DictForm:
-                value:
-                  consistency: strong
-                  usermacs:
-                  - labels:
-                    - label1
-                    mac: 921b638445cd
-                    vlan: vlan-1
-                  - labels:
-                    - label2
-                    - label3
-                    mac: 721b638445ef
-                    notes: mac address refers to Canon printers
             schema:
-              oneOf:
-              - $ref: '#/components/schemas/user_macs'
-              - $ref: '#/components/schemas/user_macs_update_body'
+              $ref: '#/components/schemas/user_macs'
           multipart/form-data:
             schema:
               properties:
-                consistency:
-                  $ref: '#/components/schemas/consistency'
-                  description: Read consistency applied after the import
                 file:
                   description: CSV file containing user MAC entries to import
                   format: binary
@@ -85822,8 +85789,7 @@ components:
         idp_cert:
           description: Identity provider certificate used to verify signed SAML responses
           examples:
-          - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-            CERTIFICATE-----'
+          - '-----BEGIN CERTIFICATE-----\n<redacted>\n-----END CERTIFICATE-----'
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/nac_portal_sso_idp_sign_algo'
@@ -113808,22 +113774,6 @@ components:
         updated:
           $ref: '#/components/schemas/uuids'
           description: User MAC entry IDs updated by the request
-      type: object
-    user_macs_update_body:
-      additionalProperties: false
-      description: Dict form of bulk user MAC update request with explicit consistency
-        control
-      properties:
-        consistency:
-          $ref: '#/components/schemas/consistency'
-          description: Read consistency applied after the update
-        usermacs:
-          description: List of user MAC entries to update
-          items:
-            $ref: '#/components/schemas/user_mac'
-          type: array
-      required:
-      - usermacs
       type: object
     usermacs_id:
       description: Request body for deleting multiple user MAC entries
