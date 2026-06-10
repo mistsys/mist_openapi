@@ -18913,17 +18913,20 @@ paths:
         name: common_name
         schema:
           type: string
-      - description: Filter by MDM or certificate provider that issued the certificate
+      - description: Filter by MDM or certificate provider that issued the certificate.
+          Accepts multiple comma-separated values.
         in: query
         name: cert_provider
         schema:
           type: string
-      - description: Filter by certificate serial number
+      - description: Filter by certificate serial number. Accepts multiple comma-separated
+          values.
         in: query
         name: serial_number
         schema:
           type: string
-      - description: Filter by device identifier associated with the certificate
+      - description: Filter by device identifier associated with the certificate.
+          Accepts multiple comma-separated values.
         in: query
         name: device_id
         schema:
@@ -33285,8 +33288,8 @@ paths:
     - $ref: '#/components/parameters/map_id'
     post:
       deprecated: true
-      description: "**Deprecated** \u2014 use `POST /api/v1/sites/{site_id}/maps/{map_id}/apply_autoplacement`\
-        \ to accept cached values, or `POST /api/v1/sites/{site_id}/maps/{map_id}/clear_autoplacement`\
+      description: "**Deprecated** \u2014 use [Accept Site AP Autoplacement]($e/Sites%20Maps%20-%20Auto-placement/acceptSiteApLocalizationData)\
+        \ to accept cached values, or [Clear Site AP Autoplacement]($e/Sites%20Maps%20-%20Auto-placement/clearSiteApAutoplacement)\
         \ to reject them."
       operationId: confirmSiteApLocalizationData
       requestBody:
