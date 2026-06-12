@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2604.1.5**
+  description: '> Version: **2605.1.0**
 
     >
 
-    > Date: **June 3, 2026**
+    > Date: **June 8, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2604.1.5
+  version: 2605.1.0
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -1244,6 +1244,9 @@ tags:
     typically representing different floors or levels in a building. Map Stacks help
     organize and manage floorplans for multi-story buildings or complex deployments.
   name: Sites Map Stacks
+- description: Marvis Config Actions are config changes injected by Marvis into network
+    devices. These actions can be searched, counted, deleted, and given feedback.
+  name: Sites Marvis Configs
 - description: 'MxEdges (Mist Edges) at the site level are deployed to tunnel traffic
     at each site due to network constraints or security concerns.
 
@@ -6990,8 +6993,9 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: Claim organization licenses or activation codes, optionally running
-        the claim asynchronously and specifying the claim scope.
+      description: Synchronously claims licenses and/or inventory devices from an
+        activation code. All inventory devices are claimed immediately during the
+        request.
       operationId: claimOrgLicense
       requestBody:
         content:
@@ -7051,6 +7055,111 @@ paths:
       - Orgs Licenses
     parameters:
     - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/claims:
+    get:
+      description: List all async inventory claim jobs for the organization, optionally
+        including per-device details per claim.
+      operationId: listOrgAsyncClaims
+      parameters:
+      - description: Whether to include per-device detail in each claim record
+        in: query
+        name: detail
+        schema:
+          examples:
+          - true
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncClaimsList'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listOrgAsyncClaims
+      tags:
+      - Orgs Licenses
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    post:
+      description: 'Schedules an async claim for inventory devices. Inventory claiming
+        is queued and processed in the background; the response returns immediately
+        with a `claim_id` for polling. Licenses (if `type=all`) are still claimed
+        synchronously during the request.
+
+
+        Use `GET /api/v1/orgs/{org_id}/claims/{claim_id}` to poll the result.'
+      operationId: createOrgAsyncClaim
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  code: ZHT3K-H36DT-MG85D-M61AC
+                  type: inventory
+            schema:
+              $ref: '#/components/schemas/claim_activation_async'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncClaimCreate'
+        '400':
+          description: Invalid key (or already used)
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: createOrgAsyncClaim
+      tags:
+      - Orgs Licenses
+  /api/v1/orgs/{org_id}/claims/{claim_id}:
+    get:
+      description: Return the processing status for a specific async inventory claim
+        job, optionally including per-device details.
+      operationId: getOrgAsyncClaimStatus
+      parameters:
+      - description: Whether to include per-device detail in the claim status response
+        in: query
+        name: detail
+        schema:
+          examples:
+          - true
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncClaimStatus'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgAsyncClaimStatus
+      tags:
+      - Orgs Licenses
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - description: Unique identifier of the async claim job
+      in: path
+      name: claim_id
+      required: true
+      schema:
+        format: uuid
+        type: string
   /api/v1/orgs/{org_id}/clients/count:
     get:
       description: Count wireless client records across the organization, optionally
@@ -10254,6 +10363,44 @@ paths:
       summary: updateOrgIdpProfile
       tags:
       - Orgs IDP Profiles
+  /api/v1/orgs/{org_id}/insights/marvisclient/{marvisclient_id}/marvisclient-metrics:
+    get:
+      description: Return time-series metrics for a specific Marvis Client device.
+        For the full list of supported metric field names and example values, refer
+        to [List Insight Metrics](/#operations/listInsightMetrics) under `/api/v1/const/insight_metrics`.
+      operationId: getOrgMarvisClientInsights
+      parameters:
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/MarvisClientInsights'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgMarvisClientInsights
+      tags:
+      - Orgs Clients - Marvis
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - description: Marvis Client device UUID
+      in: path
+      name: marvisclient_id
+      required: true
+      schema:
+        format: uuid
+        type: string
   /api/v1/orgs/{org_id}/insights/sites-sle:
     get:
       description: Return per-site Service-Level Expectation (SLE) scores for Wi-Fi,
@@ -10422,6 +10569,14 @@ paths:
         schema:
           examples:
           - 1703003296
+          type: integer
+      - description: Filter results to devices that were last disconnected before
+          this time, in epoch seconds
+        in: query
+        name: disconnected_before
+        schema:
+          examples:
+          - 1733522845
           type: integer
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
@@ -11133,8 +11288,8 @@ paths:
       operationId: countOrgJsiAssetsAndContracts
       parameters:
       - description: 'Field used to group this count response. enum: `account_id`,
-          `claimed`, `has_support`, `eol_time`, `eos_time`, `version_time`, `model`,
-          `sku`, `status`, `type`, `version`, `warranty_type`'
+          `claimed`, `has_support`, `end_of_sale_time`, `eos_time`, `version_time`,
+          `model`, `sku`, `status`, `type`, `version`, `warranty_type`'
         in: query
         name: distinct
         schema:
@@ -11218,16 +11373,16 @@ paths:
         name: warranty_type
         schema:
           $ref: '#/components/schemas/jsi_warranty_type'
-      - description: Filter devices with End Of Life date after this date
+      - description: Filter devices with End Of Sale date after this date
         in: query
-        name: eol_after
+        name: end_of_sale_after
         schema:
           examples:
           - '2024-01-01'
           type: string
-      - description: Filter devices with End Of Life date before this date
+      - description: Filter devices with End Of Sale date before this date
         in: query
-        name: eol_before
+        name: end_of_sale_before
         schema:
           examples:
           - '2025-12-31'
@@ -11838,6 +11993,167 @@ paths:
       summary: importOrgMaps
       tags:
       - Orgs Maps
+  /api/v1/orgs/{org_id}/marvisclients/events/count:
+    get:
+      description: Count Marvis Client events by a distinct field.
+      operationId: countOrgMarvisClientEvents
+      parameters:
+      - description: 'Field to count by. enum: `type`, `device_id`, `wifi_mac`, `wifi_ip`,
+          `hostname`, `ssid`, `bssid`, `channel`, `pre_bssid`, `pre_channel`'
+        in: query
+        name: distinct
+        schema:
+          default: type
+          type: string
+      - description: Filter by event type
+        in: query
+        name: type
+        schema:
+          type: string
+      - description: Filter by Marvis Client installation device UUID
+        in: query
+        name: device_id
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi MAC address
+        in: query
+        name: wifi_mac
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi IP address
+        in: query
+        name: wifi_ip
+        schema:
+          type: string
+      - description: Filter by device hostname
+        in: query
+        name: hostname
+        schema:
+          type: string
+      - description: Filter by SSID involved in roam events
+        in: query
+        name: ssid
+        schema:
+          type: string
+      - description: Filter by BSSID the client roamed to
+        in: query
+        name: bssid
+        schema:
+          type: string
+      - description: Filter by channel the client roamed to
+        in: query
+        name: channel
+        schema:
+          type: string
+      - description: Filter by BSSID the client roamed from
+        in: query
+        name: pre_bssid
+        schema:
+          type: string
+      - description: Filter by channel the client roamed from
+        in: query
+        name: pre_channel
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/MarvisClientEventsCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgMarvisClientEvents
+      tags:
+      - Orgs Clients - Marvis
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/marvisclients/events/search:
+    get:
+      description: Search Marvis Client events across the organization.
+      operationId: searchOrgMarvisClientEvents
+      parameters:
+      - description: Filter by event type
+        in: query
+        name: type
+        schema:
+          type: string
+      - description: Filter by Marvis Client installation device UUID
+        in: query
+        name: device_id
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi MAC address
+        in: query
+        name: wifi_mac
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi IP address
+        in: query
+        name: wifi_ip
+        schema:
+          type: string
+      - description: Filter by device hostname
+        in: query
+        name: hostname
+        schema:
+          type: string
+      - description: Filter by SSID involved in roam events
+        in: query
+        name: ssid
+        schema:
+          type: string
+      - description: Filter by BSSID the client roamed to
+        in: query
+        name: bssid
+        schema:
+          type: string
+      - description: Filter by channel the client roamed to
+        in: query
+        name: channel
+        schema:
+          type: string
+      - description: Filter by BSSID the client roamed from
+        in: query
+        name: pre_bssid
+        schema:
+          type: string
+      - description: Filter by channel the client roamed from
+        in: query
+        name: pre_channel
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/MarvisClientEventsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgMarvisClientEvents
+      tags:
+      - Orgs Clients - Marvis
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/marvisinvites:
     get:
       description: List Marvis Client onboarding invite profiles for the organization,
@@ -14383,6 +14699,31 @@ paths:
       tags:
       - Orgs NAC Rules
   /api/v1/orgs/{org_id}/nactags:
+    description: "NAC Tags are the building blocks to compose NAC Rules.\n\nThey can\
+      \ either appear in the `matching` / `not_matching` sections of a NAC Rule,\n\
+      in which case they play the role of classifiers, or they could appear in the\
+      \ `apply_tags`\nsection of a NAC Rule, in which case they influence the result.\n\
+      \nWhen the `type` field of a NAC Tag is `match`, it can be used as a classifier\
+      \ of a NAC Rule:\n  - The `match` field specifies the attribute name and the\
+      \ `values` field specifies the list of\n    attribute values to match on.\n\
+      \  - When multiple values are specified, they are treated as an OR condition\
+      \ between those values.\n    This behavior can be changed by setting the `match_all`\
+      \ field to `true`, in which case it is\n    treated as an AND condition between\
+      \ those values.\n  - By default an exact match is performed. This behavior can\
+      \ be changed as follows:\n    - Adding `*` at the beginning will perform a suffix\
+      \ match\n      (ex: `*-staff` will match `foo-staff` and `bar-staff`)\n    -\
+      \ Adding `*` at the end will perform a prefix match\n      (ex: `foo-*` will\
+      \ match `foo-staff` and `foo-interns`)\n    - Adding `*` at both ends will perform\
+      \ a substring match\n      (ex: `*printer*` will match `hp-printer-bldg1`, `brother-printer-lab`)\n\
+      \    - Adding `!` at the beginning will perform a negation of the match\n  \
+      \    (ex: `!ssid-guest` will match any string that is not `ssid-guest`)\n  \
+      \  - Note: when negation should be used along with suffix/substring operation,\n\
+      \      `!` should always precede `*`\n      (ex: `!*guest` will match any string\
+      \ that is not ending with `guest`)\n  - Prepending the value with the keyword\
+      \ `regex=` followed by a regular expression will\n    evaluate the match as\
+      \ a regex (instead of the wildcard behaviors above: prefix, suffix,\n    substring,\
+      \ or exact match).\n    (ex: `regex=^foo-(staff|interns)$` will match `foo-staff`\
+      \ and `foo-interns`)\n"
     get:
       description: List organization NAC tags, optionally filtering by tag type, name,
         or match attribute.
@@ -18564,31 +18905,45 @@ paths:
   /api/v1/orgs/{org_id}/setting/mist_scep/client_certs:
     get:
       description: List Mist SCEP client certificates issued for the organization.
-        Results can be filtered by SSO name ID, certificate serial number, or device
-        ID; `serial_number` and `device_id` accept comma-separated values.
+        Results can be filtered by common name, certificate provider, serial number,
+        device ID, or time range.
       operationId: listOrgIssuedClientCertificates
       parameters:
-      - description: Filter results by sso name id
+      - description: Filter by certificate common name (e.g. user UPN or device identifier)
         in: query
-        name: sso_name_id
+        name: common_name
         schema:
           type: string
-      - description: Serial Number of the certificate. Accepts multiple comma-separated
+      - description: Filter by MDM or certificate provider that issued the certificate.
+          Accepts multiple comma-separated values.
+        in: query
+        name: cert_provider
+        schema:
+          type: string
+      - description: Filter by certificate serial number. Accepts multiple comma-separated
           values.
         in: query
         name: serial_number
         schema:
-          examples:
-          - 30259366527558158949099094530690907190005860547,445699007254824353311932325964410163058359466645
           type: string
-      - description: Filter results by device id. Accepts multiple comma-separated
-          values.
+      - description: Filter by device identifier associated with the certificate.
+          Accepts multiple comma-separated values.
         in: query
         name: device_id
         schema:
-          examples:
-          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
           type: string
+      - description: Filter by certificate expiry time, in epoch seconds
+        in: query
+        name: expire_time
+        schema:
+          type: integer
+      - description: Filter by certificate issuance time, in epoch seconds
+        in: query
+        name: created_time
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           $ref: '#/components/responses/IssuedClientCertificates'
@@ -20683,6 +21038,157 @@ paths:
       - Orgs Clients - Marvis
     parameters:
     - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/stats/marvisclients/count:
+    get:
+      description: Count Marvis Client stats records by a distinct field.
+      operationId: countOrgMarvisClientsStats
+      parameters:
+      - description: 'Field to count by. enum: `device_id`, `wifi_mac`, `wifi_ip`,
+          `hostname`, `model`, `mfg`, `serial`, `os_type`, `os_version`'
+        in: query
+        name: distinct
+        schema:
+          default: os_type
+          type: string
+      - description: Filter by Marvis Client installation device UUID
+        in: query
+        name: device_id
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi MAC address
+        in: query
+        name: wifi_mac
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi IP address
+        in: query
+        name: wifi_ip
+        schema:
+          type: string
+      - description: Filter by device hostname
+        in: query
+        name: hostname
+        schema:
+          type: string
+      - description: Filter by device model
+        in: query
+        name: model
+        schema:
+          type: string
+      - description: Filter by device manufacturer
+        in: query
+        name: mfg
+        schema:
+          type: string
+      - description: Filter by device serial number
+        in: query
+        name: serial
+        schema:
+          type: string
+      - description: Filter by device OS type or platform
+        in: query
+        name: os_type
+        schema:
+          type: string
+      - description: Filter by device OS version
+        in: query
+        name: os_version
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsMarvisClientsCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgMarvisClientsStats
+      tags:
+      - Orgs Stats - Marvis Clients
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/stats/marvisclients/search:
+    get:
+      description: Search Marvis Client stats records across the organization.
+      operationId: searchOrgMarvisClientsStats
+      parameters:
+      - description: Filter by Marvis Client installation device UUID
+        in: query
+        name: device_id
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi MAC address
+        in: query
+        name: wifi_mac
+        schema:
+          type: string
+      - description: Filter by device Wi-Fi IP address
+        in: query
+        name: wifi_ip
+        schema:
+          type: string
+      - description: Filter by device hostname
+        in: query
+        name: hostname
+        schema:
+          type: string
+      - description: Filter by device model
+        in: query
+        name: model
+        schema:
+          type: string
+      - description: Filter by device manufacturer
+        in: query
+        name: mfg
+        schema:
+          type: string
+      - description: Filter by device serial number
+        in: query
+        name: serial
+        schema:
+          type: string
+      - description: Filter by device OS type or platform
+        in: query
+        name: os_type
+        schema:
+          type: string
+      - description: Filter by device OS version
+        in: query
+        name: os_version
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsMarvisClientsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgMarvisClientsStats
+      tags:
+      - Orgs Stats - Marvis Clients
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/stats/mxedges:
     get:
       description: Get List of Org MxEdge Stats
@@ -22212,7 +22718,8 @@ paths:
       tags:
       - Orgs User MACs
     put:
-      description: Update Multiple Org User MACs
+      description: Update Multiple Org User MACs. Accepts a JSON array of user MAC
+        objects where `id` is required for each entry.
       operationId: updateOrgMultipleUserMacs
       requestBody:
         content:
@@ -22299,26 +22806,31 @@ paths:
     parameters:
     - $ref: '#/components/parameters/org_id'
     post:
-      description: "Import Org User MACs\n\n### CSV Import example\n```csv \nmac,labels,vlan,notes,name,radius_group\n\
+      description: "Import Org User MACs. Accepts JSON or CSV upload.\n\n**JSON \u2014\
+        \ Array form** (asynchronous by default):\n```json\n[\n  {\"mac\": \"921b638445cd\"\
+        , \"labels\": [\"label1\"], \"vlan\": \"vlan-1\"},\n  {\"mac\": \"721b638445ef\"\
+        , \"labels\": [\"label2\", \"label3\"], \"notes\": \"mac address refers to\
+        \ Canon printers\"}\n]\n```\n\n**CSV upload**: multipart/form-data with `file`\
+        \ field.\n\n### CSV file format\n```csv\nmac,labels,vlan,notes,name,radius_group\n\
         921b638445cd,\"bldg1,flor1\",vlan-100\n721b638445ef,\"bldg2,flor2\",vlan-101,Canon\
         \ Printers\n721b638445ee,\"bldg3,flor3\",vlan-102,Printer2,VIP\n921b638445ce,\"\
-        bldg4,flor4\",vlan-103\n921b638445cf,\"bldg5,flor5\",vlan-104\n````"
+        bldg4,flor4\",vlan-103\n921b638445cf,\"bldg5,flor5\",vlan-104\n```"
       operationId: importOrgUserMacs
       requestBody:
         content:
           application/json:
             examples:
-              Example:
+              ArrayForm:
                 value:
                 - labels:
                   - label1
                   mac: 921b638445cd
-                  vlan: '30'
+                  vlan: vlan-1
                 - labels:
                   - label2
                   - label3
                   mac: 721b638445ef
-                  notes: MAC address refers to Canon printers
+                  notes: mac address refers to Canon printers
                 - labels:
                   - label4
                   mac: 721b638445ee
@@ -22328,12 +22840,19 @@ paths:
                   - label7
                   mac: 921b638445ce
                 - mac: 921b638445cf
-                  vlan: '100'
+                  vlan: vlan-100
             schema:
               $ref: '#/components/schemas/user_macs'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/binary_stream'
+              properties:
+                file:
+                  description: CSV file containing user MAC entries to import
+                  format: binary
+                  type: string
+              required:
+              - file
+              type: object
       responses:
         '200':
           $ref: '#/components/responses/UserMacImport'
@@ -25278,6 +25797,11 @@ paths:
               Example:
                 value:
                   band: '5'
+                  channels:
+                  - 36
+                  - 40
+                  - 44
+                  - 48
                   device_id: 00000000-0000-0000-1000-5c5b35bd76bb
                   duration: 600
                   format: stream
@@ -31924,6 +32448,13 @@ paths:
       description: Get List of Site Maps
       operationId: listSiteMaps
       parameters:
+      - description: Filter maps by mapstack UUID; returns only maps belonging to
+          that mapstack
+        in: query
+        name: mapstack_id
+        schema:
+          format: uuid
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
       responses:
@@ -32224,6 +32755,53 @@ paths:
       summary: updateSiteMap
       tags:
       - Sites Maps
+  /api/v1/sites/{site_id}/maps/{map_id}/apply_autoplacement:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/map_id'
+    post:
+      description: 'Accept the cached autoplacement and auto-orientation values of
+        a map or subset of APs on a map. Any APs that have autoplacement values are
+        stored in cache for up to 7 days while awaiting acceptance.
+
+
+
+        Accepting the autoplacement values overwrites the existing X, Y, and orientation
+        of the accepted APs with their cached autoplacement values.
+
+
+        Once a decision to accept is made, or the 7-day time-to-live (TTL) expires,
+        the cached values are deleted.'
+      operationId: acceptSiteApLocalizationData
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  for: placement
+                  macs:
+                  - 5c5b35000001
+            schema:
+              $ref: '#/components/schemas/autoplacement_localization_selector'
+        description: Request Body
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Map does not exist or belong to specified site / Invalid localization
+            service. Expected [placement, orientation]
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: acceptSiteApLocalizationData
+      tags:
+      - Sites Maps - Auto-placement
   /api/v1/sites/{site_id}/maps/{map_id}/auto_geofences:
     parameters:
     - $ref: '#/components/parameters/map_id'
@@ -32541,14 +33119,30 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/map_id'
     post:
-      description: This API is used to destroy the cached autoplacement locations
-        of a map or subset of APs on a map.
+      description: 'Reject the cached autoplacement and auto-orientation values of
+        a map or subset of APs on a map. Any APs that have autoplacement values are
+        stored in cache for up to 7 days while awaiting rejection.
+
+
+
+        Rejecting the autoplacement values causes the APs to retain their current
+        X, Y, and orientation.
+
+
+        Once a decision to reject is made, or the 7-day time-to-live (TTL) expires,
+        the cached values are deleted.'
       operationId: clearSiteApAutoplacement
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  for: placement
+                  macs:
+                  - 5c5b35000001
             schema:
-              $ref: '#/components/schemas/mac_addresses'
+              $ref: '#/components/schemas/autoplacement_localization_selector'
       responses:
         '200':
           $ref: '#/components/responses/OK'
@@ -32692,25 +33286,10 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/map_id'
     post:
-      description: 'This API is used to accept or reject the cached autoplacement
-        and auto-orientation values of a map or subset of APs on a map. Any APs that
-        have autoplacement values are stored in cache for up to 7 days while awaiting
-        acceptance or rejection.
-
-
-        ```
-
-        Accepting the autoplacement values overwrites the existing X, Y, and orientation
-        of the accepted APs with their cached autoplacement values.
-
-        Rejecting the autoplacement values causes the APs to retain their current
-        X, Y, and orientation.
-
-        ```
-
-
-        Once a decision (accept or reject) is made, or the 7-day time-to-live (TTL)
-        expires, the cached values are deleted.'
+      deprecated: true
+      description: "**Deprecated** \u2014 use [Accept Site AP Autoplacement](/#operations/acceptSiteApLocalizationData)\
+        \ to accept cached values, or [Clear Site AP Autoplacement](/#operations/clearSiteApAutoplacement)\
+        \ to reject them."
       operationId: confirmSiteApLocalizationData
       requestBody:
         content:
@@ -32830,6 +33409,215 @@ paths:
       summary: createSiteMapStack
       tags:
       - Sites Map Stacks
+  /api/v1/sites/{site_id}/marvis_configs/count:
+    get:
+      description: Count Marvis Config Actions for a site by a distinct field.
+      operationId: countSiteMarvisConfigActions
+      parameters:
+      - description: 'Field to count by. enum: `mac`, `type`, `src`, `admin_id`, `op`,
+          `port_id`, `reason`, `vlan_ids`'
+        in: query
+        name: distinct
+        schema:
+          default: mac
+          type: string
+      - description: Filter by device MAC address
+        in: query
+        name: mac
+        schema:
+          type: string
+      - description: Filter by config type (e.g. wired)
+        in: query
+        name: type
+        schema:
+          type: string
+      - description: Filter by source of the config action (e.g. marvis)
+        in: query
+        name: src
+        schema:
+          type: string
+      - description: Filter by admin ID
+        in: query
+        name: admin_id
+        schema:
+          type: string
+      - description: Filter by operation type (e.g. disable_port, enable_port, update_mtu,
+          add_vlans_to_port)
+        in: query
+        name: op
+        schema:
+          type: string
+      - description: Filter by port identifier (e.g. ge-0/0/13)
+        in: query
+        name: port_id
+        schema:
+          type: string
+      - description: Filter by VLAN ID
+        in: query
+        name: vlan_ids
+        schema:
+          type: integer
+      - description: Filter by reason for the config action (e.g. rogue_dhcp_server_detected)
+        in: query
+        name: reason
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/MarvisConfigActionsCount'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countSiteMarvisConfigActions
+      tags:
+      - Sites Marvis Configs
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/marvis_configs/search:
+    get:
+      description: Search Marvis Config Actions for a site.
+      operationId: searchSiteMarvisConfigActions
+      parameters:
+      - description: Filter by device MAC address
+        in: query
+        name: mac
+        schema:
+          type: string
+      - description: Filter by config type (e.g. wired)
+        in: query
+        name: type
+        schema:
+          type: string
+      - description: Filter by source of the config action (e.g. marvis)
+        in: query
+        name: src
+        schema:
+          type: string
+      - description: Filter by admin ID
+        in: query
+        name: admin_id
+        schema:
+          type: string
+      - description: Filter by operation type (e.g. disable_port, enable_port, update_mtu,
+          add_vlans_to_port)
+        in: query
+        name: op
+        schema:
+          type: string
+      - description: Filter by port identifier (e.g. ge-0/0/13)
+        in: query
+        name: port_id
+        schema:
+          type: string
+      - description: Filter by VLAN ID
+        in: query
+        name: vlan_ids
+        schema:
+          type: integer
+      - description: Filter by reason for the config action (e.g. rogue_dhcp_server_detected)
+        in: query
+        name: reason
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      responses:
+        '200':
+          $ref: '#/components/responses/MarvisConfigActionsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteMarvisConfigActions
+      tags:
+      - Sites Marvis Configs
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/marvis_configs/{id}:
+    delete:
+      description: Delete a Marvis Config Action.
+      operationId: deleteSiteMarvisConfigAction
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteSiteMarvisConfigAction
+      tags:
+      - Sites Marvis Configs
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - description: UUID of the Marvis Config Action
+      in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+  /api/v1/sites/{site_id}/marvis_configs/{id}/feedback:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - description: UUID of the Marvis Config Action
+      in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+    post:
+      description: Submit feedback on a Marvis-injected config action (e.g. mark as
+        invalid).
+      operationId: submitSiteMarvisConfigFeedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/marvis_config_feedback'
+        description: Request Body
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/MarvisConfigFeedbackResponse'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: submitSiteMarvisConfigFeedback
+      tags:
+      - Sites Marvis Configs
   /api/v1/sites/{site_id}/mxedges:
     get:
       description: List Mist Edges for a site. Use [List Org Mist Edges](/#operations/listOrgMxEdges)
@@ -37191,6 +37979,12 @@ paths:
         statistics across the organization.
       operationId: listSiteAssetsStats
       parameters:
+      - description: Filter assets by map UUID
+        in: query
+        name: map_id
+        schema:
+          format: uuid
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -42111,6 +42905,7 @@ paths:
                 value:
                   smsglobal_api_key: '123456'
                   smsglobal_api_secret: abcdef
+                  smsglobal_sender: '61400000002'
                   to: '+911122334455'
             schema:
               $ref: '#/components/schemas/test_sms_global'
@@ -43827,6 +44622,86 @@ components:
       value:
         success:
         - 5c5b350e0001
+    AsyncClaimCreateExample:
+      value:
+        claim_id: 8e2a0c6f-6f3c-4c4e-9c72-8c5b1c1b6b9b
+        inventory_pending:
+        - mac: 5c5b35000012
+        - mac: 5c5b35000018
+    AsyncClaimStatusExample:
+      value:
+        claim_id: 8e2a0c6f-6f3c-4c4e-9c72-8c5b1c1b6b9b
+        completed:
+        - '000000000022'
+        - '000000000011'
+        details:
+        - mac: '000000000022'
+          status: added
+          timestamp: 1709598053
+        - mac: '000000000011'
+          status: added
+          timestamp: 1709598053
+        failed: 0
+        incompleted: []
+        org_id: 44fe2c6b-7d7d-46e6-8d4f-5ce6a7c6b01a
+        processed: 2
+        scheduled_at: 1709598052
+        status: done
+        succeed: 2
+        timestamp: 1709598053
+        total: 2
+    AsyncClaimsListDetailExample:
+      value:
+        claims:
+        - claim_id: 8e2a0c6f-6f3c-4c4e-9c72-8c5b1c1b6b9b
+          completed:
+          - '000000000022'
+          - '000000000011'
+          details:
+          - mac: '000000000022'
+            status: added
+            timestamp: 1709598053
+          - mac: '000000000011'
+            status: added
+            timestamp: 1709598053
+          failed: 0
+          incompleted: []
+          org_id: 44fe2c6b-7d7d-46e6-8d4f-5ce6a7c6b01a
+          processed: 2
+          scheduled_at: 1709598052
+          status: done
+          succeed: 2
+          timestamp: 1709598053
+          total: 2
+    AsyncClaimsListExample:
+      value:
+        claims:
+        - claim_id: 8e2a0c6f-6f3c-4c4e-9c72-8c5b1c1b6b9b
+          completed:
+          - '000000000022'
+          - '000000000011'
+          failed: 0
+          incompleted: []
+          org_id: 44fe2c6b-7d7d-46e6-8d4f-5ce6a7c6b01a
+          processed: 2
+          scheduled_at: 1709598052
+          status: done
+          succeed: 2
+          timestamp: 1709598053
+          total: 2
+        - claim_id: 3a7b6c1e-4e5a-4eaa-9c7f-9a9c62b7f402
+          completed:
+          - '000000000044'
+          failed: 0
+          incompleted:
+          - '000000000033'
+          org_id: 44fe2c6b-7d7d-46e6-8d4f-5ce6a7c6b01a
+          processed: 1
+          scheduled_at: 1709598070
+          status: ongoing
+          succeed: 1
+          timestamp: 1709598075
+          total: 2
     AsyncLicenseExample:
       value:
         completed:
@@ -49632,12 +50507,15 @@ components:
         total: 2
     IssuedClientCertificatesExample:
       value:
+        limit: 100
+        page: 1
         results:
-        - common_name: john@corp.com
-          created_time: '2025-08-18 10:10:30.949165+00:00'
+        - cert_provider: jamf
+          common_name: john@corp.com
+          created_time: 1431382121
           device_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
-          expire_time: '2026-08-18 10:06:00+00:00'
-          serial_number: 91984382552102771A2B3C4E5F224719956718003374658
+          expire_time: 1718921115
+          serial_number: 13 00 13 03 23 EE D5 84 01
     JseInfoExample:
       value:
         cloud_name: devcentral.juniperclouds.net
@@ -49657,7 +50535,7 @@ components:
     JsiInventoryExample:
       value:
       - device_name: name1
-        eol_time: 1561507200
+        end_of_sale_time: 1561507200
         eos_time: 1672012800
         master: true
         model: EX2300-24MP
@@ -49680,7 +50558,7 @@ components:
         results:
         - claimed: true
           device_name: name1
-          eol_time: 1561507200
+          end_of_sale_time: 1561507200
           eos_time: 1672012800
           has_support: true
           master: true
@@ -50114,16 +50992,102 @@ components:
         name: Board Room
         org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+    MarvisClientEventsSearchExample:
+      value:
+        limit: 100
+        results:
+        - bssid: 00:11:22:33:44:55
+          channel: 6
+          device_id: 0c2a2c6c-5a95-4956-a02d-e1b39c2e5c6e
+          hostname: my-android-phone
+          neighbor_ap_report:
+          - band: 2.4GHz
+            bssid: aa:bb:cc:dd:ee:ff
+            channel: 1
+            rssi: -72
+          org_id: c168ddee-c14c-11e5-8e81-1258369c38a9
+          pre_bssid: aa:bb:cc:dd:ee:ff
+          pre_channel: 1
+          pre_rssi: -70
+          rssi: -58
+          ssid: Corp-WiFi
+          timestamp: 1717027200
+          type: ROAM
+          wifi_ip: 192.168.1.55
+          wifi_mac: 00:aa:bb:cc:dd:ee
+        total: 1
     MarvisClientExample:
       value:
         enrollment_url: marvisclient://api.mist.com/path/to/url
         id: 3a14098f-b995-7552-b0a4-b8ee39b337a6
         name: Handhelds
+    MarvisClientInsightsExample:
+      value:
+        avg_battery:
+        - 82
+        - 79
+        avg_cellular_rssi:
+        - -95
+        - -92
+        avg_cpu:
+        - 12.5
+        - 15.2
+        avg_memory:
+        - 43.1
+        - 44.8
+        avg_wifi_rssi:
+        - -62
+        - -60
+        end: 1717113600
+        interval: 3600
+        limit: 100
+        page: 1
+        rt:
+        - '2026-05-30T16:00:00Z'
+        - '2026-05-30T17:00:00Z'
+        start: 1717027200
     MarvisClientsArrayExample:
       value:
       - enrollment_url: marvisclient://api.mist.com/path/to/url
         id: 3a14098f-b995-7552-b0a4-b8ee39b337a6
         name: Handhelds
+    MarvisConfigActionsSearchExample:
+      value:
+        end: 1775122221
+        limit: 10
+        results:
+        - admin_id: 6d617276-0000-0000-3157-000000000000
+          id: 05b46288-37d4-4860-9de4-1edc6e8d5363
+          mac: f8c1165aba00
+          op: disable_port
+          org_id: 174260d5-cb22-4ea8-badb-c77a89acb0a9
+          port_id: ge-0/0/2
+          reason: rogue_dhcp_server_detected
+          site_id: 437ac5f0-fc76-4a2b-87ab-d8d1e5c00405
+          src: marvis
+          timestamp: 1775028130.405962
+          type: wired
+          vlan_ids: []
+        - admin_id: 6d617276-0000-0000-3157-000000000000
+          id: b1a81ed4-a7a2-4945-b01d-f54afe6d5cc4
+          mac: f8c1165aba00
+          op: add_vlans_to_port
+          org_id: 174260d5-cb22-4ea8-badb-c77a89acb0a9
+          port_id: ge-0/0/12
+          reason: missing_vlans
+          site_id: 437ac5f0-fc76-4a2b-87ab-d8d1e5c00405
+          src: marvis
+          timestamp: 1774866716.15723
+          type: wired
+          vlan_ids:
+          - 100
+          - 200
+        start: 1775118621
+        total: 2
+    MarvisConfigFeedbackResponseExample:
+      value:
+        feedback_note: this port config is intended, do not change anymore
+        feedback_type: invalid
     MlExample:
       value:
       - current:
@@ -51870,6 +52834,7 @@ components:
         created_time: 1542328276
         deviceprofile_id: 6f4bf402-45f9-2a56-6c8b-7f83d3bc98e9
         id: 00000000-0000-0000-0000-5c5b35000018
+        last_disconnected: 1542828000
         mac: 5c5b35000018
         model: AP41
         modified_time: 1542829778
@@ -52989,10 +53954,16 @@ components:
     RunningSpectrumAnalysis:
       value:
         band: '5'
+        channels:
+        - 36
+        - 40
+        - 44
+        - 48
         device_id: 00000000-0000-0000-1000-5c5b35bd76bb
         duration: 600
         format: stream
         started_time: 1435080709
+        width: 20
     SamlMetadataExample:
       value:
         acs_url: https://api.mist.com/api/v1/saml/llDfa13f/login
@@ -56002,6 +56973,43 @@ components:
       - default: true
         package: SSR
         version: 5.3.1-17
+    StatsMarvisClientsSearchExample:
+      value:
+        limit: 100
+        results:
+        - battery_charging: false
+          battery_level: 82
+          cpu_background: 2.1
+          cpu_idle: 78.3
+          cpu_system: 5.4
+          cpu_user: 14.2
+          device_id: 0c2a2c6c-5a95-4956-a02d-e1b39c2e5c6e
+          hostname: my-android-phone
+          location:
+            map_id: b4695157-0d1d-4da0-8f9e-5c38149d8b81
+            site_id: d14f16d8-d14f-11e5-8e81-1258369c38a9
+            timestamp: 1717027100
+            x: 423.5
+            y: 201.0
+          memory_total: 8589934592
+          memory_usage: 3758096384
+          mfg: Samsung
+          model: Galaxy S23
+          org_id: c168ddee-c14c-11e5-8e81-1258369c38a9
+          os_type: Android
+          os_version: '14'
+          serial: R5CX123456A
+          storage_total: 128849018880
+          storage_usage: 52428800000
+          timestamp: 1717027200
+          wifi_band: 5GHz
+          wifi_bssid: 00:11:22:33:44:55
+          wifi_channel: 36
+          wifi_ip: 192.168.1.55
+          wifi_mac: 00:aa:bb:cc:dd:ee
+          wifi_rssi: -58
+          wifi_ssid: Corp-WiFi
+        total: 1
     SwitchMetricsSiteScoped:
       value:
         active_ports_summary:
@@ -56418,6 +57426,9 @@ components:
         mac: 921b638445cd
         notes: MAC address refers to Canon printers
         vlan: '30'
+    UserMacImportAsyncExample:
+      value:
+        detail: import in progress
     UserMacImportExample:
       value:
         added:
@@ -56437,6 +57448,9 @@ components:
         mac: 921b638445cd
         notes: MAC address refers to Canon printers
         vlan: '30'
+    UserMacsUpdateAsyncExample:
+      value:
+        detail: batch update in progress
     UserMacsUpdateExample:
       value:
         errors:
@@ -58691,6 +59705,55 @@ components:
           schema:
             $ref: '#/components/schemas/response_assign_success'
       description: OK - list only devices that has deviceprofile_id changed
+    AsyncClaimCreate:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AsyncClaimCreateExample'
+          schema:
+            $ref: '#/components/schemas/response_async_claim_create'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AsyncClaimCreateExample'
+          schema:
+            $ref: '#/components/schemas/response_async_claim_create'
+      description: OK
+    AsyncClaimStatus:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AsyncClaimStatusExample'
+          schema:
+            $ref: '#/components/schemas/response_async_claim_status'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/AsyncClaimStatusExample'
+          schema:
+            $ref: '#/components/schemas/response_async_claim_status'
+      description: OK
+    AsyncClaimsList:
+      content:
+        application/json:
+          examples:
+            Detail False:
+              $ref: '#/components/examples/AsyncClaimsListExample'
+            Detail True:
+              $ref: '#/components/examples/AsyncClaimsListDetailExample'
+          schema:
+            $ref: '#/components/schemas/response_async_claims_list'
+        application/vnd.api+json:
+          examples:
+            Detail False:
+              $ref: '#/components/examples/AsyncClaimsListExample'
+            Detail True:
+              $ref: '#/components/examples/AsyncClaimsListDetailExample'
+          schema:
+            $ref: '#/components/schemas/response_async_claims_list'
+      description: OK
     AsyncLicense:
       content:
         application/json:
@@ -61080,6 +62143,51 @@ components:
           schema:
             $ref: '#/components/schemas/marvis_client'
       description: Example response
+    MarvisClientEventsCount:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/CountExample'
+          schema:
+            $ref: '#/components/schemas/response_count'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/CountExample'
+          schema:
+            $ref: '#/components/schemas/response_count'
+      description: Count result
+    MarvisClientEventsSearch:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisClientEventsSearchExample'
+          schema:
+            $ref: '#/components/schemas/marvis_client_events_search'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisClientEventsSearchExample'
+          schema:
+            $ref: '#/components/schemas/marvis_client_events_search'
+      description: Paginated Marvis Client events search results
+    MarvisClientInsights:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisClientInsightsExample'
+          schema:
+            $ref: '#/components/schemas/marvis_client_insights'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisClientInsightsExample'
+          schema:
+            $ref: '#/components/schemas/marvis_client_insights'
+      description: Marvis Client time-series metrics
     MarvisClientsArray:
       content:
         application/json:
@@ -61095,6 +62203,51 @@ components:
           schema:
             $ref: '#/components/schemas/marvis_clients'
       description: Example response
+    MarvisConfigActionsCount:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/CountExample'
+          schema:
+            $ref: '#/components/schemas/response_count'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/CountExample'
+          schema:
+            $ref: '#/components/schemas/response_count'
+      description: Count result
+    MarvisConfigActionsSearch:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisConfigActionsSearchExample'
+          schema:
+            $ref: '#/components/schemas/marvis_config_actions_search'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisConfigActionsSearchExample'
+          schema:
+            $ref: '#/components/schemas/marvis_config_actions_search'
+      description: Paginated Marvis Config Actions search results
+    MarvisConfigFeedbackResponse:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisConfigFeedbackResponseExample'
+          schema:
+            $ref: '#/components/schemas/marvis_config_feedback_response'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/MarvisConfigFeedbackResponseExample'
+          schema:
+            $ref: '#/components/schemas/marvis_config_feedback_response'
+      description: Marvis Config Feedback response
     Ml:
       content:
         application/json:
@@ -63506,6 +64659,36 @@ components:
           schema:
             $ref: '#/components/schemas/ssr_versions'
       description: OK
+    StatsMarvisClientsCount:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/CountExample'
+          schema:
+            $ref: '#/components/schemas/response_count'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/CountExample'
+          schema:
+            $ref: '#/components/schemas/response_count'
+      description: Count result
+    StatsMarvisClientsSearch:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/StatsMarvisClientsSearchExample'
+          schema:
+            $ref: '#/components/schemas/stats_marvis_clients_search'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/StatsMarvisClientsSearchExample'
+          schema:
+            $ref: '#/components/schemas/stats_marvis_clients_search'
+      description: Paginated Marvis Client stats search results
     SwitchMetrics:
       content:
         application/json:
@@ -63840,13 +65023,17 @@ components:
       content:
         application/json:
           examples:
-            Example:
+            Async:
+              $ref: '#/components/examples/UserMacImportAsyncExample'
+            Sync:
               $ref: '#/components/examples/UserMacImportExample'
           schema:
             $ref: '#/components/schemas/user_mac_import'
         application/vnd.api+json:
           examples:
-            Example:
+            Async:
+              $ref: '#/components/examples/UserMacImportAsyncExample'
+            Sync:
               $ref: '#/components/examples/UserMacImportExample'
           schema:
             $ref: '#/components/schemas/user_mac_import'
@@ -63879,13 +65066,17 @@ components:
       content:
         application/json:
           examples:
-            Example:
+            Async:
+              $ref: '#/components/examples/UserMacsUpdateAsyncExample'
+            Sync:
               $ref: '#/components/examples/UserMacsUpdateExample'
           schema:
             $ref: '#/components/schemas/user_macs_update'
         application/vnd.api+json:
           examples:
-            Example:
+            Async:
+              $ref: '#/components/examples/UserMacsUpdateAsyncExample'
+            Sync:
               $ref: '#/components/examples/UserMacsUpdateExample'
           schema:
             $ref: '#/components/schemas/user_macs_update'
@@ -66250,6 +67441,18 @@ components:
           - integer
           - 'null'
       type: object
+    ap_auto_upgrade_custom_versions:
+      additionalProperties:
+        description: Firmware version or channel to deploy on the specified AP model
+        type: string
+      description: Per-AP-model firmware versions or channels used for auto-upgrade.
+        Property key is the AP model name (e.g. "AP41"), value is the firmware version
+        or release channel (e.g. `stable`)
+      examples:
+      - AP21: stable
+        AP41: 0.1.5135
+        AP61: 0.1.7215
+      type: object
     ap_centrak:
       additionalProperties: false
       description: CenTrak integration settings for an AP
@@ -67023,6 +68226,52 @@ components:
       - remote
       examples:
       - base
+      type: string
+    ap_mqtt:
+      additionalProperties: false
+      description: MQTT broker publishing settings for an AP; use `mqtt_topic` on
+        individual AssetFilter entries to specify which MQTT topic each matching BLE
+        advertisement is forwarded to
+      properties:
+        broker_host:
+          description: MQTT broker hostname or IP address; required when `enabled`
+            is `true`
+          type: string
+        broker_port:
+          description: MQTT broker port; defaults to `1883` for `tcp` and `8883` for
+            `ssl`
+          type: integer
+        broker_proto:
+          $ref: '#/components/schemas/ap_mqtt_broker_proto'
+          description: MQTT broker transport protocol
+        enabled:
+          default: false
+          description: Whether to enable MQTT publishing
+          type: boolean
+        format:
+          $ref: '#/components/schemas/ap_mqtt_format'
+          description: Payload format for published messages
+        password:
+          description: Optional MQTT password; masked in GET responses
+          format: password
+          type: string
+        username:
+          description: Optional MQTT username
+          type: string
+      type: object
+    ap_mqtt_broker_proto:
+      default: tcp
+      description: 'MQTT broker transport protocol. enum: `ssl`, `tcp`'
+      enum:
+      - ssl
+      - tcp
+      type: string
+    ap_mqtt_format:
+      default: raw
+      description: 'Payload format for MQTT published messages. enum: `json`, `raw`'
+      enum:
+      - json
+      - raw
       type: string
     ap_port_config:
       additionalProperties: false
@@ -68523,6 +69772,10 @@ components:
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when this asset filter was last modified
+        mqtt_topic:
+          description: If set, matching BLE advertisements are forwarded to this MQTT
+            topic when MQTT publishing is enabled
+          type: string
         name:
           description: Display name for this BLE asset filter
           examples:
@@ -68837,6 +70090,25 @@ components:
         time_of_day:
           $ref: '#/components/schemas/time_of_day'
           description: Scheduled time of day for auto preemption
+      type: object
+    autoplacement_localization_selector:
+      description: Request body to apply or clear cached autoplacement or auto-orientation
+        values for a map or subset of APs
+      properties:
+        for:
+          default: placement
+          description: 'The selector to choose auto placement or auto orientation.
+            enum: `orientation`, `placement`'
+          enum:
+          - orientation
+          - placement
+          type: string
+        macs:
+          description: List of AP MAC addresses to apply the action to. If omitted,
+            the action applies to all APs on the map
+          items:
+            type: string
+          type: array
       type: object
     avprofile:
       description: Antivirus scanning profile with protocols, limits, and whitelist
@@ -70922,19 +72194,34 @@ components:
     claim_activation:
       description: Request to claim organization licenses or activation codes
       properties:
-        async:
-          default: false
-          description: Whether to run the claim process asynchronously
-          type: boolean
         code:
           description: Activation or license claim code to redeem
           type: string
         device_type:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: Device category associated with the activation code
+          description: If only intended to claim a certain device type, specify it
+            here
         type:
           $ref: '#/components/schemas/claim_type'
           description: Claim scope, such as all, inventory, or license
+      required:
+      - code
+      - type
+      type: object
+    claim_activation_async:
+      description: Request to schedule an asynchronous inventory claim
+      properties:
+        code:
+          description: Activation code to claim
+          type: string
+        device_type:
+          $ref: '#/components/schemas/device_type_default_ap'
+          description: If only intended to claim a certain device type, specify it
+            here
+        type:
+          $ref: '#/components/schemas/claim_type_async'
+          description: Claim scope; `all` claims licenses synchronously and queues
+            inventory, `inventory` queues inventory only
       required:
       - code
       - type
@@ -70956,6 +72243,12 @@ components:
       - all
       - inventory
       - license
+      type: string
+    claim_type_async:
+      description: 'Claim scope for async inventory claiming. enum: `all`, `inventory`'
+      enum:
+      - all
+      - inventory
       type: string
     clear_dot1x_session:
       description: Request body for clearing dot1x sessions on switch ports
@@ -73403,6 +74696,9 @@ components:
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the access point object was last modified
+        mqtt_config:
+          $ref: '#/components/schemas/ap_mqtt'
+          description: MQTT broker publishing settings for this access point
         name:
           description: Configured hostname assigned to the access point
           examples:
@@ -74327,6 +75623,9 @@ components:
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the AP device profile was last modified
+        mqtt_config:
+          $ref: '#/components/schemas/ap_mqtt'
+          description: MQTT broker publishing settings for this AP profile
         name:
           description: Display name of the AP device profile
           type:
@@ -79049,6 +80348,9 @@ components:
         jsi:
           description: Whether the inventory device is in JSI mode
           type: boolean
+        last_disconnected:
+          description: Timestamp when the device last disconnected, in epoch seconds
+          type: integer
         mac:
           description: Device MAC address for this inventory record
           type: string
@@ -79354,6 +80656,12 @@ components:
           examples:
           - 790e6c1790e6c18541d
           type: string
+        cacerts:
+          description: PEM-encoded CA certificates used to verify the Visionline collector's
+            TLS certificate. Required when the collector uses a self-signed certificate
+          items:
+            type: string
+          type: array
         enabled:
           default: false
           description: Whether the Visionline integration is enabled
@@ -79489,18 +80797,14 @@ components:
           - john@corp.com
           type: string
         created_time:
-          description: Timestamp when the client certificate was created
-          examples:
-          - '2025-08-18 10:10:30.949165+00:00'
-          type: string
+          description: Certificate issuance time, in epoch seconds
+          type: integer
         device_id:
           $ref: '#/components/schemas/device_id'
           description: Device associated with the issued client certificate
         expire_time:
-          description: Timestamp when the client certificate expires
-          examples:
-          - '2026-08-18 10:06:00+00:00'
-          type: string
+          description: Certificate expiry time, in epoch seconds
+          type: integer
         serial_number:
           description: Certificate serial number used for lookup or revocation
           examples:
@@ -79516,6 +80820,12 @@ components:
       additionalProperties: false
       description: Issued client certificate search results wrapper
       properties:
+        limit:
+          description: Maximum number of results requested
+          type: integer
+        page:
+          description: Current page number
+          type: integer
         results:
           $ref: '#/components/schemas/issued_client_certificates'
           description: List of issued client certificates returned by the query
@@ -79530,27 +80840,71 @@ components:
       description: Juniper Support inventory item with entitlement, lifecycle, and
         software metadata
       properties:
+        availability:
+          description: Current operational availability status of the device; only
+            returned for onboarded (claimed) devices
+          type: string
         claimed:
           description: Indicates if the device is claimed by any org
           type: boolean
+        contract_end_date:
+          description: Expiration date of the service contract; only returned for
+            onboarded (claimed) devices
+          type: string
+        contract_reseller:
+          description: Name of the reseller associated with the contract; only returned
+            for onboarded (claimed) devices
+          type: string
+        contract_start_date:
+          description: Official commencement date of the service contract; only returned
+            for onboarded (claimed) devices
+          type: string
+        contract_type:
+          description: General classification of the contract; only returned for onboarded
+            (claimed) devices
+          type: string
+        current_contract_flag:
+          description: Current status of the contract (e.g., 'Active', 'Expired');
+            only returned for onboarded (claimed) devices
+          type: string
         device_name:
           description: Name of the device
           type: string
+        distributor:
+          description: Name of the distributor who provided the device; only returned
+            for onboarded (claimed) devices
+          type: string
+        end_of_sale_time:
+          description: End of sale epoch timestamp
+          type: integer
         eol_psn:
           description: Product support notice associated with the device end-of-life
             milestone
           examples:
           - TSB18097
           type: string
-        eol_time:
-          description: End of life time
-          type: integer
         eos_time:
           description: End of support time
           type: integer
         has_support:
           description: Indicates if the device is covered under active support contract
           type: boolean
+        ia_address:
+          description: Physical installation street address of the asset; only returned
+            for onboarded (claimed) devices
+          type: string
+        ia_country:
+          description: Country of installation; only returned for onboarded (claimed)
+            devices
+          type: string
+        ia_region:
+          description: Geographic region where the device is installed; only returned
+            for onboarded (claimed) devices
+          type: string
+        ia_zip_postal:
+          description: ZIP or postal code of the installation site; only returned
+            for onboarded (claimed) devices
+          type: string
         master:
           description: Indicates whether it is Master
           type: boolean
@@ -79562,6 +80916,26 @@ components:
           description: Organization identifier that has claimed the device, when applicable
         serial:
           description: Device serial number recorded in the install base inventory
+          type: string
+        service_contract_no:
+          description: Unique identifier for the service contract; only returned for
+            onboarded (claimed) devices
+          type: string
+        service_contract_type:
+          description: Specific service level or contract category for the device;
+            only returned for onboarded (claimed) devices
+          type: string
+        service_decline_flag:
+          description: Indicates if the service offer was declined (e.g., 'Y'/'N');
+            only returned for onboarded (claimed) devices
+          type: string
+        service_eligible:
+          description: Indicator of whether the device is eligible for service coverage
+            ('Yes', 'No'); only returned for onboarded (claimed) devices
+          type: string
+        ship_date_calc:
+          description: Calculated or actual date the device was shipped; only returned
+            for onboarded (claimed) devices
           type: string
         sku:
           description: Serviceable SKU associated with the device
@@ -79589,6 +80963,14 @@ components:
           type: integer
         warranty:
           description: Coverage details associated with the device warranty
+          type: string
+        warranty_end:
+          description: Expiration date of the warranty period; only returned for onboarded
+            (claimed) devices
+          type: string
+        warranty_start:
+          description: Start date of the manufacturer or secondary warranty; only
+            returned for onboarded (claimed) devices
           type: string
         warranty_time:
           description: Timestamp when warranty needs to be renewed
@@ -79647,13 +81029,13 @@ components:
       type: array
     jsi_inventory_count_distinct:
       description: 'Distinct field used when counting Juniper Support Insight inventory
-        records. enum: `account_id`, `claimed`, `has_support`, `eol_time`, `eos_time`,
-        `version_time`, `model`, `sku`, `status`, `type`, `version`, `warranty_type`'
+        records. enum: `account_id`, `claimed`, `has_support`, `end_of_sale_time`,
+        `eos_time`, `version_time`, `model`, `sku`, `status`, `type`, `version`, `warranty_type`'
       enum:
       - account_id
       - claimed
       - has_support
-      - eol_time
+      - end_of_sale_time
       - eos_time
       - version_time
       - model
@@ -80136,6 +81518,11 @@ components:
             connected to this AE port is ZTPing for the first time, it will not have
             LACP configured on the other end. **Note:** Turning this on will enable
             force-up on one of the interfaces in the bundle only'
+          type: boolean
+        ae_lacp_passive:
+          default: false
+          description: If `aggregated`==`true`, sets LACP to passive mode on this
+            AE interface; by default, active (fast) mode is used
           type: boolean
         ae_lacp_slow:
           description: To use slow timeout
@@ -81558,6 +82945,153 @@ components:
           $ref: '#/components/schemas/marvis_client_telemetry'
           description: Client telemetry collection settings for Marvis Client
       type: object
+    marvis_client_event:
+      additionalProperties: false
+      description: A Marvis Client event record
+      properties:
+        band:
+          description: Wi-Fi band at the time of the event
+          type: string
+        bssid:
+          description: BSSID the client roamed to (for roam events)
+          type: string
+        channel:
+          description: Channel the client roamed to (for roam events)
+          type: integer
+        device_id:
+          description: UUID of the device the Marvis Client is installed on
+          format: uuid
+          type: string
+        hostname:
+          description: Device hostname
+          type: string
+        location:
+          $ref: '#/components/schemas/stats_marvis_client_location'
+          description: Last known device location
+        neighbor_ap_report:
+          description: List of neighboring APs observed at the time of the event
+          items:
+            $ref: '#/components/schemas/marvis_client_event_neighbor_ap'
+          type: array
+        org_id:
+          description: Organization UUID
+          format: uuid
+          type: string
+        percent:
+          description: Battery level percentage at the time of the event (for battery
+            events)
+          type: integer
+        pre_bssid:
+          description: BSSID the client roamed from (for roam events)
+          type: string
+        pre_channel:
+          description: Channel the client roamed from (for roam events)
+          type: integer
+        pre_rssi:
+          description: RSSI before the roam event, in dBm
+          type: integer
+        rssi:
+          description: Wi-Fi RSSI at the time of the event, in dBm
+          type: integer
+        ssid:
+          description: SSID the client was connected to
+          type: string
+        timestamp:
+          description: Event timestamp, in epoch seconds
+          type: integer
+        type:
+          description: Event type
+          type: string
+        wifi_ip:
+          description: Device Wi-Fi IP address at the time of the event
+          type: string
+        wifi_mac:
+          description: Device Wi-Fi MAC address
+          type: string
+      type: object
+    marvis_client_event_neighbor_ap:
+      additionalProperties: false
+      description: A neighboring AP observed in a Marvis Client event
+      properties:
+        band:
+          description: Wi-Fi band the AP is operating on
+          type: string
+        bssid:
+          description: BSSID of the neighboring AP
+          type: string
+        channel:
+          description: Channel the neighboring AP is on
+          type: integer
+        rssi:
+          description: RSSI of the neighboring AP signal, in dBm
+          type: integer
+      type: object
+    marvis_client_events_search:
+      additionalProperties: false
+      description: Paginated list of Marvis Client events
+      properties:
+        limit:
+          description: Maximum number of results requested
+          type: integer
+        results:
+          description: List of Marvis Client events
+          items:
+            $ref: '#/components/schemas/marvis_client_event'
+          type: array
+        total:
+          description: Total number of matching results
+          type: integer
+      type: object
+    marvis_client_insights:
+      additionalProperties: false
+      description: Time-series performance metrics for a Marvis Client device
+      properties:
+        avg_battery:
+          description: Average battery level per interval bucket
+          items:
+            type: number
+          type: array
+        avg_cellular_rssi:
+          description: Average cellular RSSI per interval bucket, in dBm
+          items:
+            type: number
+          type: array
+        avg_cpu:
+          description: "Average CPU utilization per interval bucket (0\u2013100)"
+          items:
+            type: number
+          type: array
+        avg_memory:
+          description: "Average memory utilization per interval bucket (0\u2013100)"
+          items:
+            type: number
+          type: array
+        avg_wifi_rssi:
+          description: Average Wi-Fi RSSI per interval bucket, in dBm
+          items:
+            type: number
+          type: array
+        end:
+          description: End of the reporting window, in epoch seconds
+          type: integer
+        interval:
+          description: Duration of each interval bucket, in seconds
+          type: integer
+        limit:
+          description: Maximum number of results requested
+          type: integer
+        page:
+          description: Current page number
+          type: integer
+        rt:
+          description: List of ISO 8601 timestamp strings for each interval bucket
+          items:
+            type: string
+          type: array
+        start:
+          description: Start of the reporting window, in epoch seconds
+          type: integer
+      type: object
     marvis_client_location:
       additionalProperties: false
       description: Location collection settings for Marvis Client
@@ -81588,6 +83122,100 @@ components:
       items:
         $ref: '#/components/schemas/marvis_client'
       type: array
+    marvis_config_action:
+      additionalProperties: false
+      description: A Marvis-injected config action record
+      properties:
+        admin_id:
+          description: Admin UUID associated with the config action
+          format: uuid
+          type: string
+        id:
+          description: UUID of the config action
+          format: uuid
+          type: string
+        mac:
+          description: Device MAC address
+          type: string
+        op:
+          description: Operation type (e.g. disable_port, enable_port, update_mtu,
+            add_vlans_to_port)
+          type: string
+        org_id:
+          description: Organization UUID
+          format: uuid
+          type: string
+        port_id:
+          description: Port identifier (e.g. ge-0/0/13)
+          type: string
+        reason:
+          description: Reason for the config action (e.g. rogue_dhcp_server_detected)
+          type: string
+        site_id:
+          description: Site UUID
+          format: uuid
+          type: string
+        src:
+          description: Source of the config action (e.g. marvis)
+          type: string
+        timestamp:
+          description: Timestamp when the config action was recorded, in epoch seconds
+          type: number
+        type:
+          description: Config type (e.g. wired)
+          type: string
+        vlan_ids:
+          description: List of VLAN IDs involved in the config action
+          items:
+            type: integer
+          type: array
+      type: object
+    marvis_config_actions_search:
+      additionalProperties: false
+      description: Paginated list of Marvis config actions
+      properties:
+        end:
+          description: Search window end timestamp, in epoch seconds
+          type: integer
+        limit:
+          description: Maximum number of results requested
+          type: integer
+        results:
+          description: List of Marvis config actions
+          items:
+            $ref: '#/components/schemas/marvis_config_action'
+          type: array
+        start:
+          description: Search window start timestamp, in epoch seconds
+          type: integer
+        total:
+          description: Total number of matching results
+          type: integer
+      type: object
+    marvis_config_feedback:
+      additionalProperties: false
+      description: Feedback submission for a Marvis config action
+      properties:
+        note:
+          description: Free-text note about the feedback
+          type: string
+        type:
+          description: 'Feedback type. enum: `invalid`'
+          enum:
+          - invalid
+          type: string
+      type: object
+    marvis_config_feedback_response:
+      additionalProperties: false
+      description: Response after submitting feedback on a Marvis config action
+      properties:
+        feedback_note:
+          description: The note provided with the feedback
+          type: string
+        feedback_type:
+          description: The feedback type that was submitted
+          type: string
+      type: object
     marvis_self_driving:
       additionalProperties: false
       description: Self-driving network automation settings per domain
@@ -81651,6 +83279,10 @@ components:
           maximum: 2592000
           minimum: 60
           type: integer
+        caching_site_ids:
+          $ref: '#/components/schemas/mxcluster_nacedge_caching_site_ids'
+          description: List of site UUIDs whose auth requests should be cached by
+            NAC Edges assigned to this site
         default_dot1x_vlan:
           description: Default vlan for all dot1x devices, if different from default_vlan
           examples:
@@ -82086,6 +83718,10 @@ components:
         mist_nac:
           $ref: '#/components/schemas/mxcluster_nac'
           description: NAC settings for the Mist Edge cluster
+        mist_nacedge:
+          $ref: '#/components/schemas/mxcluster_nacedge'
+          description: NAC Edge survivability settings for the cluster; requires `mist_nac`
+            to be enabled
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the Mist Edge cluster was last modified
@@ -82213,6 +83849,56 @@ components:
       examples:
       - cisco-ios
       type: string
+    mxcluster_nacedge:
+      additionalProperties: false
+      description: NAC Edge survivability settings for a Mist Edge cluster. Requires
+        `mist_nac` to be enabled on the cluster
+      properties:
+        auth_ttl:
+          default: 604800
+          description: Cache TTL for last auth result in seconds
+          maximum: 2592000
+          minimum: 60
+          type: integer
+        caching_site_ids:
+          $ref: '#/components/schemas/mxcluster_nacedge_caching_site_ids'
+          description: List of site UUIDs whose auth requests should be cached by
+            NAC Edges in this cluster
+        default_dot1x_vlan:
+          description: Default VLAN for all dot1x devices, if different from default_vlan
+          examples:
+          - '20'
+          type: string
+        default_vlan:
+          description: Default VLAN to assign for devices not in the cache
+          examples:
+          - testVlan
+          type: string
+        enabled:
+          default: false
+          description: Whether NAC Edge survivability is enabled for this cluster
+          type: boolean
+        nac_edge_hosts:
+          $ref: '#/components/schemas/mxcluster_nacedge_nac_edge_hosts'
+          description: NAC Edge hostnames used by APs for survivability authentication
+      type: object
+    mxcluster_nacedge_caching_site_ids:
+      description: Site UUIDs whose auth requests are cached by NAC Edges in the cluster
+      examples:
+      - - 4ac1dcf4-9d8b-7910-ac87-6ad873648a5c
+        - 7dc1acf4-9d8b-7910-ac87-6ad873648a5c
+      items:
+        format: uuid
+        type: string
+      type: array
+    mxcluster_nacedge_nac_edge_hosts:
+      description: List of Mist NAC Edge hosts for AP survivability authentication
+      examples:
+      - - nac-west-1.corp.com
+        - nac-west-2.corp.com
+      items:
+        type: string
+      type: array
     mxcluster_rad_auth_server_keywrap_format:
       default: ascii
       description: 'if used for Mist APs. enum: `ascii`, `hex`'
@@ -83168,7 +84854,8 @@ components:
           description: Upgrade channel to use for qualified versions
         distro:
           description: Linux distribution codename for an optional distro upgrade,
-            such as bullseye
+            such as bullseye or `next` to upgrade to the next distro version. Uses
+            highest qualified versions
           type: string
         max_failure_percentage:
           default: 5
@@ -84013,8 +85700,7 @@ components:
     nac_portal_additional_cacerts:
       description: Optional list of additional CA certificates to be used
       examples:
-      - - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-          CERTIFICATE-----'
+      - - '-----BEGIN CERTIFICATE-----\<redacted>\n-----END CERTIFICATE-----'
       items:
         type: string
       type: array
@@ -84097,8 +85783,7 @@ components:
         idp_cert:
           description: Identity provider certificate used to verify signed SAML responses
           examples:
-          - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-            CERTIFICATE-----'
+          - '-----BEGIN CERTIFICATE-----\n<redacted>\n-----END CERTIFICATE-----'
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/nac_portal_sso_idp_sign_algo'
@@ -85749,6 +87434,9 @@ components:
         auto_site_assignment:
           $ref: '#/components/schemas/org_setting_auto_site_assignment'
           description: Automatic site assignment rules for claimed devices
+        auto_upgrade:
+          $ref: '#/components/schemas/org_setting_auto_upgrade'
+          description: AP automatic firmware upgrade policy for the organization
         blacklist_url:
           description: Read-only URL for the organization blacklist file
           examples:
@@ -85945,6 +87633,17 @@ components:
             \ have write access\n  * `true`: API will hide passwords/secrets for all\
             \ users\n  * `false`: API will hide passwords/secrets for read-only users"
           type: boolean
+        src_ips:
+          description: Optional list of IP addresses or CIDR subnets from which org
+            API access is allowed. At most 10 entries. The source IP of the request
+            making this update must be within one of the specified subnets.
+          examples:
+          - - 63.3.56.0/24
+            - 63.3.55.4
+          items:
+            type: string
+          maxItems: 10
+          type: array
       type: object
     org_setting_auto_assignment_rule:
       additionalProperties: false
@@ -86116,6 +87815,31 @@ components:
       - name
       - subnet
       type: string
+    org_setting_auto_upgrade:
+      additionalProperties: false
+      description: Organization-wide AP automatic firmware upgrade policy
+      properties:
+        custom_versions:
+          $ref: '#/components/schemas/ap_auto_upgrade_custom_versions'
+          description: Per-AP-model firmware versions or channels used for auto-upgrade
+        day_of_week:
+          $ref: '#/components/schemas/day_of_week'
+          description: Day of the week for the AP auto-upgrade maintenance window
+        enabled:
+          default: false
+          description: Whether AP auto-upgrade is enabled. Note that Mist may auto-upgrade
+            APs if the running version is no longer supported.
+          type: boolean
+        time_of_day:
+          description: '`any` or HH:MM (24-hour format). Upgrade will happen within
+            up to 1 hour from this time.'
+          examples:
+          - '12:00'
+          type: string
+        version:
+          $ref: '#/components/schemas/site_auto_upgrade_version'
+          description: Firmware release channel or specific version used for AP auto-upgrade
+      type: object
     org_setting_celona:
       additionalProperties: false
       description: Integration settings for Celona
@@ -86407,6 +88131,12 @@ components:
       additionalProperties: false
       description: Organization settings for Marvis automation
       properties:
+        disable_proactive_monitoring:
+          default: false
+          description: 'Disable proactive monitoring in Marvis. NOTE: support access
+            must be enabled for the org (`allow_mist`=`true`) for proactive monitoring
+            to function.'
+          type: boolean
         self_driving:
           $ref: '#/components/schemas/marvis_self_driving'
           description: Self-driving network automation settings by domain
@@ -89139,6 +90869,71 @@ components:
           description: Messages describing successful assignment results
       required:
       - success
+      type: object
+    response_async_claim_create:
+      additionalProperties: false
+      description: Response to an async inventory claim request
+      properties:
+        claim_id:
+          description: Unique identifier for the async claim job, used to poll status
+          format: uuid
+          type: string
+        inventory_pending:
+          $ref: '#/components/schemas/response_claim_license_inventory_pending'
+          description: Inventory devices queued for async claim processing
+      type: object
+    response_async_claim_status:
+      additionalProperties: false
+      description: Async inventory claim job status
+      properties:
+        claim_id:
+          description: Unique identifier of the async claim job
+          format: uuid
+          type: string
+        completed:
+          $ref: '#/components/schemas/response_async_license_completed'
+          description: Device MAC addresses that completed async claim processing
+        details:
+          $ref: '#/components/schemas/response_async_license_details'
+          description: Per-device status details for async claim processing; present
+            when `detail=true`
+        failed:
+          description: Number of devices that failed claim processing
+          type: integer
+        incompleted:
+          $ref: '#/components/schemas/response_async_license_incompleted'
+          description: Device MAC addresses not yet completed in async claim processing
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns the async claim job
+        processed:
+          description: Number of devices processed so far
+          type: integer
+        scheduled_at:
+          description: Epoch timestamp when the async claim was scheduled
+          type: integer
+        status:
+          $ref: '#/components/schemas/response_async_license_status'
+          description: Current async claim processing state
+        succeed:
+          description: Number of devices that successfully completed claim processing
+          type: integer
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+          description: Epoch timestamp of the last status report
+        total:
+          description: Total number of devices included in the claim
+          type: integer
+      type: object
+    response_async_claims_list:
+      additionalProperties: false
+      description: List of async inventory claim jobs for the organization
+      properties:
+        claims:
+          description: Async claim job status records
+          items:
+            $ref: '#/components/schemas/response_async_claim_status'
+          type: array
       type: object
     response_async_license:
       additionalProperties: false
@@ -92730,6 +94525,11 @@ components:
           description: Radio band currently being scanned by spectrum analysis, such
             as 24, 5, or 6
           type: string
+        channels:
+          description: List of channels being scanned in the spectrum analysis
+          items:
+            type: integer
+          type: array
         device_id:
           description: Device ID of the AP that is running spectrum analysis
           format: uuid
@@ -92743,6 +94543,9 @@ components:
           type: string
         started_time:
           description: Timestamp when the spectrum analysis was started
+          type: integer
+        width:
+          description: Channel width used during the spectrum analysis scan, in MHz
           type: integer
       type: object
     response_search:
@@ -97249,7 +99052,8 @@ components:
           description: Automatic AP placement settings for the site
         auto_upgrade:
           $ref: '#/components/schemas/site_setting_auto_upgrade'
-          description: Automatic AP firmware upgrade settings for the site
+          description: Automatic AP firmware upgrade settings for the site. Overrides
+            org setting when provided.
         auto_upgrade_esl:
           $ref: '#/components/schemas/site_setting_auto_upgrade_esl'
           description: Automatic ESL firmware upgrade settings for the site
@@ -97715,15 +99519,8 @@ components:
       description: Automatic AP firmware upgrade policy
       properties:
         custom_versions:
-          additionalProperties:
-            type: string
-          description: Custom versions for different models. Property key is the model
-            name (e.g. "AP41")
-          examples:
-          - AP21: stable
-            AP41: 0.1.5135
-            AP61: 0.1.7215
-          type: object
+          $ref: '#/components/schemas/ap_auto_upgrade_custom_versions'
+          description: Per-AP-model firmware versions or channels used for auto-upgrade
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
           description: Weekly AP auto-upgrade day for the maintenance window
@@ -100456,12 +102253,12 @@ components:
           description: Optional list of channels to scan. If not specified, all supported
             channels will be scanned
           examples:
-          - - '36'
-            - '40'
-            - '44'
-            - '48'
+          - - 36
+            - 40
+            - 44
+            - 48
           items:
-            type: string
+            type: integer
           type: array
         device_id:
           description: Device ID of the AP that is performing spectrum analysis
@@ -100684,9 +102481,25 @@ components:
         oauth_type:
           $ref: '#/components/schemas/sso_oauth_type'
           description: Provider type for OAuth SSO when `idp_type`==`oauth`
-        openroaming:
-          $ref: '#/components/schemas/sso_openroaming'
-          description: Configuration for OpenRoaming SSO when `idp_type`==`openroaming`
+        openroaming_ssids:
+          $ref: '#/components/schemas/sso_openroaming_ssids'
+          description: SSIDs that support OpenRoaming, used when `idp_type`==`openroaming`
+        openroaming_wba_client_cert:
+          description: Optional WBA-issued client certificate for OpenRoaming. If
+            not provided, the default WBA-issued certificate for Juniper will be used.
+          examples:
+          - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
+            CERTIFICATE-----'
+          format: password
+          type: string
+        openroaming_wba_client_key:
+          description: Optional WBA-issued client private key for OpenRoaming. If
+            not provided, the default WBA-issued key for Juniper will be used.
+          examples:
+          - '-----BEGIN PRIVATE KEY-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
+            PRIVATE KEY-----'
+          format: password
+          type: string
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Owning organization identifier for this SSO configuration
@@ -100926,20 +102739,18 @@ components:
       type: string
     sso_openroaming:
       additionalProperties: false
-      description: OpenRoaming SSO settings used when `idp_type`==`openroaming`
+      deprecated: true
+      description: 'Deprecated. OpenRoaming configuration is now expressed as top-level
+        fields on the SSO object: `openroaming_ssids`, `openroaming_wba_client_cert`,
+        and `openroaming_wba_client_key`.'
       properties:
         ssids:
           $ref: '#/components/schemas/sso_openroaming_ssids'
           description: Network SSID names enabled for OpenRoaming SSO
         wba_cert:
-          description: Optional WBA-issued certificate. If not provided, the default
-            WBA-issued certificate for Juniper will be used.
-          examples:
-          - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
-            CERTIFICATE-----'
+          deprecated: true
+          description: Deprecated. Use `openroaming_wba_client_cert` instead.
           type: string
-      required:
-      - ssids
       type: object
     sso_openroaming_ssids:
       description: Network SSID names enabled for OpenRoaming SSO
@@ -102493,6 +104304,12 @@ components:
         _ttl:
           description: Time-to-live in seconds; how long this asset data is valid
             in cache
+          type: integer
+        battery_percent:
+          description: "Estimated battery level (1\u2013100%); currently supported\
+            \ for Aruba/HPE asset tags"
+          examples:
+          - 50
           type: integer
         battery_voltage:
           description: Battery voltage, in mV
@@ -104123,6 +105940,132 @@ components:
       items:
         $ref: '#/components/schemas/stats_gateway_wan_tunnel'
       type: array
+    stats_marvis_client:
+      additionalProperties: false
+      description: Marvis Client stats record returned by search
+      properties:
+        battery_charging:
+          description: Whether the device battery is currently charging
+          type: boolean
+        battery_level:
+          description: "Battery level percentage (0\u2013100)"
+          type: integer
+        cpu_background:
+          description: "Background CPU utilization (0\u2013100)"
+          type: number
+        cpu_idle:
+          description: "Idle CPU percentage (0\u2013100)"
+          type: number
+        cpu_system:
+          description: "System CPU utilization (0\u2013100)"
+          type: number
+        cpu_user:
+          description: "User-space CPU utilization (0\u2013100)"
+          type: number
+        device_id:
+          description: UUID of the device the Marvis Client is installed on
+          format: uuid
+          type: string
+        hostname:
+          description: Device hostname
+          type: string
+        location:
+          $ref: '#/components/schemas/stats_marvis_client_location'
+          description: Last known device location
+        memory_total:
+          description: Total device memory, in bytes
+          type: integer
+        memory_usage:
+          description: Memory in use, in bytes
+          type: integer
+        mfg:
+          description: Device manufacturer
+          type: string
+        model:
+          description: Device model name
+          type: string
+        org_id:
+          description: Organization UUID
+          format: uuid
+          type: string
+        os_type:
+          description: OS type or platform (e.g. Android, iOS)
+          type: string
+        os_version:
+          description: OS version string
+          type: string
+        serial:
+          description: Device serial number
+          type: string
+        storage_total:
+          description: Total device storage, in bytes
+          type: integer
+        storage_usage:
+          description: Storage in use, in bytes
+          type: integer
+        timestamp:
+          description: Timestamp of the stats record, in epoch seconds
+          type: integer
+        wifi_band:
+          description: Wi-Fi band the device is connected on
+          type: string
+        wifi_bssid:
+          description: BSSID the device is connected to
+          type: string
+        wifi_channel:
+          description: Wi-Fi channel the device is on
+          type: integer
+        wifi_ip:
+          description: Device Wi-Fi IP address
+          type: string
+        wifi_mac:
+          description: Device Wi-Fi MAC address
+          type: string
+        wifi_rssi:
+          description: Wi-Fi RSSI, in dBm
+          type: integer
+        wifi_ssid:
+          description: SSID the device is connected to
+          type: string
+      type: object
+    stats_marvis_client_location:
+      additionalProperties: false
+      description: Last known location fix for a Marvis Client device
+      properties:
+        map_id:
+          description: UUID of the floor-plan map
+          format: uuid
+          type: string
+        site_id:
+          description: UUID of the site the device was located in
+          format: uuid
+          type: string
+        timestamp:
+          description: Timestamp of the location fix, in epoch seconds
+          type: integer
+        x:
+          description: X coordinate on the floor-plan map, in pixels
+          type: number
+        y:
+          description: Y coordinate on the floor-plan map, in pixels
+          type: number
+      type: object
+    stats_marvis_clients_search:
+      additionalProperties: false
+      description: Paginated list of Marvis Client stats records
+      properties:
+        limit:
+          description: Maximum number of results requested
+          type: integer
+        results:
+          description: List of Marvis Client stats records
+          items:
+            $ref: '#/components/schemas/stats_marvis_client'
+          type: array
+        total:
+          description: Total number of matching results
+          type: integer
+      type: object
     stats_mxedge:
       additionalProperties: false
       description: Statistics for a Mist Edge appliance returned by stats endpoints
@@ -108269,6 +110212,14 @@ components:
           type:
           - string
           - 'null'
+        server_fail_retry_interval:
+          default: 120
+          description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. Interval,
+            in seconds. Sets the wait time before retrying authentication after RADIUS
+            failure to reduce client flapping. Range 120-65535
+          maximum: 65535
+          minimum: 120
+          type: integer
         server_reject_network:
           description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. When RADIUS
             server reject / fails
@@ -109429,6 +111380,12 @@ components:
           examples:
           - abcdef
           format: password
+          type: string
+        smsglobal_sender:
+          description: Optional sender's number or sender ID. If not provided, uses
+            the default number associated with the account
+          examples:
+          - '61400000002'
           type: string
         to:
           description: Phone number of the recipient of SMS with country code
@@ -111726,6 +113683,9 @@ components:
         added:
           $ref: '#/components/schemas/user_mac_import_added'
           description: MAC addresses added by the import
+        detail:
+          description: Status message returned for asynchronous imports
+          type: string
         errors:
           $ref: '#/components/schemas/user_mac_import_errors'
           description: Import error messages for user MAC entries
@@ -111795,6 +113755,9 @@ components:
       additionalProperties: false
       description: Result of a bulk user MAC update
       properties:
+        detail:
+          description: Status message returned for asynchronous batch updates
+          type: string
         errors:
           $ref: '#/components/schemas/strings'
           description: Update errors reported for user MAC entries
@@ -116619,6 +118582,12 @@ components:
         dynamic_vlan:
           $ref: '#/components/schemas/wlan_dynamic_vlan'
           description: VLAN assignment settings for 802.1X dynamic VLANs
+        enable_ftm:
+          default: false
+          description: Enable FTM (Fine-Time Measurement, 802.11mc); configures the
+            AP as an FTM Responder (target), allowing clients to perform ranging requests
+            against it
+          type: boolean
         enable_local_keycaching:
           default: false
           description: Enable AP-AP keycaching via multicast
@@ -118089,6 +120058,10 @@ components:
         smsglobal_api_secret:
           description: Required if `sms_provider`==`smsglobal`, Client secret
           format: password
+          type: string
+        smsglobal_sender:
+          description: Optional sender's number or sender ID for SMSGlobal. If not
+            provided, uses the default number associated with the account
           type: string
         sponsor_auto_approve:
           default: false
