@@ -72857,13 +72857,6 @@ components:
       required:
       - member
       type: object
-    consistency:
-      default: eventual
-      description: 'Read consistency level for the operation. enum: `eventual`, `strong`'
-      enum:
-      - eventual
-      - strong
-      type: string
     const_alarm_definition:
       additionalProperties: false
       description: Alarm type definition returned by the constants API
