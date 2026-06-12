@@ -113781,9 +113781,6 @@ components:
     usermacs_id:
       description: Request body for deleting multiple user MAC entries
       properties:
-        consistency:
-          $ref: '#/components/schemas/consistency'
-          description: Read consistency used after the delete
         usermac_ids:
           $ref: '#/components/schemas/uuids'
           description: User MAC entry IDs to delete
