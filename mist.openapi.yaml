@@ -68587,12 +68587,12 @@ components:
           type: boolean
         power:
           default: null
-          description: "TX power of the radio. For Devices, 0 means auto. -1 / -2\
-            \ / -3 / \u2026: treated as 0 / -1 / -2 / \u2026"
+          description: Radio Tx power, in dBm. Can be an integer 0-25 for static power
+            configuration, or `null` or unset for auto power mode
           examples:
           - 3
           maximum: 25
-          minimum: 3
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -68663,12 +68663,12 @@ components:
           type: boolean
         power:
           default: null
-          description: "TX power of the radio. For Devices, 0 means auto. -1 / -2\
-            \ / -3 / \u2026: treated as 0 / -1 / -2 / \u2026"
+          description: Radio Tx power, in dBm. Can be an integer 0-25 for static power
+            configuration, or `null` or unset for auto power mode
           examples:
           - 6
           maximum: 25
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -68739,12 +68739,12 @@ components:
           type: boolean
         power:
           default: null
-          description: "TX power of the radio. For Devices, 0 means auto. -1 / -2\
-            \ / -3 / \u2026: treated as 0 / -1 / -2 / \u2026"
+          description: Radio Tx power, in dBm. Can be an integer 0-25 for static power
+            configuration, or `null` or unset for auto power mode
           examples:
           - 7
           maximum: 25
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -96055,12 +96055,12 @@ components:
           type: boolean
         power:
           default: null
-          description: tx power of the radio, null or 0 means auto, when power_min=power_max=power=0
-            to indicate power=0
+          description: Radio Tx power, in dBm. Can be an integer 0-25 for static power
+            configuration, or `null` or unset for auto power mode
           examples:
           - 3
           maximum: 25
-          minimum: 3
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -96119,12 +96119,12 @@ components:
           type: boolean
         power:
           default: null
-          description: "Tx power of the radio. For Devices, 0 means auto. -1 / -2\
-            \ / -3 / \u2026: treated as 0 / -1 / -2 / \u2026"
+          description: Radio Tx power, in dBm. Can be an integer 0-25 for static power
+            configuration, or `null` or unset for auto power mode
           examples:
           - 6
           maximum: 25
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -96183,20 +96183,20 @@ components:
           type: boolean
         power:
           default: null
-          description: "Tx power of the radio. For Devices, 0 means auto. -1 / -2\
-            \ / -3 / \u2026: treated as 0 / -1 / -2 / \u2026"
+          description: Radio Tx power, in dBm. Can be an integer 0-25 for static power
+            configuration, or `null` or unset for auto power mode
           examples:
           - 7
           maximum: 25
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
         power_max:
-          default: 18
+          default: 17
           description: When power=0, max tx power to use, HW-specific values will
             be used if not set
-          maximum: 18
+          maximum: 17
           minimum: 5
           type:
           - integer
