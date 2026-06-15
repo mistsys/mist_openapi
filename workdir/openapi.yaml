@@ -68599,8 +68599,8 @@ components:
           - 'null'
         power_max:
           default: 17
-          description: When power=0, max tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, max tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 3
           type:
@@ -68608,8 +68608,8 @@ components:
           - 'null'
         power_min:
           default: 8
-          description: When power=0, min tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, min tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 3
           type:
@@ -68675,8 +68675,8 @@ components:
           - 'null'
         power_max:
           default: 17
-          description: When power=0, max tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, max tx power to use, HW-specific values
+            will be used if not set
           maximum: 17
           minimum: 5
           type:
@@ -68684,8 +68684,8 @@ components:
           - 'null'
         power_min:
           default: 8
-          description: When power=0, min tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, min tx power to use, HW-specific values
+            will be used if not set
           maximum: 17
           minimum: 5
           type:
@@ -68751,8 +68751,8 @@ components:
           - 'null'
         power_max:
           default: 18
-          description: When power=0, max tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, max tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 5
           type:
@@ -68760,8 +68760,8 @@ components:
           - 'null'
         power_min:
           default: 8
-          description: When power=0, min tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, min tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 5
           type:
@@ -96071,8 +96071,8 @@ components:
           - 'null'
         power_max:
           default: 17
-          description: When power=0, max tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, max tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 3
           type:
@@ -96080,8 +96080,8 @@ components:
           - 'null'
         power_min:
           default: 8
-          description: When power=0, min tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, min tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 3
           type:
@@ -96135,8 +96135,8 @@ components:
           - 'null'
         power_max:
           default: 17
-          description: When power=0, max tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, max tx power to use, HW-specific values
+            will be used if not set
           maximum: 17
           minimum: 5
           type:
@@ -96144,8 +96144,8 @@ components:
           - 'null'
         power_min:
           default: 8
-          description: When power=0, min tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, min tx power to use, HW-specific values
+            will be used if not set
           maximum: 17
           minimum: 5
           type:
@@ -96199,8 +96199,8 @@ components:
           - 'null'
         power_max:
           default: 17
-          description: When power=0, max tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, max tx power to use, HW-specific values
+            will be used if not set
           maximum: 17
           minimum: 5
           type:
@@ -96208,8 +96208,8 @@ components:
           - 'null'
         power_min:
           default: 8
-          description: When power=0, min tx power to use, HW-specific values will
-            be used if not set
+          description: When power=null/unset, min tx power to use, HW-specific values
+            will be used if not set
           maximum: 18
           minimum: 5
           type:

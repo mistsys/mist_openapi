@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2605.1.1] - 2026-06-15
+
+- Fixed `power` field validation in AP and RF template radio band schemas (`ap_radio_band24`, `ap_radio_band5`, `ap_radio_band6`, `rftemplate_radio_band24`, `rftemplate_radio_band5`, `rftemplate_radio_band6`): corrected `minimum` from 3 (2.4 GHz) / 5 (5 GHz, 6 GHz) to 0 to match actual API behavior; updated description to clarify the field is in dBm with range 0–25 for static power or `null`/unset for auto power mode
+- Fixed `power_max` default and maximum in `rftemplate_radio_band6` from 18 to 17
+
 ## [2605.1.0] - 2026-06-08
 
 - `GET /api/v1/orgs/{org_id}/inventory`: Added `disconnected_before` query parameter to filter devices that were last disconnected before a given epoch timestamp
