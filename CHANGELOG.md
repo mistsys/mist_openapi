@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2605.1.1] - 2026-06-22
+
+- Added `id` and `org_id` fields to the `nac_portal` schema to directly expose Organization ID and Portal ID in API responses (previously only available through `additional_properties` in SDK)
+
 ## [2605.1.0] - 2026-06-08
 
 - `GET /api/v1/orgs/{org_id}/inventory`: Added `disconnected_before` query parameter to filter devices that were last disconnected before a given epoch timestamp
