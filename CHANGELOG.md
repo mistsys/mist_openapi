@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2605.1.2] - 2026-06-22
+
+- Added `id` and `org_id` fields to the `nac_portal` schema to directly expose Organization ID and Portal ID in API responses (previously only available through `additional_properties` in SDK)
+
 ## [2605.1.1] - 2026-06-15
 
 - Fixed `power` field validation in AP and RF template radio band schemas (`ap_radio_band24`, `ap_radio_band5`, `ap_radio_band6`, `rftemplate_radio_band24`, `rftemplate_radio_band5`, `rftemplate_radio_band6`): corrected `minimum` from 3 (2.4 GHz) / 5 (5 GHz, 6 GHz) to 0 to match actual API behavior; updated description to clarify the field is in dBm with range 0–25 for static power or `null`/unset for auto power mode

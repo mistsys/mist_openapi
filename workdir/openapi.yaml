@@ -85623,6 +85623,9 @@ components:
           description: Number of days before certificate expiration to start sending
             reminder notifications
           type: integer
+        id:
+          $ref: '#/components/schemas/id'
+          description: Unique identifier of the NAC portal
         name:
           description: Human-readable name of the NAC portal
           examples:
@@ -85632,6 +85635,9 @@ components:
           description: Whether to send reminder notifications before portal-issued
             certificates expire
           type: boolean
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this NAC portal
         portal:
           $ref: '#/components/schemas/nac_portal_guest_portal'
           description: Guest portal settings used when `type`==`guest_portal`
