@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2606.1.0] - 2026-06-24
+
+- Updated `evpn_topology_switch_role` schema:
+  - Added `border` role
+- Updated `mxedge` schema:
+  - Updated `mxcluster_id` to accept `null`
+
 ## [2605.1.2] - 2026-06-22
 
 - Added `id` and `org_id` fields to the `nac_portal` schema to directly expose Organization ID and Portal ID in API responses (previously only available through `additional_properties` in SDK)

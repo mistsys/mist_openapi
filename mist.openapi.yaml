@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2605.1.0**
+  description: '> Version: **2606.1.0*
 
     >
 
-    > Date: **June 8, 2026**
+    > Date: **June 24, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2605.1.0
+  version: 2606.1.0
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -77425,9 +77425,11 @@ components:
       type: array
     evpn_topology_switch_role:
       description: 'use `role`==`none` to remove a switch from the topology. enum:
-        `access`, `collapsed-core`, `core`, `distribution`, `esilag-access`, `none`'
+        `access`, `border`, `collapsed-core`, `core`, `distribution`, `esilag-access`,
+        `none`'
       enum:
       - access
+      - border
       - collapsed-core
       - core
       - distribution
@@ -84172,7 +84174,9 @@ components:
           examples:
           - 572586b7-f97b-a22b-526c-8b97a3f609c4
           format: uuid
-          type: string
+          type:
+          - string
+          - 'null'
         mxedge_mgmt:
           $ref: '#/components/schemas/mxedge_mgmt'
           description: Management credentials and settings for the Mist Edge
