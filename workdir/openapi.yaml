@@ -121542,7 +121542,7 @@ components:
           - 'null'
         match:
           $ref: '#/components/schemas/wxlan_tag_match'
-          description: Required if `type`==`match`; attribute compared against `values`
+          description: "Required if `type`==`match`; attribute compared against `values`. enum: `ap_id`, `app`, `asset_mac`, `client_mac`, `hostname`, `ip_range_subnet`, `port`, `psk_name`, `psk_role`, `radius_attr`, `radius_class`, `radius_group`, `radius_username`, `sdkclient_uuid`, `wlan_id`"
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Time when this WxLAN tag was last modified, in epoch seconds
@@ -121551,8 +121551,7 @@ components:
           type: string
         op:
           $ref: '#/components/schemas/wxlan_tag_operation'
-          description: Required if `type`==`match`; whether `values` are inclusive
-            or exclusive matches
+          description: "Required if `type`==`match`; whether `values` are inclusive or exclusive matches. enum: `in`, `not_in`"
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Owning organization associated with this WxLAN tag
@@ -121576,14 +121575,13 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/wxlan_tag_type'
-          description: Kind of WxLAN tag and how it is populated
+          description: "Kind of WxLAN tag and how it is populated. enum: `client`, `match`, `resource`, `spec`, `subnet`, `vlan`"
         values:
           $ref: '#/components/schemas/wxlan_tag_values'
-          description: Comparison values for the selected `match` attribute when `type`==`match`
+          description: "Comparison values for the selected `match` attribute when `type`==`match`. Required if `type`==`match` and\n  * `match`==`ap_id`: list of AP IDs\n  * `match`==`app`: list of Application Names\n  * `match`==`asset_mac`: list of Asset MAC Addresses\n  * `match`==`client_mac`: list of Client MAC Addresses\n  * `match`==`hostname`: list of Resources Hostnames\n  * `match`==`ip_range_subnet`: list of IP Addresses and/or CIDRs\n  * `match`==`psk_name`: list of PSK Names\n  * `match`==`psk_role`: list of PSK Roles\n  * `match`==`port`: list of Ports or Port Ranges\n  * `match`==`radius_attr`: list of RADIUS Attributes. The values are [ \"6=1\", \"26=10.2.3.4\" ], this support other RADIUS attributes where we know the type\n  * `match`==`radius_class`: list of RADIUS Classes. This matches the ATTR-Class(25)\n  * `match`==`radius_group`: list of RADIUS Groups. This is a smart tag that matches RADIUS-Filter-ID, Airespace-ACL-Name (VendorID=14179, VendorType=6) / Aruba-User-Role (VendorID=14823, VendorType=1)\n  * `match`==`radius_username`: list of RADIUS Usernames. This matches the ATTR-User-Name(1)\n  * `match`==`sdkclient_uuid`: list of SDK UUIDs\n  * `match`==`wlan_id`: list of WLAN IDs\n\n**Notes**:\nVariables are not allowed"
         vlan_id:
           $ref: '#/components/schemas/wxlan_tag_vlan_id'
-          description: Identifier of the VLAN associated with this WxLAN tag when
-            `type`==`vlan`
+          description: "Identifier of the VLAN associated with this WxLAN tag when `type`==`vlan`"
       required:
       - type
       - name
