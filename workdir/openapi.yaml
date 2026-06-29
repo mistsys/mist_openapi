@@ -12627,7 +12627,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: Claim one or more Mist Edge appliances into the organization using
-        their claim codes.
+        claim codes displayed by Mist Edges in default state, such as `135-546-673`.
       operationId: claimOrgMxEdge
       requestBody:
         content:
@@ -12699,7 +12699,8 @@ paths:
         name: tunterm_version
         schema:
           type: string
-      - description: Field used to sort results
+      - description: Field used to sort results; prefix a field with `-` for descending
+          order, and the default is `-last_seen`
         in: query
         name: sort
         schema:
@@ -13134,13 +13135,13 @@ paths:
         and distro.
       operationId: getOrgMxEdgeUpgradeInfo
       parameters:
-      - description: 'Upgrade channel used to filter available versions. enum: `alpha`,
-          `beta`, `stable`'
+      - description: 'Upgrade channel used to filter available versions; defaults
+          to `stable`. enum: `alpha`, `beta`, `stable`'
         in: query
         name: channel
         schema:
           $ref: '#/components/schemas/get_org_mxedge_upgrade_info_channel'
-      - description: Filter results by distro
+      - description: Filter results by distro, such as `buster` or `bullseye`
         in: query
         name: distro
         schema:
@@ -21778,10 +21779,13 @@ paths:
       description: Count by Distinct Attributes of Mist Tunnels Stats
       operationId: countOrgTunnelsStats
       parameters:
-      - description: 'Field used to group tunnel statistics count results. enum: `ap`,
-          `auth_algo`, `encrypt_algo`, `ike_version`, `ip`, `last_event`, `mac`, `mxcluster_id`,
-          `mxedge_id`, `node`, `peer_host`, `peer_ip`, `peer_mxedge_id`, `protocol`,
-          `remote_ip`, `remote_port`, `site_id`, `state`, `tunnel_name`, `up`, `wxtunnel_id`'
+      - description: 'Field used to group tunnel statistics count results. Valid
+          values depend on `type`: for `wxtunnel`, the default is `wxtunnel_id`; for
+          `wan`, use WAN tunnel fields such as `mac`, `site_id`, `peer_ip`, `protocol`,
+          `last_event`, or `up`. enum: `ap`, `auth_algo`, `encrypt_algo`, `ike_version`,
+          `ip`, `last_event`, `mac`, `mxcluster_id`, `mxedge_id`, `node`, `peer_host`,
+          `peer_ip`, `peer_mxedge_id`, `protocol`, `remote_ip`, `remote_port`, `site_id`,
+          `state`, `tunnel_name`, `up`, `wxtunnel_id`'
         in: query
         name: distinct
         schema:
@@ -26162,7 +26166,8 @@ paths:
       operationId: importSiteAssets
       parameters:
       - description: 'Whether to replace existing assets with the same MAC address
-          during import. enum: `False`, `True`'
+          during import. If `False`, duplicate MAC addresses are reported as errors.
+          Defaults to `False`. enum: `False`, `True`'
         in: query
         name: upsert
         schema:
@@ -37926,9 +37931,10 @@ paths:
       description: Count by Distinct Attributes of Applications
       operationId: countSiteApps
       parameters:
-      - description: 'Field used to group application statistics count results. enum:
-          `ap`, `app`, `category`, `device_mac`, `port_id`, `service`, `src_ip`, `ssid`,
-          `wcid`, `wlan_id`'
+      - description: 'Field used to group application statistics count results. Defaults
+          to `ap` for wireless device stats and `device_mac` for wired device stats.
+          enum: `ap`, `app`, `category`, `device_mac`, `port_id`, `service`, `src_ip`,
+          `ssid`, `wcid`, `wlan_id`'
         in: query
         name: distinct
         schema:
@@ -38465,7 +38471,8 @@ paths:
           examples:
           - '001122334455'
           type: string
-      - description: Filter results by application name
+      - description: Filter results by application name; supported values are `zoom`
+          and `teams`; if omitted, both applications are included
         in: query
         name: app
         schema:
@@ -79094,7 +79101,8 @@ components:
       type: string
     get_org_mxedge_upgrade_info_channel:
       default: stable
-      description: 'enum: `alpha`, `beta`, `stable`'
+      description: 'Upgrade channel used to filter available versions; defaults to
+        `stable`. enum: `alpha`, `beta`, `stable`'
       enum:
       - alpha
       - beta
@@ -79901,6 +79909,7 @@ components:
     import_site_assets_upsert:
       default: 'False'
       description: 'Whether site asset import should update matching existing assets.
+        If `False`, duplicate MAC addresses are reported as errors. Defaults to `False`.
         enum: `False`, `True`'
       enum:
       - 'False'
@@ -88851,10 +88860,13 @@ components:
       type: string
     org_tunnel_count_distinct:
       default: wxtunnel_id
-      description: 'enum: `ap`, `auth_algo`, `encrypt_algo`, `ike_version`, `ip`,
-        `last_event`, `mac`, `mxcluster_id`, `mxedge_id`, `node`, `peer_host`, `peer_ip`,
-        `peer_mxedge_id`, `protocol`, `remote_ip`, `remote_port`, `site_id`, `state`,
-        `tunnel_name`, `up`, `wxtunnel_id`'
+      description: 'Field used to group tunnel statistics count results. Valid values
+        depend on `type`: for `wxtunnel`, the default is `wxtunnel_id`; for `wan`,
+        use WAN tunnel fields such as `mac`, `site_id`, `peer_ip`, `protocol`, `last_event`,
+        or `up`. enum: `ap`, `auth_algo`, `encrypt_algo`, `ike_version`, `ip`, `last_event`,
+        `mac`, `mxcluster_id`, `mxedge_id`, `node`, `peer_host`, `peer_ip`, `peer_mxedge_id`,
+        `protocol`, `remote_ip`, `remote_port`, `site_id`, `state`, `tunnel_name`,
+        `up`, `wxtunnel_id`'
       enum:
       - ap
       - auth_algo
@@ -113928,7 +113940,7 @@ components:
       description: Request to restart a device or device node
       properties:
         member:
-          description: Virtual Chassis member number to restart
+          description: Optional Virtual Chassis member number to restart
           maximum: 9
           minimum: 0
           type: integer
