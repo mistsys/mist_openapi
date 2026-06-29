@@ -121383,7 +121383,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/wxlan_rule_action'
-          description: Allow or block behavior applied by this WxLAN rule
+          description: "Allow or block behavior applied by this WxLAN rule. enum: `allow`, `block`"
         apply_tags:
           $ref: '#/components/schemas/wxlan_rule_apply_tags'
           description: WxLAN tag identifiers applied when this rule matches
