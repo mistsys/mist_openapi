@@ -66408,7 +66408,7 @@ components:
         actions:
           $ref: '#/components/schemas/acl_policy_actions'
           description: Destination tag actions evaluated for sources matching this
-            ACL policy
+            ACL policy. For GBP-based policy, all src_tags and dst_tags have to be gbp-based, for ACL-based policy, `network` is required in either the source or destination so that we know where to attach the policy to
         name:
           description: Display name of the ACL policy
           examples:
@@ -66416,7 +66416,7 @@ components:
           type: string
         src_tags:
           $ref: '#/components/schemas/acl_policy_src_tags'
-          description: Source ACL tags that select traffic for this ACL policy
+          description: Source ACL tags that select traffic for this ACL policy. For GBP-based policy, all src_tags and dst_tags have to be gbp-based, for ACL-based policy, `network` is required in either the source or destination so that we know where to attach the policy to
       type: object
     acl_policy_action:
       additionalProperties: false
@@ -66424,8 +66424,8 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/allow_deny'
-          description: Allow or deny decision applied to traffic matching the destination
-            tag
+          description: "Allow or deny decision applied to traffic matching the destination
+            tag. enum: `allow`, `deny`"
         dst_tag:
           description: Destination ACL tag matched by this policy action
           examples:
@@ -66467,7 +66467,7 @@ components:
           type: integer
         macs:
           $ref: '#/components/schemas/acl_tag_macs'
-          description: Client or resource MAC addresses matched by this ACL tag
+          description: Client or resource MAC addresses matched by this ACL tag. Required if `type`==`mac` or `type`==`static_gbp` (if from matching MAC)
         network:
           description: "If:\n  * `type`==`mac` (optional. default is `any`)\n  * `type`==`subnet`\
             \ (optional. default is `any`)\n  * `type`==`network`\n  * `type`==`resource`\
@@ -66485,13 +66485,13 @@ components:
         specs:
           $ref: '#/components/schemas/acl_tag_specs'
           description: Layer 4 protocol and destination-port constraints for this
-            ACL tag
+            ACL tag. If `type`==`resource`, `type`==`radius_group`, `type`==`port_usage` or `type`==`gbp_resource`. Empty means unrestricted, i.e. any
         subnets:
           $ref: '#/components/schemas/acl_tag_subnets'
-          description: IP subnets matched by this ACL tag
+          description: IP subnets matched by this ACL tag. If `type`==`subnet`, `type`==`resource` (optional. default is `any`) or `type`==`static_gbp` (if from matching subnet)
         type:
           $ref: '#/components/schemas/acl_tag_type'
-          description: Classifier type that determines which ACL tag fields are evaluated
+          description: "Classifier type that determines which ACL tag fields are evaluated. enum: `any` (matching anything not identified), `dynamic_gbp` (from the gbp_tag received from RADIUS), `gbp_resource` (can only be used in `dst_tags`, `mac`, `network`, `port_usage`, `radius_group`), `resource` (can only be used in `dst_tags`), `static_gbp` (applying gbp tag against matching conditions), `subnet`"
       required:
       - type
       type: object
@@ -72824,7 +72824,7 @@ components:
           type: string
         role:
           $ref: '#/components/schemas/config_switch_local_accounts_user_role'
-          description: Access role granted to the local switch user account
+          description: "Access role granted to the local switch user account. enum: `admin`, `helpdesk`, `none`, `read`"
       type: object
     config_switch_local_accounts_user_role:
       default: none
@@ -75227,7 +75227,7 @@ components:
           description: ACL policies applied to traffic handled by this switch
         acl_tags:
           $ref: '#/components/schemas/acl_tags'
-          description: ACL tags used by switch access policies
+          description: ACL tags used by switch access policies. Property key is the ACL tag name
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
           description: "Additional CLI configuration commands to apply to this switch. **Note**: no check is done"
@@ -75270,19 +75270,19 @@ components:
           type: boolean
         dns_servers:
           $ref: '#/components/schemas/dns_servers'
-          description: DNS servers configured for this switch
+          description: DNS servers configured for this switch. To keep compatibility, dns settings in `ip_config` and `oob_ip_config` will overwrite this setting
         dns_suffix:
           $ref: '#/components/schemas/dns_suffix'
-          description: DNS search suffixes configured for this switch
+          description: DNS search suffixes configured for this switch. To keep compatibility, dns settings in `ip_config` and `oob_ip_config` will overwrite this setting
         evpn_config:
           $ref: '#/components/schemas/evpn_config'
           description: EVPN configuration applied to this switch
         extra_routes:
           $ref: '#/components/schemas/extra_routes'
-          description: Additional IPv4 routes configured on this switch
+          description: Additional IPv4 routes configured on this switch. Property key is the destination CIDR (e.g. \"10.0.0.0/8\")
         extra_routes6:
           $ref: '#/components/schemas/extra_routes6'
-          description: Additional IPv6 routes configured on this switch
+          description: Additional IPv6 routes configured on this switch. Property key is the destination CIDR (e.g. \"2001:db8::/32\")
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier of the switch object
@@ -75309,7 +75309,7 @@ components:
           description: Management IP addressing settings for this switch
         local_port_config:
           $ref: '#/components/schemas/local_port_config'
-          description: Local port configuration settings for this switch
+          description: Local port configuration settings for this switch, overriding the port configuration from `port_config`. Property key is the port name or range (e.g. \"ge-0/0/0-10\")
         mac:
           description: Switch MAC address used to identify the device
           readOnly: true
@@ -75348,22 +75348,22 @@ components:
           type: string
         networks:
           $ref: '#/components/schemas/switch_networks'
-          description: Layer 3 networks configured for use by this switch
+          description: Layer 3 networks configured for use by this switch. Property key is the network name
         notes:
           description: Free-form administrative notes for this switch
           type: string
         ntp_servers:
           $ref: '#/components/schemas/ntp_servers'
-          description: NTP servers used by this switch
+          description: NTP servers used by this switch. By default, those in the Site Settings will be used
         oob_ip_config:
           $ref: '#/components/schemas/switch_oob_ip_config'
-          description: Out-of-band management IP configuration for this switch
+          description: Out-of-band management IP configuration for this switch. If HA configuration, key parameter will be nodeX (eg `node1`); If there are 2 routing engines, re1 mgmt IP has to be set separately (if desired, key parameter = `re1`)
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Organization that owns this switch
         ospf_areas:
           $ref: '#/components/schemas/ospf_areas'
-          description: OSPF area configuration for this switch
+          description: OSPF area configuration for this switch. Property key is the OSPF area (should be a number (0-255) or an IP address)
         ospf_config:
           $ref: '#/components/schemas/switch_ospf_config'
           description: OSPF routing configuration for this switch
@@ -75375,16 +75375,16 @@ components:
           type: object
         port_config:
           $ref: '#/components/schemas/wired_port_config'
-          description: Per-port wired configuration for this switch
+          description: Per-port wired configuration for this switch. Property key is the port name or range (e.g. \"ge-0/0/0-10\")
         port_config_overwrite:
           $ref: '#/components/schemas/switch_port_config_overwrites'
-          description: Per-port overrides for switch port usage attributes
+          description: Per-port overrides for switch port usage attributes, this can be used to override some attributes of the port_usage without having to create a new port_usage. Property key is the port name or range (e.g. \"ge-0/0/0-10\")
         port_mirroring:
           $ref: '#/components/schemas/switch_port_mirroring'
-          description: Port mirroring configuration for this switch
+          description: Port mirroring configuration for this switch. Property key is the port mirroring instance name. `port_mirroring` can be added under device/site settings. It takes interface and ports as input for ingress, interface as input for egress and can take interface and port as output. A maximum 4 mirroring ports is allowed
         port_usages:
           $ref: '#/components/schemas/switch_port_usages'
-          description: Reusable switch port usage profiles available on this switch
+          description: Reusable switch port usage profiles available on this switch. Property key is the port usage name
         radius_config:
           $ref: '#/components/schemas/switch_radius_config'
           description: RADIUS authentication and accounting settings for this switch
@@ -75401,7 +75401,7 @@ components:
           type: string
         routing_policies:
           $ref: '#/components/schemas/sw_routing_policies'
-          description: Routing policies applied by this switch
+          description: Routing policies applied by this switch. Property key is the policy name
         serial:
           description: Manufacturer serial number for the switch
           readOnly: true
@@ -75437,7 +75437,7 @@ components:
           description: VRF configuration applied to this switch
         vrf_instances:
           $ref: '#/components/schemas/switch_vrf_instances'
-          description: VRF instances configured on this switch
+          description: VRF instances configured on this switch. Property key is the VRF name
         vrrp_config:
           $ref: '#/components/schemas/vrrp_config'
           description: VRRP configuration applied to this switch
@@ -78163,7 +78163,7 @@ components:
             in an HA cluster
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IP assignment mode for the out-of-band management interface
+          description: "IP assignment mode for the out-of-band management interface. enum: `dhcp`, `static`"
         use_mgmt_vrf:
           default: false
           description: If supported on the platform. If enabled, DNS will be using
@@ -81287,7 +81287,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IP assignment mode for this Junos IP configuration
+          description: "IP assignment mode for this Junos IP configuration. enum: `dhcp`, `static`"
       type: object
     junos_local_port_config:
       additionalProperties: false
@@ -81333,7 +81333,7 @@ components:
           type: boolean
         duplex:
           $ref: '#/components/schemas/switch_port_local_usage_duplex'
-          description: Link duplex mode for this local port configuration
+          description: "Link duplex mode for this local port configuration. enum: `auto`, `half`, `full`"
         dynamic_vlan_networks:
           $ref: '#/components/schemas/switch_port_local_usage_dynamic_vlan_networks'
           description: Only if `port_auth`==`dot1x`, networks or VLANs that RADIUS
@@ -81368,8 +81368,8 @@ components:
           type: boolean
         mac_auth_protocol:
           $ref: '#/components/schemas/switch_port_local_usage_mac_auth_protocol'
-          description: Only if `enable_mac_auth`==`true`, MAC authentication protocol
-            to use
+          description: "Only if `enable_mac_auth`==`true`, MAC authentication protocol
+            to use. enum: `eap_md5`, `eap_peap`, `pap`"
         mac_limit:
           default: 0
           description: Max number of MAC addresses, default is 0 for unlimited, otherwise
@@ -81378,7 +81378,7 @@ components:
           type: integer
         mode:
           $ref: '#/components/schemas/switch_port_local_usage_mode'
-          description: Switching mode for this local port configuration
+          description: "Switching mode for this local port configuration. enum: `access`, `inet`, `trunk`"
         mtu:
           description: Media maximum transmission unit (MTU) is the largest data unit
             that can be forwarded without fragmentation. The default value is 1514.
@@ -81422,7 +81422,7 @@ components:
           - 'null'
         speed:
           $ref: '#/components/schemas/junos_port_config_speed'
-          description: Link speed for this local port configuration
+          description: "Link speed for this local port configuration. enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`, `100g`,`auto` (default)"
         storm_control:
           $ref: '#/components/schemas/switch_port_local_usage_storm_control'
           description: Storm-control settings for this local port configuration
@@ -81486,10 +81486,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IPv4 assignment mode for the additional Junos L3 presence
+          description: "IPv4 assignment mode for the additional Junos L3 presence. enum: `dhcp`, `static`"
         type6:
           $ref: '#/components/schemas/ip_type6'
-          description: IPv6 assignment mode for the additional Junos L3 presence
+          description: "IPv6 assignment mode for the additional Junos L3 presence. enum: `dhcp`, `disabled`, `static`"
       type: object
     junos_port_config:
       additionalProperties: false
@@ -81534,7 +81534,7 @@ components:
           type: boolean
         duplex:
           $ref: '#/components/schemas/junos_port_config_duplex'
-          description: Link duplex mode for this Junos port
+          description: 'Link duplex mode for this Junos port. enum: `auto`, `full`, `half`'
         dynamic_usage:
           description: Enable dynamic usage for this port. Set to `dynamic` to enable.
           type:
@@ -81569,7 +81569,7 @@ components:
           type: string
         speed:
           $ref: '#/components/schemas/junos_port_config_speed'
-          description: Link speed for this Junos port
+          description: "Link speed for this Junos port. enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`, `100g`,`auto` (default)"
         usage:
           description: Port usage name. For Q-in-Q, use `vlan_tunnel`. If EVPN is
             used, use `evpn_uplink`or `evpn_downlink`
@@ -81588,7 +81588,7 @@ components:
     junos_port_config_speed:
       default: auto
       description: 'enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`,
-        `100g`,`auto`'
+        `100g`,`auto` (default)'
       enum:
       - 10m
       - 100m
@@ -89103,7 +89103,7 @@ components:
           type: object
         type:
           $ref: '#/components/schemas/ospf_area_type'
-          description: Area type for this OSPF area
+          description: "Area type for this OSPF area. enum: `default`, `nssa`, `stub`"
       type: object
     ospf_area_network_auth_type:
       default: none
@@ -89161,7 +89161,7 @@ components:
           type: string
         auth_type:
           $ref: '#/components/schemas/ospf_area_network_auth_type'
-          description: Authentication method used by this OSPF network
+          description: "Authentication method used by this OSPF network. enum: `md5`, `none`, `password`"
         bfd_minimum_interval:
           description: Minimum BFD interval for this OSPF network, in milliseconds
           examples:
@@ -89193,7 +89193,7 @@ components:
           type: string
         interface_type:
           $ref: '#/components/schemas/ospf_area_network_interface_type'
-          description: OSPF interface type used for this network
+          description: "OSPF interface type used for this network. enum: `broadcast`, `nbma` (non-broadcast multi-access), `p2mp`, `p2p`"
         metric:
           description: OSPF metric assigned to this network
           examples:
@@ -90512,7 +90512,7 @@ components:
           description: Remote syslog server destinations
         time_format:
           $ref: '#/components/schemas/remote_syslog_time_format'
-          description: Timestamp format used in forwarded syslog messages
+          description: "TTimestamp format used in forwarded syslog messages. enum: `millisecond`, `year`, `year millisecond`"
         users:
           $ref: '#/components/schemas/remote_syslog_users'
           description: User-specific syslog logging rules
@@ -90561,10 +90561,10 @@ components:
       properties:
         facility:
           $ref: '#/components/schemas/remote_syslog_facility'
-          description: Syslog facility to match for this selector
+          description: "Syslog facility to match for this selector. enum: `any`, `authorization`, `change-log`, `config`, `conflict-log`, `daemon`, `dfc`, `external`, `firewall`, `ftp`, `interactive-commands`, `kernel`, `ntp`, `pfe`, `security`, `user`"
         severity:
           $ref: '#/components/schemas/remote_syslog_severity'
-          description: Syslog severity to match for this selector
+          description: "Syslog severity to match for this selector. enum: `alert`, `any`, `critical`, `emergency`, `error`, `info`, `notice`, `warning`"
       type: object
     remote_syslog_contents:
       description: List of syslog content selectors
@@ -90646,7 +90646,7 @@ components:
           type: boolean
         facility:
           $ref: '#/components/schemas/remote_syslog_facility'
-          description: Default syslog facility for messages sent to this server
+          description: "Default syslog facility for messages sent to this server. enum: `any`, `authorization`, `change-log`, `config`, `conflict-log`, `daemon`, `dfc`, `external`, `firewall`, `ftp`, `interactive-commands`, `kernel`, `ntp`, `pfe`, `security`, `user`"
         host:
           description: Address or hostname of the remote syslog server
           examples:
@@ -90662,7 +90662,7 @@ components:
           description: Network port used by the remote syslog server
         protocol:
           $ref: '#/components/schemas/remote_syslog_server_protocol'
-          description: Transport protocol used for this remote syslog server
+          description: "Transport protocol used for this remote syslog server. enum: `tcp`, `udp`"
         routing_instance:
           description: Routing instance used to reach this remote syslog server
           examples:
@@ -90676,7 +90676,7 @@ components:
           type: string
         severity:
           $ref: '#/components/schemas/remote_syslog_severity'
-          description: Default syslog severity for messages sent to this server
+          description: "Default syslog severity for messages sent to this server. enum: `alert`, `any`, `critical`, `emergency`, `error`, `info`, `notice`, `warning`"
         source_address:
           description: Source address for syslog traffic. If configured, Mist uses
             the VLAN first; otherwise it uses `source_ip`
@@ -101695,7 +101695,7 @@ components:
           description: SNMP engine ID used for SNMPv3
         engine_id_type:
           $ref: '#/components/schemas/snmp_config_engine_id_type'
-          description: Method used to derive the SNMP engine ID
+          description: "Method used to derive the SNMP engine ID. enum: `local`, `use_mac_address`"
         location:
           description: Physical location string advertised through SNMP
           examples:
@@ -101767,7 +101767,7 @@ components:
           $ref: '#/components/schemas/snmp_config_trap_group_categories'
           description: Trap categories included in this SNMP trap group
         group_name:
-          description: Trap group name for this SNMP trap group
+          description: Trap group name for this SNMP trap group. Categories list can refer to https://www.juniper.net/documentation/software/topics/task/configuration/snmp_trap-groups-configuring-junos-nm.html
           examples:
           - profiler
           type: string
@@ -101776,7 +101776,7 @@ components:
           description: Trap target addresses for this SNMP trap group
         version:
           $ref: '#/components/schemas/snmp_config_trap_version'
-          description: SNMP trap protocol version used by this group
+          description: "SNMP trap protocol version used by this group. enum: `all`, `v1`, `v2`"
       type: object
     snmp_config_trap_group_categories:
       description: Trap categories included in an SNMP trap group
@@ -101799,7 +101799,7 @@ components:
       type: array
     snmp_config_trap_version:
       default: v2
-      description: 'enum: `all`, `v1`, `v2`'
+      description: "SNMP trap protocol version used by this group. enum: `all`, `v1`, `v2`"
       enum:
       - all
       - v1
@@ -101864,7 +101864,7 @@ components:
       properties:
         engine_type:
           $ref: '#/components/schemas/snmp_usm_engine_type'
-          description: SNMP engine type used for this USM configuration
+          description: "SNMP engine type used for this USM configuration. enum: `local_engine`, `remote_engine`"
         remote_engine_id:
           description: Required only if `engine_type`==`remote_engine`
           examples:
@@ -101893,7 +101893,7 @@ components:
           type: string
         authentication_type:
           $ref: '#/components/schemas/snmp_usm_user_authentication_type'
-          description: Authentication protocol used by this SNMPv3 USM user
+          description: "Authentication protocol used by this SNMPv3 USM user. enum: `authentication-md5`, `authentication-none`, `authentication-sha`, `authentication-sha224`, `authentication-sha256`, `authentication-sha384`, `authentication-sha512`"
         encryption_password:
           description: Not required if `encryption_type`==`privacy-none`. Include
             alphabetic, numeric, and special characters, but it cannot include control
@@ -101902,7 +101902,7 @@ components:
           type: string
         encryption_type:
           $ref: '#/components/schemas/snmp_usm_user_encryption_type'
-          description: Privacy protocol used by this SNMPv3 USM user
+          description: "Privacy protocol used by this SNMPv3 USM user. enum: `privacy-3des`, `privacy-aes128`, `privacy-des`, `privacy-none`"
         name:
           description: Username for the SNMPv3 USM user
           type: string
@@ -101993,13 +101993,13 @@ components:
           type: string
         security_level:
           $ref: '#/components/schemas/snmp_vacm_access_item_prefix_list_item_level'
-          description: Required security level for this VACM access rule
+          description: "Required security level for this VACM access rule. enum: `authentication`, `none`, `privacy`"
         security_model:
           $ref: '#/components/schemas/snmp_vacm_access_item_prefix_list_item_model'
-          description: Required security model for this VACM access rule
+          description: "Required security model for this VACM access rule. enum: `any`, `usm`, `v1`, `v2c`"
         type:
           $ref: '#/components/schemas/snmp_vacm_access_item_type'
-          description: VACM context matching type for this access rule
+          description: "VACM context matching type for this access rule. enum: `context_prefix`, `default_context_prefix`"
         write_view:
           description: Write view name referenced by this VACM access rule
           examples:
@@ -102044,7 +102044,7 @@ components:
           description: VACM security-name to group mapping entries
         security_model:
           $ref: '#/components/schemas/snmp_vacm_security_model'
-          description: Required security model for these VACM group mappings
+          description: "Required security model for these VACM group mappings. enum: `usm`, `v1`, `v2c`"
       type: object
     snmp_vacm_security_to_group_content:
       description: VACM security-name to group mapping entries
@@ -102056,7 +102056,7 @@ components:
       description: VACM security-name to group mapping entry
       properties:
         group:
-          description: VACM group name referenced by this mapping
+          description: VACM group name referenced by this mapping. Refer to group_name under access
           type: string
         security_name:
           description: Name of the SNMP security principal mapped to a VACM group
@@ -102136,8 +102136,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/snmpv3_config_notify_type'
-          description: Delivery mode for this SNMPv3 notification, such as trap or
-            inform
+          description: "Delivery mode for this SNMPv3 notification, such as trap or
+            inform. enum: `inform`, `trap`"
       type: object
     snmpv3_config_notify_type:
       description: 'Delivery mode for this SNMPv3 notification, such as trap or inform.
@@ -102190,23 +102190,22 @@ components:
       properties:
         message_processing_model:
           $ref: '#/components/schemas/snmpv3_config_target_param_mess_process_model'
-          description: SNMP message processing model used by this target parameter
-            profile
+          description: "SNMP message processing model used by this target parameter profile. enum: `v1`, `v2c`, `v3`"
         name:
           description: Target parameter profile name
           type: string
         notify_filter:
           description: Notification filter profile referenced by this target parameter
-            profile
+            profile. Refer to profile-name in notify_filter
           type: string
         security_level:
           $ref: '#/components/schemas/snmpv3_config_target_param_security_level'
-          description: Required security level for this target parameter profile
+          description: "Required security level for this target parameter profile. enum: `authentication`, `none`, `privacy`"
         security_model:
           $ref: '#/components/schemas/snmpv3_config_target_param_security_model'
-          description: Required security model for this target parameter profile
+          description: "Required security model for this target parameter profile. enum: `usm`, `v1`, `v2c`"
         security_name:
-          description: USM security name referenced by this target parameter profile
+          description: USM security name referenced by this target parameter profile. Refer to security_name in usm
           examples:
           - m01620
           type: string
@@ -109240,7 +109239,7 @@ components:
           type: string
         hold_time:
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
-          description: Default BGP hold time for switch BGP sessions
+          description: Default BGP hold time for switch BGP sessions. Hold time is three times the interval at which keepalive messages are sent. It indicates to the peer the length of time that it should consider the sender valid. Must be 0 or a number in the range 3-65535.
         import_policy:
           description: Import policy must match one of the policy names defined in
             the `routing_policies` property.
@@ -109253,10 +109252,10 @@ components:
           description: BGP neighbor settings keyed by neighbor IP address
         networks:
           $ref: '#/components/schemas/switch_bgp_config_networks'
-          description: Network names used to add BGP groups to the corresponding VRFs
+          description: Network names used to add BGP groups to the corresponding VRFs. When a network is specified, a BGP group will be added to the VRF that network is part of.
         type:
           $ref: '#/components/schemas/switch_bgp_config_type'
-          description: BGP session type for this switch BGP configuration
+          description: "BGP session type for this switch BGP configuration. enum: `external`, `internal`"
       required:
       - type
       - local_as
@@ -109288,7 +109287,7 @@ components:
           type: string
         hold_time:
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
-          description: BGP hold time for this neighbor
+          description: BGP hold time for this neighbor. Hold time is three times the interval at which keepalive messages are sent. It indicates to the peer the length of time that it should consider the sender valid. Must be 0 or a number in the range 3-65535.
         import_policy:
           description: Import policy must match one of the policy names defined in
             the `routing_policies` property.
@@ -109387,7 +109386,7 @@ components:
         fixed_bindings:
           $ref: '#/components/schemas/switch_dhcpd_config_fixed_bindings'
           description: If `type`==`server` or `type6`==`server`, fixed client bindings
-            for DHCP service
+            for DHCP service. Property key is the MAC Address. Format is `[0-9a-f]{12}` (e.g. \"5684dae9ac8b\")
         gateway:
           description: If `type`==`server` - optional, `ip` will be used if not provided
           examples:
@@ -109443,14 +109442,14 @@ components:
           description: If `type6`==`relay`, upstream IPv6 DHCP servers
         type:
           $ref: '#/components/schemas/switch_dhcpd_config_type'
-          description: IPv4 DHCP mode for this switch network
+          description: "IPv4 DHCP mode for this switch network. enum: `none`, `relay` (DHCP Relay), `server` (DHCP Server)"
         type6:
           $ref: '#/components/schemas/switch_dhcpd_config_type6'
-          description: IPv6 DHCP mode for this switch network
+          description: "IPv6 DHCP mode for this switch network. enum: `none`, `relay` (DHCP Relay), `server` (DHCP Server)"
         vendor_encapsulated:
           $ref: '#/components/schemas/switch_dhcpd_config_vendor_options'
           description: "If `type`==`server` or `type6`==`server`, vendor-encapsulated
-            DHCP options advertised to clients. Property key is <enterprise number>:<sub option code>, with\n  * enterprise number: 1-65535 (https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers)\n  * sub option code: 1-255, sub-option code"
+            DHCP options advertised to clients. Property key is <enterprise number>:<sub option code>, with enterprise number: 1-65535 (https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers) and sub option code: 1-255"
       type: object
     switch_dhcpd_config_type:
       description: 'enum: `none`, `relay` (DHCP Relay), `server` (DHCP Server)'
@@ -109470,9 +109469,7 @@ components:
     switch_dhcpd_config_vendor_options:
       additionalProperties:
         $ref: '#/components/schemas/dhcpd_config_vendor_option'
-      description: "If `type`==`server` or `type6`==`server`. Property key is <enterprise\
-        \ number>:<sub option code>, with\n  * enterprise number: 1-65535 (https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers)\n\
-        \  * sub option code: 1-255, sub-option code'"
+      description: "If `type`==`server` or `type6`==`server`. Property key is <enterprise number>:<sub option code>, with enterprise number: 1-65535 (https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers) and sub option code: 1-255"
       type: object
     switch_iot_config:
       additionalProperties:
@@ -109699,7 +109696,7 @@ components:
           type: boolean
         local_accounts:
           $ref: '#/components/schemas/config_switch_local_accounts'
-          description: Local switch user accounts keyed by username
+          description: Local switch user accounts keyed by username. Property key is the user name. For Local user authentication
         mxedge_proxy_host:
           description: IP address or FQDN of the Mist Edge used to proxy the switch
             management traffic to the Mist Cloud
@@ -109836,7 +109833,7 @@ components:
       properties:
         areas:
           $ref: '#/components/schemas/switch_ospf_config_areas'
-          description: OSPF areas configured on the switch
+          description: OSPF areas configured on the switch. Property key is the area name
         enabled:
           default: false
           description: Enable OSPF on the switch
@@ -109885,7 +109882,7 @@ components:
           type: boolean
         duplex:
           $ref: '#/components/schemas/switch_port_usage_duplex_overwrite'
-          description: Link duplex mode override for the switch port
+          description: "Link duplex mode override for the switch port. enum: `auto`, `full`, `half`"
         mac_limit:
           $ref: '#/components/schemas/switch_port_usage_mac_limit_overwrite'
           description: MAC address learning limit override for the switch port
@@ -109902,7 +109899,7 @@ components:
           type: string
         speed:
           $ref: '#/components/schemas/switch_port_usage_speed_overwrite'
-          description: Link speed override for the switch port
+          description: "Link speed override for the switch port. enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`, `100g`,`auto` (default)"
       type: object
     switch_port_config_overwrites:
       additionalProperties:
@@ -110105,7 +110102,7 @@ components:
           type: boolean
         duplex:
           $ref: '#/components/schemas/switch_port_usage_duplex'
-          description: Only if `mode`!=`dynamic`. Link duplex mode for this port usage
+          description: "Only if `mode`!=`dynamic`. Link duplex mode for this port usage. enum: `auto`, `full`, `half`"
         dynamic_vlan_networks:
           $ref: '#/components/schemas/switch_port_usage_dynamic_vlan_networks'
           description: Only if `mode`!=`dynamic` and `port_auth`==`dot1x`. Networks
@@ -110149,15 +110146,15 @@ components:
           type: boolean
         mac_auth_protocol:
           $ref: '#/components/schemas/switch_port_usage_mac_auth_protocol'
-          description: Only if `mode`!=`dynamic` and `enable_mac_auth`==`true`. MAC
-            authentication protocol to use; ignored if Mist NAC is enabled
+          description: "Only if `mode`!=`dynamic` and `enable_mac_auth`==`true`. MAC
+            authentication protocol to use; ignored if Mist NAC is enabled. enum: `eap-md5`, `eap-peap`, `pap`"
         mac_limit:
           $ref: '#/components/schemas/switch_port_usage_mac_limit'
           description: Only if `mode`!=`dynamic`. Maximum number of MAC addresses
             allowed on the port; 0 means unlimited
         mode:
           $ref: '#/components/schemas/switch_port_usage_mode'
-          description: Switching mode for this port usage
+          description: "Switching mode for this port usage. `mode`==`dynamic` must only be used if the port usage name is `dynamic`. enum: `access`, `dynamic`, `inet`, `trunk`"
         mtu:
           $ref: '#/components/schemas/switch_port_usage_mtu'
           description: Only if `mode`!=`dynamic`. MTU for ports using this port usage
@@ -110181,12 +110178,12 @@ components:
           type: boolean
         poe_priority:
           $ref: '#/components/schemas/poe_priority'
-          description: Only if `mode`!=`dynamic`. PoE priority for ports using this
-            port usage
+          description: "Only if `mode`!=`dynamic`. PoE priority for ports using this
+            port usage. enum: `low`, `high`"
         port_auth:
           $ref: '#/components/schemas/switch_port_usage_dot1x'
-          description: Only if `mode`!=`dynamic`. 802.1X authentication mode for this
-            port usage
+          description: "Only if `mode`!=`dynamic`. 802.1X authentication mode for this
+            port usage. enum: `dot1x`"
         port_network:
           description: Only if `mode`!=`dynamic`. Native network/vlan for untagged
             traffic
@@ -110197,8 +110194,8 @@ components:
             reauthentication interval for clients on the port
         reset_default_when:
           $ref: '#/components/schemas/switch_port_usage_dynamic_reset_default_when'
-          description: Only if `mode`==`dynamic`. Condition that resets a dynamic
-            port to the default port usage
+          description: "Only if `mode`==`dynamic`. Condition that resets a dynamic
+            port to the default port usage. enum: `link_down`, `none` (let the DPC port keep at the current port usage)"
         rules:
           $ref: '#/components/schemas/switch_port_usage_dynamic_rules'
           description: Only if `mode`==`dynamic`. Dynamic matching rules that select
@@ -110225,7 +110222,7 @@ components:
           - 'null'
         speed:
           $ref: '#/components/schemas/switch_port_usage_speed'
-          description: Only if `mode`!=`dynamic`. Link speed for this port usage
+          description: "Only if `mode`!=`dynamic`. Link speed for this port usage. enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`, `100g`,`auto` (default)"
         storm_control:
           $ref: '#/components/schemas/switch_port_usage_storm_control'
           description: Only if `mode`!=`dynamic`. Storm-control settings for this
@@ -110330,7 +110327,7 @@ components:
           type: string
         src:
           $ref: '#/components/schemas/switch_port_usage_dynamic_rule_src'
-          description: Source attribute evaluated by this dynamic rule
+          description: "Source attribute evaluated by this dynamic rule. enum: `link_peermac`, `lldp_chassis_id`, `lldp_hardware_revision`, `lldp_manufacturer_name`, `lldp_oui`, `lldp_serial_number`, `lldp_system_description`, `lldp_system_name`, `radius_dynamicfilter`, `radius_usermac`, `radius_username`"
         usage:
           description: Port usage name to apply when this dynamic rule matches
           type: string
@@ -110438,9 +110435,8 @@ components:
         (no-reauthentication).'
     switch_port_usage_speed:
       default: auto
-      description: 'Only if `mode`!=`dynamic`, Port speed, default is auto to automatically
-        negotiate speed enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`,
-        `100g`,`auto`'
+      description: 'Only if `mode`!=`dynamic`, Port speed. enum: `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`,
+        `100g`,`auto` (default)'
       enum:
       - 10m
       - 100m
@@ -110455,8 +110451,8 @@ components:
       type: string
     switch_port_usage_speed_overwrite:
       default: auto
-      description: 'Port Speed, default is auto to automatically negotiate speed enum:
-        `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`, `100g`,`auto`'
+      description: 'Port Speed. enum:
+        `100m`, `10m`, `1g`, `2.5g`, `5g`, `10g`, `25g`, `40g`, `100g`,`auto` (default)'
       enum:
       - 10m
       - 100m
@@ -110545,7 +110541,7 @@ components:
           description: RADIUS accounting servers used by this switch configuration
         auth_server_selection:
           $ref: '#/components/schemas/switch_radius_config_auth_server_selection'
-          description: Selection strategy for RADIUS authentication servers
+          description: "Selection strategy for RADIUS authentication servers. enum: `ordered`, `unordered`"
         auth_servers:
           $ref: '#/components/schemas/radius_auth_servers'
           description: RADIUS authentication servers used by this switch configuration
@@ -110753,10 +110749,10 @@ components:
           type: string
         extra_routes:
           $ref: '#/components/schemas/vrf_extra_routes'
-          description: Additional IPv4 static routes configured for this VRF instance
+          description: Additional IPv4 static routes configured for this VRF instance. Property key is the destination CIDR (e.g. \"10.0.0.0/8\")
         extra_routes6:
           $ref: '#/components/schemas/vrf_extra_routes6'
-          description: Additional IPv6 static routes configured for this VRF instance
+          description: Additional IPv6 static routes configured for this VRF instance. Property key is the destination CIDR (e.g. "2001:db8::/32")
         networks:
           $ref: '#/components/schemas/strings'
           description: Names of switch networks included in this VRF instance
@@ -111171,7 +111167,8 @@ components:
           description: TACACS+ accounting servers used for switch management sessions
         default_role:
           $ref: '#/components/schemas/tacacs_default_role'
-          description: Default switch-management role to use for TACACS+ logins
+          description: 'Default switch-management role to use for TACACS+ logins. enum:
+            `admin`, `helpdesk`, `none`, `read`'
         enabled:
           description: Whether TACACS+ is enabled for switch management authentication
           type: boolean
@@ -115251,7 +115248,7 @@ components:
           type: boolean
         groups:
           $ref: '#/components/schemas/vrrp_config_groups'
-          description: VRRP groups keyed by group name
+          description: VRRP groups keyed by group name. Property key is the VRRP group name
       type: object
     vrrp_config_group:
       additionalProperties: false
