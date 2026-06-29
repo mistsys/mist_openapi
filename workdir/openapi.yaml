@@ -83743,10 +83743,10 @@ components:
           description: AP source subnets allowed to establish Mist tunnels
         tunterm_dhcpd_config:
           $ref: '#/components/schemas/tunterm_dhcpd_config'
-          description: DHCP relay or server settings for tunneled VLANs
+          description: DHCP relay or server settings for tunneled VLANs. Property key is the VLAN ID
         tunterm_extra_routes:
           $ref: '#/components/schemas/mxcluster_tunterm_extra_routes'
-          description: Extra routes for Mist Tunnel VLAN traffic
+          description: Extra routes for Mist Tunnel VLAN traffic. Property key is the destination subnet in CIDR format
         tunterm_hosts:
           $ref: '#/components/schemas/mxcluster_tunterm_hosts'
           description: Hostnames or IP addresses used as Mist Tunnel peers
@@ -83756,7 +83756,7 @@ components:
             is configured
         tunterm_hosts_selection:
           $ref: '#/components/schemas/mxcluster_tunterm_hosts_selection'
-          description: Selection strategy for ordering tunnel termination hosts
+          description: "Selection strategy for ordering tunnel termination hosts. enum: `shuffle` (the ordering of tunterm_hosts is randomized by the device''s MAC), `shuffle-by-site` (shuffle by site_id+tunnel_id so when client connects to a specific Tunnel, it will go to the same (order of) mxedge, and we load-balancing between tunnels), `ordered` (order decided by tunterm_hosts_order)"
         tunterm_monitoring:
           $ref: '#/components/schemas/mxcluster_tunterm_monitoring'
           description: Monitoring checks for tunnel termination reachability
@@ -83921,7 +83921,7 @@ components:
           type: boolean
         nas_ip_source:
           $ref: '#/components/schemas/mxcluster_radsec_nas_ip_source'
-          description: Source used to populate NAS-IP-Address and NAS-IPv6-Address
+          description: "Source used to populate NAS-IP-Address and NAS-IPv6-Address. enum: `any`, `oob`, `oob6`, `tunnel`, `tunnel6`"
             attributes
         proxy_hosts:
           $ref: '#/components/schemas/mxcluster_radsec_proxy_hosts'
@@ -83929,11 +83929,10 @@ components:
             TLS servers
         server_selection:
           $ref: '#/components/schemas/mxcluster_radsec_server_selection'
-          description: RADIUS server selection strategy for RadSec failover
+          description: "RADIUS server selection strategy for RadSec failover. enum: `ordered`, `unordered`"
         src_ip_source:
           $ref: '#/components/schemas/mxcluster_radsec_src_ip_source'
-          description: Connection source interface or address used when reaching RADIUS
-            servers
+          description: "Connection source interface or address used when reaching RADIUS servers. enum: `any`, `oob`, `oob6`, `tunnel`, `tunnel6`"
       type: object
     mxcluster_radsec_acct_server:
       additionalProperties: false
@@ -83990,7 +83989,7 @@ components:
           type: boolean
         keywrap_format:
           $ref: '#/components/schemas/mxcluster_rad_auth_server_keywrap_format'
-          description: Encoding format for Mist AP RADIUS keywrap keys
+          description: "Encoding format for Mist AP RADIUS keywrap keys. enum: `ascii`, `hex`"
         keywrap_kek:
           description: If used for Mist APs, encryption key
           type: string
@@ -84419,10 +84418,10 @@ components:
           type: string
         oob_ip_type:
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type'
-          description: IPv4 address assignment mode for out-of-band management
+          description: "IPv4 address assignment mode for out-of-band management. enum: `dhcp`, `disabled`, `static`"
         oob_ip_type6:
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type6'
-          description: IPv6 address assignment mode for out-of-band management
+          description: "IPv6 address assignment mode for out-of-band management. enum: `autoconf`, `dhcp`, `disabled`, `static`"
         root_password:
           description: Root account password for the Mist Edge
           examples:
@@ -85585,8 +85584,8 @@ components:
       properties:
         access_type:
           $ref: '#/components/schemas/nac_portal_access_type'
-          description: If `type`==`marvis_client`, whether onboarding applies to wireless
-            clients or both wireless and wired clients
+          description: "If `type`==`marvis_client`, whether onboarding applies to wireless
+            clients or both wireless and wired clients. enum: `wireless`, `wireless+wired`"
         additional_cacerts:
           $ref: '#/components/schemas/nac_portal_additional_cacerts'
           description: Additional CA certificates trusted during NAC portal certificate
@@ -112452,7 +112451,7 @@ components:
           description: DHCP server IP addresses used as relay targets for this VLAN
         type:
           $ref: '#/components/schemas/tunterm_dhcpd_type'
-          description: DHCP forwarding mode for this tunneled VLAN
+          description: "DHCP forwarding mode for this tunneled VLAN. enum: `relay`"
       type: object
     tunterm_dhcpd_type:
       default: relay
