@@ -89533,7 +89533,7 @@ components:
           type: string
         views:
           $ref: '#/components/schemas/admin_privilege_views'
-          description: UI views allowed by custom role restrictions
+          description: UI views allowed by custom role restrictions\nBelow are the list of supported UI views. Note that this is UI only feature.  \n\n  | UI View | Required Role | Description |\n  | --- | --- | --- |\n  | `reporting` | `read` | full access to all analytics tools |\n  | `marketing` | `read` | can view analytics and location maps |\n  | `super_observer` | `read` | can view all the organization except the subscription page |\n  | `location` | `write` | can view and manage location maps, can view analytics |\n  | `security` | `write` | can view and manage site labels, policies and security |\n  | `switch_admin` | `helpdesk` | can view and manage Switch ports, can view wired clients |\n  | `mxedge_admin` | `admin` | can view and manage Mist edges and Mist tunnels |\n  | `lobby_admin` | `admin` | full access to Org and Site Pre-shared keys |
       required:
       - role
       - scope
@@ -102453,7 +102453,7 @@ components:
           description: Ping Identity region for OAuth SSO when `oauth_type`==`ping_identity`
         oauth_provider_domain:
           $ref: '#/components/schemas/oauth_provider_domain'
-          description: Provider domain for Okta OAuth SSO when `oauth_type`==`okta`
+          description: "Provider domain for Okta OAuth SSO when `oauth_type`==`okta`. enum: `okta.com`, `oktapreview.com`, `okta-emea.com`, `okta-gov.com`, `okta.mil`, `mtls.okta.com`"
         oauth_ropc_client_id:
           description: If `idp_type`==`oauth`, ropc = Resource Owner Password Credentials
           examples:
