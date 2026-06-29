@@ -77741,7 +77741,8 @@ components:
           - 'null'
         status:
           $ref: '#/components/schemas/fwupdate_stat_status'
-          description: Current firmware update status
+          description: 'Current firmware update status. enum: `inprogress`, `failed`, `upgraded`, `success`, `scheduled`,
+            `error`'
         status_id:
           description: Numeric firmware update status identifier
           examples:
