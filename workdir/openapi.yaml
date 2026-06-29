@@ -114977,7 +114977,7 @@ components:
       properties:
         bfd_profile:
           $ref: '#/components/schemas/vpn_path_bfd_profile'
-          description: BFD profile used for this VPN path
+          description: "BFD profile used for this VPN path. enum: `broadband`, `lte`"
         bfd_use_tunnel_mode:
           default: false
           description: If `type`==`mesh` and for SSR only, whether to use tunnel mode
@@ -114988,7 +114988,7 @@ components:
           type: string
         peer_paths:
           $ref: '#/components/schemas/vpn_path_peer_paths'
-          description: Peer path preferences used when `type`==`mesh`
+          description: Peer path preferences used when `type`==`mesh`. Property key is the Peer Interface name
         pod:
           default: 1
           description: Grouping index used to place this VPN path into a pod
@@ -115027,7 +115027,7 @@ components:
       properties:
         strategy:
           $ref: '#/components/schemas/vpn_path_selection_strategy'
-          description: Path selection strategy for a hub-and-spoke VPN
+          description: "Path selection strategy for a hub-and-spoke VPN. enum: `disabled`, `simple`, `manual`"
       type: object
     vpn_path_selection_strategy:
       default: disabled
