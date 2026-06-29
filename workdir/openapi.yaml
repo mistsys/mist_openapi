@@ -2289,7 +2289,7 @@ paths:
     - $ref: '#/components/parameters/org_id'
     post:
       description: Claim devices into the organization inventory by activation code
-        through the installer workflow.
+        through the installer workflow. This mirrors [Add Org Inventory]($e/Orgs%20Inventory/addOrgInventory).
       operationId: claimInstallerDevices
       requestBody:
         content:
@@ -66742,7 +66742,8 @@ components:
           format: password
           type: string
         recaptcha:
-          description: CAPTCHA verification token submitted during admin registration
+          description: CAPTCHA provider response token submitted during admin registration;
+            for Google reCAPTCHA, see https://www.google.com/recaptcha/
           type: string
         recaptcha_flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
@@ -83922,8 +83923,7 @@ components:
           type: boolean
         nas_ip_source:
           $ref: '#/components/schemas/mxcluster_radsec_nas_ip_source'
-          description: "Source used to populate NAS-IP-Address and NAS-IPv6-Address. enum: `any`, `oob`, `oob6`, `tunnel`, `tunnel6`"
-            attributes
+          description: "Source used to populate the NAS-IP-Address and NAS-IPv6-Address attributes. enum: `any`, `oob`, `oob6`, `tunnel`, `tunnel6`"
         proxy_hosts:
           $ref: '#/components/schemas/mxcluster_radsec_proxy_hosts'
           description: AP-reachable hostnames or IP addresses advertised as RadSec
@@ -90460,7 +90460,8 @@ components:
           maxLength: 64
           type: string
         recaptcha:
-          description: CAPTCHA verification token submitted with the recovery request
+          description: CAPTCHA provider response token submitted with the recovery
+            request; for Google reCAPTCHA, see https://www.google.com/recaptcha/
           type: string
         recaptcha_flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
