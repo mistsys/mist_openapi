@@ -13431,7 +13431,7 @@ paths:
       required: true
       schema:
         $ref: '#/components/schemas/mxedge_service_name'
-    - description: 'Restart or start or stop. enum: `restart`, `start`, `stop`'
+    - description: Restart or start or stop
       in: path
       name: action
       required: true
@@ -19355,7 +19355,7 @@ paths:
       - Orgs Linked Applications
     parameters:
     - $ref: '#/components/parameters/org_id'
-    - description: 'OAuth application name. enum: `crowdstrike`, `intune`, `jamf`, `mobicontrol`, `prisma`, `sentinelone`, `teams`, `vmware`, `zdx`, `zoom`'
+    - description: OAuth application name
       in: path
       name: app_name
       required: true
@@ -19409,7 +19409,7 @@ paths:
       - Orgs Linked Applications
     parameters:
     - $ref: '#/components/parameters/org_id'
-    - description: 'OAuth application name. enum: `crowdstrike`, `intune`, `jamf`, `mobicontrol`, `prisma`, `sentinelone`, `teams`, `vmware`, `zdx`, `zoom`'
+    - description: OAuth application name
       in: path
       name: app_name
       required: true
@@ -35619,7 +35619,7 @@ paths:
       - Sites RRM
     parameters:
     - $ref: '#/components/parameters/site_id'
-    - description: '802.11 Band. enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
+    - description: 802.11 Band
       in: path
       name: band
       required: true
@@ -35670,7 +35670,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
-    - description: '802.11 Band. enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
+    - description: 802.11 Band
       in: path
       name: band
       required: true
@@ -35730,7 +35730,7 @@ paths:
       - Sites RRM
     parameters:
     - $ref: '#/components/parameters/site_id'
-    - description: '802.11 Band. enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
+    - description: 802.11 Band
       in: path
       name: band
       required: true
@@ -37934,7 +37934,10 @@ paths:
       description: Count by Distinct Attributes of Applications
       operationId: countSiteApps
       parameters:
-      - description: 'Field used to group application statistics count results. Defaults to `ap` for wireless device stats and `device_mac` for wired device stats. enum: `ap`, `app`, `category`, `device_mac`, `port_id`, `service`, `src_ip`, `ssid`, `wcid`, `wlan_id app`'
+      - description: 'Field used to group application statistics count results. Defaults
+          to `ap` for wireless device stats and `device_mac` for wired device stats.
+          enum: `ap`, `app`, `category`, `device_mac`, `port_id`, `service`, `src_ip`,
+          `ssid`, `wcid`, `wlan_id`'
         in: query
         name: distinct
         schema:
@@ -65648,10 +65651,11 @@ components:
           description: Timestamp when the Advanced Anti Malware profile was created
         fallback_action:
           $ref: '#/components/schemas/aamw_profile_action'
-          description: 'Action to take when Sky ATP cannot obtain a malware verdict. enum: `block`, `permit`'
+          description: Action to take when Sky ATP cannot obtain a malware verdict
         file_action:
           $ref: '#/components/schemas/aamw_profile_action'
-          description: 'Action to take for files that meet or exceed the malware verdict threshold. enum: `block`, `permit`'
+          description: Action to take for files that meet or exceed the malware verdict
+            threshold
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier of the Advanced Anti Malware profile
@@ -65696,7 +65700,7 @@ components:
       properties:
         category:
           $ref: '#/components/schemas/aamw_profile_category_category'
-          description: 'File category covered by this Advanced Anti Malware profile. enum: `archive`, `document`, `pdf`, `executable`, `rich_application`, `library`, `os_package`, `mobile`, `java`, `configuration`, `script`'
+          description: File category covered by this Advanced Anti Malware profile
         hash_lookup_only:
           default: false
           description: Whether files in this category use hash lookup without full
@@ -66228,7 +66232,7 @@ components:
       properties:
         cloud_name:
           $ref: '#/components/schemas/account_skyatp_cloud_name'
-          description: 'Sky ATP cloud endpoint used for the integration. enum: `www.amerskyatp.com`, `www.apacskyatp.com`, `www.euroskyatp.com`, `www.canadaskyatp.com`'
+          description: Sky ATP cloud endpoint used for the integration
         password:
           description: Credential password for the Sky ATP realm user
           examples:
@@ -66287,7 +66291,7 @@ components:
       properties:
         cloud_name:
           $ref: '#/components/schemas/account_skyatp_cloud_name'
-          description: 'Sky ATP cloud endpoint configured for the integration. enum: `www.amerskyatp.com`, `www.apacskyatp.com`, `www.euroskyatp.com`, `www.canadaskyatp.com`'
+          description: Sky ATP cloud endpoint configured for the integration
         realm:
           description: Sky ATP realm linked with this Mist organization
           examples:
@@ -66596,7 +66600,7 @@ components:
           description: Unique identifier of the administrator
         compliance_status:
           $ref: '#/components/schemas/admin_compliance_status'
-          description: 'Trade compliance status for this administrator. enum: `blocked`, `restricted`'
+          description: Trade compliance status for this administrator
         email:
           description: If admin account is not an Org API Token
           examples:
@@ -66755,7 +66759,7 @@ components:
           type: string
         recaptcha_flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
-          description: 'CAPTCHA provider flavor used for registration verification. enum: `google`, `hcaptcha`'
+          description: CAPTCHA provider flavor used for registration verification
         referer_invite_token:
           description: Invite token to apply after account creation
           examples:
@@ -66834,10 +66838,10 @@ components:
             privilege
         role:
           $ref: '#/components/schemas/admin_privilege_role'
-          description: 'Access role granted by this privilege. enum: `admin`, `helpdesk`, `installer`, `read`, `write`'
+          description: Access role granted by this privilege
         scope:
           $ref: '#/components/schemas/admin_privilege_scope'
-          description: 'Object scope where this privilege applies. enum: `msp`, `org`, `orggroup`, `site`, `sitegroup`'
+          description: Object scope where this privilege applies
         site_id:
           $ref: '#/components/schemas/admin_privilege_site_id'
           description: Required if `scope`==`site`. Site granted by this privilege
@@ -67080,7 +67084,7 @@ components:
           description: Wireless SSIDs related to this alarm
         status:
           $ref: '#/components/schemas/alarm_status'
-          description: 'Current lifecycle status of this alarm. enum: `open`, `resolved`'
+          description: Current lifecycle status of this alarm
         switches:
           $ref: '#/components/schemas/alarm_switches'
           description: Switch MAC addresses related to this alarm
@@ -68051,7 +68055,7 @@ components:
           type: string
         pullup:
           $ref: '#/components/schemas/ap_iot_pullup'
-          description: 'Selects the pull-up resistor mode applied to the input pin. enum: `external`, `internal`, `none`'
+          description: Selects the pull-up resistor mode applied to the input pin
       type: object
     ap_iot_output:
       additionalProperties: false
@@ -68074,7 +68078,7 @@ components:
           type: boolean
         pullup:
           $ref: '#/components/schemas/ap_iot_pullup'
-          description: 'Selects the pull-up resistor mode applied to the output pin. enum: `external`, `internal`, `none`'
+          description: Selects the pull-up resistor mode applied to the output pin
         value:
           description: Output pin signal level, default 0
           examples:
@@ -68254,14 +68258,14 @@ components:
           type: integer
         broker_proto:
           $ref: '#/components/schemas/ap_mqtt_broker_proto'
-          description: 'MQTT broker transport protocol. enum: `ssl`, `tcp`'
+          description: MQTT broker transport protocol
         enabled:
           default: false
           description: Whether to enable MQTT publishing
           type: boolean
         format:
           $ref: '#/components/schemas/ap_mqtt_format'
-          description: 'Payload format for published messages. enum: `json`, `raw`'
+          description: Payload format for published messages
         password:
           description: Optional MQTT password; masked in GET responses
           format: password
@@ -68392,7 +68396,8 @@ components:
           type: boolean
         type:
           $ref: '#/components/schemas/ap_port_config_dynamic_vlan_type'
-          description: 'Mapping mode for interpreting dynamic VLAN attributes returned by RADIUS. enum: `airespace-interface-name`, `standard`'
+          description: Mapping mode for interpreting dynamic VLAN attributes returned
+            by RADIUS
         vlans:
           additionalProperties:
             type:
@@ -70085,7 +70090,7 @@ components:
       properties:
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
-          description: 'Scheduled weekday for auto preemption. enum: `any`, `fri`, `mon`, `sat`, `sun`, `thu`, `tue`, `wed`'
+          description: Scheduled weekday for auto preemption
         enabled:
           default: false
           description: Whether auto preemption is enabled
@@ -70246,7 +70251,7 @@ components:
           description: Site identifier associated with this beacon
         type:
           $ref: '#/components/schemas/beacon_type'
-          description: 'Beacon advertisement format used by this beacon. enum: `eddystone-uid`, `eddystone-url`, `ibeacon`'
+          description: Beacon advertisement format used by this beacon
         x:
           description: Horizontal map position of the beacon, in pixels
           format: double
@@ -70503,7 +70508,7 @@ components:
           type: integer
         state:
           $ref: '#/components/schemas/bgp_stats_state'
-          description: 'Current state of the BGP session. enum: `active`, `connect`, `established`, `idle`, `open_config`, `open_sent`'
+          description: Current state of the BGP session
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when these BGP peer stats were sampled
@@ -70592,7 +70597,7 @@ components:
           description: Site identifier associated with this BGP peer statistic
         state:
           $ref: '#/components/schemas/bgp_stats_state'
-          description: 'Current state of the BGP session. enum: `active`, `connect`, `established`, `idle`, `open_config`, `open_sent`'
+          description: Current state of the BGP session
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when these BGP peer stats were sampled
@@ -71403,7 +71408,7 @@ components:
           - 'null'
         type:
           $ref: '#/components/schemas/capture_client_type'
-          description: 'Packet capture type discriminator for client captures. enum: `client`'
+          description: Packet capture type discriminator for client captures
       required:
       - type
       type: object
@@ -71433,7 +71438,7 @@ components:
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_gateway_format'
-          description: 'Output format for the gateway packet capture. enum: `stream`'
+          description: Output format for the gateway packet capture
         gateways:
           additionalProperties:
             $ref: '#/components/schemas/capture_gateway_gateways'
@@ -71458,7 +71463,7 @@ components:
           description: Gateway ports to include in the packet capture
         type:
           $ref: '#/components/schemas/capture_gateway_type'
-          description: 'Packet capture type discriminator for gateway captures. enum: `gateway`'
+          description: Packet capture type discriminator for gateway captures
       required:
       - type
       - gateways
@@ -71526,7 +71531,7 @@ components:
           type: integer
         format:
           $ref: '#/components/schemas/capture_mxedge_format'
-          description: 'Output format for the Mist Edge packet capture. enum: `stream`, `tzsp`'
+          description: Output format for the Mist Edge packet capture
         max_pkt_len:
           default: 512
           description: Max_len of each packet to capture. Default is 512, minimum
@@ -71559,7 +71564,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/capture_mxedge_type'
-          description: 'Packet capture type discriminator for Mist Edge captures. enum: `mxedge`'
+          description: Packet capture type discriminator for Mist Edge captures
         tzsp_host:
           description: Required if `format`==`tzsp`. Remote host accessible to mxedges
             over the network for receiving the captured packets
@@ -71648,7 +71653,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/capture_new_assoc_type'
-          description: 'Packet capture type discriminator for new association captures. enum: `new_assoc`'
+          description: Packet capture type discriminator for new association captures
       required:
       - type
       type: object
@@ -71686,7 +71691,7 @@ components:
           type: string
         band:
           $ref: '#/components/schemas/capture_radiotap_band'
-          description: 'Radio band to capture for radiotap packets. enum: `24`, `24,5,6`, `5`, `6`'
+          description: Radio band to capture for radiotap packets
         client_mac:
           description: Client MAC address used to filter the radiotap packet capture
           examples:
@@ -71697,7 +71702,7 @@ components:
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_radiotap_format'
-          description: 'Output format for the radiotap packet capture. enum: `pcap`, `stream`'
+          description: Output format for the radiotap packet capture
         max_pkt_len:
           $ref: '#/components/schemas/capture_max_pkt_length'
           description: Maximum number of bytes captured from each packet
@@ -71714,7 +71719,7 @@ components:
           description: Filter expression applied to the radiotap packet capture
         type:
           $ref: '#/components/schemas/capture_radiotap_type'
-          description: 'Packet capture type discriminator for radiotap captures. enum: `radiotap`'
+          description: Packet capture type discriminator for radiotap captures
         wlan_id:
           description: WLAN id associated with the respective ssid.
           examples:
@@ -71766,7 +71771,7 @@ components:
           - 'null'
         band:
           $ref: '#/components/schemas/capture_radiotapwired_band'
-          description: 'Radio band to capture for the radiotap portion. enum: `24`, `24,5,6`, `5`, `6`'
+          description: Radio band to capture for the radiotap portion
         client_mac:
           description: Client MAC address used to filter the combined packet capture
           examples:
@@ -71779,7 +71784,7 @@ components:
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_radiotapwired_format'
-          description: 'Output format for the combined packet capture. enum: `pcap`, `stream`'
+          description: Output format for the combined packet capture
         max_pkt_len:
           $ref: '#/components/schemas/capture_max_pkt_length'
           description: Maximum number of bytes captured from each packet
@@ -71803,7 +71808,8 @@ components:
           description: Filter expression applied across the combined packet capture
         type:
           $ref: '#/components/schemas/capture_radiotapwired_type'
-          description: 'Packet capture type discriminator for combined radiotap and wired captures. enum: `radiotap,wired`'
+          description: Packet capture type discriminator for combined radiotap and
+            wired captures
         wired_tcpdump_expression:
           $ref: '#/components/schemas/capture_tcpdump_expression'
           description: Filter expression applied to the wired portion of the capture
@@ -71869,7 +71875,7 @@ components:
           type: object
         band:
           $ref: '#/components/schemas/capture_scan_band'
-          description: 'Radio band to capture for scan radio packets. enum: `24`, `5`, `6`'
+          description: Radio band to capture for scan radio packets
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth'
           description: Channel bandwidth to use for the scan radio packet capture
@@ -71892,7 +71898,7 @@ components:
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_scan_format'
-          description: 'Output format for the scan radio packet capture. enum: `pcap`, `stream`'
+          description: Output format for the scan radio packet capture
         max_pkt_len:
           $ref: '#/components/schemas/capture_max_pkt_length'
           description: Maximum number of bytes captured from each packet
@@ -71908,7 +71914,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/capture_scan_type'
-          description: 'Packet capture type discriminator for scan radio captures. enum: `scan`'
+          description: Packet capture type discriminator for scan radio captures
         width:
           description: Specify the bandwidth value with respect to the channel.
           type: string
@@ -71922,7 +71928,7 @@ components:
       properties:
         band:
           $ref: '#/components/schemas/capture_scan_aps_band'
-          description: 'Radio band on which to start the scan capture. enum: `24`, `5`, `6`'
+          description: Radio band on which to start the scan capture
         channel:
           description: Specify the channel value where scan PCAP has to be started
           type: string
@@ -72007,7 +72013,7 @@ components:
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_switch_format'
-          description: 'Output format for the switch packet capture. enum: `stream`'
+          description: Output format for the switch packet capture
         max_pkt_len:
           $ref: '#/components/schemas/capture_max_pkt_length'
           description: Maximum number of bytes captured from each packet
@@ -72031,7 +72037,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/capture_switch_type'
-          description: 'Packet capture type discriminator for switch captures. enum: `switch`'
+          description: Packet capture type discriminator for switch captures
       required:
       - type
       - switches
@@ -72099,7 +72105,7 @@ components:
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_wired_format'
-          description: 'Output format for the wired packet capture. enum: `pcap`, `stream`'
+          description: Output format for the wired packet capture
         max_pkt_len:
           $ref: '#/components/schemas/capture_max_pkt_length'
           description: Maximum number of bytes captured from each packet
@@ -72111,7 +72117,7 @@ components:
           description: Filter expression applied to the wired packet capture
         type:
           $ref: '#/components/schemas/capture_wired_type'
-          description: 'Packet capture type discriminator for wired captures. enum: `wired`'
+          description: Packet capture type discriminator for wired captures
       required:
       - type
       type: object
@@ -72142,13 +72148,13 @@ components:
           - 'null'
         band:
           $ref: '#/components/schemas/capture_wireless_band'
-          description: 'Radio band to capture for wireless packets. enum: `24`, `5`, `6`'
+          description: Radio band to capture for wireless packets
         duration:
           $ref: '#/components/schemas/capture_duration'
           description: Packet capture duration, in seconds
         format:
           $ref: '#/components/schemas/capture_wireless_format'
-          description: 'Output format for the wireless packet capture. enum: `pcap`, `stream`'
+          description: Output format for the wireless packet capture
         max_pkt_len:
           $ref: '#/components/schemas/capture_max_pkt_length'
           description: Maximum number of bytes captured from each packet
@@ -72160,7 +72166,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/capture_wireless_type'
-          description: 'Packet capture type discriminator for wireless captures. enum: `wireless`'
+          description: Packet capture type discriminator for wireless captures
         wlan_id:
           description: WLAN identifier used to filter the wireless packet capture
           format: uuid
@@ -72199,10 +72205,11 @@ components:
           type: string
         device_type:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: 'If only intended to claim a certain device type, specify it here. enum: `ap`, `gateway`, `switch`'
+          description: If only intended to claim a certain device type, specify it
+            here
         type:
           $ref: '#/components/schemas/claim_type'
-          description: 'Claim scope, such as all, inventory, or license. enum: `all`, `inventory`, `license`'
+          description: Claim scope, such as all, inventory, or license
       required:
       - code
       - type
@@ -72215,10 +72222,12 @@ components:
           type: string
         device_type:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: 'If only intended to claim a certain device type, specify it here. enum: `ap`, `gateway`, `switch`'
+          description: If only intended to claim a certain device type, specify it
+            here
         type:
           $ref: '#/components/schemas/claim_type_async'
-          description: 'Claim scope; `all` claims licenses synchronously and queues inventory, `inventory` queues inventory only. enum: `all`, `inventory`'
+          description: Claim scope; `all` claims licenses synchronously and queues
+            inventory, `inventory` queues inventory only
       required:
       - code
       - type
@@ -72316,7 +72325,7 @@ components:
             duration
         auth_type:
           $ref: '#/components/schemas/nac_auth_type'
-          description: 'Authentication method used by the NAC client. enum: `cert`, `device-auth`, `eap-teap`, `eap-tls`, `eap-ttls`, `idp`, `mab`, `eap-peap`'
+          description: Authentication method used by the NAC client
         cert_cn:
           $ref: '#/components/schemas/nac_cert_cn'
           description: Certificate common names observed for the client during the
@@ -72344,10 +72353,10 @@ components:
           type: boolean
         edr_provider:
           $ref: '#/components/schemas/edr_provider'
-          description: 'EDR provider associated with the NAC client. enum: `crowdstrike`, `sentinelone`'
+          description: EDR provider associated with the NAC client
         edr_status:
           $ref: '#/components/schemas/edr_status'
-          description: 'EDR health status reported for the NAC client. enum: `sentinelone_healthy`, `sentinelone_infected`, `crowdstrike_low`, `crowdstrike_medium`, `crowdstrike_high`, `crowdstrike_critical`, `crowdstrike_informational`'
+          description: EDR health status reported for the NAC client
         group:
           description: User group associated with the NAC client
           type: string
@@ -72395,7 +72404,7 @@ components:
           description: Most recent SSID used by the NAC client
         last_status:
           $ref: '#/components/schemas/nac_client_last_status'
-          description: 'Most recent NAC authentication status for the client. enum: `permitted`, `session_started`, `session_stopped`, `denied`'
+          description: Most recent NAC authentication status for the client
         last_username:
           $ref: '#/components/schemas/last_username'
           description: Most recent username presented by the NAC client
@@ -72428,7 +72437,7 @@ components:
           description: Port identifiers used by the NAC client during the query duration
         random_mac:
           $ref: '#/components/schemas/random_mac'
-          description: 'Whether the NAC client used a randomized MAC address. enum: `true`, `false`'
+          description: Whether the NAC client used a randomized MAC address
         resp_attrs:
           $ref: '#/components/schemas/resp_attrs'
           description: RADIUS response attributes returned for the NAC client
@@ -72443,7 +72452,7 @@ components:
           description: Time when the NAC client record was observed
         type:
           $ref: '#/components/schemas/nac_access_type'
-          description: 'Network access type for the NAC client. enum: `wireless`, `wired`, `vty`'
+          description: Network access type for the NAC client
         usermac_label:
           $ref: '#/components/schemas/strings'
           description: User MAC labels associated with the NAC client
@@ -73375,7 +73384,7 @@ components:
           type: boolean
         type:
           $ref: '#/components/schemas/const_device_type_ap'
-          description: 'Device type for this AP model definition. enum: `ap`'
+          description: Device type for this AP model definition
         unmanaged:
           description: Whether this AP model is listed as unmanaged in the constants
             catalog
@@ -73475,7 +73484,7 @@ components:
       properties:
         default_dir:
           $ref: '#/components/schemas/const_device_ap_extios_default_dir'
-          description: 'Default direction for this external I/O port. enum: `IN`, `OUT`'
+          description: Default direction for this external I/O port
         input:
           description: Whether this external I/O port supports input mode
           type: boolean
@@ -73593,7 +73602,7 @@ components:
           type: boolean
         type:
           $ref: '#/components/schemas/const_device_type_gateway'
-          description: 'Device type for this gateway model definition. enum: `gateway`'
+          description: Device type for this gateway model definition
       required:
       - type
       type: object
@@ -73771,7 +73780,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/const_device_type_switch'
-          description: 'Device type for this switch model definition. enum: `switch`'
+          description: Device type for this switch model definition
       required:
       - type
       type: object
@@ -74832,10 +74841,10 @@ components:
           type: string
         device_type:
           $ref: '#/components/schemas/device_type'
-          description: 'Device type associated with the event. enum: `ap`, `gateway`, `switch`'
+          description: Device type associated with the event
         ev_type:
           $ref: '#/components/schemas/webhook_device_events_event_ev_type'
-          description: 'Advisory severity for the device event. enum: `notice`, `warn`'
+          description: Advisory severity for the device event
         ext_ip:
           description: External IP address reported for the device event
           type: string
@@ -75191,7 +75200,8 @@ components:
           type: integer
         auth_server_status:
           $ref: '#/components/schemas/device_search_radius_filter_status'
-          description: 'RADIUS authentication server status for this server in device search results. enum: `up`, `down`, `unreachable`'
+          description: RADIUS authentication server status for this server in device
+            search results
         auth_timeouts:
           description: Number of authentication timeouts
           type: integer
@@ -76765,7 +76775,7 @@ components:
           description: Time when the roaming event occurred
         type:
           $ref: '#/components/schemas/event_fastroam_type'
-          description: 'Fast-roam result category for the event. enum: `fail`, `none`, `pingpong`, `poor`, `slow`, `success`'
+          description: Fast-roam result category for the event
       required:
       - latency
       - ssid
@@ -76841,7 +76851,7 @@ components:
           type: string
         band:
           $ref: '#/components/schemas/dot11_band'
-          description: 'Radio band used for the wireless client event. enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
+          description: Radio band used for the wireless client event
         bssid:
           description: Wireless BSSID involved in the client event
           type: string
@@ -76850,10 +76860,10 @@ components:
           type: integer
         key_mgmt:
           $ref: '#/components/schemas/client_key_mgmt'
-          description: 'Key management protocol used by the client session. enum: `WPA2-PSK`, `WPA2-PSK/CCMP`, `WPA2-PSK-FT`, `WPA2-PSK-SHA256`, `WPA3-EAP-SHA256`, `WPA3-EAP-SHA256/CCMP`, `WPA3-EAP-FT/GCMP256`, `WPA3-SAE-FT`, `WPA3-SAE-PSK`'
+          description: Key management protocol used by the client session
         proto:
           $ref: '#/components/schemas/dot11_proto'
-          description: '802.11 protocol used by the client session. enum: `a`, `ac`, `ax`, `b`, `be`, `g`, `n`'
+          description: 802.11 protocol used by the client session
         ssid:
           description: Wireless network SSID involved in the client event
           type: string
@@ -77004,7 +77014,7 @@ components:
           type: boolean
         role:
           $ref: '#/components/schemas/evpn_config_role'
-          description: 'EVPN topology role for the switch. enum: `access`, `border`, `collapsed-core`, `core`, `distribution`, `esilag-access`, `none`'
+          description: EVPN topology role for the switch
       readOnly: true
       type: object
     evpn_config_role:
@@ -77084,7 +77094,7 @@ components:
           type: boolean
         routed_at:
           $ref: '#/components/schemas/evpn_options_routed_at'
-          description: 'Topology tier where EVPN virtual gateway routing is placed. enum: `core`, `distribution`, `edge`'
+          description: Topology tier where EVPN virtual gateway routing is placed
         underlay:
           $ref: '#/components/schemas/evpn_options_underlay'
           description: EVPN underlay BGP and subnet settings for the topology
@@ -77312,7 +77322,7 @@ components:
           description: List of pod numbers this switch participates in
         role:
           $ref: '#/components/schemas/evpn_topology_switch_role'
-          description: 'EVPN topology role for this switch. enum: `access`, `border`, `collapsed-core`, `core`, `distribution`, `esilag-access`, `none`'
+          description: EVPN topology role for this switch
         router_id:
           description: Routing identifier used by this switch for EVPN routing
           examples:
@@ -78455,7 +78465,8 @@ components:
           description: Per-VPN path settings for traffic that uses this port. Property key is the VPN path name
         wan_arp_policer:
           $ref: '#/components/schemas/gateway_port_wan_arp_policer'
-          description: 'Only when `wan_type`==`broadband`. ARP policer profile applied to the WAN port. enum: `default`, `max`, `recommended`'
+          description: "Only when `wan_type`==`broadband`. ARP policer profile applied
+            to the WAN port. enum: `dafault`, `max`, `recommended`"
         wan_ext_ip:
           description: Only if `usage`==`wan`, optional. If spoke should reach this
             port by a different IP
@@ -78566,7 +78577,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/gateway_wan_type'
-          description: 'IPv4 assignment mode for this gateway port interface. enum: `dhcp`, `pppoe`, `static`'
+          description: "IPv4 assignment mode for this gateway port interface. enum: `dhcp`, `ppoe`, `static`"
         type6:
           $ref: '#/components/schemas/gateway_wan_type6'
           description: "IPv6 assignment mode for this gateway port interface. enum: `autoconf`, `dhcp`, `static`"
@@ -78709,7 +78720,8 @@ components:
           type: integer
         role:
           $ref: '#/components/schemas/gateway_port_vpn_path_role'
-          description: 'Gateway role for this VPN path; valid values depend on the VPN `type`. enum: `hub`, `mesh`, `spoke`'
+          description: Gateway role for this VPN path; valid values depend on the
+            VPN `type`
         traffic_shaping:
           $ref: '#/components/schemas/gateway_traffic_shaping'
           description: Traffic shaping settings applied to this VPN path
@@ -78852,7 +78864,7 @@ components:
           description: Time associated with this gateway search result
         type:
           $ref: '#/components/schemas/device_type_gateway'
-          description: 'Device type for this gateway search result. enum: `gateway`'
+          description: Device type for this gateway search result
         uptime:
           description: Device uptime for the gateway, in seconds
           type: integer
@@ -78971,7 +78983,7 @@ components:
           description: Provider-specific tunnel options defined by this gateway template
         type:
           $ref: '#/components/schemas/gateway_template_type'
-          description: 'Gateway template deployment type. enum: `spoke`, `standalone`'
+          description: Gateway template deployment type
         url_filtering_deny_msg:
           default: Access to this URL Category has been blocked
           description: When a service policy denies a app_category, what message to
@@ -79568,7 +79580,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to run the device operation. enum: `node0`, `node1`'
+          description: HA cluster node on which to run the device operation
       type: object
     ha_cluster_node_enum:
       description: 'HA cluster node selector. enum: `node0`, `node1`'
@@ -80375,7 +80387,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: 'Device type for this inventory record. enum: `ap`, `gateway`, `switch`'
+          description: Device type for this inventory record
         vc_mac:
           description: If `type`==`switch` and the device is part of a Virtual Chassis,
             MAC address of the Virtual Chassis. If `type`==`gateway` and the device
@@ -80475,7 +80487,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: 'Device type for this inventory search result. enum: `ap`, `gateway`, `switch`'
+          description: Device type for this inventory search result
         vc_mac:
           description: Virtual Chassis MAC address for this inventory search result
           examples:
@@ -80550,7 +80562,7 @@ components:
           type: boolean
         op:
           $ref: '#/components/schemas/inventory_update_operation'
-          description: 'Inventory operation to apply to the listed devices. enum: `assign`, `delete`, `downgrade_to_jsi`, `unassign`, `upgrade_to_mist`'
+          description: Inventory operation to apply to the listed devices
         serials:
           $ref: '#/components/schemas/inventory_update_serials'
           description: Device serial numbers affected by this inventory operation
@@ -80944,7 +80956,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/device_type'
-          description: 'Device category for the inventory item. enum: `ap`, `gateway`, `switch`'
+          description: Device category for the inventory item
         version:
           description: Software version currently running on the device
           type: string
@@ -80973,7 +80985,7 @@ components:
           type: integer
         warranty_type:
           $ref: '#/components/schemas/jsi_warranty_type'
-          description: 'Warranty category reported for the device. enum: `Standard Hardware Warranty`, `Enhanced Hardware Warranty`, `Dead On Arrival Warranty`, `Limited Lifetime Warranty`, `Software Warranty`, `Limited Lifetime Warranty for WLA`, `Warranty-JCPO EOL (DOA Not Included)`, `MIST Enhanced Hardware Warranty`, `MIST Standard Warranty`, `Determine Lifetime warranty`'
+          description: Warranty category reported for the device
       type: object
     js_inventory_search:
       additionalProperties: false
@@ -81374,7 +81386,8 @@ components:
           type: boolean
         mac_auth_protocol:
           $ref: '#/components/schemas/switch_port_local_usage_mac_auth_protocol'
-          description: 'Only if `enable_mac_auth`==`true`, MAC authentication protocol to use. enum: `eap-md5`, `eap-peap`, `pap`'
+          description: "Only if `enable_mac_auth`==`true`, MAC authentication protocol
+            to use. enum: `eap_md5`, `eap_peap`, `pap`"
         mac_limit:
           default: 0
           description: Max number of MAC addresses, default is 0 for unlimited, otherwise
@@ -81407,7 +81420,7 @@ components:
           type: boolean
         port_auth:
           $ref: '#/components/schemas/switch_port_local_usage_dot1x'
-          description: '802.1X authentication mode for this local port configuration. enum: `dot1x`'
+          description: 802.1X authentication mode for this local port configuration
         port_network:
           description: Native network/vlan for untagged traffic
           type: string
@@ -81495,7 +81508,7 @@ components:
           description: "IPv4 assignment mode for the additional Junos L3 presence. enum: `dhcp`, `static`"
         type6:
           $ref: '#/components/schemas/ip_type6'
-          description: 'IPv6 assignment mode for the additional Junos L3 presence. enum: `autoconf`, `dhcp`, `disabled`, `static`'
+          description: "IPv6 assignment mode for the additional Junos L3 presence. enum: `dhcp`, `disabled`, `static`"
       type: object
     junos_port_config:
       additionalProperties: false
@@ -82319,7 +82332,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/map_type'
-          description: 'Map type, such as `image` or `google`. enum: `google`, `image`'
+          description: Map type, such as `image` or `google`
         url:
           description: When `type`==`image`, URL for the map image
           examples:
@@ -82328,7 +82341,7 @@ components:
           type: string
         view:
           $ref: '#/components/schemas/map_view'
-          description: 'If `type`==`google`, map tile view to display. enum: `hybrid`, `roadmap`, `satellite`, `terrain`'
+          description: If `type`==`google`, map tile view to display
         wall_path:
           $ref: '#/components/schemas/map_wall_path'
           description: Wall path geometry for this map
@@ -82405,7 +82418,7 @@ components:
           type: boolean
         vendor_name:
           $ref: '#/components/schemas/map_import_json_vendor_name'
-          description: 'Map import vendor for the uploaded JSON. enum: `ekahau`, `ibwave`'
+          description: Map import vendor for the uploaded JSON
       required:
       - vendor_name
       type: object
@@ -82461,7 +82474,7 @@ components:
           type: number
         vendor_name:
           $ref: '#/components/schemas/map_jibestream_vendor_name'
-          description: 'Vendor identifier for a Jibestream import. enum: `jibestream`'
+          description: Vendor identifier for a Jibestream import
         venue_id:
           description: Venue or organization id
           examples:
@@ -82506,7 +82519,7 @@ components:
           type: string
         vendor_name:
           $ref: '#/components/schemas/map_micello_vendor_name'
-          description: 'Vendor identifier for a Micello import. enum: `micello`'
+          description: Vendor identifier for a Micello import
       required:
       - vendor_name
       - account_key
@@ -82604,7 +82617,7 @@ components:
           description: Target site for imported floorplans, when specified
         vendor_name:
           $ref: '#/components/schemas/map_org_import_file_json_vendor_name'
-          description: 'Map import vendor for the uploaded file. enum: `ekahau`, `ibwave`'
+          description: Map import vendor for the uploaded file
       required:
       - vendor_name
       type: object
@@ -83573,7 +83586,7 @@ components:
           type: string
         tier:
           $ref: '#/components/schemas/msp_tier'
-          description: 'Service tier for the MSP account. enum: `advanced`, `base`'
+          description: Service tier for the MSP account
         url:
           description: For advanced tier (uMSPs) only
           type: string
@@ -83603,7 +83616,7 @@ components:
           type: string
         op:
           $ref: '#/components/schemas/msp_license_action_operation'
-          description: 'License operation to perform for this MSP request. enum: `amend`, `annotate`, `delete`, `unamend`'
+          description: License operation to perform for this MSP request
         quantity:
           description: Required if `op`==`amend`; license quantity to move to the
             destination org
@@ -83654,7 +83667,7 @@ components:
       properties:
         op:
           $ref: '#/components/schemas/msp_org_change_operation'
-          description: 'Assignment operation to apply to the listed org IDs. enum: `assign`, `unassign`'
+          description: Assignment operation to apply to the listed org IDs
         org_ids:
           $ref: '#/components/schemas/msp_org_change_org_ids'
           description: List of org IDs to assign to or unassign from the MSP account
@@ -83820,7 +83833,7 @@ components:
           type: string
         vendor:
           $ref: '#/components/schemas/mxcluster_nac_client_vendor'
-          description: 'RADIUS client vendor profile for this IP or subnet. enum: `aruba`, `cisco-aironet`, `cisco-dnac`, `cisco-ios`, `cisco-meraki`, `brocade`, `generic`, `juniper`, `paloalto`'
+          description: RADIUS client vendor profile for this IP or subnet
       type: object
     mxcluster_nac_client_ips:
       additionalProperties:
@@ -84358,7 +84371,7 @@ components:
           type: string
         severity:
           $ref: '#/components/schemas/event_severity'
-          description: 'Event severity level reported for this Mist Edge event. enum: `normal`, `critical`, `high`, `warning`'
+          description: Event severity level reported for this Mist Edge event
         sys_info.usage:
           $ref: '#/components/schemas/mxedge_event_sys_info'
           description: System resource usage details associated with the event
@@ -84386,7 +84399,7 @@ components:
           type: string
         severity:
           $ref: '#/components/schemas/event_severity'
-          description: 'Event severity for the system resource condition. enum: `normal`, `critical`, `high`, `warning`'
+          description: Event severity for the system resource condition
       type: object
     mxedge_events:
       description: Mist Edge event records
@@ -84505,10 +84518,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: 'IPv4 address assignment mode for out-of-band management. enum: `dhcp`, `static`'
+          description: IPv4 address assignment mode for out-of-band management
         type6:
           $ref: '#/components/schemas/ip_type'
-          description: 'IPv6 address assignment mode for out-of-band management. enum: `dhcp`, `static`'
+          description: IPv6 address assignment mode for out-of-band management
       type: object
     mxedge_oob_ip_config_dns:
       default:
@@ -84564,7 +84577,7 @@ components:
           description: DHCP relay server addresses used when `type`==`relay`
         type:
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_type'
-          description: 'DHCP handling mode for the global tunnel termination config. enum: `relay`'
+          description: DHCP handling mode for the global tunnel termination config
       type: object
     mxedge_tunterm_dhcpd_config_property:
       additionalProperties: false
@@ -84579,7 +84592,7 @@ components:
           description: DHCP relay server addresses used by this tunneled VLAN
         type:
           $ref: '#/components/schemas/mxedge_tunterm_dhcpd_config_type'
-          description: 'DHCP handling mode for this tunneled VLAN. enum: `relay`'
+          description: DHCP handling mode for this tunneled VLAN
       type: object
     mxedge_tunterm_dhcpd_config_servers:
       description: List of DHCP servers; required if `type`==`relay`
@@ -84848,7 +84861,7 @@ components:
           description: Canary phase percentages for phased Mist Edge upgrades
         channel:
           $ref: '#/components/schemas/mxedge_upgrade_channel'
-          description: 'Upgrade channel to use for qualified versions. enum: `alpha`, `beta`, `stable`'
+          description: Upgrade channel to use for qualified versions
         distro:
           description: Linux distribution codename for an optional distro upgrade,
             such as bullseye or `next` to upgrade to the next distro version. Uses
@@ -84867,7 +84880,7 @@ components:
           type: integer
         strategy:
           $ref: '#/components/schemas/mxedge_upgrade_strategy'
-          description: 'Upgrade rollout strategy for the selected Mist Edges. enum: `canary`, `big_bang`, `serial`'
+          description: Upgrade rollout strategy for the selected Mist Edges
         versions:
           $ref: '#/components/schemas/mxedge_upgrade_version'
           description: Per-service target versions for the upgrade request
@@ -85104,7 +85117,7 @@ components:
           description: Identifier of the org that owns the Mist Tunnel
         protocol:
           $ref: '#/components/schemas/mxtunnel_protocol'
-          description: 'Encapsulation protocol used for the Mist Tunnel. enum: `ip`, `udp`'
+          description: Encapsulation protocol used for the Mist Tunnel
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Identifier of the site when the Mist Tunnel is site-scoped
@@ -85267,7 +85280,7 @@ components:
       properties:
         coa_type:
           $ref: '#/components/schemas/nac_coa_type'
-          description: 'Change of Authorization command to send to the NAC client. enum: `reauth`, `disconnect`'
+          description: Change of Authorization command to send to the NAC client
       type: object
     nac_client_coa_response:
       additionalProperties: false
@@ -85278,7 +85291,7 @@ components:
           type: string
         device_type:
           $ref: '#/components/schemas/device_type'
-          description: 'Type of network device that received the CoA command. enum: `ap`, `gateway`, `switch`'
+          description: Type of network device that received the CoA command
       type: object
     nac_client_event:
       additionalProperties: false
@@ -85291,7 +85304,7 @@ components:
           type: string
         auth_type:
           $ref: '#/components/schemas/nac_auth_type'
-          description: 'Authentication method used for the NAC event. enum: `cert`, `device-auth`, `eap-teap`, `eap-tls`, `eap-ttls`, `idp`, `mab`, `eap-peap`'
+          description: Authentication method used for the NAC event
         bssid:
           description: Wireless BSSID used for the client session
           examples:
@@ -85299,7 +85312,7 @@ components:
           type: string
         client_type:
           $ref: '#/components/schemas/nac_access_type'
-          description: 'Access type for the NAC client event. enum: `wireless`, `wired`, `vty`'
+          description: Access type for the NAC client event
         device_mac:
           $ref: '#/components/schemas/nac_device_mac'
           description: Network device MAC address for the AP or switch handling the
@@ -85342,10 +85355,10 @@ components:
           description: Switch port identifier where the NAC event occurred
         port_type:
           $ref: '#/components/schemas/nac_access_type'
-          description: 'Access type of the port where the NAC event occurred. enum: `wireless`, `wired`, `vty`'
+          description: Access type of the port where the NAC event occurred
         random_mac:
           $ref: '#/components/schemas/random_mac'
-          description: 'Whether the client used a randomized MAC address. enum: `true`, `false`'
+          description: Whether the client used a randomized MAC address
         resp_attrs:
           $ref: '#/components/schemas/resp_attrs'
           description: RADIUS response attributes returned by NAC to the NAS
@@ -85728,7 +85741,7 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/nac_portal_guest_portal_auth'
-          description: 'Mode presented by the NAC guest portal for user authentication. enum: `external`, `multi`, `none`'
+          description: Mode presented by the NAC guest portal for user authentication
         expire:
           description: If `auth`==`none` or `auth`==`multi`, whether to expire the
             guest after a certain time
@@ -87149,7 +87162,7 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/org_e911_report_status'
-          description: 'Current generation state of the E911 AP BSSID report. enum: `disabled`, `scheduled`, `available`'
+          description: Current generation state of the E911 AP BSSID report
         url:
           description: Presigned URL to download the CSV file. Only present when `status`
             is `available`.
@@ -87216,7 +87229,7 @@ components:
           type: string
         op:
           $ref: '#/components/schemas/org_license_action_operation'
-          description: 'License action operation to perform. enum: `amend`, `annotate`, `delete`, `unamend`'
+          description: License action operation to perform
         quantity:
           description: If `op`==`amend`, the number of licenses to move
           type: integer
@@ -87679,7 +87692,8 @@ components:
           type: string
         match_device_type:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: 'Device type filter that limits which claimed devices this rule applies to. enum: `ap`, `gateway`, `switch`'
+          description: Device type filter that limits which claimed devices this rule
+            applies to
         match_model:
           description: Optional additional device model filter for this assignment
             rule
@@ -87697,7 +87711,8 @@ components:
           - 'null'
         src:
           $ref: '#/components/schemas/org_setting_auto_site_assignment_src'
-          description: 'Source attribute used to evaluate the automatic assignment rule. enum: `ext_ip`, `dns_suffix`, `geoip`, `lldp_port_desc`, `lldp_system_name`, `model`, `name`, `subnet`'
+          description: Source attribute used to evaluate the automatic assignment
+            rule
         subnet:
           description: If `src`==`subnet` or `ext_ip`==`ext_ip`
           type: string
@@ -87741,13 +87756,13 @@ components:
           type: string
         match_device:
           $ref: '#/components/schemas/device_type_default_ap'
-          description: 'Device type filter for this naming rule. enum: `ap`, `gateway`, `switch`'
+          description: Device type filter for this naming rule
         prefix:
           description: Text prepended to the generated device name
           type: string
         src:
           $ref: '#/components/schemas/org_setting_auto_device_naming_rule_src'
-          description: 'Device attribute used to generate the name. enum: `lldp_port_desc`, `mac`'
+          description: Device attribute used to generate the name
         suffix:
           description: Text appended to the generated device name
           type: string
@@ -87828,7 +87843,7 @@ components:
             property keys are AP model names, such as AP41
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
-          description: 'Day of the week for the AP auto-upgrade maintenance window. enum: `any`, `fri`, `mon`, `sat`, `sun`, `thu`, `tue`, `wed`'
+          description: Day of the week for the AP auto-upgrade maintenance window
         enabled:
           default: false
           description: Whether AP auto-upgrade is enabled. Note that Mist may auto-upgrade
@@ -87842,7 +87857,7 @@ components:
           type: string
         version:
           $ref: '#/components/schemas/site_auto_upgrade_version'
-          description: 'Firmware release channel or specific version used for AP auto-upgrade. enum: `beta`, `custom`, `stable`'
+          description: Firmware release channel or specific version used for AP auto-upgrade
       type: object
     org_setting_celona:
       additionalProperties: false
@@ -88088,16 +88103,16 @@ components:
       properties:
         admin:
           $ref: '#/components/schemas/org_setting_junos_shell_access_admin'
-          description: 'Shell access level used for administrator web-shell sessions. enum: `admin`, `none`, `viewer`'
+          description: Shell access level used for administrator web-shell sessions
         helpdesk:
           $ref: '#/components/schemas/org_setting_junos_shell_access_helpdesk'
-          description: 'Shell access level used for helpdesk web-shell sessions. enum: `admin`, `none`, `viewer`'
+          description: Shell access level used for helpdesk web-shell sessions
         read:
           $ref: '#/components/schemas/org_setting_junos_shell_access_read'
-          description: 'Shell access level used for read-only web-shell sessions. enum: `admin`, `none`, `viewer`'
+          description: Shell access level used for read-only web-shell sessions
         write:
           $ref: '#/components/schemas/org_setting_junos_shell_access_write'
-          description: 'Shell access level used for write-role web-shell sessions. enum: `admin`, `none`, `viewer`'
+          description: Shell access level used for write-role web-shell sessions
       type: object
     org_setting_junos_shell_access_admin:
       default: admin
@@ -88213,10 +88228,12 @@ components:
           description: Client fingerprinting settings used by Mist NAC
         idp_machine_cert_lookup_field:
           $ref: '#/components/schemas/idp_machine_cert_lookup_field'
-          description: 'Client certificate field used to look up machine groups in identity providers. enum: `automatic`, `cn`, `dns`'
+          description: Client certificate field used to look up machine groups in
+            identity providers
         idp_user_cert_lookup_field:
           $ref: '#/components/schemas/idp_user_cert_lookup_field'
-          description: 'Client certificate field used to look up user groups in identity providers. enum: `automatic`, `cn`, `email`, `upn`'
+          description: Client certificate field used to look up user groups in identity
+            providers
         idps:
           $ref: '#/components/schemas/org_setting_mist_nac_idps'
           description: Identity provider mappings used by Mist NAC realm matching
@@ -88228,7 +88245,8 @@ components:
           description: RADIUS server certificate presented by Mist NAC during EAP-TLS
         use_ip_version:
           $ref: '#/components/schemas/org_setting_mist_nac_ip_version'
-          description: 'IP version used by NAS devices and Mist Edge proxies to reach Mist NAC. enum: `v4`, `v6`'
+          description: IP version used by NAS devices and Mist Edge proxies to reach
+            Mist NAC
         use_ssl_port:
           default: false
           description: By default, NAS devices (switches/aps) and proxies(mxedge)
@@ -88268,7 +88286,8 @@ components:
           type: boolean
         wireless_coa_type:
           $ref: '#/components/schemas/org_setting_mist_nac_fingerprinting_wireless_coa'
-          description: 'Change of Authorization action sent to wireless clients when fingerprints change. enum: `reauth`, `disconnect`'
+          description: Change of Authorization action sent to wireless clients when
+            fingerprints change
       type: object
     org_setting_mist_nac_fingerprinting_wireless_coa:
       description: 'Change of Authorization action sent to wireless clients when fingerprints
@@ -88326,7 +88345,7 @@ components:
       properties:
         coa_type:
           $ref: '#/components/schemas/nac_coa_type'
-          description: 'Change of Authorization action sent for MDM posture changes. enum: `reauth`, `disconnect`'
+          description: Change of Authorization action sent for MDM posture changes
       type: object
     org_setting_mist_nac_server_cert:
       additionalProperties: false
@@ -88922,7 +88941,7 @@ components:
           description: Organization that owns the databoard
         purpose:
           $ref: '#/components/schemas/org_ui_settings_purpose'
-          description: 'UI surface or purpose for this databoard. enum: `marvisdashboard`'
+          description: UI surface or purpose for this databoard
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Site associated with the databoard when `for_site` is true
@@ -89324,7 +89343,7 @@ components:
           description: Other-device MAC addresses included in the bulk update
         op:
           $ref: '#/components/schemas/other_device_update_operation'
-          description: 'Action to perform on the other devices. enum: `assign`, `unassign`'
+          description: Action to perform on the other devices
         site_id:
           description: Site ID used when assigning other devices
           format: uuid
@@ -89477,10 +89496,10 @@ components:
           type: string
         role:
           $ref: '#/components/schemas/privilege_msp_role'
-          description: 'Access role granted by this MSP privilege. enum: `admin`, `helpdesk`, `installer`, `read`, `write`'
+          description: Access role granted by this MSP privilege
         scope:
           $ref: '#/components/schemas/privilege_msp_scope'
-          description: 'MSP hierarchy level where this privilege applies. enum: `msp`, `org`, `orggroup`'
+          description: MSP hierarchy level where this privilege applies
         views:
           $ref: '#/components/schemas/admin_privilege_views'
           description: UI views allowed by custom role restrictions
@@ -89874,7 +89893,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/psk_portal_type'
-          description: 'Portal mode for personal PSK onboarding, either admin or BYOD. enum: `admin`, `byod`'
+          description: Portal mode for personal PSK onboarding, either admin or BYOD
         ui_url:
           description: Public URL where users access the PSK portal
           type: string
@@ -89973,7 +89992,8 @@ components:
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/psk_portal_sso_idp_sign_algo'
-          description: 'SAML assertion signing algorithm expected from the identity provider. enum: `sha1`, `sha256`, `sha384`, `sha512`'
+          description: SAML assertion signing algorithm expected from the identity
+            provider
         idp_sso_url:
           description: Identity provider SSO URL for SAML login
           type: string
@@ -90022,7 +90042,7 @@ components:
       properties:
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
-          description: 'Logo and text alignment for the PSK portal template. enum: `center`, `left`, `right`'
+          description: Logo and text alignment for the PSK portal template
         color:
           default: '#1074bc'
           description: Primary hex color used by the portal template
@@ -90433,7 +90453,8 @@ components:
       properties:
         flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
-          description: 'CAPTCHA provider used for registration, such as Google reCAPTCHA or hCaptcha. enum: `google`, `hcaptcha`'
+          description: CAPTCHA provider used for registration, such as Google reCAPTCHA
+            or hCaptcha
         required:
           description: Whether CAPTCHA verification is required for registration
           type: boolean
@@ -90465,7 +90486,7 @@ components:
           type: string
         recaptcha_flavor:
           $ref: '#/components/schemas/recaptcha_flavor'
-          description: 'CAPTCHA provider flavor used for recovery verification. enum: `google`, `hcaptcha`'
+          description: CAPTCHA provider flavor used for recovery verification
       required:
       - email
       type: object
@@ -90916,7 +90937,7 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/response_async_license_status'
-          description: 'Current async claim processing state. enum: `prepared`, `ongoing`, `done`'
+          description: Current async claim processing state
         succeed:
           description: Number of devices that successfully completed claim processing
           type: integer
@@ -90964,7 +90985,7 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/response_async_license_status'
-          description: 'Current asynchronous license claim processing state. enum: `prepared`, `ongoing`, `done`'
+          description: Current asynchronous license claim processing state
         succeed:
           description: Number of devices that successfully completed license claim
             processing
@@ -91100,7 +91121,7 @@ components:
           type: number
         status:
           $ref: '#/components/schemas/response_auto_map_assignment_info_status'
-          description: 'Current auto map assignment processing state. enum: `not_started`, `in_progress`, `completed`, `error`'
+          description: Current auto map assignment processing state
         stop_time:
           description: Only when `status`==`completed`, Unix timestamp when auto map
             assignment stopped
@@ -91179,7 +91200,7 @@ components:
           type: number
         status:
           $ref: '#/components/schemas/response_auto_orientation_info_status'
-          description: 'Current auto orientation processing state. enum: `pending`, `inprogress`, `done`, `error`'
+          description: Current auto orientation processing state
         stop_time:
           description: Timestamp when auto orient completed or was manually stopped
           type: number
@@ -91211,7 +91232,7 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/auto_placement_info_status'
-          description: 'Current autoplacement processing state. enum: `done`, `error`, `inprogress`, `pending`'
+          description: Current autoplacement processing state
       type: object
     response_auto_zone:
       additionalProperties: false
@@ -91219,7 +91240,7 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/response_auto_zone_status'
-          description: 'Current auto zones service state for the map. enum: `in_progress`, `awaiting_review`, `not_started`, `error`'
+          description: Current auto zones service state for the map
         zones:
           $ref: '#/components/schemas/response_auto_zone_zones'
           description: Suggested zones awaiting review for the map
@@ -92161,7 +92182,7 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/upgrade_info_status'
-          description: 'Current status of the requested device upgrade. enum: `error`, `inprogress`, `scheduled`, `starting`, `success`'
+          description: Current status of the requested device upgrade
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Epoch timestamp when the device upgrade status was reported
@@ -93145,7 +93166,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/response_map_import_ap_action'
-          description: 'Import action applied to this AP. enum: `assigned-named-placed`, `assigned-placed`, `ignored`, `named-placed`, `placed`'
+          description: Import action applied to this AP
         floorplan_id:
           description: Floorplan identifier where the AP placement was imported
           format: uuid
@@ -93492,7 +93513,7 @@ components:
           description: Device identifiers that failed during the inventory operation
         op:
           $ref: '#/components/schemas/response_org_inventory_change_op'
-          description: 'Inventory operation applied to the requested device identifiers. enum: `assign`, `delete`, `downgrade_to_jsi`, `unassign`, `upgrade_to_mist`'
+          description: Inventory operation applied to the requested device identifiers
         reason:
           $ref: '#/components/schemas/strings'
           description: Failure reasons corresponding to entries in the error list
@@ -93692,7 +93713,7 @@ components:
           type: integer
         scope:
           $ref: '#/components/schemas/suppressed_alarm_scope'
-          description: 'Alarm suppression scope, either organization-wide or site-specific. enum: `org`, `site`'
+          description: Alarm suppression scope, either organization-wide or site-specific
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Site identifier for a site-scoped alarm suppression entry
@@ -94155,7 +94176,7 @@ components:
           description: AP MAC addresses where capture configuration failed
         format:
           $ref: '#/components/schemas/capture_mxedge_format'
-          description: 'Output format for packet capture data. enum: `stream`, `tzsp`'
+          description: Output format for packet capture data
         gateways:
           $ref: '#/components/schemas/response_pcap_status_gateways'
           description: Gateway devices included in the packet capture session
@@ -94235,7 +94256,7 @@ components:
             was reported
         type:
           $ref: '#/components/schemas/pcap_type'
-          description: 'Packet capture type for the current session. enum: `client`, `gateway`, `new_assoc`, `radiotap`, `radiotap,wired`, `wired`, `wireless`'
+          description: Packet capture type for the current session
         tzsp_host:
           description: Required if `format`==`tzsp`. Remote host accessible to Mist
             Edges over the network for receiving the captured packets.
@@ -94851,10 +94872,10 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/upgrade_device_status'
-          description: 'Current status of the site device upgrade job. enum: `cancelled`, `completed`, `created`, `downloaded`, `downloading`, `failed`, `queued`, `upgrading`'
+          description: Current status of the site device upgrade job
         strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: 'Device upgrade strategy used by this job. enum: `big_bang`, `canary`, `rrm`, `serial`'
+          description: Device upgrade strategy used by this job
         target_version:
           description: Version to upgrade to
           minLength: 1
@@ -94918,10 +94939,10 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/upgrade_device_status'
-          description: 'Current status of the site device upgrade job. enum: `cancelled`, `completed`, `created`, `downloaded`, `downloading`, `failed`, `queued`, `upgrading`'
+          description: Current status of the site device upgrade job
         strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: 'Device upgrade strategy used by this job. enum: `big_bang`, `canary`, `rrm`, `serial`'
+          description: Device upgrade strategy used by this job
         target_version:
           description: Version to upgrade to
           minLength: 1
@@ -95628,7 +95649,7 @@ components:
           description: Unique value identifying the organization upgrade job
         strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: 'Execution strategy used for the organization upgrade job. enum: `big_bang`, `canary`, `rrm`, `serial`'
+          description: Execution strategy used for the organization upgrade job
         target_version:
           description: Firmware version targeted by the organization AP upgrade
           examples:
@@ -95823,7 +95844,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/rf_client_type'
-          description: 'Target device category for the RF diagnostic recording. enum: `asset`, `client`, `sdkclient`'
+          description: Target device category for the RF diagnostic recording
       required:
       - name
       - type
@@ -95898,7 +95919,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/rf_client_type'
-          description: 'Target device category for the recording. enum: `asset`, `client`, `sdkclient`'
+          description: Target device category for the recording
         url:
           description: JSON file URL for frame data captured by the recording
           type: string
@@ -96353,7 +96374,7 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/rrm_status'
-          description: 'Current RRM calculation status. enum: `ready`, `unknown`, `updating`'
+          description: Current RRM calculation status
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when the current RRM data was generated
@@ -96560,7 +96581,7 @@ components:
           type: string
         band:
           $ref: '#/components/schemas/dot11_band'
-          description: 'Radio band affected by the RRM event. enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
+          description: Radio band affected by the RRM event
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth'
           description: Channel width after the RRM event, in MHz
@@ -96569,7 +96590,7 @@ components:
           type: integer
         event:
           $ref: '#/components/schemas/rrm_event_type'
-          description: 'RRM event type that caused or records the change. enum: `interference-ap-co-channel`, `interference-ap-non-wifi`, `neighbor-ap-down`, `neighbor-ap-recovered`, `radar-detected`, `rrm-radar`, `scheduled-site_rrm`, `triggered-site_rrm`'
+          description: RRM event type that caused or records the change
         power:
           description: Transmit power after the RRM event
           type: integer
@@ -97352,10 +97373,10 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/secintel_profile_profile_action'
-          description: 'Protection level applied to the SecIntel category. enum: `default`, `standard`, `strict`'
+          description: Protection level applied to the SecIntel category
         category:
           $ref: '#/components/schemas/secintel_profile_profile_category'
-          description: 'SecIntel feed category configured by this profile entry. enum: `CC`, `DNS`, `IH`'
+          description: SecIntel feed category configured by this profile entry
       type: object
     secintel_profile_profile_action:
       default: default
@@ -97470,7 +97491,7 @@ components:
           description: QoS DSCP value used for custom SSR traffic classification
         failover_policy:
           $ref: '#/components/schemas/service_failover_policy'
-          description: 'Failover behavior for traffic matched by this service. enum: `non_revertible`, `none`, `revertible`'
+          description: Failover behavior for traffic matched by this service
         hostnames:
           $ref: '#/components/schemas/service_hostnames'
           description: Domain hostnames matched by this custom service for web filtering
@@ -97528,14 +97549,15 @@ components:
           type: boolean
         traffic_class:
           $ref: '#/components/schemas/service_traffic_class'
-          description: 'Traffic class applied when `traffic_type`==`custom`. enum: `best_effort`, `high`, `low`, `medium`'
+          description: Traffic class applied when `traffic_type`==`custom`
         traffic_type:
           default: data_best_effort
           description: values from [List Traffic Types]($e/Constants%20Definitions/listTrafficTypes)
           type: string
         type:
           $ref: '#/components/schemas/service_type'
-          description: 'Matching mode that determines which app, URL, or custom fields are used. enum: `app_categories`, `apps`, `custom`, `urls`'
+          description: Matching mode that determines which app, URL, or custom fields
+            are used
         urls:
           $ref: '#/components/schemas/service_urls'
           description: URL patterns matched by this service when `type`==`urls`
@@ -97712,7 +97734,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/allow_deny'
-          description: 'Allow or deny action for traffic matched by this service policy. enum: `allow`, `deny`'
+          description: Allow or deny action for traffic matched by this service policy
         antivirus:
           $ref: '#/components/schemas/service_policy_antivirus'
           description: Malware and virus inspection settings applied by this service
@@ -97859,7 +97881,7 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/service_policy_secintel_profile'
-          description: 'Protection level applied by SecIntel inspection. enum: `default`, `standard`, `strict`'
+          description: Protection level applied by SecIntel inspection
         secintelprofile_id:
           description: Organization-level SecIntel profile ID; takes precedence over
             inline `profile` settings
@@ -97900,7 +97922,7 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/service_policy_skyatp_dns_dga_detection_profile'
-          description: 'Sky ATP DNS DGA detection profile to apply. enum: `default`, `standard`, `strict`'
+          description: Sky ATP DNS DGA detection profile to apply
       type: object
     service_policy_skyatp_dns_dga_detection_profile:
       description: 'enum: `default`, `standard`, `strict`'
@@ -97918,7 +97940,7 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/service_policy_skyatp_dns_tunnel_detection_profile'
-          description: 'Sky ATP DNS tunneling detection profile to apply. enum: `default`, `standard`, `strict`'
+          description: Sky ATP DNS tunneling detection profile to apply
       type: object
     service_policy_skyatp_dns_tunnel_detection_profile:
       description: 'enum: `default`, `standard`, `strict`'
@@ -98097,7 +98119,7 @@ components:
       properties:
         channel:
           $ref: '#/components/schemas/ssr_upgrade_channel'
-          description: 'Firmware release channel used for SSR auto-upgrade. enum: `alpha`, `beta`, `stable`'
+          description: Firmware release channel used for SSR auto-upgrade
         custom_versions:
           $ref: '#/components/schemas/setting_ssr_auto_upgrade_custom_versions'
           description: Per-model SSR firmware versions used for auto-upgrade
@@ -98130,7 +98152,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to create the shell session. enum: `node0`, `node1`'
+          description: HA cluster node on which to create the shell session
       type: object
     simple_alert:
       additionalProperties: false
@@ -98660,7 +98682,7 @@ components:
           description: Identifier of the org that owns the site Mist Tunnel configuration
         protocol:
           $ref: '#/components/schemas/mxtunnel_protocol'
-          description: 'Encapsulation protocol used for the site Mist Tunnel. enum: `ip`, `udp`'
+          description: Encapsulation protocol used for the site Mist Tunnel
         radsec:
           $ref: '#/components/schemas/site_mxtunnel_radsec'
           description: TLS-secured RADIUS proxy settings for the site Mist Tunnel
@@ -98698,7 +98720,7 @@ components:
           type: integer
         protocol:
           $ref: '#/components/schemas/site_mxtunnel_protocol'
-          description: 'Encapsulation protocol used for this additional Mist Tunnel. enum: `ip`, `udp`'
+          description: Encapsulation protocol used for this additional Mist Tunnel
         vlan_ids:
           $ref: '#/components/schemas/site_mxtunnel_additional_mxtunnel_vlan_ids'
           description: List of VLAN IDs carried by this additional Mist Tunnel
@@ -99524,7 +99546,7 @@ components:
             property keys are AP model names, such as AP41
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
-          description: 'Weekly AP auto-upgrade day for the maintenance window. enum: `any`, `fri`, `mon`, `sat`, `sun`, `thu`, `tue`, `wed`'
+          description: Weekly AP auto-upgrade day for the maintenance window
         enabled:
           default: false
           description: Whether auto upgrade should happen (Note that Mist may auto-upgrade
@@ -99538,7 +99560,7 @@ components:
           type: string
         version:
           $ref: '#/components/schemas/site_auto_upgrade_version'
-          description: 'Firmware release channel or custom version used for AP auto-upgrade. enum: `beta`, `custom`, `stable`'
+          description: Firmware release channel or custom version used for AP auto-upgrade
       type: object
     site_setting_auto_upgrade_esl:
       additionalProperties: false
@@ -99561,7 +99583,7 @@ components:
           type: object
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
-          description: 'Weekly ESL auto-upgrade day for the maintenance window. enum: `any`, `fri`, `mon`, `sat`, `sun`, `thu`, `tue`, `wed`'
+          description: Weekly ESL auto-upgrade day for the maintenance window
         enabled:
           default: false
           description: Whether auto upgrade should happen (Note that Mist may auto-upgrade
@@ -100077,7 +100099,7 @@ components:
       properties:
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
-          description: 'Day of week when the automatic upgrade window runs. enum: `any`, `fri`, `mon`, `sat`, `sun`, `thu`, `tue`, `wed`'
+          description: Day of week when the automatic upgrade window runs
         enabled:
           description: Whether automatic upgrades are enabled for sites using this
             site template
@@ -100199,7 +100221,7 @@ components:
           - 'null'
         proxy_arp:
           $ref: '#/components/schemas/site_wifi_proxy_arp'
-          description: 'ARP proxy mode for site Wi-Fi. enum: `default`, `disabled`, `enabled`'
+          description: ARP proxy mode for site Wi-Fi
       type: object
     site_wifi_proxy_arp:
       description: 'enum: `default`, `disabled`, `enabled`'
@@ -102248,7 +102270,7 @@ components:
       properties:
         band:
           $ref: '#/components/schemas/spectrum_analysis_band'
-          description: 'Radio band to scan during spectrum analysis. enum: `24`, `5`, `6`'
+          description: Radio band to scan during spectrum analysis
         channels:
           description: Optional list of channels to scan. If not specified, all supported
             channels will be scanned
@@ -102272,7 +102294,7 @@ components:
           type: integer
         format:
           $ref: '#/components/schemas/spectrum_analysis_format'
-          description: 'Output format for the spectrum analysis results. enum: `json`, `stream`'
+          description: Output format for the spectrum analysis results
       required:
       - band
       type: object
@@ -102344,13 +102366,13 @@ components:
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/sso_idp_sign_algo'
-          description: 'SAML assertion signing algorithm. Required if `idp_type`==`saml`. enum: `sha1`, `sha256`, `sha384`, `sha512`'
+          description: SAML assertion signing algorithm. Required if `idp_type`==`saml`
         idp_sso_url:
           description: Required if `idp_type`==`saml`, IDP Single-Sign-On URL
           type: string
         idp_type:
           $ref: '#/components/schemas/sso_idp_type'
-          description: 'Identity provider type for this SSO configuration. enum: `ldap`, `mxedge_proxy`, `oauth`, `saml`, `openroaming`'
+          description: Identity provider type for this SSO configuration
         ignore_unmatched_roles:
           description: If `idp_type`==`saml`, ignore any unmatched roles provided
             in assertion. By default, an assertion is treated as invalid for any unmatched
@@ -102411,7 +102433,7 @@ components:
           description: Server hostnames or IP addresses for LDAP or LDAPS when `idp_type`==`ldap`
         ldap_type:
           $ref: '#/components/schemas/sso_ldap_type'
-          description: 'Provider template for LDAP SSO when `idp_type`==`ldap`. enum: `azure`, `custom`, `google`, `okta`'
+          description: Provider template for LDAP SSO when `idp_type`==`ldap`
         ldap_user_filter:
           description: Required if `ldap_type`==`custom`, LDAP filter that will identify
             the type of user
@@ -102439,7 +102461,7 @@ components:
           type: string
         nameid_format:
           $ref: '#/components/schemas/sso_nameid_format'
-          description: 'SAML NameID format used when `idp_type`==`saml`. enum: `email`, `unspecified`'
+          description: SAML NameID format used when `idp_type`==`saml`
         oauth_cc_client_id:
           description: Required if `idp_type`==`oauth`, Client Credentials
           examples:
@@ -102457,7 +102479,7 @@ components:
           type: string
         oauth_ping_identity_region:
           $ref: '#/components/schemas/oauth_ping_identity_region'
-          description: 'Ping Identity region for OAuth SSO when `oauth_type`==`ping_identity`. enum: `asia`, `au`, `ca`, `eu`, `us`'
+          description: Ping Identity region for OAuth SSO when `oauth_type`==`ping_identity`
         oauth_provider_domain:
           $ref: '#/components/schemas/oauth_provider_domain'
           description: "Provider domain for Okta OAuth SSO when `oauth_type`==`okta`. enum: `okta.com`, `oktapreview.com`, `okta-emea.com`, `okta-gov.com`, `okta.mil`, `mtls.okta.com`"
@@ -102480,7 +102502,7 @@ components:
           type: string
         oauth_type:
           $ref: '#/components/schemas/sso_oauth_type'
-          description: 'Provider type for OAuth SSO when `idp_type`==`oauth`. enum: `azure`, `azure-gov`, `okta`, `ping_identity`'
+          description: Provider type for OAuth SSO when `idp_type`==`oauth`
         openroaming_ssids:
           $ref: '#/components/schemas/sso_openroaming_ssids'
           description: SSIDs that support OpenRoaming, used when `idp_type`==`openroaming`
@@ -102884,7 +102906,7 @@ components:
       properties:
         channel:
           $ref: '#/components/schemas/ssr_upgrade_channel'
-          description: 'Firmware release channel to use for the SSR upgrade. enum: `alpha`, `beta`, `stable`'
+          description: Firmware release channel to use for the SSR upgrade
         reboot_at:
           description: Reboot start time in epoch seconds, default is start_time,
             -1 disables reboot
@@ -102914,7 +102936,7 @@ components:
       properties:
         channel:
           $ref: '#/components/schemas/ssr_upgrade_channel'
-          description: 'Firmware release channel to use for the SSR upgrade. enum: `alpha`, `beta`, `stable`'
+          description: Firmware release channel to use for the SSR upgrade
         device_ids:
           $ref: '#/components/schemas/ssr_upgrade_multi_device_ids'
           description: SSR device identifiers targeted by the upgrade
@@ -102928,7 +102950,7 @@ components:
           type: integer
         strategy:
           $ref: '#/components/schemas/ssr_upgrade_strategy'
-          description: 'Upgrade rollout strategy for the targeted SSR devices. enum: `big_bang`, `serial`'
+          description: Upgrade rollout strategy for the targeted SSR devices
         version:
           description: 128T firmware version to upgrade (e.g. 5.3.0-93)
           minLength: 1
@@ -103001,7 +103023,7 @@ components:
       properties:
         antenna_select:
           $ref: '#/components/schemas/antenna_select'
-          description: 'Selectable antenna mode reported for the AP. enum: `""`, `external`, `internal`'
+          description: Selectable antenna mode reported for the AP
         auto_placement:
           $ref: '#/components/schemas/stats_ap_auto_placement'
           description: Auto placement result and status for the AP
@@ -103325,7 +103347,7 @@ components:
           description: Total packets transmitted by the AP since connection
         type:
           $ref: '#/components/schemas/const_device_type_ap'
-          description: 'Device type for this statistics record. enum: `ap`'
+          description: Device type for this statistics record
         uptime:
           description: How long, in seconds, has the device been up (or rebooted)
           examples:
@@ -103830,7 +103852,7 @@ components:
           type: number
         src:
           $ref: '#/components/schemas/stats_ap_gps_stat_src'
-          description: 'Source of the GPS location data. enum: `gps`, `other_ap`, `other_aps`'
+          description: Source of the GPS location data
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when the GPS location data was observed, in epoch seconds
@@ -103872,7 +103894,7 @@ components:
           description: L2TP session entries for this tunnel
         state:
           $ref: '#/components/schemas/l2tp_state'
-          description: 'L2TP tunnel state reported by the AP. enum: `established`, `established_with_session`, `idle`, `wait-ctrl-conn`, `wait-ctrl-reply`'
+          description: L2TP tunnel state reported by the AP
         uptime:
           description: Tunnel uptime, in seconds
           examples:
@@ -103923,7 +103945,7 @@ components:
           - 'null'
         state:
           $ref: '#/components/schemas/l2tp_state'
-          description: 'L2TP session state reported by the AP. enum: `established`, `established_with_session`, `idle`, `wait-ctrl-conn`, `wait-ctrl-reply`'
+          description: L2TP session state reported by the AP
       type: object
     stats_ap_l2tp_stat_sessions:
       description: L2TP tunnel sessions reported by an AP
@@ -105519,7 +105541,7 @@ components:
           type: boolean
         auth_state:
           $ref: '#/components/schemas/port_auth_state'
-          description: 'Authentication state of the port. enum: `""`, `authenticated`, `authenticating`, `held`, `init`'
+          description: Authentication state of the port
         disabled:
           description: Indicates if interface is disabled
           readOnly: true
@@ -105594,7 +105616,7 @@ components:
           type: boolean
         poe_mode:
           $ref: '#/components/schemas/stats_switch_port_poe_mode'
-          description: 'PoE mode reported for the port. enum: `802.3af`, `802.3at`, `802.3bt`'
+          description: PoE mode reported for the port
         poe_on:
           description: Is the device attached to POE
           readOnly: true
@@ -105653,10 +105675,10 @@ components:
           type: integer
         stp_role:
           $ref: '#/components/schemas/port_stp_role'
-          description: 'Current spanning tree role of the port. enum: `""`, `alternate`, `backup`, `designated`, `disabled`, `root`, `root-prevented`'
+          description: Current spanning tree role of the port
         stp_state:
           $ref: '#/components/schemas/port_stp_state'
-          description: 'Current spanning tree state of the port. enum: `""`, `blocking`, `disabled`, `forwarding`, `learning`, `listening`'
+          description: Current spanning tree state of the port
         tx_bcast_pkts:
           description: Number of broadcast packets transmitted on the interface
           readOnly: true
@@ -105680,7 +105702,7 @@ components:
           description: Total packets transmitted on the port
         type:
           $ref: '#/components/schemas/stats_switch_port_type'
-          description: 'Detected device category connected to the port, when available. enum: `ap`, `ble`, `gateway`, `mxedge`, `nac`, `switch`'
+          description: Detected device category connected to the port, when available
         unconfigured:
           description: Indicates if interface is unconfigured
           readOnly: true
@@ -105909,10 +105931,10 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/tunnel_priority'
-          description: 'Relative preference assigned to the tunnel. enum: `primary`, `secondary`'
+          description: Relative preference assigned to the tunnel
         protocol:
           $ref: '#/components/schemas/wan_tunnel_protocol'
-          description: 'Tunnel protocol used for the connection. enum: `gre`, `ipsec`'
+          description: Tunnel protocol used for the connection
         rx_bytes:
           $ref: '#/components/schemas/rx_bytes'
           description: Total bytes received on the tunnel
@@ -106456,10 +106478,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type'
-          description: 'IPv4 address assignment mode for out-of-band management. enum: `dhcp`, `disabled`, `static`'
+          description: IPv4 address assignment mode for out-of-band management
         type8:
           $ref: '#/components/schemas/mxedge_mgmt_oob_ip_type6'
-          description: 'IPv6 address assignment mode for out-of-band management. enum: `autoconf`, `dhcp`, `disabled`, `static`'
+          description: IPv6 address assignment mode for out-of-band management
       type: object
     stats_mxedge_port_stat:
       additionalProperties: false
@@ -106789,7 +106811,7 @@ components:
           description: Site identifier associated with the tunnel statistics
         state:
           $ref: '#/components/schemas/stats_mxtunnel_state'
-          description: 'Current state of the WxLAN or Mist tunnel. enum: `established`, `established_with_sessions`, `idle`, `wait-ctrl-conn`, `wait-ctrl-reply`'
+          description: Current state of the WxLAN or Mist tunnel
         tx_control_pkts:
           description: Number of control packets transmitted for the tunnel
           readOnly: true
@@ -107780,7 +107802,7 @@ components:
           type: boolean
         auth_state:
           $ref: '#/components/schemas/port_auth_state'
-          description: 'Authentication state of the port. enum: `""`, `authenticated`, `authenticating`, `held`, `init`'
+          description: Authentication state of the port
         disabled:
           description: Indicates if interface is disabled
           readOnly: true
@@ -107869,14 +107891,14 @@ components:
           type: boolean
         poe_mode:
           $ref: '#/components/schemas/stats_switch_port_poe_mode'
-          description: 'PoE mode reported for the port. enum: `802.3af`, `802.3at`, `802.3bt`'
+          description: PoE mode reported for the port
         poe_on:
           description: Is the device attached to POE
           readOnly: true
           type: boolean
         poe_priority:
           $ref: '#/components/schemas/poe_priority'
-          description: 'PoE priority configured for the port. enum: `low`, `high`'
+          description: PoE priority configured for the port
         port_id:
           description: Identifier of the port reporting these statistics
           examples:
@@ -107931,10 +107953,10 @@ components:
           type: integer
         stp_role:
           $ref: '#/components/schemas/port_stp_role'
-          description: 'Current spanning tree role of the port. enum: `""`, `alternate`, `backup`, `designated`, `disabled`, `root`, `root-prevented`'
+          description: Current spanning tree role of the port
         stp_state:
           $ref: '#/components/schemas/port_stp_state'
-          description: 'Current spanning tree state of the port. enum: `""`, `blocking`, `disabled`, `forwarding`, `learning`, `listening`'
+          description: Current spanning tree state of the port
         tx_bcast_pkts:
           description: Number of broadcast packets transmitted on the interface
           readOnly: true
@@ -107958,7 +107980,7 @@ components:
           description: Total packets transmitted on the port
         type:
           $ref: '#/components/schemas/stats_switch_port_type'
-          description: 'Detected device category connected to the port, when available. enum: `ap`, `ble`, `gateway`, `mxedge`, `nac`, `switch`'
+          description: Detected device category connected to the port, when available
         unconfigured:
           description: Indicates if interface is unconfigured
           readOnly: true
@@ -108220,10 +108242,10 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/tunnel_priority'
-          description: 'Relative preference assigned to the tunnel. enum: `primary`, `secondary`'
+          description: Relative preference assigned to the tunnel
         protocol:
           $ref: '#/components/schemas/wan_tunnel_protocol'
-          description: 'Tunnel protocol used for the connection. enum: `gre`, `ipsec`'
+          description: Tunnel protocol used for the connection
         rx_bytes:
           $ref: '#/components/schemas/rx_bytes'
           description: Total bytes received on the tunnel
@@ -108338,7 +108360,7 @@ components:
           type: integer
         band:
           $ref: '#/components/schemas/dot11_band'
-          description: 'Wi-Fi radio band used by the wireless client connection. enum: `24`, `5`, `5-dedicated`, `5-selectable`, `6`, `6-dedicated`, `6-selectable`'
+          description: Wi-Fi radio band used by the wireless client connection
         bssid:
           description: AP radio BSSID serving the wireless client connection
           type: string
@@ -108405,7 +108427,7 @@ components:
           type: boolean
         proto:
           $ref: '#/components/schemas/dot11_proto'
-          description: '802.11 protocol amendment used by the wireless client. enum: `a`, `ac`, `ax`, `b`, `be`, `g`, `n`'
+          description: 802.11 protocol amendment used by the wireless client
         psk_id:
           description: PSK id (if multi-psk is used)
           format: uuid
@@ -108612,7 +108634,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/stats_wxrule_action'
-          description: 'Allow or block behavior enforced by this WxLAN rule. enum: `allow`, `block`'
+          description: Allow or block behavior enforced by this WxLAN rule
         client_mac:
           $ref: '#/components/schemas/stats_wxrule_client_mac'
           description: Wireless client MAC addresses matching this WxLAN rule
@@ -109070,7 +109092,7 @@ components:
           type: integer
         scope:
           $ref: '#/components/schemas/suppressed_alarm_scope'
-          description: 'Alarm suppression target level. enum: `org`, `site`'
+          description: Alarm suppression target level
       type: object
     suppressed_alarm_applies:
       additionalProperties: false
@@ -109502,14 +109524,16 @@ components:
       properties:
         alarm_class:
           $ref: '#/components/schemas/switch_iot_port_alarm_class'
-          description: 'Alarm severity class raised for input-triggered switch IOT port events. enum: `minor`, `major`'
+          description: Alarm severity class raised for input-triggered switch IOT
+            port events
         enabled:
           default: false
           description: Whether this switch IOT port is enabled
           type: boolean
         input_src:
           $ref: '#/components/schemas/switch_iot_port_input_src'
-          description: 'Only for `OUT` ports. Input port that triggers this output port. enum: `IN0`, `IN1`'
+          description: Only for `OUT` ports. Input port that triggers this output
+            port
         name:
           description: Display name for the switch IOT port
           type: string
@@ -109601,7 +109625,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: 'IP assignment mode for in-band switch management. enum: `dhcp`, `static`'
+          description: IP assignment mode for in-band switch management
       type: object
     switch_matching_rule_oob_ip_config:
       additionalProperties: false
@@ -109609,7 +109633,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/ip_type'
-          description: 'IP assignment mode for out-of-band switch management. enum: `dhcp`, `static`'
+          description: IP assignment mode for out-of-band switch management
         use_mgmt_vrf:
           default: false
           description: If supported on the platform. If enabled, DNS will be using
@@ -110668,7 +110692,7 @@ components:
           description: Time associated with this switch search result
         type:
           $ref: '#/components/schemas/device_type_switch'
-          description: 'Device type for this switch search result. enum: `switch`'
+          description: Device type for this switch search result
         uptime:
           description: Device uptime for the switch, in seconds
           type: integer
@@ -110717,7 +110741,7 @@ components:
           type: integer
         vc_role:
           $ref: '#/components/schemas/switch_virtual_chassis_member_vc_role'
-          description: 'Role of this member in the Virtual Chassis. enum: `backup`, `linecard`, `master`'
+          description: Role of this member in the Virtual Chassis
       required:
       - mac
       - member_id
@@ -110801,7 +110825,7 @@ components:
       properties:
         aggressiveness:
           $ref: '#/components/schemas/synthetictest_config_aggressiveness'
-          description: 'Overall aggressiveness level for synthetic test probes. enum: `auto`, `high`, `med`, `low`'
+          description: Overall aggressiveness level for synthetic test probes
         custom_probes:
           $ref: '#/components/schemas/synthetictest_config_custom_probes'
           description: Custom synthetic probe definitions keyed by probe name
@@ -110835,7 +110859,7 @@ components:
       properties:
         aggressiveness:
           $ref: '#/components/schemas/synthetictest_config_aggressiveness'
-          description: 'Probe aggressiveness level for this custom synthetic probe. enum: `auto`, `high`, `med`, `low`'
+          description: Probe aggressiveness level for this custom synthetic probe
         target:
           description: Can be URL (e.g. http://x.com, https://x.com:8080/path/to/resource),
             IP address, or IP:port combination
@@ -110849,7 +110873,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/synthetictest_config_custom_probe_type'
-          description: 'Probe type used by this custom synthetic probe. enum: `application`, `curl`, `icmp`, `reachability`, `tcp`'
+          description: Probe type used by this custom synthetic probe
       type: object
     synthetictest_config_custom_probe_type:
       default: icmp
@@ -111002,7 +111026,8 @@ components:
           type: string
         protocol:
           $ref: '#/components/schemas/synthetictest_device_protocol'
-          description: 'If `type`==`lan_connectivity`. Protocol or protocol combination used for the connectivity test. enum: `ping`, `ping+traceroute`, `traceroute`'
+          description: If `type`==`lan_connectivity`. Protocol or protocol combination
+            used for the connectivity test
         tenant:
           description: If `type`==`curl` or `type`==`lan_connectivity`
           examples:
@@ -111024,7 +111049,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/synthetictest_type'
-          description: 'Synthetic test type to run against the target. enum: `arp`, `curl`, `dhcp`, `dhcp6`, `dns`, `lan_connectivity`, `radius`, `speedtest`'
+          description: Synthetic test type to run against the target
         url:
           description: If `type`==`curl`. URL requested during the HTTP synthetic
             test
@@ -111072,7 +111097,7 @@ components:
           type: string
         device_type:
           $ref: '#/components/schemas/device_type'
-          description: 'Device category that ran the synthetic test. enum: `ap`, `gateway`, `switch`'
+          description: Device category that ran the synthetic test
         failed:
           description: Whether the synthetic test failed
           examples:
@@ -111121,7 +111146,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/synthetictest_type'
-          description: 'Synthetic test type for this result. enum: `arp`, `curl`, `dhcp`, `dhcp6`, `dns`, `lan_connectivity`, `radius`, `speedtest`'
+          description: Synthetic test type for this result
         vlan_id:
           description: Identifier of the VLAN used by the synthetic test
           examples:
@@ -111362,7 +111387,8 @@ components:
           type: string
         last_status:
           $ref: '#/components/schemas/test_cradlepoint_last_status'
-          description: 'Integration status detected during the most recent Cradlepoint sync. enum: `active`, `inactive`'
+          description: Integration status detected during the most recent Cradlepoint
+            sync
       type: object
     test_cradlepoint_last_status:
       description: 'status of integration detected during last sync. enum: `active`,
@@ -111484,7 +111510,7 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/ticket_status'
-          description: 'Current lifecycle status of this support ticket. enum: `closed`, `open`, `pending`, `solved`'
+          description: Current lifecycle status of this support ticket
         subject:
           description: Short summary of the support request
           type: string
@@ -112454,7 +112480,7 @@ components:
           description: DHCP server IP addresses used as relay targets
         type:
           $ref: '#/components/schemas/tunterm_dhcpd_type'
-          description: 'DHCP forwarding mode for tunnel termination VLANs. enum: `relay`'
+          description: DHCP forwarding mode for tunnel termination VLANs
       type: object
     tunterm_dhcpd_config_property:
       additionalProperties: false
@@ -112500,7 +112526,7 @@ components:
           type: integer
         protocol:
           $ref: '#/components/schemas/tunterm_monitoring_protocol'
-          description: 'Monitoring method used for this tunnel termination check. enum: `arp`, `ping`, `tcp`'
+          description: Monitoring method used for this tunnel termination check
         src_vlan_id:
           description: Optional source for the monitoring check, vlan_id configured
             in tunterm_other_ip_configs
@@ -113212,10 +113238,11 @@ components:
             the organization upgrade
         device_type:
           $ref: '#/components/schemas/device_type'
-          description: 'Device family selected for the organization upgrade. enum: `ap`, `gateway`, `switch`'
+          description: Device family selected for the organization upgrade
         download_strategy:
           $ref: '#/components/schemas/upgrade_org_devices_download_strategy'
-          description: 'Firmware download orchestration strategy for the organization upgrade. enum: `canary`, `big_bang`, `serial`'
+          description: Firmware download orchestration strategy for the organization
+            upgrade
         max_failure_percentage:
           $ref: '#/components/schemas/upgrade_devices_max_failure_percentage'
           description: If `strategy`!=`big_bang`. Allowed failure percentage across
@@ -113253,7 +113280,7 @@ components:
           type: string
         reboot_strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: 'Device reboot orchestration strategy for selected devices. enum: `big_bang`, `canary`, `rrm`, `serial`'
+          description: Device reboot orchestration strategy for selected devices
         rrm_first_batch_percentage:
           description: For APs only and if `strategy`==`rrm`. Percentage of APs that
             need to be present in the first RRM batch
@@ -113268,10 +113295,12 @@ components:
           type: integer
         rrm_mesh_upgrade:
           $ref: '#/components/schemas/upgrade_device_rrm_mesh_upgrade'
-          description: 'For APs only and if `strategy`==`rrm`. Mesh AP upgrade order for the organization upgrade. enum: `parallel`, `sequential`'
+          description: For APs only and if `strategy`==`rrm`. Mesh AP upgrade order
+            for the organization upgrade
         rrm_node_order:
           $ref: '#/components/schemas/upgrade_device_rrm_node_order'
-          description: 'For APs only and if `strategy`==`rrm`. AP ordering direction for RRM upgrade batches. enum: `center_to_fringe`, `fringe_to_center`'
+          description: For APs only and if `strategy`==`rrm`. AP ordering direction
+            for RRM upgrade batches
         rrm_slow_ramp:
           description: For APs only and if `strategy`==`rrm`. True will make rrm batch
             sizes slowly ramp up
@@ -113301,7 +113330,7 @@ components:
           type: integer
         strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: 'Upgrade orchestration strategy for selected devices. enum: `big_bang`, `canary`, `rrm`, `serial`'
+          description: Upgrade orchestration strategy for selected devices
         versions:
           $ref: '#/components/schemas/upgrade_org_devices_versions'
           description: Target firmware versions for this organization upgrade
@@ -113388,7 +113417,7 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/upgrade_device_status'
-          description: 'Current status of the site-level upgrade job. enum: `cancelled`, `completed`, `created`, `downloaded`, `downloading`, `failed`, `queued`, `upgrading`'
+          description: Current status of the site-level upgrade job
         targets:
           $ref: '#/components/schemas/upgrade_devices_targets'
           description: Device targets grouped by upgrade state
@@ -113404,7 +113433,7 @@ components:
       properties:
         firmware_type:
           $ref: '#/components/schemas/upgrade_org_devices_version_firmware_type'
-          description: 'Firmware family this version entry applies to. enum: `ap`, `junos`'
+          description: Firmware family this version entry applies to
         force:
           default: false
           description: If `firmware_type`==`ap`, set to `true` if upgrade is needed
@@ -113502,10 +113531,12 @@ components:
           type: integer
         rrm_mesh_upgrade:
           $ref: '#/components/schemas/upgrade_device_rrm_mesh_upgrade'
-          description: 'For APs only and if `strategy`==`rrm`. Mesh AP upgrade order for the site upgrade. enum: `parallel`, `sequential`'
+          description: For APs only and if `strategy`==`rrm`. Mesh AP upgrade order
+            for the site upgrade
         rrm_node_order:
           $ref: '#/components/schemas/upgrade_device_rrm_node_order'
-          description: 'For APs only and if `strategy`==`rrm`. AP ordering direction for RRM upgrade batches. enum: `center_to_fringe`, `fringe_to_center`'
+          description: For APs only and if `strategy`==`rrm`. AP ordering direction
+            for RRM upgrade batches
         rrm_slow_ramp:
           description: For APs only and if `strategy`==`rrm`. True will make rrm batch
             sizes slowly ramp up
@@ -113525,7 +113556,7 @@ components:
           type: integer
         strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: 'Upgrade orchestration strategy for selected devices. enum: `big_bang`, `canary`, `rrm`, `serial`'
+          description: Upgrade orchestration strategy for selected devices
         version:
           description: Specific version / stable, default is to use the latest available
             version
@@ -113590,7 +113621,7 @@ components:
           type: boolean
         for:
           $ref: '#/components/schemas/use_auto_ap_values_for'
-          description: 'Localization value type to accept or reject. enum: `orientation`, `placement`'
+          description: Localization value type to accept or reject
         macs:
           $ref: '#/components/schemas/use_auto_ap_values_macs'
           description: AP MAC addresses whose cached values are accepted or rejected
@@ -113821,7 +113852,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to clear ARP entries. enum: `node0`, `node1`'
+          description: HA cluster node on which to clear ARP entries
         port_id:
           description: The device interface on which to clear the ARP cache.
           examples:
@@ -113847,10 +113878,10 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to clear BGP sessions. enum: `node0`, `node1`'
+          description: HA cluster node on which to clear BGP sessions
         type:
           $ref: '#/components/schemas/utils_clear_bgp_type'
-          description: 'BGP clear operation type to run. enum: `hard`, `in`, `out`, `soft`'
+          description: BGP clear operation type to run
         vrf:
           description: Routing instance or VRF containing the BGP session
           type: string
@@ -113899,7 +113930,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to clear sessions. enum: `node0`, `node1`'
+          description: HA cluster node on which to clear sessions
         service_name:
           description: Service name, only supported in SSR
           examples:
@@ -113927,7 +113958,7 @@ components:
           type: integer
         node:
           $ref: '#/components/schemas/utils_devices_restart_node'
-          description: 'SRX or SSR node to restart. enum: `node0`, `node1`'
+          description: SRX or SSR node to restart
       type: object
     utils_devices_restart_multi:
       description: Request to restart multiple devices
@@ -114000,7 +114031,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node from which to send ping packets. enum: `node0`, `node1`'
+          description: HA cluster node from which to send ping packets
         size:
           default: 56
           description: ICMP payload size, in bytes
@@ -114022,7 +114053,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to release the DHCP lease. enum: `node0`, `node1`'
+          description: HA cluster node on which to release the DHCP lease
         port_id:
           description: Network interface whose current DHCP lease should be released
           examples:
@@ -114049,7 +114080,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to release DHCP leases. enum: `node0`, `node1`'
+          description: HA cluster node on which to release DHCP leases
         port_id:
           description: Network interface containing the DHCP leases to release
           examples:
@@ -114165,7 +114196,7 @@ components:
       properties:
         info:
           $ref: '#/components/schemas/utils_send_support_logs_info'
-          description: 'Support file bundle type to upload. enum: `code-dumps`, `full`, `messages`, `outbound-ssh`, `process`, `var-logs`'
+          description: Support file bundle type to upload
         node:
           description: 'Optional for SSR: if node is not present, both nodes support
             files are uploaded'
@@ -114209,7 +114240,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node from which to send the service ping. enum: `node0`, `node1`'
+          description: HA cluster node from which to send the service ping
         service:
           description: Ping packet takes the same path as the service
           type: string
@@ -114248,7 +114279,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node to run the command on, required for Gateways. enum: `node0`, `node1`'
+          description: HA cluster node to run the command on, required for Gateways
         port_id:
           description: Device port identifier filter for the ARP table lookup
           examples:
@@ -114265,7 +114296,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show the BGP summary. enum: `node0`, `node1`'
+          description: HA cluster node on which to show the BGP summary
       type: object
     utils_show_dhcp_leases:
       description: DHCP leases command request
@@ -114277,7 +114308,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show DHCP leases. enum: `node0`, `node1`'
+          description: HA cluster node on which to show DHCP leases
       required:
       - network
       type: object
@@ -114333,7 +114364,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show the forwarding table. enum: `node0`, `node1`'
+          description: HA cluster node on which to show the forwarding table
         prefix:
           description: IPv4 or IPv6 prefix filter for forwarding table entries
           examples:
@@ -114375,7 +114406,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show the OSPF database. enum: `node0`, `node1`'
+          description: HA cluster node on which to show the OSPF database
         self_originate:
           default: false
           description: Whether to show only self-originated OSPF database entries;
@@ -114392,7 +114423,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show OSPF interfaces. enum: `node0`, `node1`'
+          description: HA cluster node on which to show OSPF interfaces
         port_id:
           description: Network interface filter for OSPF interface output
           examples:
@@ -114414,7 +114445,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show OSPF neighbors. enum: `node0`, `node1`'
+          description: HA cluster node on which to show OSPF neighbors
         port_id:
           description: Network interface filter for OSPF neighbor output
           examples:
@@ -114431,7 +114462,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show the OSPF summary. enum: `node0`, `node1`'
+          description: HA cluster node on which to show the OSPF summary
         vrf:
           description: Routing instance or VRF filter for OSPF summary output
           examples:
@@ -114468,7 +114499,7 @@ components:
           type: string
         protocol:
           $ref: '#/components/schemas/utils_show_route_protocol'
-          description: 'Routing protocol filter for route entries. enum: `any`, `bgp`, `direct`, `evpn`, `ospf`, `static`'
+          description: Routing protocol filter for route entries
         route:
           description: "if neighbor is specified, received / advertised; if not specified,\
             \ both will be shown\n  * for SSR, show bgp neighbors 10.250.18.202 received-routes/advertised-routes\n\
@@ -114499,7 +114530,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show the service path. enum: `node0`, `node1`'
+          description: HA cluster node on which to show the service path
         service_name:
           description: Exact service name for which to display the service path
           examples:
@@ -114511,7 +114542,7 @@ components:
       properties:
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node on which to show active sessions. enum: `node0`, `node1`'
+          description: HA cluster node on which to show active sessions
         service_name:
           description: The exact service name for which to display the active sessions
           examples:
@@ -114533,7 +114564,7 @@ components:
           type: string
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node from which to run traceroute. enum: `node0`, `node1`'
+          description: HA cluster node from which to run traceroute
         port:
           default: 33434
           description: When `protocol`==`udp`, not supported in SSR. The udp port
@@ -114541,7 +114572,7 @@ components:
           type: integer
         protocol:
           $ref: '#/components/schemas/utils_traceroute_protocol'
-          description: 'Transport protocol to use for traceroute. enum: `icmp`, `udp`'
+          description: Transport protocol to use for traceroute
         timeout:
           default: 60
           description: Not supported in SSR. Maximum time in seconds to wait for the
@@ -114708,7 +114739,7 @@ components:
           type: integer
         power_mode:
           $ref: '#/components/schemas/ble_config_power_mode'
-          description: 'Transmit power mode for the virtual beacon. enum: `custom`, `default`'
+          description: Transmit power mode for the virtual beacon
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Site identifier that owns the virtual beacon
@@ -114752,7 +114783,7 @@ components:
       properties:
         mode:
           $ref: '#/components/schemas/vc_port_mode'
-          description: 'Virtual Chassis port mode to apply. enum: `network`, `vcp-higig`, `vcp-hgoe`'
+          description: Virtual Chassis port mode to apply
       type: object
     vc_port_mode:
       description: 'enum: `network`, `vcp-higig`, `vcp-hgoe`'
@@ -114803,7 +114834,7 @@ components:
           description: Port names to use as Virtual Chassis ports on this member
         vc_role:
           $ref: '#/components/schemas/virtual_chassis_config_member_vc_role'
-          description: 'Role of this member in the Virtual Chassis. enum: `backup`, `linecard`, `master`'
+          description: Role of this member in the Virtual Chassis
       required:
       - mac
       - vc_role
@@ -114843,7 +114874,8 @@ components:
             to use as Virtual Chassis ports
         vc_role:
           $ref: '#/components/schemas/virtual_chassis_member_update_vc_role'
-          description: 'Required if `op`==`add` or `op`==`preprovision`; role of the member in the Virtual Chassis. enum: `backup`, `linecard`, `master`'
+          description: Required if `op`==`add` or `op`==`preprovision`; role of the
+            member in the Virtual Chassis
       type: object
     virtual_chassis_member_update_vc_ports:
       description: Required if `op`==`add` or `op`==`preprovision`
@@ -114866,7 +114898,7 @@ components:
           description: Virtual Chassis members and ports affected by the operation
         op:
           $ref: '#/components/schemas/virtual_chassis_port_operation'
-          description: 'Action to perform on the specified Virtual Chassis ports. enum: `delete`, `set`'
+          description: Action to perform on the specified Virtual Chassis ports
       required:
       - op
       - members
@@ -114899,7 +114931,7 @@ components:
           type: integer
         op:
           $ref: '#/components/schemas/virtual_chassis_update_op'
-          description: 'Action to perform on the Virtual Chassis. enum: `add`, `preprovision`, `remove`, `renumber`'
+          description: Action to perform on the Virtual Chassis
         remove_inventory:
           default: false
           description: Only if `op`==`preprovision`. When removing members from a
@@ -114972,7 +115004,7 @@ components:
             or interface name for `mesh` mode
         type:
           $ref: '#/components/schemas/vpn_mode'
-          description: 'VPN topology mode for this configuration. enum: `hub_spoke`, `mesh`'
+          description: VPN topology mode for this configuration
       required:
       - name
       - paths
@@ -115297,7 +115329,7 @@ components:
           type: string
         auth_type:
           $ref: '#/components/schemas/vrrp_group_auth_type'
-          description: 'Authentication method used by the VRRP group. enum: `md5`, `simple`'
+          description: Authentication method used by the VRRP group
         networks:
           $ref: '#/components/schemas/vrrp_group_networks'
           description: VRRP network mappings and their virtual IP addresses
@@ -115494,7 +115526,7 @@ components:
           type: string
         oauth2_grant_type:
           $ref: '#/components/schemas/webhook_oauth2_grant_type'
-          description: 'OAuth2 grant type used when `type`==`oauth2`. enum: `client_credentials`, `password`'
+          description: OAuth2 grant type used when `type`==`oauth2`
         oauth2_password:
           description: Required when `oauth2_grant_type`==`password`; password used
             for the OAuth2 token request
@@ -115586,7 +115618,7 @@ components:
             seen, in epoch seconds
         node:
           $ref: '#/components/schemas/ha_cluster_node_enum'
-          description: 'HA cluster node associated with this alarm event when applicable. enum: `node0`, `node1`'
+          description: HA cluster node associated with this alarm event when applicable
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Organization associated with this alarm event
@@ -115651,7 +115683,7 @@ components:
           description: Alarm events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_alarms_topic'
-          description: 'Webhook topic name for alarm event deliveries. enum: `alarms`'
+          description: Webhook topic name for alarm event deliveries
       required:
       - events
       - topic
@@ -115689,7 +115721,7 @@ components:
           description: Raw RSSI event records included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_asset_raw_rssi_topic'
-          description: 'Webhook topic name for asset raw RSSI deliveries. enum: `asset-raw-rssi`'
+          description: Webhook topic name for asset raw RSSI deliveries
       required:
       - events
       - topic
@@ -115813,7 +115845,7 @@ components:
           description: Audit log events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_audits_topic'
-          description: 'Webhook topic name for audit event deliveries. enum: `audits`'
+          description: Webhook topic name for audit event deliveries
       required:
       - events
       - topic
@@ -115832,7 +115864,7 @@ components:
           description: Client information events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_client_info_topic'
-          description: 'Webhook topic name for client information deliveries. enum: `client-info`'
+          description: Webhook topic name for client information deliveries
       type: object
     webhook_client_info_event:
       additionalProperties: false
@@ -115880,7 +115912,7 @@ components:
           description: Client join events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_client_join_topic'
-          description: 'Webhook topic name for client join deliveries. enum: `client-join`'
+          description: Webhook topic name for client join deliveries
       required:
       - events
       - topic
@@ -115974,7 +116006,7 @@ components:
           description: Client latency summary events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_client_latency_topic'
-          description: 'Webhook topic name for client latency deliveries. enum: `client-latency`'
+          description: Webhook topic name for client latency deliveries
       type: object
     webhook_client_latency_event:
       additionalProperties: false
@@ -116059,7 +116091,7 @@ components:
           description: Client session events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_client_sessions_topic'
-          description: 'Webhook topic name for client session deliveries. enum: `client-sessions`'
+          description: Webhook topic name for client session deliveries
       required:
       - events
       - topic
@@ -116236,7 +116268,7 @@ components:
           description: Site associated with the webhook delivery attempt, when applicable
         status:
           $ref: '#/components/schemas/webhook_delivery_status'
-          description: 'Delivery result for the webhook request. enum: `failure`, `success`'
+          description: Delivery result for the webhook request
         status_code:
           description: HTTP status code returned by the webhook destination
           examples:
@@ -116247,7 +116279,7 @@ components:
           description: Time when the webhook delivery attempt occurred, in epoch seconds
         topic:
           $ref: '#/components/schemas/webhook_delivery_topic'
-          description: 'Webhook topic delivered in this request. enum: `alarms`, `audits`, `device-updowns`, `occupancy-alerts`, `ping`'
+          description: Webhook topic delivered in this request
         webhook_id:
           description: Unique identifier of the configured webhook used for this delivery
             attempt
@@ -116295,7 +116327,7 @@ components:
           description: Device events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_device_events_topic'
-          description: 'Webhook topic name for device event deliveries. enum: `device-events`'
+          description: Webhook topic name for device event deliveries
       required:
       - events
       - topic
@@ -116320,7 +116352,7 @@ components:
           description: Device up/down events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_device_updowns_topic'
-          description: 'Webhook topic name for device up/down deliveries. enum: `device-updowns`'
+          description: Webhook topic name for device up/down deliveries
       required:
       - events
       - topic
@@ -116392,7 +116424,7 @@ components:
             delivery
         topic:
           $ref: '#/components/schemas/webhook_discovered_raw_rssi_topic'
-          description: 'Webhook topic name for discovered raw RSSI deliveries. enum: `discovered-raw-rssi`'
+          description: Webhook topic name for discovered raw RSSI deliveries
       required:
       - topic
       type: object
@@ -116487,7 +116519,7 @@ components:
           description: Guest authorization events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_guest_authorizations_topic'
-          description: 'Webhook topic name for guest authorization deliveries. enum: `guest-authorizations`'
+          description: Webhook topic name for guest authorization deliveries
       type: object
     webhook_guest_authorizations_event:
       additionalProperties: false
@@ -116611,7 +116643,7 @@ components:
           description: Location events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_location_topic'
-          description: 'Webhook topic name for generic location deliveries. enum: `location`'
+          description: Webhook topic name for generic location deliveries
       required:
       - events
       - topic
@@ -116625,7 +116657,7 @@ components:
           description: Asset location events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_location_asset_topic'
-          description: 'Webhook topic name for asset location deliveries. enum: `location-asset`'
+          description: Webhook topic name for asset location deliveries
       required:
       - events
       - topic
@@ -116728,7 +116760,7 @@ components:
           description: CenTrak location events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_location_centrak_topic'
-          description: 'Webhook topic name for CenTrak location deliveries. enum: `location-centrak`'
+          description: Webhook topic name for CenTrak location deliveries
       required:
       - events
       - topic
@@ -116759,7 +116791,7 @@ components:
           description: Time when the CenTrak location was calculated, in epoch seconds
         type:
           $ref: '#/components/schemas/webhook_location_centrak_event_type'
-          description: 'Location object type for the CenTrak event. enum: `wifi`'
+          description: Location object type for the CenTrak event
         wifi_beacon_extended_info:
           $ref: '#/components/schemas/wifi_beacon_extended_info'
           description: Extended Wi-Fi beacon metadata included with this CenTrak location
@@ -116799,7 +116831,7 @@ components:
           description: Connected client location events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_location_client_topic'
-          description: 'Webhook topic name for connected client location deliveries. enum: `location-client`'
+          description: Webhook topic name for connected client location deliveries
       required:
       - events
       - topic
@@ -116951,7 +116983,7 @@ components:
           description: SDK client location events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_location_sdk_topic'
-          description: 'Webhook topic name for SDK client location deliveries. enum: `location-sdk`'
+          description: Webhook topic name for SDK client location deliveries
       required:
       - events
       - topic
@@ -117024,7 +117056,7 @@ components:
             delivery
         topic:
           $ref: '#/components/schemas/webhook_location_unclient_topic'
-          description: 'Webhook topic name for unconnected client location deliveries. enum: `location-unclient`'
+          description: Webhook topic name for unconnected client location deliveries
       required:
       - events
       - topic
@@ -117093,7 +117125,7 @@ components:
           description: Minis application test events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_minis_application_topic'
-          description: 'Webhook topic name for Minis application test deliveries. enum: `minis-application`'
+          description: Webhook topic name for Minis application test deliveries
       required:
       - events
       - topic
@@ -117135,7 +117167,7 @@ components:
           type: boolean
         test_type:
           $ref: '#/components/schemas/synthetictest_config_custom_probe_type'
-          description: 'Synthetic test type used for the Minis application result. enum: `application`, `curl`, `icmp`, `reachability`, `tcp`'
+          description: Synthetic test type used for the Minis application result
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when the Minis application test result was reported, in
@@ -117166,7 +117198,7 @@ components:
           description: Minis reachability test events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_minis_reachability_topic'
-          description: 'Webhook topic name for Minis reachability test deliveries. enum: `minis-reachability`'
+          description: Webhook topic name for Minis reachability test deliveries
       required:
       - events
       - topic
@@ -117262,7 +117294,7 @@ components:
           description: Mist Edge events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_mxedge_event_topic'
-          description: 'Webhook topic name for Mist Edge event deliveries. enum: `mxedge-events`'
+          description: Webhook topic name for Mist Edge event deliveries
       required:
       - events
       - topic
@@ -117276,7 +117308,7 @@ components:
           description: NAC accounting events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_nac_accounting_topic'
-          description: 'Webhook topic name for NAC accounting deliveries. enum: `nac-accounting`'
+          description: Webhook topic name for NAC accounting deliveries
       type: object
     webhook_nac_accounting_event:
       additionalProperties: false
@@ -117289,7 +117321,7 @@ components:
           type: string
         auth_type:
           $ref: '#/components/schemas/nac_auth_type'
-          description: 'Authentication method used for the NAC accounting session. enum: `cert`, `device-auth`, `eap-teap`, `eap-tls`, `eap-ttls`, `idp`, `mab`, `eap-peap`'
+          description: Authentication method used for the NAC accounting session
         bssid:
           description: Wireless BSSID used for the NAC accounting session
           examples:
@@ -117366,7 +117398,7 @@ components:
           description: NAC authentication events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_nac_events_topic'
-          description: 'Webhook topic name for NAC event deliveries. enum: `nac-events`'
+          description: Webhook topic name for NAC event deliveries
       type: object
     webhook_nac_events_topic:
       description: 'Webhook topic name for NAC event deliveries. enum: `nac-events`'
@@ -117401,7 +117433,7 @@ components:
           description: Occupancy alert batches included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_occupancy_alerts_topic'
-          description: 'Webhook topic name for occupancy alert deliveries. enum: `occupancy-alerts`'
+          description: Webhook topic name for occupancy alert deliveries
       required:
       - events
       - topic
@@ -117461,7 +117493,7 @@ components:
           description: Time when the occupancy alert was generated, in epoch seconds
         type:
           $ref: '#/components/schemas/webhook_occupancy_alert_type'
-          description: 'Occupancy compliance state reported for the zone. enum: `COMPLIANCE-OK`, `COMPLIANCE-VIOLATION`'
+          description: Occupancy compliance state reported for the zone
         zone_id:
           description: Zone identifier associated with the occupancy alert
           format: uuid
@@ -117504,7 +117536,7 @@ components:
           description: Ping events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_ping_topic'
-          description: 'Webhook topic name for ping deliveries. enum: `ping`'
+          description: Webhook topic name for ping deliveries
       required:
       - events
       - topic
@@ -117552,7 +117584,7 @@ components:
           description: RSSI zone events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_rssizone_topic'
-          description: 'Webhook topic name for RSSI zone event deliveries. enum: `rssizone`'
+          description: Webhook topic name for RSSI zone event deliveries
       required:
       - events
       - topic
@@ -117580,10 +117612,10 @@ components:
           description: Time when the RSSI zone transition was reported, in epoch seconds
         trigger:
           $ref: '#/components/schemas/webhook_zone_event_trigger'
-          description: 'Whether the client entered or exited the RSSI zone. enum: `enter`, `exit`'
+          description: Whether the client entered or exited the RSSI zone
         type:
           $ref: '#/components/schemas/webhook_zone_event_type'
-          description: 'Client type reported for the RSSI zone event. enum: `asset`, `sdk`, `wifi`'
+          description: Client type reported for the RSSI zone event
       required:
       - mac
       - map_id
@@ -117614,7 +117646,7 @@ components:
           description: SDK client scan data events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_sdkclient_scan_data_topic'
-          description: 'Webhook topic name for SDK client scan data deliveries. enum: `sdkclient-scan-data`'
+          description: Webhook topic name for SDK client scan data deliveries
       required:
       - topic
       - events
@@ -117677,7 +117709,7 @@ components:
           type: string
         band:
           $ref: '#/components/schemas/scan_data_item_band'
-          description: 'Radio band on which the SDK client scanned the BSSID. enum: `2.4`, `5`'
+          description: Radio band on which the SDK client scanned the BSSID
         bssid:
           description: Scanned BSSID found during the SDK client's background Wi-Fi
             scan
@@ -117727,7 +117759,7 @@ components:
           description: Site SLE score events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_site_sle_topic'
-          description: 'Webhook topic name for site SLE score deliveries. enum: `site-sle`'
+          description: Webhook topic name for site SLE score deliveries
       required:
       - events
       - topic
@@ -117817,7 +117849,7 @@ components:
             delivery
         topic:
           $ref: '#/components/schemas/webhook_wifi_conn_raw_topic'
-          description: 'Webhook topic name for connected Wi-Fi raw packet deliveries. enum: `wifi-conn-raw`'
+          description: Webhook topic name for connected Wi-Fi raw packet deliveries
       required:
       - events
       - topic
@@ -117935,7 +117967,7 @@ components:
             delivery
         topic:
           $ref: '#/components/schemas/webhook_wifi_unconn_raw_topic'
-          description: 'Webhook topic name for unconnected Wi-Fi raw packet deliveries. enum: `wifi-unconn-raw`'
+          description: Webhook topic name for unconnected Wi-Fi raw packet deliveries
       required:
       - events
       - topic
@@ -118017,7 +118049,7 @@ components:
           description: Zone transition events included in this webhook delivery
         topic:
           $ref: '#/components/schemas/webhook_zone_topic'
-          description: 'Webhook topic name for zone transition deliveries. enum: `zone`'
+          description: Webhook topic name for zone transition deliveries
       required:
       - events
       - topic
@@ -118052,10 +118084,10 @@ components:
           description: Time when the zone transition was reported, in epoch seconds
         trigger:
           $ref: '#/components/schemas/webhook_zone_event_trigger'
-          description: 'Whether the client or asset entered or exited the zone. enum: `enter`, `exit`'
+          description: Whether the client or asset entered or exited the zone
         type:
           $ref: '#/components/schemas/webhook_zone_event_type'
-          description: 'Client or asset type reported for the zone event. enum: `asset`, `sdk`, `wifi`'
+          description: Client or asset type reported for the zone event
         zone_id:
           description: Zone identifier associated with the event
           format: uuid
@@ -118446,7 +118478,7 @@ components:
           description: Settings that control client authentication for this WLAN
         auth_server_selection:
           $ref: '#/components/schemas/wlan_auth_server_selection'
-          description: 'RADIUS authentication server selection behavior for this WLAN. enum: `ordered`, `unordered`'
+          description: RADIUS authentication server selection behavior for this WLAN
         auth_servers:
           $ref: '#/components/schemas/wlan_auth_servers'
           description: RADIUS authentication servers used by this WLAN. Required when
@@ -119070,7 +119102,8 @@ components:
           type: boolean
         owe:
           $ref: '#/components/schemas/wlan_auth_owe'
-          description: 'When `type`==`open`, Opportunistic Wireless Encryption mode for this WLAN. enum: `disabled`, `enabled`, `required`'
+          description: When `type`==`open`, Opportunistic Wireless Encryption mode
+            for this WLAN
         pairwise:
           $ref: '#/components/schemas/wlan_auth_pairwise'
           description: When `type`==`psk` or `type`==`eap`, pairwise cipher suites
@@ -119218,7 +119251,7 @@ components:
             restricted
         scope:
           $ref: '#/components/schemas/wlan_bonjour_service_properties_scope'
-          description: 'Discovery scope for this Bonjour service on the WLAN. enum: `same_ap`, `same_map`, `same_site`'
+          description: Discovery scope for this Bonjour service on the WLAN
       type: object
     wlan_bonjour_service_properties_radius_groups:
       description: Optional, if the service is further restricted for certain RADIUS
@@ -121860,7 +121893,7 @@ components:
           type: boolean
         ethertype:
           $ref: '#/components/schemas/wxlan_tunnel_session_ethertype'
-          description: 'Frame type carried by this tunnel session. enum: `ethernet`, `vlan`'
+          description: Frame type carried by this tunnel session
         local_session_id:
           description: Identifier for the local L2TPv3 session, from 1 to 2147483647
           maximum: 2147483647
