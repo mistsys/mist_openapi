@@ -122089,8 +122089,7 @@ components:
       description: 'Session-based authentication for browser or login/password flows.
         After a successful [Login]($e/Admins%20Login/login) request, Mist returns
         a `csrftoken` cookie. Send that value in the `X-CSRFToken` header on later
-        state-changing API requests that use the login session, such as POST, PUT,
-        PATCH, and DELETE requests.
+        API requests that use the login session.
 
 
         **Format**:
