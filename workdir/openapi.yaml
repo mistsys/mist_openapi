@@ -85609,8 +85609,8 @@ components:
           type: integer
         eap_type:
           $ref: '#/components/schemas/nac_portal_eap_type'
-          description: EAP mode used when onboarding wireless clients through the
-            NAC portal
+          description: "EAP mode used when onboarding wireless clients through the
+            NAC portal. enum: `wpa2`, `wpa3`"
         enable_telemetry:
           description: Model, version, fingering, events (connecting, disconnect,
             roaming), which ap
@@ -85636,7 +85636,7 @@ components:
           description: Organization that owns this NAC portal
         portal:
           $ref: '#/components/schemas/nac_portal_guest_portal'
-          description: Guest portal settings used when `type`==`guest_portal`
+          description: "Guest portal settings used when `type`==`guest_portal`. If `auth`==`none`, the user is presented with a terms of service and can click and continue; if `auth`==`external`, the user is redirected to an external URL for authentication; if `auth`==`multi`, the user is presented with a choice of authentication methods (social logins: facebook / google / amazon / microsoft / azure;  sponsor;  sms: supported provider: twillio;  email;  sso;  userpass: pre created guest list)"
         portal_authorize_jwt_secret:
           description: If `type`==`guest_portal` and `auth`==`external`, the `portal_authorize_jwt_secret`
             will be generated
@@ -85679,8 +85679,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/nac_portal_type'
-          description: NAC portal mode, such as guest admin, guest portal, or Marvis
-            client onboarding
+          description: "NAC portal mode, such as guest admin, guest portal, or Marvis
+            client onboarding. enum: `guest_admin` (NAC-Based Portal Admin for Pre Created Guest Authentication), `guest_portal` (NAC-Based Guest Portal), `marvis_client`"
         ui_url:
           description: If `auth`==`guest_admin`, the URL to the guest admin portal
           examples:
@@ -85785,8 +85785,8 @@ components:
           type: string
         idp_sign_algo:
           $ref: '#/components/schemas/nac_portal_sso_idp_sign_algo'
-          description: Signing algorithm expected for SAML assertions from the identity
-            provider
+          description: "Signing algorithm expected for SAML assertions from the identity
+            provider. enum: `sha1`, `sha256`, `sha384`, `sha512`"
         idp_sso_url:
           description: Identity provider Single Sign-On URL for SAML authentication
           examples:
