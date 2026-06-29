@@ -86096,8 +86096,8 @@ components:
           description: Unique identifier of the NAC tag
         match:
           $ref: '#/components/schemas/nac_tag_match'
-          description: If `type`==`match`, client or authentication attribute used
-            for rule matching
+          description: "If `type`==`match`, client or authentication attribute used
+            for rule matching. enum: `cert_cn`, `cert_eku`, `cert_issuer`, `cert_san`, `cert_serial`, `cert_sub`, `cert_template`, `client_mac`, `edr_status`, `gbp_tag`, `hostname`, `idp_role`, `ingress_vlan`, `mdm_status`, `nas_ip`, `radius_group`, `realm`, `ssid`, `user_name`, `usermac_label`"
         match_all:
           default: false
           description: "This field is applicable only when `type`==`match`\n  * `false`:\
@@ -86140,12 +86140,12 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/nac_tag_type'
-          description: NAC tag type that determines whether the tag is a matcher or
-            a result attribute
+          description: "NAC tag type that determines whether the tag is a matcher or
+            a result attribute. enum: `egress_vlan_names`, `gbp_tag`, `match`, `radius_attrs`, `radius_group`, `radius_vendor_attrs`, `redirect_nacportal_id`, `session_timeout`, `username_attr`, `vlan`"
         username_attr:
           $ref: '#/components/schemas/nac_tag_username_attr'
-          description: If `type`==`username_attr`, attribute used to derive the username
-            returned by the NAC rule
+          description: "If `type`==`username_attr`, attribute used to derive the username
+            returned by the NAC rule. enum: `automatic`, `cn`, `dns`, `email`, `upn`"
         values:
           $ref: '#/components/schemas/nac_tag_values'
           description: If `type`==`match`, attribute values used by the NAC tag matcher
