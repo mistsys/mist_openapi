@@ -74385,7 +74385,7 @@ components:
           type: boolean
         has_delivery_results:
           description: Whether delivery-result search is available for this webhook
-            topic
+            topic through `/api/v1/:scope/:scope_id/webhooks/:webhook_id/events/search`
           type: boolean
         internal:
           description: Whether this topic is internal and not selectable in site or
@@ -80560,7 +80560,7 @@ components:
       type: object
     inventory_update_macs:
       description: If `op`==`assign`, `op`==`unassign`, `op`==`upgrade_to_mist`, or
-        `op`==`downgrade_to_jsi`, device MAC addresses to update
+        `op`==`downgrade_to_jsi`, device MAC addresses to update, such as `5c5b350e0001`
       items:
         type: string
       type: array
@@ -80580,7 +80580,8 @@ components:
       - upgrade_to_mist
       type: string
     inventory_update_serials:
-      description: If `op`==`delete`, device serial numbers to delete from inventory
+      description: If `op`==`delete`, device serial numbers to delete from inventory,
+        such as `FXLH2015150025`
       items:
         type: string
       type: array
@@ -87822,7 +87823,8 @@ components:
       properties:
         custom_versions:
           $ref: '#/components/schemas/ap_auto_upgrade_custom_versions'
-          description: Per-AP-model firmware versions or channels used for auto-upgrade
+          description: Per-AP-model firmware versions or channels used for auto-upgrade;
+            property keys are AP model names, such as AP41
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
           description: Day of the week for the AP auto-upgrade maintenance window
@@ -97967,7 +97969,8 @@ components:
       type: object
     service_policy_syslog:
       additionalProperties: false
-      description: Syslog logging settings for a service policy
+      description: Syslog logging settings for a service policy; required when syslog
+        logging is enabled
       properties:
         enabled:
           default: false
@@ -98496,7 +98499,8 @@ components:
           description: Schedule during which engagement analytics rules apply
         max_dwell:
           default: 43200
-          description: Maximum dwell time in seconds considered by engagement analytics
+          description: Maximum dwell time in seconds considered by engagement analytics;
+            defaults to 43200 (12h), maximum 68400 (18h)
           examples:
           - 43200
           maximum: 68400
@@ -98973,9 +98977,12 @@ components:
       - type
       type: string
     site_rogue_whitelisted_bssids:
-      description: BSSID values or wildcard patterns excluded from rogue detection
+      description: BSSID values or wildcard patterns excluded from rogue detection,
+        such as `cc-8e-6f-d4-bf-16`, `cc-73-*`, or `cc:82:*`
       examples:
-      - - NeighborSSID
+      - - cc-8e-6f-d4-bf-16
+        - cc-73-*
+        - cc:82:*
       items:
         type: string
       type: array
@@ -99515,7 +99522,8 @@ components:
       properties:
         custom_versions:
           $ref: '#/components/schemas/ap_auto_upgrade_custom_versions'
-          description: Per-AP-model firmware versions or channels used for auto-upgrade
+          description: Per-AP-model firmware versions or channels used for auto-upgrade;
+            property keys are AP model names, such as AP41
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
           description: Weekly AP auto-upgrade day for the maintenance window
@@ -102734,16 +102742,18 @@ components:
     sso_openroaming:
       additionalProperties: false
       deprecated: true
-      description: 'Deprecated. OpenRoaming configuration is now expressed as top-level
-        fields on the SSO object: `openroaming_ssids`, `openroaming_wba_client_cert`,
-        and `openroaming_wba_client_key`.'
+      description: Deprecated OpenRoaming configuration used when `idp_type`==`openroaming`;
+        use top-level SSO fields `openroaming_ssids`, `openroaming_wba_client_cert`,
+        and `openroaming_wba_client_key` instead.
       properties:
         ssids:
           $ref: '#/components/schemas/sso_openroaming_ssids'
           description: Network SSID names enabled for OpenRoaming SSO
         wba_cert:
           deprecated: true
-          description: Deprecated. Use `openroaming_wba_client_cert` instead.
+          description: Deprecated. Use `openroaming_wba_client_cert` instead. Optional
+            WBA-issued certificate; if omitted, the default Juniper WBA-issued certificate
+            is used.
           type: string
       type: object
     sso_openroaming_ssids:
@@ -107100,7 +107110,8 @@ components:
       type: object
     stats_sdkclient_network_connection:
       additionalProperties: false
-      description: Current network connection details reported for an SDK client
+      description: Current network connection details reported for an SDK client when
+        known
       properties:
         mac:
           description: Current network connection MAC address reported for the SDK
@@ -108362,7 +108373,7 @@ components:
           type: boolean
         key_mgmt:
           description: Security key-management and cipher suite used by the wireless
-            client
+            client, such as WPA2-PSK/CCMP
           type: string
         last_seen:
           $ref: '#/components/schemas/last_seen'
@@ -108509,6 +108520,7 @@ components:
     stats_wireless_client_airwatch:
       additionalProperties: false
       description: AirWatch authorization information reported for a wireless client
+        when AirWatch is enabled
       properties:
         authorized:
           description: Whether the wireless client is authorized by AirWatch
@@ -109182,7 +109194,9 @@ components:
       - static
       type: string
     sw_routing_policy_terms:
-      description: Ordered switch routing policy terms; at least one term is required
+      description: Ordered switch routing policy terms; at least one term is required,
+        each term should include at least one matching criterion/filter, and all criteria
+        in a term must match
       items:
         $ref: '#/components/schemas/sw_routing_policy_term'
       minItems: 1
@@ -111600,10 +111614,11 @@ components:
       readOnly: true
       type: array
     ticket_status:
-      description: 'Ticket status. enum: `closed`, `open`, `pending`, `solved`. `open`
-        means Mist is working on it, `pending` means requester attention is needed,
-        `solved` means Mist considers it resolved but it can still be updated or rated,
-        and `closed` means it is archived'
+      description: 'Ticket status. `open` means Mist is working on it, `pending` means
+        requester attention is needed, `solved` means Mist considers it resolved and
+        requester updates can cause it to re-open or be rated, and `closed` means
+        it is archived and cannot be changed. enum: `closed`, `open`, `pending`,
+        `solved`'
       enum:
       - closed
       - open
@@ -111972,8 +111987,10 @@ components:
     tunnel_config_dh_group:
       default: '14'
       description: 'Only if `provider`==`custom-ipsec`. Diffie-Hellman group for IPsec
-        phase 2. enum: `1`, `14`, `15`, `16`, `19`, `2`, `20`, `21`, `24`, `5`. `14`
-        is the default 2048-bit group; `19`, `20`, `21`, and `24` are ECP groups'
+        phase 2. `2` is 1024-bit, `14` is the default 2048-bit group, `15` is 3072-bit,
+        `16` is 4096-bit, and `19`, `20`, `21`, and `24` are 256-bit, 384-bit, 521-bit,
+        and 2048-bit ECP groups. enum: `1`, `14`, `15`, `16`, `19`, `2`, `20`, `21`,
+        `24`, `5`'
       enum:
       - '1'
       - '14'
@@ -112000,9 +112017,10 @@ components:
       - 'null'
     tunnel_config_ike_dh_group:
       default: '14'
-      description: 'Diffie-Hellman group for IKE phase 1. enum: `1`, `14`, `15`, `16`,
-        `19`, `2`, `20`, `21`, `24`, `5`. `14` is the default 2048-bit group; `19`,
-        `20`, `21`, and `24` are ECP groups'
+      description: 'Diffie-Hellman group for IKE phase 1. `2` is 1024-bit, `14` is
+        the default 2048-bit group, `15` is 3072-bit, `16` is 4096-bit, and `19`,
+        `20`, `21`, and `24` are 256-bit, 384-bit, 521-bit, and 2048-bit ECP groups.
+        enum: `1`, `14`, `15`, `16`, `19`, `2`, `20`, `21`, `24`, `5`'
       enum:
       - '1'
       - '14'
@@ -112121,7 +112139,7 @@ components:
       type: array
     tunnel_config_probe:
       additionalProperties: false
-      description: Tunnel health probe settings
+      description: Only if `provider`==`custom-ipsec`. Tunnel health probe settings
       properties:
         interval:
           description: How often to trigger the probe
@@ -114367,7 +114385,8 @@ components:
           description: HA cluster node on which to show the OSPF database
         self_originate:
           default: false
-          description: Whether to show only self-originated OSPF database entries
+          description: Whether to show only self-originated OSPF database entries;
+            defaults to false
           type: boolean
         vrf:
           description: Routing instance or VRF filter for OSPF database output
@@ -114537,7 +114556,8 @@ components:
           type: integer
         use_ipv6:
           default: false
-          description: Whether to resolve hostname targets over IPv6
+          description: Whether to resolve hostname targets over IPv6; applicable
+            when `host` is a hostname
           type: boolean
         vrf:
           description: For SRX, routing instance or VRF from which to initiate traceroute;
@@ -121420,8 +121440,8 @@ components:
           $ref: '#/components/schemas/modified_time'
           description: Time when this WxLAN rule was last modified, in epoch seconds
         order:
-          description: Lookup priority for WxLAN rules; larger positive values match
-            first, and -1 means LAST. Uniqueness is not checked
+          description: Lookup priority for WxLAN rules; values greater than 0 match
+            in descending order, and -1 means LAST. Uniqueness is not checked
           examples:
           - 1
           minimum: -1
@@ -122069,7 +122089,8 @@ components:
       description: 'Session-based authentication for browser or login/password flows.
         After a successful [Login]($e/Admins%20Login/login) request, Mist returns
         a `csrftoken` cookie. Send that value in the `X-CSRFToken` header on later
-        API requests that use the login session.
+        state-changing API requests that use the login session, such as POST, PUT,
+        PATCH, and DELETE requests.
 
 
         **Format**:
