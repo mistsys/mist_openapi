@@ -70113,7 +70113,7 @@ components:
           description: Timestamp when this antivirus profile was created
         fallback_action:
           $ref: '#/components/schemas/avprofile_fallback_action'
-          description: Action to take when antivirus scanning cannot complete
+          description: "Action to take when antivirus scanning cannot complete. enum: `block`, `log-and-permit`, `permit`"
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier of the antivirus profile
@@ -70137,7 +70137,7 @@ components:
           description: Owning organization identifier for this antivirus profile
         protocols:
           $ref: '#/components/schemas/avprofile_protocols'
-          description: Network protocols inspected by this antivirus profile
+          description: "Network protocols inspected by this antivirus profile. enum: `ftp`, `http`, `imap`, `pop3`, `smtp`"
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Associated site identifier for this antivirus profile, when
