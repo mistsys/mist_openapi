@@ -79586,25 +79586,25 @@ components:
       properties:
         fri:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Friday
+          description: Operating hour range for Friday. If the hour is not defined then it's treated as 00:00-23:59
         mon:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Monday
+          description: Operating hour range for Monday. If the hour is not defined then it's treated as 00:00-23:59
         sat:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Saturday
+          description: Operating hour range for Saturday. If the hour is not defined then it's treated as 00:00-23:59
         sun:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Sunday
+          description: Operating hour range for Sunday. If the hour is not defined then it's treated as 00:00-23:59
         thu:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Thursday
+          description: Operating hour range for Thursday. If the hour is not defined then it's treated as 00:00-23:59
         tue:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Tuesday
+          description: Operating hour range for Tuesday. If the hour is not defined then it's treated as 00:00-23:59
         wed:
           $ref: '#/components/schemas/hour'
-          description: Operating hour range for Wednesday
+          description: Operating hour range for Wednesday. If the hour is not defined then it's treated as 00:00-23:59
       type: object
     ibeacon_major:
       description: Major number for iBeacon
@@ -118423,7 +118423,7 @@ components:
           description: QoS rules for application traffic on this WLAN
         apply_to:
           $ref: '#/components/schemas/wlan_apply_to'
-          description: Scope that determines where this WLAN is applied
+          description: "Scope that determines where this WLAN is applied. enum: `aps`, `site`, `wxtags`"
         arp_filter:
           default: false
           description: Whether to enable smart arp filter
@@ -118497,20 +118497,20 @@ components:
             WLAN
         cisco_cwa:
           $ref: '#/components/schemas/wlan_cisco_cwa'
-          description: Central web authentication settings for Cisco CWA on this WLAN
+          description: "Central web authentication settings for Cisco CWA on this WLAN. See CWA: https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/115732-central-web-auth-00.html"
         client_limit_down:
           $ref: '#/components/schemas/wlan_limit'
-          description: Downlink bandwidth limit applied per client
+          description: Downlink bandwidth limit applied per client, in kbps
         client_limit_down_enabled:
           default: false
-          description: If downlink limiting per-client is enabled
+          description: If downlink limiting per-client is enabled, in kbps
           type: boolean
         client_limit_up:
           $ref: '#/components/schemas/wlan_limit'
-          description: Uplink bandwidth limit applied per client
+          description: Uplink bandwidth limit applied per client, in kbps
         client_limit_up_enabled:
           default: false
-          description: If uplink limiting per-client is enabled
+          description: If uplink limiting per-client is enabled, in kbps
           type: boolean
         coa_servers:
           $ref: '#/components/schemas/coa_servers'
@@ -118520,7 +118520,7 @@ components:
           description: Time when this WLAN was created, in epoch seconds
         disable_11ax:
           default: false
-          description: Some old WLAN drivers may not be compatible
+          description: Some old WLAN drivers may not be compatible with 802.11ax
           type: boolean
         disable_11be:
           default: false
@@ -118572,7 +118572,7 @@ components:
           type: integer
         dynamic_psk:
           $ref: '#/components/schemas/wlan_dynamic_psk'
-          description: Per-user PSK selection settings for this WLAN
+          description: "Per-user PSK selection settings for this WLAN. For dynamic PSK where we get per_user PSK from Radius. dynamic_psk allows PSK to be selected at runtime depending on context (wlan/site/user/...) thus following configurations are assumed (currently)\n  * PSK will come from RADIUS server\n  * AP sends client MAC as username and password (i.e. `enable_mac_auth` is assumed)\n  * AP sends BSSID:SSID as Caller-Station-ID\n  * `auth_servers` is required\n  * PSK will come from cloud WLC if source is cloud_psks\n  * default_psk will be used if cloud WLC is not available\n  * `multi_psk_only` and `psk` is ignored\n  * `pairwise` can only be wpa2-ccmp (for now, wpa3 support on the roadmap)"
         dynamic_vlan:
           $ref: '#/components/schemas/wlan_dynamic_vlan'
           description: VLAN assignment settings for 802.1X dynamic VLANs
@@ -118632,8 +118632,7 @@ components:
           description: DHCP Option 82 insertion settings for this WLAN
         interface:
           $ref: '#/components/schemas/wlan_interface'
-          description: Network interface or tunnel where this WLAN bridges client
-            traffic
+          description: "Network interface or tunnel where this WLAN bridges client. enum: `all`, `eth0`, `eth1`, `eth2`, `eth3`, `mxtunnel`, `site_mxedge`, `wxtunnel`"
         isolation:
           default: false
           description: Whether to stop clients to talk to each other
@@ -118762,7 +118761,7 @@ components:
           description: TLS-secured RADIUS transport settings for this WLAN
         rateset:
           $ref: '#/components/schemas/wlan_rateset'
-          description: Data rate settings by RF band for this WLAN
+          description: "Data rate settings by RF band for this WLAN. Property key is the RF band. enum: `24`, `5`, `6`"
         reconnect_clients_when_roaming_mxcluster:
           default: false
           description: When different mxcluster is on different subnet, we'd want
@@ -118770,7 +118769,7 @@ components:
           type: boolean
         roam_mode:
           $ref: '#/components/schemas/wlan_roam_mode'
-          description: Fast roaming mode configured for this WLAN
+          description: "Fast roaming mode configured for this WLAN. enum: `11r`, `OKC`, `NONE`"
         schedule:
           $ref: '#/components/schemas/wlan_schedule'
           description: Operating schedule controlling when this WLAN is active
@@ -119080,7 +119079,7 @@ components:
           - 'null'
         type:
           $ref: '#/components/schemas/wlan_auth_type'
-          description: Authentication mode used by this WLAN
+          description: "Authentication mode used by this WLAN. enum: `eap`, `eap192`, `open`, `psk`, `psk-tkip`, `psk-wpa2-tkip`, `wep`"
         wep_as_secondary_auth:
           default: false
           description: Enable WEP as secondary auth
@@ -119306,7 +119305,7 @@ components:
           type: integer
         template:
           $ref: '#/components/schemas/wlan_datarates_template'
-          description: Data rate template used to derive WLAN rate settings
+          description: "Data rate template used to derive WLAN rate settings. enum: `no-legacy` (no 11b), `compatible` (all, like before, default setting that Broadcom/Atheros used), `legacy-only` (disable 802.11n and 802.11ac), `high-density` (no 11b, no low rates), `custom` (user defined)"
         vht:
           description: If `template`==`custom`. MCS bitmasks for 4 streams (16-bit
             for each stream, MCS0 is least significant bit), e.g. 03ff 01ff 00ff limits
@@ -119437,7 +119436,7 @@ components:
           type: boolean
         source:
           $ref: '#/components/schemas/dynamic_psk_source'
-          description: Origin used to retrieve per-user PSKs
+          description: "Origin used to retrieve per-user PSKs. enum: `cloud_psks`, `radius`"
       type:
       - object
       - 'null'
@@ -119453,7 +119452,7 @@ components:
         default_vlan_ids:
           $ref: '#/components/schemas/wlan_dynamic_vlan_default_vlan_ids'
           description: Fallback VLAN IDs, ranges, or variables used when no RADIUS
-            VLAN match is returned
+            VLAN match is returned. Can be a number, a range of VLAN IDs, a variable or multiple numbers, ranges or variables as a VLAN pool. Default VLAN as a pool of VLANS requires 0.14.x or newer firmware
         enabled:
           default: false
           description: Requires `vlan_enabled`==`true` to be set to `true`. Whether
@@ -119464,7 +119463,7 @@ components:
           description: VLAN IDs that should be locally bridged for dynamic VLAN assignment
         type:
           $ref: '#/components/schemas/wlan_dynamic_vlan_type'
-          description: Dynamic VLAN mapping method used for RADIUS-provided VLAN attributes
+          description: "Dynamic VLAN mapping method used for RADIUS-provided VLAN attributes. enum: `standard` (using Tunnel-Private-Group-ID, widely supported), `airespace-interface-name` (Airespace/Cisco)"
         vlans:
           additionalProperties:
             type: string
@@ -119769,7 +119768,7 @@ components:
           - 'null'
         auth:
           $ref: '#/components/schemas/wlan_portal_auth'
-          description: Guest portal login scheme used by the WLAN
+          description: "Guest portal login scheme used by the WLAN. enum: `amazon`, `azure`, `email`, `external`, `facebook`, `google`, `microsoft`, `multi`, `none`, `password`, `sms`, `sponsor`, `sso`"
         azure_client_id:
           default: ''
           description: Required if `azure_enabled`==`true`. Azure active directory
@@ -120044,8 +120043,8 @@ components:
           - 'null'
         sms_provider:
           $ref: '#/components/schemas/wlan_portal_sms_provider'
-          description: Optional if `sms_enabled`==`true`. SMS provider used to deliver
-            guest portal access codes
+          description: "Optional if `sms_enabled`==`true`. SMS provider used to deliver
+            guest portal access codes. enum: `broadnet`, `clickatell`, `gupshup`, `manual`, `puzzel`, `smsglobal`, `telstra`, `twilio`"
         smsglobal_api_key:
           description: Required if `sms_provider`==`smsglobal`, Client API Key
           type: string
@@ -120118,8 +120117,8 @@ components:
           type: string
         sso_idp_sign_algo:
           $ref: '#/components/schemas/wlan_portal_idp_sign_algo'
-          description: Optional if `wlan_portal_auth`==`sso`. Signing algorithm used
-            for SAML assertions from the identity provider
+          description: "Optional if `wlan_portal_auth`==`sso`. Signing algorithm used
+            for SAML assertions from the identity provider. enum: `sha1`, `sha256`, `sha384`, `sha512`"
         sso_idp_sso_url:
           default: ''
           description: Required if `wlan_portal_auth`==`sso`, IDP Single-Sign-On URL
@@ -120130,8 +120129,8 @@ components:
           type: string
         sso_nameid_format:
           $ref: '#/components/schemas/wlan_portal_sso_nameid_format'
-          description: Optional if `wlan_portal_auth`==`sso`. SAML NameID format expected
-            from the identity provider
+          description: "Optional if `wlan_portal_auth`==`sso`. SAML NameID format expected
+            from the identity provider. enum: `email`, `unspecified`"
         telstra_client_id:
           description: Required if `sms_provider`==`telstra`, Client ID provided by
             Telstra
@@ -121291,7 +121290,7 @@ components:
       properties:
         class:
           $ref: '#/components/schemas/wlan_qos_class'
-          description: QoS traffic class applied when WLAN QoS override is enabled
+          description: "QoS traffic class applied when WLAN QoS override is enabled. enum: `background`, `best_effort`, `video`, `voice`"
         overwrite:
           default: false
           description: Whether to overwrite QoS
@@ -121299,7 +121298,7 @@ components:
       type: object
     wlan_qos_class:
       default: best_effort
-      description: 'enum: `background`, `best_effort`, `video`, `voice`'
+      description: "QoS traffic class applied when WLAN QoS override is enabled. enum: `background`, `best_effort`, `video`, `voice`"
       enum:
       - background
       - best_effort
