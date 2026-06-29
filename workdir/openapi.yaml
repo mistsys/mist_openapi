@@ -87349,17 +87349,17 @@ components:
       properties:
         aamw:
           $ref: '#/components/schemas/service_policy_aamw'
-          description: Advanced anti-malware settings applied by this service policy
+          description: Advanced anti-malware settings applied by this service policy. SRX only
         action:
           $ref: '#/components/schemas/allow_deny'
-          description: Allow or deny action for traffic matched by this service policy
+          description: "Allow or deny action for traffic matched by this service policy. enum: `allow`, `deny`"
         antivirus:
           $ref: '#/components/schemas/service_policy_antivirus'
           description: Malware and virus inspection settings applied by this service
             policy
         appqoe:
           $ref: '#/components/schemas/service_policy_appqoe'
-          description: Application QoE settings applied by this service policy
+          description: Application QoE settings applied by this service policy. SRX only
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Epoch timestamp when the service policy was created
@@ -87398,7 +87398,7 @@ components:
           description: Application services or groups matched by this policy
         ssl_proxy:
           $ref: '#/components/schemas/service_policy_ssl_proxy'
-          description: SSL proxy inspection settings applied by this service policy
+          description: SSL proxy inspection settings applied by this service policy. SRX only
         tenants:
           $ref: '#/components/schemas/strings'
           description: Tenant names matched by this service policy
@@ -97716,7 +97716,7 @@ components:
         antivirus:
           $ref: '#/components/schemas/service_policy_antivirus'
           description: Malware and virus inspection settings applied by this service
-            policy
+            policy. SRX only
         appqoe:
           $ref: '#/components/schemas/service_policy_appqoe'
           description: Application QoE settings applied by this service policy
@@ -97778,7 +97778,7 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/service_policy_aamw_profile'
-          description: Built-in advanced anti-malware inspection profile to apply
+          description: "Built-in advanced anti-malware inspection profile to apply. enum: `docsonly`, `executables`, `standard`"
       type: object
     service_policy_aamw_profile:
       default: standard
