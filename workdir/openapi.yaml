@@ -86988,7 +86988,7 @@ components:
         src_ips:
           $ref: '#/components/schemas/org_apitoken_src_ips'
           description: Allowed source IP addresses or CIDRs from which the token may
-            be used
+            be used.  At most 10 IP addresses can be specified, cannot be changed once the API Token is created
       required:
       - name
       type: object
@@ -89514,10 +89514,10 @@ components:
           type: string
         role:
           $ref: '#/components/schemas/privilege_org_role'
-          description: Access role granted by this organization privilege
+          description: 'Access role granted by this organization privilege. enum: `admin`, `helpdesk`, `installer`, `read`, `write`'
         scope:
           $ref: '#/components/schemas/privilege_org_scope'
-          description: Organization hierarchy level where this privilege applies
+          description: "Organization hierarchy level where this privilege applies. enum: `org`, `site`, `sitegroup`, `orgsites`"
         site_id:
           description: If `scope`==`site`, site ID this privilege applies to
           format: uuid
