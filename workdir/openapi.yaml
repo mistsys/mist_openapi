@@ -85846,7 +85846,7 @@ components:
       properties:
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
-          description: Text and content alignment for the NAC portal page
+          description: "Text and content alignment for the NAC portal page. enum: `left`, `center`, `right`"
         color:
           default: '#1074bc'
           description: Primary color used by the NAC portal template
@@ -120332,7 +120332,7 @@ components:
           type: string
         alignment:
           $ref: '#/components/schemas/portal_template_alignment'
-          description: Text and content alignment used by the guest portal template
+          description: "Text and content alignment used by the guest portal template. enum: `left`, `center`, `right`"
         ar:
           $ref: '#/components/schemas/wlan_portal_template_setting_locale'
           description: Localized portal template strings for Arabic
