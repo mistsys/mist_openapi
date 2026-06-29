@@ -69581,7 +69581,7 @@ components:
       properties:
         apps:
           $ref: '#/components/schemas/app_probing_apps'
-          description: Predefined application keys to probe
+          description: Predefined application keys to probe. APP-keys from [List Applications]($e/Constants%20Definitions/listApplications)
         custom_apps:
           $ref: '#/components/schemas/app_probing_custom_apps'
           description: User-defined application probe definitions
@@ -69634,7 +69634,7 @@ components:
           type: integer
         protocol:
           $ref: '#/components/schemas/app_probing_custom_app_protocol'
-          description: Probe protocol used by this custom application definition
+          description: "Probe protocol used by this custom application definition. enum: `http`, `icmp`"
         url:
           description: If `protocol`==`http`. HTTP URL or hostname probed by this
             custom app
@@ -70369,12 +70369,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/bgp_config_type'
-          description: Required if `via`==`lan`, `via`==`tunnel` or `via`==`wan`;
-            BGP session type, internal or external
+          description: "Required if `via`==`lan`, `via`==`tunnel` or `via`==`wan`. enum: `external`, `internal`"
         via:
           $ref: '#/components/schemas/bgp_config_via'
-          description: Transport used for this BGP session, such as LAN, tunnel, VPN,
-            or WAN
+          description: "Transport used for this BGP session. enum: `lan`, `tunnel`, `vpn`, `wan`"
         vpn_name:
           description: Optional if `via`==`vpn`; VPN name used for this BGP session
           type: string
@@ -70416,8 +70414,8 @@ components:
           description: Autonomous System (AS) number of this BGP neighbor
         tunnel_via:
           $ref: '#/components/schemas/tunnel_via'
-          description: If `via`==`tunnel`, primary or secondary tunnel associated
-            with this BGP neighbor
+          description: 'If `via`==`tunnel`, primary or secondary tunnel associated
+            with this BGP neighbor. enum: `primary`, `secondary`'
       required:
       - neighbor_as
       type: object
@@ -74907,7 +74905,7 @@ components:
       properties:
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands to apply to this gateway
+          description: "Additional CLI configuration commands to apply to this gateway. **Note**: no check is done"
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/bgp_config'
@@ -74927,16 +74925,16 @@ components:
           description: DHCP server configuration served by this gateway
         dns_servers:
           $ref: '#/components/schemas/dns_servers'
-          description: DNS servers configured for this gateway
+          description: DNS servers configured for this gateway. To keep compatibility, dns settings in `ip_config` and `oob_ip_config` will overwrite this setting
         dns_suffix:
           $ref: '#/components/schemas/dns_suffix'
-          description: DNS search suffixes configured for this gateway
+          description: DNS search suffixes configured for this gateway. To keep compatibility, dns settings in `ip_config` and `oob_ip_config` will overwrite this setting
         extra_routes:
           $ref: '#/components/schemas/gateway_extra_routes'
-          description: Additional IPv4 routes configured on this gateway
+          description: Additional IPv4 routes configured on this gateway. Property key is the destination CIDR (e.g. \"10.0.0.0/8\"), the destination Network name or a variable (e.g. \"{{myvar}}\")
         extra_routes6:
           $ref: '#/components/schemas/gateway_extra_routes6'
-          description: Additional IPv6 routes configured on this gateway
+          description: Additional IPv6 routes configured on this gateway. Property key is the destination CIDR (e.g. \"2a02:1234:420a:10c9::/64\"), the destination Network name or a variable (e.g. \"{{myvar}}\")
         for_site:
           description: Whether the gateway configuration is scoped directly to a site
           readOnly: true
@@ -74968,7 +74966,7 @@ components:
           - 'null'
         ip_configs:
           $ref: '#/components/schemas/gateway_ip_configs'
-          description: Gateway interface IP configurations by network name
+          description: Gateway interface IP configurations by network name. Property key is the network name
         mac:
           description: Gateway MAC address used to identify the device
           readOnly: true
@@ -75036,7 +75034,7 @@ components:
           type: string
         routing_policies:
           $ref: '#/components/schemas/gw_routing_policies'
-          description: Routing policies applied by this gateway
+          description: Routing policies applied by this gateway. Property key is the policy name
         serial:
           description: Manufacturer serial number for the gateway
           readOnly: true
@@ -75073,7 +75071,7 @@ components:
           description: VRF configuration applied to this gateway
         vrf_instances:
           $ref: '#/components/schemas/gateway_vrf_instances'
-          description: VRF instances configured on this gateway
+          description: VRF instances configured on this gateway. Property key is the VRF name
         x:
           description: Horizontal map position of the gateway, in pixels
           examples:
@@ -75232,7 +75230,7 @@ components:
           description: ACL tags used by switch access policies
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands to apply to this switch
+          description: "Additional CLI configuration commands to apply to this switch. **Note**: no check is done"
         aggregate_routes:
           $ref: '#/components/schemas/aggregate_routes'
           description: Additional IPv4 aggregate routes configured on this switch
@@ -75681,8 +75679,7 @@ components:
       properties:
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands provided by this gateway
-            profile
+          description: "Additional CLI configuration commands provided by this gateway profile. **Note**: no check is done"
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/bgp_config'
@@ -75812,8 +75809,7 @@ components:
           description: ACL tags available to switch access policies in this profile
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands provided by this switch
-            profile
+          description: "Additional CLI configuration commands provided by this switch profile. **Note**: no check is done"
         aggregate_routes:
           $ref: '#/components/schemas/aggregate_routes'
           description: Additional IPv4 aggregate route defaults in this switch profile
@@ -76070,7 +76066,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/dhcpd_config_option_type'
-          description: Data type used to encode this DHCP option value
+          description: "Data type used to encode this DHCP option value. enum: `boolean`, `hex`, `int16`, `int32`, `ip`, `string`, `uint16`, `uint32`"
         value:
           description: Option value to send for this DHCP option
           type: string
@@ -76101,15 +76097,15 @@ components:
         dns_servers:
           $ref: '#/components/schemas/dhcpd_config_dns_servers'
           description: If `type`==`local` or `type6`==`local`, DNS servers advertised
-            to DHCP clients
+            to DHCP clients - optional, if not defined, system one will be used
         dns_suffix:
           $ref: '#/components/schemas/dhcpd_config_dns_suffix'
           description: If `type`==`local` or `type6`==`local`, DNS search suffixes
-            advertised to DHCP clients
+            advertised to DHCP clients - optional, if not defined, system one will be used
         fixed_bindings:
           $ref: '#/components/schemas/dhcpd_config_fixed_bindings'
           description: If `type`==`local` or `type6`==`local`, fixed client bindings
-            for local DHCP service
+            for local DHCP service. Property key is the MAC Address.  Format is `[0-9a-f]{12}` (e.g. \"5684dae9ac8b\")
         gateway:
           description: If `type`==`local` - optional, `ip` will be used if not provided
           examples:
@@ -76149,7 +76145,7 @@ components:
         options:
           $ref: '#/components/schemas/dhcpd_config_options'
           description: If `type`==`local` or `type6`==`local`, custom DHCP options
-            advertised to clients
+            advertised to clients. Property key is the DHCP option number
         server_id_override:
           default: false
           description: "`server_id_override`==`true` means the device, when acts as\
@@ -76165,14 +76161,14 @@ components:
           description: If `type6`==`relay`, upstream IPv6 DHCP servers
         type:
           $ref: '#/components/schemas/dhcpd_config_type'
-          description: IPv4 DHCP mode for this network
+          description: "IPv4 DHCP mode for this network. enum: `local` (DHCP Server), `none`, `relay` (DHCP Relay)"
         type6:
           $ref: '#/components/schemas/dhcpd_config_type6'
-          description: IPv6 DHCP mode for this network
+          description: "IPv6 DHCP mode for this network. enum: `local` (DHCP Server), `none`, `relay` (DHCP Relay)"
         vendor_encapsulated:
           $ref: '#/components/schemas/dhcpd_config_vendor_options'
-          description: If `type`==`local` or `type6`==`local`, vendor-encapsulated
-            DHCP options advertised to clients
+          description: "If `type`==`local` or `type6`==`local`, vendor-encapsulated
+            DHCP options advertised to clients. Property key is <enterprise number>:<sub option code>, with\n  * enterprise number: 1-65535 (https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers)\n  * sub option code: 1-255, sub-option code"
       type: object
     dhcpd_config_servers:
       description: If `type`==`relay`, upstream IPv4 DHCP servers
@@ -76210,7 +76206,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/dhcpd_config_vendor_option_type'
-          description: Data type used to encode this vendor option value
+          description: "Data type used to encode this vendor option value. enum: `boolean`, `hex`, `int16`, `int32`, `ip`, `string`, `uint16`, `uint32`"
         value:
           description: Option value to send for this vendor option
           type: string
@@ -77928,10 +77924,10 @@ components:
             network interface
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IPv4 address assignment mode for this gateway network interface
+          description: "IPv4 address assignment mode for this gateway network interface. enum: `dhcp`, `static`"
         type6:
           $ref: '#/components/schemas/ip_type6'
-          description: IPv6 address assignment mode for this gateway network interface
+          description: "IPv6 address assignment mode for this gateway network interface. enum: `autoconf`, `dhcp`, `disabled`, `static`"
       type: object
     gateway_ip_config_property_second_ips:
       description: Optional list of secondary IPs in CIDR format
@@ -78073,7 +78069,7 @@ components:
       properties:
         day_of_week:
           $ref: '#/components/schemas/day_of_week'
-          description: Scheduled weekday for automatic signature updates
+          description: "Scheduled weekday for automatic signature updates. enum: `any`, `fri`, `mon`, `sat`, `sun`, `thu`, `tue`, `wed`"
         enable:
           default: true
           description: Whether automatic security signature updates are enabled
@@ -78201,7 +78197,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IP assignment mode for the node1 out-of-band management interface
+          description: "IP assignment mode for the node1 out-of-band management interface. enum: `dhcp`, `static`"
         use_mgmt_vrf:
           default: false
           description: If supported on the platform. If enabled, DNS will be using
@@ -78226,7 +78222,7 @@ components:
           description: Candidate paths evaluated for this gateway path preference
         strategy:
           $ref: '#/components/schemas/gateway_path_strategy'
-          description: Selection strategy used to evaluate the candidate paths
+          description: "Selection strategy used to evaluate the candidate paths. enum: `ecmp`, `ordered`, `weighted`"
       type: object
     gateway_path_preferences_path:
       additionalProperties: false
@@ -78250,14 +78246,13 @@ components:
           type: string
         networks:
           $ref: '#/components/schemas/gateway_path_preferences_path_networks'
-          description: List of network names used when `type`==`local`
+          description: List of network names required when `type`==`local`
         target_ips:
           $ref: '#/components/schemas/gateway_path_preferences_path_target_ips'
           description: List of destination IP addresses to replace when `type`==`local`
         type:
           $ref: '#/components/schemas/gateway_path_type'
-          description: Gateway path source type, such as local network, WAN interface,
-            VPN path, or tunnel
+          description: "Gateway path source type. enum: `local`, `tunnel`, `vpn`, `wan`"
         wan_name:
           description: Optional if `type`==`vpn`; WAN interface name associated with
             the VPN path
@@ -78342,7 +78337,7 @@ components:
           type: boolean
         dsl_type:
           $ref: '#/components/schemas/gateway_port_dsl_type'
-          description: If `wan_type`==`dsl`. DSL technology used by the WAN port
+          description: "If `wan_type`==`dsl`. DSL technology used by the WAN port. enum: `adsl`, `vdsl`"
         dsl_vci:
           default: 35
           description: If `wan_type`==`dsl`, 16 bit int
@@ -78353,7 +78348,7 @@ components:
           type: integer
         duplex:
           $ref: '#/components/schemas/gateway_port_duplex'
-          description: Ethernet duplex mode configured on the port
+          description: "Ethernet duplex mode configured on the port. enum: `auto`, `full`, `half`"
         ip_config:
           $ref: '#/components/schemas/gateway_port_config_ip_config'
           description: Layer 3 IP configuration for the port
@@ -78362,8 +78357,8 @@ components:
           type: string
         lte_auth:
           $ref: '#/components/schemas/gateway_port_lte_auth'
-          description: If `wan_type`==`lte`. Authentication method used by the LTE
-            uplink
+          description: "If `wan_type`==`lte`. Authentication method used by the LTE
+            uplink. enum: `chap`, `none`, `pap`"
         lte_backup:
           description: Whether the LTE uplink is used as a backup WAN connection
           type: boolean
@@ -78445,18 +78440,18 @@ components:
           description: Traffic shaping settings applied to the port
         usage:
           $ref: '#/components/schemas/gateway_port_usage'
-          description: Logical usage assigned to the port
+          description: "Logical usage assigned to the port. enum: `ha_control`, `ha_data`, `lan`, `wan`"
         vlan_id:
           $ref: '#/components/schemas/gateway_port_vlan_id_with_variable'
           description: VLAN ID or variable used when the WAN interface is carried
             on a VLAN
         vpn_paths:
           $ref: '#/components/schemas/gateway_port_vpn_paths'
-          description: Per-VPN path settings for traffic that uses this port
+          description: Per-VPN path settings for traffic that uses this port. Property key is the VPN path name
         wan_arp_policer:
           $ref: '#/components/schemas/gateway_port_wan_arp_policer'
-          description: Only when `wan_type`==`broadband`. ARP policer profile applied
-            to the WAN port
+          description: "Only when `wan_type`==`broadband`. ARP policer profile applied
+            to the WAN port. enum: `dafault`, `max`, `recommended`"
         wan_ext_ip:
           description: Only if `usage`==`wan`, optional. If spoke should reach this
             port by a different IP
@@ -78490,14 +78485,14 @@ components:
           description: Optional WAN health probe override settings for this port
         wan_source_nat:
           $ref: '#/components/schemas/gateway_port_wan_source_nat'
-          description: Source NAT settings applied to traffic leaving this WAN port
+          description: Source NAT settings applied to traffic leaving this WAN port. Only if `usage`==`wan`, optional. By default, source-NAT is performed on all WAN Ports using the interface-ip
         wan_speedtest_mode:
           $ref: '#/components/schemas/gateway_port_config_wan_speedtest_mode'
-          description: Controls whether Marvis or the scheduler can run speed tests
-            on this WAN port
+          description: "Controls whether Marvis or the scheduler can run speed tests
+            on this WAN port. enum: `auto`, `enabled`, `disabled`"
         wan_type:
           $ref: '#/components/schemas/gateway_port_wan_type'
-          description: Only if `usage`==`wan`. WAN uplink type configured on the port
+          description: "Only if `usage`==`wan`. WAN uplink type configured on the port. enum: `broadband`, `dsl`, `lte`"
       required:
       - usage
       type: object
@@ -78561,16 +78556,16 @@ components:
           type: string
         pppoe_auth:
           $ref: '#/components/schemas/gateway_wan_ppoe_auth'
-          description: Authentication protocol used for PPPoE when `type`==`pppoe`
+          description: "Authentication protocol used for PPPoE when `type`==`pppoe`. enum: `chap`, `none`, `pap`"
         pppoe_username:
           description: Username used for PPPoE when `type`==`pppoe`
           type: string
         type:
           $ref: '#/components/schemas/gateway_wan_type'
-          description: IPv4 assignment mode for this gateway port interface
+          description: "IPv4 assignment mode for this gateway port interface. enum: `dhcp`, `ppoe`, `static`"
         type6:
           $ref: '#/components/schemas/gateway_wan_type6'
-          description: IPv6 assignment mode for this gateway port interface
+          description: "IPv6 assignment mode for this gateway port interface. enum: `autoconf`, `dhcp`, `static`"
       type: object
     gateway_port_config_reth_idx:
       anyOf:
@@ -78697,7 +78692,7 @@ components:
       properties:
         bfd_profile:
           $ref: '#/components/schemas/gateway_port_vpn_path_bfd_profile'
-          description: BFD profile used for this VPN path when the VPN `type`==`hub_spoke`
+          description: "BFD profile used for this VPN path when the VPN `type`==`hub_spoke`. enum: `broadband`, `lte`"
         bfd_use_tunnel_mode:
           default: false
           description: Only if the VPN `type`==`hub_spoke`. Whether to use tunnel
@@ -78869,8 +78864,7 @@ components:
       properties:
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands provided by this gateway
-            template
+          description: "Additional CLI configuration commands provided by this gateway template. **Note**: no check is done"
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/bgp_config'
@@ -79012,7 +79006,7 @@ components:
         class_percentages:
           $ref: '#/components/schemas/gateway_traffic_shaping_class_percentages'
           description: Traffic class bandwidth percentages for high, medium, low,
-            and best-effort queues
+            and best-effort queues. Sum must be equal to 100
         enabled:
           default: false
           description: Whether traffic shaping is enabled
@@ -79070,7 +79064,7 @@ components:
           description: List of IPv4 probe host addresses used by this WAN override
         probe_profile:
           $ref: '#/components/schemas/gateway_wan_probe_override_probe_profile'
-          description: WAN probe profile used for health checks on this port
+          description: 'WAN probe profile used for health checks on this port. enum: `broadband`, `lte`'
       type: object
     gateway_wan_probe_override_probe_profile:
       default: broadband
@@ -79362,11 +79356,11 @@ components:
         local_preference:
           $ref: '#/components/schemas/routing_policy_local_preference'
           description: Preference value to set when this term is used as an import
-            policy
+            policy. Value in range 1-4294967294. Can be a Variable (e.g. `{{bgp_as}}`)
         prepend_as_path:
           $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
           description: AS path values to prepend when this term is used as an export
-            policy
+            policy. Can be a Variable (e.g. `{{as_path}}`)
       type: object
     gw_routing_policy_term_action_add_community:
       description: BGP communities added to routes matched by a gateway routing policy
@@ -79683,7 +79677,7 @@ components:
       properties:
         base_profile:
           $ref: '#/components/schemas/idp_profile_base_profile'
-          description: Built-in IDP baseline profile inherited before applying overwrites
+          description: "Built-in IDP baseline profile inherited before applying overwrites. enum: `critical`, `standard`, `strict`"
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Timestamp when the IDP profile was created
@@ -79775,7 +79769,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/idp_profile_action'
-          description: Enforcement action applied when this overwrite rule matches
+          description: "Enforcement action applied when this overwrite rule matches. enum: `alert` (default), `drop` (silently dropping packets), `close` (notify client/server to close connection)"
         matching:
           $ref: '#/components/schemas/idp_profile_matching'
           description: Criteria that select signatures for this overwrite rule
@@ -86337,13 +86331,13 @@ components:
           type: string
         tenants:
           $ref: '#/components/schemas/network_tenants'
-          description: Tenant address mappings associated with this network
+          description: Tenant address mappings associated with this network. Property key must be the user/tenant name (i.e. \"printer-1\") or a Variable (i.e. \"{{myvar}}\")
         vlan_id:
           $ref: '#/components/schemas/vlan_id_with_variable'
           description: VLAN ID or variable associated with this network
         vpn_access:
           $ref: '#/components/schemas/network_vpn_access'
-          description: VPN access settings keyed by VPN name for this network
+          description: VPN access settings keyed by VPN name for this network. Property key is the VPN name. Whether this network can be accessed from vpn
       required:
       - name
       type: object
@@ -86366,7 +86360,7 @@ components:
           type: boolean
         destination_nat:
           $ref: '#/components/schemas/network_internet_access_destination_nat'
-          description: Destination NAT rules for direct internet access
+          description: Destination NAT rules for direct internet access. Property key can be an External IP (i.e. \"63.16.0.3\"), an External IP:Port (i.e. \"63.16.0.3:443\"), an External Port (i.e. \":443\"), an External CIDR (i.e. \"63.16.0.0/30\"), an External CIDR:Port (i.e. \"63.16.0.0/30:443\") or a Variable (i.e. \"{{myvar}}\"). At least one of the `internal_ip` or `port` must be defined
         enabled:
           description: Whether direct internet access is enabled for this network
           type: boolean
@@ -86377,7 +86371,7 @@ components:
           type: boolean
         static_nat:
           $ref: '#/components/schemas/network_internet_access_static_nat'
-          description: Static NAT rules for direct internet access
+          description: Static NAT rules for direct internet access. Property key may be an External IP Address (i.e. \"63.16.0.3\"), a CIDR (i.e. \"63.16.0.12/20\") or a Variable (i.e. \"{{myvar}}\")
       type: object
     network_internet_access_destination_nat:
       additionalProperties:
@@ -86459,7 +86453,7 @@ components:
           type: boolean
         groups:
           $ref: '#/components/schemas/network_multicast_groups'
-          description: Multicast group-to-RP mappings for this network
+          description: Multicast group-to-RP mappings for this network. Property Key is the CIDR (example \"225.1.0.3/32\")
       type: object
     network_multicast_group:
       additionalProperties: false
@@ -86506,8 +86500,7 @@ components:
           description: ACL tags available to access policies in this network template
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands provided by this network
-            template
+          description: "Additional CLI configuration commands provided by this network template. **Note**: no check is done"
         bgp_config:
           additionalProperties:
             $ref: '#/components/schemas/switch_bgp_config'
@@ -86655,7 +86648,7 @@ components:
           type: boolean
         destination_nat:
           $ref: '#/components/schemas/network_vpn_access_destination_nat'
-          description: Destination NAT rules applied for VPN access to this network
+          description: Destination NAT rules applied for VPN access to this network. Property key can be an External IP (i.e. \"63.16.0.3\"), an External IP:Port (i.e. \"63.16.0.3:443\"), an External Port (i.e. \":443\"), an External CIDR (i.e. \"63.16.0.0/30\"), an External CIDR:Port (i.e. \"63.16.0.0/30:443\") or a Variable (i.e. \"{{myvar}}\"). At least one of the `internal_ip` or `port` must be defined
         nat_pool:
           description: If `routed`==`false` (usually at Spoke), but some hosts needs
             to be reachable from Hub, a subnet is required to create and advertise
@@ -86687,7 +86680,7 @@ components:
             reachable from the hub
         static_nat:
           $ref: '#/components/schemas/network_vpn_access_static_nat'
-          description: Static NAT rules applied for VPN access to this network
+          description: Static NAT rules applied for VPN access to this network. Property key may be an External IP Address (i.e. \"63.16.0.3\"), a CIDR (i.e. \"63.16.0.12/20\") or a Variable (i.e. \"{{myvar}}\")
         summarized_subnet:
           description: toward overlay, how HUB should deal with routes it received
             from Spokes
@@ -89616,7 +89609,7 @@ components:
           type: string
         protocol:
           $ref: '#/components/schemas/protect_re_custom_protocol'
-          description: Transport protocol matched by this custom Protect RE ACL
+          description: "Transport protocol matched by this custom Protect RE ACL. enum: `any`, `icmp`, `tcp`, `udp`"
         subnets:
           $ref: '#/components/schemas/protect_re_custom_subnet'
           description: Source subnets matched by this custom Protect RE ACL
@@ -97846,7 +97839,7 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/service_policy_ewf_rule_profile'
-          description: Enhanced web filtering profile applied by this rule
+          description: "Enhanced web filtering profile applied by this rule. enum: `critical`, `standard`, `strict`"
       type: object
     service_policy_ewf_rule_profile:
       default: strict
@@ -97943,7 +97936,7 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/service_policy_skyatp_http_inspection_profile'
-          description: Sky ATP HTTP inspection profile to apply
+          description: 'Sky ATP HTTP inspection profile to apply. enum: `standard`, `strict`'
       type: object
     service_policy_skyatp_http_inspection_profile:
       description: 'Sky ATP HTTP inspection profile to apply. enum: `standard`, `strict`'
@@ -97965,7 +97958,7 @@ components:
       properties:
         ciphers_category:
           $ref: '#/components/schemas/ssl_proxy_ciphers_category'
-          description: Allowed cipher strength category for SSL proxy inspection
+          description: "Allowed cipher strength category for SSL proxy inspection. enum: `medium`, `strong`, `weak`"
         enabled:
           default: false
           description: Whether SSL proxy inspection is enabled for the service policy
@@ -99020,8 +99013,7 @@ components:
           description: Access control tag definitions available to site policies
         additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands applied through the site
-            setting
+          description: "Additional CLI configuration commands applied through the site setting. **Note**: no check is done"
         allow_mist:
           default: false
           description: whether to allow Mist to look at this org
@@ -99146,8 +99138,7 @@ components:
           description: Template settings applied to site gateways
         gateway_additional_config_cmds:
           $ref: '#/components/schemas/additional_config_cmds'
-          description: Additional CLI configuration commands applied to gateways at
-            the site
+          description: "Additional CLI configuration commands applied to gateways at the site. **Note**: no check is done"
         gateway_mgmt:
           $ref: '#/components/schemas/gateway_mgmt'
           description: Management access settings for gateways at the site
@@ -105611,9 +105602,12 @@ components:
           readOnly: true
           type: string
         port_usage:
-          description: Logical usage assigned to the port
+          description: "Logical usage assigned to the port. enum: `ha_control`, `ha_data`, `lan`, `wan`"
           examples:
+          - ha_control
+          - ha_data
           - lan
+          - wan
           type: string
         power_draw:
           description: Amount of power being used by the interface at the time the
@@ -109385,11 +109379,11 @@ components:
         dns_servers:
           $ref: '#/components/schemas/switch_dhcpd_config_dns_servers'
           description: If `type`==`server` or `type6`==`server`, DNS servers advertised
-            to DHCP clients
+            to DHCP clients - optional, if not defined, system one will be used
         dns_suffix:
           $ref: '#/components/schemas/switch_dhcpd_config_dns_suffix'
           description: If `type`==`server` or `type6`==`server`, DNS search suffixes
-            advertised to DHCP clients
+            advertised to DHCP clients - optional, if not defined, system one will be used
         fixed_bindings:
           $ref: '#/components/schemas/switch_dhcpd_config_fixed_bindings'
           description: If `type`==`server` or `type6`==`server`, fixed client bindings
@@ -109433,7 +109427,7 @@ components:
         options:
           $ref: '#/components/schemas/switch_dhcpd_config_options'
           description: If `type`==`server` or `type6`==`server`, custom DHCP options
-            advertised to clients
+            advertised to clients. Property key is the DHCP option number
         server_id_override:
           default: false
           description: "`server_id_override`==`true` means the device, when acts as\
@@ -109455,8 +109449,8 @@ components:
           description: IPv6 DHCP mode for this switch network
         vendor_encapsulated:
           $ref: '#/components/schemas/switch_dhcpd_config_vendor_options'
-          description: If `type`==`server` or `type6`==`server`, vendor-encapsulated
-            DHCP options advertised to clients
+          description: "If `type`==`server` or `type6`==`server`, vendor-encapsulated
+            DHCP options advertised to clients. Property key is <enterprise number>:<sub option code>, with\n  * enterprise number: 1-65535 (https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers)\n  * sub option code: 1-255, sub-option code"
       type: object
     switch_dhcpd_config_type:
       description: 'enum: `none`, `relay` (DHCP Relay), `server` (DHCP Server)'
@@ -109825,7 +109819,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IP assignment mode for the out-of-band management interface
+          description: "IP assignment mode for the out-of-band management interface. enum: `dhcp`, `static`"
         use_mgmt_vrf:
           default: false
           description: If supported on the platform. If enabled, DNS will be using
@@ -111824,15 +111818,15 @@ components:
       properties:
         auto_provision:
           $ref: '#/components/schemas/tunnel_config_auto_provision'
-          description: Provider auto-provisioning settings for tunnel endpoints
+          description: Provider auto-provisioning settings for tunnel endpoints. This takes precedence over the `primary` and `secondary` nodes.
         ike_lifetime:
           description: Only if `provider`==`custom-ipsec`. IKE lifetime configured
             for the custom IPsec tunnel
           type: integer
         ike_mode:
           $ref: '#/components/schemas/tunnel_config_ike_mode'
-          description: Only if `provider`==`custom-ipsec`. IKE negotiation mode for
-            the tunnel
+          description: "Only if `provider`==`custom-ipsec`. IKE negotiation mode for
+            the tunnel. enum: `aggressive`, `main`"
         ike_proposals:
           $ref: '#/components/schemas/tunnel_config_ike_proposals'
           description: If `provider`==`custom-ipsec`, IKE proposals used for custom
@@ -111854,23 +111848,23 @@ components:
           description: Local protected subnets advertised by this tunnel
         mode:
           $ref: '#/components/schemas/tunnel_config_tunnel_mode'
-          description: Tunnel failover mode used for primary and secondary endpoints
+          description: "Tunnel failover mode used for primary and secondary endpoints. enum: `active-active`, `active-standby`"
         networks:
           $ref: '#/components/schemas/tunnel_config_networks'
           description: Destination networks reachable through this tunnel
         primary:
           $ref: '#/components/schemas/tunnel_config_node'
-          description: Main remote tunnel endpoint settings
+          description: Main remote tunnel endpoint settings. Only if `provider`==`zscaler-ipsec`, `provider`==`jse-ipsec` or `provider`==`custom-ipsec`
         probe:
           $ref: '#/components/schemas/tunnel_config_probe'
-          description: Tunnel health probe settings
+          description: Tunnel health probe settings. Only if `provider`==`custom-ipsec`
         protocol:
           $ref: '#/components/schemas/tunnel_config_protocol'
-          description: Only if `provider`==`custom-ipsec`. Tunnel protocol for custom
-            tunnel negotiation
+          description: "Only if `provider`==`custom-ipsec`. Tunnel protocol for custom
+            tunnel negotiation. enum: `gre`, `ipsec`"
         provider:
           $ref: '#/components/schemas/tunnel_config_provider'
-          description: Tunnel provider used when auto provisioning is disabled
+          description: "Tunnel provider used when auto provisioning is disabled. enum: `custom-ipsec`, `custom-gre`, `jse-ipsec`, `prisma-ipsec`, `zscaler-gre`, `zscaler-ipsec`"
         psk:
           description: Required if `provider`==`zscaler-ipsec`, `provider`==`jse-ipsec`
             or `provider`==`custom-ipsec`
@@ -111883,8 +111877,8 @@ components:
           description: Backup remote tunnel endpoint settings
         version:
           $ref: '#/components/schemas/tunnel_config_version'
-          description: Only if `provider`==`custom-gre` or `provider`==`custom-ipsec`.
-            Tunnel version value for custom tunnel configuration
+          description: "Only if `provider`==`custom-gre` or `provider`==`custom-ipsec`.
+            Tunnel version value for custom tunnel configuration. enum: `1`, `2`"
       type: object
     tunnel_config_auth_algo:
       description: 'enum: `md5`, `sha1`, `sha2`'
@@ -111910,7 +111904,7 @@ components:
           description: Main auto-provisioned tunnel endpoint settings
         provider:
           $ref: '#/components/schemas/tunnel_config_auto_provision_provider'
-          description: Tunnel provider used for automatic endpoint provisioning
+          description: "Tunnel provider used for automatic endpoint provisioning. enum: `jse-ipsec`, `zscaler-ipsec`"
         region:
           description: API override for POP selection in the case user wants to override
             the auto discovery of remote network location and force the tunnel to
@@ -111962,7 +111956,7 @@ components:
             reachability
         wan_names:
           $ref: '#/components/schemas/tunnel_config_auto_provision_node_wan_names'
-          description: WAN interface names used by the auto-provisioned tunnel endpoint
+          description: Optional, only needed if `vars_only`==`false`. WAN interface names used by the auto-provisioned tunnel endpoint
     tunnel_config_auto_provision_node_wan_names:
       description: Optional, only needed if `vars_only`==`false`
       items:
@@ -112036,13 +112030,13 @@ components:
       properties:
         auth_algo:
           $ref: '#/components/schemas/tunnel_config_auth_algo'
-          description: Integrity algorithm used by this IKE proposal
+          description: "Integrity algorithm used by this IKE proposal. enum: `md5`, `sha1`, `sha2`"
         dh_group:
           $ref: '#/components/schemas/tunnel_config_ike_dh_group'
-          description: Diffie-Hellman group used by this IKE proposal
+          description: "Diffie-Hellman group used by this IKE proposal. enum: `1`, `2` (1024-bit), `5`, `14` (default, 2048-bit), `15` (3072-bit), `16` (4096-bit), `19` (256-bit ECP), `20` (384-bit ECP), `21` (521-bit ECP), `24` (2048-bit ECP)"
         enc_algo:
           $ref: '#/components/schemas/tunnel_config_enc_algo'
-          description: Cipher algorithm used by this IKE proposal
+          description: "Cipher algorithm used by this IKE proposal. enum: `3des`, `aes128`, `aes256`, `aes_gcm128`, `aes_gcm256`"
       type: object
     tunnel_config_ike_proposals:
       description: If `provider`==`custom-ipsec`, IKE proposals used for custom IPsec
@@ -112056,13 +112050,13 @@ components:
       properties:
         auth_algo:
           $ref: '#/components/schemas/tunnel_config_auth_algo'
-          description: Integrity algorithm used by this IPsec proposal
+          description: "Integrity algorithm used by this IPsec proposal. enum: `md5`, `sha1`, `sha2`"
         dh_group:
           $ref: '#/components/schemas/tunnel_config_dh_group'
-          description: Diffie-Hellman group used by this IPsec proposal
+          description: "Diffie-Hellman group used by this IPsec proposal. enum: `1`, `2` (1024-bit), `5`, `14` (default, 2048-bit), `15` (3072-bit), `16` (4096-bit), `19` (256-bit ECP), `20` (384-bit ECP), `21` (521-bit ECP), `24` (2048-bit ECP)"
         enc_algo:
           $ref: '#/components/schemas/tunnel_config_enc_algo'
-          description: Cipher algorithm used by this IPsec proposal
+          description: "Cipher algorithm used by this IPsec proposal. enum: `3des`, `aes128`, `aes256`, `aes_gcm128`, `aes_gcm256`"
       type: object
     tunnel_config_ipsec_proposals:
       description: Only if `provider`==`custom-ipsec`. IPsec proposals used for custom
@@ -112091,13 +112085,13 @@ components:
           description: Remote gateway host addresses for this tunnel node
         internal_ips:
           $ref: '#/components/schemas/tunnel_config_node_internal_ips'
-          description: Internal IP addresses configured on this tunnel node
+          description: Internal IP addresses configured on this tunnel node. Only if `provider`==`zscaler-gre`, `provider`==`jse-ipsec`, `provider`==`custom-ipsec` or `provider`==`custom-gre`
         probe_ips:
           $ref: '#/components/schemas/strings'
           description: Health-check IP addresses used to monitor this tunnel node
         remote_ids:
           $ref: '#/components/schemas/tunnel_config_node_remote_ids'
-          description: IKE identities expected from this tunnel node
+          description: IKE identities expected from this tunnel node. Only if `provider`==`jse-ipsec` or `provider`==`custom-ipsec`
         wan_names:
           $ref: '#/components/schemas/tunnel_config_node_wan_names'
           description: Interface names that source tunnel traffic for this node
@@ -112142,7 +112136,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/tunnel_config_probe_type'
-          description: Protocol used by the custom IPsec tunnel health probe
+          description: "Protocol used by the custom IPsec tunnel health probe. enum: `http`, `icmp`"
       type: object
     tunnel_config_probe_type:
       default: icmp
@@ -115053,7 +115047,7 @@ components:
         class_percentage:
           $ref: '#/components/schemas/vpn_path_traffic_shaping_class_percentage'
           description: Bandwidth percentages for high, medium, low, and best-effort
-            traffic classes
+            traffic classes. Sum must equal 100
         enabled:
           description: Whether traffic shaping is enabled for this VPN path
           type: boolean
