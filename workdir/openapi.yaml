@@ -67927,7 +67927,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ap_client_bridge_auth_type'
-          description: Authentication mode for the client bridge connection
+          description: "Authentication mode for the client bridge connection. enum: `open`, `psk`"
       type: object
     ap_client_bridge_auth_type:
       default: psk
@@ -67973,7 +67973,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ap_esl_type'
-          description: ESL integration type to enable on the AP
+          description: "ESL integration type to enable on the AP. enum: `hanshow`, `imagotag`, `native`, `solum`"
         verify_cert:
           description: Only if `type`==`imagotag` or `type`==`native`
           examples:
@@ -68139,10 +68139,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ip_type'
-          description: IPv4 address assignment mode for AP management traffic
+          description: "IPv4 address assignment mode for AP management traffic. enum: `dhcp`, `static`"
         type6:
           $ref: '#/components/schemas/ip_type6'
-          description: IPv6 address assignment mode for AP management traffic
+          description: "IPv6 address assignment mode for AP management traffic. enum: `autoconf`, `dhcp`, `disabled`, `static`"
         vlan_id:
           default: 1
           description: Management VLAN ID, default is 1 (untagged)
@@ -68191,7 +68191,7 @@ components:
       properties:
         bands:
           $ref: '#/components/schemas/ap_mesh_bands'
-          description: Radio bands allowed for AP mesh links
+          description: "Radio bands allowed for AP mesh links. The first viable one will be picked. enum: `24`, `5`, `6`"
         enabled:
           default: false
           description: Whether mesh is enabled on this AP
@@ -68208,7 +68208,7 @@ components:
           - 'null'
         role:
           $ref: '#/components/schemas/ap_mesh_role'
-          description: Mesh role for this AP, either base or remote
+          description: "Mesh role for this AP. enum: `base`, `remote`"
         use_wpa3_on_5:
           default: false
           description: Whether to use WPA3 on the 5 GHz band for mesh links
@@ -68291,7 +68291,7 @@ components:
           type: boolean
         forwarding:
           $ref: '#/components/schemas/ap_port_config_forwarding'
-          description: Traffic forwarding mode for this AP Ethernet port
+          description: "Traffic forwarding mode for this AP Ethernet port. enum: \n  * `all`: local breakout, All VLANs\n  * `limited`: local breakout, only the VLANs configured in `port_vlan_id` and `vlan_ids`\n  * `mxtunnel`: central breakout to an Org Mist Edge (requires `mxtunnel_id`)\n  * `site_mxedge`: central breakout to a Site Mist Edge (requires `mxtunnel_name`)\n  * `wxtunnel`': central breakout to an Org WxTunnel (requires `wxtunnel_id`)"
         mac_auth_preferred:
           default: false
           description: When `true`, we'll do dot1x then mac_auth. enable this to prefer
@@ -68299,8 +68299,7 @@ components:
           type: boolean
         mac_auth_protocol:
           $ref: '#/components/schemas/ap_port_config_mac_auth_protocol'
-          description: Protocol used for MAC authentication when `enable_mac_auth`
-            is `true`
+          description: "Protocol used for MAC authentication when `enable_mac_auth` is `true`. enum: `eap-md5`, `eap-peap`, `pap`"            
         mist_nac:
           $ref: '#/components/schemas/wlan_mist_nac'
           description: Juniper Mist NAC settings used by AP port authentication
@@ -68318,7 +68317,7 @@ components:
           type: string
         port_auth:
           $ref: '#/components/schemas/ap_port_config_port_auth'
-          description: Authentication mode for this AP Ethernet port
+          description: "Authentication mode for this AP Ethernet port. enum: `dot1x`, `none`"
         port_vlan_id:
           description: If `forwarding`==`limited`. VLAN ID allowed on this AP Ethernet
             port
@@ -68490,18 +68489,18 @@ components:
           type: integer
         antenna_mode:
           $ref: '#/components/schemas/ap_radio_antenna_mode'
-          description: Selected radio chain mode for AP models that support antenna
-            mode control
+          description: "Selected radio chain mode for AP models that support antenna
+            mode control. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         antenna_select:
           $ref: '#/components/schemas/antenna_select'
-          description: Internal or external antenna selection for AP models with selectable
-            antennas
+          description: "Internal or external antenna selection for AP models with selectable
+            antennas. enum: `\"\"` (default), `external`, `internal`"
         band_24:
           $ref: '#/components/schemas/ap_radio_band24'
           description: 2.4 GHz radio settings for this access point
         band_24_usage:
           $ref: '#/components/schemas/radio_band_24_usage'
-          description: Radio usage mode for the 2.4 GHz-capable radio
+          description: "Radio usage mode for the 2.4 GHz-capable radio. enum: `24`, `5`, `6`, `auto`"
         band_5:
           $ref: '#/components/schemas/ap_radio_band5'
           description: 5 GHz radio settings for this access point
@@ -68563,10 +68562,10 @@ components:
           - 'null'
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
-          description: Radio chain mode for the 2.4 GHz radio
+          description: "Radio chain mode for the 2.4 GHz radio. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth24'
-          description: Channel width configured for the 2.4 GHz radio
+          description: "Channel width configured for the 2.4 GHz radio. . enum: `0`(disabled, response only), `20`, `40`"
         channel:
           default: null
           description: For Device. (primary) channel for the band, 0 means using the
@@ -68615,7 +68614,7 @@ components:
           - 'null'
         preamble:
           $ref: '#/components/schemas/radio_band_preamble'
-          description: 802.11 preamble mode used by the 2.4 GHz radio
+          description: "802.11 preamble mode used by the 2.4 GHz radio. enum: `auto`, `long`, `short`"
       type: object
     ap_radio_band5:
       additionalProperties: false
@@ -68636,13 +68635,13 @@ components:
           - 'null'
         antenna_beam_pattern:
           $ref: '#/components/schemas/radio_band_antenna_beam_pattern'
-          description: Beam pattern used by the 5 GHz radio antenna
+          description: "Beam pattern used by the 5 GHz radio antenna. enum: `narrow`, `medium`, `wide`"
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
-          description: Radio chain mode for the 5 GHz radio
+          description: "Radio chain mode for the 5 GHz radio. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth5'
-          description: Channel width configured for the 5 GHz radio
+          description: "Channel width configured for the 5 GHz radio.  enum: `0`(disabled, response only), `20`, `40`, `80`"
         channel:
           default: null
           description: For Device. (primary) channel for the band, 0 means using the
@@ -68689,7 +68688,7 @@ components:
           - 'null'
         preamble:
           $ref: '#/components/schemas/radio_band_preamble'
-          description: 802.11 preamble mode used by the 5 GHz radio
+          description: "802.11 preamble mode used by the 5 GHz radio. enum: `auto`, `long`, `short`"
       type: object
     ap_radio_band6:
       additionalProperties: false
@@ -68710,13 +68709,13 @@ components:
           - 'null'
         antenna_beam_pattern:
           $ref: '#/components/schemas/radio_band_antenna_beam_pattern'
-          description: Beam pattern used by the 6 GHz radio antenna
+          description: "Beam pattern used by the 6 GHz radio antenna. enum: `narrow`, `medium`, `wide`"
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
-          description: Radio chain mode for the 6 GHz radio
+          description: "Radio chain mode for the 6 GHz radio. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth6'
-          description: Channel width configured for the 6 GHz radio
+          description: "Channel width configured for the 6 GHz radio. enum: `0`(disabled, response only), `20`, `40`, `80`, `160`"
         channel:
           default: null
           description: For Device. (primary) channel for the band, 0 means using the
@@ -68763,7 +68762,7 @@ components:
           - 'null'
         preamble:
           $ref: '#/components/schemas/radio_band_preamble'
-          description: 802.11 preamble mode used by the 6 GHz radio
+          description: "802.11 preamble mode used by the 6 GHz radio. enum: `auto`, `long`, `short`"
         standard_power:
           default: false
           description: For 6GHz Only, standard-power operation, AFC (Automatic Frequency
@@ -69489,7 +69488,7 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ap_usb_type'
-          description: USB integration type for this legacy AP USB configuration
+          description: "USB integration type for this legacy AP USB configuration. enum: `hanshow`, `imagotag`, `solum`"
         verify_cert:
           description: Only if `type`==`imagotag`, whether to turn on SSL verification
           type: boolean
@@ -69513,7 +69512,7 @@ components:
       properties:
         allow_join:
           $ref: '#/components/schemas/ap_zigbee_allow_join'
-          description: Join policy for new Zigbee devices on this AP
+          description: "Join policy for new Zigbee devices on this AP. enum: `always`, `manual`"
         channel:
           default: 0
           description: "Zigbee channel (2.4 GHz). `0` means auto; valid fixed values\
@@ -70652,10 +70651,10 @@ components:
           type: integer
         beacon_rate_mode:
           $ref: '#/components/schemas/ble_config_beacon_rate_mode'
-          description: Beacon rate mode for Mist BLE beacons; use custom to set beacon_rate
+          description: "Beacon rate mode for Mist BLE beacons; use custom to set beacon_rate. enum: `custom`, `default`"
         beam_disabled:
           $ref: '#/components/schemas/ble_config_beam_disabled'
-          description: AP BLE beam numbers disabled for location advertisements
+          description: List of AP BLE location beam numbers (1-8) which should be disabled at the AP and not transmit location information (where beam 1 is oriented at the top the AP, growing counter-clock-wise, with 9 being the omni BLE beam)
         custom_ble_packet_enabled:
           default: false
           description: Can be enabled if `beacon_enabled`==`true`, whether to send
@@ -70798,7 +70797,7 @@ components:
           type: integer
         power_mode:
           $ref: '#/components/schemas/ble_config_power_mode'
-          description: Transmit power mode for BLE beacons; use custom to set `power`
+          description: "Transmit power mode for BLE beacons; use custom to set `power`. enum: `custom`, `default`"
       type: object
     ble_config_beacon_rate_mode:
       default: default
@@ -74747,13 +74746,13 @@ components:
           description: Site where this access point is assigned
         type:
           $ref: '#/components/schemas/const_device_type_ap'
-          description: Device type discriminator for access point records
+          description: "Device type discriminator for access point records. enum: `ap`"
         uplink_port_config:
           $ref: '#/components/schemas/ap_uplink_port_config'
           description: Authentication and failover behavior for AP uplink ports
         usb_config:
           $ref: '#/components/schemas/ap_usb'
-          description: Legacy USB integration settings for this access point
+          description: "Legacy USB integration settings for this access point. Note: legacy, new config moved to ESL Config."
         vars:
           $ref: '#/components/schemas/vars'
           description: Variable values that override site variables for this access
@@ -75058,7 +75057,7 @@ components:
           description: Provider-specific options for tunnels terminated by this gateway
         type:
           $ref: '#/components/schemas/const_device_type_gateway'
-          description: Device type discriminator for gateway records
+          description: "Device type discriminator for gateway records. enum: `gateway`"
         url_filtering_deny_msg:
           default: Access to this URL Category has been blocked
           description: When a service policy denies a app_category, what message to
@@ -75423,7 +75422,7 @@ components:
           description: Management-plane settings for this switch
         type:
           $ref: '#/components/schemas/const_device_type_switch'
-          description: Device type discriminator for switch records
+          description: "Device type discriminator for switch records. enum: `switch`"
         use_router_id_as_source_ip:
           default: false
           description: Whether to use it for snmp / syslog / tacplus / radius
@@ -75660,7 +75659,7 @@ components:
           description: Deprecated AP switch configuration defaults in this profile
         type:
           $ref: '#/components/schemas/device_type_ap'
-          description: Device type discriminator for AP device profiles
+          description: "Device type discriminator for AP device profiles. enum: `ap`"
         uplink_port_config:
           $ref: '#/components/schemas/ap_uplink_port_config'
           description: Authentication and failover defaults for AP uplink ports
@@ -75781,7 +75780,7 @@ components:
           description: Provider-specific tunnel options defined by this gateway profile
         type:
           $ref: '#/components/schemas/device_type_gateway'
-          description: Device type discriminator for gateway profiles
+          description: "Device type discriminator for gateway profiles. enum: `gateway`"
         url_filtering_deny_msg:
           default: Access to this URL Category has been blocked
           description: When a service policy denies a app_category, what message to
@@ -75919,7 +75918,7 @@ components:
           description: Management-plane defaults provided by this switch profile
         type:
           $ref: '#/components/schemas/const_device_type_switch'
-          description: Device type discriminator for switch profiles
+          description: "Device type discriminator for switch profiles. enum: `switch`"
         use_router_id_as_source_ip:
           default: false
           description: Whether to use it for snmp / syslog / tacplus / radius
@@ -90186,7 +90185,7 @@ components:
           type: boolean
         keywrap_format:
           $ref: '#/components/schemas/radius_keywrap_format'
-          description: Encoding format for RADIUS keywrap KEK and MACK values
+          description: "Encoding format for RADIUS keywrap KEK and MACK values. enum: `ascii`, `hex`"
         keywrap_kek:
           description: RADIUS keywrap key encryption key (KEK)
           examples:
@@ -90238,7 +90237,7 @@ components:
           type: boolean
         keywrap_format:
           $ref: '#/components/schemas/radius_keywrap_format'
-          description: Encoding format for RADIUS keywrap KEK and MACK values
+          description: "Encoding format for RADIUS keywrap KEK and MACK values. enum: `ascii`, `hex`"
         keywrap_kek:
           description: RADIUS keywrap key encryption key (KEK)
           examples:
@@ -90353,7 +90352,7 @@ components:
             does not use mxtunnel
         proxy_hosts:
           $ref: '#/components/schemas/radsec_proxy_hosts'
-          description: RadSec proxy hostnames advertised to APs
+          description: RadSec proxy hostnames advertised to APs. Default is site.mxedge.radsec.proxy_hosts which must be a superset of all `wlans[*].radsec.proxy_hosts`. When `radsec.proxy_hosts` are not used, tunnel peers (org or site mxedges) are used irrespective of `use_site_mxedge`
         server_name:
           description: TLS server name to verify against the CA certificates in Org
             Setting. Only if not Mist Edge.
@@ -95943,7 +95942,7 @@ components:
           description: 2.4 GHz radio settings in this RF template
         band_24_usage:
           $ref: '#/components/schemas/radio_band_24_usage'
-          description: Radio usage mode for the 2.4 GHz-capable radio in this RF template
+          description: "Radio usage mode for the 2.4 GHz-capable radio in this RF template. enum: `24`, `5`, `6`, `auto`"
         band_5:
           $ref: '#/components/schemas/rftemplate_radio_band5'
           description: 5 GHz radio settings in this RF template
@@ -96012,7 +96011,7 @@ components:
             defaults
         band_24_usage:
           $ref: '#/components/schemas/radio_band_24_usage'
-          description: Model-specific radio usage mode for the 2.4 GHz-capable radio
+          description: "Model-specific radio usage mode for the 2.4 GHz-capable radio. enum: `24`, `5`, `6`, `auto`"
         band_5:
           $ref: '#/components/schemas/rftemplate_radio_band5'
           description: Model-specific 5 GHz radio settings that override RF template
@@ -96050,10 +96049,10 @@ components:
           - 'null'
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
-          description: Radio chain mode for the 2.4 GHz radio
+          description: "Radio chain mode for the 2.4 GHz radio. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth24'
-          description: Channel width configured for the 2.4 GHz radio
+          description: "Channel width configured for the 2.4 GHz radio. enum: `0`(disabled, response only), `20`, `40`"
         channels:
           $ref: '#/components/schemas/radio_band_channels'
           description: Allowed channel list for the 2.4 GHz radio; null or an empty
@@ -96091,7 +96090,7 @@ components:
           - 'null'
         preamble:
           $ref: '#/components/schemas/radio_band_preamble'
-          description: 802.11 preamble mode used by the 2.4 GHz radio
+          description: "802.11 preamble mode used by the 2.4 GHz radio. enum: `auto`, `long`, `short`"
       type: object
     rftemplate_radio_band5:
       additionalProperties: false
@@ -96112,10 +96111,10 @@ components:
           - 'null'
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
-          description: Radio chain mode for the 5 GHz radio
+          description: "Radio chain mode for the 5 GHz radio. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth5'
-          description: Channel width configured for the 5 GHz radio
+          description: "Channel width configured for the 5 GHz radio.  enum: `0`(disabled, response only), `20`, `40`, `80`"
         channels:
           $ref: '#/components/schemas/radio_band_channels'
           description: Allowed channel list for the 5 GHz radio; null or an empty
@@ -96153,7 +96152,7 @@ components:
           - 'null'
         preamble:
           $ref: '#/components/schemas/radio_band_preamble'
-          description: 802.11 preamble mode used by the 5 GHz radio
+          description: "802.11 preamble mode used by the 5 GHz radio. enum: `auto`, `long`, `short`"
       type: object
     rftemplate_radio_band6:
       additionalProperties: false
@@ -96174,10 +96173,10 @@ components:
           - 'null'
         antenna_mode:
           $ref: '#/components/schemas/radio_band_antenna_mode'
-          description: Radio chain mode for the 6 GHz radio
+          description: "Radio chain mode for the 6 GHz radio. enum: `1x1`, `2x2`, `3x3`, `4x4`, `default`"
         bandwidth:
           $ref: '#/components/schemas/dot11_bandwidth6'
-          description: Channel width configured for the 6 GHz radio
+          description: "Channel width configured for the 6 GHz radio. enum: `0`(disabled, response only), `20`, `40`, `80`, `160`"
         channels:
           $ref: '#/components/schemas/radio_band_channels'
           description: Allowed channel list for the 6 GHz radio; null or an empty
@@ -96215,7 +96214,7 @@ components:
           - 'null'
         preamble:
           $ref: '#/components/schemas/radio_band_preamble'
-          description: 802.11 preamble mode used by the 6 GHz radio
+          description: "802.11 preamble mode used by the 6 GHz radio. enum: `auto`, `long`, `short`"
         standard_power:
           default: false
           description: For 6GHz Only, standard-power operation, AFC (Automatic Frequency
@@ -105287,7 +105286,7 @@ components:
           description: WAN tunnel statistics for the gateway
         type:
           $ref: '#/components/schemas/const_device_type_gateway'
-          description: Device type discriminator for gateway statistics
+          description: "Device type discriminator for gateway statistics. enum: `gateway`"
         uptime:
           description: Elapsed time since the gateway last booted, in seconds
           examples:
@@ -107462,7 +107461,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/device_type_switch'
-          description: Device type discriminator for switch statistics
+          description: "Device type discriminator for switch statistics. enum: `switch`"
         uptime:
           description: Elapsed time since the switch last booted, in seconds
           examples:
