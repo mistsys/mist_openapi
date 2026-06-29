@@ -115530,7 +115530,7 @@ components:
           description: Event topics delivered by this webhook
         type:
           $ref: '#/components/schemas/webhook_type'
-          description: Delivery mechanism used by this webhook
+          description: "Delivery mechanism used by this webhook. enum: `aws-sns`, `google-pubsub`, `http-post`, `oauth2`, `splunk`"
         url:
           description: Destination URL that receives webhook deliveries
           type: string
