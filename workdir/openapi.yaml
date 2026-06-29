@@ -85880,7 +85880,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/nac_rule_action'
-          description: Allow or block decision applied when the NAC rule matches
+          description: "Allow or block decision applied when the NAC rule matches. enum: `allow`, `block`"
         apply_tags:
           $ref: '#/components/schemas/nac_rule_apply_tags'
           description: NAC tag IDs to include in the Access-Accept when the rule allows
@@ -85898,7 +85898,7 @@ components:
           type: boolean
         guest_auth_state:
           $ref: '#/components/schemas/nac_rule_guest_auth_state'
-          description: Guest portal authorization state condition for the rule
+          description: "Guest portal authorization state condition for the rule. enum: `authorized`, `unknown`"
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier of the NAC rule
@@ -85958,22 +85958,22 @@ components:
       properties:
         auth_type:
           $ref: '#/components/schemas/nac_auth_type'
-          description: NAC authentication method that must match the request
+          description: "NAC authentication method that must match the request. enum: `cert`, `device-auth`, `eap-teap`, `eap-tls`, `eap-ttls`, `idp`, `mab`, `eap-peap`"
         family:
           $ref: '#/components/schemas/nac_rule_matching_family'
-          description: Client device family values that must match the request
+          description: Client device family values that must match the request. Refer to [List Fingerprint Types]]($e/Constants%20Definitions/listFingerprintTypes) for allowed family values"
         mfg:
           $ref: '#/components/schemas/nac_rule_matching_model'
-          description: Client device manufacturer values that must match the request
+          description: Client device manufacturer values that must match the request. Refer to [List Fingerprint Types]]($e/Constants%20Definitions/listFingerprintTypes) for allowed manufacturer values"
         model:
           $ref: '#/components/schemas/nac_rule_matching_mfg'
-          description: Client device model values that must match the request
+          description: Client device model values that must match the request. Refer to [List Fingerprint Types]]($e/Constants%20Definitions/listFingerprintTypes) for allowed model values"
         nactags:
           $ref: '#/components/schemas/nac_rule_matching_nactags'
           description: NAC tag IDs whose match criteria must be satisfied by the request
         os_type:
           $ref: '#/components/schemas/nac_rule_matching_os_type'
-          description: Client OS type values that must match the request
+          description: Client OS type values that must match the request. Refer to [List Fingerprint Types]]($e/Constants%20Definitions/listFingerprintTypes) for allowed os_type values"
         port_types:
           $ref: '#/components/schemas/nac_rule_matching_port_types'
           description: Wired or wireless access types that must match the request
