@@ -5568,7 +5568,8 @@ paths:
         optionally filtered by organization-wide or site-specific scope.
       operationId: listOrgSuppressedAlarms
       parameters:
-      - description: 'Filter results by scope. enum: `org`, `site`'
+      - description: 'Filter results by scope; if omitted, both organization-wide
+          and site-specific suppression entries are returned. enum: `org`, `site`'
         in: query
         name: scope
         schema:
@@ -7196,21 +7197,23 @@ paths:
           - my-everest*
           - '*everest*'
           type: string
-      - description: Filter results by device type
+      - description: Filter results by device type, such as Mac, Nvidia, or iPhone
         in: query
         name: device
         schema:
           examples:
           - iPhone
           type: string
-      - description: Filter results by operating system
+      - description: Filter results by operating system, such as Sierra, Yosemite,
+          or Windows 10
         in: query
         name: os
         schema:
           examples:
           - Windows 10
           type: string
-      - description: Filter results by device model
+      - description: Filter results by device model, such as MBP 15 late 2013, iPhone
+          6, iPhone 6s, or 8+ GSM
         in: query
         name: model
         schema:
@@ -42796,7 +42799,8 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/site_zone_count_distinct'
-      - description: 'Filter results by user type. enum: `asset`, `client`, `sdkclient`'
+      - description: 'Filter results by user type; defaults to `client`. enum: `asset`,
+          `client`, `sdkclient`'
         in: query
         name: user_type
         schema:
@@ -42848,7 +42852,8 @@ paths:
       description: Search Zone Sessions
       operationId: searchSiteZoneSessions
       parameters:
-      - description: 'Filter results by user type. enum: `asset`, `client`, `sdkclient`'
+      - description: 'Filter results by user type; defaults to `client`. enum: `asset`,
+          `client`, `sdkclient`'
         in: query
         name: user_type
         schema:
@@ -66728,7 +66733,7 @@ components:
           - John
           type: string
         invite_code:
-          description: Invite code used to authorize new admin registration
+          description: Invite code used to authorize initial admin registration
           examples:
           - MISTROCKS
           type: string
@@ -66816,7 +66821,8 @@ components:
           readOnly: true
           type: string
         name:
-          description: Display name of the object for this privilege scope
+          description: Display name of the object for this privilege scope, such as
+            the organization, site, or MSP name
           readOnly: true
           type: string
         org_id:
@@ -81466,7 +81472,8 @@ components:
       type: object
     junos_other_ip_config:
       additionalProperties: false
-      description: Optional switch L3 presence on an additional network or VLAN
+      description: Optional switch L3 presence on an additional network or VLAN when
+        required
       properties:
         evpn_anycast:
           default: false
@@ -99508,7 +99515,8 @@ components:
       type: object
     site_setting_auto_placement:
       additionalProperties: false
-      description: Automatically determined AP placement coordinates and orientation
+      description: Automatically determined AP placement coordinates and orientation,
+        populated when they can be determined
       properties:
         orientation:
           description: AP orientation angle in degrees on the map
@@ -103910,7 +103918,8 @@ components:
       description: L2TP tunnel session reported by an AP
       properties:
         local_sid:
-          description: Local L2TP session identifier for this tunnel session
+          description: Local L2TP session identifier for this tunnel session; assigned
+            dynamically unless the tunnel is static
           examples:
           - 31
           readOnly: true
@@ -103926,7 +103935,8 @@ components:
           - string
           - 'null'
         remote_sid:
-          description: Remote L2TP session identifier for this tunnel session
+          description: Remote L2TP session identifier for this tunnel session; assigned
+            dynamically unless the tunnel is static
           examples:
           - 13
           readOnly: true
@@ -106818,13 +106828,15 @@ components:
       description: Session information for a WxLAN or Mist tunnel
       properties:
         local_sid:
-          description: Local session identifier for the tunnel session
+          description: Local session identifier for the tunnel session; assigned dynamically
+            unless the tunnel is static
           type: integer
         remote_id:
           description: Configured remote identifier for the tunnel session
           type: string
         remote_sid:
-          description: Peer session identifier for the tunnel session
+          description: Peer session identifier for the tunnel session; assigned dynamically
+            unless the tunnel is static
           type: integer
         state:
           description: Current state of the tunnel session
