@@ -3,7 +3,7 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2606.1.1*
+  description: '> Version: **2606.1.1**
 
     >
 
@@ -119720,8 +119720,8 @@ components:
         type: string
       type: array
     wlan_mxtunnel_name:
-      description: When `interface`=`site_mxedge`, name of the mxtunnel that in mxtunnel
-        under Site Setting
+      description: When `interface`=`site_mxedge`, name of the Mist Tunnel defined
+        under `site_setting.mxtunnel.additional_mxtunnels`
       items:
         default: default
         examples:
