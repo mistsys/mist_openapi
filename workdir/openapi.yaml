@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2606.1.0*
+  description: '> Version: **2606.1.1*
 
     >
 
-    > Date: **June 24, 2026**
+    > Date: **July 10, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2606.1.0
+  version: 2606.1.1
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -68314,7 +68314,7 @@ components:
         mxtunnel_name:
           default: ''
           description: If `forwarding`==`site_mxedge`, vlan_ids comes from site_mxedge
-            (`mxtunnels` under site setting)
+            (`mxtunnel` under site setting)
           type: string
         port_auth:
           $ref: '#/components/schemas/ap_port_config_port_auth'
@@ -68337,7 +68337,7 @@ components:
           description: "Optional to specify the VLAN ID for a tunnel if forwarding\
             \ is for `wxtunnel`, `mxtunnel` or `site_mxedge`.\n  * if vlan_id is not\
             \ specified then it will use first one in vlan_ids[] of the mxtunnel.\n\
-            \  * if forwarding == site_mxedge, vlan_ids comes from site_mxedge (`mxtunnels`\
+            \  * if forwarding == site_mxedge, vlan_ids comes from site_mxedge (`mxtunnel`\
             \ under site setting)"
           examples:
           - 9
@@ -99200,7 +99200,7 @@ components:
         mxedge_mgmt:
           $ref: '#/components/schemas/mxedge_mgmt'
           description: Mist Edge management access settings for the site
-        mxtunnels:
+        mxtunnel:
           $ref: '#/components/schemas/site_mxtunnel'
           description: Site Mist Tunnel configuration
         networks:
@@ -119726,7 +119726,7 @@ components:
         type: string
       type: array
     wlan_mxtunnel_name:
-      description: When `interface`=`site_mxedge`, name of the mxtunnel that in mxtunnels
+      description: When `interface`=`site_mxedge`, name of the mxtunnel that in mxtunnel
         under Site Setting
       items:
         default: default
