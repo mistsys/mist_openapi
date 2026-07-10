@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2606.1.1] - 2026-07-10
+- Fixed `site_setting` schema: renamed attribute `mxtunnels` to `mxtunnel`
+
 ## [2606.1.0] - 2026-06-24
 
 - Updated `evpn_topology_switch_role` schema:
