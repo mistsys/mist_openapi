@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2606.1.1**
+  description: '> Version: **2607.1.0**
 
     >
 
-    > Date: **July 10, 2026**
+    > Date: **July 22, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2606.1.1
+  version: 2607.1.0
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -449,8 +449,10 @@ tags:
   name: Orgs Devices
 - description: API Calls specific to SSR devices
   name: Orgs Devices - SSR
-- description: API Calls specific to AOS (Aruba Operating System) devices
-  name: Orgs Devices - AOS
+- description: API Calls specific to AOS-CX (Aruba Operating System - CX) devices
+  name: Orgs Devices - AOSCX
+- description: API Calls specific to EdgeConnect devices
+  name: Orgs Devices - EdgeConnect
 - description: 'EVPN allows an alternative but more efficient LAN architecture utilizing
     VxLAN / MP-BGP - separating control plane (MAC / IP Learning) from forwarding
     plane.
@@ -744,6 +746,8 @@ tags:
     fields can be requested by adding the query parameter `fields=` and the list of
     fields, or `fields=*` to retrieve all the available fields.'
   name: Orgs Stats - Devices
+- description: API Calls to retrieve statistics about Marvis Clients at the Org level
+  name: Orgs Stats - Marvis Clients
 - description: API Calls to retrieve statistics about the Mist Edges at the Org level
   name: Orgs Stats - MxEdges
 - description: API Calls to retrieve statistics about OSPF peers at the Org level
@@ -1970,6 +1974,27 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: listLicenseTypes
+      tags:
+      - Constants Definitions
+  /api/v1/const/marvisclient_events:
+    get:
+      description: Return Marvis Client event type definitions used by the Marvis
+        Client event search and count APIs.
+      operationId: listMarvisClientEventsDefinitions
+      responses:
+        '200':
+          $ref: '#/components/responses/ConstMarvisClientEvents'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listMarvisClientEventsDefinitions
       tags:
       - Constants Definitions
   /api/v1/const/marvisclient_versions:
@@ -6029,15 +6054,15 @@ paths:
       summary: updateOrgAlarmTemplate
       tags:
       - Orgs Alarm Templates
-  /api/v1/orgs/{org_id}/aos/register_cmd:
+  /api/v1/orgs/{org_id}/aoscx/register_cmd:
     get:
       description: Generates a registration challenge token for TPM-based brownfield
-        registration of AOS devices. The returned command string can be copied and
-        pasted directly into an AOS device to register it with Mist.
-      operationId: getOrgAosRegisterCmd
+        registration of AOSCX devices. The returned command string can be copied and
+        pasted directly into an AOSCX device to register it with Mist.
+      operationId: getOrgAoscxRegisterCmd
       responses:
         '200':
-          $ref: '#/components/responses/AosRegisterCmd'
+          $ref: '#/components/responses/AoscxRegisterCmd'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -6048,9 +6073,9 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
-      summary: getOrgAosRegisterCmd
+      summary: getOrgAoscxRegisterCmd
       tags:
-      - Orgs Devices - AOS
+      - Orgs Devices - AOSCX
     parameters:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/apitokens:
@@ -8561,7 +8586,7 @@ paths:
       operationId: countOrgDeviceEvents
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `apfw`,
-          `model`, `org_id`, `site_id`, `text`, `timestamp`, `type`'
+          `model`, `org_id`, `site_id`, `status`, `text`, `timestamp`, `type`'
         in: query
         name: distinct
         schema:
@@ -8603,6 +8628,22 @@ paths:
           - Device connected
           type: string
       - $ref: '#/components/parameters/device_event_type'
+      - description: Keyword to include events from additional indices (e.g. ext_tunnel
+          for ext tunnel events)
+        in: query
+        name: includes
+        schema:
+          examples:
+          - ext_tunnel
+          type: string
+      - description: Filter ext_tunnel events by tunnel provisioning status. Accepts
+          multiple comma-separated values (e.g. `PROVISION_IN_PROGRESS,PROVISIONED`)
+        in: query
+        name: status
+        schema:
+          examples:
+          - PROVISION_IN_PROGRESS,PROVISIONED
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -8680,12 +8721,20 @@ paths:
           - port_id
           type: string
       - description: Keyword to include events from additional indices (e.g. ext_tunnel
-          for prisma events)
+          for ext tunnel events)
         in: query
         name: includes
         schema:
           examples:
           - ext_tunnel
+          type: string
+      - description: Filter ext_tunnel events by tunnel provisioning status (e.g.
+          `PROVISION_IN_PROGRESS`)
+        in: query
+        name: status
+        schema:
+          examples:
+          - PROVISION_IN_PROGRESS
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -9324,6 +9373,29 @@ paths:
       summary: listOrgAvailableDeviceVersions
       tags:
       - Utilities Upgrade
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/edgeconnect/register_cmd:
+    get:
+      description: Returns a registration code for adopting an EdgeConnect device
+        into Mist.
+      operationId: getOrgEdgeconnectRegisterCmd
+      responses:
+        '200':
+          $ref: '#/components/responses/EdgeconnectRegisterCmd'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgEdgeconnectRegisterCmd
+      tags:
+      - Orgs Devices - EdgeConnect
     parameters:
     - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/events/search:
@@ -10931,6 +11003,13 @@ paths:
           - AB123CD
           - '*123*'
           type: string
+      - description: Device claim code (magic). Accepts multiple comma-separated values.
+        in: query
+        name: magic
+        schema:
+          examples:
+          - WVTFBLTNPXD23H2
+          type: string
       - description: Filter inventory results by whether the device is the Virtual
           Chassis master
         in: query
@@ -11415,6 +11494,41 @@ paths:
           examples:
           - '2025-12-31'
           type: string
+      - description: Filter results by service contract end date before this date
+        in: query
+        name: contract_end_before
+        schema:
+          examples:
+          - '2025-12-31'
+          type: string
+      - description: Filter results by service contract end date after this date
+        in: query
+        name: contract_end_after
+        schema:
+          examples:
+          - '2024-01-01'
+          type: string
+      - description: Filter results by contract ID
+        in: query
+        name: contract_type
+        schema:
+          type: string
+      - description: Filter results by contract SKU
+        in: query
+        name: contract_sku
+        schema:
+          type: string
+      - description: Filter results by end of service time
+        in: query
+        name: end_of_service_time
+        schema:
+          type: string
+      - description: 'Filter results by service contract status. enum: `Active`, `Declined`,
+          `EOL`, `Service Available`'
+        in: query
+        name: support_contract_status
+        schema:
+          type: string
       - description: Indicates if the device is covered under active support contract.
           Accepts multiple comma-separated boolean values.
         in: query
@@ -11438,7 +11552,10 @@ paths:
           examples:
           - PBN67890
           type: string
-      - description: Wildcards for `serial`, `model`, `account_id`
+      - description: Wildcard text search across `account_id`, `contract_id`, `contract_reseller`,
+          `contract_sku`, `device_name`, `distributor`, `ia_address`, `ia_country`,
+          `ia_region`, `ia_zip_postal`, `model`, `serial`, `sku`, `status`, `suggested_version`,
+          `version`, `warranty`
         in: query
         name: text
         schema:
@@ -11503,37 +11620,45 @@ paths:
         can be done on versions, models, customer_risk, id, and bug_type fields.
       operationId: searchOrgJsiPbn
       parameters:
-      - description: OS versions to search for
+      - description: Software versions affected by the PBN
         in: query
         name: versions
         schema:
           examples:
           - 20.4R3
           type: string
-      - description: Device models to search for
+      - description: Models affected by the PBN
         in: query
         name: models
         schema:
           type: string
-      - description: Customer risk level to filter by
+      - description: 'Filter results by customer risk. enum: `Critical`, `Major`,
+          `Minor`'
         in: query
         name: customer_risk
         schema:
           type: string
-      - description: PBN ID to search for
+      - description: ID of the PBN
         in: query
         name: id
         schema:
           examples:
           - '1403338'
           type: string
-      - description: Bug type to filter by
+      - description: 'Filter results by bug type. enum: `Day-1`, `Regression`'
         in: query
         name: bug_type
         schema:
           type: string
+      - description: Wildcard search across `versions`, `models`, `customer_risk`,
+          `id`, `bug_type`
+        in: query
+        name: text
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/search_after'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -11595,12 +11720,13 @@ paths:
         models, versions, and text fields.
       operationId: searchOrgJsiSirt
       parameters:
-      - description: Filter results by severity
+      - description: 'Filter results by SIRT severity. enum: `Critical`, `High`, `Low`,
+          `Medium`'
         in: query
         name: severity
         schema:
           type: string
-      - description: Filter results by identifier
+      - description: JSA number
         in: query
         name: id
         schema:
@@ -11627,20 +11753,19 @@ paths:
         name: published_before
         schema:
           type: string
-      - description: Filter results by models
+      - description: Models affected by the SIRT
         in: query
         name: models
         schema:
           type: string
-      - description: Software version affected by the SIRT
+      - description: Software versions affected by the SIRT
         in: query
         name: versions
         schema:
           examples:
           - 20.4R3
           type: string
-      - description: Wildcards search on os_version_affected, affected_models, severity,
-          jsa_id
+      - description: Wildcard search across `versions`, `models`, `severity`, `id`
         in: query
         name: text
         schema:
@@ -13672,7 +13797,7 @@ paths:
       operationId: countOrgNacClients
       parameters:
       - description: 'Field used to group this count response. enum: `ap`, `auth_type`,
-          `device_mac`, `edr_managed`, `edr_provider`, `edr_status`, `family`, `hostname`,
+          `device_mac`, `edr_managed`, `edr_providers`, `edr_status`, `family`, `hostname`,
           `idp_id`, `mfg`, `mdm_compliance`, `mdm_managed`, `mdm_provider`, `model`,
           `mxedge_id`, `nacrule_matched`, `nacrule_name`, `nacrule_id`, `nas_ip`,
           `nas_vendor`, `os`, `site_id`, `ssid`, `status`, `type`, `usermac_label`,
@@ -14035,10 +14160,10 @@ paths:
         name: edr_managed
         schema:
           type: boolean
-      - description: 'EDR provider used to filter NAC clients. enum: `crowdstrike`,
+      - description: 'EDR provider of the client''s organisation. enum: `crowdstrike`,
           `sentinelone`'
         in: query
-        name: edr_provider
+        name: edr_providers
         schema:
           $ref: '#/components/schemas/edr_provider'
       - description: 'EDR status used to filter NAC clients. enum: `sentinelone_healthy`,
@@ -18518,6 +18643,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  cp_api_id: 84446d61-2206-4ea5-855a-0043f980be54
+                  cp_api_key: 79c329da9893e34099c7d8ad5cb9c941
+                  ecm_api_id: 73446d61-2206-4ea5-855a-0043f980be62
+                  ecm_api_key: 68b329da9893e34099c7d8ad5cb9c9405
+                  enable_lldp: true
             schema:
               $ref: '#/components/schemas/account_cradlepoint_config'
       responses:
@@ -18550,6 +18683,7 @@ paths:
                   cp_api_key: 79c329da9893e34099c7d8ad5cb9c941
                   ecm_api_id: 73446d61-2206-4ea5-855a-0043f980be62
                   ecm_api_key: 68b329da9893e34099c7d8ad5cb9c9405
+                  enable_lldp: true
             schema:
               $ref: '#/components/schemas/account_cradlepoint_config'
       responses:
@@ -27620,6 +27754,14 @@ paths:
           examples:
           - ext_tunnel
           type: string
+      - description: Filter ext_tunnel events by tunnel provisioning status (e.g.
+          `PROVISION_IN_PROGRESS`)
+        in: query
+        name: status
+        schema:
+          examples:
+          - PROVISION_IN_PROGRESS
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -28995,6 +29137,74 @@ paths:
       summary: getSiteDeviceConfigCmd
       tags:
       - Utilities Common
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/device_id'
+  /api/v1/sites/{site_id}/devices/{device_id}/flow_records/search:
+    get:
+      description: 'Search network flow records for a specific device within a site.
+
+        Note: Only supported for switch devices. The device must be manageable. The
+        `device_mac` is automatically scoped to the device in the URL path and cannot
+        be overridden by query parameter.'
+      operationId: searchSiteDeviceFlowRecords
+      parameters:
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/sort'
+      - description: Source IP address
+        in: query
+        name: src_ip
+        schema:
+          type: string
+      - description: Destination IP address
+        in: query
+        name: dst_ip
+        schema:
+          type: string
+      - description: Source port
+        in: query
+        name: src_port
+        schema:
+          type: string
+      - description: Destination port
+        in: query
+        name: dst_port
+        schema:
+          type: string
+      - description: Protocol (e.g. `tcp`, `udp`, `icmp`)
+        in: query
+        name: protocol
+        schema:
+          type: string
+      - description: Flow state
+        in: query
+        name: state
+        schema:
+          type: string
+      - description: Flow direction
+        in: query
+        name: direction
+        schema:
+          type: string
+      - $ref: '#/components/parameters/search_after'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceFlowRecordsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchSiteDeviceFlowRecords
+      tags:
+      - Utilities LAN
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
@@ -31121,7 +31331,51 @@ paths:
       summary: setSiteVcPort
       tags:
       - Sites Devices - Wired - Virtual Chassis
+  /api/v1/sites/{site_id}/devices/{device_id}/zigbee_event_trail:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/device_id'
+    post:
+      description: Start a Zigbee event trail session on an AP. Returns a `session`
+        that the UI can use to stream results.
+      operationId: startSiteDeviceZigbeeEventTrail
+      responses:
+        '200':
+          $ref: '#/components/responses/ZigbeeTrail'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteDeviceZigbeeEventTrail
+      tags:
+      - Sites Devices - Wireless
   /api/v1/sites/{site_id}/devices/{device_id}/zigbee_join:
+    delete:
+      description: Stop allowing new Zigbee end devices to join the network through
+        the specified AP.
+      operationId: stopSiteDeviceZigbeeJoin
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: stopSiteDeviceZigbeeJoin
+      tags:
+      - Sites Devices - Wireless
     parameters:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/device_id'
@@ -31162,6 +31416,66 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: enableSiteDeviceZigbeeJoin
+      tags:
+      - Sites Devices - Wireless
+  /api/v1/sites/{site_id}/devices/{device_id}/zigbee_kick:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/device_id'
+    post:
+      description: Kick one or more Zigbee clients from a Zigbee-enabled AP. The AP
+        must be connected.
+      operationId: kickSiteDeviceZigbeeClients
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  macs:
+                  - 00177a01060cae9f
+                  - 00177a01060caea1
+            schema:
+              $ref: '#/components/schemas/utils_zigbee_kick'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: kickSiteDeviceZigbeeClients
+      tags:
+      - Sites Devices - Wireless
+  /api/v1/sites/{site_id}/devices/{device_id}/zigbee_packet_trail:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/device_id'
+    post:
+      description: Start a Zigbee packet trail session on an AP. Returns a `session`
+        that the UI can use to stream results.
+      operationId: startSiteDeviceZigbeePacketTrail
+      responses:
+        '200':
+          $ref: '#/components/responses/ZigbeeTrail'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteDeviceZigbeePacketTrail
       tags:
       - Sites Devices - Wireless
   /api/v1/sites/{site_id}/events/fast_roam:
@@ -32129,6 +32443,38 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
+  /api/v1/sites/{site_id}/iotendpoints/count:
+    get:
+      description: Count IoT Endpoints
+      operationId: countSiteIotEndpoints
+      parameters:
+      - description: 'Field used to group this count response. enum: `site_id`'
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/site_iotendpoints_count_distinct'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countSiteIotEndpoints
+      tags:
+      - Sites Stats - IoT Endpoints
+    parameters:
+    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/iotendpoints/search:
     get:
       description: Search IoT Endpoints
@@ -32184,6 +32530,34 @@ paths:
       - Sites Stats - IoT Endpoints
     parameters:
     - $ref: '#/components/parameters/site_id'
+  /api/v1/sites/{site_id}/iotendpoints/{id}/zigbee_rejoin:
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+    post:
+      description: Trigger a Zigbee endpoint to rejoin the network
+      operationId: rejoinSiteIotEndpointZigbee
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: rejoinSiteIotEndpointZigbee
+      tags:
+      - Sites Stats - IoT Endpoints
   /api/v1/sites/{site_id}/licenses/usages:
     get:
       description: This shows license usage (i.e. needed) based on the features enabled
@@ -38472,6 +38846,14 @@ paths:
           examples:
           - zoom
           type: string
+      - description: Filter results by whether the client is wired
+        in: query
+        name: wired
+        schema:
+          default: false
+          examples:
+          - false
+          type: boolean
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       responses:
@@ -38525,6 +38907,14 @@ paths:
           examples:
           - zoom
           type: string
+      - description: Filter results by whether the client is wired
+        in: query
+        name: wired
+        schema:
+          default: false
+          examples:
+          - false
+          type: boolean
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -44553,6 +44943,7 @@ components:
         id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         mfg_company_id: 0
         modified_time: 0
+        mqtt_topic: xxxxx
         name: string
         org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
@@ -45357,8 +45748,10 @@ components:
           client_ip:
           - 10.7.51.74
           edr_managed: true
-          edr_provider: sentinelone
-          edr_status: sentinelone_healthy
+          edr_providers:
+          - sentinelone
+          edr_status:
+          - sentinelone_healthy
           idp_id: string
           idp_role:
           - string
@@ -46441,14 +46834,18 @@ components:
         - sub_ex12p
         key: sub_ex12
         name: SUB-EX12
+    ConstMarvisClientEventsExample:
+      value:
+      - display: Marvis Client Roamed
+        key: MARVISCLIENT_ROAMED
     ConstMarvisClientVersionsExample:
       value:
-      - label: default
+      - label: latest
         notes: ''
         os: android
         url: https://mobile.mist.com/installers/marvisclient/android/1.1.9/marvisclient-installer.apk
         version: 1.1.9
-      - label: default
+      - label: rc1
         notes: ''
         os: macos
         url: https://mobile.mist.com/installers/marvisclient/macos/0.100.29/marvisclient-installer.dmg
@@ -46794,8 +47191,43 @@ components:
             on vlan 1, id 60224
           timestamp: 1547235620.89
           type: CLIENT_DNS_OK
+        - device_type: gateway
+          job_id: c2096de9-0ca4-4a8b-b500-d37cbe0f0baf
+          mac: d007ca6c6ac0
+          org_id: 86f0c649-06b1-4337-b3d4-25eeb887f732
+          site_id: 9f8d28eb-77c7-44c7-a85b-4426bf291679
+          status: PROVISION_IN_PROGRESS
+          template_id: 660e8400-e29b-41d4-a716-446655440001
+          timestamp: 1748987445.959
+          tunnel_name: zs1
+          type: NOTICE
         start: 0
         total: 0
+    DeviceFlowRecordsSearchExample:
+      value:
+        end: 1775003600
+        limit: 1000
+        results:
+        - device_mac: 5c5b350e020a
+          direction: ingress
+          dst_ip: 8.8.8.8
+          dst_port: 443
+          duration: 60
+          end_time: 1775000060
+          flow_id: 12345
+          org_id: 2818e386-8dec-2562-9ede-5b8a0fbbdc71
+          protocol: tcp
+          sampling_percentage: 0.1
+          site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          src_ip: 10.0.0.1
+          src_port: 54321
+          start_time: 1775000000
+          state: aged-out
+          timestamp: 1775000060
+          total_bytes: 150000
+          total_pkts: 100
+        start: 1775000000
+        total: 1
     DeviceIotExample:
       value:
         A1: 1
@@ -47790,7 +48222,7 @@ components:
     DeviceVersionExample:
       value:
       - model: AP41
-        tag: stable
+        tag: suggested
         version: v0.1.543
       - model: AP21
         version: v0.1.545
@@ -50557,27 +50989,106 @@ components:
         end: 1748023308
         limit: 1000
         results:
-        - claimed: true
+        - availability: 'Yes'
+          claimed: true
+          contract_end_date: '2028-10-01'
+          contract_id: 324343-234
+          contract_reseller: Reseller1
+          contract_sku: EX2300-24MP-AFO
+          contract_start_date: '2022-09-01'
+          contract_type: Maintenance
+          current_contract_flag: No Contract
           device_name: name1
+          distributor: Dist
           end_of_sale_time: 1561507200
+          end_of_service_time: 1661507200
+          eol_psn: TSB18097
           eos_time: 1672012800
           has_support: true
+          ia_address: Address1
+          ia_country: United States
+          ia_region: Rhode Island
+          ia_zip_postal: 02865-3749
           master: true
           model: EX2300-24MP
           org_id: 6e843b41-f953-4af9-80e5-e1a70f65754a
           serial: XN3123300095
+          service_contract_no: '16036705'
+          service_contract_type: MS
+          service_decline_flag: 'No'
+          service_eligible: 'Yes'
+          ship_date_calc: '2022-08-31'
           sku: EX2300
           status: connected
           suggested_version: Latest 21.4R3-Sx
+          support_contract_status: Active
           type: switch
           version: 23.4R2-S4.11
+          version_description: ''
           version_eos_time: 1672012800
           version_time: 1561507200
           warranty: Enhanced Hardware Warranty
+          warranty_end: '2042-11-28'
+          warranty_start: '2022-09-01'
           warranty_time: 1672012800
-          warranty_type: Enhanced Hardware Warranty
+          warranty_type: WTY00002
         start: 1748019708
         total: 1
+    JsiPbnSearchExample:
+      value:
+        end: 1753415677
+        limit: 1
+        next: /api/v1/orgs/bf105f5e-2490-453b-9dc0-81224ca295cf/jsi/pbn/search?end=1753415677&limit=1&search_after=%5B%221403338%22%5D&start=1753412077
+        results:
+        - bug_type: Day-1
+          customer_risk: Major
+          id: '1403338'
+          introduced_in: ''
+          models:
+          - MX10008
+          - vMX
+          product_family:
+          - EX2200
+          - QFX5210
+          release_notes: In aggregated interfaces and STP (Spanning Tree Protocol)
+            scenario, the STP does not work.
+          restoration: ''
+          title: The STP does not work when aggregated interfaces number is "ae1000"
+          versions:
+          - 23.4R2-S1.1
+          workaround: Use the 'ae' number from 0 to 999 in QFX5000 and 0 to 479 in
+            other QFXs / EX under STP.
+          workaround_provided: 'yes'
+        start: 1753412077
+        total: 604
+    JsiSirtSearchExample:
+      value:
+        end: 1753411849
+        limit: 1
+        next: /api/v1/orgs/bf105f5e-2490-453b-9dc0-81224ca295cf/jsi/sirt/search?end=1753411849&limit=1&search_after=%5B%22JSA100053%22%5D&start=1753408249
+        results:
+        - cvss_score: 6.5
+          id: JSA100053
+          models:
+          - MX10008
+          - vMX
+          problem: 'An Improper Handling of Length Parameter Inconsistency vulnerability
+            in the routing protocol daemon (rpd).
+
+            '
+          published_date: 1752019200
+          release_notes: An Improper Handling of Length Parameter Inconsistency vulnerability
+            in the routing protocol daemon (rpd).
+          severity: Medium
+          solution: 'false'
+          title: 'Junos OS and Junos OS Evolved: In an EVPN environment, receipt of
+            a specifically malformed BGP update causes RPD crash'
+          updated_date: 1752019200
+          versions:
+          - 23.4R2-S1.1
+          workaround: ''
+        start: 1753408249
+        total: 14
     JuniperLinkAccountFailedExample:
       value:
         detail: Account[ABC Corp] already linked
@@ -50995,27 +51506,45 @@ components:
         site_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
     MarvisClientEventsSearchExample:
       value:
-        limit: 100
+        limit: 1000
         results:
-        - bssid: 00:11:22:33:44:55
-          channel: 6
-          device_id: 0c2a2c6c-5a95-4956-a02d-e1b39c2e5c6e
-          hostname: my-android-phone
+        - bssid: 5c5b35000002
+          channel: 11
+          device_id: da088609-8e8d-6d8b-0e40-fe1dc94b9218
+          hostname: jdoe123-dell
+          location:
+            map_id: 7735ef91-83b4-6116-1c1a-57819af48867
+            site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+            timestamp: 1678377926
+            x: 12.5
+            y: 45.0
           neighbor_ap_report:
-          - band: 2.4GHz
-            bssid: aa:bb:cc:dd:ee:ff
-            channel: 1
-            rssi: -72
-          org_id: c168ddee-c14c-11e5-8e81-1258369c38a9
-          pre_bssid: aa:bb:cc:dd:ee:ff
-          pre_channel: 1
-          pre_rssi: -70
-          rssi: -58
-          ssid: Corp-WiFi
-          timestamp: 1717027200
-          type: ROAM
-          wifi_ip: 192.168.1.55
-          wifi_mac: 00:aa:bb:cc:dd:ee
+          - band: '5'
+            bssid: 5c5b35000003
+            channel: 44
+            rssi: -55
+          - band: '5'
+            bssid: 5c5b35000004
+            channel: 36
+            rssi: -70
+          org_id: 2818e386-8dec-2562-9ede-5b8a0fbbdc71
+          pre_bssid: 5c5b35000001
+          pre_channel: 7
+          pre_rssi: -76
+          rssi: -53
+          ssid: Corp
+          timestamp: 1678377926
+          type: MARVISCLIENT_ROAMED
+          wifi_ip: 10.10.20.1
+          wifi_mac: f01c2df166e0
+        - device_id: da088609-8e8d-6d8b-0e40-fe1dc94b9218
+          hostname: jdoe123-dell
+          org_id: 2818e386-8dec-2562-9ede-5b8a0fbbdc71
+          percent: 9
+          timestamp: 1678378040
+          type: MARVISCLIENT_LOW_BATTERY
+          wifi_ip: 10.10.20.1
+          wifi_mac: f01c2df166e0
         total: 1
     MarvisClientExample:
       value:
@@ -51807,6 +52336,7 @@ components:
 
           -----END CERTIFICATE-----'
         cert_expire_time: 365
+        enable_location: false
         enable_telemetry: true
         expiry_notification_time: 2
         name: get-wifi
@@ -51830,6 +52360,7 @@ components:
       value:
         access_type: wireless
         cert_expire_time: 365
+        enable_location: false
         enable_telemetry: true
         expiry_notification_time: 2
         name: get-wifi
@@ -52848,6 +53379,7 @@ components:
         limit: 1000
         results:
         - mac: f01c2df166e0
+          magic: WVTFBLTNPXD23H2
           master: true
           members:
           - mac: f01c2df166e0
@@ -53662,6 +54194,7 @@ components:
           preamble: short
         country_code: FR
         created_time: 1594743723
+        enable_unii_4: false
         id: b3f20330-f76a-49f1-bc65-0d8727140b1d
         model_specific: {}
         modified_time: 1613582192
@@ -53709,6 +54242,7 @@ components:
           preamble: short
         country_code: FR
         created_time: 1594743723
+        enable_unii_4: false
         id: b3f20330-f76a-49f1-bc65-0d8727140b1d
         model_specific: {}
         modified_time: 1613582192
@@ -57183,9 +57717,17 @@ components:
         org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
     TestCradlepointCrowdstrike:
       value:
+        alert_config_id: 8b7e06ac-0yu5-11f1-88h2-42628k552c3d
+        cp_api_id: '********'
+        cp_api_key: '********'
+        destination_config_id: 8ad364de-0yu5-13r1-9abc-263675be6074
+        ecm_api_id: '********'
+        ecm_api_key: '********'
+        enable_lldp: false
         error: Cradlepoint API keys are no longer valid, please verify and update
           the keys under organization settings.
         last_status: inactive
+        shared_secret: '********'
     TicketAttachmentExample:
       value:
         content_url: https://api.mist.com/api/v1/forward/download?jwt=...
@@ -57265,6 +57807,7 @@ components:
         results:
         - ap: 5c5b35000010
           last_seen: 1547437078
+          mtu: 582
           mxcluster_id: 572586b7-f97b-a22b-526c-8b97a3f609c4
           mxedge_id: 387804a7-3474-85ce-15a2-f9a9684c9c90
           mxtunnel_id: 7dae216d-7c98-a51b-e068-dd7d477b7216
@@ -57272,16 +57815,14 @@ components:
           peer_mxedge_id: 09320a5c-bc23-441e-80a0-b96c632d45f5
           remote_ip: 172.16.1.2
           remote_port: 13535
-          rx_control_pkts: 7571
           sessions:
           - local_sid: 31
             remote_id: mxtunnel
             remote_sid: 13
             state: established
           site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          start_time: 1744000000
           state: established_with_sessions
-          tx_control_pkts: 14862
-          uptime: 135
         start: 1531776183
         total: 1
     TwoFactorExample:
@@ -57426,6 +57967,9 @@ components:
         - bld4
         mac: 921b638445cd
         notes: MAC address refers to Canon printers
+        site_ids:
+        - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+        - 52f4347e-3e4b-186c-21ca-ad5b70eb23d6
         vlan: '30'
     UserMacImportAsyncExample:
       value:
@@ -57448,7 +57992,38 @@ components:
         - bld4
         mac: 921b638445cd
         notes: MAC address refers to Canon printers
+        site_ids:
+        - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+        - 52f4347e-3e4b-186c-21ca-ad5b70eb23d6
         vlan: '30'
+    UserMacsCountExample:
+      value:
+        end: 1723651268
+        limit: 10
+        results:
+        - id: 111cafd2-ba1b-5169-bfcb-9cdf1d473ddb
+          labels:
+          - flor1
+          - bld4
+          mac: 921b638445cd
+          name: Printer2
+          notes: mac address refers to Canon printers
+          radius_group: VIP
+          site_ids:
+          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          - 52f4347e-3e4b-186c-21ca-ad5b70eb23d6
+          vlan: '30'
+        - id: abecafd2-ba1b-5169-bfcb-9cdf1d473123
+          labels:
+          - blgd-cupe
+          - old
+          mac: 921b638445ce
+          name: os mac
+          notes: mac devices
+          radius_group: rg-1
+          vlan: vlan-2
+        start: 1723651267
+        total: 2
     UserMacsUpdateAsyncExample:
       value:
         detail: batch update in progress
@@ -58132,6 +58707,9 @@ components:
     ZigbeeJoinExample:
       value:
         session_id: 19e73828-937f-05e6-f709-e29efdb0a82b
+    ZigbeeTrailExample:
+      value:
+        session: 7a5f7796-83ee-11e5-95c6-1258369c38a9
     ZoneExample:
       value:
         created_time: 0
@@ -59478,6 +60056,15 @@ components:
           schema:
             $ref: '#/components/schemas/aos_register_cmd'
       description: AOS Brownfield Registration Commands
+    AoscxRegisterCmd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/aoscx_register_cmd'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/aoscx_register_cmd'
+      description: AOSCX Brownfield Registration Commands
     ApiUsage:
       content:
         application/json:
@@ -60523,6 +61110,21 @@ components:
           schema:
             $ref: '#/components/schemas/const_license_types'
       description: List of License Types
+    ConstMarvisClientEvents:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ConstMarvisClientEventsExample'
+          schema:
+            $ref: '#/components/schemas/const_marvisclient_events'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ConstMarvisClientEventsExample'
+          schema:
+            $ref: '#/components/schemas/const_marvisclient_events'
+      description: List of Marvis Client event type definitions
     ConstMarvisClientVersions:
       content:
         application/json:
@@ -60785,6 +61387,21 @@ components:
               $ref: '#/components/examples/DeviceEventsSearchExample'
           schema:
             $ref: '#/components/schemas/response_device_events_search'
+      description: OK
+    DeviceFlowRecordsSearch:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/DeviceFlowRecordsSearchExample'
+          schema:
+            $ref: '#/components/schemas/response_device_flow_records_search'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/DeviceFlowRecordsSearchExample'
+          schema:
+            $ref: '#/components/schemas/response_device_flow_records_search'
       description: OK
     DeviceIot:
       content:
@@ -61075,6 +61692,15 @@ components:
           schema:
             $ref: '#/components/schemas/response_dswitches_metrics'
       description: OK
+    EdgeconnectRegisterCmd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/edgeconnect_register_cmd'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/edgeconnect_register_cmd'
+      description: EdgeConnect Registration Command
     EventsDevices:
       content:
         application/json:
@@ -61793,9 +62419,15 @@ components:
     JsiPbnSearch:
       content:
         application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/JsiPbnSearchExample'
           schema:
             $ref: '#/components/schemas/jsi_pbn_search'
         application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/JsiPbnSearchExample'
           schema:
             $ref: '#/components/schemas/jsi_pbn_search'
       description: OK
@@ -61811,9 +62443,15 @@ components:
     JsiSirtSearch:
       content:
         application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/JsiSirtSearchExample'
           schema:
             $ref: '#/components/schemas/jsi_sirt_search'
         application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/JsiSirtSearchExample'
           schema:
             $ref: '#/components/schemas/jsi_sirt_search'
       description: OK
@@ -65057,9 +65695,15 @@ components:
     UserMacsCount:
       content:
         application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/UserMacsCountExample'
           schema:
             $ref: '#/components/schemas/user_macs_count'
         application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/UserMacsCountExample'
           schema:
             $ref: '#/components/schemas/user_macs_count'
       description: OK
@@ -65531,6 +66175,21 @@ components:
               $ref: '#/components/examples/ZigbeeJoinExample'
           schema:
             $ref: '#/components/schemas/zigbee_join_response'
+      description: OK
+    ZigbeeTrail:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ZigbeeTrailExample'
+          schema:
+            $ref: '#/components/schemas/zigbee_trail_response'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ZigbeeTrailExample'
+          schema:
+            $ref: '#/components/schemas/zigbee_trail_response'
       description: OK
     Zone:
       content:
@@ -66409,6 +67068,10 @@ components:
           $ref: '#/components/schemas/acl_policy_actions'
           description: Destination tag actions evaluated for sources matching this
             ACL policy
+        disabled:
+          default: false
+          description: Whether this ACL policy is disabled
+          type: boolean
         name:
           description: Display name of the ACL policy
           examples:
@@ -66479,8 +67142,8 @@ components:
             by this ACL tag
           type: string
         radius_group:
-          description: "Required if:\n  * `type`==`radius_group`\n  * `type`==`static_gbp`\n\
-            if from matching radius_group"
+          description: "Required if:\n  * `type`==`radius_group`\n  * `type`==`aruba_user_role`\n\
+            \  * `type`==`static_gbp`\nif from matching radius_group"
           type: string
         specs:
           $ref: '#/components/schemas/acl_tag_specs'
@@ -66525,8 +67188,9 @@ components:
           type: string
       type: object
     acl_tag_specs:
-      description: If `type`==`resource`, `type`==`radius_group`, `type`==`port_usage`
-        or `type`==`gbp_resource`. Empty means unrestricted, i.e. any
+      description: If `type`==`resource`, `type`==`radius_group`, `type`==`aruba_user_role`,
+        `type`==`port_usage` or `type`==`gbp_resource`. Empty means unrestricted,
+        i.e. any
       items:
         $ref: '#/components/schemas/acl_tag_spec'
       type: array
@@ -66537,13 +67201,15 @@ components:
         type: string
       type: array
     acl_tag_type:
-      description: "enum: \n  * `any`: matching anything not identified\n  * `dynamic_gbp`:\
-        \ from the gbp_tag received from RADIUS\n  * `gbp_resource`: can only be used\
-        \ in `dst_tags`\n  * `mac`\n  * `network`\n  * `port_usage`\n  * `radius_group`\n\
-        \  * `resource`: can only be used in `dst_tags`\n  * `static_gbp`: applying\
-        \ gbp tag against matching conditions\n  * `subnet`'"
+      description: "enum: \n  * `any`: matching anything not identified\n  * `aruba_user_role`:\
+        \ Aruba user role matched via `radius_group`\n  * `dynamic_gbp`: from the\
+        \ gbp_tag received from RADIUS\n  * `gbp_resource`: can only be used in `dst_tags`\n\
+        \  * `mac`\n  * `network`\n  * `port_usage`\n  * `radius_group`\n  * `resource`:\
+        \ can only be used in `dst_tags`\n  * `static_gbp`: applying gbp tag against\
+        \ matching conditions\n  * `subnet`'"
       enum:
       - any
+      - aruba_user_role
       - dynamic_gbp
       - gbp_resource
       - mac
@@ -67390,6 +68056,15 @@ components:
             and configuration commands.
           type: string
       type: object
+    aoscx_register_cmd:
+      additionalProperties: false
+      description: AOSCX Brownfield Registration Commands
+      properties:
+        cli_commands:
+          description: AOSCX-specific CLI commands that can be copied and pasted directly
+            into an AOSCX device to register it with Mist
+          type: string
+      type: object
     ap_aeroscout:
       additionalProperties: false
       description: AeroScout location integration settings applied to an AP or AP
@@ -67450,7 +68125,7 @@ components:
         Property key is the AP model name (e.g. "AP41"), value is the firmware version
         or release channel (e.g. `stable`)
       examples:
-      - AP21: stable
+      - AP21: alpha
         AP41: 0.1.5135
         AP61: 0.1.7215
       type: object
@@ -68230,9 +68905,12 @@ components:
       type: string
     ap_mqtt:
       additionalProperties: false
-      description: MQTT broker publishing settings for an AP; use `mqtt_topic` on
-        individual AssetFilter entries to specify which MQTT topic each matching BLE
-        advertisement is forwarded to
+      description: MQTT publishing configuration for an AP. Use `mqtt_topic` on individual
+        AssetFilter entries to specify which MQTT topic each matching BLE advertisement
+        is forwarded to. Only AssetFilters with `mqtt_topic` set are used; disabled
+        filters and filters without `mqtt_topic` are skipped. Set `default_topic`
+        to publish advertisements that match no AssetFilter to a catch-all topic,
+        allowing MQTT to be used without configuring any AssetFilter.
       properties:
         broker_host:
           description: MQTT broker hostname or IP address; required when `enabled`
@@ -68245,6 +68923,12 @@ components:
         broker_proto:
           $ref: '#/components/schemas/ap_mqtt_broker_proto'
           description: MQTT broker transport protocol
+        default_topic:
+          description: Optional catch-all MQTT topic; BLE advertisements matching
+            no AssetFilter are published here
+          examples:
+          - mist/asset/raw
+          type: string
         enabled:
           default: false
           description: Whether to enable MQTT publishing
@@ -69507,6 +70191,42 @@ components:
       examples:
       - imagotag
       type: string
+    ap_uwb_config:
+      additionalProperties: false
+      description: Ultra-wideband (UWB) RTLS / OMLOX asset-visibility integration
+        settings for an access point. The device-level value overrides the device
+        profile value, which in turn overrides the site-level setting.
+      properties:
+        enabled:
+          default: false
+          description: Whether UWB RTLS integration is enabled
+          type: boolean
+        host:
+          description: RTLS server hostname or IP address
+          examples:
+          - coriva.example.com
+          type: string
+        port:
+          description: RTLS server port number
+          examples:
+          - 9000
+          maximum: 65535
+          minimum: 1
+          type: integer
+        slot:
+          default: 0
+          description: "UWB time slot assigned to this AP, 0\u201315"
+          examples:
+          - 0
+          maximum: 15
+          minimum: 0
+          type: integer
+        type:
+          description: 'UWB integration type. enum: `zigpos`'
+          enum:
+          - zigpos
+          type: string
+      type: object
     ap_zigbee:
       additionalProperties: false
       description: Zigbee radio and network settings applied to an AP or AP profile
@@ -72340,12 +73060,16 @@ components:
         edr_managed:
           description: Whether the NAC client is managed by an EDR provider
           type: boolean
-        edr_provider:
-          $ref: '#/components/schemas/edr_provider'
-          description: EDR provider associated with the NAC client
+        edr_providers:
+          description: EDR providers associated with the NAC client
+          items:
+            $ref: '#/components/schemas/edr_provider'
+          type: array
         edr_status:
-          $ref: '#/components/schemas/edr_status'
-          description: EDR health status reported for the NAC client
+          description: EDR health statuses reported for the NAC client
+          items:
+            $ref: '#/components/schemas/edr_status'
+          type: array
         group:
           description: User group associated with the NAC client
           type: string
@@ -74073,6 +74797,25 @@ components:
           examples:
           - Wired Assurance 12
           type: string
+        enforcement_level:
+          description: Level at which the license is enforced
+          enum:
+          - org
+          - site
+          type: string
+        entitled_licenses:
+          description: License type keys this license type entitles
+          examples:
+          - - sub_ex12
+            - sub_sadv1
+          items:
+            type: string
+          type: array
+        group:
+          description: License group this license type belongs to
+          examples:
+          - SUB-WIRED
+          type: string
         includes:
           $ref: '#/components/schemas/const_license_type_includes'
           description: License SKU components included by this license type
@@ -74083,6 +74826,11 @@ components:
           type: string
         name:
           description: Display name of the license type
+          examples:
+          - SUB-EX12
+          type: string
+        type:
+          description: License type identifier (SKU)
           examples:
           - SUB-EX12
           type: string
@@ -74132,6 +74880,28 @@ components:
       description: Marvis Client installer versions returned by the constants API
       items:
         $ref: '#/components/schemas/const_marvis_client_version'
+      type: array
+    const_marvisclient_event:
+      additionalProperties: false
+      description: A Marvis Client event type definition
+      properties:
+        display:
+          description: Human-readable name for this Marvis Client event type
+          examples:
+          - Marvis Client Roamed
+          type: string
+        key:
+          description: Event type key used in Marvis Client event search and count
+            APIs
+          examples:
+          - MARVISCLIENT_ROAMED
+          type: string
+      type: object
+    const_marvisclient_events:
+      description: Marvis Client event type definitions returned by the constants
+        API
+      items:
+        $ref: '#/components/schemas/const_marvisclient_event'
       type: array
     const_mxedge_model:
       additionalProperties: false
@@ -74618,6 +75388,11 @@ components:
           default: false
           description: Whether to disable module port
           type: boolean
+        enable_unii_4:
+          default: false
+          description: Whether U-NII-4 channels (169, 173, 177) are enabled on this
+            access point
+          type: boolean
         esl_config:
           $ref: '#/components/schemas/ap_esl_config'
           description: Electronic shelf label integration settings for this access
@@ -74754,6 +75529,10 @@ components:
         usb_config:
           $ref: '#/components/schemas/ap_usb'
           description: Legacy USB integration settings for this access point
+        uwb_config:
+          $ref: '#/components/schemas/ap_uwb_config'
+          description: UWB RTLS / OMLOX asset-visibility settings; overrides the device
+            profile and site-level `uwb_config`
         vars:
           $ref: '#/components/schemas/vars'
           description: Variable values that override site variables for this access
@@ -74837,6 +75616,11 @@ components:
         ext_ip:
           description: External IP address reported for the device event
           type: string
+        job_id:
+          description: Job identifier associated with a tunnel provisioning event
+            (present when `includes`==`ext_tunnel`)
+          format: uuid
+          type: string
         mac:
           description: Device MAC address associated with the event
           type: string
@@ -74876,12 +75660,24 @@ components:
         site_name:
           description: Name of the site associated with the event
           type: string
+        status:
+          description: Tunnel provisioning status for ext_tunnel events (e.g. `PROVISION_IN_PROGRESS`)
+          type: string
+        template_id:
+          description: Gateway template identifier associated with a tunnel provisioning
+            event (present when `includes`==`ext_tunnel`)
+          format: uuid
+          type: string
         text:
           description: Optional human-readable text for the device event
           type: string
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when the device event occurred
+        tunnel_name:
+          description: Tunnel name associated with a tunnel provisioning event (present
+            when `includes`==`ext_tunnel`)
+          type: string
         type:
           description: Device event type key
           type: string
@@ -75536,7 +76332,7 @@ components:
           description: Device model (as seen in the device stats)
           type: string
         tag:
-          description: Annotation, stable / beta / alpha. Or it can be empty or nothing
+          description: Annotation, suggested / alpha. Or it can be empty or nothing
             which is likely a dev build
           type: string
         version:
@@ -75667,6 +76463,10 @@ components:
         usb_config:
           $ref: '#/components/schemas/ap_usb'
           description: Legacy USB integration defaults in this AP profile
+        uwb_config:
+          $ref: '#/components/schemas/ap_uwb_config'
+          description: UWB RTLS / OMLOX asset-visibility settings; overrides the site-level
+            `uwb_config` and is overridden by device-level `uwb_config`
         vars:
           $ref: '#/components/schemas/vars'
           description: Variable values provided by this AP device profile
@@ -76691,6 +77491,15 @@ components:
       examples:
       - cloud_psks
       type: string
+    edgeconnect_register_cmd:
+      additionalProperties: false
+      description: EdgeConnect device registration command response
+      properties:
+        registration_code:
+          description: Registration code used to adopt an EdgeConnect device into
+            Mist
+          type: string
+      type: object
     edr_provider:
       description: 'EDR provider associated with the NAC client. enum: `crowdstrike`,
         `sentinelone`'
@@ -77723,6 +78532,81 @@ components:
       - os
       - os_type
       type: string
+    flow_record:
+      additionalProperties: false
+      description: Network flow record reported by a switch device
+      properties:
+        device_mac:
+          description: MAC address of the device
+          type: string
+        direction:
+          description: 'Flow direction. enum: `egress`, `ingress`'
+          enum:
+          - egress
+          - ingress
+          type: string
+        dst_ip:
+          description: Destination IP address
+          type: string
+        dst_port:
+          description: Destination port number
+          type: integer
+        duration:
+          description: Flow duration in seconds
+          format: int64
+          type: integer
+        end_time:
+          description: Flow end time in epoch seconds
+          format: int64
+          type: integer
+        flow_id:
+          description: Unique flow identifier
+          format: int64
+          type: integer
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: UUID of the org
+        protocol:
+          description: Protocol (e.g. `tcp`, `udp`, `icmp`)
+          type: string
+        sampling_percentage:
+          description: Percentage of packets sampled (e.g. `0.1` means 0.1% of packets
+            are captured via sFlow; `100.0` means all packets are captured via FBT)
+          format: float
+          type: number
+        site_id:
+          $ref: '#/components/schemas/site_id'
+          description: UUID of the site
+        src_ip:
+          description: Source IP address
+          type: string
+        src_port:
+          description: Source port number
+          type: integer
+        start_time:
+          description: Flow start time in epoch seconds
+          format: int64
+          type: integer
+        state:
+          description: 'Flow state. enum: `active`, `aged-out`'
+          enum:
+          - active
+          - aged-out
+          type: string
+        timestamp:
+          description: Epoch time (in seconds) when the flow record was last updated
+            or completed
+          format: int64
+          type: integer
+        total_bytes:
+          description: Total number of bytes in the flow
+          format: int64
+          type: integer
+        total_pkts:
+          description: Total number of packets in the flow
+          format: int64
+          type: integer
+      type: object
     for_site:
       description: 'enum: `any`, `true`, `false`'
       enum:
@@ -78023,6 +78907,10 @@ components:
         disable_console:
           default: false
           description: For SSR and SRX, disable console port
+          type: boolean
+        disable_idp_pcap:
+          default: false
+          description: For SRX only, disable IDP packet capture
           type: boolean
         disable_oob:
           default: false
@@ -79063,6 +79951,14 @@ components:
       description: Only if `usage`==`wan`. WAN health probe override for this gateway
         port
       properties:
+        hostnames:
+          $ref: '#/components/schemas/strings'
+          description: List of hostnames used as probe destinations; applicable for
+            both IPv4 and IPv6
+        http:
+          $ref: '#/components/schemas/gateway_wan_probe_override_http'
+          description: HTTP probe settings; success from any ICMP or HTTP probe indicates
+            the WAN is up
         ip6s:
           $ref: '#/components/schemas/strings'
           description: List of IPv6 probe host addresses used by this WAN override
@@ -79072,6 +79968,27 @@ components:
         probe_profile:
           $ref: '#/components/schemas/gateway_wan_probe_override_probe_profile'
           description: WAN probe profile used for health checks on this port
+      type: object
+    gateway_wan_probe_override_http:
+      additionalProperties: false
+      description: HTTP probe settings for a WAN probe override
+      properties:
+        accepted_status_codes:
+          description: HTTP response status codes that indicate a successful probe.
+            Defaults to 200 if not specified.
+          examples:
+          - - 204
+          items:
+            type: integer
+          type: array
+        urls:
+          description: HTTP or HTTPS URLs to probe
+          examples:
+          - - http://www.google.com/generate_204
+            - https://www.google.com/generate_204
+          items:
+            type: string
+          type: array
       type: object
     gateway_wan_probe_override_probe_profile:
       default: broadband
@@ -79337,7 +80254,9 @@ components:
       description: Actions applied to routes matched by a gateway routing policy term
       properties:
         accept:
-          description: Whether to accept routes that match this term
+          description: Whether to accept routes that match this term. Precedence is
+            `accept` > `next_term` > `next_policy`; routes are rejected if all three
+            are false
           type: boolean
         add_community:
           $ref: '#/components/schemas/gw_routing_policy_term_action_add_community'
@@ -79364,6 +80283,16 @@ components:
           $ref: '#/components/schemas/routing_policy_local_preference'
           description: Preference value to set when this term is used as an import
             policy
+        next_policy:
+          default: false
+          description: When true, continue evaluating the next routing policy in the
+            chain after this term matches; default is false
+          type: boolean
+        next_term:
+          default: false
+          description: When true, continue evaluating the next term in the same routing
+            policy after this term matches; default is false
+          type: boolean
         prepend_as_path:
           $ref: '#/components/schemas/routing_policy_term_action_prepend_as_path'
           description: AS path values to prepend when this term is used as an export
@@ -79796,8 +80725,8 @@ components:
       type: array
     idp_user_cert_lookup_field:
       default: automatic
-      description: 'allow customer to choose the EAP-TLS client certificate''s field.
-        To use for IDP User Groups lookup. enum: `automatic`, `cn`, `email`, `upn`'
+      description: 'allow customer to choose the EAP-TLS client certificate''s field
+        to use for IDP User Groups lookup. enum: `automatic`, `cn`, `email`, `upn`'
       enum:
       - automatic
       - cn
@@ -80435,6 +81364,11 @@ components:
           examples:
           - f01c2df166e0
           type: string
+        magic:
+          description: Device claim code (magic) for this inventory search result
+          examples:
+          - WVTFBLTNPXD23H2
+          type: string
         master:
           description: Whether this search result represents the master member of
             a Virtual Chassis
@@ -80848,9 +81782,17 @@ components:
           description: Expiration date of the service contract; only returned for
             onboarded (claimed) devices
           type: string
+        contract_id:
+          description: Unique identifier of the service contract; only returned for
+            onboarded (claimed) devices
+          type: string
         contract_reseller:
           description: Name of the reseller associated with the contract; only returned
             for onboarded (claimed) devices
+          type: string
+        contract_sku:
+          description: SKU associated with the service contract; only returned for
+            onboarded (claimed) devices
           type: string
         contract_start_date:
           description: Official commencement date of the service contract; only returned
@@ -80873,6 +81815,9 @@ components:
           type: string
         end_of_sale_time:
           description: End of sale epoch timestamp
+          type: integer
+        end_of_service_time:
+          description: End of service epoch timestamp
           type: integer
         eol_psn:
           description: Product support notice associated with the device end-of-life
@@ -80942,6 +81887,10 @@ components:
           type: string
         suggested_version:
           description: Recommended software version for the device
+          type: string
+        support_contract_status:
+          description: 'Service contract status; only returned for onboarded (claimed)
+            devices. enum: `Active`, `Declined`, `EOL`, `Service Available`'
           type: string
         type:
           $ref: '#/components/schemas/device_type'
@@ -81069,8 +82018,10 @@ components:
             type: string
           type: array
         product_family:
-          description: Product family affected by the PBN issue
-          type: string
+          description: Product families affected by the PBN issue
+          items:
+            type: string
+          type: array
         release_notes:
           description: Release notes for this PBN
           type: string
@@ -85619,6 +86570,11 @@ components:
           $ref: '#/components/schemas/nac_portal_eap_type'
           description: EAP mode used when onboarding wireless clients through the
             NAC portal
+        enable_location:
+          default: false
+          description: Whether location data collection is enabled for devices onboarding
+            through this NAC portal
+          type: boolean
         enable_telemetry:
           description: Model, version, fingering, events (connecting, disconnect,
             roaming), which ap
@@ -86473,8 +87429,8 @@ components:
     network_multicast_groups:
       additionalProperties:
         $ref: '#/components/schemas/network_multicast_group'
-      description: Group address to RP (rendezvous point) mapping. Property Key is
-        the CIDR (example "225.1.0.3/32")
+      description: Group address to RP (rendezvous point) mapping (gateway only).
+        Property Key is the CIDR (example "225.1.0.3/32")
       type: object
     network_routed_for_networks:
       description: For a Network (usually LAN), it can be routable to other networks
@@ -86545,6 +87501,11 @@ components:
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the network template was last modified
+        multicast_config:
+          $ref: '#/components/schemas/switch_multicast_config'
+          description: Multicast settings for networks in the master VRF (not assigned
+            to any vrf_instances); PIM is automatically enabled when any master-VRF
+            network has `multicast.enabled`==`true`
         name:
           description: Display name of the network template
           type: string
@@ -87120,14 +88081,15 @@ components:
       type: string
     org_devices_events_count_distinct:
       default: model
-      description: 'enum: `ap`, `apfw`, `model`, `org_id`, `site_id`, `text`, `timestamp`,
-        `type`'
+      description: 'enum: `ap`, `apfw`, `model`, `org_id`, `site_id`, `status`, `text`,
+        `timestamp`, `type`'
       enum:
       - ap
       - apfw
       - model
       - org_id
       - site_id
+      - status
       - text
       - timestamp
       - type
@@ -87290,7 +88252,7 @@ components:
       type: string
     org_nac_clients_count_distinct:
       default: type
-      description: 'enum: `ap`, `auth_type`, `device_mac`, `edr_managed`, `edr_provider`,
+      description: 'enum: `ap`, `auth_type`, `device_mac`, `edr_managed`, `edr_providers`,
         `edr_status`, `family`, `hostname`, `idp_id`, `mfg`, `mdm_compliance`, `mdm_managed`,
         `mdm_provider`, `model`, `mxedge_id`, `nacrule_matched`, `nacrule_name`, `nacrule_id`,
         `nas_ip`, `nas_vendor`, `os`, `site_id`, `ssid`, `status`, `type`, `usermac_label`,
@@ -87300,7 +88262,7 @@ components:
       - auth_type
       - device_mac
       - edr_managed
-      - edr_provider
+      - edr_providers
       - edr_status
       - family
       - hostname
@@ -87454,17 +88416,18 @@ components:
           type: string
         cacerts:
           $ref: '#/components/schemas/radsec_certs_ap'
-          description: CA certificates used by organization-level RADIUS and RADSec
-            settings
+          description: Legacy CA certificate list used to verify client certificates.
+            If `cacerts_configs` is provided and non-empty, this field is ignored.
+        cacerts_configs:
+          $ref: '#/components/schemas/org_setting_cacerts_configs'
+          description: Preferred per-issuer CA certificate configuration with optional
+            OCSP and CRL settings. When provided and non-empty, `cacerts` is ignored.
         celona:
           $ref: '#/components/schemas/org_setting_celona'
           description: Integration settings for Celona
         cloudshark:
           $ref: '#/components/schemas/org_setting_cloudshark'
           description: Packet capture integration settings for CloudShark
-        cradlepoint:
-          $ref: '#/components/schemas/org_setting_cradlepoint'
-          description: Integration settings for Cradlepoint devices
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Epoch timestamp when the organization settings were created
@@ -87636,6 +88599,11 @@ components:
       additionalProperties: false
       description: Organization API response policy for hiding secrets and passwords
       properties:
+        enforce_src_ips_for_tokens:
+          default: false
+          description: Optional. When `true`, Org API tokens without their own `src_ips`
+            also respect the org policy `src_ips`. Default is `false`.
+          type: boolean
         no_reveal:
           default: false
           description: "By default, API hides password/secrets when the user doesn't\
@@ -87849,6 +88817,51 @@ components:
           $ref: '#/components/schemas/site_auto_upgrade_version'
           description: Firmware release channel or specific version used for AP auto-upgrade
       type: object
+    org_setting_cacerts_config:
+      additionalProperties: false
+      description: Per-issuer CA certificate configuration used to verify client certificates
+      properties:
+        cert:
+          description: PEM-encoded CA certificate
+          examples:
+          - '-----BEGIN CERTIFICATE-----\nMIIFZjCCA06gAwIBAgIIP61/1qm/uDowDQYJKoZIhvcNAQELBQE\n-----END
+            CERTIFICATE-----'
+          type: string
+        crl_enabled:
+          default: true
+          description: Whether CRL checks are enabled. When true, CRL from AIA is
+            used if available unless `crl_url` is set.
+          type: boolean
+        crl_url:
+          description: Optional override URL for the certificate CRL distribution
+            point
+          examples:
+          - https://crl.example.com/issuer1.crl
+          type: string
+        name:
+          description: Optional user-friendly label for the CA issuer configuration
+          examples:
+          - Issuer 1
+          type: string
+        ocsp_enabled:
+          default: true
+          description: Whether OCSP checks are enabled. When true, OCSP responder
+            from AIA is used if available unless `ocsp_url` is set.
+          type: boolean
+        ocsp_url:
+          description: Optional override URL for the OCSP responder
+          examples:
+          - https://ocsp.example.com
+          type: string
+      required:
+      - cert
+      type: object
+    org_setting_cacerts_configs:
+      description: List of per-issuer CA certificate configurations. Preferred over
+        `cacerts`.
+      items:
+        $ref: '#/components/schemas/org_setting_cacerts_config'
+      type: array
     org_setting_celona:
       additionalProperties: false
       description: Integration settings for Celona
@@ -87879,43 +88892,6 @@ components:
           examples:
           - https://cloudshark.hosted.domain
           type: string
-      type: object
-    org_setting_cradlepoint:
-      additionalProperties: false
-      description: Read-only Cradlepoint integration settings stored for the organization
-      properties:
-        cp_api_id:
-          description: Cradlepoint API ID used by Mist for the integration
-          examples:
-          - 84446d61-2206-4ea5-855a-0043f980be54
-          readOnly: true
-          type: string
-        cp_api_key:
-          description: Cradlepoint API key paired with the Cradlepoint API ID
-          examples:
-          - 79c329da9893e34099c7d8ad5cb9c941
-          format: password
-          readOnly: true
-          type: string
-        ecm_api_id:
-          description: Cradlepoint ECM API ID used by Mist for the integration
-          examples:
-          - 73446d61-2206-4ea5-855a-0043f980be62
-          readOnly: true
-          type: string
-        ecm_api_key:
-          description: Cradlepoint ECM API key paired with the ECM API ID
-          examples:
-          - 68b329da9893e34099c7d8ad5cb9c940
-          format: password
-          readOnly: true
-          type: string
-        enable_lldp:
-          description: Whether Mist uses Cradlepoint LLDP data to link routers to
-            Mist sites and devices
-          readOnly: true
-          type: boolean
-      readOnly: true
       type: object
     org_setting_device_cert:
       additionalProperties: false
@@ -88203,6 +89179,11 @@ components:
           maximum: 4
           minimum: 1
           type: integer
+        enable_eap_md5_for_mab:
+          default: false
+          description: 'Enable EAP-MD5 for MAB. WARNING: Not FIPS compliant, use only
+            if required for legacy device support.'
+          type: boolean
         eu_only:
           default: false
           description: By default, NAC POD failover considers all NAC pods available
@@ -88248,8 +89229,8 @@ components:
         usermac_expiry:
           default: 0
           description: Allow customer to configure an expiry time for usermacs by
-            attaching a Quarantine label to those which have been inactive for the
-            configured period of time (in days). 0 means no expiry
+            attaching an `inactive_endpoint` label to those which have been inactive
+            for the configured period of time (in days). 0 means no expiry
           examples:
           - 30
           maximum: 1095
@@ -89751,7 +90732,12 @@ components:
           type: string
         usage:
           $ref: '#/components/schemas/psk_usage'
-          description: 'Binding mode for this PSK, enum: `macs`, `multi`, `single`'
+          description: 'Binding mode for this PSK, enum: `macs`, `multi`, `single`,
+            `usermac_labels`'
+        usermac_labels:
+          $ref: '#/components/schemas/psk_usermac_labels'
+          description: Usermac labels allowed when `usage`==`usermac_labels`; this
+            list is capped at 100 entries
         vlan_id:
           $ref: '#/components/schemas/psk_vlan_id'
           description: VLAN ID returned for clients using this PSK
@@ -90079,12 +91065,23 @@ components:
       type: string
     psk_usage:
       default: multi
-      description: 'enum: `macs`, `multi`, `single`'
+      description: 'enum: `macs`, `multi`, `single`, `usermac_labels`'
       enum:
       - macs
       - multi
       - single
+      - usermac_labels
       type: string
+    psk_usermac_labels:
+      description: If `usage`==`usermac_labels`, this list contains usermac labels
+        (e.g. `iot`, `students`). This list is capped at 100 entries
+      examples:
+      - - iot
+        - students
+      items:
+        type: string
+      maxItems: 100
+      type: array
     psk_vlan_id:
       description: VLAN for this PSK key
       oneOf:
@@ -92015,6 +93012,33 @@ components:
       - limit
       - total
       type: object
+    response_device_flow_records_search:
+      additionalProperties: false
+      description: Paginated response for device flow record search results
+      properties:
+        end:
+          description: Epoch timestamp, in seconds, for the end of the flow record
+            search window
+          type: integer
+        limit:
+          description: Maximum number of flow records returned in this page
+          type: integer
+        results:
+          description: Flow records matching the search filters
+          items:
+            $ref: '#/components/schemas/flow_record'
+          type: array
+        search_after:
+          description: Cursor token for retrieving the next page of flow records
+          type: string
+        start:
+          description: Epoch timestamp, in seconds, for the start of the flow record
+            search window
+          type: integer
+        total:
+          description: Number of flow records matching the search filters
+          type: integer
+      type: object
     response_device_metrics:
       additionalProperties: false
       description: Time-series insight metric response for a device
@@ -93851,6 +94875,9 @@ components:
           $ref: '#/components/schemas/org_id'
           description: Organization that owns the site where the spectrum analysis
             was run
+        spectrogram_url:
+          description: URL to the generated spectrogram image for the spectrum analysis
+          type: string
         timestamp:
           description: Epoch timestamp, in seconds, when the spectrum analysis was
             run
@@ -95111,6 +96138,11 @@ components:
         device_type:
           description: Type of devices targeted by the SSR upgrade
           type: string
+        force:
+          default: false
+          description: Whether the upgrade was forced even when the requested version
+            matched the running version
+          type: boolean
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier for the SSR upgrade job
@@ -95169,11 +96201,20 @@ components:
         device_type:
           description: Type of devices targeted by the SSR upgrade
           type: string
+        force:
+          default: false
+          description: Whether the upgrade was forced even when the requested version
+            matched the running version
+          type: boolean
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier for the SSR upgrade job
         status:
           description: Current status of the SSR upgrade job
+          minLength: 1
+          type: string
+        strategy:
+          description: Upgrade strategy used by the SSR upgrade job
           minLength: 1
           type: string
         targets:
@@ -95961,6 +97002,10 @@ components:
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Timestamp when the RF template was created
+        enable_unii_4:
+          default: false
+          description: Whether U-NII-4 channels (169, 173, 177) are enabled
+          type: boolean
         for_site:
           description: Whether the RF template is scoped to a site rather than the
             organization
@@ -98587,6 +99632,12 @@ components:
       format: uuid
       readOnly: true
       type: string
+    site_iotendpoints_count_distinct:
+      default: site_id
+      description: 'enum: `site_id`'
+      enum:
+      - site_id
+      type: string
     site_mxedge_events_count_distinct:
       default: mxedge_id
       description: 'enum: `mxcluster_id`, `mxedge_id`, `package`, `type`'
@@ -99339,6 +100390,12 @@ components:
           description: by default, we only honor description provided in port_config.
             This allows fallback to those defined in port_usages
           type: boolean
+        uwb_config:
+          $ref: '#/components/schemas/ap_uwb_config'
+          description: UWB RTLS (OMLOX asset visibility) settings for the site, only
+            effective on AP models with a UWB radio and in countries where the UWB
+            radio is permitted. Overridden by the device profile and device-level
+            settings
         vars:
           $ref: '#/components/schemas/vars'
           description: Template variables defined for the site
@@ -102109,6 +103166,11 @@ components:
       additionalProperties: false
       description: SNMPv3 notification filter profile
       properties:
+        categories:
+          $ref: '#/components/schemas/snmpv3_config_notify_filter_item_categories'
+          description: CX only. List of SNMP trap group categories included in this
+            filter profile. See https://www.juniper.net/documentation/software/topics/task/configuration/snmp-trap-groups-configuring-junos-nm.html
+            for valid category names.
         contents:
           $ref: '#/components/schemas/snmpv3_config_notify_filter_item_contents'
           description: OID filter rules in this notification filter profile
@@ -102116,6 +103178,15 @@ components:
           description: Notification filter profile name
           type: string
       type: object
+    snmpv3_config_notify_filter_item_categories:
+      description: List of SNMP trap group category names for a CX notification filter
+        profile
+      examples:
+      - - link
+        - authentication
+      items:
+        type: string
+      type: array
     snmpv3_config_notify_filter_item_content:
       additionalProperties: false
       description: OID filter rule for an SNMPv3 notification profile
@@ -102887,6 +103958,11 @@ components:
         channel:
           $ref: '#/components/schemas/ssr_upgrade_channel'
           description: Firmware release channel to use for the SSR upgrade
+        force:
+          default: false
+          description: When true, forces the upgrade even when the requested version
+            matches the currently running version; default is false
+          type: boolean
         reboot_at:
           description: Reboot start time in epoch seconds, default is start_time,
             -1 disables reboot
@@ -102919,7 +103995,13 @@ components:
           description: Firmware release channel to use for the SSR upgrade
         device_ids:
           $ref: '#/components/schemas/ssr_upgrade_multi_device_ids'
-          description: SSR device identifiers targeted by the upgrade
+          description: List of 128T device IDs to upgrade; currently only one 128T
+            device is allowed
+        force:
+          default: false
+          description: When true, forces the upgrade even when the requested version
+            matches the currently running version; default is false
+          type: boolean
         reboot_at:
           description: Reboot start time in epoch seconds, default is start_time,
             -1 disables reboot
@@ -102939,7 +104021,8 @@ components:
       - device_ids
       type: object
     ssr_upgrade_multi_device_ids:
-      description: List of 128T device IDs to upgrade
+      description: List of 128T device IDs to upgrade; currently only one 128T device
+        is allowed
       items:
         format: uuid
         type: string
@@ -103365,6 +104448,10 @@ components:
           type:
           - number
           - 'null'
+        zigbee_stat:
+          $ref: '#/components/schemas/stats_ap_zigbee_stat'
+          description: ZigBee statistics reported by the AP, present only when ZigBee
+            is enabled on the AP
       required:
       - type
       title: stats_ap
@@ -103839,7 +104926,7 @@ components:
       type: object
     stats_ap_gps_stat_src:
       description: 'The origin of the GPS data. enum: `gps`: from this device GPS
-        estimates, `other_ap` from neighboring device GPS estimates. Note: API responses
+        estimates, `other_aps` from neighboring devices GPS estimates. Note: API responses
         may return `other_aps` which should be treated as `other_ap`'
       enum:
       - gps
@@ -104299,6 +105386,28 @@ components:
           readOnly: true
           type:
           - boolean
+          - 'null'
+      type: object
+    stats_ap_zigbee_stat:
+      additionalProperties: false
+      description: ZigBee statistics reported by an AP, present only when ZigBee is
+        enabled on the AP
+      properties:
+        iotproxy_status:
+          description: Connection status of the IoT proxy
+          examples:
+          - connected
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        num_iotendpoints:
+          description: Number of IoT endpoints connected through the AP
+          examples:
+          - 3
+          readOnly: true
+          type:
+          - integer
           - 'null'
       type: object
     stats_asset:
@@ -106105,6 +107214,16 @@ components:
         ip_stat:
           $ref: '#/components/schemas/stats_mxedge_ip_stat'
           description: IP address statistics reported by the Mist Edge
+        kernel_abi:
+          description: Kernel release version running on the Mist Edge
+          examples:
+          - 6.1.0-47
+          type: string
+        kernel_version:
+          description: Kernel package version running on the Mist Edge
+          examples:
+          - 6.1.170-3
+          type: string
         lag_stat:
           $ref: '#/components/schemas/stats_mxedge_lag_stats'
           description: Link aggregation statistics reported by the Mist Edge
@@ -106774,27 +107893,19 @@ components:
           description: Remote endpoint port for the tunnel
           readOnly: true
           type: integer
-        rx_control_pkts:
-          description: Number of control packets received for the tunnel
-          readOnly: true
-          type: integer
         sessions:
           $ref: '#/components/schemas/stats_mxtunnel_sessions'
           description: WxLAN tunnel sessions reported for this tunnel
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Site identifier associated with the tunnel statistics
+        start_time:
+          description: Epoch timestamp when the tunnel was established
+          readOnly: true
+          type: integer
         state:
           $ref: '#/components/schemas/stats_mxtunnel_state'
           description: Current state of the WxLAN or Mist tunnel
-        tx_control_pkts:
-          description: Number of control packets transmitted for the tunnel
-          readOnly: true
-          type: integer
-        uptime:
-          description: Duration, in seconds, that the tunnel has been up
-          readOnly: true
-          type: integer
       required:
       - remote_ip
       type: object
@@ -108388,6 +109499,11 @@ components:
         model:
           description: Device model, may be available if we can identify them
           type: string
+        mxedge_id:
+          description: Mist Edge the wireless client connection is tunneled through,
+            when applicable
+          format: uuid
+          type: string
         num_locating_aps:
           description: Number of APs used to locate this client
           type: integer
@@ -109757,6 +110873,36 @@ components:
           description: Switch network used for Mist NAC RadSec connectivity
           type: string
       type: object
+    switch_multicast_config:
+      additionalProperties: false
+      description: Multicast configuration for a VRF. When set at the network template
+        level it applies to networks in the master VRF (not assigned to any vrf_instances).
+        PIM is automatically enabled when any network in the VRF has `multicast.enabled`==`true`.
+      properties:
+        anycast_rp:
+          default: false
+          description: When `true`, auto-generates a shared RP on `is_l3_border` devices
+            (ERB/IPClos topologies only)
+          type: boolean
+        rp_ip:
+          description: RP address used when `anycast_rp`==`false`. If the address
+            matches a device SVI, it is configured as a local RP; otherwise a static
+            RP is configured
+          examples:
+          - 10.2.1.10
+          type: string
+        sbd_subnet:
+          description: SBD IRB subnet; Mist auto-assigns per-device IPs from this
+            range (EVPN eOISM only)
+          examples:
+          - 10.99.0.0/24
+          type: string
+        sbd_vlan_id:
+          description: Supplemental Bridge Domain VLAN ID (EVPN topology / eOISM only)
+          examples:
+          - 3900
+          type: integer
+      type: object
     switch_network:
       additionalProperties: false
       description: A network represents a network segment. It can either represent
@@ -109785,6 +110931,9 @@ components:
           examples:
           - '3070'
           type: string
+        multicast:
+          $ref: '#/components/schemas/switch_network_multicast'
+          description: Multicast (IGMP snooping) settings for this VLAN
         subnet:
           description: Optional for pure switching, required when L3 / routing features
             are used
@@ -109798,6 +110947,22 @@ components:
           description: VLAN identifier for this switch network
       required:
       - vlan_id
+      type: object
+    switch_network_multicast:
+      additionalProperties: false
+      description: Multicast settings for a switch network (VLAN)
+      properties:
+        enabled:
+          default: false
+          description: Whether to enable IGMP snooping on this VLAN
+          type: boolean
+        igmp_version:
+          default: '2'
+          description: IGMP version. '2' (default, ASM/IGMPv2) / '3' (SSM/IGMPv3)
+          enum:
+          - '2'
+          - '3'
+          type: string
       type: object
     switch_networks:
       additionalProperties:
@@ -110764,6 +111929,10 @@ components:
         extra_routes6:
           $ref: '#/components/schemas/vrf_extra_routes6'
           description: Additional IPv6 static routes configured for this VRF instance
+        multicast_config:
+          $ref: '#/components/schemas/switch_multicast_config'
+          description: Multicast configuration for this VRF instance. PIM is automatically
+            enabled when any network in this VRF has `multicast.enabled`==`true`
         networks:
           $ref: '#/components/schemas/strings'
           description: Names of switch networks included in this VRF instance
@@ -111348,6 +112517,51 @@ components:
       additionalProperties: false
       description: Cradlepoint integration connectivity test result
       properties:
+        alert_config_id:
+          description: Cradlepoint alert configuration ID created by the integration
+            setup
+          examples:
+          - 8b7e06ac-0yu5-11f1-88h2-42628k552c3d
+          readOnly: true
+          type: string
+        cp_api_id:
+          description: Cradlepoint API ID stored for the integration (masked)
+          examples:
+          - '********'
+          readOnly: true
+          type: string
+        cp_api_key:
+          description: Cradlepoint API key stored for the integration (masked)
+          examples:
+          - '********'
+          format: password
+          readOnly: true
+          type: string
+        destination_config_id:
+          description: Cradlepoint destination configuration ID created by the integration
+            setup
+          examples:
+          - 8ad364de-0yu5-13r1-9abc-263675be6074
+          readOnly: true
+          type: string
+        ecm_api_id:
+          description: Cradlepoint ECM API ID stored for the integration (masked)
+          examples:
+          - '********'
+          readOnly: true
+          type: string
+        ecm_api_key:
+          description: Cradlepoint ECM API key stored for the integration (masked)
+          examples:
+          - '********'
+          format: password
+          readOnly: true
+          type: string
+        enable_lldp:
+          description: Whether Mist uses Cradlepoint LLDP data to link routers to
+            Mist sites and devices
+          readOnly: true
+          type: boolean
         error:
           description: if status is `inactive` this field returns the reason for it
             being inactive.
@@ -111360,6 +112574,13 @@ components:
           $ref: '#/components/schemas/test_cradlepoint_last_status'
           description: Integration status detected during the most recent Cradlepoint
             sync
+        shared_secret:
+          description: Shared secret generated by the integration setup (masked)
+          examples:
+          - '********'
+          format: password
+          readOnly: true
+          type: string
       type: object
     test_cradlepoint_last_status:
       description: 'status of integration detected during last sync. enum: `active`,
@@ -112090,9 +113311,23 @@ components:
         hosts:
           $ref: '#/components/schemas/tunnel_config_node_hosts'
           description: Remote gateway host addresses for this tunnel node
+        internal_ip6s:
+          $ref: '#/components/schemas/strings'
+          description: IPv6 addresses configured on this tunnel node
         internal_ips:
           $ref: '#/components/schemas/tunnel_config_node_internal_ips'
           description: Internal IP addresses configured on this tunnel node
+        probe_hostnames:
+          $ref: '#/components/schemas/strings'
+          description: Hostnames used as ICMP probe destinations for this tunnel node;
+            applicable for both IPv4 and IPv6
+        probe_http:
+          $ref: '#/components/schemas/tunnel_config_node_probe_http'
+          description: HTTP probe settings for this tunnel node; success from any
+            ICMP or HTTP probe indicates the tunnel is up
+        probe_ip6s:
+          $ref: '#/components/schemas/strings'
+          description: IPv6 ICMP probe addresses used to monitor this tunnel node
         probe_ips:
           $ref: '#/components/schemas/strings'
           description: Health-check IP addresses used to monitor this tunnel node
@@ -112118,6 +113353,27 @@ components:
       items:
         type: string
       type: array
+    tunnel_config_node_probe_http:
+      additionalProperties: false
+      description: HTTP probe settings for a custom IPsec tunnel node
+      properties:
+        accepted_status_codes:
+          description: HTTP response status codes that indicate a successful probe.
+            Defaults to 200 if not specified.
+          examples:
+          - - 204
+          items:
+            type: integer
+          type: array
+        urls:
+          description: HTTP or HTTPS URLs to probe
+          examples:
+          - - http://www.google.com/generate_204
+            - https://www.google.com/generate_204
+          items:
+            type: string
+          type: array
+      type: object
     tunnel_config_node_remote_ids:
       description: Only if `provider`==`jse-ipsec` or `provider`==`custom-ipsec`
       items:
@@ -112147,8 +113403,9 @@ components:
       type: object
     tunnel_config_probe_type:
       default: icmp
-      description: 'Protocol used by the custom IPsec tunnel health probe. enum: `http`,
-        `icmp`'
+      description: "Protocol used by the custom IPsec tunnel health probe. `http`\
+        \ is deprecated \u2014 use `probe_ips`/`probe_hostnames` for ICMP probes and\
+        \ `probe_http` for HTTP probes instead. enum: `http`, `icmp`"
       enum:
       - http
       - icmp
@@ -113197,7 +114454,7 @@ components:
       properties:
         all_sites:
           default: false
-          description: If `true`, will upgrade all sites in this org
+          description: If `true`, will upgrade all sites in this org; overrides `site_ids`
           type: boolean
         canary_phases:
           $ref: '#/components/schemas/upgrade_device_canary_phases'
@@ -113210,6 +114467,9 @@ components:
           $ref: '#/components/schemas/upgrade_org_devices_download_strategy'
           description: Firmware download orchestration strategy for the organization
             upgrade
+        enable_p2p:
+          description: For APs only. Whether to allow local AP-to-AP firmware upgrade
+          type: boolean
         max_failure_percentage:
           $ref: '#/components/schemas/upgrade_devices_max_failure_percentage'
           description: If `strategy`!=`big_bang`. Allowed failure percentage across
@@ -113223,25 +114483,27 @@ components:
           description: Device models selected for the organization upgrade
         p2p_cluster_size:
           default: 10
-          description: For APs only and if `enable_p2p`==`true`.
+          description: For APs only. Size to split devices for peer-to-peer download
+            batches; default 10
           examples:
-          - 0
+          - 10
           minimum: 0
           type: integer
         p2p_parallelism:
-          description: For APs only and if `enable_p2p`==`true`. Number of parallel
-            p2p download batches to create
+          description: For APs only. Number of parallel peer-to-peer download batches
+            to create. If not set, automatically determined based on device count
+            (<=50 uses 1, 51-100 uses 3, >100 uses 10)
           type: integer
         reboot_at:
           deprecated: true
-          description: For Switches and Gateways only and if `reboot`==`true`. Reboot
-            start time in epoch seconds, default is `start_time`
+          description: Reboot start time in epoch seconds, default is `start_time`;
+            deprecated, use `reboot_datetime` instead
           examples:
           - 1624399840
           type: integer
         reboot_datetime:
-          description: Process start date and time, ISO8601 format. Exclude timezone
-            component if site local timezone needs to be used
+          description: Reboot start time in ISO 8601 format; default is `start_datetime`.
+            Exclude timezone component to use site local timezone
           examples:
           - 2024-06-13 15:00:00-07:00
           type: string
@@ -113285,19 +114547,29 @@ components:
             is rebooted
           type: boolean
         start_datetime:
-          description: Process start date and time, ISO8601 format
+          description: Firmware download start time in ISO 8601 format; default is
+            now. Exclude timezone component to use site local timezone
           examples:
           - 2024-06-13 15:00:00-07:00
           type: string
         start_time:
           deprecated: true
-          description: Upgrade start time in epoch seconds, default is now
+          description: Firmware download start time in epoch seconds, default is now;
+            deprecated, use `start_datetime` instead
           examples:
           - 1624399840
           type: integer
         strategy:
           $ref: '#/components/schemas/upgrade_device_strategy'
-          description: Upgrade orchestration strategy for selected devices
+          deprecated: true
+          description: Deprecated; use `download_strategy` and `reboot_strategy` instead.
+            `big_bang` (upgrade all at once, no orchestration), `serial` (one at a
+            time), `canary`, or `rrm` (AP only); default is big_bang
+        version:
+          deprecated: true
+          description: Deprecated; use `versions` instead. Specific firmware version,
+            `suggested`, or `alpha`; default is latest
+          type: string
         versions:
           $ref: '#/components/schemas/upgrade_org_devices_versions'
           description: Target firmware versions for this organization upgrade
@@ -113403,22 +114675,26 @@ components:
           description: Firmware family this version entry applies to
         force:
           default: false
-          description: If `firmware_type`==`ap`, set to `true` if upgrade is needed
-            when target version <= running version
+          description: Set to `true` to force upgrade. For `device_type`==`ap`, applies
+            when target version <= running version. For `device_type`==`gateway` with
+            `firmware_type`==`ssr`, applies only when target version == running version;
+            default false
           type: boolean
         model_version:
           $ref: '#/components/schemas/upgrade_org_devices_version_model_version'
-          description: If `firmware_type`==`junos`, model-specific firmware version
-            overrides
+          description: Map of device model to firmware version; overrides `version`
+            for the specified models
         version:
           description: Firmware version to deploy for this entry
           type: string
       type: object
     upgrade_org_devices_version_firmware_type:
-      description: 'Firmware family this version entry applies to. enum: `ap`, `junos`'
+      description: 'Firmware family this version entry applies to. enum: `ap`, `junos`,
+        `ssr`'
       enum:
       - ap
       - junos
+      - ssr
       type: string
     upgrade_org_devices_version_model_version:
       additionalProperties:
@@ -113464,14 +114740,16 @@ components:
           description: Device models selected for the site upgrade
         p2p_cluster_size:
           default: 10
-          description: For APs only and if `enable_p2p`==`true`.
+          description: For APs only and if `enable_p2p`==`true`. Size to split devices
+            for peer-to-peer download batches; default 10
           examples:
-          - 0
+          - 10
           minimum: 0
           type: integer
         p2p_parallelism:
           description: For APs only and if `enable_p2p`==`true`. Number of parallel
-            p2p download batches to create
+            peer-to-peer download batches to create. If not set, automatically determined
+            based on device count (<=50 uses 1, 51-100 uses 3, >100 uses 10)
           type: integer
         reboot:
           default: false
@@ -113672,6 +114950,11 @@ components:
           examples:
           - VIP
           type: string
+        site_ids:
+          description: Optional list of site IDs this user MAC entry is scoped to
+          items:
+            $ref: '#/components/schemas/site_id'
+          type: array
         vlan:
           description: Network VLAN value associated with this user MAC entry
           examples:
@@ -114594,10 +115877,28 @@ components:
         duration:
           default: 600
           description: Number of seconds to permit new Zigbee end-device joins; range
-            is 30-3600
-          maximum: 3600
-          minimum: 30
+            is 60-600
+          maximum: 600
+          minimum: 60
           type: integer
+      type: object
+    utils_zigbee_kick:
+      additionalProperties: false
+      description: Request body for kicking one or more Zigbee clients from an AP
+      properties:
+        macs:
+          description: One or more Zigbee EUI-64 (8-byte) MACs. Accepts colon-separated
+            (`00:17:7a:01:06:0c:ae:9f`) or plain hex (`00177a01060cae9f`). Must be
+            non-empty.
+          examples:
+          - - 00177a01060cae9f
+            - 00177a01060caea1
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - macs
       type: object
     uuids:
       description: UUID string values used as identifiers
@@ -115449,6 +116750,10 @@ components:
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Epoch timestamp when the webhook was created
+        default_action:
+          $ref: '#/components/schemas/webhook_action'
+          description: Default action applied when none of the `rules` match the incoming
+            event
         enabled:
           default: true
           description: Whether webhook is enabled
@@ -115511,6 +116816,11 @@ components:
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Organization that owns the webhook
+        rules:
+          $ref: '#/components/schemas/webhook_rules'
+          description: Optional filtering rules to override `topics`. Each rule permits
+            or blocks events for a topic, optionally based on event payload matching
+            criteria
         secret:
           description: "Only if `type`=`http-post` \n\nwhen `secret` is provided,\
             \ two HTTP headers will be added: \n  * X-Mist-Signature-v2: HMAC_SHA256(secret,\
@@ -115549,6 +116859,13 @@ components:
           description: When url uses HTTPS, whether to verify the certificate
           type: boolean
       type: object
+    webhook_action:
+      default: permit
+      description: 'Webhook filtering action. enum: `permit`, `block`'
+      enum:
+      - permit
+      - block
+      type: string
     webhook_alarm_event:
       additionalProperties: false
       description: Alarm event delivered inside an `alarms` webhook payload
@@ -117602,6 +118919,40 @@ components:
       enum:
       - rssizone
       type: string
+    webhook_rule:
+      additionalProperties: false
+      description: Filtering rule that permits or blocks webhook events for a topic
+      properties:
+        action:
+          $ref: '#/components/schemas/webhook_action'
+          description: Action applied when the rule matches the incoming event
+        matching:
+          $ref: '#/components/schemas/webhook_rule_matching'
+          description: Optional event payload matching criteria. Property key is the
+            event field name and the value is the list of accepted values
+        topic:
+          description: Webhook topic this rule applies to
+          type: string
+      required:
+      - topic
+      type: object
+    webhook_rule_matching:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      description: Event payload matching criteria. Property key is the event field
+        name and the value is the list of accepted values (e.g. matching field `type`
+        to [`AP_DISCONNECTED`])
+      examples:
+      - type:
+        - AP_DISCONNECTED
+      type: object
+    webhook_rules:
+      description: Optional filtering rules to override `topics`
+      items:
+        $ref: '#/components/schemas/webhook_rule'
+      type: array
     webhook_sdkclient_scan_data:
       additionalProperties: false
       description: Sample of the `sdkclient-scan-data` webhook payload.
@@ -119445,6 +120796,10 @@ components:
           description: When 11r is enabled, we'll try to use the cached PMK, this
             can be disabled. `false` means auto
           type: boolean
+        local_vlan_ids:
+          $ref: '#/components/schemas/wlan_dynamic_vlan_local_vlan_ids'
+          description: VLANs to be bridged locally when forwarding to mxtunnel or
+            site mxedge
         source:
           $ref: '#/components/schemas/dynamic_psk_source'
           description: Origin used to retrieve per-user PSKs
@@ -121938,6 +123293,18 @@ components:
           description: Session ID for the Zigbee join operation
           examples:
           - 19e73828-937f-05e6-f709-e29efdb0a82b
+          format: uuid
+          type: string
+      type: object
+    zigbee_trail_response:
+      additionalProperties: false
+      description: Response containing the session identifier for a Zigbee event or
+        packet trail operation
+      properties:
+        session:
+          description: Session ID the UI can use to stream trail results
+          examples:
+          - 7a5f7796-83ee-11e5-95c6-1258369c38a9
           format: uuid
           type: string
       type: object

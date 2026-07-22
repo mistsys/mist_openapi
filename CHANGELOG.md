@@ -2,6 +2,156 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2607.1.0] - 2026-07-21
+
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting_api_policy` schema):
+  - Added `enforce_src_ips_for_tokens` field (boolean, default `false`): when `true`, Org API tokens without their own `src_ips` also respect the org policy `src_ips`
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting` schema):
+  - Removed `cradlepoint` property (Cradlepoint credentials are no longer returned in Org Setting)
+  - Removed unused `org_setting_cradlepoint` component schema
+  - Added `cacerts_configs` field referencing new `org_setting_cacerts_configs` schema: preferred per-issuer CA certificate configuration with optional OCSP and CRL settings; when provided and non-empty, `cacerts` is ignored
+  - Updated `cacerts` field description to mark it as legacy format (still accepted; ignored when `cacerts_configs` is non-empty)
+- Added new schemas `org_setting_cacerts_config` and `org_setting_cacerts_configs`:
+  - `org_setting_cacerts_config`: per-issuer CA cert entry with `cert` (required), optional `name`, `ocsp_enabled` (default `true`), `ocsp_url`, `crl_enabled` (default `true`), `crl_url`
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting_mist_nac` schema):
+  - Added `enable_eap_md5_for_mab` field (boolean, default `false`): enables EAP-MD5 for MAB; not FIPS-compliant, for legacy device support only
+  - Updated `usermac_expiry` description: inactive endpoints now receive an `inactive_endpoint` label (previously described as a `Quarantine` label)
+  - Fixed `idp_user_cert_lookup_field` standalone schema description: corrected broken sentence (`'s field. To use for` → `'s field to use for`)
+- `POST /api/v1/orgs/{org_id}/setting/cradlepoint/setup`: added request body example with all five fields including `enable_lldp: true`
+- `PUT /api/v1/orgs/{org_id}/setting/cradlepoint/setup`: added `enable_lldp: true` to the existing request body example
+- `GET /api/v1/orgs/{org_id}/setting/cradlepoint/setup` (`test_cradlepoint` schema and `TestCradlepointCrowdstrike` example):
+  - Added response fields: `alert_config_id`, `cp_api_id`, `cp_api_key` (password), `destination_config_id`, `ecm_api_id`, `ecm_api_key` (password), `enable_lldp`, `shared_secret` (password)
+  - Updated `TestCradlepointCrowdstrike` example to include all new fields
+- `GET/PUT/DELETE /api/v1/orgs/{org_id}/rftemplates/{rftemplate_id}` (`rf_template` schema):
+  - Added `enable_unii_4` field (boolean, default `false`): enables U-NII-4 channels (169, 173, 177)
+  - Updated `RftemplateExample` and `RftemplatesArrayExample` to include `enable_unii_4: false`
+- `POST /api/v1/orgs/{org_id}/networktemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}` (`snmpv3_config_notify_filter_item` schema):
+  - Added `categories` field (array of strings, CX only): list of SNMP trap group category names included in the filter profile (e.g. `link`, `authentication`)
+  - Added new `snmpv3_config_notify_filter_item_categories` schema
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`gateway_wan_probe_override` schema):
+  - Added `hostnames` field (array of strings): probe hostnames applicable for both IPv4 and IPv6
+  - Added `http` field referencing new `gateway_wan_probe_override_http` schema: HTTP probe URLs and optional `accepted_status_codes` (default 200)
+  - Added new `gateway_wan_probe_override_http` schema
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`tunnel_config_node` schema):
+  - Added `internal_ip6s` field (array of strings): IPv6 addresses on the tunnel node
+  - Added `probe_hostnames` field (array of strings): hostnames for ICMP probes, applicable for both IPv4 and IPv6
+  - Added `probe_http` field referencing new `tunnel_config_node_probe_http` schema: HTTP probe URLs and optional `accepted_status_codes`
+  - Added `probe_ip6s` field (array of strings): IPv6 ICMP probe addresses
+  - Added new `tunnel_config_node_probe_http` schema
+- Updated `tunnel_config_probe_type` description: marked `http` value as deprecated; recommended alternatives are `probe_ips`/`probe_hostnames` for ICMP and `probe_http` for HTTP probes
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`gw_routing_policy_term_action` schema):
+  - Updated `accept` field description: added precedence note (`accept` > `next_term` > `next_policy`; routes are rejected if all three are false)
+  - Added `next_policy` field (boolean, default `false`): when true, continue evaluating the next routing policy in the chain
+  - Added `next_term` field (boolean, default `false`): when true, continue evaluating the next term in the same routing policy
+- `PUT /api/v1/orgs/{org_id}/psks` and `POST /api/v1/orgs/{org_id}/psks` (`psk` schema):
+  - Added `usermac_labels` value to `psk_usage` enum
+  - Added `usermac_labels` field (array of strings, max 100): usermac labels applied when `usage`==`usermac_labels`
+  - Added new `psk_usermac_labels` schema
+- `GET /api/v1/orgs/{org_id}/devices/events/search` and `GET /api/v1/sites/{site_id}/devices/events/search`:
+  - Added `status` query parameter: filter ext_tunnel events by tunnel provisioning status (e.g. `PROVISION_IN_PROGRESS`)
+  - Added `job_id` field to `device_event` schema: job identifier for tunnel provisioning events
+  - Added `status` field to `device_event` schema: tunnel provisioning status for ext_tunnel events
+  - Added `template_id` field to `device_event` schema: gateway template ID for tunnel provisioning events
+  - Added `tunnel_name` field to `device_event` schema: tunnel name for ext_tunnel events
+  - Updated `DeviceEventsSearchExample` to include an ext_tunnel event result
+- `GET /api/v1/orgs/{org_id}/devices/events/count`:
+  - Added `includes` query parameter: include events from additional indices (e.g. `ext_tunnel`)
+  - Added `status` query parameter: filter ext_tunnel events by provisioning status; accepts comma-separated values
+  - Added `status` value to `org_devices_events_count_distinct` enum
+- `GET /api/v1/orgs/{org_id}/mxedges/{mxedge_id}/stats`, `GET /api/v1/sites/{site_id}/mxedges/{mxedge_id}/stats` (`stats_mxedge` schema):
+  - Added `kernel_abi` field (string): kernel ABI version running on the Mist Edge
+  - Added `kernel_version` field (string): kernel version running on the Mist Edge
+- `GET /api/v1/orgs/{org_id}/stats/tunnels/search` (`stats_mxtunnel` schema):
+  - Replaced `uptime` field with `start_time` (integer): epoch timestamp when the tunnel was established
+  - Removed `rx_control_pkts` field
+  - Removed `tx_control_pkts` field
+  - Updated `TunnelsSearchTypeWxtunnel` example to reflect these changes
+- Added `GET /api/v1/orgs/{org_id}/aoscx/register_cmd` (new endpoint, replaces `GET /api/v1/orgs/{org_id}/aos/register_cmd`): generates a TPM-based brownfield registration token for AOSCX devices; response uses new `aoscx_register_cmd` schema
+- Removed `GET /api/v1/orgs/{org_id}/aos/register_cmd` (replaced by `aoscx/register_cmd`)
+- `POST /api/v1/orgs/{org_id}/ssr/upgrade` and `POST /api/v1/sites/{site_id}/devices/{device_id}/upgrade` (`ssr_upgrade` and `ssr_upgrade_multi` schemas):
+  - Added `force` field (boolean, default `false`): when `true`, forces the upgrade even when the requested version matches the currently running version
+- `GET /api/v1/orgs/{org_id}/ssr/upgrade` and `GET /api/v1/orgs/{org_id}/ssr/upgrade/{upgrade_id}` (`response_ssr_upgrade` and `response_ssr_upgrade_status` schemas):
+  - Added `force` field (boolean): whether the upgrade was forced when the requested version matched the running version
+  - Added missing `strategy` field to `response_ssr_upgrade_status`
+- `GET /api/v1/orgs/{org_id}/nac_clients/search`: renamed query parameter `edr_provider` to `edr_providers`; updated description
+- `GET /api/v1/orgs/{org_id}/nac_clients/count`: updated `distinct` enum value `edr_provider` → `edr_providers`
+- `client_nac` schema: renamed field `edr_provider` → `edr_providers` (type changed to array of `edr_provider` enum); changed `edr_status` field to array of `edr_status` enum
+- `org_nac_clients_count_distinct` schema: renamed enum value `edr_provider` → `edr_providers`
+- `user_mac` schema: added optional `site_ids` field (array of site UUIDs)
+- `POST /api/v1/orgs/{org_id}/usermacs`, `GET /api/v1/orgs/{org_id}/usermacs/search`, `GET /api/v1/orgs/{org_id}/usermacs/{usermac_id}`, and `GET /api/v1/orgs/{org_id}/usermacs/count`: updated examples to include `site_ids`
+- `GET /api/v1/const/marvisclient_events`: updated `ConstMarvisClientVersionsExample` to use distinct `label` values (`latest`, `rc1`, `default`) per OS entry
+- `GET /api/v1/const/marvisclient_events`: added new endpoint returning Marvis Client event type definitions (`key`, `display`); added `ConstMarvisClientEventsExample`, `ConstMarvisClientEvents` response, `const_marvisclient_event` and `const_marvisclient_events` schemas
+- `GET /api/v1/orgs/{org_id}/marvisclients/events/search`: updated `MarvisClientEventsSearchExample` — corrected event type from `ROAM` to `MARVISCLIENT_ROAMED`, added `location` object, updated `neighbor_ap_report` band values, added second `MARVISCLIENT_LOW_BATTERY` event
+- `nac_portal` schema: added `enable_location` field (boolean, default `false`); updated `NacPortalExample` and `NacPortalArrayExample`
+- `wlan_dynamic_psk` schema: added `local_vlan_ids` field (array of VLAN IDs/ranges/variables); VLANs bridged locally when forwarding to mxtunnel or site mxedge
+- `asset_filter` schema: `mqtt_topic` field was already present in schema; added to `AssetfilterExample`
+- `PUT /api/v1/sites/{site_id}/devices/{device_id}` (`device_ap` schema):
+  - Added `enable_unii_4` field (boolean, default `false`): enables U-NII-4 channels (169, 173, 177) on the access point
+  - Added `uwb_config` field referencing new `ap_uwb_config` schema: UWB RTLS / OMLOX asset-visibility integration (`enabled`, `type` enum `zigpos`, `slot` 0–15, `host`, `port` 1–65535); device value overrides device profile and site-level setting
+- `deviceprofile_ap` schema: added `uwb_config` field (`ap_uwb_config`); overrides site-level setting, overridden by device-level setting
+- `ap_mqtt` schema: added `default_topic` field (string): catch-all MQTT topic for BLE advertisements matching no AssetFilter
+- `acl_policy` schema: added `disabled` field (boolean, default `false`)
+- `acl_tag_type` schema: added `aruba_user_role` enum value; updated `acl_tag.radius_group` description and `acl_tag_specs` description to include `aruba_user_role`
+- `network_template` schema: added `multicast_config` field referencing new `switch_multicast_config` schema
+- New `switch_multicast_config` schema: `anycast_rp` (boolean, default `false`; auto-generates shared RP on `is_l3_border` devices in ERB/IPClos topologies), `rp_ip` (string; local or static RP address when `anycast_rp`==`false`), `sbd_vlan_id` (integer; SBD VLAN for EVPN eOISM), `sbd_subnet` (string; SBD IRB subnet for per-device IP auto-assignment)
+- `DELETE /api/v1/sites/{site_id}/devices/{device_id}/zigbee_join`: added endpoint to stop allowing new Zigbee end devices to join through the AP
+- `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_kick`: added endpoint to kick one or more Zigbee clients (requires `macs`, non-empty array of EUI-64 MACs); added `utils_zigbee_kick` schema
+- `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_event_trail`: added endpoint to start a Zigbee event trail session (returns `session`)
+- `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_packet_trail`: added endpoint to start a Zigbee packet trail session (returns `session`)
+- Added `zigbee_trail_response` schema and `ZigbeeTrail` response for the Zigbee event/packet trail endpoints
+  - Updated parameter descriptions: `versions`, `models`, `customer_risk` (added enum: `Critical`, `Major`, `Minor`), `id`, `bug_type` (added enum: `Day-1`, `Regression`)
+  - Added missing `text` query parameter: wildcard search across `versions`, `models`, `customer_risk`, `id`, `bug_type`
+  - Added missing `sort` query parameter
+  - Fixed `product_family` field in `jsi_pbn_item` schema: changed type from `string` to array of strings
+  - Added `JsiPbnSearchExample` response example
+  - `severity`: added enum values (`Critical`, `High`, `Low`, `Medium`)
+  - `id`: updated to "JSA number"
+  - `models`: updated to "Models affected by the SIRT"
+  - `versions`: updated to "Software versions affected by the SIRT"
+  - `text`: corrected wildcard search fields to `versions`, `models`, `severity`, `id`
+  - Added `JsiSirtSearchExample` response example
+- `POST /api/v1/orgs/{org_id}/devices/upgrade` (`upgrade_org_devices` schema):
+  - Updated `all_sites` description: clarified that `true` overrides `site_ids`
+  - Added `enable_p2p` field (boolean): for APs only; whether to allow local AP-to-AP firmware upgrade
+  - Updated `p2p_cluster_size` description: for APs only; size to split devices for peer-to-peer download batches; updated example from `0` to `10`
+  - Updated `p2p_parallelism` description: for APs only; if not set, automatically determined based on device count (<=50 uses 1, 51-100 uses 3, >100 uses 10)
+  - Updated `reboot_at` as deprecated; description updated to reference `reboot_datetime`
+  - Updated `reboot_datetime` description: reboot start time in ISO 8601 format; default is `start_datetime`; timezone note added
+  - Updated `start_datetime` description: firmware download start time in ISO 8601 format; default is now; timezone note added
+  - Updated `start_time` as deprecated; description updated to reference `start_datetime`
+  - Marked `strategy` as `deprecated`; description updated to reference `download_strategy` and `reboot_strategy`
+  - Added deprecated `version` field (string): use `versions` instead; accepts specific firmware version, `suggested`, or `alpha`
+  - Added `ssr` to `upgrade_org_devices_version_firmware_type` enum (now: `ap`, `junos`, `ssr`)
+  - Updated `upgrade_org_devices_version.force` description: clarified per-device-type behavior for SSR gateways
+  - Updated `upgrade_org_devices_version.model_version` description: generalized to all device types (previously junos-only)
+- `GET /api/v1/orgs/{org_id}/jsi/inventory/search`:
+  - Added `contract_end_before` query parameter: filter by service contract end date before this date
+  - Added `contract_end_after` query parameter: filter by service contract end date after this date
+  - Added `contract_type` query parameter: filter by contract ID
+  - Added `contract_sku` query parameter: filter by contract SKU
+  - Added `end_of_service_time` query parameter: filter by end of service time
+  - Added `support_contract_status` query parameter: filter by service contract status (`Active`, `Declined`, `EOL`, `Service Available`)
+  - Updated `text` query parameter description: wildcard search now covers `account_id`, `contract_id`, `contract_reseller`, `contract_sku`, `device_name`, `distributor`, `ia_address`, `ia_country`, `ia_region`, `ia_zip_postal`, `model`, `serial`, `sku`, `status`, `suggested_version`, `version`, `warranty`
+  - Added `contract_id` field to `js_inventory_item` schema: unique identifier of the service contract; only returned for claimed devices
+  - Added `contract_sku` field to `js_inventory_item` schema: SKU associated with the service contract; only returned for claimed devices
+  - Added `end_of_service_time` field to `js_inventory_item` schema: end of service epoch timestamp
+  - Added `support_contract_status` field to `js_inventory_item` schema: service contract status (`Active`, `Declined`, `EOL`, `Service Available`); only returned for claimed devices
+  - Updated `JsiInventorySearchExample` to include all response fields including claimed-device fields
+- Site Setting networks (`switch_network` schema): added `multicast` field referencing new `switch_network_multicast` schema (`enabled`, default `false`, enables IGMP snooping on the VLAN; `igmp_version` enum `2`/`3`, default `2`)
+- Site Setting vrf_instances (`switch_vrf_instance` schema): added `multicast_config` field (referencing `switch_multicast_config`) for per-VRF multicast; PIM auto-enabled when any network in the VRF has `multicast.enabled`==`true`
+- Site Setting gateway_mgmt (`gateway_mgmt` schema): added `disable_idp_pcap` field (boolean, default `false`; SRX only, disables IDP packet capture)
+- Site Setting (`site_setting` schema): added `uwb_config` field referencing `ap_uwb_config` schema (site-level UWB RTLS / OMLOX asset-visibility settings; overridden by device profile and device-level settings)
+- Webhooks (`webhook` schema, Org and Site): added `rules` field (referencing new `webhook_rules`/`webhook_rule`/`webhook_rule_matching` schemas) for optional per-topic permit/block filtering with event payload matching, and `default_action` field (referencing new `webhook_action` enum `permit`/`block`, default `permit`) applied when no rule matches
+- `GET /api/v1/sites/{site_id}/stats/devices` (`stats_ap` schema): added `zigbee_stat` field referencing new `stats_ap_zigbee_stat` schema (`num_iotendpoints`, `iotproxy_status`); present only when ZigBee is enabled on the AP
+- `GET /api/v1/sites/{site_id}/stats/clients`, `GET /api/v1/sites/{site_id}/stats/maps/{map_id}/clients`, `GET /api/v1/sites/{site_id}/stats/devices/{device_id}/clients` (`stats_wireless_client` schema): added `mxedge_id` field (Mist Edge the client connection is tunneled through)
+- `GET /api/v1/sites/{site_id}/iotendpoints/count`: added new endpoint to count IoT endpoints (`distinct` enum `site_id`, new `site_iotendpoints_count_distinct` schema)
+- `POST /api/v1/sites/{site_id}/iotendpoints/{id}/zigbee_rejoin`: added new endpoint to trigger a Zigbee endpoint to rejoin the network
+- `GET /api/v1/sites/{site_id}/devices/{device_id}/flow_records/search`: added new endpoint to search network flow records for a switch device (filters `start`, `end`, `limit`, `sort`, `src_ip`, `dst_ip`, `src_port`, `dst_port`, `protocol`, `state`, `direction`, `search_after`); added new `response_device_flow_records_search` and `flow_record` schemas, `DeviceFlowRecordsSearch` response, and `DeviceFlowRecordsSearchExample`
+- `GET /api/v1/sites/{site_id}/stats/analyze_spectrum` (`response_past_spectrum_analysis_result` schema): added `spectrogram_url` field (URL to the generated spectrogram image)
+- `GET /api/v1/const/license_types` (`const_license_type` schema): added `type`, `group`, `enforcement_level` (enum `org`, `site`), and `entitled_licenses` fields
+- `GET /api/v1/sites/{site_id}/stats/calls/troubleshoot`: added `wired` query parameter to filter results by whether the client is wired
+- `GET /api/v1/sites/{site_id}/stats/calls/summary`: added `wired` query parameter to filter results by whether the client is wired
+
 ## [2606.1.1] - 2026-07-10
 - Fixed `site_setting` schema: renamed attribute `mxtunnels` to `mxtunnel`
 
