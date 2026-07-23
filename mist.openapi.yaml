@@ -11510,7 +11510,7 @@ paths:
           examples:
           - '2024-01-01'
           type: string
-      - description: Filter results by contract ID
+      - description: Filter results by contract type
         in: query
         name: contract_type
         schema:
