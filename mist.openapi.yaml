@@ -32421,7 +32421,8 @@ paths:
       description: Count IoT Endpoints
       operationId: countSiteIotEndpoints
       parameters:
-      - description: 'Field used to group this count response. enum: `site_id`'
+      - description: 'Field used to group this count response. enum: `ap_mac`, `mac`,
+          `site_id`, `type`'
         in: query
         name: distinct
         schema:
@@ -99621,9 +99622,12 @@ components:
       type: string
     site_iotendpoints_count_distinct:
       default: site_id
-      description: 'enum: `site_id`'
+      description: 'enum: `ap_mac`, `mac`, `site_id`, `type`'
       enum:
+      - ap_mac
+      - mac
       - site_id
+      - type
       type: string
     site_mxedge_events_count_distinct:
       default: mxedge_id

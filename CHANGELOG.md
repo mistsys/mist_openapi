@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`gw_routing_policy_term_action` schema): added `next_policy`, `next_term`
 - `PUT /api/v1/orgs/{org_id}/psks` and `POST /api/v1/orgs/{org_id}/psks` (`psk` schema): added `usermac_labels` field and `usermac_labels` value to `psk_usage` enum; added `psk_usermac_labels` schema
 - `GET /api/v1/orgs/{org_id}/devices/events/search` and `GET /api/v1/sites/{site_id}/devices/events/search`: added `job_id`, `status`, `template_id`, `tunnel_name` fields to `device_event` schema
+- `GET /api/v1/sites/{site_id}/iotendpoints/count`: added `ap_mac`, `mac`, `type` values to `distinct` query parameter enum (`site_iotendpoints_count_distinct` schema)
 - `GET /api/v1/orgs/{org_id}/devices/events/count`: added `includes` query parameter
 - `GET /api/v1/orgs/{org_id}/mxedges/{mxedge_id}/stats`, `GET /api/v1/sites/{site_id}/mxedges/{mxedge_id}/stats` (`stats_mxedge` schema): added `kernel_abi`, `kernel_version`
 - `GET /api/v1/orgs/{org_id}/stats/tunnels/search` (`stats_mxtunnel` schema): added `start_time`; removed `uptime`, `rx_control_pkts`, `tx_control_pkts`
