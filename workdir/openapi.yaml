@@ -8636,14 +8636,6 @@ paths:
           examples:
           - ext_tunnel
           type: string
-      - description: Filter ext_tunnel events by tunnel provisioning status. Accepts
-          multiple comma-separated values (e.g. `PROVISION_IN_PROGRESS,PROVISIONED`)
-        in: query
-        name: status
-        schema:
-          examples:
-          - PROVISION_IN_PROGRESS,PROVISIONED
-          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
@@ -8727,14 +8719,6 @@ paths:
         schema:
           examples:
           - ext_tunnel
-          type: string
-      - description: Filter ext_tunnel events by tunnel provisioning status (e.g.
-          `PROVISION_IN_PROGRESS`)
-        in: query
-        name: status
-        schema:
-          examples:
-          - PROVISION_IN_PROGRESS
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -11523,12 +11507,11 @@ paths:
         name: end_of_service_time
         schema:
           type: string
-      - description: 'Filter results by service contract status. enum: `Active`, `Declined`,
-          `EOL`, `Service Available`'
+      - description: Filter results by service contract status
         in: query
         name: support_contract_status
         schema:
-          type: string
+          $ref: '#/components/schemas/support_contract_status'
       - description: Indicates if the device is covered under active support contract.
           Accepts multiple comma-separated boolean values.
         in: query
@@ -11645,11 +11628,11 @@ paths:
           examples:
           - '1403338'
           type: string
-      - description: 'Filter results by bug type. enum: `Day-1`, `Regression`'
+      - description: Filter results by bug type
         in: query
         name: bug_type
         schema:
-          type: string
+          $ref: '#/components/schemas/jsi_pbn_bug_type'
       - description: Wildcard search across `versions`, `models`, `customer_risk`,
           `id`, `bug_type`
         in: query
@@ -11720,12 +11703,11 @@ paths:
         models, versions, and text fields.
       operationId: searchOrgJsiSirt
       parameters:
-      - description: 'Filter results by SIRT severity. enum: `Critical`, `High`, `Low`,
-          `Medium`'
+      - description: Filter results by SIRT severity
         in: query
         name: severity
         schema:
-          type: string
+          $ref: '#/components/schemas/jsi_sirt_severity'
       - description: JSA number
         in: query
         name: id
@@ -14160,7 +14142,7 @@ paths:
         name: edr_managed
         schema:
           type: boolean
-      - description: 'EDR provider of the client''s organisation. enum: `crowdstrike`,
+      - description: 'EDR provider of the client''s organization. enum: `crowdstrike`,
           `sentinelone`'
         in: query
         name: edr_providers
@@ -27754,14 +27736,6 @@ paths:
           examples:
           - ext_tunnel
           type: string
-      - description: Filter ext_tunnel events by tunnel provisioning status (e.g.
-          `PROVISION_IN_PROGRESS`)
-        in: query
-        name: status
-        schema:
-          examples:
-          - PROVISION_IN_PROGRESS
-          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -32533,7 +32507,8 @@ paths:
   /api/v1/sites/{site_id}/iotendpoints/{id}/zigbee_rejoin:
     parameters:
     - $ref: '#/components/parameters/site_id'
-    - in: path
+    - description: ID of the IoT Endpoint
+      in: path
       name: id
       required: true
       schema:
@@ -34492,7 +34467,7 @@ paths:
         name: mdm_compliance_status
         schema:
           type: string
-      - description: "MDM provider of client\u2019s organisation eg \"intune\", \"\
+      - description: "MDM provider of client\u2019s organization eg \"intune\", \"\
           jamf\""
         in: query
         name: mdm_provider
@@ -70222,11 +70197,13 @@ components:
           minimum: 0
           type: integer
         type:
-          description: 'UWB integration type. enum: `zigpos`'
-          enum:
-          - zigpos
-          type: string
+          $ref: '#/components/schemas/ap_uwb_config_type'
       type: object
+    ap_uwb_config_type:
+      description: 'UWB integration type. enum: `zigpos`'
+      enum:
+      - zigpos
+      type: string
     ap_zigbee:
       additionalProperties: false
       description: Zigbee radio and network settings applied to an AP or AP profile
@@ -78540,11 +78517,7 @@ components:
           description: MAC address of the device
           type: string
         direction:
-          description: 'Flow direction. enum: `egress`, `ingress`'
-          enum:
-          - egress
-          - ingress
-          type: string
+          $ref: '#/components/schemas/flow_record_direction'
         dst_ip:
           description: Destination IP address
           type: string
@@ -78588,11 +78561,7 @@ components:
           format: int64
           type: integer
         state:
-          description: 'Flow state. enum: `active`, `aged-out`'
-          enum:
-          - active
-          - aged-out
-          type: string
+          $ref: '#/components/schemas/flow_record_state'
         timestamp:
           description: Epoch time (in seconds) when the flow record was last updated
             or completed
@@ -78607,6 +78576,18 @@ components:
           format: int64
           type: integer
       type: object
+    flow_record_direction:
+      description: 'Flow direction. enum: `egress`, `ingress`'
+      enum:
+      - egress
+      - ingress
+      type: string
+    flow_record_state:
+      description: 'Flow state. enum: `active`, `aged-out`'
+      enum:
+      - active
+      - aged-out
+      type: string
     for_site:
       description: 'enum: `any`, `true`, `false`'
       enum:
@@ -81889,9 +81870,9 @@ components:
           description: Recommended software version for the device
           type: string
         support_contract_status:
-          description: 'Service contract status; only returned for onboarded (claimed)
-            devices. enum: `Active`, `Declined`, `EOL`, `Service Available`'
-          type: string
+          $ref: '#/components/schemas/support_contract_status'
+          description: Service contract status; only returned for onboarded (claimed)
+            devices
         type:
           $ref: '#/components/schemas/device_type'
           description: Device category for the inventory item
@@ -81991,13 +81972,18 @@ components:
       - version
       - warranty_type
       type: string
+    jsi_pbn_bug_type:
+      description: 'Type of the bug. enum: `Day-1`, `Regression`'
+      enum:
+      - Day-1
+      - Regression
+      type: string
     jsi_pbn_item:
       additionalProperties: false
       description: PBN (Problem Bug Notification) advisory item
       properties:
         bug_type:
-          description: Type of the bug (Day-1, Regression)
-          type: string
+          $ref: '#/components/schemas/jsi_pbn_bug_type'
         customer_risk:
           description: Customer impact risk level for the PBN advisory
           type: string
@@ -82100,8 +82086,7 @@ components:
           description: Release notes if any
           type: string
         severity:
-          description: Security severity assigned to the SIRT advisory
-          type: string
+          $ref: '#/components/schemas/jsi_sirt_severity'
         solution:
           description: Recommended fix or remediation for the security issue
           type: string
@@ -82146,6 +82131,15 @@ components:
           description: Count of SIRT advisories matching the search
           type: integer
       type: object
+    jsi_sirt_severity:
+      description: 'Security severity assigned to the SIRT advisory. enum: `Critical`,
+        `High`, `Low`, `Medium`'
+      enum:
+      - Critical
+      - High
+      - Low
+      - Medium
+      type: string
     jsi_warranty_type:
       description: 'Warranty type label for Juniper Support Insight (JSI) devices.
         enum: `Standard Hardware Warranty`, `Enhanced Hardware Warranty`, `Dead On
@@ -88081,15 +88075,14 @@ components:
       type: string
     org_devices_events_count_distinct:
       default: model
-      description: 'enum: `ap`, `apfw`, `model`, `org_id`, `site_id`, `status`, `text`,
-        `timestamp`, `type`'
+      description: 'enum: `ap`, `apfw`, `model`, `org_id`, `site_id`, `text`, `timestamp`,
+        `type`'
       enum:
       - ap
       - apfw
       - model
       - org_id
       - site_id
-      - status
       - text
       - timestamp
       - type
@@ -110159,6 +110152,15 @@ components:
         type: string
       type: array
       uniqueItems: true
+    support_contract_status:
+      description: 'Service contract status. enum: `Active`, `Declined`, `EOL`, `Service
+        Available`'
+      enum:
+      - Active
+      - Declined
+      - EOL
+      - Service Available
+      type: string
     suppressed_alarm:
       description: Request body for suppressing organization alarms
       properties:
