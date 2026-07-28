@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2607.1.0] - 2026-07-21
+
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting_api_policy` schema): added `enforce_src_ips_for_tokens`
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting` schema): added `cacerts_configs`; removed `cradlepoint`; removed `org_setting_cradlepoint` schema
+- Added `org_setting_cacerts_config` and `org_setting_cacerts_configs` schemas
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting_mist_nac` schema): added `enable_eap_md5_for_mab`
+- `GET /api/v1/orgs/{org_id}/setting/cradlepoint/setup` (`test_cradlepoint` schema): added `alert_config_id`, `cp_api_id`, `cp_api_key`, `destination_config_id`, `ecm_api_id`, `ecm_api_key`, `enable_lldp`, `shared_secret`
+- `GET/PUT/DELETE /api/v1/orgs/{org_id}/rftemplates/{rftemplate_id}` (`rf_template` schema): added `enable_unii_4`
+- `POST /api/v1/orgs/{org_id}/networktemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/networktemplates/{networktemplate_id}` (`snmpv3_config_notify_filter_item` schema): added `categories`; added `snmpv3_config_notify_filter_item_categories` schema
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`gateway_wan_probe_override` schema): added `hostnames`, `http`; added `gateway_wan_probe_override_http` schema
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`tunnel_config_node` schema): added `internal_ip6s`, `probe_hostnames`, `probe_http`, `probe_ip6s`; added `tunnel_config_node_probe_http` schema
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT/DELETE /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`gw_routing_policy_term_action` schema): added `next_policy`, `next_term`
+- `PUT /api/v1/orgs/{org_id}/psks` and `POST /api/v1/orgs/{org_id}/psks` (`psk` schema): added `usermac_labels` field and `usermac_labels` value to `psk_usage` enum; added `psk_usermac_labels` schema
+- `GET /api/v1/orgs/{org_id}/devices/events/search` and `GET /api/v1/sites/{site_id}/devices/events/search`: added `job_id`, `status`, `template_id`, `tunnel_name` fields to `device_event` schema
+- `GET /api/v1/sites/{site_id}/iotendpoints/count`: added `ap_mac`, `mac`, `type` values to `distinct` query parameter enum (`site_iotendpoints_count_distinct` schema)
+- `GET /api/v1/orgs/{org_id}/devices/events/count`: added `includes` query parameter
+- `GET /api/v1/orgs/{org_id}/mxedges/{mxedge_id}/stats`, `GET /api/v1/sites/{site_id}/mxedges/{mxedge_id}/stats` (`stats_mxedge` schema): added `kernel_abi`, `kernel_version`
+- `GET /api/v1/orgs/{org_id}/stats/tunnels/search` (`stats_mxtunnel` schema): added `start_time`; removed `uptime`, `rx_control_pkts`, `tx_control_pkts`
+- Added `GET /api/v1/orgs/{org_id}/aoscx/register_cmd` (replaces `aos/register_cmd`); added `aoscx_register_cmd` schema
+- Removed `GET /api/v1/orgs/{org_id}/aos/register_cmd`
+- `POST /api/v1/orgs/{org_id}/ssr/upgrade` and `POST /api/v1/sites/{site_id}/devices/{device_id}/upgrade` (`ssr_upgrade`, `ssr_upgrade_multi` schemas): added `force`
+- `GET /api/v1/orgs/{org_id}/ssr/upgrade` and `GET /api/v1/orgs/{org_id}/ssr/upgrade/{upgrade_id}` (`response_ssr_upgrade`, `response_ssr_upgrade_status` schemas): added `force`; added `strategy` to `response_ssr_upgrade_status`
+- `GET /api/v1/orgs/{org_id}/nac_clients/search`: renamed `edr_provider` → `edr_providers` query parameter
+- `GET /api/v1/orgs/{org_id}/nac_clients/count`: renamed `distinct` enum value `edr_provider` → `edr_providers`
+- `client_nac` schema: renamed `edr_provider` → `edr_providers` (array); `edr_status` now array
+- `org_nac_clients_count_distinct` schema: renamed enum value `edr_provider` → `edr_providers`
+- `user_mac` schema: added `site_ids`
+- `GET /api/v1/const/marvisclient_events`: added new endpoint; added `const_marvisclient_event`, `const_marvisclient_events` schemas, `ConstMarvisClientEvents` response
+- `nac_portal` schema: added `enable_location`
+- `wlan_dynamic_psk` schema: added `local_vlan_ids`
+- `PUT /api/v1/sites/{site_id}/devices/{device_id}` (`device_ap` schema): added `enable_unii_4`, `uwb_config`; added `ap_uwb_config` schema
+- `deviceprofile_ap` schema: added `uwb_config`
+- `ap_mqtt` schema: added `default_topic`
+- `acl_policy` schema: added `disabled`
+- `acl_tag_type` schema: added `aruba_user_role` enum value
+- `network_template` schema: added `multicast_config`; added `switch_multicast_config` schema (`anycast_rp`, `rp_ip`, `sbd_vlan_id`, `sbd_subnet`)
+- Added `DELETE /api/v1/sites/{site_id}/devices/{device_id}/zigbee_join`
+- Added `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_kick`; added `utils_zigbee_kick` schema
+- Added `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_event_trail`
+- Added `POST /api/v1/sites/{site_id}/devices/{device_id}/zigbee_packet_trail`
+- Added `zigbee_trail_response` schema and `ZigbeeTrail` response
+- `GET /api/v1/orgs/{org_id}/jsi/pbn/search`: added `text`, `sort` query parameters; added enum values to `customer_risk`, `bug_type`; changed `jsi_pbn_item.product_family` to array; added `JsiPbnSearchExample`
+- `GET /api/v1/orgs/{org_id}/jsi/sirt/search`: added enum values to `severity`; added `JsiSirtSearchExample`
+- `POST /api/v1/orgs/{org_id}/devices/upgrade` (`upgrade_org_devices` schema): added `enable_p2p`, `version` (deprecated); added `ssr` to `upgrade_org_devices_version_firmware_type` enum
+- `GET /api/v1/orgs/{org_id}/jsi/inventory/search`: added `contract_end_before`, `contract_end_after`, `contract_type`, `contract_sku`, `end_of_service_time`, `support_contract_status` query parameters; added `contract_id`, `contract_sku`, `end_of_service_time`, `support_contract_status` fields to `js_inventory_item` schema
+- Site Setting networks (`switch_network` schema): added `multicast`; added `switch_network_multicast` schema
+- Site Setting vrf_instances (`switch_vrf_instance` schema): added `multicast_config`
+- Site Setting gateway_mgmt (`gateway_mgmt` schema): added `disable_idp_pcap`
+- Site Setting (`site_setting` schema): added `uwb_config`
+- Webhooks (`webhook` schema, Org and Site): added `rules`, `default_action`; added `webhook_rules`, `webhook_rule`, `webhook_rule_matching`, `webhook_action` schemas
+- `GET /api/v1/sites/{site_id}/stats/devices` (`stats_ap` schema): added `zigbee_stat`; added `stats_ap_zigbee_stat` schema
+- `GET /api/v1/sites/{site_id}/stats/clients`, `GET /api/v1/sites/{site_id}/stats/maps/{map_id}/clients`, `GET /api/v1/sites/{site_id}/stats/devices/{device_id}/clients` (`stats_wireless_client` schema): added `mxedge_id`
+- Added `GET /api/v1/sites/{site_id}/iotendpoints/count`; added `site_iotendpoints_count_distinct` schema
+- Added `POST /api/v1/sites/{site_id}/iotendpoints/{id}/zigbee_rejoin`
+- Added `GET /api/v1/sites/{site_id}/devices/{device_id}/flow_records/search`; added `response_device_flow_records_search`, `flow_record` schemas, `DeviceFlowRecordsSearch` response, `DeviceFlowRecordsSearchExample`
+- `GET /api/v1/sites/{site_id}/stats/analyze_spectrum` (`response_past_spectrum_analysis_result` schema): added `spectrogram_url`
+- `GET /api/v1/const/license_types` (`const_license_type` schema): added `type`, `group`, `enforcement_level`, `entitled_licenses`
+- `GET /api/v1/sites/{site_id}/stats/calls/troubleshoot`: added `wired` query parameter
+- `GET /api/v1/sites/{site_id}/stats/calls/summary`: added `wired` query parameter
+
 ## [2606.1.1] - 2026-07-10
 - Fixed `site_setting` schema: renamed attribute `mxtunnels` to `mxtunnel`
 
