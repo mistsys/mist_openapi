@@ -3203,8 +3203,8 @@ paths:
     - in: path
       name: provider
       required: true
+      description: Oauth2 provider name
       schema:
-        description: Oauth2 provider name
         examples:
         - google
         type: string
