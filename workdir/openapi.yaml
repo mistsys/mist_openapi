@@ -114516,6 +114516,18 @@ components:
       - starting
       - success
       type: string
+    upgrade_org_devices_strategy:
+          default: big_bang
+          enum:
+          - big_bang
+          - canary
+          - rrm
+          - serial
+          type: string
+          deprecated: true
+          description: Deprecated; use `download_strategy` and `reboot_strategy` instead.
+            `big_bang` (upgrade all at once, no orchestration), `serial` (one at a
+            time), `canary`, or `rrm` (AP only); default is big_bang
     upgrade_org_devices:
       description: Organization-wide device upgrade request
       properties:
@@ -114624,11 +114636,7 @@ components:
           - 1624399840
           type: integer
         strategy:
-          $ref: '#/components/schemas/upgrade_device_strategy'
-          deprecated: true
-          description: Deprecated; use `download_strategy` and `reboot_strategy` instead.
-            `big_bang` (upgrade all at once, no orchestration), `serial` (one at a
-            time), `canary`, or `rrm` (AP only); default is big_bang
+          $ref: '#/components/schemas/upgrade_org_devices_strategy'
         version:
           deprecated: true
           description: Deprecated; use `versions` instead. Specific firmware version,
