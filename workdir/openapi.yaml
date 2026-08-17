@@ -70873,11 +70873,7 @@ components:
           $ref: '#/components/schemas/time_of_day'
           description: Scheduled time of day for auto preemption
       type: object
-    autoplacement_localization_selector:
-      description: Request body to apply or clear cached autoplacement or auto-orientation
-        values for a map or subset of APs
-      properties:
-        for:
+    autoplacement_localization_selector_for:
           default: placement
           description: 'The selector to choose auto placement or auto orientation.
             enum: `orientation`, `placement`'
@@ -70885,6 +70881,12 @@ components:
           - orientation
           - placement
           type: string
+    autoplacement_localization_selector:
+      description: Request body to apply or clear cached autoplacement or auto-orientation
+        values for a map or subset of APs
+      properties:
+        for:
+          $ref: '#/components/schemas/autoplacement_localization_selector_for'
         macs:
           description: List of AP MAC addresses to apply the action to. If omitted,
             the action applies to all APs on the map
@@ -74852,6 +74854,12 @@ components:
       items:
         $ref: '#/components/schemas/const_language'
       type: array
+    const_license_type_enforcement_level:
+          description: "Level at which the license is enforced. enum: `org`, `site`."
+          enum:
+          - org
+          - site
+          type: string
     const_license_type:
       additionalProperties: false
       description: License type definition returned by the constants API
@@ -74862,11 +74870,7 @@ components:
           - Wired Assurance 12
           type: string
         enforcement_level:
-          description: "Level at which the license is enforced. enum: `org`, `site`."
-          enum:
-          - org
-          - site
-          type: string
+          $ref: '#/components/schemas/const_license_type_enforcement_level'
         entitled_licenses:
           description: License type keys this license type entitles
           examples:
@@ -84215,6 +84219,11 @@ components:
           description: Total number of matching results
           type: integer
       type: object
+    marvis_config_feedback_type:
+          description: 'Feedback type. enum: `invalid`'
+          enum:
+          - invalid
+          type: string
     marvis_config_feedback:
       additionalProperties: false
       description: Feedback submission for a Marvis config action
@@ -84223,10 +84232,7 @@ components:
           description: Free-text note about the feedback
           type: string
         type:
-          description: 'Feedback type. enum: `invalid`'
-          enum:
-          - invalid
-          type: string
+            $ref: '#/components/schemas/marvis_config_feedback_type'
       type: object
     marvis_config_feedback_response:
       additionalProperties: false
@@ -111026,6 +111032,13 @@ components:
       required:
       - vlan_id
       type: object
+    switch_network_multicast_igmp_version:
+          default: '2'
+          description: IGMP version. '2' (default, ASM/IGMPv2) / '3' (SSM/IGMPv3)
+          enum:
+          - '2'
+          - '3'
+          type: string
     switch_network_multicast:
       additionalProperties: false
       description: Multicast settings for a switch network (VLAN)
@@ -111035,12 +111048,7 @@ components:
           description: Whether to enable IGMP snooping on this VLAN
           type: boolean
         igmp_version:
-          default: '2'
-          description: IGMP version. '2' (default, ASM/IGMPv2) / '3' (SSM/IGMPv3)
-          enum:
-          - '2'
-          - '3'
-          type: string
+          $ref: '#/components/schemas/switch_network_multicast_igmp_version'
       type: object
     switch_networks:
       additionalProperties:
