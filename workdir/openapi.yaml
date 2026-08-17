@@ -11418,16 +11418,12 @@ paths:
         name: status
         schema:
           $ref: '#/components/schemas/device_status'
-      - description: 'Device warranty type used to filter Juniper Support Insight
-          inventory. enum: `Standard Hardware Warranty`, `Enhanced Hardware Warranty`,
-          `Dead On Arrival Warranty`, `Limited Lifetime Warranty`, `Software Warranty`,
-          `Limited Lifetime Warranty for WLA`, `Warranty-JCPO EOL (DOA Not Included)`,
-          `MIST Enhanced Hardware Warranty`, `MIST Standard Warranty`, `Determine
-          Lifetime warranty`'
+      - description: Device warranty type used to filter Juniper Support Insight
+          inventory
         in: query
         name: warranty_type
         schema:
-          $ref: '#/components/schemas/jsi_warranty_type'
+          type: string
       - description: Filter devices with End Of Sale date after this date
         in: query
         name: end_of_sale_after
@@ -81988,8 +81984,8 @@ components:
           description: Timestamp when warranty needs to be renewed
           type: integer
         warranty_type:
-          $ref: '#/components/schemas/jsi_warranty_type'
-          description: "Warranty category reported for the device. enum: `Standard Hardware Warranty`, `Enhanced Hardware Warranty`, `Dead On Arrival Warranty`, `Limited Lifetime Warranty`, `Software Warranty`, `Limited Lifetime Warranty for WLA`, `Warranty-JCPO EOL (DOA Not Included)`, `MIST Enhanced Hardware Warranty`, `MIST Standard Warranty`, `Determine Lifetime warranty`."
+          type: string
+          description: Warranty category reported for the device
       type: object
     js_inventory_search:
       additionalProperties: false
@@ -82224,25 +82220,6 @@ components:
       - High
       - Low
       - Medium
-      type: string
-    jsi_warranty_type:
-      description: 'Warranty type label for Juniper Support Insight (JSI) devices.
-        enum: `Standard Hardware Warranty`, `Enhanced Hardware Warranty`, `Dead On
-        Arrival Warranty`, `Limited Lifetime Warranty`, `Software Warranty`, `Limited
-        Lifetime Warranty for WLA`, `Warranty-JCPO EOL (DOA Not Included)`, `MIST
-        Enhanced Hardware Warranty`, `MIST Standard Warranty`, `Determine Lifetime
-        warranty`'
-      enum:
-      - Standard Hardware Warranty
-      - Enhanced Hardware Warranty
-      - Dead On Arrival Warranty
-      - Limited Lifetime Warranty
-      - Software Warranty
-      - Limited Lifetime Warranty for WLA
-      - Warranty-JCPO EOL (DOA Not Included)
-      - MIST Enhanced Hardware Warranty
-      - MIST Standard Warranty
-      - Determine Lifetime warranty
       type: string
     juniper_account:
       additionalProperties: false
