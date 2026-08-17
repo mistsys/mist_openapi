@@ -93544,6 +93544,11 @@ components:
       items:
         $ref: '#/components/schemas/org_event'
       type: array
+    response_events_other_devices_search_results:
+      description: Other-device event records returned by a search response
+      items:
+        $ref: '#/components/schemas/event_otherdevice'
+      type: array
     response_events_other_devices_search:
       additionalProperties: false
       description: Paginated response for other-device event search results
@@ -93561,8 +93566,8 @@ components:
             event records
           type: string
         results:
-          $ref: '#/components/schemas/event_otherdevice'
-          description: Other-device event data matching the search filters
+          $ref: '#/components/schemas/response_events_other_devices_search_results'
+          description: list of other-device event records matching the search filters
         start:
           description: Epoch timestamp for the start of the other-device event search
             window
@@ -98184,6 +98189,11 @@ components:
       items:
         $ref: '#/components/schemas/sdktemplate'
       type: array
+    search_events_wan_client_results:
+      description: WAN client event result data returned by a search response
+      items:
+        $ref: '#/components/schemas/events_client_wan'
+      type: array
     search_events_wan_client:
       additionalProperties: false
       description: Paginated response for WAN client event searches
@@ -98201,8 +98211,8 @@ components:
             results are available
           type: string
         results:
-          $ref: '#/components/schemas/events_client_wan'
-          description: WAN client event result data returned by the search response
+          $ref: '#/components/schemas/search_events_wan_client_results'
+          description: List of WAN client event result data returned by the search response
         start:
           description: Lower bound timestamp of the WAN client event search window,
             in epoch seconds
