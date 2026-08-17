@@ -50403,15 +50403,15 @@ components:
         end: 0
         limit: 0
         results:
-          device_mac: string
-          mac: 5c5b351e13b5
-          org_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862a
-          site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
-          text: 'Plugged: The Internal 5GB (SIM1) has been inserted into Internal
-            1.'
-          timestamp: 547235620.89
-          type: CELLULAR_EDGE_MODEM_WAN_PLUGGED
-          vendor: cradlepoint
+          - device_mac: string
+            mac: 5c5b351e13b5
+            org_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862a
+            site_id: 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+            text: 'Plugged: The Internal 5GB (SIM1) has been inserted into Internal
+              1.'
+            timestamp: 547235620.89
+            type: CELLULAR_EDGE_MODEM_WAN_PLUGGED
+            vendor: cradlepoint
         start: 0
         total: 0
     EventsSearchExample:
@@ -56426,7 +56426,7 @@ components:
         classifier: ''
         end: 1668760746
         failure: ''
-        limit: '1000'
+        limit: 1000
         metric: application_health
         page: 1
         start: 1668121200
@@ -58362,14 +58362,14 @@ components:
         end: 0
         limit: 0
         results:
-          When: 2022-12-31 23:59:59.293000+00:00
-          ev_type: CLIENT_IP_ASSIGNED
-          metadata: {}
-          org_id: b0b9f142-aaba-11e6-aafc-0242ac110002
-          random_mac: true
-          site_id: fc656275-b157-43fd-b922-5f4f341c19bf
-          text: DHCP Ack IP 192.168.88.216
-          wcid: 62bbfb75-10d8-49d1-dec7-d2df91624287
+          - When: 2022-12-31 23:59:59.293000+00:00
+            ev_type: CLIENT_IP_ASSIGNED
+            metadata: {}
+            org_id: b0b9f142-aaba-11e6-aafc-0242ac110002
+            random_mac: true
+            site_id: fc656275-b157-43fd-b922-5f4f341c19bf
+            text: DHCP Ack IP 192.168.88.216
+            wcid: 62bbfb75-10d8-49d1-dec7-d2df91624287
         start: 0
         total: 0
     WanClientsSearchExample:
