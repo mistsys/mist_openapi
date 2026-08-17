@@ -91895,6 +91895,7 @@ components:
           examples:
           - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
           type: string
+          format: uuid
         tunterm_port_config:
           $ref: '#/components/schemas/tunterm_port_config'
           description: Tunnel termination Ethernet port configuration for a Mist Edge
@@ -95108,6 +95109,7 @@ components:
           type:
           - string
           - 'null'
+          format: uuid
         termination_reason:
           description: Reason the packet capture session ended
           examples:
@@ -95224,6 +95226,7 @@ components:
           type: boolean
         site_id:
           description: Site associated with the packet capture session, when site-scoped
+          format: uuid
           type:
           - string
           - 'null'
