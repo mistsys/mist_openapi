@@ -85621,9 +85621,9 @@ components:
       description: IGMP snooping settings for Mist Tunnel VLANs
       properties:
         enabled:
-          anyOf:
-          - type: boolean
-          - type: string
+          type:
+          - boolean
+          - string
           default: false
           description: Whether IGMP snooping is enabled for the configured VLANs
         querier:
