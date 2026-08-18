@@ -9,6 +9,28 @@
                         "no-ambiguous-path"
                     ]
                 }
+            },
+            "openapi-v3-docsgen-linting": {
+                "Rules": {
+                    "Skip": [
+                        "schema-description-exists",
+                        "schema-example-or-default-value-exists",
+                        "example-summary-or-description-exists",
+                        "mediaType-example-or-examples-exist",
+                        "parameter-example-or-examples-exist",
+                        "request-body-description-exists"
+                    ]
+                }
+            },
+            "openapi-v3-agentic-tools-linting": {
+                "Rules": {
+                    "Skip": [
+                        "required-description-for-enum-item",
+                        "required-schema-description",
+                        "required-environment-information",
+                        "at-least-one-parameter-example"
+                    ]
+                }
             }
         }
     }
