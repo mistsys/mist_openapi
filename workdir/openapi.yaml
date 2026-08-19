@@ -114991,7 +114991,7 @@ components:
           - 1624399840
           type: integer
         strategy:
-          $ref: '#/components/schemas/upgrade_org_devices_strategy'
+          $ref: '#/components/schemas/upgrade_device_strategy_deprecated'
         version:
           deprecated: true
           description: Deprecated; use `versions` instead. Specific firmware version,
@@ -115057,7 +115057,7 @@ components:
         format: uuid
         type: string
       type: array
-    upgrade_org_devices_strategy:
+    upgrade_device_strategy_deprecated:
       default: big_bang
       deprecated: true
       description: Deprecated; use `download_strategy` and `reboot_strategy` instead.
