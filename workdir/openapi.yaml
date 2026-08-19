@@ -114708,6 +114708,18 @@ components:
       - rrm
       - serial
       type: string
+    upgrade_device_strategy_deprecated:
+      default: big_bang
+      deprecated: true
+      description: Deprecated; use `download_strategy` and `reboot_strategy` instead.
+        `big_bang` (upgrade all at once, no orchestration), `serial` (one at a time),
+        `canary`, or `rrm` (AP only); default is big_bang
+      enum:
+      - big_bang
+      - canary
+      - rrm
+      - serial
+      type: string
     upgrade_devices_max_failure_percentage:
       default: 5
       description: If `strategy`!=`big_bang`. percentage of failures allowed across
@@ -115057,18 +115069,6 @@ components:
         format: uuid
         type: string
       type: array
-    upgrade_device_strategy_deprecated:
-      default: big_bang
-      deprecated: true
-      description: Deprecated; use `download_strategy` and `reboot_strategy` instead.
-        `big_bang` (upgrade all at once, no orchestration), `serial` (one at a time),
-        `canary`, or `rrm` (AP only); default is big_bang
-      enum:
-      - big_bang
-      - canary
-      - rrm
-      - serial
-      type: string
     upgrade_org_devices_upgrade:
       additionalProperties: false
       description: Upgrade entry for a single site within an organization upgrade
