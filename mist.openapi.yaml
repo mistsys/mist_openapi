@@ -84911,7 +84911,9 @@ components:
             enum: `ordered`, `shuffle`, `shuffle-by-site`.'
         tunterm_monitoring:
           $ref: '#/components/schemas/mxcluster_tunterm_monitoring'
-          description: Monitoring checks for tunnel termination reachability
+          description: Monitoring checks for tunnel termination reachability. Only
+            for Org Mist Edges; use `tunterm_monitoring` in the `site_setting` for
+            site-scoped Mist Edges
         tunterm_monitoring_disabled:
           description: Whether tunnel termination monitoring is disabled for the cluster
           type: boolean
@@ -100698,7 +100700,8 @@ components:
           type: boolean
         tunterm_monitoring:
           $ref: '#/components/schemas/tunterm_monitoring'
-          description: Tunnel termination monitoring settings for the site
+          description: Tunnel termination monitoring settings for the Mist Edges assigned
+            to the site
         tunterm_monitoring_disabled:
           default: false
           description: Whether tunnel termination monitoring is disabled for the site
