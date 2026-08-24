@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2607.1.1] - 2026-08-17
+
+- `GET /api/v1/orgs/{org_id}/jsi/inventory/search` (`warranty_type` query parameter and `js_inventory_item.warranty_type`): changed from a fixed enum to a string to support all warranty values returned by Juniper Support Insight.
+- `GET /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/impacted-applications`, `GET /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/impacted-aps`, and `GET /api/v1/sites/{site_id}/sle/{scope}/{scope_id}/metric/{metric}/impacted-users`: response `limit` fields are now integers.
+
 ## [2607.1.0] - 2026-07-21
 
 - `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting_api_policy` schema): added `enforce_src_ips_for_tokens`
