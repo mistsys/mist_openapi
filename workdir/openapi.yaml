@@ -7341,6 +7341,97 @@ paths:
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
+      - description: Filter results by RADIUS authentication server IP
+        in: query
+        name: auth_server
+        schema:
+          type: string
+      - description: Filter results by 802.1X authorization reason code
+        in: query
+        name: authorization_reason_code
+        schema:
+          type: string
+      - description: Filter results by BSS MAC address
+        in: query
+        name: bssid
+        schema:
+          type: string
+      - description: Filter results by radio channel
+        in: query
+        name: channel
+        schema:
+          type: integer
+      - description: Filter results by DHCP server IP
+        in: query
+        name: dhcp_server
+        schema:
+          type: string
+      - description: Filter results by DNS server IP
+        in: query
+        name: dns_server
+        schema:
+          type: string
+      - description: Filter results by gateway IP
+        in: query
+        name: gateway
+        schema:
+          type: string
+      - description: Time bucket interval for aggregation
+        in: query
+        name: interval
+        schema:
+          type: string
+      - description: Filter results by client IP address
+        in: query
+        name: ip
+        schema:
+          type: string
+      - description: Filter results by key management type
+        in: query
+        name: key_mgmt
+        schema:
+          type: string
+      - description: Filter results by client MAC address
+        in: query
+        name: mac
+        schema:
+          type: string
+      - description: Filter results by NAC rule identifier
+        in: query
+        name: nacrule_id
+        schema:
+          type: string
+      - description: Filter results by randomized MAC address flag
+        in: query
+        name: random_mac
+        schema:
+          type: boolean
+      - description: Filter results by status code
+        in: query
+        name: status_code
+        schema:
+          type: integer
+      - description: Filter results by full-text search
+        in: query
+        name: text
+        schema:
+          type: string
+      - description: Filter results by event type code
+        in: query
+        name: type_code
+        schema:
+          type: integer
+      - description: Filter results by VLAN identifier
+        in: query
+        name: vlan
+        schema:
+          type: integer
+      - description: Sort results by field name
+        in: query
+        name: sort
+        schema:
+          type: string
+      - $ref: '#/components/parameters/search_after'
       - $ref: '#/components/parameters/limit'
       responses:
         '200':
@@ -10167,6 +10258,87 @@ paths:
           examples:
           - Guest
           type: string
+      - description: Filter results by access code email
+        in: query
+        name: access_code_email
+        schema:
+          type: string
+      - description: Filter results by AP MAC address
+        in: query
+        name: ap
+        schema:
+          type: string
+      - description: Filter results by mobile carrier
+        in: query
+        name: carrier
+        schema:
+          type: string
+      - description: Filter results by client MAC address
+        in: query
+        name: client
+        schema:
+          type: string
+      - description: Filter results by company name
+        in: query
+        name: company
+        schema:
+          type: string
+      - description: Filter to cross-site guest records
+        in: query
+        name: cross_site
+        schema:
+          type: boolean
+      - description: Filter results by email address
+        in: query
+        name: email
+        schema:
+          type: string
+      - description: Filter results by custom portal field 1
+        in: query
+        name: field1
+        schema:
+          type: string
+      - description: Filter results by custom portal field 2
+        in: query
+        name: field2
+        schema:
+          type: string
+      - description: Filter results by custom portal field 3
+        in: query
+        name: field3
+        schema:
+          type: string
+      - description: Filter results by custom portal field 4
+        in: query
+        name: field4
+        schema:
+          type: string
+      - description: Filter results by mobile number
+        in: query
+        name: mobile
+        schema:
+          type: string
+      - description: Filter results by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter results by randomized MAC address flag
+        in: query
+        name: random_mac
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/search_after'
+      - description: Filter results by site identifier
+        in: query
+        name: site_id
+        schema:
+          type: string
+      - description: Filter results by SMS gateway
+        in: query
+        name: sms_gateway
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -10766,6 +10938,74 @@ paths:
         name: status
         schema:
           $ref: '#/components/schemas/device_status_filter'
+      - description: Filter results by disconnected timestamp. Devices last disconnected
+          before this time are returned
+        in: query
+        name: disconnected_before
+        schema:
+          type: string
+      - description: Comma-separated list of fields to return in the response
+        in: query
+        name: fields
+        schema:
+          type: string
+      - description: Filter results by MAC address or member MAC addresses
+        in: query
+        name: mac
+        schema:
+          type: string
+      - description: Filter results by device claim code (magic)
+        in: query
+        name: magic
+        schema:
+          type: string
+      - description: Filter results to master devices only
+        in: query
+        name: master
+        schema:
+          type: boolean
+      - description: Filter results by last name change timestamp. Devices modified
+          after this time are returned
+        in: query
+        name: modified_after
+        schema:
+          type: string
+      - description: Filter results by device name (partial match)
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter results by serial number
+        in: query
+        name: serial
+        schema:
+          type: string
+      - description: Filter results by SKU. Accepts multiple comma-separated values.
+        in: query
+        name: sku
+        schema:
+          type: string
+      - description: Sort results by field name
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: Filter results by full-text search across name, MAC, and serial
+        in: query
+        name: text
+        schema:
+          type: string
+      - description: Filter to virtual chassis MAC (vc_mac) devices
+        in: query
+        name: vc_mac
+        schema:
+          type: boolean
+      - description: Filter to virtual MAC addresses
+        in: query
+        name: virtual_mac
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/search_after'
       - $ref: '#/components/parameters/limit'
       responses:
         '200':
@@ -11034,6 +11274,31 @@ paths:
         name: text
         schema:
           type: string
+      - description: Filter devices disconnected before this timestamp (epoch or date string)
+        in: query
+        name: disconnected_before
+        schema:
+          type: string
+      - description: Comma-separated list of fields to return in results
+        in: query
+        name: fields
+        schema:
+          type: string
+      - description: Filter devices whose name changed after this timestamp (epoch or date string)
+        in: query
+        name: modified_after
+        schema:
+          type: string
+      - description: Filter by whether the device has a VC MAC address (true/false)
+        in: query
+        name: vc_mac
+        schema:
+          type: boolean
+      - description: Filter by whether the device has a virtual MAC address (true/false)
+        in: query
+        name: virtual_mac
+        schema:
+          type: boolean
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/search_after'
@@ -16742,6 +17007,17 @@ paths:
           examples:
           - employee,contractor
           type: string
+      - description: Filter results by portal identifier
+        in: query
+        name: portal_id
+        schema:
+          format: uuid
+          type: string
+      - description: Sort results by field. Accepted values are name, role, ssid, portal_id
+        in: query
+        name: sort
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
       responses:
@@ -16784,7 +17060,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/psk'
+              $ref: '#/components/schemas/psk_create'
         description: Request Body
       responses:
         '200':
@@ -16821,10 +17097,10 @@ paths:
                   usage: multi
                   vlan_id: 10
             schema:
-              $ref: '#/components/schemas/psks'
+              $ref: '#/components/schemas/psks_update'
       responses:
         '200':
-          $ref: '#/components/responses/PsksArray'
+          $ref: '#/components/responses/PsksBulkUpdateResult'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -16836,6 +17112,53 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: updateOrgMultiplePsks
+      tags:
+      - Orgs Psks
+    delete:
+      description: Delete organization PSKs matching the specified filters. All PSKs
+        matching the filter criteria will be permanently deleted.
+      operationId: deleteOrgPsks
+      parameters:
+      - description: Filter PSKs to delete by name. Accepts multiple comma-separated values.
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter PSKs to delete by portal identifier
+        in: query
+        name: portal_id
+        schema:
+          format: uuid
+          type: string
+      - description: Filter PSKs to delete by role. Accepts multiple comma-separated values.
+        in: query
+        name: role
+        schema:
+          type: string
+      - description: Sort field for filtering. Accepted values are name, role, ssid, portal_id
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: Filter PSKs to delete by SSID. Accepts multiple comma-separated values.
+        in: query
+        name: ssid
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteOrgPsks
       tags:
       - Orgs Psks
   /api/v1/orgs/{org_id}/psks/delete:
@@ -23925,6 +24248,26 @@ paths:
         schema:
           examples:
           - 1 121 3 6 12 15 28 42 43 180,1 3 6 12 15 28 42 43 180
+          type: string
+      - description: Filter results by manufacturer short name
+        in: query
+        name: mfg
+        schema:
+          type: string
+      - description: Filter results by node
+        in: query
+        name: node
+        schema:
+          type: string
+      - description: Filter results by randomized MAC address flag
+        in: query
+        name: random_mac
+        schema:
+          type: boolean
+      - description: 'Filter connected clients when device_mac is specified. enum: `connected`'
+        in: query
+        name: status
+        schema:
           type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
@@ -31957,6 +32300,86 @@ paths:
         name: ssid
         schema:
           type: string
+      - description: Filter results by access code email
+        in: query
+        name: access_code_email
+        schema:
+          type: string
+      - description: Filter results by AP MAC address
+        in: query
+        name: ap
+        schema:
+          type: string
+      - description: Filter results by mobile carrier
+        in: query
+        name: carrier
+        schema:
+          type: string
+      - description: Filter results by client MAC address
+        in: query
+        name: client
+        schema:
+          type: string
+      - description: Filter results by company name
+        in: query
+        name: company
+        schema:
+          type: string
+      - description: Filter to cross-site guest records
+        in: query
+        name: cross_site
+        schema:
+          type: boolean
+      - description: Filter results by email address
+        in: query
+        name: email
+        schema:
+          type: string
+      - description: Filter results by custom portal field 1
+        in: query
+        name: field1
+        schema:
+          type: string
+      - description: Filter results by custom portal field 2
+        in: query
+        name: field2
+        schema:
+          type: string
+      - description: Filter results by custom portal field 3
+        in: query
+        name: field3
+        schema:
+          type: string
+      - description: Filter results by custom portal field 4
+        in: query
+        name: field4
+        schema:
+          type: string
+      - description: Time bucket interval for aggregation
+        in: query
+        name: interval
+        schema:
+          type: string
+      - description: Filter results by mobile number
+        in: query
+        name: mobile
+        schema:
+          type: string
+      - description: Filter results by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter results by randomized MAC address flag
+        in: query
+        name: random_mac
+        schema:
+          type: boolean
+      - description: Filter results by SMS gateway
+        in: query
+        name: sms_gateway
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -35514,7 +35937,7 @@ paths:
                   usage: multi
                   vlan_id: 1
             schema:
-              $ref: '#/components/schemas/psk'
+              $ref: '#/components/schemas/psk_create'
         description: Request Body
       responses:
         '200':
@@ -35539,10 +35962,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/psks'
+              $ref: '#/components/schemas/psks_update'
       responses:
         '200':
-          $ref: '#/components/responses/PsksArray'
+          $ref: '#/components/responses/PsksBulkUpdateResult'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -35554,6 +35977,42 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: updateSiteMultiplePsks
+      tags:
+      - Sites Psks
+    delete:
+      description: Delete site PSKs matching the specified filters. All PSKs matching
+        the filter criteria will be permanently deleted.
+      operationId: deleteSitePsks
+      parameters:
+      - description: Filter PSKs to delete by name. Accepts multiple comma-separated values.
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter PSKs to delete by role. Accepts multiple comma-separated values.
+        in: query
+        name: role
+        schema:
+          type: string
+      - description: Filter PSKs to delete by SSID. Accepts multiple comma-separated values.
+        in: query
+        name: ssid
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteSitePsks
       tags:
       - Sites Psks
   /api/v1/sites/{site_id}/psks/import:
@@ -40406,6 +40865,11 @@ paths:
         name: tenant
         schema:
           type: string
+      - description: 'Filter results by device category. enum: `ap`, `gateway`, `switch`'
+        in: query
+        name: device_type
+        schema:
+          $ref: '#/components/schemas/device_type'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
@@ -64142,6 +64606,28 @@ components:
           schema:
             $ref: '#/components/schemas/psk_list'
       description: OK
+      headers:
+        X-Page-Limit:
+          description: Maximum number of items returned per page
+          schema:
+            type: integer
+        X-Page-Page:
+          description: Current page number
+          schema:
+            type: integer
+        X-Page-Total:
+          description: Total number of items across all pages
+          schema:
+            type: integer
+    PsksBulkUpdateResult:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/psk_bulk_update_result'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/psk_bulk_update_result'
+      description: OK
     RadioMacs:
       content:
         application/json:
@@ -80296,6 +80782,36 @@ components:
           format: uuid
           readOnly: true
           type: string
+        ap:
+          description: Access point MAC address associated with the guest session
+          type: string
+        carrier:
+          description: Mobile carrier associated with the guest
+          type: string
+        cross_site:
+          description: Whether the guest session is cross-site
+          type: boolean
+        marketing_opt_in:
+          description: Marketing opt-in status for the guest
+          type: string
+        mobile:
+          description: Mobile phone number of the guest
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization identifier for the guest record
+        site_id:
+          $ref: '#/components/schemas/site_id'
+          description: Site identifier where the guest was seen
+        sms_gateway:
+          description: SMS gateway used for guest authentication
+          type: string
+        sponsor_email:
+          description: Email address of the guest sponsor
+          type: string
+        timestamp:
+          description: Epoch timestamp of the guest record
+          type: number
       type: object
     guest_org:
       description: Guest authorization record at organization scope
@@ -81539,10 +82055,19 @@ components:
           - 1
           type: integer
       type: object
-    inventory_search_result:
+    inventory_search_result_ap:
       additionalProperties: false
-      description: Inventory record returned by inventory search
+      description: Inventory record for an AP device returned by inventory search.
+        The `members`, `managed`, `master`, `member_macs`, `member_models`, and
+        `member_serials` fields are omitted for APs (they apply only to Virtual
+        Chassis-capable devices).
       properties:
+        last_disconnected:
+          description: Epoch timestamp when the device last disconnected
+          type: number
+        last_name_change:
+          description: Date string of the most recent device name change
+          type: string
         mac:
           description: Device MAC address for this inventory search result
           examples:
@@ -81553,15 +82078,9 @@ components:
           examples:
           - WVTFBLTNPXD23H2
           type: string
-        master:
-          description: Whether this search result represents the master member of
-            a Virtual Chassis
-          examples:
-          - true
-          type: boolean
-        members:
-          $ref: '#/components/schemas/inventory_search_result_members'
-          description: Virtual Chassis members included in this inventory search result
+        master_mac:
+          description: MAC address of the Virtual Chassis master device
+          type: string
         model:
           description: Device model for this inventory search result
           examples:
@@ -81575,6 +82094,9 @@ components:
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Organization that owns this inventory search result
+        role:
+          description: Device role within the Virtual Chassis
+          type: string
         serial:
           description: Device serial number for this inventory search result
           examples:
@@ -81593,10 +82115,14 @@ components:
           examples:
           - disconnected
           type: string
+        timestamp:
+          description: Epoch timestamp of the inventory record
+          type: number
         type:
-          $ref: '#/components/schemas/device_type_default_ap'
-          description: 'Device type for this inventory search result. enum: `ap`,
-            `gateway`, `switch`.'
+          description: Device type discriminator; always `ap` for this variant.
+          enum:
+          - ap
+          type: string
         vc_mac:
           description: Virtual Chassis MAC address for this inventory search result
           examples:
@@ -81607,6 +82133,108 @@ components:
           examples:
           - 21.4R3.5
           type: string
+      required:
+      - type
+      type: object
+    inventory_search_result_gateway:
+      additionalProperties: false
+      description: Inventory record for a gateway device returned by inventory search,
+        including Virtual Chassis fields.
+      properties:
+        last_disconnected:
+          description: Epoch timestamp when the device last disconnected
+          type: number
+        last_name_change:
+          description: Date string of the most recent device name change
+          type: string
+        mac:
+          description: Device MAC address for this inventory search result
+          examples:
+          - f01c2df166e0
+          type: string
+        magic:
+          description: Device claim code (magic) for this inventory search result
+          examples:
+          - WVTFBLTNPXD23H2
+          type: string
+        managed:
+          description: Whether the device is managed (gateway/switch only)
+          type: boolean
+        master:
+          description: Whether this search result represents the master member of
+            a Virtual Chassis
+          examples:
+          - true
+          type: boolean
+        master_mac:
+          description: MAC address of the Virtual Chassis master device
+          type: string
+        member_macs:
+          description: Comma-separated MAC addresses of Virtual Chassis members
+          type: string
+        member_models:
+          description: Comma-separated models of Virtual Chassis members
+          type: string
+        member_serials:
+          description: Comma-separated serial numbers of Virtual Chassis members
+          type: string
+        members:
+          $ref: '#/components/schemas/inventory_search_result_members'
+          description: Virtual Chassis members included in this inventory search result
+        model:
+          description: Device model for this inventory search result
+          examples:
+          - EX4300-48P
+          type: string
+        name:
+          description: Configured device name in this inventory search result
+          examples:
+          - mist-wa-ex4300-VC
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this inventory search result
+        role:
+          description: Device role within the Virtual Chassis
+          type: string
+        serial:
+          description: Device serial number for this inventory search result
+          examples:
+          - PD3714460200
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
+          description: Site associated with this inventory search result, when assigned
+        sku:
+          description: Device SKU for this inventory search result
+          examples:
+          - EX4300-48P
+          type: string
+        status:
+          description: Current inventory status for the device
+          examples:
+          - disconnected
+          type: string
+        timestamp:
+          description: Epoch timestamp of the inventory record
+          type: number
+        type:
+          description: Device type discriminator; always `gateway` for this variant.
+          enum:
+          - gateway
+          type: string
+        vc_mac:
+          description: Virtual Chassis MAC address for this inventory search result
+          examples:
+          - f01c2df166e0
+          type: string
+        version:
+          description: Software version reported for this inventory search result
+          examples:
+          - 21.4R3.5
+          type: string
+      required:
+      - type
       type: object
     inventory_search_result_member:
       additionalProperties: false
@@ -81633,10 +82261,120 @@ components:
       items:
         $ref: '#/components/schemas/inventory_search_result_member'
       type: array
+    inventory_search_result_switch:
+      additionalProperties: false
+      description: Inventory record for a switch device returned by inventory search,
+        including Virtual Chassis fields.
+      properties:
+        last_disconnected:
+          description: Epoch timestamp when the device last disconnected
+          type: number
+        last_name_change:
+          description: Date string of the most recent device name change
+          type: string
+        mac:
+          description: Device MAC address for this inventory search result
+          examples:
+          - f01c2df166e0
+          type: string
+        magic:
+          description: Device claim code (magic) for this inventory search result
+          examples:
+          - WVTFBLTNPXD23H2
+          type: string
+        managed:
+          description: Whether the device is managed (gateway/switch only)
+          type: boolean
+        master:
+          description: Whether this search result represents the master member of
+            a Virtual Chassis
+          examples:
+          - true
+          type: boolean
+        master_mac:
+          description: MAC address of the Virtual Chassis master device
+          type: string
+        member_macs:
+          description: Comma-separated MAC addresses of Virtual Chassis members
+          type: string
+        member_models:
+          description: Comma-separated models of Virtual Chassis members
+          type: string
+        member_serials:
+          description: Comma-separated serial numbers of Virtual Chassis members
+          type: string
+        members:
+          $ref: '#/components/schemas/inventory_search_result_members'
+          description: Virtual Chassis members included in this inventory search result
+        model:
+          description: Device model for this inventory search result
+          examples:
+          - EX4300-48P
+          type: string
+        name:
+          description: Configured device name in this inventory search result
+          examples:
+          - mist-wa-ex4300-VC
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this inventory search result
+        role:
+          description: Device role within the Virtual Chassis
+          type: string
+        serial:
+          description: Device serial number for this inventory search result
+          examples:
+          - PD3714460200
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
+          description: Site associated with this inventory search result, when assigned
+        sku:
+          description: Device SKU for this inventory search result
+          examples:
+          - EX4300-48P
+          type: string
+        status:
+          description: Current inventory status for the device
+          examples:
+          - disconnected
+          type: string
+        timestamp:
+          description: Epoch timestamp of the inventory record
+          type: number
+        type:
+          description: Device type discriminator; always `switch` for this variant.
+          enum:
+          - switch
+          type: string
+        vc_mac:
+          description: Virtual Chassis MAC address for this inventory search result
+          examples:
+          - f01c2df166e0
+          type: string
+        version:
+          description: Software version reported for this inventory search result
+          examples:
+          - 21.4R3.5
+          type: string
+      required:
+      - type
+      type: object
     inventory_search_results:
-      description: Inventory records returned by an inventory search
+      description: Inventory records returned by an inventory search. Each item is
+        one of the per-device-type variants selected by the `type` discriminator.
       items:
-        $ref: '#/components/schemas/inventory_search_result'
+        discriminator:
+          mapping:
+            ap: '#/components/schemas/inventory_search_result_ap'
+            gateway: '#/components/schemas/inventory_search_result_gateway'
+            switch: '#/components/schemas/inventory_search_result_switch'
+          propertyName: type
+        oneOf:
+        - $ref: '#/components/schemas/inventory_search_result_ap'
+        - $ref: '#/components/schemas/inventory_search_result_gateway'
+        - $ref: '#/components/schemas/inventory_search_result_switch'
       type: array
     inventory_update:
       description: Request to assign, unassign, delete, or change management mode
@@ -86036,6 +86774,87 @@ components:
         versions:
           $ref: '#/components/schemas/mxedge_upgrade_version'
           description: Per-service target versions for the upgrade request
+        device_ids:
+          description: List of specific device identifiers to include in the upgrade
+          items:
+            type: string
+          type: array
+        download_strategy:
+          description: Strategy for firmware download phase
+          type: string
+        enable_p2p:
+          description: Enable peer-to-peer upgrade distribution
+          type: boolean
+        is_distro_upgrade:
+          description: Whether this is a distribution-level upgrade
+          type: boolean
+        max_failures:
+          description: Maximum number of device failures allowed per phase
+          items:
+            type: integer
+          type: array
+        models:
+          description: List of device models to target for the upgrade
+          items:
+            type: string
+          type: array
+        name:
+          description: Human-readable name for the upgrade job
+          type: string
+        p2p_cluster_size:
+          description: Cluster size for peer-to-peer upgrade groups
+          type: integer
+        p2p_parallelism:
+          description: Parallelism level for peer-to-peer upgrade distribution
+          type: integer
+        reboot_at:
+          description: Scheduled reboot time as Unix epoch seconds
+          type: integer
+        reboot_canary_phases:
+          description: Canary phase percentages for staged reboot rollout (values 1-100)
+          items:
+            type: integer
+          type: array
+        reboot_datetime:
+          description: Scheduled reboot datetime in ISO 8601 format
+          type: string
+        reboot_max_failure_percentage:
+          description: Maximum percentage of device failures allowed during reboot phase (0-100)
+          type: integer
+        reboot_strategy:
+          description: Strategy for device reboot phase
+          type: string
+        rrm_first_batch_percentage:
+          description: Percentage of devices in the first RRM upgrade batch
+          type: integer
+        rrm_max_batch_percentage:
+          description: Maximum percentage of devices per RRM upgrade batch
+          type: integer
+        rrm_mesh_upgrade:
+          description: RRM mesh upgrade strategy identifier
+          type: string
+        rrm_node_order:
+          description: Node ordering strategy for RRM upgrades
+          type: string
+        rrm_slow_ramp:
+          description: Enable slow ramp mode for RRM upgrade batching
+          type: boolean
+        rules:
+          description: Device match rules for targeting specific devices
+          items:
+            type: object
+          type: array
+        site_ids:
+          description: List of site identifiers to include in the upgrade
+          items:
+            type: string
+          type: array
+        snapshot:
+          description: Take a configuration snapshot before upgrading (applicable to switch devices)
+          type: boolean
+        start_datetime:
+          description: Scheduled start datetime in ISO 8601 format
+          type: string
       required:
       - mxedge_ids
       type: object
@@ -90992,10 +91811,40 @@ components:
           description: VLAN name to be assigned. Optional, `vlan_id` takes precedence
             if both are provided
           type: string
+        portal_id:
+          description: UUID of the PSK portal that issued this PSK, when portal-managed
+          format: uuid
+          type: string
       required:
       - name
       - passphrase
       - ssid
+      type: object
+    psk_create:
+      allOf:
+        - $ref: '#/components/schemas/psk'
+        - required:
+            - notify_expiry
+      description: PSK request body for create operations requiring expiry notification setting
+    psk_update:
+      allOf:
+        - $ref: '#/components/schemas/psk'
+        - required:
+            - id
+      description: PSK request body for bulk update operations requiring PSK identifier
+    psk_bulk_update_result:
+      description: Result of a bulk PSK update operation
+      properties:
+        updated:
+          description: List of PSK objects that were successfully updated
+          items:
+            $ref: '#/components/schemas/psk'
+          type: array
+        error:
+          description: List of error messages for PSKs that could not be updated
+          items:
+            type: string
+          type: array
       type: object
     psk_id_list:
       description: PSK delete request payload
@@ -91341,6 +92190,12 @@ components:
       description: List of personal PSK configurations
       items:
         $ref: '#/components/schemas/psk'
+      type: array
+      uniqueItems: true
+    psks_update:
+      description: List of PSK update request bodies for bulk update operations
+      items:
+        $ref: '#/components/schemas/psk_update'
       type: array
       uniqueItems: true
     psks_import_file:
@@ -93155,6 +94010,9 @@ components:
         total:
           description: Number of distinct result buckets returned
           type: integer
+        next:
+          description: Pagination cursor for retrieving the next page of count results
+          type: string
       required:
       - distinct
       - end
@@ -94712,6 +95570,284 @@ components:
           additionalProperties: true
           description: Per-service target versions for this Mist Edge upgrade
           type: object
+        canary_phases:
+          description: Canary phase percentages configured for staged rollout
+          items:
+            type: integer
+          type: array
+        device_ids:
+          description: List of targeted device identifiers
+          items:
+            type: string
+          type: array
+        device_type:
+          description: Type of device being upgraded
+          type: string
+        download_strategy:
+          description: Configured download phase strategy
+          type: string
+        enable_p2p:
+          description: Whether peer-to-peer upgrade distribution is enabled
+          type: boolean
+        errors:
+          description: List of errors encountered during the upgrade job
+          items:
+            description: Upgrade error entry
+            properties:
+              error_reason:
+                description: Human-readable reason for the upgrade error
+                type: string
+            type: object
+          type: array
+        force:
+          description: Whether the upgrade is forced regardless of current version
+          type: boolean
+        max_failure_percentage:
+          description: Maximum percentage of device failures allowed before aborting
+          type: integer
+        max_failures:
+          description: Maximum number of device failures allowed per phase
+          items:
+            type: integer
+          type: array
+        models:
+          description: List of device models targeted by the upgrade
+          items:
+            type: string
+          type: array
+        name:
+          description: Human-readable name for the upgrade job
+          type: string
+        p2p_cluster_size:
+          description: Configured peer-to-peer upgrade cluster size
+          type: integer
+        p2p_parallelism:
+          description: Configured peer-to-peer upgrade parallelism level
+          type: integer
+        reboot_at:
+          description: Configured reboot time as Unix epoch seconds
+          type: integer
+        reboot_canary_phases:
+          description: Canary phase percentages configured for staged reboot rollout
+          items:
+            type: integer
+          type: array
+        reboot_datetime:
+          description: Configured reboot datetime in ISO 8601 format
+          type: string
+        reboot_max_failure_percentage:
+          description: Maximum percentage of device failures allowed during reboot phase
+          type: integer
+        reboot_strategy:
+          description: Configured reboot phase strategy
+          type: string
+        rrm_first_batch_percentage:
+          description: Configured percentage of devices in the first RRM batch
+          type: integer
+        rrm_max_batch_percentage:
+          description: Configured maximum percentage of devices per RRM batch
+          type: integer
+        rrm_mesh_upgrade:
+          description: Configured RRM mesh upgrade strategy
+          type: string
+        rrm_node_order:
+          description: Configured node ordering for RRM upgrades
+          type: string
+        rrm_slow_ramp:
+          description: Whether RRM slow ramp mode is enabled
+          type: boolean
+        rules:
+          description: Device match rules configured for targeting
+          items:
+            type: object
+          type: array
+        site_ids:
+          description: List of site identifiers included in the upgrade
+          items:
+            type: string
+          type: array
+        snapshot:
+          description: Whether configuration snapshot is taken before upgrade (switch devices)
+          type: boolean
+        start_datetime:
+          description: Configured start datetime in ISO 8601 format
+          type: string
+        start_time:
+          description: Configured start time as Unix epoch seconds
+          type: integer
+        target_version:
+          description: Target firmware version string
+          type: string
+        upgrade_time:
+          description: Human-readable total upgrade duration
+          type: string
+        upgrades:
+          description: List of per-site upgrade job details
+          items:
+            properties:
+              model:
+                description: Device model for this per-model upgrade job boundary
+                type: string
+              site_id:
+                description: Site identifier for this per-site upgrade job
+                type: string
+              upgrade_id:
+                description: Unique identifier of the per-site upgrade job
+                type: string
+              upgrade:
+                description: Upgrade job status and target details
+                properties:
+                  id:
+                    description: Unique identifier of the upgrade job
+                    type: string
+                  status:
+                    description: Current state of the upgrade job
+                    type: string
+                  download_time:
+                    description: Time taken to download firmware, in seconds
+                    type: number
+                  upgrade_time:
+                    description: Human-readable total upgrade duration
+                    type: string
+                  plan:
+                    description: Upgrade execution plan details
+                    type: object
+                  current_phase:
+                    description: Current upgrade phase identifier
+                    type: string
+                  targets:
+                    description: Per-device upgrade progress targets
+                    properties:
+                      cancelled:
+                        description: List of device MAC addresses in cancelled state
+                        items:
+                          type: string
+                        type: array
+                      devices:
+                        description: Detailed per-device upgrade state information
+                        items:
+                          properties:
+                            current_version:
+                              description: Currently installed firmware version on the device
+                              type: string
+                            current_versions:
+                              additionalProperties:
+                                type: string
+                              description: Map of component names to currently installed versions
+                              type: object
+                            error:
+                              additionalProperties: true
+                              description: Error details if the device upgrade encountered a failure
+                              type: object
+                            mac:
+                              description: Device MAC address
+                              type: string
+                            progress:
+                              description: Upgrade progress percentage for the device
+                              type: number
+                            status:
+                              description: Current upgrade state of the device
+                              type: string
+                            target_version:
+                              description: Target firmware version for the device upgrade
+                              type: string
+                            target_versions:
+                              additionalProperties:
+                                type: string
+                              description: Map of component names to target versions
+                              type: object
+                            vc_mac:
+                              description: Virtual chassis MAC address
+                              type: string
+                          type: object
+                        type: array
+                      distro_download_progress:
+                        additionalProperties:
+                          type: string
+                        description: Per-device distribution download progress percentage
+                        type: object
+                      failed:
+                        description: List of device MAC addresses in failed state
+                        items:
+                          type: string
+                        type: array
+                      failure_reasons:
+                        additionalProperties:
+                          type: string
+                        description: Per-device failure reason descriptions
+                        type: object
+                      firmware_download_requested:
+                        description: List of device MAC addresses with firmware download requested
+                        items:
+                          type: string
+                        type: array
+                      firmware_downloaded:
+                        description: List of device MAC addresses with firmware downloaded
+                        items:
+                          type: string
+                        type: array
+                      firmware_downloading:
+                        description: List of device MAC addresses currently downloading firmware
+                        items:
+                          type: string
+                        type: array
+                      pkgs:
+                        additionalProperties:
+                          items:
+                            type: object
+                          type: array
+                        description: Per-device package details for MxEdge upgrades
+                        type: object
+                      reboot_in_progress:
+                        description: List of device MAC addresses with reboot in progress
+                        items:
+                          type: string
+                        type: array
+                      reboot_requested:
+                        description: List of device MAC addresses with reboot requested
+                        items:
+                          type: string
+                        type: array
+                      rebooted:
+                        description: List of device MAC addresses that have rebooted
+                        items:
+                          type: string
+                        type: array
+                      scheduled:
+                        description: List of device MAC addresses scheduled for upgrade
+                        items:
+                          type: string
+                        type: array
+                      skipped:
+                        description: List of device MAC addresses that were skipped
+                        items:
+                          type: string
+                        type: array
+                      total:
+                        description: Total number of devices targeted by this upgrade
+                        type: integer
+                      upgrade_requested:
+                        description: List of device MAC addresses with upgrade requested
+                        items:
+                          type: string
+                        type: array
+                      upgraded:
+                        description: List of device MAC addresses that have been upgraded
+                        items:
+                          type: string
+                        type: array
+                      upgrading:
+                        description: List of device MAC addresses currently upgrading
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  counts:
+                    description: Per-status device count summary
+                    type: object
+                type: object
+            type: object
+          type: array
       required:
       - status
       - strategy
@@ -112711,6 +113847,99 @@ components:
           examples:
           - 20
           type: integer
+        arp_ip:
+          description: Target IP address used in the ARP synthetic test
+          type: string
+        arp_resolved_mac:
+          description: MAC address resolved via ARP during the synthetic test
+          type: string
+        curl_response_status:
+          description: HTTP response status code returned by the curl synthetic test
+          type: string
+        curl_url:
+          description: URL targeted by the curl synthetic test
+          type: string
+        dhcp_ips:
+          description: IP addresses returned by the DHCP synthetic test
+          type: string
+        dhcp_lease_time:
+          description: Lease time returned by the DHCP synthetic test
+          type: string
+        dhcp_server:
+          description: DHCP server address used in the synthetic test
+          type: string
+        dns_resolved_ips:
+          description: IP addresses resolved by the DNS synthetic test
+          type: string
+        dns_server:
+          description: DNS server address used in the synthetic test
+          type: string
+        host:
+          description: Target host of the synthetic test
+          type: string
+        id:
+          description: Unique identifier of the synthetic test record
+          type: string
+        ip6_dns_servers:
+          description: IPv6 DNS servers discovered by the synthetic test
+          type: string
+        ip6_gateways:
+          description: IPv6 gateways discovered by the synthetic test
+          type: string
+        ip6_managed:
+          description: IPv6 managed flag reported by the synthetic test
+          type: string
+        ip6_prefixes:
+          description: IPv6 prefixes discovered by the synthetic test
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this synthetic test result
+        ping_count:
+          description: Number of ping packets sent during the synthetic test
+          type: string
+        ping_logs:
+          description: Log output from the ping synthetic test
+          type: string
+        ping_loss:
+          description: Ping packet loss percentage from the synthetic test
+          type: string
+        ping_time_avg:
+          description: Average round-trip time from the ping synthetic test, in milliseconds
+          type: string
+        ping_time_max:
+          description: Maximum round-trip time from the ping synthetic test, in milliseconds
+          type: string
+        ping_time_min:
+          description: Minimum round-trip time from the ping synthetic test, in milliseconds
+          type: string
+        policy:
+          description: Application policy associated with the synthetic test
+          type: string
+        protocol:
+          description: Network protocol used in the synthetic test
+          type: string
+        radius_ip:
+          description: RADIUS server IP address used in the synthetic test
+          type: string
+        radius_port:
+          description: RADIUS server port used in the synthetic test
+          type: string
+        service:
+          description: Application or service tested by the synthetic test
+          type: string
+        site_id:
+          $ref: '#/components/schemas/site_id'
+          description: Site associated with this synthetic test result
+        tenant:
+          description: Tenant associated with the synthetic test
+          type: string
+        text:
+          description: Additional descriptive text from the synthetic test output
+          type: string
+        traceroute_logs:
+          description: Log output from the traceroute synthetic test
+          type: string
       type: object
     synthetictest_protocol:
       description: 'Protocol used by a synthetic test probe. enum: `ping`, `traceroute`'
@@ -120080,6 +121309,66 @@ components:
         vlan:
           $ref: '#/components/schemas/wired_client_response_vlan'
           description: Client VLAN identifiers observed for the wired client
+        client_mac:
+          description: Client MAC address for the wired client search result
+          type: string
+        count:
+          description: Recurrence count for this client record
+          type: string
+        first_seen:
+          description: Timestamp when the client was first seen
+          type: string
+        group:
+          description: Group associated with the client
+          type: string
+        hostname:
+          description: Hostname of the wired client
+          type: string
+        ip6:
+          description: IPv6 address of the wired client
+          type: string
+        last_device_mac:
+          description: Most recent device MAC address seen for the client
+          type: string
+        last_hostname:
+          description: Most recent hostname for the client
+          type: string
+        last_ip:
+          description: Most recent IPv4 address for the client
+          type: string
+        last_ip6:
+          description: Most recent IPv6 address for the client
+          type: string
+        last_port_id:
+          description: Most recent port identifier for the client
+          type: string
+        last_username:
+          description: Most recent authenticated username for the client
+          type: string
+        last_vlan:
+          description: Most recent VLAN identifier for the client
+          type: integer
+        last_vlan_name:
+          description: Most recent VLAN name for the client
+          type: string
+        manufacture:
+          description: Manufacturer name of the client device
+          type: string
+        mfg:
+          description: Manufacturer of the client device
+          type: string
+        node:
+          description: Node associated with the client
+          type: string
+        random_mac:
+          description: Whether the client uses a randomized MAC address
+          type: boolean
+        source:
+          description: Source of the client record
+          type: string
+        username:
+          description: Authenticated username for the client
+          type: string
       type: object
     wired_client_response_device_mac:
       description: Switch or gateway MAC addresses where the wired client was observed
