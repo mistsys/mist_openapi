@@ -39240,6 +39240,7 @@ paths:
         schema:
           examples:
           - 1,2
+          pattern: ^[1-5](,[1-5])*$
           type: string
       - description: Filter application statistics by application name
         in: query

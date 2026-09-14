@@ -30,7 +30,6 @@ All notable changes to this project will be documented in this file.
 - `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis` schema): added multi-AP `device_ids` (maximum 5, takes precedence over `device_id`); extended duration maximum from 600 to 3600 seconds; added `SpectrumAnalysisSession` response with `session_id` and optional `invalid_device_ids`
 - `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis_response` schema): added `started_time`, `device_id`/`device_ids`, `duration`, `band`, `format`, `width`, and `channels`; added multi-AP `invalid_device_ids`
 - `GET /api/v1/sites/{site_id}/stats/analyze_spectrum` (`response_past_spectrum_analysis_result` schema): added optional `device_id`/`device_ids` identifiers, with a maximum of 5 devices (both remain optional; legacy records identified only by `mac` are still valid)
-- `WS /api-ws/v1/stream` subscription `/sites/{site_id}/analyze_spectrum`: added `spectrum_analysis_stream_message` for streamed `session`, `device_id`, `fft_samples`, and `channel_usage` data
 
 ## [2607.1.1] - 2026-08-17
 
