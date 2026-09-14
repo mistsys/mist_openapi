@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 - `POST /api/v1/register` (`admin_invite` schema): added optional `no_tracking` privacy-consent setting with GDPR-dependent default behavior
 - `GET /api/v1/sites/{site_id}/stats/calls/count`: added `mac` and `ap_mac` filters; `rating` now accepts comma-separated values
 - `GET /api/v1/sites/{site_id}/rrm/channel_scores/band/{band}`: added optional `ap` query parameter to return per-AP channel scores
-- `GET /api/v1/orgs/{org_id}/inventory/search`: added `vc_mac`, `master_mac`, `timestamp`, `last_name_change`, `last_disconnected`, `modified_after`, `disconnected_before` query parameters
+- `GET /api/v1/orgs/{org_id}/inventory/search`: added `vc_mac`, `master_mac`, `modified_after`, `disconnected_before` query parameters
 - `GET /api/v1/orgs/{org_id}/inventory/search` (`inventory_search_result` schema): added `timestamp`, `last_name_change`, `last_disconnected`
 - `GET /api/v1/orgs/{org_id}/inventory/search` (`inventory_search` schema): `start` and `end` changed from integer to number (epoch seconds with fractional part)
 - `POST /api/v1/orgs/{org_id}/networks`, `GET/PUT /api/v1/orgs/{org_id}/networks/{network_id}` (`network` schema): added optional `zone_id` (SecurityZone UUID; when omitted the network `name` is used as the security zone name)
@@ -27,9 +27,9 @@ All notable changes to this project will be documented in this file.
 - `synthetictest_config_wan_speedtest` (`GET/PUT /api/v1/orgs/{org_id}/setting`, `GET/PUT /api/v1/sites/{site_id}/setting`, and `GET /api/v1/sites/{site_id}/setting/derived`): renamed `enabled` to `disabled` and set the default to `false`
 - `switch_port_usage` (`mac_auth_protocol`): clarified Mist NAC behavior; the protocol is forced to `pap` unless `mist_nac.enable_eap_md5_for_mab` preserves `eap-md5` for EAP-MD5 over MAB
 - Added `GET/POST/DELETE /api/v1/sites/{site_id}/flow_capture` with Flow Capture session, request, normalized stream message, and status response schemas; request validation requires `switches` plus at least one flow filter
-- `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis` schema): added multi-AP `device_ids` (maximum 5, takes precedence over `device_id`); extended duration maximum from 600 to 3600 seconds; added `SpectrumAnalysisSession` response with `session_id` and optional `invalid_aps`
+- `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis` schema): added multi-AP `device_ids` (maximum 5, takes precedence over `device_id`); extended duration maximum from 600 to 3600 seconds; added `SpectrumAnalysisSession` response with `session_id` and optional `invalid_device_ids`
 - `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis_response` schema): added `started_time`, `device_id`/`device_ids`, `duration`, `band`, `format`, `width`, and `channels`; added multi-AP `invalid_device_ids`
-- `GET /api/v1/sites/{site_id}/stats/analyze_spectrum` (`response_past_spectrum_analysis_result` schema): added optional `device_id`/`device_ids` identifiers, with a maximum of 5 devices
+- `GET /api/v1/sites/{site_id}/stats/analyze_spectrum` (`response_past_spectrum_analysis_result` schema): added optional `device_id`/`device_ids` identifiers, with a maximum of 5 devices (both remain optional; legacy records identified only by `mac` are still valid)
 - `WS /api-ws/v1/stream` subscription `/sites/{site_id}/analyze_spectrum`: added `spectrum_analysis_stream_message` for streamed `session`, `device_id`, `fft_samples`, and `channel_usage` data
 
 ## [2607.1.1] - 2026-08-17

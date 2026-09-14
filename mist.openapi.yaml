@@ -10932,7 +10932,7 @@ paths:
       description: Search organization inventory records with filters for type, MAC
         address, Virtual Chassis MAC address, Virtual Chassis master MAC address,
         model, name, site, serial number, Virtual Chassis master state, SKU, version,
-        status, text, and inventory timestamps.
+        status, and text.
       operationId: searchOrgInventory
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
@@ -11060,27 +11060,6 @@ paths:
         name: text
         schema:
           type: string
-      - description: Inventory entry creation time, in epoch seconds
-        in: query
-        name: timestamp
-        schema:
-          examples:
-          - 1703003296
-          type: integer
-      - description: Time the inventory entry name was last changed, in epoch seconds
-        in: query
-        name: last_name_change
-        schema:
-          examples:
-          - 1703003296
-          type: integer
-      - description: Time the device was last disconnected, in epoch seconds
-        in: query
-        name: last_disconnected
-        schema:
-          examples:
-          - 1703003296
-          type: integer
       - description: Filter on inventory last modified time, in epoch
         in: query
         name: modified_after
@@ -32099,9 +32078,18 @@ paths:
     parameters:
     - $ref: '#/components/parameters/site_id'
     post:
-      description: Start a flow capture session on one or more online switches running
+      description: 'Start a flow capture session on one or more online switches running
         JMA firmware. The same filter is applied to every switch. Only one packet
         or flow capture session can be active per site at a time.
+
+
+        The captured flow records are streamed over websocket rather than returned
+        in the HTTP response.
+
+
+        #### Subscribe to Flow Capture outputs
+
+        `WS /api-ws/v1/stream`'
       operationId: startSiteFlowCapture
       requestBody:
         content:
@@ -79266,7 +79254,7 @@ components:
       - os_type
       type: string
     flow_capture_direction:
-      description: Direction of the captured flow
+      description: 'Direction of the captured flow. enum: `egress`, `ingress`'
       enum:
       - egress
       - ingress
@@ -79290,26 +79278,8 @@ components:
       additionalProperties: true
       description: Switches that failed flow capture validation
       type: object
-    flow_capture_message:
-      additionalProperties: false
-      description: Flow record streamed over the site flow capture WebSocket channel
-      properties:
-        capture_id:
-          format: uuid
-          type: string
-        device_mac:
-          description: Colon-separated MAC address of the reporting switch
-          type: string
-        flow_dict:
-          anyOf:
-          - $ref: '#/components/schemas/flow_capture_record'
-          - type: 'null'
-          description: Normalized flow record, or null as the stop sentinel
-        lost_messages:
-          type: integer
-      type: object
     flow_capture_protocol:
-      description: Flow capture protocol filter
+      description: 'Flow capture protocol filter. enum: `tcp`, `udp`, `icmp`, `icmp6`'
       enum:
       - tcp
       - udp
@@ -79341,17 +79311,6 @@ components:
       type: object
     flow_capture_request:
       additionalProperties: false
-      anyOf:
-      - required:
-        - src_ip
-      - required:
-        - dst_ip
-      - required:
-        - src_port
-      - required:
-        - dst_port
-      - required:
-        - protocol
       description: Flow capture request for one or more switches
       properties:
         dst_ip:
@@ -84151,6 +84110,7 @@ components:
           description: Optional floor number within the map stack
           examples:
           - 1
+          minimum: 0
           type: integer
         mapstack_id:
           description: Map stack containing this map
@@ -95907,11 +95867,6 @@ components:
       type: array
     response_past_spectrum_analysis_result:
       additionalProperties: false
-      anyOf:
-      - required:
-        - device_id
-      - required:
-        - device_ids
       description: Result of a past spectrum analysis
       properties:
         band:
@@ -101959,7 +101914,8 @@ components:
           description: SRX gateways integrated with this site
         mist_nac_user_role_source:
           $ref: '#/components/schemas/site_setting_mist_nac_user_role_source'
-          description: Source of the Mist NAC user role sent to Juniper SRX gateways
+          description: 'Source of the Mist NAC user role sent to Juniper SRX gateways.
+            enum: `idp_role`, `radius_group`, `none`'
         send_mist_nac_user_info:
           description: Whether Mist NAC user information is sent to Juniper SRX gateways
           type: boolean
@@ -102046,8 +102002,8 @@ components:
           description: Palo Alto Networks gateways integrated with this site
         mist_nac_user_role_source:
           $ref: '#/components/schemas/site_setting_mist_nac_user_role_source'
-          description: Source of the Mist NAC user role sent to Palo Alto Networks
-            gateways
+          description: 'Source of the Mist NAC user role sent to Palo Alto Networks
+            gateways. enum: `idp_role`, `radius_group`, `none`'
         send_mist_nac_user_info:
           default: false
           description: Whether Mist NAC user information is sent to Palo Alto Networks
@@ -104592,11 +104548,6 @@ components:
         $ref: '#/components/schemas/snmpv3_config_target_param'
       type: array
     spectrum_analysis:
-      anyOf:
-      - required:
-        - device_id
-      - required:
-        - device_ids
       description: Request parameters for starting AP spectrum analysis at a site
       properties:
         band:
@@ -104657,11 +104608,6 @@ components:
       type: string
     spectrum_analysis_response:
       additionalProperties: false
-      anyOf:
-      - required:
-        - device_id
-      - required:
-        - device_ids
       description: Response returned after starting AP spectrum analysis
       properties:
         band:
@@ -104709,24 +104655,6 @@ components:
           type: integer
       required:
       - session_id
-      type: object
-    spectrum_analysis_stream_message:
-      additionalProperties: false
-      description: Spectrum analysis data message streamed on the site WebSocket channel
-      properties:
-        channel_usage:
-          $ref: '#/components/schemas/response_past_spectrum_analysis_channel_usages'
-          description: Per-channel utilization measurements captured during the analysis
-        device_id:
-          description: Device-generated UUID of the AP reporting the spectrum data
-          format: uuid
-          type: string
-        fft_samples:
-          $ref: '#/components/schemas/response_past_spectrum_analysis_fft_samples'
-          description: FFT signal samples captured during the analysis
-        session:
-          description: Session identifier returned by the start API
-          type: string
       type: object
     sponsor_link_validity_duration:
       anyOf:
