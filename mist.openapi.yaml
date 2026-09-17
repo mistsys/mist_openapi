@@ -79287,29 +79287,6 @@ components:
       - icmp
       - icmp6
       type: string
-    flow_capture_record:
-      additionalProperties: false
-      description: Normalized flow record streamed by a switch
-      properties:
-        bytes:
-          type: integer
-        direction:
-          $ref: '#/components/schemas/flow_capture_direction'
-        dst_ip:
-          type: string
-        dst_port:
-          type: integer
-        packets:
-          type: integer
-        protocol:
-          $ref: '#/components/schemas/flow_capture_protocol'
-        src_ip:
-          type: string
-        src_port:
-          type: integer
-        timestamp:
-          type: number
-      type: object
     flow_capture_request:
       additionalProperties: false
       description: Flow capture request for one or more switches
