@@ -647,11 +647,9 @@ tags:
     providers such as microsoft EntraID, okta workforce identity cloud, and google
     workspace idp.
   name: Orgs NAC IDP
-- description: The NAC IDP allows users to integrate with various Identity Providers
-    (IDPs) to enhance authentication and access control. Admins can configure identity
-    providers such as microsoft EntraID, okta workforce identity cloud, and google
-    workspace idp.
-  name: Sites NAC Fingerprints
+- description: Search and count client device fingerprint records (family, manufacturer,
+    model, and OS) inferred by Mist NAC insights across the organization.
+  name: Orgs NAC Fingerprints
 - description: 'NAC Tags are the building blocks to compose nacrules.
 
     They can either appear in the "matching" / "not_matching" sections of a nacrule,
@@ -10424,6 +10422,111 @@ paths:
       summary: updateOrgIdpProfile
       tags:
       - Orgs IDP Profiles
+  /api/v1/orgs/{org_id}/insights/fingerprints/count:
+    get:
+      description: Count Client Fingerprints
+      operationId: countOrgClientFingerprints
+      parameters:
+      - description: 'Field used to group this count response. enum: `family`, `model`,
+          `os`, `os_type`'
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/fingerprints_count_distinct'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgClientFingerprints
+      tags:
+      - Orgs NAC Fingerprints
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/insights/fingerprints/search:
+    get:
+      description: Search Client Fingerprints
+      operationId: searchOrgClientFingerprints
+      parameters:
+      - description: Device Category of the client device
+        example: EX Series Switch
+        in: query
+        name: family
+        schema:
+          type: string
+      - description: 'Filter results by client type. enum: `wireless`, `wired`, `vty`'
+        example: wired
+        in: query
+        name: client_type
+        schema:
+          $ref: '#/components/schemas/nac_access_type'
+      - description: Filter results by device model
+        example: ex4100-f-12p
+        in: query
+        name: model
+        schema:
+          type: string
+      - description: Manufacturer name of the client device
+        example: Juniper Networks, Inc.
+        in: query
+        name: mfg
+        schema:
+          type: string
+      - description: Operating System name and version of the client device
+        example: JUNOS 22.3R1.12
+        in: query
+        name: os
+        schema:
+          type: string
+      - description: Operating system name of the client device
+        example: JUNOS
+        in: query
+        name: os_type
+        schema:
+          type: string
+      - description: Filter results by MAC address
+        example: d420b080516d
+        in: query
+        name: mac
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/sort_wcid'
+      - $ref: '#/components/parameters/search_after'
+      responses:
+        '200':
+          $ref: '#/components/responses/FingerprintSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgClientFingerprints
+      tags:
+      - Orgs NAC Fingerprints
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/insights/marvisclient/{marvisclient_id}/marvisclient-metrics:
     get:
       description: Return time-series metrics for a specific Marvis Client device.
@@ -23307,6 +23410,64 @@ paths:
       summary: updateOrgUserMac
       tags:
       - Orgs User MACs
+  /api/v1/orgs/{org_id}/vars/count:
+    get:
+      description: 'Count organization vars, optionally grouped by `distinct` and
+        filtered by site, variable name, and source.
+
+
+        Example: /api/v1/orgs/{org_id}/vars/count?distinct=var'
+      operationId: countOrgVars
+      parameters:
+      - description: 'Field used to group this count response. enum: `site_id`, `src`,
+          `var`'
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/org_vars_count_distinct'
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
+          type: string
+      - description: Filter variable results by variable name. Accepts multiple comma-separated
+          values.
+        in: query
+        name: var
+        schema:
+          examples:
+          - guest_end,guest_net
+          type: string
+      - description: 'Filter results by source. enum: `deviceprofile`, `site`'
+        in: query
+        name: src
+        schema:
+          $ref: '#/components/schemas/var_source'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgVars
+      tags:
+      - Orgs Vars
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/vars/search:
     get:
       description: 'Search vars
@@ -32550,111 +32711,6 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
-  /api/v1/sites/{site_id}/insights/fingerprints/count:
-    get:
-      description: Count Client Fingerprints
-      operationId: countSiteClientFingerprints
-      parameters:
-      - description: 'Field used to group this count response. enum: `family`, `model`,
-          `os`, `os_type`'
-        in: query
-        name: distinct
-        schema:
-          $ref: '#/components/schemas/fingerprints_count_distinct'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/limit'
-      responses:
-        '200':
-          $ref: '#/components/responses/Count'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: countSiteClientFingerprints
-      tags:
-      - Sites NAC Fingerprints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
-  /api/v1/sites/{site_id}/insights/fingerprints/search:
-    get:
-      description: Search Client Fingerprints
-      operationId: searchSiteClientFingerprints
-      parameters:
-      - description: Device Category of the client device
-        example: EX Series Switch
-        in: query
-        name: family
-        schema:
-          type: string
-      - description: 'Filter results by client type. enum: `wireless`, `wired`, `vty`'
-        example: wired
-        in: query
-        name: client_type
-        schema:
-          $ref: '#/components/schemas/nac_access_type'
-      - description: Filter results by device model
-        example: ex4100-f-12p
-        in: query
-        name: model
-        schema:
-          type: string
-      - description: Manufacturer name of the client device
-        example: Juniper Networks, Inc.
-        in: query
-        name: mfg
-        schema:
-          type: string
-      - description: Operating System name and version of the client device
-        example: JUNOS 22.3R1.12
-        in: query
-        name: os
-        schema:
-          type: string
-      - description: Operating system name of the client device
-        example: JUNOS
-        in: query
-        name: os_type
-        schema:
-          type: string
-      - description: Filter results by MAC address
-        example: d420b080516d
-        in: query
-        name: mac
-        schema:
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/interval'
-      - $ref: '#/components/parameters/sort_wcid'
-      - $ref: '#/components/parameters/search_after'
-      responses:
-        '200':
-          $ref: '#/components/responses/FingerprintSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: searchSiteClientFingerprints
-      tags:
-      - Sites NAC Fingerprints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats:
     get:
       description: Get Gateway Insight Metrics
@@ -90926,6 +90982,14 @@ components:
       items:
         $ref: '#/components/schemas/org_ui_settings_tile'
       type: array
+    org_vars_count_distinct:
+      default: var
+      description: 'enum: `site_id`, `src`, `var`'
+      enum:
+      - site_id
+      - src
+      - var
+      type: string
     org_wan_clients_count_distinct:
       default: mac
       description: 'enum: `hostname`, `ip`, `mac`, `mfg`, `network`'

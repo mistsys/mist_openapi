@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [2609.1.0] - 2026-09-07
 
+- Fixed `GET /api/v1/sites/{site_id}/insights/fingerprints/count` and `GET /api/v1/sites/{site_id}/insights/fingerprints/search`: moved to `GET /api/v1/orgs/{org_id}/insights/fingerprints/count` and `GET /api/v1/orgs/{org_id}/insights/fingerprints/search` (these endpoints only ever worked at the org level; incorrectly documented under sites)
+- Added `GET /api/v1/orgs/{org_id}/vars/count` (distinct count of organization vars, grouped by `site_id`, `src`, or `var`)
 - Added `GET/PUT/DELETE /api/v1/sites/{site_id}/mapstacks/{mapstack_id}`; replaced `map.group_name`/`map.group_idx` with `mapstack_id`/`mapstack_floor`
 - `POST /api/v1/register` (`admin_invite` schema): added optional `no_tracking` privacy-consent setting with GDPR-dependent default behavior
 - `GET /api/v1/sites/{site_id}/stats/calls/count`: added `mac` and `ap_mac` filters; `rating` now accepts comma-separated values
