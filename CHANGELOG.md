@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2609.1.0] - 2026-09-07
+
+- Fixed `GET /api/v1/sites/{site_id}/insights/fingerprints/count` and `GET /api/v1/sites/{site_id}/insights/fingerprints/search`: moved to `GET /api/v1/orgs/{org_id}/insights/fingerprints/count` and `GET /api/v1/orgs/{org_id}/insights/fingerprints/search` (these endpoints only ever worked at the org level; incorrectly documented under sites)
+- Added `GET /api/v1/orgs/{org_id}/vars/count` (distinct count of organization vars, grouped by `site_id`, `src`, or `var`)
+- Added `GET/PUT/DELETE /api/v1/sites/{site_id}/mapstacks/{mapstack_id}`; replaced `map.group_name`/`map.group_idx` with `mapstack_id`/`mapstack_floor`
+- `POST /api/v1/register` (`admin_invite` schema): added optional `no_tracking` privacy-consent setting with GDPR-dependent default behavior
+- `GET /api/v1/sites/{site_id}/stats/calls/count`: added `mac` and `ap_mac` filters; `rating` now accepts comma-separated values
+- `GET /api/v1/sites/{site_id}/rrm/channel_scores/band/{band}`: added optional `ap` query parameter to return per-AP channel scores
+- `GET /api/v1/orgs/{org_id}/inventory/search`: added `vc_mac`, `master_mac`, `modified_after`, `disconnected_before` query parameters
+- `GET /api/v1/orgs/{org_id}/inventory/search` (`inventory_search_result` schema): added `timestamp`, `last_name_change`, `last_disconnected`
+- `GET /api/v1/orgs/{org_id}/inventory/search` (`inventory_search` schema): `start` and `end` changed from integer to number (epoch seconds with fractional part)
+- `POST /api/v1/orgs/{org_id}/networks`, `GET/PUT /api/v1/orgs/{org_id}/networks/{network_id}` (`network` schema): added optional `zone_id` (SecurityZone UUID; when omitted the network `name` is used as the security zone name)
+- Added `GET/POST /api/v1/orgs/{org_id}/securityzones` and `GET/PUT/DELETE /api/v1/orgs/{org_id}/securityzones/{securityzone_id}` (Org-level SRX security zones); added `securityzone` and `securityzones` schemas, `SecurityZone` and `SecurityZonesArray` responses, and the `Orgs Security Zones` tag
+- `POST /api/v1/orgs/{org_id}/gatewaytemplates`, `GET/PUT /api/v1/orgs/{org_id}/gatewaytemplates/{gatewaytemplate_id}` (`gateway_template` schema) and `PUT /api/v1/sites/{site_id}/devices/{device_id}` (`device_gateway` schema): added `mnha_config`; added `gateway_mnha_config` schema (SRX Multi-Node HA, replaces chassis-cluster mode when enabled)
+- `POST /api/v1/orgs/{org_id}/pcaps/capture` (`capture_mxedge` schema): `max_pkt_len` maximum lowered from 2048 to 1536
+- `GET /api/v1/orgs/{org_id}/stats/mxedges`, `GET /api/v1/orgs/{org_id}/stats/mxedges/{mxedge_id}`, `GET /api/v1/sites/{site_id}/stats/mxedges`, `GET /api/v1/sites/{site_id}/stats/mxedges/{mxedge_id}` (`stats_mxedge` schema): added `drop_stat`; added `stats_mxedge_drop_stat` schema
+- `GET /api/v1/orgs/{org_id}/stats/bgp_peers/search` and `GET /api/v1/sites/{site_id}/stats/bgp_peers/search` (`bgp_stats` schema): added `flap_count` and `router_id`
+- `GET /api/v1/orgs/{org_id}/stats/ospf_peers/search` and `GET /api/v1/sites/{site_id}/stats/ospf_peers/search` (`ospf_peer_stats_search_results_items` schema): renamed `peer_ip` → `neighbor` (`peer_ip` kept and marked deprecated); added `neighbor_id`
+- Added `GET /api/v1/orgs/{org_id}/setting/mist_scep/events/search` (Mist SCEP PKI operation events); added `scep_event`, `scep_events`, `scep_event_type`, `org_scep_events_search_type` and `response_scep_events_search` schemas, and the `ScepEventsSearch` response
+- `POST /api/v1/sites/{site_id}/pcaps/capture` (`capture_max_pkt_length` schema): maximum `max_pkt_len` lowered from 2048 to 1536
+- `GET/POST /api/v1/orgs/{org_id}/assetfilters`, `GET/PUT /api/v1/orgs/{org_id}/assetfilters/{assetfilter_id}`, `GET/POST /api/v1/sites/{site_id}/assetfilters`, `GET/PUT /api/v1/sites/{site_id}/assetfilters/{assetfilter_id}` (`asset_filter` schema): added `aeroscout_forwarding`
+- `switch_multicast_config` (network templates, device profiles, site settings, and device configuration): added `rp_mac`, `peg_enabled`, and `sbd_wan_rpf`; clarified `anycast_rp` / `rp_ip` precedence and EVPN RP behavior
+- `switch_port_usage` (site settings and other shared switch port-usage configurations): added optional `no_local_port_config` (boolean, default `false`) to control whether the usage can be overridden in local port configuration
+- `GET/PUT /api/v1/sites/{site_id}/setting` and `GET /api/v1/sites/{site_id}/setting/derived` (`site_setting_paloalto_networks`, `site_setting_juniper_srx` schemas): added optional `mist_nac_user_role_source` enum (`idp_role`, `radius_group`, `none`), defaulting to `idp_role`
+- `synthetictest_config_wan_speedtest` (`GET/PUT /api/v1/orgs/{org_id}/setting`, `GET/PUT /api/v1/sites/{site_id}/setting`, and `GET /api/v1/sites/{site_id}/setting/derived`): renamed `enabled` to `disabled` and set the default to `false`
+- `switch_port_usage` (`mac_auth_protocol`): clarified Mist NAC behavior; the protocol is forced to `pap` unless `mist_nac.enable_eap_md5_for_mab` preserves `eap-md5` for EAP-MD5 over MAB
+- Added `GET/POST/DELETE /api/v1/sites/{site_id}/flow_capture` with Flow Capture session, request, normalized stream message, and status response schemas; request validation requires `switches` plus at least one flow filter
+- `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis` schema): added multi-AP `device_ids` (maximum 5, takes precedence over `device_id`); extended duration maximum from 600 to 3600 seconds; added `SpectrumAnalysisSession` response with `session_id` and optional `invalid_device_ids`
+- `POST /api/v1/sites/{site_id}/analyze_spectrum` (`spectrum_analysis_response` schema): added `started_time`, `device_id`/`device_ids`, `duration`, `band`, `format`, `width`, and `channels`; added multi-AP `invalid_device_ids`
+- `GET /api/v1/sites/{site_id}/stats/analyze_spectrum` (`response_past_spectrum_analysis_result` schema): added optional `device_id`/`device_ids` identifiers, with a maximum of 5 devices (both remain optional; legacy records identified only by `mac` are still valid)
+
 ## [2607.1.1] - 2026-08-17
 
 - `GET /api/v1/orgs/{org_id}/jsi/inventory/search` (`warranty_type` query parameter and `js_inventory_item.warranty_type`): changed from a fixed enum to a string to support all warranty values returned by Juniper Support Insight.

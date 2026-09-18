@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2607.1.1**
+  description: '> Version: **2609.1.0**
 
     >
 
-    > Date: **August 17, 2026**
+    > Date: **September 7, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2607.1.1
+  version: 2609.1.0
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -643,11 +643,9 @@ tags:
     providers such as microsoft EntraID, okta workforce identity cloud, and google
     workspace idp.
   name: Orgs NAC IDP
-- description: The NAC IDP allows users to integrate with various Identity Providers
-    (IDPs) to enhance authentication and access control. Admins can configure identity
-    providers such as microsoft EntraID, okta workforce identity cloud, and google
-    workspace idp.
-  name: Sites NAC Fingerprints
+- description: Search and count client device fingerprint records (family, manufacturer,
+    model, and OS) inferred by Mist NAC insights across the organization.
+  name: Orgs NAC Fingerprints
 - description: 'NAC Tags are the building blocks to compose nacrules.
 
     They can either appear in the "matching" / "not_matching" sections of a nacrule,
@@ -867,6 +865,10 @@ tags:
     \ will be flagged in [Device Config History]($e/Sites%20Devices/searchSiteDeviceConfigHistory)\
     \ where you can search for the when and where the violation occurs."
   name: Orgs Security Policies
+- description: Security Zones are Org-level zones used by SRX gateways. The zone `name`
+    is used as the security zone name on the device, and Networks can reference a
+    zone through their `zone_id`.
+  name: Orgs Security Zones
 - description: 'A Service refers to the applications that network users will connect
     to. These applications represent traffic destinations and are essential for defining
     network policies and security configurations.
@@ -4167,6 +4169,7 @@ paths:
     get:
       description: Search organizations under this MSP using organization identifiers,
         names, subscription state, trial state, usage types, and time-based filters.
+        Only organizations with at least one claimed device are returned.
       operationId: searchMspOrgs
       parameters:
       - $ref: '#/components/parameters/name'
@@ -10416,6 +10419,111 @@ paths:
       summary: updateOrgIdpProfile
       tags:
       - Orgs IDP Profiles
+  /api/v1/orgs/{org_id}/insights/fingerprints/count:
+    get:
+      description: Count Client Fingerprints
+      operationId: countOrgClientFingerprints
+      parameters:
+      - description: 'Field used to group this count response. enum: `family`, `model`,
+          `os`, `os_type`'
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/fingerprints_count_distinct'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgClientFingerprints
+      tags:
+      - Orgs NAC Fingerprints
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+  /api/v1/orgs/{org_id}/insights/fingerprints/search:
+    get:
+      description: Search Client Fingerprints
+      operationId: searchOrgClientFingerprints
+      parameters:
+      - description: Device Category of the client device
+        example: EX Series Switch
+        in: query
+        name: family
+        schema:
+          type: string
+      - description: 'Filter results by client type. enum: `wireless`, `wired`, `vty`'
+        example: wired
+        in: query
+        name: client_type
+        schema:
+          $ref: '#/components/schemas/nac_access_type'
+      - description: Filter results by device model
+        example: ex4100-f-12p
+        in: query
+        name: model
+        schema:
+          type: string
+      - description: Manufacturer name of the client device
+        example: Juniper Networks, Inc.
+        in: query
+        name: mfg
+        schema:
+          type: string
+      - description: Operating System name and version of the client device
+        example: JUNOS 22.3R1.12
+        in: query
+        name: os
+        schema:
+          type: string
+      - description: Operating system name of the client device
+        example: JUNOS
+        in: query
+        name: os_type
+        schema:
+          type: string
+      - description: Filter results by MAC address
+        example: d420b080516d
+        in: query
+        name: mac
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - $ref: '#/components/parameters/sort_wcid'
+      - $ref: '#/components/parameters/search_after'
+      responses:
+        '200':
+          $ref: '#/components/responses/FingerprintSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgClientFingerprints
+      tags:
+      - Orgs NAC Fingerprints
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/insights/marvisclient/{marvisclient_id}/marvisclient-metrics:
     get:
       description: Return time-series metrics for a specific Marvis Client device.
@@ -10923,8 +11031,9 @@ paths:
   /api/v1/orgs/{org_id}/inventory/search:
     get:
       description: Search organization inventory records with filters for type, MAC
-        address, model, name, site, serial number, Virtual Chassis master state, SKU,
-        version, status, and text.
+        address, Virtual Chassis MAC address, Virtual Chassis master MAC address,
+        model, name, site, serial number, Virtual Chassis master state, SKU, version,
+        status, and text.
       operationId: searchOrgInventory
       parameters:
       - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
@@ -10942,6 +11051,24 @@ paths:
           - 5c5b350e0001,*5b35*
           - 5c5b350e0001
           - '*5b35*'
+          type: string
+      - description: Virtual Chassis MAC address. Accepts multiple comma-separated
+          values.
+        in: query
+        name: vc_mac
+        schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
+          - 5c5b350e0001
+          type: string
+      - description: MAC address of the Virtual Chassis master device. Accepts multiple
+          comma-separated values.
+        in: query
+        name: master_mac
+        schema:
+          examples:
+          - 5c5b53010101,5c5b53020202
+          - 5c5b350e0001
           type: string
       - description: Partial / full Device model. Use `prefix*` for prefix search
           or `*substring*` for contains search (e.g. `AP4*` and `*P4*` match `AP43`).
@@ -11034,6 +11161,21 @@ paths:
         name: text
         schema:
           type: string
+      - description: Filter on inventory last modified time, in epoch
+        in: query
+        name: modified_after
+        schema:
+          examples:
+          - 1733522845
+          type: integer
+      - description: Filter results to devices that were last disconnected before
+          this time, in epoch seconds
+        in: query
+        name: disconnected_before
+        schema:
+          examples:
+          - 1781519042
+          type: integer
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/search_after'
@@ -18063,6 +18205,137 @@ paths:
       summary: updateOrgSecPolicy
       tags:
       - Orgs Security Policies
+  /api/v1/orgs/{org_id}/securityzones:
+    get:
+      description: List organization-level security zones. Security zones are used
+        by SRX gateways, and the zone `name` is used as the security zone name on
+        the device.
+      operationId: listOrgSecurityZones
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/SecurityZonesArray'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: listOrgSecurityZones
+      tags:
+      - Orgs Security Zones
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    post:
+      description: Create an organization-level security zone for SRX gateways. Networks
+        reference a zone through their `zone_id`, and several networks can share the
+        same zone.
+      operationId: createOrgSecurityZone
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  name: corp-zone
+            schema:
+              $ref: '#/components/schemas/securityzone'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/SecurityZone'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: createOrgSecurityZone
+      tags:
+      - Orgs Security Zones
+  /api/v1/orgs/{org_id}/securityzones/{securityzone_id}:
+    delete:
+      description: Delete an organization security zone by ID so it can no longer
+        be referenced by a Network `zone_id`.
+      operationId: deleteOrgSecurityZone
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteOrgSecurityZone
+      tags:
+      - Orgs Security Zones
+    get:
+      description: Retrieve details for a specific organization security zone.
+      operationId: getOrgSecurityZone
+      responses:
+        '200':
+          $ref: '#/components/responses/SecurityZone'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getOrgSecurityZone
+      tags:
+      - Orgs Security Zones
+    parameters:
+    - $ref: '#/components/parameters/org_id'
+    - $ref: '#/components/parameters/securityzone_id'
+    put:
+      description: Update an organization security zone. Renaming a zone changes the
+        security zone name used on the device for every Network referencing it.
+      operationId: updateOrgSecurityZone
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  name: corp-zone
+            schema:
+              $ref: '#/components/schemas/securityzone'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/SecurityZone'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: updateOrgSecurityZone
+      tags:
+      - Orgs Security Zones
   /api/v1/orgs/{org_id}/servicepolicies:
     get:
       description: List organization-level service policies. Service policies match
@@ -19105,6 +19378,65 @@ paths:
       summary: revokeOrgIssuedClientCertificates
       tags:
       - Orgs SCEP
+  /api/v1/orgs/{org_id}/setting/mist_scep/events/search:
+    get:
+      description: Search Mist SCEP PKI operation events for the organization. Use
+        this to audit certificate issuance errors and diagnose client onboarding problems.
+      operationId: searchOrgScepEvents
+      parameters:
+      - description: 'Filter by event type. enum: `failure`, `success`'
+        in: query
+        name: type
+        schema:
+          $ref: '#/components/schemas/org_scep_events_search_type'
+      - description: Filter by the MDM or certificate provider that triggered the
+          operation
+        example: jamf
+        in: query
+        name: cert_provider
+        schema:
+          type: string
+      - description: Partial match against the certificate common name, such as a
+          user UPN
+        example: john@corp.com
+        in: query
+        name: common_name
+        schema:
+          type: string
+      - description: Filter by the device identifier associated with the SCEP operation
+        in: query
+        name: device_id
+        schema:
+          examples:
+          - bb08e3c5-a1d9-5f21-a3b7-cd0821eab8f6
+          format: uuid
+          type: string
+      - description: Keyword search within the event reason text
+        example: invalid challenge
+        in: query
+        name: text
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScepEventsSearch'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: searchOrgScepEvents
+      tags:
+      - Orgs SCEP
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/setting/pcap_bucket/setup:
     parameters:
     - $ref: '#/components/parameters/org_id'
@@ -23077,6 +23409,64 @@ paths:
       summary: updateOrgUserMac
       tags:
       - Orgs User MACs
+  /api/v1/orgs/{org_id}/vars/count:
+    get:
+      description: 'Count organization vars, optionally grouped by `distinct` and
+        filtered by site, variable name, and source.
+
+
+        Example: /api/v1/orgs/{org_id}/vars/count?distinct=var'
+      operationId: countOrgVars
+      parameters:
+      - description: 'Field used to group this count response. enum: `site_id`, `src`,
+          `var`'
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/org_vars_count_distinct'
+      - description: Filter results by site identifier. Accepts multiple comma-separated
+          values.
+        in: query
+        name: site_id
+        schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
+          type: string
+      - description: Filter variable results by variable name. Accepts multiple comma-separated
+          values.
+        in: query
+        name: var
+        schema:
+          examples:
+          - guest_end,guest_net
+          type: string
+      - description: 'Filter results by source. enum: `deviceprofile`, `site`'
+        in: query
+        name: src
+        schema:
+          $ref: '#/components/schemas/var_source'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: countOrgVars
+      tags:
+      - Orgs Vars
+    parameters:
+    - $ref: '#/components/parameters/org_id'
   /api/v1/orgs/{org_id}/vars/search:
     get:
       description: 'Search vars
@@ -24978,6 +25368,7 @@ paths:
                   first_name: John
                   invite_code: MISTROCKS
                   last_name: Smith
+                  no_tracking: false
                   org_name: Smith LLC
                   password: foryoureyesonly
                   recaptcha: string
@@ -26029,7 +26420,7 @@ paths:
         description: Request Body
       responses:
         '200':
-          $ref: '#/components/responses/WebsocketSession'
+          $ref: '#/components/responses/SpectrumAnalysisSession'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -31805,6 +32196,97 @@ paths:
       summary: updateSiteEvpnTopology
       tags:
       - Sites EVPN Topologies
+  /api/v1/sites/{site_id}/flow_capture:
+    delete:
+      description: Stop the active flow capture session for the site. Returns 400
+        if no flow capture session is active.
+      operationId: stopSiteFlowCapture
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: stopSiteFlowCapture
+      tags:
+      - Utilities PCAPs
+    get:
+      description: Get the current flow capture session status for the site. Returns
+        an empty object when no session is active.
+      operationId: getSiteFlowCaptureStatus
+      responses:
+        '200':
+          $ref: '#/components/responses/FlowCaptureStatus'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteFlowCaptureStatus
+      tags:
+      - Utilities PCAPs
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    post:
+      description: 'Start a flow capture session on one or more online switches running
+        JMA firmware. The same filter is applied to every switch. Only one packet
+        or flow capture session can be active per site at a time.
+
+
+        The captured flow records are streamed over websocket rather than returned
+        in the HTTP response.
+
+
+        #### Subscribe to Flow Capture outputs
+
+        `WS /api-ws/v1/stream`'
+      operationId: startSiteFlowCapture
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  dst_ip: 8.8.8.8
+                  dst_port: 443
+                  duration: 600
+                  protocol: tcp
+                  src_ip: 10.0.0.0/8
+                  src_port: 1024
+                  switches:
+                  - 5c5b35000001
+                  - 5c5b35000002
+            schema:
+              $ref: '#/components/schemas/flow_capture_request'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/FlowCaptureStatus'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: startSiteFlowCapture
+      tags:
+      - Utilities PCAPs
   /api/v1/sites/{site_id}/gatewaytemplates/derived:
     get:
       description: Get the list of derived Gateway Templates a Site
@@ -32230,111 +32712,6 @@ paths:
     - $ref: '#/components/parameters/site_id'
     - $ref: '#/components/parameters/metric'
     - $ref: '#/components/parameters/device_mac'
-  /api/v1/sites/{site_id}/insights/fingerprints/count:
-    get:
-      description: Count Client Fingerprints
-      operationId: countSiteClientFingerprints
-      parameters:
-      - description: 'Field used to group this count response. enum: `family`, `model`,
-          `os`, `os_type`'
-        in: query
-        name: distinct
-        schema:
-          $ref: '#/components/schemas/fingerprints_count_distinct'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/limit'
-      responses:
-        '200':
-          $ref: '#/components/responses/Count'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: countSiteClientFingerprints
-      tags:
-      - Sites NAC Fingerprints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
-  /api/v1/sites/{site_id}/insights/fingerprints/search:
-    get:
-      description: Search Client Fingerprints
-      operationId: searchSiteClientFingerprints
-      parameters:
-      - description: Device Category of the client device
-        example: EX Series Switch
-        in: query
-        name: family
-        schema:
-          type: string
-      - description: 'Filter results by client type. enum: `wireless`, `wired`, `vty`'
-        example: wired
-        in: query
-        name: client_type
-        schema:
-          $ref: '#/components/schemas/nac_access_type'
-      - description: Filter results by device model
-        example: ex4100-f-12p
-        in: query
-        name: model
-        schema:
-          type: string
-      - description: Manufacturer name of the client device
-        example: Juniper Networks, Inc.
-        in: query
-        name: mfg
-        schema:
-          type: string
-      - description: Operating System name and version of the client device
-        example: JUNOS 22.3R1.12
-        in: query
-        name: os
-        schema:
-          type: string
-      - description: Operating system name of the client device
-        example: JUNOS
-        in: query
-        name: os_type
-        schema:
-          type: string
-      - description: Filter results by MAC address
-        example: d420b080516d
-        in: query
-        name: mac
-        schema:
-          type: string
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/start'
-      - $ref: '#/components/parameters/end'
-      - $ref: '#/components/parameters/duration'
-      - $ref: '#/components/parameters/interval'
-      - $ref: '#/components/parameters/sort_wcid'
-      - $ref: '#/components/parameters/search_after'
-      responses:
-        '200':
-          $ref: '#/components/responses/FingerprintSearch'
-        '400':
-          $ref: '#/components/responses/HTTP400'
-        '401':
-          $ref: '#/components/responses/HTTP401'
-        '403':
-          $ref: '#/components/responses/HTTP403'
-        '404':
-          $ref: '#/components/responses/HTTP404'
-        '429':
-          $ref: '#/components/responses/HTTP429'
-      summary: searchSiteClientFingerprints
-      tags:
-      - Sites NAC Fingerprints
-    parameters:
-    - $ref: '#/components/parameters/site_id'
   /api/v1/sites/{site_id}/insights/gateway/{device_id}/stats:
     get:
       description: Get Gateway Insight Metrics
@@ -32938,8 +33315,6 @@ paths:
             examples:
               Example:
                 value:
-                  group_idx: 0
-                  group_name: string
                   height: 0
                   height_m: 0
                   latlng_br:
@@ -33861,6 +34236,73 @@ paths:
         '429':
           $ref: '#/components/responses/HTTP429'
       summary: createSiteMapStack
+      tags:
+      - Sites Map Stacks
+  /api/v1/sites/{site_id}/mapstacks/{mapstack_id}:
+    delete:
+      description: Delete a Site Map Stack
+      operationId: deleteSiteMapStack
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteSiteMapStack
+      tags:
+      - Sites Map Stacks
+    get:
+      description: Get Site Map Stack Details
+      operationId: getSiteMapStack
+      responses:
+        '200':
+          $ref: '#/components/responses/Mapstack'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: getSiteMapStack
+      tags:
+      - Sites Map Stacks
+    parameters:
+    - $ref: '#/components/parameters/site_id'
+    - $ref: '#/components/parameters/mapstack_id'
+    put:
+      description: Update a Site Map Stack
+      operationId: updateSiteMapStack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mapstack'
+        description: Request Body
+      responses:
+        '200':
+          $ref: '#/components/responses/Mapstack'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '404':
+          $ref: '#/components/responses/HTTP404'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: updateSiteMapStack
       tags:
       - Sites Map Stacks
   /api/v1/sites/{site_id}/marvis_configs/count:
@@ -36044,6 +36486,13 @@ paths:
       description: Get Site Channel Scores
       operationId: getSiteChannelScores
       parameters:
+      - description: AP MAC address. When supplied, returns per-AP channel scores
+          instead of site-wide scores.
+        in: query
+        name: ap
+        required: false
+        schema:
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       responses:
@@ -38826,15 +39275,29 @@ paths:
         name: distinct
         schema:
           $ref: '#/components/schemas/count_site_calls_distinct'
-      - description: Feedback rating (e.g. "rating=1" or "rating=1,2")
+      - description: Filter results by client MAC address
+        in: query
+        name: mac
+        schema:
+          examples:
+          - '001122334455'
+          type: string
+      - description: Filter results by AP MAC address
+        in: query
+        name: ap_mac
+        schema:
+          examples:
+          - '001122334455'
+          type: string
+      - description: Feedback rating, from 1 to 5; accepts comma-separated values
+          such as "1,2"
         in: query
         name: rating
         schema:
           examples:
-          - 5
-          maximum: 5
-          minimum: 1
-          type: integer
+          - 1,2
+          pattern: ^[1-5](,[1-5])*$
+          type: string
       - description: Filter application statistics by application name
         in: query
         name: app
@@ -45448,6 +45911,7 @@ components:
         limit: 0
         results:
         - evpn_overlay: true
+          flap_count: 3
           for_overlay: true
           local_as: 65000
           mac: 020001c04668
@@ -45456,6 +45920,7 @@ components:
           neighbor_mac: 020001c04600
           node: node0
           org_id: 0c160b7f-1027-4cd1-923b-744534c4b070
+          router_id: 172.16.254.2
           rx_pkts: 63366
           rx_routes: 60
           site_id: 725a8d34-a126-4f2c-b990-d1219421cb75
@@ -51514,8 +51979,6 @@ components:
       value:
       - created_time: 0
         flags: {}
-        group_idx: 1
-        group_name: East Wing
         height: 0
         height_m: 0
         id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
@@ -51526,6 +51989,8 @@ components:
           lat: string
           lng: string
         locked: true
+        mapstack_floor: 1
+        mapstack_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
         modified_time: 0
         name: string
         occupancy_limit: 0
@@ -53458,7 +53923,9 @@ components:
       value:
         limit: 1000
         results:
-        - mac: f01c2df166e0
+        - last_disconnected: 1616109044
+          last_name_change: 1784007045.409
+          mac: f01c2df166e0
           magic: WVTFBLTNPXD23H2
           master: true
           members:
@@ -53472,6 +53939,7 @@ components:
           site_id: 01dc141d-b6af-4baa-b00f-0e31ef954c4f
           sku: EX4300-48P
           status: disconnected
+          timestamp: 1616108044
           type: switch
           vc_mac: f01c2df166e0
           version: 21.4R3.5
@@ -54590,6 +55058,35 @@ components:
           WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat><md:AssertionConsumerService
           Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api.mist.com/api/v1/saml/llDfa13f/login"
           index="0" isDefault="true"/></md:SPSSODescriptor></md:EntityDescriptor>
+    ScepEventsSearchExample:
+      value:
+        end: 1748314800
+        limit: 100
+        page: 1
+        results:
+        - cert_provider: jamf
+          common_name: name@company.net bb08e3c5-a1d9-5f21-a3b7-cd0821eab8f6
+          device_id: bb08e3c5-a1d9-5f21-a3b7-cd0821eab8f6
+          org_id: 9301bff6-8992-49d6-b1ea-907ee81bb5fb
+          text: invalid challenge/expired
+          timestamp: 1748227903
+          type: SCEP_PKI_OPERATION_FAILURE
+        - cert_provider: jamf
+          common_name: name@company.net aa3d2e37-6063-4bc0-9d5f-3bc13509f1f4
+          device_id: ''
+          org_id: 9342bff6-8992-49d6-b1ea-907ee81bb5fb
+          text: invalid CN or device_id
+          timestamp: 1748227803
+          type: SCEP_PKI_OPERATION_FAILURE
+        - cert_provider: jamf
+          common_name: name@company.net aa3d2e37-6063-4bc0-9d5f-3bc13509f1f4
+          device_id: aa3d2e37-6063-4bc0-9d5f-3bc13509f1f4
+          org_id: 9342bff6-8992-49d6-b1ea-907ee81bb5fb
+          text: scep PKI operation successful
+          timestamp: 1748227803
+          type: SCEP_PKI_OPERATION_SUCCESS
+        start: 1748228400
+        total: 3
     SdkinviteExample:
       value:
         created_time: 1428954000
@@ -54688,6 +55185,20 @@ components:
             type: open
           band: '5'
           ssid: office-guest
+    SecurityZoneExample:
+      value:
+        created_time: 1656353525
+        id: a045ea40-ccd0-4660-8f35-0305fae26e9c
+        modified_time: 1656353525
+        name: corp-zone
+        org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
+    SecurityZonesArrayExample:
+      value:
+      - created_time: 1656353525
+        id: a045ea40-ccd0-4660-8f35-0305fae26e9c
+        modified_time: 1656353525
+        name: corp-zone
+        org_id: b069b358-4c97-5319-1f8c-7c5ca64d6ab1
     SelfAuditLogsExample:
       value:
         end: 1428954000
@@ -59254,6 +59765,15 @@ components:
         - 000000ab-00ab-00ab-00ab-0000000000ab
         format: uuid
         type: string
+    mapstack_id:
+      in: path
+      name: mapstack_id
+      required: true
+      schema:
+        examples:
+        - 000000ab-00ab-00ab-00ab-0000000000ab
+        format: uuid
+        type: string
     marvisinvite_id:
       in: path
       name: marvisinvite_id
@@ -59736,6 +60256,15 @@ components:
       name: secret
       required: true
       schema:
+        type: string
+    securityzone_id:
+      in: path
+      name: securityzone_id
+      required: true
+      schema:
+        examples:
+        - 000000ab-00ab-00ab-00ab-0000000000ab
+        format: uuid
         type: string
     service_id:
       in: path
@@ -61913,6 +62442,15 @@ components:
               $ref: '#/components/examples/FingerprintSearchExample'
           schema:
             $ref: '#/components/schemas/fingerprint_search_result'
+      description: OK
+    FlowCaptureStatus:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/flow_capture_session'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/flow_capture_session'
       description: OK
     GatewayCluster:
       content:
@@ -64431,6 +64969,21 @@ components:
           schema:
             $ref: '#/components/schemas/saml_metadata'
       description: OK
+    ScepEventsSearch:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ScepEventsSearchExample'
+          schema:
+            $ref: '#/components/schemas/response_scep_events_search'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/ScepEventsSearchExample'
+          schema:
+            $ref: '#/components/schemas/response_scep_events_search'
+      description: OK
     Sdkinvite:
       content:
         application/json:
@@ -64580,6 +65133,36 @@ components:
               $ref: '#/components/examples/SecpolicyExample'
           schema:
             $ref: '#/components/schemas/secpolicy'
+      description: OK
+    SecurityZone:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SecurityZoneExample'
+          schema:
+            $ref: '#/components/schemas/securityzone'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SecurityZoneExample'
+          schema:
+            $ref: '#/components/schemas/securityzone'
+      description: OK
+    SecurityZonesArray:
+      content:
+        application/json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SecurityZonesArrayExample'
+          schema:
+            $ref: '#/components/schemas/securityzones'
+        application/vnd.api+json:
+          examples:
+            Example:
+              $ref: '#/components/examples/SecurityZonesArrayExample'
+          schema:
+            $ref: '#/components/schemas/securityzones'
       description: OK
     SelfAuditLogs:
       content:
@@ -65210,6 +65793,15 @@ components:
           schema:
             $ref: '#/components/schemas/sle_threshold'
       description: Example response
+    SpectrumAnalysisSession:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/spectrum_analysis_response'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/spectrum_analysis_response'
+      description: OK
     Sso:
       content:
         application/json:
@@ -67484,6 +68076,10 @@ components:
           examples:
           - Smith
           type: string
+        no_tracking:
+          description: Optional privacy-consent setting. When omitted, defaults to
+            true in GDPR environments and false in non-GDPR environments.
+          type: boolean
         org_name:
           description: Organization name supplied during initial admin registration
           examples:
@@ -69212,7 +69808,10 @@ components:
     ap_port_config_mac_auth_protocol:
       default: pap
       description: 'if `enable_mac_auth`==`true`, allows user to select an authentication
-        protocol. enum: `eap-md5`, `eap-peap`, `pap`'
+        protocol. When Mist NAC is enabled, this is forced to `pap`, unless the Org
+        `mist_nac.enable_eap_md5_for_mab` setting is enabled: in that case `eap-md5`
+        is kept and the port still performs MAB (mac-radius) but sends the request
+        as EAP-MD5. enum: `eap-md5`, `eap-peap`, `pap`'
       enum:
       - eap-md5
       - eap-peap
@@ -70559,6 +71158,11 @@ components:
     asset_filter:
       description: BLE asset filter definition; all specified criteria must match
       properties:
+        aeroscout_forwarding:
+          default: false
+          description: Whether matching BLE advertisements are forwarded to AES when
+            aeroscout is enabled on the device
+          type: boolean
         ap_mac:
           description: Access point MAC address that must observe the BLE asset
           type: string
@@ -71380,6 +71984,11 @@ components:
         evpn_overlay:
           description: If this is created for evpn overlay
           type: boolean
+        flap_count:
+          description: Number of times the BGP session has flapped
+          examples:
+          - 3
+          type: integer
         for_overlay:
           description: If this is created for overlay
           type: boolean
@@ -71416,6 +72025,12 @@ components:
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Owning organization identifier for this BGP peer statistic
+        router_id:
+          description: Local router ID (IP address) of the device reporting this BGP
+            peer
+          examples:
+          - 172.16.254.2
+          type: string
         rx_pkts:
           $ref: '#/components/schemas/rx_pkts'
           description: Packets received from this BGP neighbor
@@ -72343,10 +72958,11 @@ components:
       type: string
     capture_max_pkt_length:
       default: 512
-      description: Maximum bytes captured from each packet, or null to use the default
+      description: Maximum bytes captured from each packet; default is 512, minimum
+        is 64 and maximum is 1536. Null uses the default.
       examples:
       - 128
-      maximum: 2048
+      maximum: 1536
       minimum: 64
       type:
       - integer
@@ -72371,10 +72987,10 @@ components:
         max_pkt_len:
           default: 512
           description: Max_len of each packet to capture. Default is 512, minimum
-            is 64 and maximum is 2048
+            is 64 and maximum is 1536
           examples:
           - 512
-          maximum: 2048
+          maximum: 1536
           minimum: 64
           type: integer
         mxedges:
@@ -75935,6 +76551,9 @@ components:
           description: whether the device can be configured by Mist or not. This deprecates
             `managed` for adopted devices.
           type: boolean
+        mnha_config:
+          $ref: '#/components/schemas/gateway_mnha_config'
+          description: Multi-Node HA (MNHA) settings for this gateway, SRX only
         model:
           description: Gateway model reported for the device
           readOnly: true
@@ -78692,6 +79311,96 @@ components:
       - os
       - os_type
       type: string
+    flow_capture_direction:
+      description: 'Direction of the captured flow. enum: `egress`, `ingress`'
+      enum:
+      - egress
+      - ingress
+      type: string
+    flow_capture_filter:
+      additionalProperties: false
+      description: Normalized filter applied to a flow capture session
+      properties:
+        dst_ip:
+          type: string
+        dst_port:
+          type: integer
+        protocol:
+          $ref: '#/components/schemas/flow_capture_protocol'
+        src_ip:
+          type: string
+        src_port:
+          type: integer
+      type: object
+    flow_capture_invalid_switches:
+      additionalProperties: true
+      description: Switches that failed flow capture validation
+      type: object
+    flow_capture_protocol:
+      description: 'Flow capture protocol filter. enum: `tcp`, `udp`, `icmp`, `icmp6`'
+      enum:
+      - tcp
+      - udp
+      - icmp
+      - icmp6
+      type: string
+    flow_capture_request:
+      additionalProperties: false
+      description: Flow capture request for one or more switches
+      properties:
+        dst_ip:
+          type: string
+        dst_port:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        duration:
+          default: 600
+          maximum: 900
+          minimum: 60
+          type: integer
+        protocol:
+          $ref: '#/components/schemas/flow_capture_protocol'
+        src_ip:
+          type: string
+        src_port:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        switches:
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - switches
+      type: object
+    flow_capture_session:
+      additionalProperties: false
+      description: Current flow capture session status for a site
+      properties:
+        capture_filter:
+          $ref: '#/components/schemas/flow_capture_filter'
+        duration:
+          type: integer
+        enabled:
+          type: boolean
+        expiry:
+          type: integer
+        id:
+          format: uuid
+          type: string
+        invalid_switches:
+          $ref: '#/components/schemas/flow_capture_invalid_switches'
+        org_id:
+          $ref: '#/components/schemas/org_id'
+        site_id:
+          $ref: '#/components/schemas/site_id'
+        switch_count:
+          type: integer
+        timestamp:
+          type: integer
+      type: object
     flow_record:
       additionalProperties: false
       description: Network flow record reported by a switch device
@@ -79201,6 +79910,17 @@ components:
       items:
         type: string
       type: array
+    gateway_mnha_config:
+      additionalProperties: false
+      description: Multi-Node High Availability (MNHA) configuration, supported on
+        SRX devices only. When enabled, the device operates in MNHA mode instead of
+        chassis-cluster mode.
+      properties:
+        enabled:
+          default: false
+          description: Whether MNHA mode is enabled
+          type: boolean
+      type: object
     gateway_oob_ip_config:
       additionalProperties: false
       description: Out-of-band management IP configuration for gateway interfaces
@@ -79984,6 +80704,10 @@ components:
         ip_configs:
           $ref: '#/components/schemas/gateway_ip_configs'
           description: Gateway interface IP configuration defaults by network name
+        mnha_config:
+          $ref: '#/components/schemas/gateway_mnha_config'
+          description: Multi-Node HA (MNHA) settings applied by this gateway template,
+            SRX only
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the gateway template was last modified
@@ -81517,8 +82241,10 @@ components:
       description: Paginated inventory search response
       properties:
         end:
-          description: Page ending index for this inventory search response
-          type: integer
+          description: End of the inventory search time window, in epoch seconds
+          examples:
+          - 1784062455.7383447
+          type: number
         limit:
           description: Maximum number of inventory search results requested
           examples:
@@ -81531,8 +82257,10 @@ components:
           $ref: '#/components/schemas/inventory_search_results'
           description: Inventory records returned by the search
         start:
-          description: Page starting index for this inventory search response
-          type: integer
+          description: Start of the inventory search time window, in epoch seconds
+          examples:
+          - 1784058855.7383447
+          type: number
         total:
           description: Number of inventory records matching the search
           examples:
@@ -81543,6 +82271,16 @@ components:
       additionalProperties: false
       description: Inventory record returned by inventory search
       properties:
+        last_disconnected:
+          description: Time the device was last disconnected, in epoch seconds
+          examples:
+          - 1616109044
+          type: number
+        last_name_change:
+          description: Time the inventory entry name was last changed, in epoch seconds
+          examples:
+          - 1784007045.409
+          type: number
         mac:
           description: Device MAC address for this inventory search result
           examples:
@@ -81593,6 +82331,11 @@ components:
           examples:
           - disconnected
           type: string
+        timestamp:
+          description: Time the inventory entry was created, in epoch seconds
+          examples:
+          - 1616108044
+          type: number
         type:
           $ref: '#/components/schemas/device_type_default_ap'
           description: 'Device type for this inventory search result. enum: `ap`,
@@ -83377,16 +84120,6 @@ components:
         geofences:
           $ref: '#/components/schemas/map_geofences'
           description: Location boundary definitions configured on this map
-        group_idx:
-          description: Optional floor or group ordering index for this map
-          examples:
-          - 1
-          type: integer
-        group_name:
-          description: Optional floor or group display name for this map
-          examples:
-          - East Wing
-          type: string
         height:
           description: When `type`==`image`, height of the map image in pixels
           examples:
@@ -83409,6 +84142,16 @@ components:
           default: false
           description: Whether this map is considered locked down
           type: boolean
+        mapstack_floor:
+          description: Optional floor number within the map stack
+          examples:
+          - 1
+          minimum: 0
+          type: integer
+        mapstack_id:
+          description: Map stack containing this map
+          format: uuid
+          type: string
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the map was last modified
@@ -86795,8 +87538,8 @@ components:
             through this NAC portal
           type: boolean
         enable_telemetry:
-          description: Model, version, fingering, events (connecting, disconnect,
-            roaming), which ap
+          description: Optional, model, version, fingerprinting, events (connecting,
+            disconnect, roaming), which ap, default is false
           type: boolean
         expiry_notification_time:
           description: Number of days before certificate expiration to start sending
@@ -87530,6 +88273,15 @@ components:
         vpn_access:
           $ref: '#/components/schemas/network_vpn_access'
           description: VPN access settings keyed by VPN name for this network
+        zone_id:
+          description: SecurityZone this network belongs to. When set, the zone name
+            is used as the security zone name on the SRX, and multiple networks can
+            share the same zone. When omitted, the network `name` is used as the security
+            zone name.
+          examples:
+          - a045ea40-ccd0-4660-8f35-0305fae26e9c
+          format: uuid
+          type: string
       required:
       - name
       type: object
@@ -88538,6 +89290,14 @@ components:
       - pskportal_id
       - user_id
       type: string
+    org_scep_events_search_type:
+      description: 'enum: `failure`, `success`'
+      enum:
+      - failure
+      - success
+      examples:
+      - failure
+      type: string
     org_service_policies:
       description: List of organization-level service policies
       items:
@@ -88810,7 +89570,8 @@ components:
           type: integer
         ui_no_tracking:
           default: false
-          description: Whether UI usage tracking is disabled for the organization
+          description: Whether to disable UI usage tracking (e.g. Fullstory, Pendo)
+            for the whole organization
           type: boolean
         vpn_options:
           $ref: '#/components/schemas/org_setting_vpn_options'
@@ -90226,6 +90987,14 @@ components:
       items:
         $ref: '#/components/schemas/org_ui_settings_tile'
       type: array
+    org_vars_count_distinct:
+      default: var
+      description: 'enum: `site_id`, `src`, `var`'
+      enum:
+      - site_id
+      - src
+      - var
+      type: string
     org_wan_clients_count_distinct:
       default: mac
       description: 'enum: `hostname`, `ip`, `mac`, `mfg`, `network`'
@@ -90502,11 +91271,23 @@ components:
         mac:
           description: Router MAC address of the device advertising the OSPF peer
           type: string
+        neighbor:
+          description: IP address of the OSPF neighbor
+          examples:
+          - 172.29.1.4
+          type: string
+        neighbor_id:
+          description: Router ID (IP address) of the OSPF neighbor
+          examples:
+          - 172.16.254.2
+          type: string
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Organization identifier of the router reporting the peer state
         peer_ip:
-          description: IP address of the OSPF neighbor
+          deprecated: true
+          description: IP address of the OSPF neighbor. Deprecated, use `neighbor`
+            instead
           type: string
         port_id:
           description: Interface on which the OSPF neighbor is learned
@@ -95142,6 +95923,19 @@ components:
         channel_usage:
           $ref: '#/components/schemas/response_past_spectrum_analysis_channel_usages'
           description: Per-channel utilization measurements captured during the analysis
+        device_id:
+          description: AP device UUID used for a single-AP spectrum analysis
+          format: uuid
+          type: string
+        device_ids:
+          description: AP device UUIDs used for a multi-AP spectrum analysis; maximum
+            5 devices
+          items:
+            format: uuid
+            type: string
+          maxItems: 5
+          minItems: 1
+          type: array
         fft_samples:
           $ref: '#/components/schemas/response_past_spectrum_analysis_fft_samples'
           description: FFT signal samples captured during the analysis
@@ -95862,6 +96656,39 @@ components:
           type: integer
         width:
           description: Channel width used during the spectrum analysis scan, in MHz
+          type: integer
+      type: object
+    response_scep_events_search:
+      additionalProperties: false
+      description: Paginated Mist SCEP PKI operation event search response
+      properties:
+        end:
+          description: End of the SCEP event search window, in epoch seconds
+          examples:
+          - 1748314800
+          type: integer
+        limit:
+          description: Maximum number of SCEP events returned per page
+          examples:
+          - 100
+          type: integer
+        page:
+          description: Current page of SCEP event search results
+          examples:
+          - 1
+          type: integer
+        results:
+          $ref: '#/components/schemas/scep_events'
+          description: SCEP PKI operation events matching the search
+        start:
+          description: Start of the SCEP event search window, in epoch seconds
+          examples:
+          - 1748228400
+          type: integer
+        total:
+          description: Number of SCEP events matching the search
+          examples:
+          - 3
           type: integer
       type: object
     response_search:
@@ -98185,6 +99012,54 @@ components:
       - '5'
       minLength: 1
       type: string
+    scep_event:
+      additionalProperties: false
+      description: Mist SCEP PKI operation event reported for an organization
+      properties:
+        cert_provider:
+          description: MDM or certificate provider that triggered the SCEP operation
+          examples:
+          - jamf
+          type: string
+        common_name:
+          description: Common name presented in the SCEP certificate request
+          examples:
+          - name@company.net bb08e3c5-a1d9-5f21-a3b7-cd0821eab8f6
+          type: string
+        device_id:
+          description: Device identifier associated with the SCEP operation. Empty
+            when the SCEP request did not include a device ID
+          examples:
+          - bb08e3c5-a1d9-5f21-a3b7-cd0821eab8f6
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization where the SCEP operation was performed
+        text:
+          description: Reason text describing the outcome of the SCEP operation
+          examples:
+          - invalid challenge/expired
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+          description: Time when the SCEP event was recorded, in epoch seconds
+        type:
+          $ref: '#/components/schemas/scep_event_type'
+          description: 'SCEP event type. enum: `SCEP_PKI_OPERATION_FAILURE`, `SCEP_PKI_OPERATION_SUCCESS`.'
+      type: object
+    scep_event_type:
+      description: 'enum: `SCEP_PKI_OPERATION_FAILURE`, `SCEP_PKI_OPERATION_SUCCESS`'
+      enum:
+      - SCEP_PKI_OPERATION_FAILURE
+      - SCEP_PKI_OPERATION_SUCCESS
+      examples:
+      - SCEP_PKI_OPERATION_FAILURE
+      type: string
+    scep_events:
+      description: SCEP PKI operation events returned by a search
+      items:
+        $ref: '#/components/schemas/scep_event'
+      type: array
     sdk_invite_sms:
       description: Request body for sending an SDK invite by SMS
       properties:
@@ -98794,6 +99669,42 @@ components:
         $ref: '#/components/schemas/wlan'
       type: array
       uniqueItems: true
+    securityzone:
+      additionalProperties: false
+      description: Org-level security zone used by SRX gateways. The zone `name` is
+        used as the security zone name on the device, and Networks reference a zone
+        through their `zone_id`.
+      properties:
+        created_time:
+          $ref: '#/components/schemas/created_time'
+          description: Timestamp when the security zone was created, in epoch seconds
+        id:
+          $ref: '#/components/schemas/id'
+          description: Unique value identifying the security zone
+        modified_time:
+          $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the security zone was last modified, in epoch
+            seconds
+        name:
+          description: Security zone name used on the device. Must start with a letter
+            or a digit, followed by letters, digits, hyphens or underscores
+          examples:
+          - corp-zone
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization identifier associated with the security zone
+      required:
+      - name
+      type: object
+    securityzones:
+      description: Security zones returned by list operations
+      items:
+        $ref: '#/components/schemas/securityzone'
+      type: array
     service:
       description: Traffic service definition for applications or destinations used
         by gateway and SSR policies
@@ -101049,6 +101960,10 @@ components:
         gateways:
           $ref: '#/components/schemas/site_setting_juniper_srx_gateways'
           description: SRX gateways integrated with this site
+        mist_nac_user_role_source:
+          $ref: '#/components/schemas/site_setting_mist_nac_user_role_source'
+          description: 'Source of the Mist NAC user role sent to Juniper SRX gateways.
+            enum: `idp_role`, `radius_group`, `none`'
         send_mist_nac_user_info:
           description: Whether Mist NAC user information is sent to Juniper SRX gateways
           type: boolean
@@ -101079,6 +101994,15 @@ components:
       items:
         $ref: '#/components/schemas/site_setting_juniper_srx_gateway'
       type: array
+    site_setting_mist_nac_user_role_source:
+      default: idp_role
+      description: 'Source of the Mist NAC user role sent to firewall gateways. enum:
+        `idp_role`, `radius_group`, `none`'
+      enum:
+      - idp_role
+      - radius_group
+      - none
+      type: string
     site_setting_mxedge:
       additionalProperties: false
       description: Service settings for the site Mist Edge cluster
@@ -101124,6 +102048,10 @@ components:
         gateways:
           $ref: '#/components/schemas/site_setting_paloalto_networks_gateways'
           description: Palo Alto Networks gateways integrated with this site
+        mist_nac_user_role_source:
+          $ref: '#/components/schemas/site_setting_mist_nac_user_role_source'
+          description: 'Source of the Mist NAC user role sent to Palo Alto Networks
+            gateways. enum: `idp_role`, `radius_group`, `none`'
         send_mist_nac_user_info:
           default: false
           description: Whether Mist NAC user information is sent to Palo Alto Networks
@@ -103686,13 +104614,23 @@ components:
             type: integer
           type: array
         device_id:
-          description: Device ID of the AP that is performing spectrum analysis
+          description: Optional device-generated UUID of the AP that is performing
+            spectrum analysis. Required when `device_ids` is not provided.
           format: uuid
           type: string
+        device_ids:
+          description: Optional device-generated UUIDs of APs to scan. When provided,
+            these take precedence over `device_id`; maximum 5 devices.
+          items:
+            format: uuid
+            type: string
+          maxItems: 5
+          minItems: 1
+          type: array
         duration:
-          default: 300
+          default: 600
           description: Length of the spectrum analysis run, in seconds
-          maximum: 600
+          maximum: 3600
           minimum: 60
           type: integer
         format:
@@ -103716,6 +104654,56 @@ components:
       - json
       - stream
       type: string
+    spectrum_analysis_response:
+      additionalProperties: false
+      description: Response returned after starting AP spectrum analysis
+      properties:
+        band:
+          $ref: '#/components/schemas/spectrum_analysis_band'
+        channels:
+          items:
+            type: integer
+          type: array
+        device_id:
+          description: AP device UUID used for a single-AP spectrum analysis
+          format: uuid
+          type: string
+        device_ids:
+          description: AP device UUIDs used for a multi-AP spectrum analysis; maximum
+            5 devices
+          items:
+            format: uuid
+            type: string
+          maxItems: 5
+          minItems: 1
+          type: array
+        duration:
+          type: integer
+        format:
+          $ref: '#/components/schemas/spectrum_analysis_format'
+        invalid_device_ids:
+          additionalProperties:
+            items:
+              format: uuid
+              type: string
+            type: array
+          description: AP device IDs that failed validation, grouped by reason; available
+            for multi-AP requests
+          type: object
+        session_id:
+          description: Spectrum analysis session identifier used to correlate WebSocket
+            output
+          format: uuid
+          type: string
+        started_time:
+          description: Epoch timestamp when spectrum analysis started
+          type: integer
+        width:
+          description: Channel width used during spectrum analysis, in MHz
+          type: integer
+      required:
+      - session_id
+      type: object
     sponsor_link_validity_duration:
       anyOf:
       - default: 60
@@ -107561,6 +108549,10 @@ components:
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Time when the Mist Edge record was created, in epoch seconds
+        drop_stat:
+          $ref: '#/components/schemas/stats_mxedge_drop_stat'
+          description: Packet drop counters reported by the Mist Edge tunnel termination
+            service
         fips_enabled:
           description: Whether FIPS mode is enabled on the Mist Edge
           type: boolean
@@ -107772,6 +108764,43 @@ components:
           system: 50
           usage: 97
           user: 46
+      type: object
+    stats_mxedge_drop_stat:
+      additionalProperties: true
+      description: Packet drop counters reported by the Mist Edge tunnel termination
+        service. Counters not listed here may be reported as additional properties.
+      properties:
+        drop_ip4_must_fragment:
+          description: Packets dropped because the IPv4 packet required fragmentation
+          examples:
+          - 2
+          type: integer
+        drop_ipsec_no_sa:
+          description: Packets dropped because no matching IPsec security association
+            was found
+          examples:
+          - 1
+          type: integer
+        drop_ipsec_unknown_spi:
+          description: Packets dropped because the IPsec SPI was unknown
+          examples:
+          - 0
+          type: integer
+        drop_l2tp_no_session:
+          description: Packets dropped because no matching L2TP session was found
+          examples:
+          - 0
+          type: integer
+        drop_protected_svi:
+          description: Packets dropped because the destination was a protected SVI
+          examples:
+          - 0
+          type: integer
+        drop_vlan_not_on_port:
+          description: Packets dropped because the VLAN is not configured on the port
+          examples:
+          - 0
+          type: integer
       type: object
     stats_mxedge_inactive_vlan_strs:
       additionalProperties: false
@@ -111278,15 +112307,30 @@ components:
       properties:
         anycast_rp:
           default: false
-          description: When `true`, auto-generates a shared RP on `is_l3_border` devices
-            (ERB/IPClos topologies only)
+          description: When `true`, generates a shared anycast RP on all `is_l3_border`
+            devices in EVPN (ERB/IPClos) topologies. Uses `rp_ip` as the shared RP
+            address, or an internal default when `rp_ip` is omitted. Takes precedence
+            over `rp_mac` and `rp_ip` when multiple RP options are set.
+          type: boolean
+        peg_enabled:
+          default: false
+          description: When `true`, enables the PIM EVPN Gateway on `is_l3_border`
+            devices. Required for external sources or receivers in EVPN topologies.
           type: boolean
         rp_ip:
-          description: RP address used when `anycast_rp`==`false`. If the address
-            matches a device SVI, it is configured as a local RP; otherwise a static
-            RP is configured
+          description: RP address used for EVPN anycast RP when `anycast_rp` is true,
+            or for an external RP when it is false. In non-EVPN topologies, a matching
+            device router ID configures a local RP; otherwise a static RP is configured.
           examples:
           - 10.2.1.10
+          type: string
+        rp_mac:
+          description: Device MAC address of a fabric RP in EVPN topologies. The RP
+            address is the first usable IP of the VRF `evpn_auto_loopback_subnet`,
+            not `rp_ip`; requires `evpn_auto_loopback_subnet`. Takes precedence over
+            `rp_ip` when `anycast_rp` is false.
+          examples:
+          - 5f263135a66d
           type: string
         sbd_subnet:
           description: SBD IRB subnet; Mist auto-assigns per-device IPs from this
@@ -111299,6 +112343,12 @@ components:
           examples:
           - 3900
           type: integer
+        sbd_wan_rpf:
+          default: false
+          description: When `true` on PEG borders, builds an eBGP mesh between PEG
+            borders over SBD IRBs so WAN-learned routes can satisfy the PIM RPF check
+            during a border WAN-uplink failure.
+          type: boolean
       type: object
     switch_network:
       additionalProperties: false
@@ -111511,8 +112561,11 @@ components:
       type: array
     switch_port_local_usage_mac_auth_protocol:
       default: eap-md5
-      description: 'Only if `enable_mac_auth` ==`true`. This type is ignored if mist_nac
-        is enabled. enum: `eap-md5`, `eap-peap`, `pap`'
+      description: 'Only if `enable_mac_auth` ==`true`. When Mist NAC is enabled,
+        this is forced to `pap`, unless the Org `mist_nac.enable_eap_md5_for_mab`
+        setting is enabled: in that case `eap-md5` is kept and the port still performs
+        MAB (mac-radius) but sends the request as EAP-MD5. enum: `eap-md5`, `eap-peap`,
+        `pap`'
       enum:
       - eap-md5
       - eap-peap
@@ -111724,9 +112777,11 @@ components:
           type: boolean
         mac_auth_protocol:
           $ref: '#/components/schemas/switch_port_usage_mac_auth_protocol'
-          description: 'Only if `mode`!=`dynamic` and `enable_mac_auth`==`true`. MAC
-            authentication protocol to use; ignored if Mist NAC is enabled. enum:
-            `eap-md5`, `eap-peap`, `pap`.'
+          description: 'Only if `mode`!=`dynamic` and `enable_mac_auth`==`true`. Select
+            `pap`, `eap-peap`, or `eap-md5`. When Mist NAC is enabled, this is forced
+            to `pap`, unless `mist_nac.enable_eap_md5_for_mab` is enabled; then `eap-md5`
+            is kept and the port performs MAB (mac-radius) while sending EAP-MD5.
+            enum: `eap-md5`, `eap-peap`, `pap`.'
         mac_limit:
           $ref: '#/components/schemas/switch_port_usage_mac_limit'
           description: Only if `mode`!=`dynamic`. Maximum number of MAC addresses
@@ -111741,6 +112796,10 @@ components:
         networks:
           $ref: '#/components/schemas/switch_port_usage_networks'
           description: Only if `mode`==`trunk`. Network or VLAN names to trunk
+        no_local_port_config:
+          default: false
+          description: Whether this port usage can be overridden in local port configuration
+          type: boolean
         persist_mac:
           default: false
           description: Only if `mode`==`access` and `port_auth`!=`dot1x`. Whether
@@ -111958,8 +113017,11 @@ components:
       type: array
     switch_port_usage_mac_auth_protocol:
       default: eap-md5
-      description: 'Only if `mode`!=`dynamic` and `enable_mac_auth` ==`true`. This
-        type is ignored if mist_nac is enabled. enum: `eap-md5`, `eap-peap`, `pap`'
+      description: 'Only if `mode`!=`dynamic` and `enable_mac_auth` ==`true`. When
+        Mist NAC is enabled, this is forced to `pap`, unless the Org `mist_nac.enable_eap_md5_for_mab`
+        setting is enabled: in that case `eap-md5` is kept and the port still performs
+        MAB (mac-radius) but sends the request as EAP-MD5. enum: `eap-md5`, `eap-peap`,
+        `pap`'
       enum:
       - eap-md5
       - eap-peap
@@ -112521,8 +113583,10 @@ components:
       additionalProperties: false
       description: WAN speedtest scheduling settings for synthetic tests
       properties:
-        enabled:
-          description: Whether scheduled WAN speedtests are enabled
+        disabled:
+          default: false
+          description: Whether scheduled WAN speedtests are disabled. Defaults to
+            `false` (enabled); set this to `true` to disable speedtests.
           type: boolean
         time_of_day:
           $ref: '#/components/schemas/time_of_day'
