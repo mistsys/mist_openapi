@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [2610.1.0] - 2026-10-01
 
 - `switch_mgmt` (switch, network/switch templates, and device profile schemas) `radius` setting: replaced the nested `radius_config` object with top-level `auth_servers`, `auth_servers_retries`, `auth_servers_timeout`, and `network` fields; `use_different_radius` changed from string to boolean; added `switch_mgmt_radius_auth_server`/`switch_mgmt_radius_auth_servers` schemas (`auth_servers` items include a read-only `id`); `auth_servers`, `auth_servers_retries`, and `auth_servers_timeout` are required when `enabled`==`true` and `use_different_radius`==`true`
+- `ap_radio_band24`/`ap_radio_band5`/`ap_radio_band6` and `rftemplate_radio_band24`/`rftemplate_radio_band5`/`rftemplate_radio_band6` schemas: `power_min` minimum lowered to `0` (previously `3` for 2.4 GHz, `5` for 5/6 GHz) to allow a minimum transmit power of 0 dBm
 
 ## [2609.1.0] - 2026-09-07
 

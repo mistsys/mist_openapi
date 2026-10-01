@@ -69993,7 +69993,7 @@ components:
           description: When power=null/unset, min tx power to use, HW-specific values
             will be used if not set
           maximum: 18
-          minimum: 3
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -70071,7 +70071,7 @@ components:
           description: When power=null/unset, min tx power to use, HW-specific values
             will be used if not set
           maximum: 17
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -70149,7 +70149,7 @@ components:
           description: When power=null/unset, min tx power to use, HW-specific values
             will be used if not set
           maximum: 18
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -98245,7 +98245,7 @@ components:
           description: When power=null/unset, min tx power to use, HW-specific values
             will be used if not set
           maximum: 18
-          minimum: 3
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -98310,7 +98310,7 @@ components:
           description: When power=null/unset, min tx power to use, HW-specific values
             will be used if not set
           maximum: 17
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -98375,7 +98375,7 @@ components:
           description: When power=null/unset, min tx power to use, HW-specific values
             will be used if not set
           maximum: 18
-          minimum: 5
+          minimum: 0
           type:
           - integer
           - 'null'
@@ -111778,7 +111778,7 @@ components:
           type: string
         hold_time:
           $ref: '#/components/schemas/switch_bgp_config_hold_time'
-          description: 'Default BGP hold time for switch BGP sessions. enum: `0`.'
+          description: Default BGP hold time for switch BGP sessions.
         import_policy:
           description: Import policy must match one of the policy names defined in
             the `routing_policies` property.
