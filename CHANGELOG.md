@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2610.1.0] - 2026-10-01
+
+- `switch_mgmt` (switch, network/switch templates, and device profile schemas) `radius` setting: replaced the nested `radius_config` object with top-level `auth_servers`, `auth_servers_retries`, `auth_servers_timeout`, and `network` fields; `use_different_radius` changed from string to boolean; added `switch_mgmt_radius_auth_server`/`switch_mgmt_radius_auth_servers` schemas (`auth_servers` items include a read-only `id`); `auth_servers`, `auth_servers_retries`, and `auth_servers_timeout` are required when `enabled`==`true` and `use_different_radius`==`true`
+
 ## [2609.1.0] - 2026-09-07
 
 - Fixed `GET /api/v1/sites/{site_id}/insights/fingerprints/count` and `GET /api/v1/sites/{site_id}/insights/fingerprints/search`: moved to `GET /api/v1/orgs/{org_id}/insights/fingerprints/count` and `GET /api/v1/orgs/{org_id}/insights/fingerprints/search` (these endpoints only ever worked at the org level; incorrectly documented under sites)

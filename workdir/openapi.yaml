@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2609.1.0**
+  description: '> Version: **2610.1.0**
 
     >
 
-    > Date: **September 7, 2026**
+    > Date: **October 1, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2609.1.0
+  version: 2610.1.0
 servers:
 - description: Mist Global 01
   url: https://api.mist.com
@@ -112288,6 +112288,40 @@ components:
       - type: string
       description: Mist Edge port used to proxy the switch management traffic to the
         Mist Cloud. Value in range 1-65535
+    switch_mgmt_radius_auth_server:
+      additionalProperties: false
+      description: RADIUS authentication server used for switch management authentication
+      properties:
+        host:
+          description: Address or hostname of the RADIUS authentication server
+          examples:
+          - 1.2.3.4
+          type: string
+        id:
+          description: Unique identifier for this RADIUS authentication server entry
+          format: uuid
+          readOnly: true
+          type: string
+        port:
+          $ref: '#/components/schemas/radius_auth_port'
+          description: UDP port used by the RADIUS authentication server
+        secret:
+          description: Shared secret used with this RADIUS authentication server
+          examples:
+          - testing123
+          format: password
+          type: string
+      required:
+      - host
+      - secret
+      type: object
+    switch_mgmt_radius_auth_servers:
+      description: List of RADIUS authentication servers used for switch management
+        authentication
+      items:
+        $ref: '#/components/schemas/switch_mgmt_radius_auth_server'
+      type: array
+      uniqueItems: true
     switch_mist_nac:
       additionalProperties: false
       description: Mist NAC RadSec settings for a switch
@@ -113153,20 +113187,34 @@ components:
       type: object
     switch_radius:
       additionalProperties: false
-      description: Switch RADIUS override settings. By default, the switch `radius_config`
-        is used; set `use_different_radius` to use alternate RADIUS settings.
+      description: RADIUS settings for switch management authentication. `auth_servers`,
+        `auth_servers_retries`, and `auth_servers_timeout` are required when `enabled`==`true`
+        and `use_different_radius`==`true`.
       properties:
+        auth_servers:
+          $ref: '#/components/schemas/switch_mgmt_radius_auth_servers'
+          description: RADIUS authentication servers used for switch management authentication.
+            Required when `enabled`==`true` and `use_different_radius`==`true`.
+        auth_servers_retries:
+          default: 3
+          description: RADIUS auth session retries. Required when `enabled`==`true`
+            and `use_different_radius`==`true`.
+          type: integer
+        auth_servers_timeout:
+          default: 5
+          description: RADIUS auth session timeout, in seconds. Required when `enabled`==`true`
+            and `use_different_radius`==`true`.
+          type: integer
         enabled:
           description: Whether RADIUS is enabled for switch management authentication
           type: boolean
-        radius_config:
-          $ref: '#/components/schemas/switch_radius_config'
-          description: RADIUS configuration used when alternate RADIUS settings are
-            required
-        use_different_radius:
-          description: Selector for alternate RADIUS settings instead of the default
-            switch `radius_config`
+        network:
+          description: Source network used for connectivity to the RADIUS servers
           type: string
+        use_different_radius:
+          description: Whether to use alternate RADIUS settings instead of the default
+            switch `radius_config`
+          type: boolean
       type: object
     switch_radius_config:
       additionalProperties: false
