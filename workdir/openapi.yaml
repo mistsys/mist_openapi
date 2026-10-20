@@ -6215,8 +6215,10 @@ paths:
         configuration, Wi-Fi, and mesh settings for assignment to sites.
       operationId: listOrgAptemplates
       parameters:
-      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/x_page_limit'
+      - $ref: '#/components/parameters/x_page_page'
       responses:
         '200':
           $ref: '#/components/responses/AptemplatesArray'
@@ -7296,43 +7298,82 @@ paths:
         and time range.
       operationId: countOrgWirelessClientEvents
       parameters:
-      - description: 'Field used to group this count response. enum: `band`, `channel`,
-          `proto`, `ssid`, `type`, `wlan_id`'
-        example: type
-        in: query
-        name: distinct
-        schema:
-          $ref: '#/components/schemas/site_client_events_count_distinct'
-      - description: See [List Device Events Definitions]($e/Constants%20Events/listDeviceEventsDefinitions).
-          Accepts multiple comma-separated values.
-        in: query
-        name: type
-        schema:
-          examples:
-          - MARVIS_EVENT_CLIENT_AUTH_FAILURE,CLIENT_DEAUTHENTICATION
-          type: string
-      - description: Reason code filter for association and disassociation events
-        in: query
-        name: reason_code
-        schema:
-          type: integer
-      - description: Filter results by SSID
-        in: query
-        name: ssid
-        schema:
-          type: string
       - description: Filter results by AP MAC address
         in: query
         name: ap
         schema:
           type: string
-      - $ref: '#/components/parameters/dot11_proto'
-      - $ref: '#/components/parameters/dot11_band'
-      - description: Filter results by WLAN identifier
+      - description: Filter by authentication server
         in: query
-        name: wlan_id
+        name: auth_server
         schema:
           type: string
+      - description: Filter by authorization reason code
+        in: query
+        name: authorization_reason_code
+        schema:
+          type: string
+      - $ref: '#/components/parameters/dot11_band'
+      - description: Filter by BSSID
+        in: query
+        name: bssid
+        schema:
+          type: string
+      - description: Filter by channel
+        in: query
+        name: channel
+        schema:
+          type: string
+      - description: Filter by DHCP server
+        in: query
+        name: dhcp_server
+        schema:
+          type: string
+      - description: Filter by DNS server
+        in: query
+        name: dns_server
+        schema:
+          type: string
+      - description: Filter by gateway
+        in: query
+        name: gateway
+        schema:
+          type: string
+      - description: Filter by client IP address
+        in: query
+        name: ip
+        schema:
+          type: string
+      - description: Filter by key management method
+        in: query
+        name: key_mgmt
+        schema:
+          type: string
+      - description: Filter by full or partial client MAC address
+        in: query
+        name: mac
+        schema:
+          type: string
+      - description: Filter by NAC rule identifier
+        in: query
+        name: nacrule_id
+        schema:
+          type: string
+      - $ref: '#/components/parameters/dot11_proto'
+      - description: Filter by randomized client MAC address. Use * for any value
+        in: query
+        name: random_mac
+        schema:
+          oneOf:
+          - type: boolean
+          - enum:
+            - '*'
+            type: string
+      - description: Reason code filter for association and disassociation events
+        in: query
+        name: reason_code
+        schema:
+          type: integer
       - description: Filter results by site identifier
         in: query
         name: site_id
@@ -7341,10 +7382,62 @@ paths:
           - 72771e6a-6f5e-4de4-a5b9-1266c4197811
           format: uuid
           type: string
+      - description: Filter results by SSID
+        in: query
+        name: ssid
+        schema:
+          type: string
+      - description: Filter by status code
+        in: query
+        name: status_code
+        schema:
+          type: string
+      - description: Filter by event text
+        in: query
+        name: text
+        schema:
+          type: string
+      - description: See [List Device Events Definitions]($e/Constants%20Events/listDeviceEventsDefinitions).
+          Accepts multiple comma-separated values.
+        in: query
+        name: type
+        schema:
+          examples:
+          - MARVIS_EVENT_CLIENT_AUTH_FAILURE,CLIENT_DEAUTHENTICATION
+          type: string
+      - description: Filter by event type code
+        in: query
+        name: type_code
+        schema:
+          type: string
+      - description: Filter by VLAN
+        in: query
+        name: vlan
+        schema:
+          type: string
+      - description: Filter results by WLAN identifier
+        in: query
+        name: wlan_id
+        schema:
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
+      - description: 'Field used to group this count response. enum: `band`, `channel`,
+          `proto`, `ssid`, `type`, `wlan_id`'
+        example: type
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/site_client_events_count_distinct'
+      - description: Sort order for results. Use * for special value handling
+        in: query
+        name: sort
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/search_after'
       responses:
         '200':
           $ref: '#/components/responses/Count'
@@ -7953,14 +8046,22 @@ paths:
         or gateway configuration subsets that can be applied to matching devices.
       operationId: listOrgDeviceProfiles
       parameters:
+      - description: Include the number of devices using each profile
+        in: query
+        name: details
+        schema:
+          default: false
+          type: boolean
       - description: 'Filter results by one device profile type. Use a single value;
           comma-separated values are not supported. enum: `ap`, `gateway`, `switch`'
         in: query
         name: type
         schema:
           $ref: '#/components/schemas/device_type_default_ap'
-      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/x_page_limit'
+      - $ref: '#/components/parameters/x_page_page'
+      - $ref: '#/components/parameters/limit'
       responses:
         '200':
           $ref: '#/components/responses/DeviceprofilesArray'
@@ -10149,12 +10250,16 @@ paths:
         WLAN, SSID, authentication method, and time range.
       operationId: searchOrgGuestAuthorization
       parameters:
-      - description: Filter results by WLAN identifier
+      - description: Filter by access code email
         in: query
-        name: wlan_id
+        name: access_code_email
         schema:
-          examples:
-          - 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: Access point MAC address, or comma-separated list of MAC addresses.
+          Use * for any value
+        in: query
+        name: ap
+        schema:
           type: string
       - description: Filter results by authentication method
         in: query
@@ -10163,6 +10268,76 @@ paths:
           examples:
           - psk
           type: string
+      - description: Filter by mobile carrier
+        in: query
+        name: carrier
+        schema:
+          type: string
+      - description: Filter by client MAC address
+        in: query
+        name: client
+        schema:
+          type: string
+      - description: Filter by company
+        in: query
+        name: company
+        schema:
+          type: string
+      - description: Filter guests authorized across sites. Defaults to false
+        in: query
+        name: cross_site
+        schema:
+          default: false
+          type: boolean
+      - description: Filter by guest email
+        in: query
+        name: email
+        schema:
+          type: string
+      - description: Filter by custom field 1
+        in: query
+        name: field1
+        schema:
+          type: string
+      - description: Filter by custom field 2
+        in: query
+        name: field2
+        schema:
+          type: string
+      - description: Filter by custom field 3
+        in: query
+        name: field3
+        schema:
+          type: string
+      - description: Filter by custom field 4
+        in: query
+        name: field4
+        schema:
+          type: string
+      - description: Filter by mobile number
+        in: query
+        name: mobile
+        schema:
+          type: string
+      - description: Filter by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter by randomized client MAC address. Use * for any value
+        in: query
+        name: random_mac
+        schema:
+          oneOf:
+          - type: boolean
+          - enum:
+            - '*'
+            type: string
+      - description: Filter by SMS gateway
+        in: query
+        name: sms_gateway
+        schema:
+          type: string
       - description: Filter results by SSID
         in: query
         name: ssid
@@ -10170,11 +10345,20 @@ paths:
           examples:
           - Guest
           type: string
-      - $ref: '#/components/parameters/limit'
+      - description: Filter results by WLAN identifier
+        in: query
+        name: wlan_id
+        schema:
+          examples:
+          - 00000000-0000-0000-0000-000000000000
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/search_after'
       responses:
         '200':
           $ref: '#/components/responses/GuestsSearch'
@@ -10840,22 +11024,31 @@ paths:
         and filtered by device type, site, model, version, and status.
       operationId: countOrgInventory
       parameters:
-      - description: 'Field used to group this count response. enum: `model`, `status`,
-          `site_id`, `sku`, `version`'
+      - description: Filter devices disconnected before this time. Accepts epoch,
+          date, relative duration or now
         in: query
-        name: distinct
-        schema:
-          $ref: '#/components/schemas/inventory_count_distinct'
-      - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
-        in: query
-        name: type
-        schema:
-          $ref: '#/components/schemas/device_type_default_ap'
-      - description: Filter results by site identifier
-        in: query
-        name: site_id
+        name: disconnected_before
         schema:
           type: string
+      - description: Filter by full or partial client MAC address
+        in: query
+        name: mac
+        schema:
+          type: string
+      - description: Filter by magic value
+        in: query
+        name: magic
+        schema:
+          type: string
+      - description: Filter by master status. The value * is a special value
+        in: query
+        name: master
+        schema:
+          oneOf:
+          - type: boolean
+          - enum:
+            - '*'
+            type: string
       - description: Filter results by device model. Accepts multiple comma-separated
           values.
         in: query
@@ -10864,9 +11057,30 @@ paths:
           examples:
           - AP45,BT11
           type: string
-      - description: Filter results by software version
+      - description: Filter devices modified after this time. Accepts epoch, date,
+          relative duration or now
         in: query
-        name: version
+        name: modified_after
+        schema:
+          type: string
+      - description: Filter by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter by member serial number. The value * is a special value
+        in: query
+        name: serial
+        schema:
+          type: string
+      - description: Filter results by site identifier
+        in: query
+        name: site_id
+        schema:
+          type: string
+      - description: Filter by SKU
+        in: query
+        name: sku
         schema:
           type: string
       - description: 'Filter results by status. enum: `connected`, `disconnected`'
@@ -10874,7 +11088,47 @@ paths:
         name: status
         schema:
           $ref: '#/components/schemas/device_status_filter'
+      - description: Filter by event text
+        in: query
+        name: text
+        schema:
+          type: string
+      - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
+        in: query
+        name: type
+        schema:
+          $ref: '#/components/schemas/device_type_default_ap'
+      - description: Filter by whether a virtual chassis MAC exists
+        in: query
+        name: vc_mac
+        schema:
+          default: false
+          type: boolean
+      - description: Filter results by software version
+        in: query
+        name: version
+        schema:
+          type: string
+      - description: Filter by whether the MAC is virtual
+        in: query
+        name: virtual_mac
+        schema:
+          default: false
+          type: boolean
+      - description: 'Field used to group this count response. enum: `model`, `status`,
+          `site_id`, `sku`, `version`'
+        in: query
+        name: distinct
+        schema:
+          $ref: '#/components/schemas/inventory_count_distinct'
+      - $ref: '#/components/parameters/fields'
+      - description: Sort order for results. Use * for special value handling
+        in: query
+        name: sort
+        schema:
+          type: string
       - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/search_after'
       responses:
         '200':
           $ref: '#/components/responses/Count'
@@ -11036,11 +11290,14 @@ paths:
         status, and text.
       operationId: searchOrgInventory
       parameters:
-      - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
+      - description: Filter results to devices that were last disconnected before
+          this time, in epoch seconds
         in: query
-        name: type
+        name: disconnected_before
         schema:
-          $ref: '#/components/schemas/device_type_default_ap'
+          examples:
+          - 1781519042
+          type: integer
       - description: Filter by MAC address. Partial matches may use `*` wildcards
           (e.g. `*5b35*` matches `5c5b350e0001` and `5c5b35000301`). Accepts multiple
           comma-separated values.
@@ -11052,14 +11309,20 @@ paths:
           - 5c5b350e0001
           - '*5b35*'
           type: string
-      - description: Virtual Chassis MAC address. Accepts multiple comma-separated
-          values.
+      - description: Device claim code (magic). Accepts multiple comma-separated values.
         in: query
-        name: vc_mac
+        name: magic
         schema:
           examples:
-          - 5c5b53010101,5c5b53020202
-          - 5c5b350e0001
+          - WVTFBLTNPXD23H2
+          type: string
+      - description: Filter inventory results by whether the device is the Virtual
+          Chassis master
+        in: query
+        name: master
+        schema:
+          examples:
+          - 'true'
           type: string
       - description: MAC address of the Virtual Chassis master device. Accepts multiple
           comma-separated values.
@@ -11083,6 +11346,13 @@ paths:
           - AP4*
           - '*P4*'
           type: string
+      - description: Filter on inventory last modified time, in epoch
+        in: query
+        name: modified_after
+        schema:
+          examples:
+          - 1733522845
+          type: integer
       - description: Device name. Always a partial match (e.g. `london` will match
           `london-1`, `london-2`, `my-london-device`...). Accepts multiple comma-separated
           values.
@@ -11092,16 +11362,6 @@ paths:
           examples:
           - name-a,name-b
           - london
-          type: string
-      - description: Filter inventory results by site identifier. Accepts multiple
-          comma-separated values.
-        in: query
-        name: site_id
-        schema:
-          examples:
-          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
-          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
-          format: uuid
           type: string
       - description: Device serial number. Partial match allowed with wildcard * (e.g.
           `*123*` will match `AB123CD`, `12345`, `XY123`). Accepts multiple comma-separated
@@ -11114,20 +11374,15 @@ paths:
           - AB123CD
           - '*123*'
           type: string
-      - description: Device claim code (magic). Accepts multiple comma-separated values.
+      - description: Filter inventory results by site identifier. Accepts multiple
+          comma-separated values.
         in: query
-        name: magic
+        name: site_id
         schema:
           examples:
-          - WVTFBLTNPXD23H2
-          type: string
-      - description: Filter inventory results by whether the device is the Virtual
-          Chassis master
-        in: query
-        name: master
-        schema:
-          examples:
-          - 'true'
+          - 00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002
+          - 4ac1dcf4-9d8b-7211-65c4-057819f0862b
+          format: uuid
           type: string
       - description: Device SKU. Partial match allowed with wildcard * (e.g. `*2300*`
           will match `EX2300-F-12P`). Accepts multiple comma-separated values.
@@ -11138,16 +11393,6 @@ paths:
           - EX2300-F-12P,*2300*
           - EX2300-F-12P
           - '*2300*'
-          type: string
-      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
-          will match `21.2R3-S3.5`). Accepts multiple comma-separated values.
-        in: query
-        name: version
-        schema:
-          examples:
-          - 21.2R3-S3.5,*2R3*
-          - 21.2R3-S3.5
-          - '*2R3*'
           type: string
       - description: 'Device status. enum: `connected`, `disconnected`. Accepts multiple
           comma-separated values.'
@@ -11161,23 +11406,40 @@ paths:
         name: text
         schema:
           type: string
-      - description: Filter on inventory last modified time, in epoch
+      - description: 'Filter results by type. enum: `ap`, `gateway`, `switch`'
         in: query
-        name: modified_after
+        name: type
+        schema:
+          $ref: '#/components/schemas/device_type_default_ap'
+      - description: Virtual Chassis MAC address. Accepts multiple comma-separated
+          values.
+        in: query
+        name: vc_mac
         schema:
           examples:
-          - 1733522845
-          type: integer
-      - description: Filter results to devices that were last disconnected before
-          this time, in epoch seconds
+          - 5c5b53010101,5c5b53020202
+          - 5c5b350e0001
+          type: string
+      - description: Device version. Partial match allowed with wildcard * (e.g. `2R3`
+          will match `21.2R3-S3.5`). Accepts multiple comma-separated values.
         in: query
-        name: disconnected_before
+        name: version
         schema:
           examples:
-          - 1781519042
-          type: integer
-      - $ref: '#/components/parameters/limit'
+          - 21.2R3-S3.5,*2R3*
+          - 21.2R3-S3.5
+          - '*2R3*'
+          type: string
+      - description: Filter by whether the MAC is virtual
+        in: query
+        name: virtual_mac
+        schema:
+          default: false
+          type: boolean
+      - $ref: '#/components/parameters/end'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/search_after'
       responses:
         '200':
@@ -16858,23 +17120,81 @@ paths:
       tags:
       - Orgs Psk Portals
   /api/v1/orgs/{org_id}/psks:
+    delete:
+      description: Deletes organization-level pre-shared keys matching the supplied
+        filters. Filters are accepted as query parameters or in the request body.
+      operationId: deleteOrgMultiplePsks
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteOrgMultiplePsks
+      tags:
+      - Orgs Psks
+      parameters:
+      - description: Filter by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter by portal identifier
+        in: query
+        name: portal_id
+        schema:
+          type: string
+      - description: Filter by role
+        in: query
+        name: role
+        schema:
+          type: string
+      - description: Filter by SSID
+        in: query
+        name: ssid
+        schema:
+          type: string
+      - description: Field used to sort results
+        in: query
+        name: sort
+        schema:
+          enum:
+          - name
+          - portal_id
+          - role
+          - ssid
+          type: string
     get:
       description: List organization personal PSKs for WLAN access, optionally filtering
         by name, SSID, or role.
       operationId: listOrgPsks
       parameters:
+      - description: Whether to list site-level keys. Use any to list both site-level
+          and organization-level keys
+        in: query
+        name: for_site
+        schema:
+          oneOf:
+          - default: false
+            type: boolean
+          - enum:
+            - any
+            type: string
       - description: Filter results by name. Accepts multiple comma-separated values.
         example: psk-a,psk-b
         in: query
         name: name
         schema:
           type: string
-      - description: Filter results by SSID. Accepts multiple comma-separated values.
+      - description: Filter by portal identifier
         in: query
-        name: ssid
+        name: portal_id
         schema:
-          examples:
-          - Corp,Guest
           type: string
       - description: Filter PSK results by role. Accepts multiple comma-separated
           values.
@@ -16884,8 +17204,27 @@ paths:
           examples:
           - employee,contractor
           type: string
-      - $ref: '#/components/parameters/limit'
+      - description: Filter results by SSID. Accepts multiple comma-separated values.
+        in: query
+        name: ssid
+        schema:
+          examples:
+          - Corp,Guest
+          type: string
+      - $ref: '#/components/parameters/x_page_limit'
+      - $ref: '#/components/parameters/x_page_page'
+      - description: Field used to sort results
+        in: query
+        name: sort
+        schema:
+          enum:
+          - name
+          - portal_id
+          - role
+          - ssid
+          type: string
       - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/limit'
       responses:
         '200':
           $ref: '#/components/responses/PsksArray'
@@ -16966,7 +17305,7 @@ paths:
               $ref: '#/components/schemas/psks'
       responses:
         '200':
-          $ref: '#/components/responses/PsksArray'
+          $ref: '#/components/responses/PskUpdateResult'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -17028,13 +17367,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/psks'
+              $ref: '#/components/schemas/psk_import_request'
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/psks_import_file'
       responses:
         '200':
-          $ref: '#/components/responses/PsksArray'
+          $ref: '#/components/responses/PskImportResult'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -24190,11 +24529,6 @@ paths:
         Definitions]($e/Constants%20Events/listClientEventsDefinitions)'
       operationId: searchOrgWiredClients
       parameters:
-      - description: Filter results by auth state
-        in: query
-        name: auth_state
-        schema:
-          type: string
       - description: Filter results by authentication method. Accepts multiple comma-separated
           values.
         in: query
@@ -24203,16 +24537,9 @@ paths:
           examples:
           - server_reject,mac_auth
           type: string
-      - description: 'Filter results by client learning source. enum: `lldp`, `mac`.
-          Accepts multiple comma-separated values.'
-        example: lldp,mac
+      - description: Filter results by auth state
         in: query
-        name: source
-        schema:
-          type: string
-      - description: Filter results by site identifier
-        in: query
-        name: site_id
+        name: auth_state
         schema:
           type: string
       - description: Filter results by one or more gateway or switch MAC addresses
@@ -24220,6 +24547,52 @@ paths:
         in: query
         name: device_mac
         schema:
+          type: string
+      - description: Filter results by DHCP client identifier. Accepts multiple comma-separated
+          values.
+        in: query
+        name: dhcp_client_identifier
+        schema:
+          examples:
+          - MAC address a8f7d982288f,MAC address 5c5b351e120c
+          type: string
+      - description: Filter results by DHCP FQDN
+        in: query
+        name: dhcp_fqdn
+        schema:
+          type: string
+      - description: Filter results by DHCP hostname. Accepts multiple comma-separated
+          values.
+        in: query
+        name: dhcp_hostname
+        schema:
+          examples:
+          - client-a,client-b
+          type: string
+      - description: Filter results by DHCP request parameters. Accepts multiple comma-separated
+          values.
+        in: query
+        name: dhcp_request_params
+        schema:
+          examples:
+          - 1 121 3 6 12 15 28 42 43 180,1 3 6 12 15 28 42 43 180
+          type: string
+      - description: DHCP Vendor Class Identifier. Accepts multiple comma-separated
+          values.
+        in: query
+        name: dhcp_vendor_class_identifier
+        schema:
+          examples:
+          - Mist AP34-WW,Mist BT11-WW
+          type: string
+      - description: Filter results by one or more IPv4 addresses. Supports comma-separated
+          values
+        in: query
+        name: ip
+        schema:
+          examples:
+          - 192.168.1.1
+          - 192.168.1.1,192.168.1.2
           type: string
       - description: Partial / full Client MAC address. Use `prefix*` for prefix search
           or `*substring*` for contains search (e.g. `aabbcc*` and `*bbcc*` match
@@ -24234,10 +24607,72 @@ paths:
           - aabbcc*
           - '*bbcc*'
           type: string
+      - description: Filter results by manufacturer. Accepts multiple comma-separated
+          values.
+        in: query
+        name: manufacture
+        schema:
+          examples:
+          - Unknown,GIFA
+          type: string
+      - description: Filter by manufacturer
+        in: query
+        name: mfg
+        schema:
+          type: string
+      - description: Filter results by NAC rule identifier
+        in: query
+        name: nacrule_id
+        schema:
+          type: string
+      - description: Filter by node
+        in: query
+        name: node
+        schema:
+          type: string
       - description: Filter results by one or more port identifiers where the client
           has connected. Supports comma-separated values
         in: query
         name: port_id
+        schema:
+          type: string
+      - description: Filter by randomized client MAC address. Use * for any value
+        in: query
+        name: random_mac
+        schema:
+          oneOf:
+          - type: boolean
+          - enum:
+            - '*'
+            type: string
+      - description: Filter results by site identifier
+        in: query
+        name: site_id
+        schema:
+          type: string
+      - description: 'Filter results by client learning source. enum: `lldp`, `mac`.
+          Accepts multiple comma-separated values.'
+        example: lldp,mac
+        in: query
+        name: source
+        schema:
+          type: string
+      - description: Restrict to connected clients. Applies only with device_mac and
+          site_id
+        in: query
+        name: status
+        schema:
+          default: all
+          enum:
+          - all
+          - connected
+          type: string
+      - description: Partial / full Client MAC address, hostname or username. Use
+          `prefix*` for prefix search or `*substring*` for contains search (e.g. `aabbcc*`
+          and `*bbcc*` match `aabbccddeeff`). Suffix-only wildcards (e.g. `*ddeeff`)
+          are not supported
+        in: query
+        name: text
         schema:
           type: string
       - description: Filter results by one or more VLAN IDs. Supports comma-separated
@@ -24249,78 +24684,11 @@ paths:
           - '1'
           - 1,2
           type: string
-      - description: Filter results by one or more IPv4 addresses. Supports comma-separated
-          values
-        in: query
-        name: ip
-        schema:
-          examples:
-          - 192.168.1.1
-          - 192.168.1.1,192.168.1.2
-          type: string
-      - description: Filter results by manufacturer. Accepts multiple comma-separated
-          values.
-        in: query
-        name: manufacture
-        schema:
-          examples:
-          - Unknown,GIFA
-          type: string
-      - description: Partial / full Client MAC address, hostname or username. Use
-          `prefix*` for prefix search or `*substring*` for contains search (e.g. `aabbcc*`
-          and `*bbcc*` match `aabbccddeeff`). Suffix-only wildcards (e.g. `*ddeeff`)
-          are not supported
-        in: query
-        name: text
-        schema:
-          type: string
-      - description: Filter results by NAC rule identifier
-        in: query
-        name: nacrule_id
-        schema:
-          type: string
-      - description: Filter results by DHCP hostname. Accepts multiple comma-separated
-          values.
-        in: query
-        name: dhcp_hostname
-        schema:
-          examples:
-          - client-a,client-b
-          type: string
-      - description: Filter results by DHCP FQDN
-        in: query
-        name: dhcp_fqdn
-        schema:
-          type: string
-      - description: Filter results by DHCP client identifier. Accepts multiple comma-separated
-          values.
-        in: query
-        name: dhcp_client_identifier
-        schema:
-          examples:
-          - MAC address a8f7d982288f,MAC address 5c5b351e120c
-          type: string
-      - description: DHCP Vendor Class Identifier. Accepts multiple comma-separated
-          values.
-        in: query
-        name: dhcp_vendor_class_identifier
-        schema:
-          examples:
-          - Mist AP34-WW,Mist BT11-WW
-          type: string
-      - description: Filter results by DHCP request parameters. Accepts multiple comma-separated
-          values.
-        in: query
-        name: dhcp_request_params
-        schema:
-          examples:
-          - 1 121 3 6 12 15 28 42 43 180,1 3 6 12 15 28 42 43 180
-          type: string
-      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/search_after'
       responses:
         '200':
@@ -32423,10 +32791,15 @@ paths:
         to search authorized guest records across the organization.
       operationId: searchSiteGuestAuthorization
       parameters:
-      - description: Filter results by WLAN identifier
-        example: 00000000-0000-0000-0000-000000000000
+      - description: Filter by access code email
         in: query
-        name: wlan_id
+        name: access_code_email
+        schema:
+          type: string
+      - description: Access point MAC address, or comma-separated list of MAC addresses.
+          Use * for any value
+        in: query
+        name: ap
         schema:
           type: string
       - description: Filter guest results by authentication method
@@ -32434,16 +32807,93 @@ paths:
         name: auth_method
         schema:
           type: string
+      - description: Filter by mobile carrier
+        in: query
+        name: carrier
+        schema:
+          type: string
+      - description: Filter by client MAC address
+        in: query
+        name: client
+        schema:
+          type: string
+      - description: Filter by company
+        in: query
+        name: company
+        schema:
+          type: string
+      - description: Filter guests authorized across sites. Defaults to false
+        in: query
+        name: cross_site
+        schema:
+          default: false
+          type: boolean
+      - description: Filter by guest email
+        in: query
+        name: email
+        schema:
+          type: string
+      - description: Filter by custom field 1
+        in: query
+        name: field1
+        schema:
+          type: string
+      - description: Filter by custom field 2
+        in: query
+        name: field2
+        schema:
+          type: string
+      - description: Filter by custom field 3
+        in: query
+        name: field3
+        schema:
+          type: string
+      - description: Filter by custom field 4
+        in: query
+        name: field4
+        schema:
+          type: string
+      - description: Filter by mobile number
+        in: query
+        name: mobile
+        schema:
+          type: string
+      - description: Filter by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter by randomized client MAC address. Use * for any value
+        in: query
+        name: random_mac
+        schema:
+          oneOf:
+          - type: boolean
+          - enum:
+            - '*'
+            type: string
+      - description: Filter by SMS gateway
+        in: query
+        name: sms_gateway
+        schema:
+          type: string
       - description: Filter results by SSID
         in: query
         name: ssid
         schema:
           type: string
-      - $ref: '#/components/parameters/limit'
+      - description: Filter results by WLAN identifier
+        example: 00000000-0000-0000-0000-000000000000
+        in: query
+        name: wlan_id
+        schema:
+          type: string
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/interval'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/search_after'
       responses:
         '200':
@@ -35899,23 +36349,59 @@ paths:
       tags:
       - Utilities PCAPs
   /api/v1/sites/{site_id}/psks:
-    get:
-      description: Get List of Site PSKs
-      operationId: listSitePsks
+    delete:
+      description: Deletes all site PSKs matching the supplied filters. Filters can
+        be provided as query parameters or in the request body.
+      operationId: deleteSiteMultiplePsks
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/HTTP400'
+        '401':
+          $ref: '#/components/responses/HTTP401'
+        '403':
+          $ref: '#/components/responses/HTTP403'
+        '429':
+          $ref: '#/components/responses/HTTP429'
+      summary: deleteSiteMultiplePsks
+      tags:
+      - Sites Psks
       parameters:
-      - description: Filter results by SSID
+      - description: Filter by guest name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter by role
+        in: query
+        name: role
+        schema:
+          type: string
+      - description: Filter by SSID
         in: query
         name: ssid
         schema:
           type: string
+    get:
+      description: Get List of Site PSKs
+      operationId: listSitePsks
+      parameters:
+      - $ref: '#/components/parameters/name'
       - description: Filter PSK results by role
         in: query
         name: role
         schema:
           type: string
-      - $ref: '#/components/parameters/name'
-      - $ref: '#/components/parameters/limit'
+      - description: Filter results by SSID
+        in: query
+        name: ssid
+        schema:
+          type: string
       - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/x_page_limit'
+      - $ref: '#/components/parameters/x_page_page'
       responses:
         '200':
           $ref: '#/components/responses/PsksArray'
@@ -35984,7 +36470,7 @@ paths:
               $ref: '#/components/schemas/psks'
       responses:
         '200':
-          $ref: '#/components/responses/PsksArray'
+          $ref: '#/components/responses/PskUpdateResult'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -36023,13 +36509,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/psks'
+              $ref: '#/components/schemas/psk_import_request'
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/psks_import_file'
       responses:
         '200':
-          $ref: '#/components/responses/PsksArray'
+          $ref: '#/components/responses/PskImportResult'
         '400':
           $ref: '#/components/responses/HTTP400'
         '401':
@@ -40817,6 +41303,23 @@ paths:
       description: Search Site Synthetic Testing
       operationId: searchSiteSyntheticTest
       parameters:
+      - description: Entity who triggers the test
+        in: query
+        name: by
+        schema:
+          examples:
+          - user
+          type: string
+      - description: Filter by device type
+        in: query
+        name: device_type
+        schema:
+          enum:
+          - ap
+          - gateway
+          - router
+          - switch
+          type: string
       - description: Filter results by MAC address
         in: query
         name: mac
@@ -40831,20 +41334,12 @@ paths:
           examples:
           - ge-1/0/1
           type: string
-      - description: Filter results by VLAN ID
+      - description: 'Connectivity protocol used to filter synthetic test results.
+          enum: `ping`, `traceroute`'
         in: query
-        name: vlan_id
+        name: protocol
         schema:
-          examples:
-          - '100'
-          type: string
-      - description: Entity who triggers the test
-        in: query
-        name: by
-        schema:
-          examples:
-          - user
-          type: string
+          $ref: '#/components/schemas/synthetictest_protocol'
       - description: Filter results by reason
         in: query
         name: reason
@@ -40852,27 +41347,33 @@ paths:
           examples:
           - test failed
           type: string
+      - description: Filter by device status
+        in: query
+        name: status
+        schema:
+          type: string
+      - description: Filter results by tenant network
+        in: query
+        name: tenant
+        schema:
+          type: string
       - description: 'Synthetic test type used to filter results. enum: `arp`, `curl`,
           `dhcp`, `dhcp6`, `dns`, `lan_connectivity`, `radius`, `speedtest`'
         in: query
         name: type
         schema:
           $ref: '#/components/schemas/synthetictest_type'
-      - description: 'Connectivity protocol used to filter synthetic test results.
-          enum: `ping`, `traceroute`'
+      - description: Filter results by VLAN ID
         in: query
-        name: protocol
+        name: vlan_id
         schema:
-          $ref: '#/components/schemas/synthetictest_protocol'
-      - description: Filter results by tenant network
-        in: query
-        name: tenant
-        schema:
+          examples:
+          - '100'
           type: string
-      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/end'
       - $ref: '#/components/parameters/duration'
+      - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/search_after'
       responses:
         '200':
@@ -59434,6 +59935,24 @@ components:
         cloud_name: zscalerbeta.net
         partner_key: K35vrZcK3JvrZc
         username: john@nmo.com
+  headers:
+    x_page_limit:
+      description: Number of items per page used for this response. Only sent when
+        the response is paginated (`limit`/`page` query parameters or `X-Page-*` request
+        headers).
+      schema:
+        type: integer
+    x_page_page:
+      description: Page number of this response. Only sent when the response is paginated
+        (`limit`/`page` query parameters or `X-Page-*` request headers).
+      schema:
+        type: integer
+    x_page_total:
+      description: Total number of items matching the request. Only sent when the
+        response is paginated (`limit`/`page` query parameters or `X-Page-*` request
+        headers).
+      schema:
+        type: integer
   parameters:
     aamwprofile_id:
       in: path
@@ -60499,6 +61018,24 @@ components:
         - 000000ab-00ab-00ab-00ab-0000000000ab
         format: uuid
         type: string
+    x_page_limit:
+      description: Maximum number of results per page. Takes precedence over the `limit`
+        query parameter; sending it enables pagination
+      in: header
+      name: X-Page-Limit
+      schema:
+        default: 100
+        minimum: 1
+        type: integer
+    x_page_page:
+      description: Page number to return; starts at `1`. Takes precedence over the
+        `page` query parameter; sending it enables pagination
+      in: header
+      name: X-Page-Page
+      schema:
+        default: 1
+        minimum: 1
+        type: integer
     zone_id:
       in: path
       name: zone_id
@@ -60779,6 +61316,13 @@ components:
           schema:
             $ref: '#/components/schemas/ap_templates'
       description: Example response
+      headers:
+        X-Page-Limit:
+          $ref: '#/components/headers/x_page_limit'
+        X-Page-Page:
+          $ref: '#/components/headers/x_page_page'
+        X-Page-Total:
+          $ref: '#/components/headers/x_page_total'
     Asset:
       content:
         application/json:
@@ -62178,6 +62722,13 @@ components:
           schema:
             $ref: '#/components/schemas/deviceprofiles'
       description: Example response
+      headers:
+        X-Page-Limit:
+          $ref: '#/components/headers/x_page_limit'
+        X-Page-Page:
+          $ref: '#/components/headers/x_page_page'
+        X-Page-Total:
+          $ref: '#/components/headers/x_page_total'
     DevicesArray:
       content:
         application/json:
@@ -64626,6 +65177,15 @@ components:
           schema:
             $ref: '#/components/schemas/psk'
       description: OK
+    PskImportResult:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/psk_import_result'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/psk_import_result'
+      description: OK
     PskPortal:
       content:
         application/json:
@@ -64665,6 +65225,15 @@ components:
           schema:
             $ref: '#/components/schemas/psk_portal_list'
       description: Example response
+    PskUpdateResult:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/psk_update_result'
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/psk_update_result'
+      description: OK
     PsksArray:
       content:
         application/json:
@@ -64680,6 +65249,13 @@ components:
           schema:
             $ref: '#/components/schemas/psk_list'
       description: OK
+      headers:
+        X-Page-Limit:
+          $ref: '#/components/headers/x_page_limit'
+        X-Page-Page:
+          $ref: '#/components/headers/x_page_page'
+        X-Page-Total:
+          $ref: '#/components/headers/x_page_total'
     RadioMacs:
       content:
         application/json:
@@ -70730,6 +71306,9 @@ components:
         modified_time:
           $ref: '#/components/schemas/modified_time'
           description: Timestamp when the AP template was last modified
+        name:
+          description: Template name
+          type: string
         org_id:
           $ref: '#/components/schemas/org_id'
           description: Organization that owns this AP template
@@ -77036,6 +77615,11 @@ components:
       enum:
       - ap
       type: string
+    device_type_ble:
+      description: 'Device Type. enum: `ble`'
+      enum:
+      - ble
+      type: string
     device_type_default_ap:
       default: ap
       description: 'enum: `ap`, `gateway`, `switch`'
@@ -77048,6 +77632,16 @@ components:
       description: 'Device Type. enum: `gateway`'
       enum:
       - gateway
+      type: string
+    device_type_mxedge:
+      description: 'Device Type. enum: `mxedge`'
+      enum:
+      - mxedge
+      type: string
+    device_type_router:
+      description: 'Device Type. enum: `router`'
+      enum:
+      - router
       type: string
     device_type_switch:
       description: 'Device Type. enum: `switch`'
@@ -77112,16 +77706,23 @@ components:
       - version
       type: object
     deviceprofile:
-      description: Device profile configuration for an AP, switch, or gateway
+      description: Device profile configuration for an AP, BLE, gateway, Mist Edge,
+        router, or switch
       discriminator:
         mapping:
           ap: '#/components/schemas/deviceprofile_ap'
+          ble: '#/components/schemas/deviceprofile_ble'
           gateway: '#/components/schemas/deviceprofile_gateway'
+          mxedge: '#/components/schemas/deviceprofile_mxedge'
+          router: '#/components/schemas/deviceprofile_router'
           switch: '#/components/schemas/deviceprofile_switch'
         propertyName: type
       oneOf:
       - $ref: '#/components/schemas/deviceprofile_ap'
+      - $ref: '#/components/schemas/deviceprofile_ble'
       - $ref: '#/components/schemas/deviceprofile_gateway'
+      - $ref: '#/components/schemas/deviceprofile_mxedge'
+      - $ref: '#/components/schemas/deviceprofile_router'
       - $ref: '#/components/schemas/deviceprofile_switch'
     deviceprofile_ap:
       additionalProperties: false
@@ -77139,6 +77740,11 @@ components:
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Timestamp when the AP device profile was created
+        device_count:
+          description: Number of devices assigned to this profile. Only returned by
+            the org device profile list when `details=true`
+          readOnly: true
+          type: integer
         disable_eth1:
           default: false
           description: Whether to disable eth1 port
@@ -77245,6 +77851,37 @@ components:
       required:
       - type
       type: object
+    deviceprofile_ble:
+      additionalProperties: true
+      description: BLE device profile. demoapi stores the request body as-is for this
+        type, so no type-specific fields are documented
+      properties:
+        created_time:
+          $ref: '#/components/schemas/created_time'
+          description: Timestamp when the BLE device profile was created
+        device_count:
+          description: Number of devices assigned to this profile. Only returned by
+            the org device profile list when `details=true`
+          readOnly: true
+          type: integer
+        id:
+          $ref: '#/components/schemas/id'
+          description: Unique identifier of the BLE device profile
+        modified_time:
+          $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the BLE device profile was last modified
+        name:
+          description: Display name of the BLE device profile
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this BLE device profile
+        type:
+          $ref: '#/components/schemas/device_type_ble'
+          description: Device type discriminator for BLE device profiles
+      required:
+      - type
+      type: object
     deviceprofile_gateway:
       additionalProperties: false
       description: Gateway Template is applied to a site for gateway(s) in a site.
@@ -77262,6 +77899,11 @@ components:
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Timestamp when the gateway profile was created
+        device_count:
+          description: Number of devices assigned to this profile. Only returned by
+            the org device profile list when `details=true`
+          readOnly: true
+          type: integer
         dhcpd_config:
           $ref: '#/components/schemas/dhcpd_config'
           description: DHCP server defaults provided by this gateway profile
@@ -77368,6 +78010,68 @@ components:
       - name
       - type
       type: object
+    deviceprofile_mxedge:
+      additionalProperties: true
+      description: Mist Edge device profile. demoapi stores the request body as-is
+        for this type, so no type-specific fields are documented
+      properties:
+        created_time:
+          $ref: '#/components/schemas/created_time'
+          description: Timestamp when the Mist Edge device profile was created
+        device_count:
+          description: Number of devices assigned to this profile. Only returned by
+            the org device profile list when `details=true`
+          readOnly: true
+          type: integer
+        id:
+          $ref: '#/components/schemas/id'
+          description: Unique identifier of the Mist Edge device profile
+        modified_time:
+          $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the Mist Edge device profile was last modified
+        name:
+          description: Display name of the Mist Edge device profile
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this Mist Edge device profile
+        type:
+          $ref: '#/components/schemas/device_type_mxedge'
+          description: Device type discriminator for Mist Edge device profiles
+      required:
+      - type
+      type: object
+    deviceprofile_router:
+      additionalProperties: true
+      description: router device profile. demoapi stores the request body as-is for
+        this type, so no type-specific fields are documented
+      properties:
+        created_time:
+          $ref: '#/components/schemas/created_time'
+          description: Timestamp when the router device profile was created
+        device_count:
+          description: Number of devices assigned to this profile. Only returned by
+            the org device profile list when `details=true`
+          readOnly: true
+          type: integer
+        id:
+          $ref: '#/components/schemas/id'
+          description: Unique identifier of the router device profile
+        modified_time:
+          $ref: '#/components/schemas/modified_time'
+          description: Timestamp when the router device profile was last modified
+        name:
+          description: Display name of the router device profile
+          type: string
+        org_id:
+          $ref: '#/components/schemas/org_id'
+          description: Organization that owns this router device profile
+        type:
+          $ref: '#/components/schemas/device_type_router'
+          description: Device type discriminator for router device profiles
+      required:
+      - type
+      type: object
     deviceprofile_switch:
       additionalProperties: false
       description: Switch Device Profiles can be applied to one or multiple switches.
@@ -77393,6 +78097,11 @@ components:
         created_time:
           $ref: '#/components/schemas/created_time'
           description: Timestamp when the switch profile was created
+        device_count:
+          description: Number of devices assigned to this profile. Only returned by
+            the org device profile list when `details=true`
+          readOnly: true
+          type: integer
         dhcp_snooping:
           $ref: '#/components/schemas/dhcp_snooping'
           description: DHCP snooping defaults provided by this switch profile
@@ -81123,6 +81832,128 @@ components:
       required:
       - wlan_id
       type: object
+    guest_search_result:
+      description: Guest authorization record returned by guest search
+      properties:
+        access_code_email:
+          description: If `auth_method`==`email`, the email address where the authorization
+            code has been sent to
+          readOnly: true
+          type: string
+        ap:
+          description: Access point MAC address
+          type: string
+        ap_mac:
+          description: MAC address of the AP used during guest registration
+          readOnly: true
+          type: string
+        auth_method:
+          description: Guest authentication method used for the authorization
+          readOnly: true
+          type: string
+        authorized:
+          default: true
+          description: Whether the guest is currently authorized
+          type: boolean
+        authorized_expiring_time:
+          description: Unix timestamp when the guest authorization expires
+          examples:
+          - 1480704955
+          readOnly: true
+          type: number
+        authorized_time:
+          description: Unix timestamp when the guest was authorized
+          examples:
+          - 1480704355
+          readOnly: true
+          type: number
+        carrier:
+          description: Mobile carrier
+          type: string
+        company:
+          description: Optional company name provided by the guest during registration
+          examples:
+          - abc
+          type: string
+        cross_site:
+          description: Whether guest is authorized across sites
+          type: boolean
+        email:
+          description: Optional email address provided by the guest during registration
+          examples:
+          - john@abc.com
+          format: email
+          type: string
+        field1:
+          description: Optional custom field 1 value provided by the guest during
+            registration
+          type: string
+        field2:
+          description: Optional custom field 2 value provided by the guest during
+            registration
+          type: string
+        field3:
+          description: Optional custom field 3 value provided by the guest during
+            registration
+          type: string
+        field4:
+          description: Optional custom field 4 value provided by the guest during
+            registration
+          type: string
+        mac:
+          description: Device MAC address captured during guest registration
+          readOnly: true
+          type: string
+        minutes:
+          default: 1440
+          description: Authorization duration, in minutes. Default is 1440 minutes
+            (1 day), maximum is 259200 (180 days)
+          maximum: 259200
+          minimum: 0
+          type: integer
+        mobile:
+          description: Mobile number
+          type: string
+        name:
+          description: Optional name provided by the guest during registration
+          examples:
+          - John Smith
+          readOnly: true
+          type: string
+        org_id:
+          description: Organization identifier
+          type: string
+        random_mac:
+          description: Whether the guest device used a randomized MAC address to connect
+            to the SSID
+          readOnly: true
+          type: boolean
+        site_id:
+          description: Site identifier
+          type: string
+        sms_gateway:
+          description: SMS gateway
+          type: string
+        sponsor_email:
+          description: Sponsor email
+          type: string
+        ssid:
+          description: Name of the SSID
+          examples:
+          - Guest-SSID
+          readOnly: true
+          type: string
+        timestamp:
+          description: Event timestamp, as an epoch timestamp
+          type: number
+        wlan_id:
+          description: Identifier of the WLAN used for the guest authorization
+          examples:
+          - 6748cfa6-4e12-11e6-9188-0242ac110007
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
     guests:
       description: List of guest authorization records
       items:
@@ -82268,7 +83099,7 @@ components:
           type: integer
       type: object
     inventory_search_result:
-      additionalProperties: false
+      additionalProperties: true
       description: Inventory record returned by inventory search
       properties:
         last_disconnected:
@@ -82291,12 +83122,18 @@ components:
           examples:
           - WVTFBLTNPXD23H2
           type: string
+        managed:
+          description: Whether the device is managed. Not present for access points
+          type: boolean
         master:
           description: Whether this search result represents the master member of
             a Virtual Chassis
           examples:
           - true
           type: boolean
+        master_mac:
+          description: MAC address of the master device
+          type: string
         members:
           $ref: '#/components/schemas/inventory_search_result_members'
           description: Virtual Chassis members included in this inventory search result
@@ -91702,9 +92539,18 @@ components:
           description: Number of days before psk is expired. Used as to when to start
             sending reminder notification when the psk is about to expire
           type: integer
+        for_site:
+          description: Whether the key is site-level
+          readOnly: true
+          type: boolean
         id:
           $ref: '#/components/schemas/id'
           description: Unique identifier of the PSK
+        last_used:
+          description: Last use time, as an epoch timestamp
+          type:
+          - integer
+          - 'null'
         mac:
           description: If `usage`==`single`, client MAC address this PSK is bound
             to; empty when auto-binding is used
@@ -91747,6 +92593,12 @@ components:
           maxLength: 64
           minLength: 8
           type: string
+        portal_id:
+          description: Portal identifier
+          format: uuid
+          type:
+          - string
+          - 'null'
         role:
           description: Client role applied to users authenticated with this PSK
           maxLength: 32
@@ -91794,6 +92646,96 @@ components:
         format: uuid
         type: string
       type: array
+    psk_import_request:
+      description: List of PSK records to import
+      items:
+        description: PSK record accepted by the import endpoint (upserted by name)
+        properties:
+          email:
+            description: Notification recipient email address for PSK creation notification
+              and expiration reminders
+            type: string
+          expire_time:
+            default: null
+            description: Expire time for this PSK key (epoch time in seconds). Default
+              `null` (as no expiration)
+            examples:
+            - 1614990263
+            type:
+            - integer
+            - 'null'
+          expiry_notification_time:
+            description: Number of days before psk is expired. Used as to when to
+              start sending reminder notification when the psk is about to expire
+            type: integer
+          mac:
+            description: If `usage`==`single`, client MAC address this PSK is bound
+              to; empty when auto-binding is used
+            type: string
+          macs:
+            $ref: '#/components/schemas/psk_macs'
+            description: Client MAC addresses or MAC patterns allowed when `usage`==`macs`
+          max_usage:
+            default: 0
+            description: For Org PSK Only. Max concurrent users for this PSK key.
+              Default is 0 (unlimited)
+            type: integer
+          name:
+            description: Display name of the PSK
+            type: string
+          notify_expiry:
+            default: false
+            description: If set to true, reminder notification will be sent when psk
+              is about to expire
+            type: boolean
+          notify_on_create_or_edit:
+            description: If set to true, notification will be sent when psk is created
+              or edited
+            type: boolean
+          passphrase:
+            description: PSK passphrase, 8-63 characters or 64 hexadecimal characters
+            format: password
+            maxLength: 64
+            minLength: 8
+            type: string
+          role:
+            description: Client role applied to users authenticated with this PSK
+            maxLength: 32
+            minLength: 0
+            type: string
+          ssid:
+            description: WLAN SSID where this PSK can be used
+            type: string
+          usage:
+            $ref: '#/components/schemas/psk_usage'
+            description: 'Binding mode for this PSK, enum: `macs`, `multi`, `single`,
+              `usermac_labels`'
+          vlan_id:
+            $ref: '#/components/schemas/psk_vlan_id'
+            description: VLAN ID returned for clients using this PSK
+        required:
+        - name
+        - ssid
+        type: object
+      type: array
+    psk_import_result:
+      additionalProperties: false
+      description: Result of a PSK import
+      properties:
+        errors:
+          description: Errors for records that were not imported
+          items:
+            type: string
+          type: array
+        updated:
+          description: Names of the PSKs that were created or updated
+          items:
+            type: string
+          type: array
+      required:
+      - errors
+      - updated
+      type: object
     psk_list:
       description: List of personal PSK configurations
       items:
@@ -92092,6 +93034,24 @@ components:
       - admin
       - byod
       type: string
+    psk_update_result:
+      additionalProperties: false
+      description: Outcome of a bulk pre-shared key update
+      properties:
+        error:
+          description: Errors for skipped items
+          items:
+            type: string
+          type: array
+        updated:
+          description: Updated pre-shared keys
+          items:
+            $ref: '#/components/schemas/psk'
+          type: array
+      required:
+      - error
+      - updated
+      type: object
     psk_usage:
       default: multi
       description: 'enum: `macs`, `multi`, `single`, `usermac_labels`'
@@ -94748,7 +95708,7 @@ components:
     response_guest_search_results:
       description: Guest authorization records returned by a search response
       items:
-        $ref: '#/components/schemas/guest'
+        $ref: '#/components/schemas/guest_search_result'
       type: array
       uniqueItems: true
     response_http400:
@@ -97645,7 +98605,7 @@ components:
     response_synthetictest_search_results:
       description: Synthetic test result records returned by search
       items:
-        $ref: '#/components/schemas/synthetictest_info'
+        $ref: '#/components/schemas/synthetictest_search_result'
       type: array
     response_troubleshoot:
       additionalProperties: false
@@ -113848,6 +114808,84 @@ components:
       - user
       - password
       type: object
+    synthetictest_search_result:
+      additionalProperties: true
+      description: Synthetic test record returned by synthetic test search
+      properties:
+        by:
+          description: Actor that triggered the synthetic test
+          examples:
+          - user
+          type: string
+        device_type:
+          $ref: '#/components/schemas/device_type'
+          description: 'Device category that ran the synthetic test. enum: `ap`, `gateway`,
+            `switch`.'
+        failed:
+          description: Whether the synthetic test failed
+          examples:
+          - false
+          type: boolean
+        id:
+          description: Test identifier
+          type: string
+        latency:
+          description: Measured latency for the synthetic test, in milliseconds
+          examples:
+          - 40
+          type: integer
+        mac:
+          description: Device MAC address that ran the synthetic test
+          type: string
+        org_id:
+          description: Organization identifier
+          type: string
+        port_id:
+          description: Interface identifier used to run the synthetic test
+          examples:
+          - ge-0/0/2
+          type: string
+        reason:
+          description: Failure reason reported for the synthetic test, when available
+          examples:
+          - interface not ready to perform test
+          type: string
+        rx_mbps:
+          description: Receive throughput measured by the synthetic speed test, in
+            Mbps
+          examples:
+          - 322
+          type: integer
+        site_id:
+          description: Site identifier
+          type: string
+        start_time:
+          description: Epoch timestamp, in seconds, when the synthetic test started
+          examples:
+          - 1675718807
+          type: integer
+        status:
+          description: Current execution status of the synthetic test
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+          description: Time when the synthetic test result was recorded
+        tx_mbps:
+          description: Transmit throughput measured by the synthetic speed test, in
+            Mbps
+          examples:
+          - 199
+          type: integer
+        type:
+          $ref: '#/components/schemas/synthetictest_type'
+          description: 'Synthetic test type for this result. enum: `arp`, `curl`,
+            `dhcp`, `dhcp6`, `dns`, `lan_connectivity`, `radius`, `speedtest`.'
+        vlan_id:
+          description: Identifier of the VLAN used by the synthetic test
+          examples:
+          - 20
+          type: integer
+      type: object
     synthetictest_type:
       description: 'enum: `arp`, `curl`, `dhcp`, `dhcp6`, `dns`, `lan_connectivity`,
         `radius`, `speedtest`'
@@ -121120,7 +122158,7 @@ components:
         $ref: '#/components/schemas/dhcp_client_option'
       type: array
     wired_client_response:
-      additionalProperties: false
+      additionalProperties: true
       description: Wired client record returned by a wired client search
       properties:
         auth_method:
@@ -121133,6 +122171,12 @@ components:
           examples:
           - authenticated
           type: string
+        client_mac:
+          description: Client MAC address
+          type: string
+        crc:
+          description: Client address checksum
+          type: integer
         device_mac:
           $ref: '#/components/schemas/wired_client_response_device_mac'
           description: MAC addresses of switches or gateways where the wired client
@@ -121169,9 +122213,29 @@ components:
           examples:
           - MSFT 5.0
           type: string
+        first_seen:
+          description: First seen time, as an epoch timestamp
+          type: number
+        hostname:
+          description: Client hostnames
+          items: {}
+          type: array
         ip:
           $ref: '#/components/schemas/wired_client_response_ip'
           description: Client IP addresses observed for the wired client
+        ip6:
+          description: IPv6 addresses
+          items: {}
+          type: array
+        last_device_mac:
+          description: Most recent device MAC address
+          type: string
+        last_port_id:
+          description: Most recent port identifier
+          type: string
+        last_vlan:
+          description: Most recent VLAN
+          type: integer
         mac:
           description: Client MAC address for the wired client record
           readOnly: true
@@ -121183,12 +122247,19 @@ components:
           $ref: '#/components/schemas/wired_client_response_port_id'
           description: Switch or gateway port identifiers where the wired client was
             observed
+        random_mac:
+          description: Whether the MAC address is randomized
+          type: boolean
         site_id:
           $ref: '#/components/schemas/site_id'
           description: Mist site associated with the wired client record
         timestamp:
           $ref: '#/components/schemas/timestamp'
           description: Time when the wired client record was observed, in epoch seconds
+        username:
+          description: Client usernames
+          items: {}
+          type: array
         vlan:
           $ref: '#/components/schemas/wired_client_response_vlan'
           description: Client VLAN identifiers observed for the wired client
