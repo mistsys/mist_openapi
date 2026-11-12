@@ -1604,6 +1604,10 @@ paths:
 
         HA cluster node names are returned in the `node` field, when applicable.'
       operationId: listAlarmDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstAlarmDefinitions'
@@ -1669,6 +1673,10 @@ paths:
       description: Return AP LED status definitions, including the values used to
         describe LED behavior and the corresponding `error_code` value.
       operationId: listApLedDefinition
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstApLedDefinitions'
@@ -1690,6 +1698,10 @@ paths:
       description: Return supported application categories used for application identification,
         traffic classification, and policy matching.
       operationId: listAppCategoryDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstAppCategoryDefinitions'
@@ -1711,6 +1723,10 @@ paths:
       description: Return supported application subcategories used for application
         identification, traffic classification, and policy matching.
       operationId: listAppSubCategoryDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstAppSubCategoryDefinitions'
@@ -1732,6 +1748,10 @@ paths:
       description: Return applications recognized by Juniper Mist devices for traffic
         classification and application analytics.
       operationId: listApplications
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstApplications'
@@ -1753,6 +1773,10 @@ paths:
       description: Return client event definitions used by client event search and
         count APIs, including event keys and metadata.
       operationId: listClientEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstClientEvents'
@@ -1774,6 +1798,10 @@ paths:
       description: Return supported country codes for Mist configuration. Set `extend=true`
         to include additional country codes when available.
       operationId: listCountryCodes
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       parameters:
       - description: Will include more country codes if true
         in: query
@@ -1840,6 +1868,10 @@ paths:
         count APIs and the `device-events` webhook topic, including event keys and
         metadata.
       operationId: listDeviceEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstDeviceEvents'
@@ -1883,6 +1915,10 @@ paths:
         `model`, `mfg`, and `os_type`) that can be used in [Mist NAC Rules]($h/Orgs%20NAC%20Rules/_overview)
         `matching` conditions.
       operationId: listFingerprintTypes
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstFingerprintTypes'
@@ -1903,6 +1939,10 @@ paths:
     get:
       description: Return applications recognized by Mist gateways for traffic classification.
       operationId: listGatewayApplications
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstGatewayApplications'
@@ -1945,6 +1985,10 @@ paths:
       description: Return supported language codes for localized Mist configuration
         and user-facing portals.
       operationId: listSiteLanguages
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstLanguages'
@@ -1966,6 +2010,10 @@ paths:
       description: Return Mist license type definitions used by inventory and subscription
         APIs.
       operationId: listLicenseTypes
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstLicenseTypes'
@@ -1987,6 +2035,10 @@ paths:
       description: Return Marvis Client event type definitions used by the Marvis
         Client event search and count APIs.
       operationId: listMarvisClientEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstMarvisClientEvents'
@@ -2008,6 +2060,10 @@ paths:
       description: Return available Marvis Client application versions for tracking
         or managing Marvis Client deployments.
       operationId: listMarvisClientVersions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstMarvisClientVersions'
@@ -2029,6 +2085,10 @@ paths:
       description: Return Mist Edge event definitions used by Mist Edge event search
         and count APIs, and `mexedge-events` webhook topic.
       operationId: listMxEdgeEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstMxEdgeEvents'
@@ -2049,6 +2109,10 @@ paths:
     get:
       description: Return Mist Edge models supported by Mist, including their capabilities.
       operationId: listMxEdgeModels
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstMxEdgeModels'
@@ -2070,6 +2134,10 @@ paths:
       description: Return NAC client event definitions used by NAC client event search
         and count APIs, and `nac-events` webhook topic.
       operationId: listNacEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstNacEvents'
@@ -2091,6 +2159,10 @@ paths:
       description: Return event definitions for other or third-party devices managed
         or monitored by Mist.
       operationId: listOtherDeviceEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstOtherDeviceEvents'
@@ -2111,6 +2183,10 @@ paths:
     get:
       description: Return supported models for other or third-party devices.
       operationId: listSupportedOtherDeviceModels
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstOtherDeviceModels'
@@ -2160,6 +2236,10 @@ paths:
     get:
       description: Return system event definitions used by system event search APIs.
       operationId: listSystemEventsDefinitions
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstSystemEvents'
@@ -2181,6 +2261,10 @@ paths:
       description: Return traffic type definitions used to classify recognized network
         traffic.
       operationId: listTrafficTypes
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstTrafficTypes'
@@ -2202,6 +2286,10 @@ paths:
       description: Return webhook topic definitions that can be subscribed to in webhook
         configuration.
       operationId: listWebhookTopics
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       responses:
         '200':
           $ref: '#/components/responses/ConstWebhookTopics'
