@@ -27,15 +27,13 @@ info:
 
     ## Helpful Resources
 
-    * [API Sandbox and Exercises](https://api-class.mist.com/)
-
     * [Postman Collection, Runners and Webhook Samples](https://www.postman.com/juniper-mist/workspace/mist-systems-s-public-workspace)
 
     * [Python Script Examples](https://github.com/tmunzer/mist_library)
 
     * [API Demo Apps](https://apps.mist-lab.fr/)
 
-    * [Juniper Blog](https://blogs.juniper.net/)
+    * [HPE Community](https://community.hpe.com/)
 
 
     ## Mist Web Browser Extension:
@@ -44,6 +42,8 @@ info:
     Store](https://chromewebstore.google.com/detail/mist-extension/ejhpdcljeamillfhdihkkmoakanpbplh)
 
     * Firefox: [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/mist-extension/)
+
+    * Safari: [App Store](https://apps.apple.com/us/app/mist-extension/id6782687846)
 
 
     ---'
@@ -80,6 +80,7 @@ servers:
 security:
 - apiToken: []
 - csrfToken: []
+- oauth2: []
 tags:
 - description: 'Admin API calls can be used to create, manage or authenticate Mist
     administrators.
@@ -1661,6 +1662,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listAlarmDefinitions
       tags:
       - Constants Events
@@ -1726,6 +1731,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listApLedDefinition
       tags:
       - Constants Definitions
@@ -1747,6 +1756,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listAppCategoryDefinitions
       tags:
       - Constants Definitions
@@ -1768,6 +1781,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listAppSubCategoryDefinitions
       tags:
       - Constants Definitions
@@ -1797,6 +1814,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listApplications
       tags:
       - Constants Definitions
@@ -1818,6 +1839,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listClientEventsDefinitions
       tags:
       - Constants Events
@@ -1846,6 +1871,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listCountryCodes
       tags:
       - Constants Definitions
@@ -1905,6 +1934,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listDeviceEventsDefinitions
       tags:
       - Constants Events
@@ -1948,6 +1981,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listFingerprintTypes
       tags:
       - Constants Definitions
@@ -1968,6 +2005,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listGatewayApplications
       tags:
       - Constants Definitions
@@ -2010,6 +2051,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listSiteLanguages
       tags:
       - Constants Definitions
@@ -2031,6 +2076,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listLicenseTypes
       tags:
       - Constants Definitions
@@ -2052,6 +2101,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listMarvisClientEventsDefinitions
       tags:
       - Constants Definitions
@@ -2073,6 +2126,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listMarvisClientVersions
       tags:
       - Constants Definitions
@@ -2094,6 +2151,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listMxEdgeEventsDefinitions
       tags:
       - Constants Events
@@ -2114,6 +2175,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listMxEdgeModels
       tags:
       - Constants Models
@@ -2135,6 +2200,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listNacEventsDefinitions
       tags:
       - Constants Events
@@ -2156,6 +2225,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listOtherDeviceEventsDefinitions
       tags:
       - Constants Events
@@ -2176,6 +2249,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listSupportedOtherDeviceModels
       tags:
       - Constants Models
@@ -2225,6 +2302,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listSystemEventsDefinitions
       tags:
       - Constants Events
@@ -2246,6 +2327,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listTrafficTypes
       tags:
       - Constants Definitions
@@ -2267,6 +2352,10 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - {}
+      - apiToken: []
+      - csrfToken: []
       summary: listWebhookTopics
       tags:
       - Constants Definitions
@@ -4998,6 +5087,8 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - csrfToken: []
       summary: getOauthAuthorization
       tags:
       - Orgs OAuth2
@@ -5048,6 +5139,8 @@ paths:
           $ref: '#/components/responses/HTTP404'
         '429':
           $ref: '#/components/responses/HTTP429'
+      security:
+      - csrfToken: []
       summary: grantOauthAuthorization
       tags:
       - Orgs OAuth2
@@ -6363,6 +6456,27 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              API Token:
+                value:
+                  name: org_token_xyz
+                  privileges:
+                  - role: admin
+                    scope: org
+                  src_ips:
+                  - 63.3.56.0/24
+                  - 63.3.55.4
+              OAuth Token:
+                value:
+                  name: ServiceNow Integration
+                  oauth_enabled: true
+                  oauth_pkce_required: false
+                  oauth_redirect_uris:
+                  - https://acme.service-now.com/oauth/callback
+                  oauth_ttl: 3600
+                  privileges:
+                  - role: write
+                    scope: org
             schema:
               $ref: '#/components/schemas/org_apitoken'
       responses:
@@ -6433,13 +6547,9 @@ paths:
         content:
           application/json:
             examples:
-              Example:
+              API Token:
                 value:
-                  name: org_token_xyz
-                  oauth_enabled: true
-                  oauth_redirect_uris:
-                  - https://acme.service-now.com/oauth/callback
-                  oauth_ttl: 3600
+                  name: org_token_pqr
                   privileges:
                   - org_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b
                     role: admin
@@ -6447,6 +6557,18 @@ paths:
                   src_ips:
                   - 63.3.56.0/24
                   - 63.3.55.6
+              OAuth Token:
+                value:
+                  name: ServiceNow Integration
+                  oauth_enabled: true
+                  oauth_pkce_required: true
+                  oauth_redirect_uris:
+                  - https://acme.service-now.com/oauth/callback
+                  oauth_ttl: 3600
+                  privileges:
+                  - org_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b
+                    role: write
+                    scope: org
             schema:
               $ref: '#/components/schemas/org_apitoken'
         description: Request Body
@@ -30504,18 +30626,6 @@ paths:
         schema:
           default: false
           type: boolean
-      - description: For an EVPN switch, preview the CLI as if its EVPN topology were
-          at this version (`1` .. latest). Lets you see what config a version migration
-          would push before committing to it via `update_version`. Diagnostic only,
-          it does not change the stored topology or push config, and is ignored when
-          the device has no EVPN topology or the value is out of range
-        in: query
-        name: evpntopo_version
-        schema:
-          examples:
-          - 2
-          minimum: 1
-          type: integer
       responses:
         '200':
           $ref: '#/components/responses/DeviceConfigCmd'
@@ -30538,12 +30648,10 @@ paths:
   /api/v1/sites/{site_id}/devices/{device_id}/derived:
     get:
       description: 'For an AP, switch or gateway, return the fully-merged, read-only
-        configuration that Mist would generate for the device, the result of applying,
-        in priority order, the Device-level overrides, the Device Profile, the device-matching
-        rules (`switch_matching` / `ap_matching` / ...), the RF Template (AP only),
-        the Site Setting, the Device / Network / WAN Template, and the Site Template.
-        This is the *intent* config in Mist format (not the device-native CLI), it
-        does not depend on the config last reported by the device.
+        configuration that Mist would generate for the device, resolved across the
+        configuration inheritance hierarchy. This is the *intent* config in Mist format
+        (not the device-native CLI), it does not depend on the config last reported
+        by the device.
 
 
         Only AP, switch and gateway devices are supported. Secret fields (passwords,
@@ -46653,8 +46761,6 @@ components:
         key: 1qkb...QQCL
         last_used: 1690115110
         name: org_token_xyz
-        oauth_client_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b.497f6eca-6276-4993-bfeb-53efbbba6f08
-        oauth_enabled: true
         org_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b
         privileges:
         - org_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b
@@ -46663,6 +46769,25 @@ components:
         src_ips:
         - 63.3.56.0/24
         - 63.3.55.4
+    ApitokenOrgOauthExample:
+      value:
+        created_by: user@mycorp.com
+        created_time: 1626875902
+        id: 497f6eca-6276-4993-bfeb-53efbbba6f08
+        key: 1qkb...QQCL
+        last_used: 1690115110
+        name: ServiceNow Integration
+        oauth_client_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b.497f6eca-6276-4993-bfeb-53efbbba6f08
+        oauth_enabled: true
+        oauth_pkce_required: true
+        oauth_redirect_uris:
+        - https://acme.service-now.com/oauth/callback
+        oauth_ttl: 3600
+        org_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b
+        privileges:
+        - org_id: a40f5d1f-d889-42e9-94ea-b9b33585fc6b
+          role: write
+          scope: org
     ApitokenUserExample:
       value:
         created_time: 1626875902
@@ -62217,14 +62342,18 @@ components:
       content:
         application/json:
           examples:
-            Example:
+            API Token:
               $ref: '#/components/examples/ApitokenOrgExample'
+            OAuth Token:
+              $ref: '#/components/examples/ApitokenOrgOauthExample'
           schema:
             $ref: '#/components/schemas/org_apitoken'
         application/vnd.api+json:
           examples:
-            Example:
+            API Token:
               $ref: '#/components/examples/ApitokenOrgExample'
+            OAuth Token:
+              $ref: '#/components/examples/ApitokenOrgOauthExample'
           schema:
             $ref: '#/components/schemas/org_apitoken'
       description: OK
@@ -73360,8 +73489,9 @@ components:
           description: Field values before the audited change
         category:
           $ref: '#/components/schemas/audit_log_category'
-          description: Present only for configuration changes. Category of the configuration
-            change
+          description: 'Present only for configuration changes. Category of the configuration
+            change. enum: `device_config_change`, `nac_change`, `wan_config_change`,
+            `wired_config_change`, `wireless_config_change`.'
         for_site:
           description: Whether this audit log entry is scoped to a site
           readOnly: true
@@ -86631,11 +86761,6 @@ components:
       type: string
     map_maze_map:
       additionalProperties: false
-      anyOf:
-      - required:
-        - config
-      - required:
-        - campus_id
       description: MazeMap map import configuration. Either `config` or `campus_id`
         is required, the request is rejected if both are absent
       properties:
@@ -86668,7 +86793,7 @@ components:
           type: string
         vendor_name:
           $ref: '#/components/schemas/map_maze_map_vendor_name'
-          description: Vendor identifier for a MazeMap import
+          description: 'Vendor identifier for a MazeMap import. enum: `maze_map`.'
         view_access_token:
           description: Optional. Access token required to load a private MazeMap
           type: string
@@ -119938,12 +120063,12 @@ components:
     utils_remove_gbp_tag:
       additionalProperties:
         description: Ignored. The GBP tag is not needed to remove a wired-client MAC,
-          send `null`
-        type: 'null'
+          any value is accepted (`null` recommended, an add-tag map can be reused)
       description: Incrementally remove the GBP (Group Based Policy) tag of wired-client
-        MACs on a switch. The request is a map of MAC to `null` (any value is ignored).
-        MACs can be in any common format (e.g. `b0:c4:e7:00:15:43`) and are normalized
-        to lowercase hex. At most 8000 MACs per request, and the batch is all-or-nothing
+        MACs on a switch. The request is a map of MAC to any value, which is ignored
+        (`null` recommended, an add-tag map can be reused as is). MACs can be in any
+        common format (e.g. `b0:c4:e7:00:15:43`) and are normalized to lowercase hex.
+        At most 8000 MACs per request, and the batch is all-or-nothing
       examples:
       - a0c4e7001543: null
         b0c4e7001543: null
@@ -128382,3 +128507,22 @@ components:
       in: header
       name: X-CSRFToken
       type: apiKey
+    oauth2:
+      description: "OAuth2 authorization code flow (RFC 6749) with PKCE (RFC 7636)\
+        \ and rotating refresh tokens, for third-party applications (including MCP\
+        \ integrations) acting on behalf of a consenting user. It uses an Org API\
+        \ token with `oauth_enabled` set as the OAuth2 client, the `client_id` is\
+        \ its composite `oauth_client_id` (`<org_id>.<token_id>`). See the [Orgs OAuth2]($e/Orgs%20OAuth2/getOauthAuthorization)\
+        \ endpoints.\n\n**Format**:\n  `Authorization: Bearer {access_token}`\n\n\
+        **Notes**:\n* The access token carries the privileges configured on the API\
+        \ token, constrained to what the consenting user has\n* The access token expires\
+        \ after `oauth_ttl` (default 1 hour), use the refresh token to get a new one\n\
+        * No fixed scopes are defined, the scope is derived from the API token name\
+        \ (e.g. `custom-ServiceNow Integration`)"
+      flows:
+        authorizationCode:
+          authorizationUrl: /api/v1/orgs/oauth/authorize
+          refreshUrl: /api/v1/orgs/oauth/token
+          scopes: {}
+          tokenUrl: /api/v1/orgs/oauth/token
+      type: oauth2
