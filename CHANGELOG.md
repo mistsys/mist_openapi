@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2611.1.1] - 2026-11-27
+
+- `GET/PUT /api/v1/orgs/{org_id}/setting` (`org_setting` schema): `switch_mgmt` now uses the shared `switch_mgmt` schema (same as switch, network/switch templates, device profile, and site settings) instead of the org-specific `org_setting_switch_mgmt` schema (removed); added `cli_banner`, `cli_idle_timeout`, `config_revert_timer`, `dhcp_option_fqdn`, `disable_oob_down_alarm`, `enable_hw_resource_monitor`, `fips_enabled`, `local_accounts`, `mxedge_proxy_host`, `mxedge_proxy_port`, `protect_re`, `radius`, `remove_existing_configs`, `root_password`, `tacacs`, and `use_mxedge_proxy`
+- `switch_mgmt` schema: `ap_affinity_threshold` default changed from `10` to `12`
+
 ## [2611.1.0] - 2026-11-15
 
 - Added `POST /api/v1/orgs/{org_id}/inventory/update_model` (set the intended model, and resulting device type, of common hardware before the device onboards; per-MAC `success`/`error`/`reason` response); added `inventory_update_model`, `inventory_update_models` and `response_inventory_update_model` schemas, and the `OrgInventoryUpdateModel` response
