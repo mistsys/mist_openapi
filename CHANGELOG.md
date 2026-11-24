@@ -72,7 +72,7 @@ All notable changes to this project will be documented in this file.
 - Merged PR #77: 22 public `/api/v1/const/` endpoints (`alarm_defs`, `ap_led_status`, `app_categories`, `app_subcategories`, `applications`, `client_events`, `countries`, `device_events`, `fingerprint_types`, `gateway_applications`, `languages`, `license_types`, `marvisclient_events`, `marvisclient_versions`, `mxedge_events`, `mxedge_models`, `nac_events`, `otherdevice_events`, `otherdevice_models`, `system_events`, `traffic_types`, `webhook_topics`) now document that authentication is optional (`security` is anonymous, `apiToken`, `csrfToken` or `oauth2`)
 - Merged PR #76: updated the `info.description` links (removed the API Sandbox and Exercises and Juniper Blog links, added the HPE Community link and the Safari App Store link for the Mist Web Browser Extension)
 - `GET /api/v1/orgs/{org_id}/inventory`: the `model` query parameter accepts the special value `mutable` to list devices whose model can be changed with `update_model`
-- `switch_port_usage_reauth_interval` schema (`reauth_interval` of switch `port_usages`: network template, site setting and switch device): the integer `minimum` is lowered from 10 to 0 so `0` (disable reauthentication) is a valid value; description clarified (MIST-239706)
+- `switch_port_usage_reauth_interval` schema (`reauth_interval` of switch `port_usages`: network template, site setting and switch device): added an integer alternative restricted to `0` (disable reauthentication) next to the existing 10-65535 range, so `1`-`9` stay invalid; description clarified (MIST-239706)
 
 ## [2610.1.0] - 2026-10-01
 

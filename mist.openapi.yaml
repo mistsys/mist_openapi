@@ -116205,6 +116205,9 @@ components:
       anyOf:
       - default: 3600
         maximum: 65535
+        minimum: 10
+        type: integer
+      - maximum: 0
         minimum: 0
         type: integer
       - type: string
