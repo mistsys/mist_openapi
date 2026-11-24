@@ -1666,6 +1666,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listAlarmDefinitions
       tags:
       - Constants Events
@@ -1735,6 +1736,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listApLedDefinition
       tags:
       - Constants Definitions
@@ -1760,6 +1762,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listAppCategoryDefinitions
       tags:
       - Constants Definitions
@@ -1785,6 +1788,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listAppSubCategoryDefinitions
       tags:
       - Constants Definitions
@@ -1818,6 +1822,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listApplications
       tags:
       - Constants Definitions
@@ -1843,6 +1848,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listClientEventsDefinitions
       tags:
       - Constants Events
@@ -1875,6 +1881,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listCountryCodes
       tags:
       - Constants Definitions
@@ -1938,6 +1945,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listDeviceEventsDefinitions
       tags:
       - Constants Events
@@ -1985,6 +1993,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listFingerprintTypes
       tags:
       - Constants Definitions
@@ -2009,6 +2018,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listGatewayApplications
       tags:
       - Constants Definitions
@@ -2055,6 +2065,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listSiteLanguages
       tags:
       - Constants Definitions
@@ -2080,6 +2091,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listLicenseTypes
       tags:
       - Constants Definitions
@@ -2105,6 +2117,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listMarvisClientEventsDefinitions
       tags:
       - Constants Definitions
@@ -2130,6 +2143,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listMarvisClientVersions
       tags:
       - Constants Definitions
@@ -2155,6 +2169,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listMxEdgeEventsDefinitions
       tags:
       - Constants Events
@@ -2179,6 +2194,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listMxEdgeModels
       tags:
       - Constants Models
@@ -2204,6 +2220,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listNacEventsDefinitions
       tags:
       - Constants Events
@@ -2229,6 +2246,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listOtherDeviceEventsDefinitions
       tags:
       - Constants Events
@@ -2253,6 +2271,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listSupportedOtherDeviceModels
       tags:
       - Constants Models
@@ -2306,6 +2325,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listSystemEventsDefinitions
       tags:
       - Constants Events
@@ -2331,6 +2351,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listTrafficTypes
       tags:
       - Constants Definitions
@@ -2356,6 +2377,7 @@ paths:
       - {}
       - apiToken: []
       - csrfToken: []
+      - oauth2: []
       summary: listWebhookTopics
       tags:
       - Constants Definitions
