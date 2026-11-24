@@ -116205,12 +116205,12 @@ components:
       anyOf:
       - default: 3600
         maximum: 65535
-        minimum: 10
+        minimum: 0
         type: integer
       - type: string
       description: 'Only if `mode`!=`dynamic` and `port_auth`=`dot1x` reauthentication
-        interval range (min: 10, max: 65535, default: 3600). Set to 0 to disable reauthentication
-        (no-reauthentication).'
+        interval in seconds (`0` or min: 10, max: 65535, default: 3600). Set to 0
+        to disable reauthentication (no-reauthentication).'
     switch_port_usage_speed:
       default: auto
       description: 'Only if `mode`!=`dynamic`, Port speed, default is auto to automatically
