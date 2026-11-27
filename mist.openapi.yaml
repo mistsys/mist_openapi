@@ -3,11 +3,11 @@ info:
   contact:
     email: tmunzer@juniper.net
     name: Thomas Munzer
-  description: '> Version: **2611.1.0**
+  description: '> Version: **2611.1.1**
 
     >
 
-    > Date: **November 15, 2026**
+    > Date: **November 27, 2026**
 
     <div class="notification"> NOTE:<br>Some important API changes will be introduced.
     Please make sure to read the <a href="https://www.juniper.net/documentation/us/en/software/mist/api/http/guides/important-api-changes">announcements</a>
@@ -51,7 +51,7 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/tmunzer/Mist-OAS3.0/main/LICENSE
   title: Mist API
-  version: 2611.1.0
+  version: 2611.1.1
   x-logo:
     altText: Juniper-MistAI
     backgroundColor: '#FFFFFF'
@@ -92226,7 +92226,7 @@ components:
           $ref: '#/components/schemas/org_setting_switch'
           description: Configuration defaults for switches in this organization
         switch_mgmt:
-          $ref: '#/components/schemas/org_setting_switch_mgmt'
+          $ref: '#/components/schemas/switch_mgmt'
           description: Management settings for switches in this organization
         switch_updown_threshold:
           default: 0
@@ -93162,18 +93162,6 @@ components:
         auto_upgrade:
           $ref: '#/components/schemas/switch_auto_upgrade'
           description: Auto-upgrade defaults for switches in this organization
-      type: object
-    org_setting_switch_mgmt:
-      additionalProperties: false
-      description: Organization-level switch management settings
-      properties:
-        ap_affinity_threshold:
-          default: 12
-          description: If the field is set in both site/setting and org/setting, the
-            value from site/setting will be used.
-          examples:
-          - 10
-          type: integer
       type: object
     org_setting_tags:
       description: Labels associated with these organization settings
@@ -115245,7 +115233,7 @@ components:
       description: Switch management-plane access and proxy settings
       properties:
         ap_affinity_threshold:
-          default: 10
+          default: 12
           description: AP affinity threshold for switch management. If set in both
             site settings and organization settings, the site setting value is used.
           type: integer
